@@ -1,9 +1,9 @@
-=== Starter Plugin ===
+=== Super Progressive Web Apps ===
 Contributors: arunbasillal, josevarghese
 Donate link: https://superpwa.com
-Tags: add, some, tags
-Requires at least: 2.0
-Tested up to: 4.8.1
+Tags: pwa, progressive web apps, manifest, android app
+Requires at least: 3.5.0
+Tested up to: 4.9.1
 Requires PHP: 5.5
 Stable tag: trunk
 License: GPLv2 or later

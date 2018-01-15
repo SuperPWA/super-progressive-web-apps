@@ -30,10 +30,10 @@ function superpwa_generate_manifest() {
 		'name'				=> get_bloginfo('name'),
 		'short_name'		=> get_bloginfo('name'),
 		'description'		=> get_bloginfo('description'),
-		'icons'				=> array( 
-									'src' 	=> '/wp-content/uploads/2018/01/million-clues-logo.png',
-									'sizes'	=> '150x150',
-									'type'	=> 'image/png',
+		'icons'				=> array(
+									'src' 	=> $settings['icon'],
+									'sizes'	=> getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1],
+									'type'	=> getimagesize($settings['icon'])['mime'],
 								),
 		'background_color'	=> $settings['background_color'],
 		'display'			=> 'standalone',

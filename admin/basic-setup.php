@@ -45,7 +45,8 @@ function superpwa_deactivate_plugin() {
  * @since	1.0
  */
 function superpwa_load_plugin_textdomain() {
-    load_plugin_textdomain( 'superpwa_td', FALSE, SUPERPWA_PATH_ABS . '/languages/' );
+	
+    load_plugin_textdomain( 'super-progressive-web-apps', FALSE, SUPERPWA_PATH_ABS . '/languages/' );
 }
 add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
 
@@ -58,7 +59,7 @@ function superpwa_settings_link( $links ) {
 	
 	return array_merge(
 		array(
-			'settings' => '<a href="' . admin_url( 'options-general.php?page=superpwa' ) . '">' . __( 'Settings', 'superpwa_td' ) . '</a>'
+			'settings' => '<a href="' . admin_url( 'options-general.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>'
 		),
 		$links
 	);
@@ -99,7 +100,7 @@ function superpwa_footer_text($default) {
 		return $default;
 	}
 	
-    $superpwa_footer_text = sprintf( __( 'If you like this plugin, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'superpwa_td' ), 
+    $superpwa_footer_text = sprintf( __( 'If you like this plugin, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
 								'https://wordpress.org/support/plugin/replace-this/reviews/?rate=5#new-post' 
 						);
 	

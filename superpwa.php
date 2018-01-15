@@ -7,7 +7,7 @@
  * Contributors: Arun Basil Lal, Jose Varghese
  * Author URI: https://superpwa.com
  * Version: 1.0
- * Text Domain: superpwa_td
+ * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */

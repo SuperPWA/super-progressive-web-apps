@@ -3,7 +3,8 @@
  * Admin UI setup and render
  *
  * @since 1.0
- * @function	superpwa_background_color_callback()	Callback function for General Settings field
+ * @function	superpwa_background_color_callback()	Background Color
+ * @function	superpwa_icons_callback()				Application Icons
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -21,9 +22,27 @@ function superpwa_background_color_callback() {
 	$settings = superpwa_get_settings(); ?>
 	
 	<!-- Background Color -->
-	<label for="superpwa_settings[background_color]"><?php esc_html_e('Background Color', 'superpwa_td') ?>
-		<input type="text" name="superpwa_settings[background_color]" id="superpwa_settings[background_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['background_color'] ) ? esc_attr( $settings['background_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
-	</label><br>
+	<input type="text" name="superpwa_settings[background_color]" id="superpwa_settings[background_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['background_color'] ) ? esc_attr( $settings['background_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
+
+	<?php
+}
+
+/**
+ * Application Icons
+ *
+ * @since 1.0
+ */
+function superpwa_icons_callback() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Application Icon -->
+	<p style="margin-bottom: 8px;"><?php _e('The image you choose here will be displayed as the icon on the splash screen in supported devices', 'super-progressive-web-apps'); ?></p>
+	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
+	<button type="button" class="button superpwa-icon-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
+	</button>
 
 	<?php
 }
@@ -46,7 +65,7 @@ function superpwa_admin_interface_render () {
 	 *
 	if ( isset( $_GET['settings-updated'] ) ) {
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_saved_message', 'superpwa_settings_saved_message', __( 'Settings are Saved', 'superpwa_td' ), 'updated' );
+		add_settings_error( 'superpwa_settings_saved_message', 'superpwa_settings_saved_message', __( 'Settings are Saved', 'super-progressive-web-apps' ), 'updated' );
 	}
  
 	// Show Settings Saved Message
@@ -60,14 +79,14 @@ function superpwa_admin_interface_render () {
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
 			
-			echo '<h2>' . __('Splash Screen Settings', 'superpwa_td') . '</h2>';
-			echo '<p>' . __('The values you set here will be used for the splash screen that some browsers choose to display.', 'superpwa_td') . '</p>';
+			echo '<h2>' . __('Splash Screen Settings', 'super-progressive-web-apps') . '</h2>';
+			echo '<p>' . __('The values you set here will be used for the splash screen that supported browsers choose to display.', 'super-progressive-web-apps') . '</p>';
 			
 			// Prints out all settings sections added to a particular settings page. 
 			do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
 			
 			// Output save settings button
-			submit_button( __('Save Settings', 'superpwa_td') );
+			submit_button( __('Save Settings', 'super-progressive-web-apps') );
 			?>
 		</form>
 	</div>

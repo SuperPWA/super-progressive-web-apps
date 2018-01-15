@@ -20,7 +20,7 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_add_menu_links() {
 	
-	add_options_page( __('Super Progressive Web Apps','superpwa_td'), __('Super PWA','superpwa_td'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
+	add_options_page( __('Super Progressive Web Apps','super-progressive-web-apps'), __('Super PWA','super-progressive-web-apps'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 
@@ -41,7 +41,7 @@ function superpwa_register_settings() {
 	// Basic Settings
     add_settings_section(
         'superpwa_basic_settings_section',		// ID
-        __('', 'superpwa_td'),					// Title
+        __('', 'super-progressive-web-apps'),					// Title
         '__return_false',						// Callback Function
         'superpwa_basic_settings_section'		// Page slug
     );
@@ -49,8 +49,17 @@ function superpwa_register_settings() {
 		// Background Color
 		add_settings_field(
 			'superpwa_background_color',					// ID
-			__('Background Color', 'superpwa_td'),			// Title
+			__('Background Color', 'super-progressive-web-apps'),			// Title
 			'superpwa_background_color_callback',			// Callback function
+			'superpwa_basic_settings_section',				// Page slug
+			'superpwa_basic_settings_section'				// Settings Section ID
+		);
+		
+		// Icons
+		add_settings_field(
+			'superpwa_icons',								// ID
+			__('Application Icon', 'super-progressive-web-apps'),			// Title
+			'superpwa_icons_callback',						// Callback function
 			'superpwa_basic_settings_section',				// Page slug
 			'superpwa_basic_settings_section'				// Settings Section ID
 		);
@@ -103,6 +112,9 @@ function superpwa_enqueue_css_js( $hook ) {
 	// Color picker CSS
 	// @refer https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
     wp_enqueue_style( 'wp-color-picker' );
+	
+	// Everything needed for media upload
+	wp_enqueue_media();
 	
 	// Main JS
     wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), false, true );
