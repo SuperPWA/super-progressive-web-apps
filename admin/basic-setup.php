@@ -25,6 +25,9 @@ function superpwa_activate_plugin() {
 	
 	// Generate manifest with default options
 	superpwa_generate_manifest();
+	
+	// Generate service worker
+	superpwa_generate_sw();
 }
 
 /**
@@ -37,6 +40,9 @@ function superpwa_deactivate_plugin() {
 	
 	// Delete manifest.json
 	superpwa_delete_manifest();
+	
+	// Delete superpwa-sw.js
+	superpwa_delete_sw();
 }
 
 /**
@@ -100,9 +106,9 @@ function superpwa_footer_text($default) {
 		return $default;
 	}
 	
-    $superpwa_footer_text = sprintf( __( 'If you like this plugin, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
-								'https://wordpress.org/support/plugin/replace-this/reviews/?rate=5#new-post' 
-						);
+    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post' 
+	);
 	
 	return $superpwa_footer_text;
 }

@@ -3,8 +3,11 @@
  * Admin UI setup and render
  *
  * @since 1.0
- * @function	superpwa_background_color_callback()	Background Color
- * @function	superpwa_icons_callback()				Application Icons
+ * @function	superpwa_manifest_cb()					Manifest Callback
+ * @function	superpwa_manifest_status_cb				Manifest Status
+ * @function	superpwa_splash_screen_cb()				Splash Screen Callback
+ * @function	superpwa_background_color_cb()			Background Color
+ * @function	superpwa_icons_cb()						Application Icons
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -12,11 +15,49 @@
 if ( ! defined('ABSPATH') ) exit;
 
 /**
+ * Manifest Callback
+ *
+ * @since	1.0
+ */
+function superpwa_manifest_cb() {
+	
+	echo '<p>' . __('The manifest includes all the information about your Progressive Web App. SuperPWA generates the manifest automatically.') . '</p>';
+}
+
+/**
+ * Manifest Status
+ *
+ * @since 1.0
+ */
+function superpwa_manifest_status_cb() {
+
+	if ( superpwa_get_contents( ABSPATH . 'manifest.json' ) ) {
+		
+		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here</a>.', 'super-progressive-web-apps' ), trailingslashit( get_bloginfo( 'wpurl' ) )  . 'manifest.json'
+		);
+	} else {
+		
+		echo '<p>' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'S') . '</p>';
+	}
+	
+}
+
+/**
+ * Splash Screen Callback
+ *
+ * @since	1.0
+ */
+function superpwa_splash_screen_cb() {
+	
+	echo '<p>' . __('The values you set here will be used for the splash screen that supported browsers choose to display.', 'super-progressive-web-apps') . '</p>';
+}
+
+/**
  * Background Color
  *
  * @since 1.0
  */
-function superpwa_background_color_callback() {
+function superpwa_background_color_cb() {
 
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
@@ -32,7 +73,7 @@ function superpwa_background_color_callback() {
  *
  * @since 1.0
  */
-function superpwa_icons_callback() {
+function superpwa_icons_cb() {
 
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
@@ -72,18 +113,18 @@ function superpwa_admin_interface_render () {
 	settings_errors( 'superpwa_settings_saved_message' ); */?> 
 	
 	<div class="wrap">	
-		<h1>Super Progressive Web Apps</h1>
+		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
 			
-			echo '<h2>' . __('Splash Screen Settings', 'super-progressive-web-apps') . '</h2>';
-			echo '<p>' . __('The values you set here will be used for the splash screen that supported browsers choose to display.', 'super-progressive-web-apps') . '</p>';
+			// Manifest
+			do_settings_sections( 'superpwa_manifest_section' );	// Page slug
 			
-			// Prints out all settings sections added to a particular settings page. 
-			do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
+			// Splash Screen
+			do_settings_sections( 'superpwa_splash_screen_section' );	// Page slug
 			
 			// Output save settings button
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );

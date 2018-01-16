@@ -38,30 +38,47 @@ function superpwa_register_settings() {
 		'superpwa_validater_and_sanitizer'	// Input sanitizer
 	);
 	
-	// Basic Settings
+	// Manifest
     add_settings_section(
-        'superpwa_basic_settings_section',		// ID
-        __('', 'super-progressive-web-apps'),					// Title
-        '__return_false',						// Callback Function
-        'superpwa_basic_settings_section'		// Page slug
+        'superpwa_manifest_section',						// ID
+        __('Manifest', 'super-progressive-web-apps'),		// Title
+        'superpwa_manifest_cb',								// Callback Function
+        'superpwa_manifest_section'							// Page slug
+    );
+	
+		// Manifest status
+		add_settings_field(
+			'superpwa_manifest_status',								// ID
+			__('Manifest Status', 'super-progressive-web-apps'),	// Title
+			'superpwa_manifest_status_cb',							// Callback function
+			'superpwa_manifest_section',							// Page slug
+			'superpwa_manifest_section'								// Settings Section ID
+		);
+	
+	// Splash Screen Settings
+    add_settings_section(
+        'superpwa_splash_screen_section',					// ID
+        __('Splash Screen', 'super-progressive-web-apps'),	// Title
+        'superpwa_splash_screen_cb',						// Callback Function
+        'superpwa_splash_screen_section'					// Page slug
     );
 	
 		// Background Color
 		add_settings_field(
-			'superpwa_background_color',					// ID
-			__('Background Color', 'super-progressive-web-apps'),			// Title
-			'superpwa_background_color_callback',			// Callback function
-			'superpwa_basic_settings_section',				// Page slug
-			'superpwa_basic_settings_section'				// Settings Section ID
+			'superpwa_background_color',							// ID
+			__('Background Color', 'super-progressive-web-apps'),	// Title
+			'superpwa_background_color_cb',						// Callback function
+			'superpwa_splash_screen_section',						// Page slug
+			'superpwa_splash_screen_section'						// Settings Section ID
 		);
 		
 		// Icons
 		add_settings_field(
-			'superpwa_icons',								// ID
-			__('Application Icon', 'super-progressive-web-apps'),			// Title
-			'superpwa_icons_callback',						// Callback function
-			'superpwa_basic_settings_section',				// Page slug
-			'superpwa_basic_settings_section'				// Settings Section ID
+			'superpwa_icons',										// ID
+			__('Application Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_icons_cb',									// Callback function
+			'superpwa_splash_screen_section',						// Page slug
+			'superpwa_splash_screen_section'						// Settings Section ID
 		);
 	
 }
