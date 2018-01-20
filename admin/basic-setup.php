@@ -38,10 +38,10 @@ function superpwa_activate_plugin() {
  */
 function superpwa_deactivate_plugin() {
 	
-	// Delete manifest.json
+	// Delete manifest
 	superpwa_delete_manifest();
 	
-	// Delete superpwa-sw.js
+	// Delete service worker
 	superpwa_delete_sw();
 }
 

@@ -107,6 +107,7 @@ function superpwa_get_settings() {
 
 	$defaults = array(
 				'background_color' 	=> '#D5E0EB',
+				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 			);
 
 	$settings = get_option('superpwa_settings', $defaults);

@@ -48,26 +48,15 @@ if ( ! defined('ABSPATH') ) exit;
  *
  * @since 		1.0
  */
-
-	/**
-	 * The absolute path to the plugin directory without the trailing slash. Useful for using with includes
-	 * eg - /var/www/html/wp-content/plugins/superpwa/
-	 */
-	if ( ! defined( 'SUPERPWA_PATH_ABS ') )
-		define('SUPERPWA_PATH_ABS', plugin_dir_path( __FILE__ ));
-
-	/**
-	 * The url to the plugin folder. Useful for referencing src
-	 * eg - http://localhost/wp/wp-content/plugins/superpwa/
-	 */
-	if ( ! defined('SUPERPWA_PATH_SRC') )
-		define('SUPERPWA_PATH_SRC', plugin_dir_url( __FILE__ ));
-
-	/**
-	 * Plugin version constant
-	 */
-	if ( ! defined('SUPERPWA_VERSION') )
-		define('SUPERPWA_VERSION', '1.0');
+if ( ! defined('SUPERPWA_PATH_ABS ') ) 			define('SUPERPWA_PATH_ABS', plugin_dir_path( __FILE__ )); // absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/superpwa/
+if ( ! defined('SUPERPWA_PATH_SRC') ) 			define('SUPERPWA_PATH_SRC', plugin_dir_url( __FILE__ )); // link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/superpwa/
+if ( ! defined('SUPERPWA_VERSION') ) 			define('SUPERPWA_VERSION', '1.0'); // Plugin version
+if ( ! defined('SUPERPWA_MANIFEST_FILENAME') ) 	define('SUPERPWA_MANIFEST_FILENAME', 'superpwa-manifest.json'); // Name of Manifest file
+if ( ! defined('SUPERPWA_MANIFEST_ABS') )		define('SUPERPWA_MANIFEST_ABS', trailingslashit( ABSPATH ) . SUPERPWA_MANIFEST_FILENAME); // Absolute path to manifest
+if ( ! defined('SUPERPWA_MANIFEST_SRC') )		define('SUPERPWA_MANIFEST_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_MANIFEST_FILENAME); // Link to manifest
+if ( ! defined('SUPERPWA_SW_FILENAME') ) 		define('SUPERPWA_SW_FILENAME', 'superpwa-sw.js'); // Name of service worker file
+if ( ! defined('SUPERPWA_SW_ABS') )				define('SUPERPWA_SW_ABS', trailingslashit( ABSPATH ) . SUPERPWA_SW_FILENAME); // Absolute path to service worker
+if ( ! defined('SUPERPWA_SW_SRC') )				define('SUPERPWA_SW_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_SW_FILENAME); // Link to service worker
 
 /**
  * Add plugin version to database

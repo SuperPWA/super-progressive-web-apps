@@ -3,7 +3,7 @@
  * Operations of the plugin are included here. 
  *
  * @since 1.0
- * @function	superpwa_generate_manifest()			Generate and write manifest into manifest.json
+ * @function	superpwa_generate_manifest()			Generate and write manifest
  * @function	superpwa_add_manifest_to_header()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
@@ -13,7 +13,7 @@
 if ( ! defined('ABSPATH') ) exit;
 
 /**
- * Generate and write manifest into manifest.json
+ * Generate and write manifest into WordPress root folder
  *
  * @return true on success, false on failure.
  * @since	1.0
@@ -26,24 +26,24 @@ function superpwa_generate_manifest() {
 	$manifest = array(
 		'name'				=> get_bloginfo('name'),
 		'short_name'		=> get_bloginfo('name'),
-		'description'		=> get_bloginfo('description'),
 		'icons'				=> array( 
 								array(
 									'src' 	=> $settings['icon'],
-									'sizes'	=> getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1],
-									'type'	=> getimagesize($settings['icon'])['mime'],
+									'sizes'	=> getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1], // must be 192x192
+									'type'	=> getimagesize($settings['icon'])['mime'], // must be image/png
 								),
 							   ),
 		'background_color'	=> $settings['background_color'],
+		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
 		'orientation'		=> 'natural',
 		'start_url'			=> '/',
 	);
 	
-	// manifest.json is saved in the root folder of WordPress
-	$file = ABSPATH . 'manifest.json';
+	// Delete manifest if it exists
+	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( $file, json_encode($manifest) ) )
+	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode($manifest) ) )
 		return false;
 	
 	return true;
@@ -56,7 +56,7 @@ function superpwa_generate_manifest() {
  */
 function superpwa_add_manifest_to_header() {
 	
-	echo '<link rel="manifest" href="'. get_bloginfo('wpurl') .'/manifest.json"><!-- Manifest added by Super PWA - https://superwa.com -->';
+	echo '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '"><!-- Manifest added by Super PWA - https://superwa.com -->';
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 
@@ -68,8 +68,5 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
  */
 function superpwa_delete_manifest() {
 	
-	// manifest.json is in the root folder of WordPress
-	$file = ABSPATH . 'manifest.json';
-	
-	return superpwa_delete( $file );
+	return superpwa_delete( SUPERPWA_MANIFEST_ABS );
 }

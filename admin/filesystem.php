@@ -22,7 +22,7 @@ function superpwa_wp_filesystem_init() {
 	global $wp_filesystem;
 	
 	if ( empty( $wp_filesystem ) ) {
-		require_once( ABSPATH . '/wp-admin/includes/file.php' );
+		require_once( trailingslashit( ABSPATH ) . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 	}
 }
@@ -80,8 +80,6 @@ function superpwa_get_contents( $file, $array = false ) {
 
 /**
  * Delete a file
- *
- * Primarily used to delete the manifest.json file
  * 
  * @param	$file	Filename with path
  * @return	bool	True on success, false otherwise

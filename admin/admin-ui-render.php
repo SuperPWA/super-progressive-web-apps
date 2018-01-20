@@ -31,13 +31,12 @@ function superpwa_manifest_cb() {
  */
 function superpwa_manifest_status_cb() {
 
-	if ( superpwa_get_contents( ABSPATH . 'manifest.json' ) ) {
+	if ( superpwa_get_contents( ABSPATH . SUPERPWA_MANIFEST_FILENAME ) ) {
 		
-		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here</a>.', 'super-progressive-web-apps' ), trailingslashit( get_bloginfo( 'wpurl' ) )  . 'manifest.json'
-		);
+		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here</a>.', 'super-progressive-web-apps' ), SUPERPWA_MANIFEST_SRC );
 	} else {
 		
-		echo '<p>' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'S') . '</p>';
+		echo '<p>' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
 	}
 	
 }
@@ -79,7 +78,7 @@ function superpwa_icons_cb() {
 	$settings = superpwa_get_settings(); ?>
 	
 	<!-- Application Icon -->
-	<p style="margin-bottom: 8px;"><?php _e('The image you choose here will be displayed as the icon on the splash screen in supported devices', 'super-progressive-web-apps'); ?></p>
+	<p style="margin-bottom: 8px;"><?php _e('This will be the icon of your PWA when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?></p>
 	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
 	<button type="button" class="button superpwa-icon-upload" data-editor="content">
 		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
