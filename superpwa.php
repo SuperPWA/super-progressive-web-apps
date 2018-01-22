@@ -1,11 +1,10 @@
 <?php
 /**
  * Plugin Name: Super Progressive Web Apps
- * Plugin URI: https://superpwa.com
+ * Plugin URI: https://github.com/SuperPWA/Super-Progressive-Web-Apps
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
  * Contributors: Arun Basil Lal, Jose Varghese
- * Author URI: https://superpwa.com
  * Version: 1.0
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
@@ -15,7 +14,7 @@
 /**
  * This plugin was developed using the WordPress starter plugin template by Arun Basil Lal <arunbasillal@gmail.com>
  * Please leave this credit and the directory structure intact for future developers who might read the code. 
- * @Github https://github.com/arunbasillal/WordPress-superpwa
+ * @Github https://github.com/arunbasillal/WordPress-Starter-Plugin
  */
  
 /**
@@ -33,11 +32,9 @@
  */
  
 /**
- * ~ TODO ~
+ * ~ Release TODO ~
  *
- * - Plugin description
- * - Update uninstall.php
- * - Update readme.txt
+ * Update SUPERPWA_VERSION
  */
 
 // Exit if accessed directly
@@ -55,7 +52,7 @@ if ( ! defined('SUPERPWA_MANIFEST_FILENAME') ) 	define('SUPERPWA_MANIFEST_FILENA
 if ( ! defined('SUPERPWA_MANIFEST_ABS') )		define('SUPERPWA_MANIFEST_ABS', trailingslashit( ABSPATH ) . SUPERPWA_MANIFEST_FILENAME); // Absolute path to manifest
 if ( ! defined('SUPERPWA_MANIFEST_SRC') )		define('SUPERPWA_MANIFEST_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_MANIFEST_FILENAME); // Link to manifest
 if ( ! defined('SUPERPWA_SW_FILENAME') ) 		define('SUPERPWA_SW_FILENAME', 'superpwa-sw.js'); // Name of service worker file
-if ( ! defined('SUPERPWA_SW_ABS') )				define('SUPERPWA_SW_ABS', trailingslashit( ABSPATH ) . SUPERPWA_SW_FILENAME); // Absolute path to service worker
+if ( ! defined('SUPERPWA_SW_ABS') )				define('SUPERPWA_SW_ABS', trailingslashit( ABSPATH ) . SUPERPWA_SW_FILENAME); // Absolute path to service worker. SW must be in the root folder
 if ( ! defined('SUPERPWA_SW_SRC') )				define('SUPERPWA_SW_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_SW_FILENAME); // Link to service worker
 
 /**

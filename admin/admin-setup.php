@@ -20,7 +20,7 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_add_menu_links() {
 	
-	add_options_page( __('Super Progressive Web Apps','super-progressive-web-apps'), __('Super PWA','super-progressive-web-apps'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
+	add_options_page( __('Super Progressive Web Apps','super-progressive-web-apps'), __('SuperPWA','super-progressive-web-apps'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 
@@ -89,10 +89,13 @@ add_action( 'admin_init', 'superpwa_register_settings' );
  *
  * @since 		1.0
  */
-function superpwa_validater_and_sanitizer ( $settings ) {
+function superpwa_validater_and_sanitizer( $settings ) {
 	
-	// Sanitize text field
-	// $settings['text_input'] = sanitize_text_field($settings['text_input']);
+	// Sanitize hex color input
+	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
+	
+	// Sanitize application icon
+	$settings['icon'] = empty( sanitize_text_field($settings['icon']) ) ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field($settings['icon']);
 	
 	return $settings;
 }

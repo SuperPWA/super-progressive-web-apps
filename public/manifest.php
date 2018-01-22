@@ -29,8 +29,8 @@ function superpwa_generate_manifest() {
 		'icons'				=> array( 
 								array(
 									'src' 	=> $settings['icon'],
-									'sizes'	=> getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1], // must be 192x192
-									'type'	=> getimagesize($settings['icon'])['mime'], // must be image/png
+									'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
+									'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 								),
 							   ),
 		'background_color'	=> $settings['background_color'],
@@ -56,7 +56,7 @@ function superpwa_generate_manifest() {
  */
 function superpwa_add_manifest_to_header() {
 	
-	echo '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '"><!-- Manifest added by Super PWA - https://superwa.com -->';
+	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">';
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 

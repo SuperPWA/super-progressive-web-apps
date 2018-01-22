@@ -88,13 +88,12 @@ function superpwa_plugin_row_meta( $links, $file ) {
 	
 	return $links;
 }
-add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 );
+// add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 ); // Todo: To be added once demo website is ready
 
 /**
  * Admin footer text
  *
- * A function to add footer text to the settings page of the plugin. Footer text contains plugin rating and donation links.
- * Note: Remove the rating link if the plugin doesn't have a WordPress.org directory listing yet. (i.e. before initial approval)
+ * A function to add footer text to the settings page of the plugin.
  * @since	1.0
  * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
  */
@@ -112,7 +111,7 @@ function superpwa_footer_text($default) {
 	
 	return $superpwa_footer_text;
 }
-add_filter('admin_footer_text', 'superpwa_footer_text');
+// add_filter('admin_footer_text', 'superpwa_footer_text'); // Todo: Wait till ver 1.1 or more to add this
 
 /**
  * Admin footer version
@@ -127,6 +126,6 @@ function superpwa_footer_version($default) {
 		return $default;
 	}
 	
-	return 'Plugin version ' . SUPERPWA_VERSION;
+	return 'SuperPWA ' . SUPERPWA_VERSION;
 }
 add_filter( 'update_footer', 'superpwa_footer_version', 11 );
