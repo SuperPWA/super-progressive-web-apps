@@ -12,7 +12,7 @@ Here is a list of feature the current release can do:
 * Generate a manifest for your website and add it to the <head> of the page
 * Set the application icon for your Progressive Web App. 
 * Set the background color for the splash screen of your Progressive Web App. 
-* Your website will show "Add to home screen" notice when accessed in a supported browser (please refer FAQ).
+* Your website will show "Add to home screen" notice when accessed in a supported browser.
 
 Please note that the app is very basic at the moment and does not include offline fall-backs. Only the homepage is cached offline as of now.
 
