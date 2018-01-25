@@ -1,7 +1,7 @@
 === Super Progressive Web Apps ===
 Contributors: arunbasillal, josevarghese
 Donate link: http://millionclues.com/donate/
-Tags: pwa, progressive web apps, manifest, android app, mobile, superpwa
+Tags: pwa, progressive web apps, manifest, android app, mobile, superpwa, chrome app
 Requires at least: 3.5.0
 Tested up to: 4.9.2
 Requires PHP: 5.3
