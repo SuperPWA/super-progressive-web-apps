@@ -13,18 +13,18 @@ SuperPWA helps you convert your WordPress website into a Progressive Web App.
 
 == Description ==
 
-A Progressive Web App (PWA) is a new technology that is a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
+A Progressive Web App (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
-Users can come back to your website by launching the app from their home screen and interact with your website through an app like interface. 
+Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. 
 
 **What included in the box**
 
-Here is a list of feature the current release can do: 
+Here is a list of features the current release can do: 
 
 * Generate a manifest for your website and add it to the <head> of the page
 * Set the application icon for your Progressive Web App. 
 * Set the background color for the splash screen of your Progressive Web App. 
-* Your website will show "Add to home screen" notice when accessed in a supported browser (please refer FAQ).
+* Your website will show the "Add to home screen" notice when accessed in a supported browser (please refer to FAQ).
 
 Please note that the app is very basic at the moment and does not include offline fall-backs. Only the homepage is cached offline as of now.
 
@@ -38,27 +38,29 @@ Please note that the app is very basic at the moment and does not include offlin
 
 We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that users would want to have on their home screen.
 
-When we first heard about PWA we wanted to learn everything about. We have spent countless hours learning and wants to share it with the world. 
+When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. 
 
 Please give us your constructive feedback and support. 
 
 **Feature Requests, Issues, Pull Requests**
 
-Here is our repository on [Github](https://github.com/SuperPWA/Super-Progressive-Web-Apps). Send us your pull requests, feature requests or issues, if any.
+Here is our repository on [GitHub](https://github.com/SuperPWA/Super-Progressive-Web-Apps). Send us your pull requests, feature requests or issues, if any.
 
 == Installation ==
 
 To install this plugin:
 
-1. Install the plugin through the WordPress admin interface, or upload the plugin folder to /wp-content/plugins/ using ftp.
+1. Install the plugin through the WordPress admin interface, or upload the plugin folder to /wp-content/plugins/ using FTP.
 2. Activate the plugin through the 'Plugins' screen in WordPress. 
 3. Go to WordPress Admin > Settings > SuperPWA
 
 == Frequently Asked Questions ==
 
-= Which devices and browsers will it work? =
+= Which devices and browsers are supported? =
 
-Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. The list is fast growing and is likely to be supported in most major browsers by the end of this year.
+Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. 
+
+The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
 == Screenshots ==
 
