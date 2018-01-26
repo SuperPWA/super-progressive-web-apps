@@ -68,6 +68,10 @@ The list is fast growing and is likely to be supported in most major browsers by
 
 == Changelog ==
 
+= 1.1 =
+* Date: 
+* 
+
 = 1.0 =
 * Date: 22.January.2018
 * First release of the plugin.

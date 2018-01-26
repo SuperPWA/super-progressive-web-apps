@@ -49,8 +49,14 @@ function superpwa_sw_template() {
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
 'use strict';
-const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ) )['host'] . '-ver-' . SUPERPWA_VERSION; ?>';
-const startPage = '/';
+
+/**
+ * Service Worker of SuperPWA
+ * https://wordpress.org/plugins/super-progressive-web-apps/
+ */
+ 
+const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ) )['host'] . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const startPage = '<?php echo get_bloginfo( 'wpurl' ); ?>';
 const offlinePage = '/';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
 const filesToCache = [startPage, offlinePage, fallbackImage];
