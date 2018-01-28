@@ -112,6 +112,8 @@ To install this plugin:
 
 == Frequently Asked Questions ==
 
+If you have any questions, please ask it on the [support forum](https://wordpress.org/support/plugin/super-progressive-web-apps).
+
 == Screenshots ==
 
 1. Settings page in WordPress Admin > Settings > SuperPWA
