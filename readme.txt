@@ -120,6 +120,9 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+= 1.2 =
+* Date: 
+
 = 1.1 =
 * Date: 28.January.2018
 * Aggressive caching of pages using CacheStorage API.
