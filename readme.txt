@@ -98,6 +98,7 @@ Uh, oh. Your PWA did not work as expected? You do not see the "Add to Home Scree
 
 * Make sure your website has a SSL certificate installed. i.e. your website should be https instead of http (as in https://your-domain.com).
 * Make sure you are using a supported device and a supported browser. Refer to the "Device and Browser Support For PWA" list above.
+* Make sure your icon is a PNG and 192px X 192 px in size. 
 * Clear the browser cache and try again. In Chrome for Android, go to Settings > Privacy > "Clear browsing data".
 * If the application icon does not update after first install, delete the PWA from your phone, clear browser cache and install again. (We are working on making it better.) 
 * Create a [new support ticket](https://wordpress.org/support/plugin/super-progressive-web-apps) and share a link to your website. We will take a look and figure it out for you.
@@ -134,6 +135,15 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Date: 
+
+= 1.1 =
+* Date: 28.January.2018
+* Aggressive caching of pages using CacheStorage API.
+* Pages once cached are served even if the user is offline. 
+* Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
 
 = 1.0 =
 * First release of the plugin.
