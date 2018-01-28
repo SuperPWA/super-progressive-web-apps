@@ -49,19 +49,25 @@ function superpwa_sw_template() {
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
 'use strict';
-const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ) )['host'] . '-ver-' . SUPERPWA_VERSION; ?>';
-const startPage = '/';
-const offlinePage = '/';
+
+/**
+ * Service Worker of SuperPWA
+ * https://wordpress.org/plugins/super-progressive-web-apps/
+ */
+ 
+const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ) )['host'] . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const startPage = '<?php echo trailingslashit(get_bloginfo( 'wpurl' )); ?>';
+const offlinePage = '<?php echo get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )); ?>';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
 const filesToCache = [startPage, offlinePage, fallbackImage];
-const neverCache = [/\/wp-admin/,/\/wp-login/,/preview=true/];
+const neverCacheUrls = [/\/wp-admin/,/\/wp-login/,/preview=true/];
 
 // Install
 self.addEventListener('install', function(e) {
-	console.log('SuperPWA Service Worker Installation');
+	console.log('SuperPWA service worker installation');
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
-			console.log('SuperPWA Service Worker Caching Dependencies');
+			console.log('SuperPWA service worker caching dependencies');
 			return cache.addAll(filesToCache);
 		})
 	);
@@ -69,12 +75,12 @@ self.addEventListener('install', function(e) {
 
 // Activate
 self.addEventListener('activate', function(e) {
-	console.log('SuperPWA Service Worker Activation');
+	console.log('SuperPWA service worker activation');
 	e.waitUntil(
 		caches.keys().then(function(keyList) {
 			return Promise.all(keyList.map(function(key) {
-				if (key !== cacheName) {
-					console.log('SuperPWA Service Worker Old Cache Removed', key);
+				if ( key !== cacheName ) {
+					console.log('SuperPWA old cache removed', key);
 					return caches.delete(key);
 				}
 			}));
@@ -85,13 +91,38 @@ self.addEventListener('activate', function(e) {
 
 // Fetch
 self.addEventListener('fetch', function(e) {
-  console.log('SuperPWA fetched ', e.request.url);
-  e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
-    })
-  );
+	
+	// Return if the current request url is in the never cache list
+	if ( ! neverCacheUrls.every(checkNeverCacheList, e.request.url) ) {
+	  console.log('SuperPWA: Current page is excluded from cache');
+	  return;
+	}
+	
+	// Return if request url protocal isn't http or https
+	if ( ! e.request.url.match(/^(http|https):\/\//i) )
+		return;
+
+	e.respondWith(
+		caches.match(e.request).then(function(response) {
+			return response || fetch(e.request).then(function(response) {
+				return caches.open(cacheName).then(function(cache) {
+					cache.put(e.request, response.clone());
+					return response;
+				});  
+			});
+		}).catch(function() {
+			return caches.match(offlinePage);
+		})
+	);
 });
+
+// Check if current url is in the neverCacheUrls list
+function checkNeverCacheList(url) {
+	if ( this.match(url) ) {
+		return false;
+	}
+	return true;
+}
 <?php return ob_get_clean();
 }
 

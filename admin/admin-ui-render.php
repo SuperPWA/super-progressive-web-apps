@@ -8,6 +8,8 @@
  * @function	superpwa_splash_screen_cb()				Splash Screen Callback
  * @function	superpwa_background_color_cb()			Background Color
  * @function	superpwa_icons_cb()						Application Icons
+ * @function	superpwa_offline_page_note_cb()			Offline Page Note
+ * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -86,6 +88,40 @@ function superpwa_icons_cb() {
 
 	<?php
 }
+
+/**
+ * Offline Page Note
+ *
+ * @since	1.0
+ */
+function superpwa_offline_page_note_cb() {
+	
+	echo '<p>' . __('The page you set here will be displayed if the requested page is not cached and the user is offline. Defaults to <code>WordPress Address</code> in <code>Settings</code> > <code>General</code>)', 'super-progressive-web-apps') . '</p>';
+}
+
+/**
+ * Offline Page Dropdown
+ *
+ * @since 1.0
+ */
+function superpwa_offline_page_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- WordPress Pages Dropdown -->
+	<label for="superpwa_settings[offline_page]">
+	<?php echo wp_dropdown_pages( array( 
+			'name' => 'superpwa_settings[offline_page]', 
+			'echo' => 0, 
+			'show_option_none' => __( '&mdash; Default &mdash;' ), 
+			'option_none_value' => '0', 
+			'selected' =>  isset($settings['offline_page']) ? $settings['offline_page'] : '',
+		)); ?>
+	</label>
+
+	<?php
+}
  
 /**
  * Admin interface renderer
@@ -124,6 +160,9 @@ function superpwa_admin_interface_render () {
 			
 			// Splash Screen
 			do_settings_sections( 'superpwa_splash_screen_section' );	// Page slug
+			
+			// Offline Page
+			do_settings_sections( 'superpwa_offline_page_section' );	// Page slug
 			
 			// Output save settings button
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );
