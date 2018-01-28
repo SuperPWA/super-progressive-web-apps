@@ -29,16 +29,14 @@ Here are the current features of Super Progressive Web Apps:
 * Pages once cached are served even if the user is offline. 
 * Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
 
-Please note that the app is very basic at the moment and does not include offline fall-backs. Only the homepage is cached offline as of now.
-
-### Features are we working on
+**Features are we currently working on:**
 
 * Cache busting features.
 * Better handling of service worker updates.
 * Better admin notices and info.
 * Better UI.
 
-### Minimum Requirements On Your WordPress Install
+### Progressive Web App Minimum Requirements
 
 Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn't HTTPS, please contact your host about it. You can also [ask us](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
 
@@ -50,7 +48,7 @@ The list is fast growing and is likely to be supported in most major browsers by
 
 ### About us
 
-We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that users would want to have on their home screen.
+We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen.
 
 When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. 
 
@@ -66,7 +64,7 @@ Here is our repository on [GitHub](https://github.com/SuperPWA/Super-Progressive
 
 * Visit WordPress Admin > Plugins > Add New
 * Search for 'Super Progressive Web Apps'
-* Click "Install Now" and then "Activte" Super Progressive Web Apps
+* Click "Install Now" and then "Activate" Super Progressive Web Apps
 
 To install manually:
 
