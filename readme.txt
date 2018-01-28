@@ -13,7 +13,7 @@ SuperPWA helps you convert your WordPress website into a Progressive Web App.
 
 == Description ==
 
-A Progressive Web App (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
+Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
@@ -34,6 +34,7 @@ Please note that the app is very basic at the moment and does not include offlin
 ### Features are we working on
 
 * Cache busting features.
+* Better handling of service worker updates.
 * Better admin notices and info.
 * Better UI.
 
@@ -95,10 +96,12 @@ Your Progressive Web App should be ready to test with the default settings upon 
 
 #### Troubleshooting Your Progressive Web App
 
-Uh, oh. Your PWA did not work as expected? 
+Uh, oh. Your PWA did not work as expected? You do not see the "Add to Home Screen" notice?
 
 * Make sure your website has a SSL certificate installed. i.e. your website should be https instead of http (as in https://your-domain.com).
 * Make sure you are using a supported device and a supported browser. Refer to the "Device and Browser Support For PWA" list above.
+* Clear the browser cache and try again. In Chrome for Android, go to Settings > Privacy > "Clear browsing data".
+* If the application icon does not update after first install, delete the PWA from your phone, clear browser cache and install again. (We are working on making it better.) 
 * Create a [new support ticket](https://wordpress.org/support/plugin/super-progressive-web-apps) and share a link to your website. We will take a look and figure it out for you.
 
 == Installation ==
