@@ -80,7 +80,24 @@ function superpwa_register_settings() {
 			'superpwa_splash_screen_section',						// Page slug
 			'superpwa_splash_screen_section'						// Settings Section ID
 		);
+		
+	// Offline Page
+    add_settings_section(
+        'superpwa_offline_page_section',					// ID
+        __('Offline Page', 'super-progressive-web-apps'),	// Title
+        'superpwa_offline_page_note_cb',					// Callback Function
+        'superpwa_offline_page_section'						// Page slug
+    );
 	
+		// Background Color
+		add_settings_field(
+			'superpwa_offline_page',							// ID
+			__('Offline Page', 'super-progressive-web-apps'),	// Title
+			'superpwa_offline_page_cb',							// Callback function
+			'superpwa_offline_page_section',					// Page slug
+			'superpwa_offline_page_section'						// Settings Section ID
+		);
+		
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
@@ -111,6 +128,7 @@ function superpwa_get_settings() {
 	$defaults = array(
 				'background_color' 	=> '#D5E0EB',
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
+				'offline_page' 		=> 0,
 			);
 
 	$settings = get_option('superpwa_settings', $defaults);
