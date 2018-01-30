@@ -112,7 +112,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
-	$settings['icon'] = empty( sanitize_text_field($settings['icon']) ) ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field($settings['icon']);
+	$settings['icon'] = sanitize_text_field($settings['icon']) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field($settings['icon']);
 	
 	return $settings;
 }

@@ -121,8 +121,14 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+<<<<<<< HEAD
 = 1.2 =
 * Date: 
+=======
+= 1.1.1 =
+* Date: 30.January.2018
+* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+>>>>>>> master
 
 = 1.1 =
 * Date: 28.January.2018
@@ -136,8 +142,14 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Upgrade Notice ==
 
+<<<<<<< HEAD
 = 1.2 =
 * Date: 
+=======
+= 1.1.1 =
+* Date: 30.January.2018
+* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+>>>>>>> master
 
 = 1.1 =
 * Date: 28.January.2018
