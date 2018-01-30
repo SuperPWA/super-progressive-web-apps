@@ -120,6 +120,10 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+= 1.1.1 =
+* Date: 30.January.2018
+* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+
 = 1.1 =
 * Date: 28.January.2018
 * Aggressive caching of pages using CacheStorage API.
@@ -131,6 +135,16 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+* Date: 30.January.2018
+* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+
+= 1.1 =
+* Date: 28.January.2018
+* Aggressive caching of pages using CacheStorage API.
+* Pages once cached are served even if the user is offline. 
+* Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
 
 = 1.0 =
 * First release of the plugin.
