@@ -96,7 +96,10 @@ function superpwa_icons_cb() {
  */
 function superpwa_offline_page_note_cb() {
 	
-	echo '<p>' . __('The page you set here will be displayed if the requested page is not cached and the user is offline. Defaults to <code>WordPress Address</code> in <code>Settings</code> > <code>General</code>)', 'super-progressive-web-apps') . '</p>';
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	printf( '<p>' . __( 'The page you set here will be displayed if the requested page is not cached and the user is offline. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ) . '</p>', get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) );
 }
 
 /**
