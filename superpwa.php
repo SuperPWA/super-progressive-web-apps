@@ -5,11 +5,7 @@
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
  * Contributors: Arun Basil Lal, Jose Varghese
-<<<<<<< HEAD
  * Version: 1.2
-=======
- * Version: 1.1.1
->>>>>>> master
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -51,11 +47,7 @@ if ( ! defined('ABSPATH') ) exit;
  */
 if ( ! defined('SUPERPWA_PATH_ABS ') ) 			define('SUPERPWA_PATH_ABS', plugin_dir_path( __FILE__ )); // absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/superpwa/
 if ( ! defined('SUPERPWA_PATH_SRC') ) 			define('SUPERPWA_PATH_SRC', plugin_dir_url( __FILE__ )); // link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/superpwa/
-<<<<<<< HEAD
 if ( ! defined('SUPERPWA_VERSION') ) 			define('SUPERPWA_VERSION', '1.2'); // Plugin version
-=======
-if ( ! defined('SUPERPWA_VERSION') ) 			define('SUPERPWA_VERSION', '1.1.1'); // Plugin version
->>>>>>> master
 if ( ! defined('SUPERPWA_MANIFEST_FILENAME') ) 	define('SUPERPWA_MANIFEST_FILENAME', 'superpwa-manifest.json'); // Name of Manifest file
 if ( ! defined('SUPERPWA_MANIFEST_ABS') )		define('SUPERPWA_MANIFEST_ABS', trailingslashit( ABSPATH ) . SUPERPWA_MANIFEST_FILENAME); // Absolute path to manifest
 if ( ! defined('SUPERPWA_MANIFEST_SRC') )		define('SUPERPWA_MANIFEST_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_MANIFEST_FILENAME); // Link to manifest
