@@ -4,6 +4,7 @@
  *
  * @since 1.0
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
+ * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
  * @function	superpwa_deactivate_plugin			Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
@@ -28,6 +29,35 @@ function superpwa_activate_plugin() {
 	
 	// Generate service worker
 	superpwa_generate_sw();
+	
+	// Set transient for activation notice
+	set_transient( 'superpwa_admin_notice_activation', true, 5 );
+}
+
+/**
+ * Add admin notice on activation
+ *
+ * @since 1.2
+ */
+add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
+
+/**
+ * Admin notice on plugin activation
+ *
+ * @since 1.2
+ */
+function superpwa_admin_notice_activation() {
+ 
+    // Return if transient is not set
+	if ( ! get_transient( 'superpwa_admin_notice_activation' ) )
+		return;
+	
+	$superpwa_is_ready = superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) ? 'Your app is ready with the default settings. ' : '';
+	
+	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
+	
+	// Delete transient
+	delete_transient( 'superpwa_admin_notice_activation' );
 }
 
 /**
