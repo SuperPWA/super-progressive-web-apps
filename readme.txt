@@ -123,6 +123,8 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 = 1.2 =
 * Date: 
+* UI Improvement: Added admin notice with a link to settings page on plugin activation.
+* New Feature: Support for theme-color
 
 = 1.1.1 =
 * Date: 30.January.2018
