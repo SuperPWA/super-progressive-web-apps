@@ -55,7 +55,7 @@ function superpwa_sw_template() {
  * https://wordpress.org/plugins/super-progressive-web-apps/
  */
  
-const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ) )['host'] . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo trailingslashit(get_bloginfo( 'wpurl' )); ?>';
 const offlinePage = '<?php echo get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )); ?>';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
