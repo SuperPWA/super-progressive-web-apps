@@ -33,9 +33,9 @@ function superpwa_manifest_cb() {
  */
 function superpwa_manifest_status_cb() {
 
-	if ( superpwa_get_contents( ABSPATH . SUPERPWA_MANIFEST_FILENAME ) ) {
+	if ( superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) ) {
 		
-		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here</a>.', 'super-progressive-web-apps' ), SUPERPWA_MANIFEST_SRC );
+		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ), SUPERPWA_MANIFEST_SRC );
 	} else {
 		
 		echo '<p>' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
