@@ -148,7 +148,13 @@ function superpwa_admin_interface_render () {
 	}
  
 	// Show Settings Saved Message
-	settings_errors( 'superpwa_settings_saved_message' ); */?> 
+	settings_errors( 'superpwa_settings_saved_message' ); */
+	
+	if ( ! is_ssl() ) {
+	
+		echo '<div class="notice notice-error"><p>' . sprintf( __( 'Progressive Web Apps require that your website is served over HTTPS. Please contact your host to add a SSL certificate to your domain.', 'super-progressive-web-apps' ) ) . '</p></div>';
+	}
+	?>
 	
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>

@@ -125,6 +125,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * Date: 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * New Feature: Support for theme-color
+* UI Improvement: Added check for HTTPS and a notice if the website is not served over HTTPS
 
 = 1.1.1 =
 * Date: 30.January.2018
