@@ -123,9 +123,12 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 = 1.2 =
 * Date: 
-* New Feature: Support for theme-color
+* New Feature: Support for theme-color.
+* New Feature: Now you can edit the Application Name and Application Short name.
+* New Feature: Set the start page of your PWA.
+* UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
-* UI Improvement: Added check for HTTPS and a notice if the website is not served over HTTPS
+* UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
 * Bux fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
