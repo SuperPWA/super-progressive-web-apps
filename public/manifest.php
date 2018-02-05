@@ -24,8 +24,8 @@ function superpwa_generate_manifest() {
 	$settings = superpwa_get_settings();
 	
 	$manifest = array(
-		'name'				=> get_bloginfo('name'),
-		'short_name'		=> get_bloginfo('name'),
+		'name'				=> $settings['app_name'],
+		'short_name'		=> $settings['app_short_name'],
 		'icons'				=> array( 
 								array(
 									'src' 	=> $settings['icon'],
@@ -37,7 +37,7 @@ function superpwa_generate_manifest() {
 		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
 		'orientation'		=> 'natural',
-		'start_url'			=> '/',
+		'start_url'			=> superpwa_get_start_url(true),
 	);
 	
 	// Delete manifest if it exists

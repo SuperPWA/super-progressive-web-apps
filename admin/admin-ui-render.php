@@ -118,7 +118,7 @@ function superpwa_start_url_cb() {
 		)); ?>
 	</label>
 	
-	<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['start_url']) ? trailingslashit(get_permalink($settings['start_url'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?></p>
+	<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?></p>
 
 	<?php
 }

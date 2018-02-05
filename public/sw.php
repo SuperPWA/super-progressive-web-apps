@@ -56,7 +56,7 @@ function superpwa_sw_template() {
  */
  
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
-const startPage = '<?php echo trailingslashit(get_bloginfo( 'wpurl' )); ?>';
+const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )); ?>';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
 const filesToCache = [startPage, offlinePage, fallbackImage];
