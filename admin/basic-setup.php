@@ -4,6 +4,7 @@
  *
  * @since 1.0
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
+ * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
  * @function	superpwa_deactivate_plugin			Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
@@ -28,6 +29,35 @@ function superpwa_activate_plugin() {
 	
 	// Generate service worker
 	superpwa_generate_sw();
+	
+	// Set transient for activation notice
+	set_transient( 'superpwa_admin_notice_activation', true, 5 );
+}
+
+/**
+ * Add admin notice on activation
+ *
+ * @since 	1.2
+ */
+add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
+
+/**
+ * Admin notice on plugin activation
+ *
+ * @since 	1.2
+ */
+function superpwa_admin_notice_activation() {
+ 
+    // Return if transient is not set
+	if ( ! get_transient( 'superpwa_admin_notice_activation' ) )
+		return;
+	
+	$superpwa_is_ready = is_ssl() && superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) ? 'Your app is ready with the default settings. ' : '';
+	
+	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
+	
+	// Delete transient
+	delete_transient( 'superpwa_admin_notice_activation' );
 }
 
 /**
@@ -94,10 +124,10 @@ function superpwa_plugin_row_meta( $links, $file ) {
  * Admin footer text
  *
  * A function to add footer text to the settings page of the plugin.
- * @since	1.0
+ * @since	1.2
  * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
  */
-function superpwa_footer_text($default) {
+function superpwa_footer_text( $default ) {
     
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
@@ -105,13 +135,13 @@ function superpwa_footer_text($default) {
 		return $default;
 	}
 	
-    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+    $superpwa_footer_text = sprintf( __( 'If you like our plugin, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
 	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post' 
 	);
 	
 	return $superpwa_footer_text;
 }
-// add_filter('admin_footer_text', 'superpwa_footer_text'); // Todo: Wait till ver 1.1 or more to add this
+add_filter('admin_footer_text', 'superpwa_footer_text');
 
 /**
  * Admin footer version

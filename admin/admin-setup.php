@@ -38,66 +38,102 @@ function superpwa_register_settings() {
 		'superpwa_validater_and_sanitizer'	// Input sanitizer
 	);
 	
-	// Manifest
+	// Basic Application Settings
     add_settings_section(
-        'superpwa_manifest_section',						// ID
-        __('Manifest', 'super-progressive-web-apps'),		// Title
-        'superpwa_manifest_cb',								// Callback Function
-        'superpwa_manifest_section'							// Page slug
+        'superpwa_basic_settings_section',					// ID
+        __return_false(),									// Title
+        '__return_false',									// Callback Function
+        'superpwa_basic_settings_section'					// Page slug
+    );
+	
+		// Application Name
+		add_settings_field(
+			'superpwa_app_name',									// ID
+			__('Application Name', 'super-progressive-web-apps'),	// Title
+			'superpwa_app_name_cb',									// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Application Short Name
+		add_settings_field(
+			'superpwa_app_short_name',								// ID
+			__('Application Short Name', 'super-progressive-web-apps'),	// Title
+			'superpwa_app_short_name_cb',							// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Application Icon
+		add_settings_field(
+			'superpwa_icons',										// ID
+			__('Application Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_icons_cb',									// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Splash Screen Background Color
+		add_settings_field(
+			'superpwa_background_color',							// ID
+			__('Background Color', 'super-progressive-web-apps'),	// Title
+			'superpwa_background_color_cb',							// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Start URL
+		add_settings_field(
+			'superpwa_start_url',									// ID
+			__('Start Page', 'super-progressive-web-apps'),			// Title
+			'superpwa_start_url_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Offline Page
+		add_settings_field(
+			'superpwa_offline_page',								// ID
+			__('Offline Page', 'super-progressive-web-apps'),		// Title
+			'superpwa_offline_page_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+	// PWA Status
+    add_settings_section(
+        'superpwa_pwa_status_section',					// ID
+        __('Status', 'super-progressive-web-apps'),		// Title
+        '__return_false',								// Callback Function
+        'superpwa_pwa_status_section'					// Page slug
     );
 	
 		// Manifest status
 		add_settings_field(
 			'superpwa_manifest_status',								// ID
-			__('Manifest Status', 'super-progressive-web-apps'),	// Title
-			'superpwa_manifest_status_cb',							// Callback function
-			'superpwa_manifest_section',							// Page slug
-			'superpwa_manifest_section'								// Settings Section ID
-		);
-	
-	// Splash Screen Settings
-    add_settings_section(
-        'superpwa_splash_screen_section',					// ID
-        __('Splash Screen', 'super-progressive-web-apps'),	// Title
-        'superpwa_splash_screen_cb',						// Callback Function
-        'superpwa_splash_screen_section'					// Page slug
-    );
-	
-		// Background Color
-		add_settings_field(
-			'superpwa_background_color',							// ID
-			__('Background Color', 'super-progressive-web-apps'),	// Title
-			'superpwa_background_color_cb',						// Callback function
-			'superpwa_splash_screen_section',						// Page slug
-			'superpwa_splash_screen_section'						// Settings Section ID
+			__('Manifest', 'super-progressive-web-apps'),			// Title
+			'superpwa_manifest_status_cb',							// CB
+			'superpwa_pwa_status_section',							// Page slug
+			'superpwa_pwa_status_section'							// Settings Section ID
 		);
 		
-		// Icons
+		// Service Worker status
 		add_settings_field(
-			'superpwa_icons',										// ID
-			__('Application Icon', 'super-progressive-web-apps'),	// Title
-			'superpwa_icons_cb',									// Callback function
-			'superpwa_splash_screen_section',						// Page slug
-			'superpwa_splash_screen_section'						// Settings Section ID
-		);
+			'superpwa_sw_status',								// ID
+			__('Service Worker', 'super-progressive-web-apps'),		// Title
+			'superpwa_sw_status_cb',							// CB
+			'superpwa_pwa_status_section',							// Page slug
+			'superpwa_pwa_status_section'							// Settings Section ID
+		);	
 		
-	// Offline Page
-    add_settings_section(
-        'superpwa_offline_page_section',					// ID
-        __('Offline Page', 'super-progressive-web-apps'),	// Title
-        'superpwa_offline_page_note_cb',					// Callback Function
-        'superpwa_offline_page_section'						// Page slug
-    );
-	
-		// Background Color
+		// HTTPS status
 		add_settings_field(
-			'superpwa_offline_page',							// ID
-			__('Offline Page', 'super-progressive-web-apps'),	// Title
-			'superpwa_offline_page_cb',							// Callback function
-			'superpwa_offline_page_section',					// Page slug
-			'superpwa_offline_page_section'						// Settings Section ID
-		);
-		
+			'superpwa_https_status',								// ID
+			__('HTTPS', 'super-progressive-web-apps'),				// Title
+			'superpwa_https_status_cb',							// CB
+			'superpwa_pwa_status_section',							// Page slug
+			'superpwa_pwa_status_section'							// Settings Section ID
+		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
@@ -107,6 +143,12 @@ add_action( 'admin_init', 'superpwa_register_settings' );
  * @since 		1.0
  */
 function superpwa_validater_and_sanitizer( $settings ) {
+	
+	// Sanitize Application Name
+	$settings['app_name'] = sanitize_text_field($settings['app_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_name']);
+	
+	// Sanitize Application Short Name
+	$settings['app_short_name'] = sanitize_text_field($settings['app_short_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_short_name']);
 	
 	// Sanitize hex color input
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
@@ -126,8 +168,12 @@ function superpwa_validater_and_sanitizer( $settings ) {
 function superpwa_get_settings() {
 
 	$defaults = array(
-				'background_color' 	=> '#D5E0EB',
+				'app_name'			=> get_bloginfo('name'),
+				'app_short_name'	=> get_bloginfo('name'),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
+				'background_color' 	=> '#D5E0EB',
+				'start_url' 		=> 0,
+				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
 			);
 

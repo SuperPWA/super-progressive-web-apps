@@ -3,13 +3,15 @@
  * Admin UI setup and render
  *
  * @since 1.0
- * @function	superpwa_manifest_cb()					Manifest Callback
- * @function	superpwa_manifest_status_cb				Manifest Status
- * @function	superpwa_splash_screen_cb()				Splash Screen Callback
- * @function	superpwa_background_color_cb()			Background Color
+ * @function	superpwa_app_name_cb()					Application Name
+ * @function	superpwa_app_short_name_cb()			Application Short Name
+ * @function	superpwa_background_color_cb()			Splash Screen Background Color
  * @function	superpwa_icons_cb()						Application Icons
- * @function	superpwa_offline_page_note_cb()			Offline Page Note
+ * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
+ * @function	superpwa_manifest_status_cb()			Manifest Status
+ * @function	superpwa_sw_status_cb()					Service Worker Status
+ * @function	superpwa_https_status_cb()				HTTPS Status
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -17,44 +19,68 @@
 if ( ! defined('ABSPATH') ) exit;
 
 /**
- * Manifest Callback
+ * Application Name
  *
- * @since	1.0
+ * @since 1.2
  */
-function superpwa_manifest_cb() {
+function superpwa_app_name_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
 	
-	echo '<p>' . __('The manifest includes all the information about your Progressive Web App. SuperPWA generates the manifest automatically.') . '</p>';
+	<fieldset>
+		
+		<input type="text" name="superpwa_settings[app_name]" class="regular-text" value="<?php if ( isset( $settings['app_name'] ) && ( ! empty($settings['app_name']) ) ) echo esc_attr($settings['app_name']); ?>"/>
+		
+	</fieldset>
+
+	<?php
 }
 
 /**
- * Manifest Status
+ * Application Short Name
+ *
+ * @since 1.2
+ */
+function superpwa_app_short_name_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
+		
+		<p class="description" id="tagline-description"><?php _e('Used when there is insufficient space to display the full name of the application.', 'super-progressive-web-apps'); ?></p>
+		
+	</fieldset>
+
+	<?php
+}
+
+/**
+ * Application Icon
  *
  * @since 1.0
  */
-function superpwa_manifest_status_cb() {
+function superpwa_icons_cb() {
 
-	if ( superpwa_get_contents( ABSPATH . SUPERPWA_MANIFEST_FILENAME ) ) {
-		
-		printf( __( 'Manifest was generated successfully. You can <a href="%s" target="_blank">see it here</a>.', 'super-progressive-web-apps' ), SUPERPWA_MANIFEST_SRC );
-	} else {
-		
-		echo '<p>' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
-	}
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
 	
+	<!-- Application Icon -->
+	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon regular-text" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
+	<button type="button" class="button superpwa-icon-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
+	</button>
+	
+	<p class="description" id="tagline-description"><?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?></p>
+
+	<?php
 }
 
 /**
- * Splash Screen Callback
- *
- * @since	1.0
- */
-function superpwa_splash_screen_cb() {
-	
-	echo '<p>' . __('The values you set here will be used for the splash screen that supported browsers choose to display.', 'super-progressive-web-apps') . '</p>';
-}
-
-/**
- * Background Color
+ * Splash Screen Background Color
  *
  * @since 1.0
  */
@@ -65,38 +91,50 @@ function superpwa_background_color_cb() {
 	
 	<!-- Background Color -->
 	<input type="text" name="superpwa_settings[background_color]" id="superpwa_settings[background_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['background_color'] ) ? esc_attr( $settings['background_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
+	
+	<p class="description" id="tagline-description"><?php _e('Background color of the splash screen.', 'super-progressive-web-apps'); ?></p>
 
 	<?php
 }
 
 /**
- * Application Icons
+ * Start URL Dropdown
  *
- * @since 1.0
+ * @since 1.2
  */
-function superpwa_icons_cb() {
+function superpwa_start_url_cb() {
 
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	
-	<!-- Application Icon -->
-	<p style="margin-bottom: 8px;"><?php _e('This will be the icon of your PWA when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?></p>
-	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
-	<button type="button" class="button superpwa-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
-	</button>
+	<fieldset>
+	
+		<!-- WordPress Pages Dropdown -->
+		<label for="superpwa_settings[start_url]">
+		<?php echo wp_dropdown_pages( array( 
+				'name' => 'superpwa_settings[start_url]', 
+				'echo' => 0, 
+				'show_option_none' => __( '&mdash; Homepage &mdash;' ), 
+				'option_none_value' => '0', 
+				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
+			)); ?>
+		</label>
+		
+		<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?></p>
+		
+		<?php if ( superpwa_is_amp() ) { ?>
+		
+			<!--  AMP Page As Start Page -->
+			<br><input type="checkbox" name="superpwa_settings[start_url_amp]" id="superpwa_settings[start_url_amp]" value="1" 
+				<?php if ( isset( $settings['start_url_amp'] ) ) { checked( '1', $settings['start_url_amp'] ); } ?>>
+				<label for="superpwa_settings[start_url_amp]"><?php _e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
+				<br>
+				
+		<?php } ?>
+	
+	</fieldset>
 
 	<?php
-}
-
-/**
- * Offline Page Note
- *
- * @since	1.0
- */
-function superpwa_offline_page_note_cb() {
-	
-	echo '<p>' . __('The page you set here will be displayed if the requested page is not cached and the user is offline. Defaults to <code>WordPress Address</code> in <code>Settings</code> > <code>General</code>)', 'super-progressive-web-apps') . '</p>';
 }
 
 /**
@@ -119,8 +157,58 @@ function superpwa_offline_page_cb() {
 			'selected' =>  isset($settings['offline_page']) ? $settings['offline_page'] : '',
 		)); ?>
 	</label>
+	
+	<p class="description" id="tagline-description"><?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?></p>
 
 	<?php
+}
+
+/**
+ * Manifest Status
+ *
+ * @since 1.0
+ */
+function superpwa_manifest_status_cb() {
+
+	if ( superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) ) {
+		
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', SUPERPWA_MANIFEST_SRC );
+	} else {
+		
+		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
+	}
+}
+
+/**
+ * Service Worker Status
+ *
+ * @since 1.2
+ */
+function superpwa_sw_status_cb() {
+
+	if ( superpwa_get_contents( SUPERPWA_SW_ABS ) ) {
+		
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
+	} else {
+		
+		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Service worker generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
+	}
+}
+
+/**
+ * HTTPS Status
+ *
+ * @since 1.2
+ */
+function superpwa_https_status_cb() {
+
+	if ( is_ssl() ) {
+		
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Your website is served over HTTPS.', 'super-progressive-web-apps' ) . '</p>' );
+	} else {
+		
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Progressive Web Apps require that your website is served over HTTPS. Please contact your host to add a SSL certificate to your domain.', 'super-progressive-web-apps' ) . '</p>' );
+	}
 }
  
 /**
@@ -145,7 +233,8 @@ function superpwa_admin_interface_render () {
 	}
  
 	// Show Settings Saved Message
-	settings_errors( 'superpwa_settings_saved_message' ); */?> 
+	settings_errors( 'superpwa_settings_saved_message' ); */
+	?>
 	
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
@@ -155,14 +244,11 @@ function superpwa_admin_interface_render () {
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
 			
-			// Manifest
-			do_settings_sections( 'superpwa_manifest_section' );	// Page slug
+			// Basic Application Settings
+			do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
 			
-			// Splash Screen
-			do_settings_sections( 'superpwa_splash_screen_section' );	// Page slug
-			
-			// Offline Page
-			do_settings_sections( 'superpwa_offline_page_section' );	// Page slug
+			// Status
+			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
 			
 			// Output save settings button
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );

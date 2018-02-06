@@ -24,8 +24,8 @@ function superpwa_generate_manifest() {
 	$settings = superpwa_get_settings();
 	
 	$manifest = array(
-		'name'				=> get_bloginfo('name'),
-		'short_name'		=> get_bloginfo('name'),
+		'name'				=> $settings['app_name'],
+		'short_name'		=> $settings['app_short_name'],
 		'icons'				=> array( 
 								array(
 									'src' 	=> $settings['icon'],
@@ -37,7 +37,7 @@ function superpwa_generate_manifest() {
 		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
 		'orientation'		=> 'natural',
-		'start_url'			=> '/',
+		'start_url'			=> superpwa_get_start_url(true),
 	);
 	
 	// Delete manifest if it exists
@@ -56,7 +56,11 @@ function superpwa_generate_manifest() {
  */
 function superpwa_add_manifest_to_header() {
 	
-	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">';
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
+	echo '<meta name="theme-color" content="'. $settings['background_color'] .'">' . PHP_EOL;
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 

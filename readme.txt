@@ -3,7 +3,7 @@ Contributors: arunbasillal, josevarghese
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.5.0
-Tested up to: 4.9.2
+Tested up to: 4.9.3
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -21,19 +21,22 @@ Users can come back to your website by launching the app from their home screen 
 
 Here are the current features of Super Progressive Web Apps: 
 
-* Generate a manifest for your website and add it to the <head> of the page
+* Generate a manifest for your website and add it to the head of your website.
 * Set the application icon for your Progressive Web App. 
 * Set the background color for the splash screen of your Progressive Web App. 
 * Your website will show the "Add to home screen" notice when accessed in a supported browser.
 * Aggressive caching of pages using CacheStorage API.
 * Pages once cached are served even if the user is offline. 
 * Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
+* New in version 1.2: Support for theme-color.
+* New in version 1.2: Now you can edit the Application Name and Application Short name.
+* New in version 1.2: Set the start page of your PWA.
+* New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 
 **Features are we currently working on:**
 
 * Cache busting features.
 * Better handling of service worker updates.
-* Better admin notices and info.
 * Better UI.
 
 ### Progressive Web App Minimum Requirements
@@ -45,18 +48,6 @@ Progressive Web Apps require that your WordPress website is served from a secure
 Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. 
 
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
-
-### About us
-
-We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen.
-
-When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. 
-
-Please give us your constructive feedback and support. 
-
-### Feature Requests, Issues, Pull Requests
-
-Here is our repository on [GitHub](https://github.com/SuperPWA/Super-Progressive-Web-Apps). Send us your pull requests, feature requests or issues, if any.
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
@@ -98,9 +89,22 @@ Uh, oh. Your PWA did not work as expected? You do not see the "Add to Home Scree
 
 * Make sure your website has a SSL certificate installed. i.e. your website should be https instead of http (as in https://your-domain.com).
 * Make sure you are using a supported device and a supported browser. Refer to the "Device and Browser Support For PWA" list above.
+* Make sure your icon is a PNG and 192px X 192 px in size. 
 * Clear the browser cache and try again. In Chrome for Android, go to Settings > Privacy > "Clear browsing data".
 * If the application icon does not update after first install, delete the PWA from your phone, clear browser cache and install again. (We are working on making it better.) 
 * Create a [new support ticket](https://wordpress.org/support/plugin/super-progressive-web-apps) and share a link to your website. We will take a look and figure it out for you.
+
+### Feature Requests, Issues, Pull Requests
+
+Here is our repository on [GitHub](https://github.com/SuperPWA/Super-Progressive-Web-Apps). Send us your pull requests, feature requests or issues, if any.
+
+### About us
+
+We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen.
+
+When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. 
+
+Please give us your constructive feedback and support. 
 
 == Installation ==
 
@@ -120,6 +124,17 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+= 1.2 =
+* Date: 06.February.2018
+* New Feature: Support for theme-color.
+* New Feature: Now you can edit the Application Name and Application Short name.
+* New Feature: Set the start page of your PWA.
+* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
+* UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
+* UI Improvement: Added admin notice with a link to settings page on plugin activation.
+* UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
+* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
+
 = 1.1.1 =
 * Date: 30.January.2018
 * Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
@@ -135,6 +150,17 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Date: 06.February.2018
+* New Feature: Support for theme-color.
+* New Feature: Now you can edit the Application Name and Application Short name.
+* New Feature: Set the start page of your PWA.
+* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
+* UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
+* UI Improvement: Added admin notice with a link to settings page on plugin activation.
+* UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
+* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
 * Date: 30.January.2018
