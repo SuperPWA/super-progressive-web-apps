@@ -35,6 +35,7 @@
  * ~ Release TODO ~
  *
  * Update SUPERPWA_VERSION
+ * Spellcheck readme.txt
  */
 
 // Exit if accessed directly
