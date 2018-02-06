@@ -132,7 +132,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
-* UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
+* UI Improvement: Added checks for manifest, service worker and HTTPS and display the status neatly in the UI.
 * Bug fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
