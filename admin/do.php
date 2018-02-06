@@ -68,7 +68,7 @@ function superpwa_is_amp() {
  * @return	String	URL to be set as the start_url in manifest and startPage in service worker
  * @since	1.2
  */
-function superpwa_get_start_url( $rel=false ) {
+function superpwa_get_start_url( $rel = false ) {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
@@ -82,7 +82,7 @@ function superpwa_get_start_url( $rel=false ) {
 	}
 	
 	// AMP URL
-	$amp_url = superpwa_is_amp() !== false ? superpwa_is_amp() : '';
+	$amp_url = superpwa_is_amp() !== false && ( isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) ? superpwa_is_amp() : '';
 	
 	return $start_url . $amp_url;
 }

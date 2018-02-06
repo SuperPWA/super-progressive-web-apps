@@ -173,6 +173,7 @@ function superpwa_get_settings() {
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'background_color' 	=> '#D5E0EB',
 				'start_url' 		=> 0,
+				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
 			);
 

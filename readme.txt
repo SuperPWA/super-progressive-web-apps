@@ -3,7 +3,7 @@ Contributors: arunbasillal, josevarghese
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.5.0
-Tested up to: 4.9.2
+Tested up to: 4.9.3
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -122,10 +122,11 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 == Changelog ==
 
 = 1.2 =
-* Date: 
+* Date: 06.February.2018
 * New Feature: Support for theme-color.
 * New Feature: Now you can edit the Application Name and Application Short name.
 * New Feature: Set the start page of your PWA.
+* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.

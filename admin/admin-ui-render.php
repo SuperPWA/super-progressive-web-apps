@@ -107,18 +107,32 @@ function superpwa_start_url_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	
-	<!-- WordPress Pages Dropdown -->
-	<label for="superpwa_settings[start_url]">
-	<?php echo wp_dropdown_pages( array( 
-			'name' => 'superpwa_settings[start_url]', 
-			'echo' => 0, 
-			'show_option_none' => __( '&mdash; Homepage &mdash;' ), 
-			'option_none_value' => '0', 
-			'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
-		)); ?>
-	</label>
+	<fieldset>
 	
-	<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?></p>
+		<!-- WordPress Pages Dropdown -->
+		<label for="superpwa_settings[start_url]">
+		<?php echo wp_dropdown_pages( array( 
+				'name' => 'superpwa_settings[start_url]', 
+				'echo' => 0, 
+				'show_option_none' => __( '&mdash; Homepage &mdash;' ), 
+				'option_none_value' => '0', 
+				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
+			)); ?>
+		</label>
+		
+		<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?></p>
+		
+		<?php if ( superpwa_is_amp() ) { ?>
+		
+			<!--  AMP Page As Start Page -->
+			<br><input type="checkbox" name="superpwa_settings[start_url_amp]" id="superpwa_settings[start_url_amp]" value="1" 
+				<?php if ( isset( $settings['start_url_amp'] ) ) { checked( '1', $settings['start_url_amp'] ); } ?>>
+				<label for="superpwa_settings[start_url_amp]"><?php _e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
+				<br>
+				
+		<?php } ?>
+	
+	</fieldset>
 
 	<?php
 }
