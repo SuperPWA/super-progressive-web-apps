@@ -31,7 +31,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.2: Support for theme-color.
 * New in version 1.2: Now you can edit the Application Name and Application Short name.
 * New in version 1.2: Set the start page of your PWA.
-* New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP
+* New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 
 **Features are we currently working on:**
 
@@ -129,11 +129,11 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * New Feature: Support for theme-color.
 * New Feature: Now you can edit the Application Name and Application Short name.
 * New Feature: Set the start page of your PWA.
-* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP
+* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
-* Bux fix: Fix a parse error that showed up only on PHP 5.3. 
+* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
 * Date: 30.January.2018
@@ -156,11 +156,11 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * New Feature: Support for theme-color.
 * New Feature: Now you can edit the Application Name and Application Short name.
 * New Feature: Set the start page of your PWA.
-* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP
+* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * UI Improvement: Added checks for manifest, serice worker and HTTPS and display the status neatly in the UI.
-* Bux fix: Fix a parse error that showed up only on PHP 5.3. 
+* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
 * Date: 30.January.2018
