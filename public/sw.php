@@ -101,6 +101,16 @@ self.addEventListener('fetch', function(e) {
 	// Return if request url protocal isn't http or https
 	if ( ! e.request.url.match(/^(http|https):\/\//i) )
 		return;
+	
+	// For POST requests, do not use the cache. Serve offline page if offline.
+	if ( e.request.method !== 'GET' ) {
+		e.respondWith(
+			fetch(e.request).catch( function() {
+				return caches.match(offlinePage);
+			})
+		);
+		return;
+	}
 
 	e.respondWith(
 		caches.match(e.request).then(function(response) {

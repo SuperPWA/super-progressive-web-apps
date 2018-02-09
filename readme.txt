@@ -124,6 +124,10 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+= 1.3 =
+* Date: 
+* Bug fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
+
 = 1.2 =
 * Date: 06.February.2018
 * New Feature: Support for theme-color.
