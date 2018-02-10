@@ -96,7 +96,7 @@ function superpwa_splash_icon_cb() {
 		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
 	</button>
 	
-	<p class="description" id="tagline-description"><?php _e('This icon will be displayed on the splash screen when your app is launched. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?></p>
+	<p class="description" id="tagline-description"><?php _e('This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?></p>
 
 	<?php
 }
