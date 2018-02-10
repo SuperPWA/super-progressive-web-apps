@@ -32,12 +32,13 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.2: Now you can edit the Application Name and Application Short name.
 * New in version 1.2: Set the start page of your PWA.
 * New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
+* New in version 1.3: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
+* New in version 1.3: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
+* New in version 1.3: Improved in-browser service worker update handling.
 
-**Features are we currently working on:**
+**Upcoming features:**
 
-* Cache busting features.
-* Better handling of service worker updates.
-* Better UI.
+* Push notifications.
 
 ### Progressive Web App Minimum Requirements
 
@@ -124,6 +125,14 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Changelog ==
 
+= 1.3 =
+* Date: 10. February.2018
+* New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
+* Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
+* Enhancement: Improved in-browser service worker update handling.
+* Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
+* Bug fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
+
 = 1.2 =
 * Date: 06.February.2018
 * New Feature: Support for theme-color.
@@ -150,6 +159,13 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.3 =
+* Date: 10. February.2018
+* New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
+* Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
+* Enhancement: Improved in-browser service worker update handling.
+* Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
 
 = 1.2 =
 * Date: 06.February.2018

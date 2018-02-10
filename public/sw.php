@@ -101,6 +101,29 @@ self.addEventListener('fetch', function(e) {
 	// Return if request url protocal isn't http or https
 	if ( ! e.request.url.match(/^(http|https):\/\//i) )
 		return;
+	
+	// For POST requests, do not use the cache. Serve offline page if offline.
+	if ( e.request.method !== 'GET' ) {
+		e.respondWith(
+			fetch(e.request).catch( function() {
+				return caches.match(offlinePage);
+			})
+		);
+		return;
+	}
+	
+	// Revving strategy
+	if ( e.request.mode === 'navigate' && navigator.onLine ) {
+		e.respondWith(
+			fetch(e.request).then(function(response) {
+				return caches.open(cacheName).then(function(cache) {
+					cache.put(e.request, response.clone());
+					return response;
+				});  
+			})
+		);
+		return;
+	}
 
 	e.respondWith(
 		caches.match(e.request).then(function(response) {

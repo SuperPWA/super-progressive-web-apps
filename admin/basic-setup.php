@@ -5,6 +5,7 @@
  * @since 1.0
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
  * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
+ * @function	superpwa_upgrader()					Plugin upgrade todo list
  * @function	superpwa_deactivate_plugin			Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
@@ -59,6 +60,37 @@ function superpwa_admin_notice_activation() {
 	// Delete transient
 	delete_transient( 'superpwa_admin_notice_activation' );
 }
+
+/**
+ * Plugin upgrade todo list
+ *
+ * @since	1.4
+ */
+function superpwa_upgrader() {
+	
+	$current_ver = get_option('superpwa_version');
+	
+	// Return if we have already done this todo
+	if ( $current_ver == SUPERPWA_VERSION ) 
+		return;
+	
+	// Return if this is the first time the plugin is installed.
+	if ( $current_ver === false ) {
+		
+		add_option( 'superpwa_version', SUPERPWA_VERSION );
+		return;
+	}
+	
+	// Re-generate manifest
+	superpwa_generate_manifest();
+	
+	// Re-generate service worker
+	superpwa_generate_sw();
+	
+	// Add current version to database
+	update_option( 'superpwa_version', SUPERPWA_VERSION );
+}
+add_action( 'admin_init', 'superpwa_upgrader' );
 
 /**
  * Plugin deactivation todo list

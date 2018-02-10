@@ -68,7 +68,16 @@ function superpwa_register_settings() {
 		add_settings_field(
 			'superpwa_icons',										// ID
 			__('Application Icon', 'super-progressive-web-apps'),	// Title
-			'superpwa_icons_cb',									// Callback function
+			'superpwa_app_icon_cb',									// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Splash Screen Icon
+		add_settings_field(
+			'superpwa_splash_icon',									// ID
+			__('Splash Screen Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_splash_icon_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -154,7 +163,10 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
-	$settings['icon'] = sanitize_text_field($settings['icon']) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field($settings['icon']);
+	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field( $settings['icon'] );
+	
+	// Sanitize splash screen icon
+	$settings['splash_icon'] = sanitize_text_field( $settings['splash_icon'] );
 	
 	return $settings;
 }
@@ -171,6 +183,7 @@ function superpwa_get_settings() {
 				'app_name'			=> get_bloginfo('name'),
 				'app_short_name'	=> get_bloginfo('name'),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
+				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
@@ -202,6 +215,6 @@ function superpwa_enqueue_css_js( $hook ) {
 	wp_enqueue_media();
 	
 	// Main JS
-    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), false, true );
+    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
