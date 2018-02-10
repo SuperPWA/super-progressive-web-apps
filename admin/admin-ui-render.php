@@ -83,7 +83,7 @@ function superpwa_app_icon_cb() {
 /**
  * Splash Screen Icon
  *
- * @since 1.0
+ * @since 1.3
  */
 function superpwa_splash_icon_cb() {
 

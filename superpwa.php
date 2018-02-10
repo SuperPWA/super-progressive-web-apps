@@ -56,14 +56,6 @@ if ( ! defined('SUPERPWA_SW_FILENAME') ) 		define('SUPERPWA_SW_FILENAME', 'super
 if ( ! defined('SUPERPWA_SW_ABS') )				define('SUPERPWA_SW_ABS', trailingslashit( ABSPATH ) . SUPERPWA_SW_FILENAME); // Absolute path to service worker. SW must be in the root folder
 if ( ! defined('SUPERPWA_SW_SRC') )				define('SUPERPWA_SW_SRC', trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_SW_FILENAME); // Link to service worker
 
-/**
- * Add plugin version to database
- *
- * @since 		1.0
- * @refer		https://codex.wordpress.org/Creating_Tables_with_Plugins#Adding_an_Upgrade_Function
- */
-update_option('superpwa_version', SUPERPWA_VERSION);	// Change this to add_option if a release needs to check installed version.
-
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'admin/loader.php');
 
