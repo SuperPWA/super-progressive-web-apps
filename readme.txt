@@ -128,6 +128,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * Date: 10. February.2018
 * New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen.
 * Enhancement: SuperPWA now accounts for content updates and will update the cache as you update the website. 
+* Enhancement: Improved service worker update handling.
 * Bug fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
 
 = 1.2 =
