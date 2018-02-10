@@ -215,6 +215,6 @@ function superpwa_enqueue_css_js( $hook ) {
 	wp_enqueue_media();
 	
 	// Main JS
-    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), false, true );
+    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
