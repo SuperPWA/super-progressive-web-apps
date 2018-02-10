@@ -6,7 +6,8 @@
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
  * @function	superpwa_background_color_cb()			Splash Screen Background Color
- * @function	superpwa_icons_cb()						Application Icons
+ * @function	superpwa_app_icon_cb()					Application Icon
+ * @function	superpwa_app_icon_cb()					Splash Screen Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
@@ -63,7 +64,7 @@ function superpwa_app_short_name_cb() {
  *
  * @since 1.0
  */
-function superpwa_icons_cb() {
+function superpwa_app_icon_cb() {
 
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
@@ -75,6 +76,27 @@ function superpwa_icons_cb() {
 	</button>
 	
 	<p class="description" id="tagline-description"><?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?></p>
+
+	<?php
+}
+
+/**
+ * Splash Screen Icon
+ *
+ * @since 1.0
+ */
+function superpwa_splash_icon_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Splash Screen Icon -->
+	<input type="text" name="superpwa_settings[splash_icon]" id="superpwa_settings[splash_icon]" class="superpwa-splash-icon regular-text" size="50" value="<?php echo isset( $settings['splash_icon'] ) ? esc_attr( $settings['splash_icon']) : ''; ?>">
+	<button type="button" class="button superpwa-splash-icon-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
+	</button>
+	
+	<p class="description" id="tagline-description"><?php _e('This icon will be displayed on the splash screen when your app is launched. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?></p>
 
 	<?php
 }

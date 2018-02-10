@@ -7,6 +7,7 @@
  * @function	superpwa_add_manifest_to_header()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
+ * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  */
 
 // Exit if accessed directly
@@ -26,13 +27,7 @@ function superpwa_generate_manifest() {
 	$manifest = array(
 		'name'				=> $settings['app_name'],
 		'short_name'		=> $settings['app_short_name'],
-		'icons'				=> array( 
-								array(
-									'src' 	=> $settings['icon'],
-									'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
-									'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
-								),
-							   ),
+		'icons'				=> superpwa_get_pwa_icons(),
 		'background_color'	=> $settings['background_color'],
 		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
@@ -73,4 +68,35 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 function superpwa_delete_manifest() {
 	
 	return superpwa_delete( SUPERPWA_MANIFEST_ABS );
+}
+
+/**
+ * Get PWA Icons
+ *
+ * @return	array	An array of icons to be used as the application icons and splash screen icons
+ * @since	1.3
+ */
+function superpwa_get_pwa_icons() {
+	
+	// Get settings
+	$settings = superpwa_get_settings();
+	
+	// Application icon
+	$icons_array[] = array(
+							'src' 	=> $settings['icon'],
+							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
+							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
+						);
+	
+	// Splash screen icon - Added since 1.3
+	if ( @$settings['splash_icon'] != null ) {
+		
+		$icons_array[] = array(
+							'src' 	=> $settings['splash_icon'],
+							'sizes'	=> '512x512', // must be 192x192.
+							'type'	=> 'image/png', // must be image/png
+						);
+	}
+	
+	return $icons_array;
 }
