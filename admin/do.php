@@ -83,11 +83,8 @@ function superpwa_get_start_url( $rel = false ) {
 	
 	if ( $rel === true ) {
 		
-		// Force HTTPS on WordPress url
-		$wp_url = str_replace( 'http://', 'https://', get_bloginfo( 'wpurl' ) );
-		
 		// Make start_url relative for manifest
-		$start_url = str_replace( untrailingslashit( $wp_url ), '', $start_url );
+		$start_url = parse_url( $start_url, PHP_URL_PATH );
 	}
 	
 	// AMP URL
