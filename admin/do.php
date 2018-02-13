@@ -66,7 +66,9 @@ function superpwa_is_amp() {
  *
  * @param	$rel	False by default. Set to true to return a relative URL (for use in manifest)
  * @return	String	URL to be set as the start_url in manifest and startPage in service worker
+ *
  * @since	1.2
+ * @since	1.3.1	Force HTTPS by replacing http:// with https://
  */
 function superpwa_get_start_url( $rel = false ) {
 	
@@ -76,9 +78,16 @@ function superpwa_get_start_url( $rel = false ) {
 	// Start Page
 	$start_url = get_permalink( $settings['start_url'] ) ? trailingslashit( get_permalink( $settings['start_url'] ) ) : trailingslashit( get_bloginfo( 'wpurl' ) );
 	
+	// Force HTTPS
+	$start_url = str_replace( 'http://', 'https://', $start_url );
+	
 	if ( $rel === true ) {
 		
-		$start_url = str_replace( untrailingslashit( get_bloginfo( 'wpurl' ) ), '', $start_url );
+		// Force HTTPS on WordPress url
+		$wp_url = str_replace( 'http://', 'https://', get_bloginfo( 'wpurl' ) );
+		
+		// Make start_url relative for manifest
+		$start_url = str_replace( untrailingslashit( $wp_url ), '', $start_url );
 	}
 	
 	// AMP URL
