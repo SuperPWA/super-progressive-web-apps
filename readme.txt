@@ -126,7 +126,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 == Changelog ==
 
 = 1.3.1 =
-* Date: 
+* Date: 15.February.2018
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
 * Enhancement: Improved how start_url is handled in the manifest.
 * Enhancement: Better handling of external resources.
@@ -166,15 +166,18 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+* Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
+* Enhancement: Improved how start_url is handled in the manifest.
+* Enhancement: Better handling of external resources.
+
 = 1.3 =
-* Date: 10. February.2018
 * New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
 * Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * Enhancement: Improved in-browser service worker update handling.
 * Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
 
 = 1.2 =
-* Date: 06.February.2018
 * New Feature: Support for theme-color.
 * New Feature: Now you can edit the Application Name and Application Short name.
 * New Feature: Set the start page of your PWA.
@@ -185,11 +188,9 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * Bug Fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
-* Date: 30.January.2018
 * Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
 
 = 1.1 =
-* Date: 28.January.2018
 * New Feature: Aggressive caching of pages using CacheStorage API.
 * New Feature: Pages once cached are served even if the user is offline. 
 * New Feature: Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
