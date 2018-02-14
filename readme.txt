@@ -129,6 +129,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * Date: 
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
 * Enhancement: Improved how start_url is handled in the manifest.
+* Enhancement: Better handling of external resources.
 
 = 1.3 =
 * Date: 10.February.2018
