@@ -102,6 +102,10 @@ self.addEventListener('fetch', function(e) {
 	if ( ! e.request.url.match(/^(http|https):\/\//i) )
 		return;
 	
+	// Return if request url is from an external domain.
+	if ( ( new URL(e.request.url).origin !== location.origin ) && ( e.request.mode === 'no-cors' ) )
+		return;
+	
 	// For POST requests, do not use the cache. Serve offline page if offline.
 	if ( e.request.method !== 'GET' ) {
 		e.respondWith(

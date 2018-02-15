@@ -119,19 +119,29 @@ To install this plugin:
 
 If you have any questions, please ask it on the [support forum](https://wordpress.org/support/plugin/super-progressive-web-apps).
 
+= Will Progressive Web Apps work on iOS devices? =
+
+PWA's require browsers with support for service workers and for iOS devices, support is available in Safari Technology Preview 48, macOS High Sierra 10.13.4 and iOS 11.3 beta seed 2. Since none of these are production releases, the general public will not be able to install your app on their mobile phones and smart devices. We will hopefully see full support by mid 2018.
+
 == Screenshots ==
 
 1. Settings page in WordPress Admin > Settings > SuperPWA
 
 == Changelog ==
 
+= 1.3.1 =
+* Date: 15.February.2018
+* Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
+* Enhancement: Improved how start_url is handled in the manifest.
+* Enhancement: Better handling of external resources.
+
 = 1.3 =
-* Date: 10. February.2018
+* Date: 10.February.2018
 * New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
 * Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * Enhancement: Improved in-browser service worker update handling.
 * Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
-* Bug fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
+* Bug Fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
 
 = 1.2 =
 * Date: 06.February.2018
@@ -142,17 +152,17 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * UI Improvement: Added checks for manifest, service worker and HTTPS and display the status neatly in the UI.
-* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
+* Bug Fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
 * Date: 30.January.2018
-* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
 
 = 1.1 =
 * Date: 28.January.2018
-* Aggressive caching of pages using CacheStorage API.
-* Pages once cached are served even if the user is offline. 
-* Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
+* New Feature: Aggressive caching of pages using CacheStorage API.
+* New Feature: Pages once cached are served even if the user is offline. 
+* New Feature: Set custom offline page. Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
 
 = 1.0 =
 * Date: 22.January.2018
@@ -160,15 +170,18 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+* Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
+* Enhancement: Improved how start_url is handled in the manifest.
+* Enhancement: Better handling of external resources.
+
 = 1.3 =
-* Date: 10. February.2018
 * New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
 * Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * Enhancement: Improved in-browser service worker update handling.
 * Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
 
 = 1.2 =
-* Date: 06.February.2018
 * New Feature: Support for theme-color.
 * New Feature: Now you can edit the Application Name and Application Short name.
 * New Feature: Set the start page of your PWA.
@@ -176,17 +189,15 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 * UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
 * UI Improvement: Added admin notice with a link to settings page on plugin activation.
 * UI Improvement: Added checks for manifest, service worker and HTTPS and display the status neatly in the UI.
-* Bug fix: Fix a parse error that showed up only on PHP 5.3. 
+* Bug Fix: Fix a parse error that showed up only on PHP 5.3. 
 
 = 1.1.1 =
-* Date: 30.January.2018
-* Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
+* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
 
 = 1.1 =
-* Date: 28.January.2018
-* Aggressive caching of pages using CacheStorage API.
-* Pages once cached are served even if the user is offline. 
-* Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
+* New Feature: Aggressive caching of pages using CacheStorage API.
+* New Feature: Pages once cached are served even if the user is offline. 
+* New Feature: Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
 
 = 1.0 =
 * First release of the plugin.
