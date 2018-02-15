@@ -119,6 +119,10 @@ To install this plugin:
 
 If you have any questions, please ask it on the [support forum](https://wordpress.org/support/plugin/super-progressive-web-apps).
 
+= Will Progressive Web Apps work on iOS devices? =
+
+PWA's require browsers with support for service workers and for iOS devices, support is available in Safari Technology Preview 48, macOS High Sierra 10.13.4 and iOS 11.3 beta seed 2. Since none of these are production releases, the general public will not be able to install your app on their mobile phones and smart devices. We will hopefully see full support by mid 2018.
+
 == Screenshots ==
 
 1. Settings page in WordPress Admin > Settings > SuperPWA
