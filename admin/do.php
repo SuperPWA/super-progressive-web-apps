@@ -1,6 +1,6 @@
 <?php
 /**
- * Operations of the plugin are included here. 
+ * Operations and common functions of SuperPWA
  *
  * @since 1.0
  * @function	superpwa_after_save_settings_todo()		Todo list after saving admin options

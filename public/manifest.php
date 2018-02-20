@@ -1,6 +1,6 @@
 <?php
 /**
- * Operations of the plugin are included here. 
+ * Manifest related functions of SuperPWA
  *
  * @since 1.0
  * @function	superpwa_generate_manifest()			Generate and write manifest
@@ -8,6 +8,7 @@
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
+ * @function	superpwa_get_scope()					Get navigation scope of PWA
  */
 
 // Exit if accessed directly
@@ -32,13 +33,14 @@ function superpwa_generate_manifest() {
 		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
 		'orientation'		=> 'natural',
-		'start_url'			=> superpwa_get_start_url(true),
+		'start_url'			=> superpwa_get_start_url( true ),
+		'scope'				=> superpwa_get_scope(),
 	);
 	
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode($manifest) ) )
+	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) )
 		return false;
 	
 	return true;
@@ -99,4 +101,15 @@ function superpwa_get_pwa_icons() {
 	}
 	
 	return $icons_array;
+}
+
+/**
+ * Get navigation scope of PWA
+ *
+ * @return	string	Relative path to the folder where WordPress is installed. Same folder as manifest and wp-config.php
+ * @since	1.4
+ */
+function superpwa_get_scope() {
+	
+	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
 }
