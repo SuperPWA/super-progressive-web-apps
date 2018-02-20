@@ -129,6 +129,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.4 =
+* Date: 20.February.2018
+
 = 1.3.1 =
 * Date: 15.February.2018
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
