@@ -31,10 +31,11 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.2: Support for theme-color.
 * New in version 1.2: Now you can edit the Application Name and Application Short name.
 * New in version 1.2: Set the start page of your PWA.
-* New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
+* New in version 1.2: Set Accelerated Mobile Pages (AMP) version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 * New in version 1.3: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
 * New in version 1.3: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * New in version 1.3: Improved in-browser service worker update handling.
+* New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 
 **Upcoming features:**
 
@@ -131,6 +132,8 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.4 =
 * Date: 20.February.2018
+* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
+* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
 
 = 1.3.1 =
 * Date: 15.February.2018

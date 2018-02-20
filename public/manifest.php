@@ -9,6 +9,7 @@
  * @function	superpwa_delete_manifest()				Delete manifest
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
+ * @function	superpwa_get_orientation()				Get orientation of PWA
  */
 
 // Exit if accessed directly
@@ -32,7 +33,7 @@ function superpwa_generate_manifest() {
 		'background_color'	=> $settings['background_color'],
 		'theme_color'		=> $settings['background_color'],
 		'display'			=> 'standalone',
-		'orientation'		=> 'natural',
+		'orientation'		=> superpwa_get_orientation(),
 		'start_url'			=> superpwa_get_start_url( true ),
 		'scope'				=> superpwa_get_scope(),
 	);
@@ -112,4 +113,36 @@ function superpwa_get_pwa_icons() {
 function superpwa_get_scope() {
 	
 	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
+}
+
+/**
+ * Get orientation of PWA
+ *
+ * @return	string	Orientation of PWA as set in the plugin settings. 
+ * @since	1.4
+ */
+function superpwa_get_orientation() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$orientation = isset( $settings['orientation'] ) ? $settings['orientation'] : 0;
+	
+	switch ( $orientation ) {
+		
+		case 0:
+			return 'any';
+			break;
+			
+		case 1:
+			return 'portrait';
+			break;
+			
+		case 2:
+			return 'landscape';
+			break;
+			
+		default: 
+			return 'any';
+	}
 }
