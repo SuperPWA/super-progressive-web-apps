@@ -64,7 +64,8 @@ function superpwa_admin_notice_activation() {
 /**
  * Plugin upgrade todo list
  *
- * @since	1.4
+ * @since	1.3.1
+ * @since	1.4		Added orientation setting to database when upgrading from pre 1.4 versions.
  */
 function superpwa_upgrader() {
 	
@@ -79,6 +80,18 @@ function superpwa_upgrader() {
 		
 		add_option( 'superpwa_version', SUPERPWA_VERSION );
 		return;
+	}
+	
+	if ( $current_ver < 1.4 ) {
+		
+		// Get settings
+		$settings = superpwa_get_settings();
+		
+		// Orientation was set as 'natural' until version 1.4. Set it as 1, which is 'portrait'.
+		$settings['orientation'] = 1;
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
 	}
 	
 	// Re-generate manifest
