@@ -131,8 +131,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Changelog ==
 
 = 1.4 =
-* Date: 20.February.2018
+* Date: 21.February.2018
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
+* New Feature: Added UI for theme_color property in manifest. [Feature request from @krunalsm](https://wordpress.org/support/topic/diffrent-theme_color-and-background_color/).
 * Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
 
 = 1.3.1 =

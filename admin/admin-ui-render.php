@@ -6,6 +6,7 @@
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
  * @function	superpwa_background_color_cb()			Splash Screen Background Color
+ * @function	superpwa_theme_color_cb()				Theme Color
  * @function	superpwa_app_icon_cb()					Application Icon
  * @function	superpwa_app_icon_cb()					Splash Screen Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
@@ -123,6 +124,26 @@ function superpwa_background_color_cb() {
 	
 	<p class="description" id="tagline-description">
 		<?php _e('Background color of the splash screen.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Theme Color
+ *
+ * @since 1.4
+ */
+function superpwa_theme_color_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Theme Color -->
+	<input type="text" name="superpwa_settings[theme_color]" id="superpwa_settings[theme_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['theme_color'] ) ? esc_attr( $settings['theme_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
+	
+	<p class="description" id="tagline-description">
+		<?php _e('Theme color is used on supported devices to tint the UI elements of the browser and app switcher. When in doubt, use the same color as <code>Background Color</code>.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php

@@ -146,3 +146,13 @@ function superpwa_get_orientation() {
 			return 'any';
 	}
 }
+
+/** 
+ * Get Theme Color of PWA
+ *
+ * @return	string	Return color of 
+ 
+ // Todo
+ - write this function
+ - update superpwa_add_manifest_to_header() function 
+ - update manifest

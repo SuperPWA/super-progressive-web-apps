@@ -91,6 +91,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 		
+		// Theme Color
+		add_settings_field(
+			'superpwa_theme_color',									// ID
+			__('Theme Color', 'super-progressive-web-apps'),		// Title
+			'superpwa_theme_color_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
 		// Start URL
 		add_settings_field(
 			'superpwa_start_url',									// ID
