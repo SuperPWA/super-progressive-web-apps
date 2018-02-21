@@ -245,7 +245,7 @@ function superpwa_orientation_cb() {
 	</label>
 	
 	<p class="description" id="tagline-description">
-		<?php _e( 'Set the orientation of your app. It is best to <code>Follow Device Orientation</code> unless your app works only in a specific orientation.', 'super-progressive-web-apps' ); ?>
+		<?php _e( 'Set the orientation of your app on devices. When set to <code>Follow Device Orientation</code> your app will rotate as the device is rotated.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php

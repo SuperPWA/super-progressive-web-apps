@@ -210,7 +210,7 @@ function superpwa_get_settings() {
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
-				'orientation'		=> 0,
+				'orientation'		=> 1,
 			);
 
 	$settings = get_option('superpwa_settings', $defaults);
