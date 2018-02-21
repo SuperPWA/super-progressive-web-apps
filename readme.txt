@@ -19,15 +19,15 @@ Users can come back to your website by launching the app from their home screen 
 
 Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App!
 
-Once SuperPWA is installed, users browsing your website from a supported device will see a "Add To Homescreen" notice and will be able to 'install your website' on the homescreen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
+Once SuperPWA is installed, users browsing your website from a supported device will see a "Add To Home Screen" notice and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
 
-SuperPWA is easy to configure, it takes less than a minute to setup your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
+SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
 
 And the best part? If you ever get stuck, we are here to watch your back! [Open a support](https://wordpress.org/support/plugin/super-progressive-web-apps) ticket if you have a question or need a feature. We are super excited to hear your feedback and we want to genuinely help you build the best Progressive Web App for your WordPress website!
 
 #### Thank You PWA Enthusiasts! 
 
-We are humbled by the feedback from the community. Thanks to everyone who believed in us and tried our plugin. Your feedback has been invaluable and we have leared a lot from your experience. Thank you for your love and support and we hope to return the love by striving to bring you the best ever Progressive Web Apps plugin for WordPress!
+We are humbled by the feedback from the community. Thanks to everyone who believed in us and tried our plugin. Your feedback has been invaluable and we have learned a lot from your experience. Thank you for your love and support and we hope to return the love by striving to bring you the best ever Progressive Web Apps plugin for WordPress!
 
 ### What's in the box
 
