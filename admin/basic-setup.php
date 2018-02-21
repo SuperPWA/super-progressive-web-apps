@@ -65,7 +65,7 @@ function superpwa_admin_notice_activation() {
  * Plugin upgrade todo list
  *
  * @since	1.3.1
- * @since	1.4		Added orientation setting to database when upgrading from pre 1.4 versions.
+ * @since	1.4		Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
  */
 function superpwa_upgrader() {
 	
@@ -89,6 +89,9 @@ function superpwa_upgrader() {
 		
 		// Orientation was set as 'natural' until version 1.4. Set it as 1, which is 'portrait'.
 		$settings['orientation'] = 1;
+		
+		// theme_color was same as background_color until version 1.4
+		$settings['theme_color'] = $settings['background_color'];
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );

@@ -31,7 +31,7 @@ function superpwa_generate_manifest() {
 		'short_name'		=> $settings['app_short_name'],
 		'icons'				=> superpwa_get_pwa_icons(),
 		'background_color'	=> $settings['background_color'],
-		'theme_color'		=> $settings['background_color'],
+		'theme_color'		=> $settings['theme_color'],
 		'display'			=> 'standalone',
 		'orientation'		=> superpwa_get_orientation(),
 		'start_url'			=> superpwa_get_start_url( true ),
@@ -58,7 +58,7 @@ function superpwa_add_manifest_to_header() {
 	$settings = superpwa_get_settings();
 	
 	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
-	echo '<meta name="theme-color" content="'. $settings['background_color'] .'">' . PHP_EOL;
+	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 
@@ -146,13 +146,3 @@ function superpwa_get_orientation() {
 			return 'any';
 	}
 }
-
-/** 
- * Get Theme Color of PWA
- *
- * @return	string	Return color of 
- 
- // Todo
- - write this function
- - update superpwa_add_manifest_to_header() function 
- - update manifest
