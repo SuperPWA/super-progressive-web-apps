@@ -36,6 +36,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.3: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * New in version 1.3: Improved in-browser service worker update handling.
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
+* New in version 1.4: You can now set the theme_color property in the manifest.
 
 **Upcoming features:**
 
@@ -177,6 +178,12 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.4 =
+* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape".
+* New Feature: Added UI for theme_color property in manifest.
+* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
+* Enhancement: Improved handling of external resources. 
 
 = 1.3.1 =
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
