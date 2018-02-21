@@ -1,6 +1,6 @@
 <?php
 /**
- * Operations of the plugin are included here. 
+ * Manifest related functions of SuperPWA
  *
  * @since 1.0
  * @function	superpwa_generate_manifest()			Generate and write manifest
@@ -8,6 +8,8 @@
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
+ * @function	superpwa_get_scope()					Get navigation scope of PWA
+ * @function	superpwa_get_orientation()				Get orientation of PWA
  */
 
 // Exit if accessed directly
@@ -29,16 +31,17 @@ function superpwa_generate_manifest() {
 		'short_name'		=> $settings['app_short_name'],
 		'icons'				=> superpwa_get_pwa_icons(),
 		'background_color'	=> $settings['background_color'],
-		'theme_color'		=> $settings['background_color'],
+		'theme_color'		=> $settings['theme_color'],
 		'display'			=> 'standalone',
-		'orientation'		=> 'natural',
-		'start_url'			=> superpwa_get_start_url(true),
+		'orientation'		=> superpwa_get_orientation(),
+		'start_url'			=> superpwa_get_start_url( true ),
+		'scope'				=> superpwa_get_scope(),
 	);
 	
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode($manifest) ) )
+	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) )
 		return false;
 	
 	return true;
@@ -55,7 +58,7 @@ function superpwa_add_manifest_to_header() {
 	$settings = superpwa_get_settings();
 	
 	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
-	echo '<meta name="theme-color" content="'. $settings['background_color'] .'">' . PHP_EOL;
+	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
 
@@ -99,4 +102,47 @@ function superpwa_get_pwa_icons() {
 	}
 	
 	return $icons_array;
+}
+
+/**
+ * Get navigation scope of PWA
+ *
+ * @return	string	Relative path to the folder where WordPress is installed. Same folder as manifest and wp-config.php
+ * @since	1.4
+ */
+function superpwa_get_scope() {
+	
+	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
+}
+
+/**
+ * Get orientation of PWA
+ *
+ * @return	string	Orientation of PWA as set in the plugin settings. 
+ * @since	1.4
+ */
+function superpwa_get_orientation() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$orientation = isset( $settings['orientation'] ) ? $settings['orientation'] : 0;
+	
+	switch ( $orientation ) {
+		
+		case 0:
+			return 'any';
+			break;
+			
+		case 1:
+			return 'portrait';
+			break;
+			
+		case 2:
+			return 'landscape';
+			break;
+			
+		default: 
+			return 'any';
+	}
 }

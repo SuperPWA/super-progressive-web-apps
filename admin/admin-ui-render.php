@@ -6,10 +6,12 @@
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
  * @function	superpwa_background_color_cb()			Splash Screen Background Color
+ * @function	superpwa_theme_color_cb()				Theme Color
  * @function	superpwa_app_icon_cb()					Application Icon
  * @function	superpwa_app_icon_cb()					Splash Screen Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
+ * @function	superpwa_orientation_cb()				Default Orientation Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
@@ -52,7 +54,9 @@ function superpwa_app_short_name_cb() {
 		
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
-		<p class="description" id="tagline-description"><?php _e('Used when there is insufficient space to display the full name of the application.', 'super-progressive-web-apps'); ?></p>
+		<p class="description" id="tagline-description">
+			<?php _e('Used when there is insufficient space to display the full name of the application.', 'super-progressive-web-apps'); ?>
+		</p>
 		
 	</fieldset>
 
@@ -75,7 +79,9 @@ function superpwa_app_icon_cb() {
 		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
 	</button>
 	
-	<p class="description" id="tagline-description"><?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?></p>
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
 
 	<?php
 }
@@ -96,7 +102,9 @@ function superpwa_splash_icon_cb() {
 		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
 	</button>
 	
-	<p class="description" id="tagline-description"><?php _e('This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?></p>
+	<p class="description" id="tagline-description">
+		<?php _e('This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
 
 	<?php
 }
@@ -114,7 +122,29 @@ function superpwa_background_color_cb() {
 	<!-- Background Color -->
 	<input type="text" name="superpwa_settings[background_color]" id="superpwa_settings[background_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['background_color'] ) ? esc_attr( $settings['background_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
 	
-	<p class="description" id="tagline-description"><?php _e('Background color of the splash screen.', 'super-progressive-web-apps'); ?></p>
+	<p class="description" id="tagline-description">
+		<?php _e('Background color of the splash screen.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Theme Color
+ *
+ * @since 1.4
+ */
+function superpwa_theme_color_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Theme Color -->
+	<input type="text" name="superpwa_settings[theme_color]" id="superpwa_settings[theme_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['theme_color'] ) ? esc_attr( $settings['theme_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
+	
+	<p class="description" id="tagline-description">
+		<?php _e('Theme color is used on supported devices to tint the UI elements of the browser and app switcher. When in doubt, use the same color as <code>Background Color</code>.', 'super-progressive-web-apps'); ?>
+	</p>
 
 	<?php
 }
@@ -142,7 +172,9 @@ function superpwa_start_url_cb() {
 			)); ?>
 		</label>
 		
-		<p class="description" id="tagline-description"><?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?></p>
+		<p class="description" id="tagline-description">
+			<?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?>
+		</p>
 		
 		<?php if ( superpwa_is_amp() ) { ?>
 		
@@ -162,7 +194,7 @@ function superpwa_start_url_cb() {
 /**
  * Offline Page Dropdown
  *
- * @since 1.0
+ * @since 1.1
  */
 function superpwa_offline_page_cb() {
 
@@ -180,7 +212,41 @@ function superpwa_offline_page_cb() {
 		)); ?>
 	</label>
 	
-	<p class="description" id="tagline-description"><?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?></p>
+	<p class="description" id="tagline-description">
+		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Default Orientation Dropdown
+ *
+ * @since 1.4
+ */
+function superpwa_orientation_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Orientation Dropdown -->
+	<label for="superpwa_settings[orientation]">
+		<select name="superpwa_settings[orientation]" id="superpwa_settings[orientation]">
+			<option value="0" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 0 ); } ?>>
+				<?php _e( 'Follow Device Orientation', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="1" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 1 ); } ?>>
+				<?php _e( 'Portrait', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="2" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 2 ); } ?>>
+				<?php _e( 'Landscape', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
+	</label>
+	
+	<p class="description" id="tagline-description">
+		<?php _e( 'Set the orientation of your app on devices. When set to <code>Follow Device Orientation</code> your app will rotate as the device is rotated.', 'super-progressive-web-apps' ); ?>
+	</p>
 
 	<?php
 }

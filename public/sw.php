@@ -1,6 +1,6 @@
 <?php
 /**
- * Operations of the plugin are included here. 
+ * Service worker related functions of SuperPWA
  *
  * @since 1.0
  * @function	superpwa_generate_sw()		Generate and write service worker into sw.js
@@ -103,7 +103,7 @@ self.addEventListener('fetch', function(e) {
 		return;
 	
 	// Return if request url is from an external domain.
-	if ( ( new URL(e.request.url).origin !== location.origin ) && ( e.request.mode === 'no-cors' ) )
+	if ( new URL(e.request.url).origin !== location.origin )
 		return;
 	
 	// For POST requests, do not use the cache. Serve offline page if offline.

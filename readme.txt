@@ -17,6 +17,18 @@ Progressive Web Apps (PWA) is a new technology that creates a middle ground betw
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
+Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+
+Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
+
+SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
+
+And the best part? If you ever get stuck, we are here to watch your back! [Open a support](https://wordpress.org/support/plugin/super-progressive-web-apps) ticket if you have a question or need a feature. We are super excited to hear your feedback and we want to genuinely help you build the best Progressive Web App for your WordPress website!
+
+#### Thank You PWA Enthusiasts! 
+
+We are humbled by the feedback from the community. Thanks to everyone who believed in us and tried our plugin. Your feedback has been invaluable and we have learned a lot from your experience. Thank you for your love and support and we hope to return the love by striving to bring you the best ever Progressive Web Apps plugin for WordPress!
+
 ### What's in the box
 
 Here are the current features of Super Progressive Web Apps: 
@@ -31,10 +43,12 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.2: Support for theme-color.
 * New in version 1.2: Now you can edit the Application Name and Application Short name.
 * New in version 1.2: Set the start page of your PWA.
-* New in version 1.2: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
+* New in version 1.2: Set Accelerated Mobile Pages (AMP) version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
 * New in version 1.3: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
 * New in version 1.3: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
 * New in version 1.3: Improved in-browser service worker update handling.
+* New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
+* New in version 1.4: You can now set the theme_color property in the manifest.
 
 **Upcoming features:**
 
@@ -129,6 +143,13 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.4 =
+* Date: 21.February.2018
+* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
+* New Feature: Added UI for theme_color property in manifest. [Feature request from @krunalsm](https://wordpress.org/support/topic/diffrent-theme_color-and-background_color/).
+* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
+* Enhancement: Improved handling of external resources. 
+
 = 1.3.1 =
 * Date: 15.February.2018
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
@@ -169,6 +190,12 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.4 =
+* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape".
+* New Feature: Added UI for theme_color property in manifest.
+* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
+* Enhancement: Improved handling of external resources. 
 
 = 1.3.1 =
 * Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 

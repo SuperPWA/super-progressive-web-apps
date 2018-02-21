@@ -91,6 +91,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 		
+		// Theme Color
+		add_settings_field(
+			'superpwa_theme_color',									// ID
+			__('Theme Color', 'super-progressive-web-apps'),		// Title
+			'superpwa_theme_color_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
 		// Start URL
 		add_settings_field(
 			'superpwa_start_url',									// ID
@@ -105,6 +114,15 @@ function superpwa_register_settings() {
 			'superpwa_offline_page',								// ID
 			__('Offline Page', 'super-progressive-web-apps'),		// Title
 			'superpwa_offline_page_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Orientation
+		add_settings_field(
+			'superpwa_orientation',									// ID
+			__('Orientation', 'super-progressive-web-apps'),		// Title
+			'superpwa_orientation_cb',								// CB
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -159,8 +177,11 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	// Sanitize Application Short Name
 	$settings['app_short_name'] = sanitize_text_field($settings['app_short_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_short_name']);
 	
-	// Sanitize hex color input
+	// Sanitize hex color input for background_color
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
+	
+	// Sanitize hex color input for theme_color
+	$settings['theme_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['theme_color'] ) ? sanitize_text_field( $settings['theme_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field( $settings['icon'] );
@@ -185,9 +206,11 @@ function superpwa_get_settings() {
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
+				'theme_color' 		=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
+				'orientation'		=> 1,
 			);
 
 	$settings = get_option('superpwa_settings', $defaults);

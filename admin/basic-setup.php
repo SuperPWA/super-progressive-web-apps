@@ -64,7 +64,8 @@ function superpwa_admin_notice_activation() {
 /**
  * Plugin upgrade todo list
  *
- * @since	1.4
+ * @since	1.3.1
+ * @since	1.4		Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
  */
 function superpwa_upgrader() {
 	
@@ -79,6 +80,21 @@ function superpwa_upgrader() {
 		
 		add_option( 'superpwa_version', SUPERPWA_VERSION );
 		return;
+	}
+	
+	if ( $current_ver < 1.4 ) {
+		
+		// Get settings
+		$settings = superpwa_get_settings();
+		
+		// Orientation was set as 'natural' until version 1.4. Set it as 1, which is 'portrait'.
+		$settings['orientation'] = 1;
+		
+		// theme_color was same as background_color until version 1.4
+		$settings['theme_color'] = $settings['background_color'];
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
 	}
 	
 	// Re-generate manifest
@@ -167,8 +183,9 @@ function superpwa_footer_text( $default ) {
 		return $default;
 	}
 	
-    $superpwa_footer_text = sprintf( __( 'If you like our plugin, please leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
-	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post' 
+    $superpwa_footer_text = sprintf( __( 'If you like our plugin, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+	'https://millionclues.com/donate/',
+	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
 	);
 	
 	return $superpwa_footer_text;
