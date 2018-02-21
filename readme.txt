@@ -17,9 +17,9 @@ Progressive Web Apps (PWA) is a new technology that creates a middle ground betw
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App!
+Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
-Once SuperPWA is installed, users browsing your website from a supported device will see a "Add To Home Screen" notice and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
+Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
 
 SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
 
