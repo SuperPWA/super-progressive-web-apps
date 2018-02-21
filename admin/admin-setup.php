@@ -177,8 +177,11 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	// Sanitize Application Short Name
 	$settings['app_short_name'] = sanitize_text_field($settings['app_short_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_short_name']);
 	
-	// Sanitize hex color input
+	// Sanitize hex color input for background_color
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
+	
+	// Sanitize hex color input for theme_color
+	$settings['theme_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['theme_color'] ) ? sanitize_text_field( $settings['theme_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field( $settings['icon'] );
