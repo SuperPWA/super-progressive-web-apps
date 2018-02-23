@@ -143,6 +143,10 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.5 =
+* Date: 
+* 
+
 = 1.4 =
 * Date: 21.February.2018
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
