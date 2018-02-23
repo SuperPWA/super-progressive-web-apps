@@ -4,7 +4,7 @@
  *
  * @since 1.0
  * @function	superpwa_generate_manifest()			Generate and write manifest
- * @function	superpwa_add_manifest_to_header()		Add manifest to header (wp_head)
+ * @function	superpwa_add_manifest_to_wp_head()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
@@ -52,7 +52,7 @@ function superpwa_generate_manifest() {
  *
  * @since	1.0
  */
-function superpwa_add_manifest_to_header() {
+function superpwa_add_manifest_to_wp_head() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
@@ -60,7 +60,7 @@ function superpwa_add_manifest_to_header() {
 	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
-add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
+add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 1 );
 
 /**
  * Delete manifest
