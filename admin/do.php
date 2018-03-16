@@ -39,24 +39,29 @@ add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_tod
 function superpwa_is_amp() {
 	
 	// AMP for WordPress - https://wordpress.org/plugins/amp
-	if ( function_exists( 'amp_init' ) )
-		return 'amp/';
+	if ( function_exists( 'amp_init' ) ) {
+		return defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR . '/' : 'amp/';
+	}
 	
 	// AMP for WP - https://wordpress.org/plugins/accelerated-mobile-pages/
-	if ( function_exists( 'ampforwp_generate_endpoint' ) ) 
-		return 'amp/';
+	if ( function_exists( 'ampforwp_generate_endpoint' ) ) {
+		return defined( 'AMPFORWP_AMP_QUERY_VAR' ) ? AMPFORWP_AMP_QUERY_VAR . '/' : 'amp/';
+	}
 	
 	// Better AMP – https://wordpress.org/plugins/better-amp/
-	if ( class_exists( 'Better_AMP' ) ) 
+	if ( class_exists( 'Better_AMP' ) ) {
 		return 'amp/';
+	}
 	
 	// AMP Supremacy - https://wordpress.org/plugins/amp-supremacy/
-	if ( class_exists( 'AMP_Init' ) ) 
+	if ( class_exists( 'AMP_Init' ) ) {
 		return 'amp/';
+	}
 	
 	// WP AMP - https://wordpress.org/plugins/wp-amp-ninja/
-	if ( function_exists( 'wpamp_init' ) ) 
+	if ( function_exists( 'wpamp_init' ) ) {
 		return '?wpamp';
+	}
 	
 	return false;
 }
