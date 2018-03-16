@@ -21,6 +21,9 @@ if ( ! defined('ABSPATH') ) exit;
  *
  * @return true on success, false on failure.
  * @since	1.0
+ * @since	1.3		Added support for 512x512 icon.
+ * @since	1.4		Added orientation and scope.
+ * @since	1.5		Added gcm_sender_id
  */
 function superpwa_generate_manifest() {
 	
@@ -38,6 +41,11 @@ function superpwa_generate_manifest() {
 		'start_url'			=> superpwa_get_start_url( true ),
 		'scope'				=> superpwa_get_scope(),
 	);
+	
+	// gcm_sender_id
+	if ( superpwa_onesignal_get_gcm_sender_id() !== false ) {
+		$manifest['gcm_sender_id'] = superpwa_onesignal_get_gcm_sender_id();
+	}
 	
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
