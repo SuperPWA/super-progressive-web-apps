@@ -183,6 +183,13 @@ function superpwa_start_url_cb() {
 				<?php if ( isset( $settings['start_url_amp'] ) ) { checked( '1', $settings['start_url_amp'] ); } ?>>
 				<label for="superpwa_settings[start_url_amp]"><?php _e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
 				<br>
+			
+			<!-- AMP for WordPress 0.6.2 doesn't support homepage, the blog index, and archive pages. -->
+			<?php if ( function_exists( 'amp_init' ) ) { ?>
+				<p class="description" id="tagline-description">
+					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
+				</p>
+			<?php } ?>
 				
 		<?php } ?>
 	

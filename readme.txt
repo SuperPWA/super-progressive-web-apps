@@ -147,6 +147,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * Date: 16.March.2018
 * Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
 * Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
+* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
 
 = 1.4 =
 * Date: 21.February.2018
