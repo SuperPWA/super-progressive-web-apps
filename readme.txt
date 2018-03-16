@@ -1,5 +1,5 @@
 === Super Progressive Web Apps ===
-Contributors: arunbasillal, josevarghese
+Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.5.0
@@ -144,8 +144,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Changelog ==
 
 = 1.5 =
-* Date: 
+* Date: 16.March.2018
 * Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
+* 
 
 = 1.4 =
 * Date: 21.February.2018
