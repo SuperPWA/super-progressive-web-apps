@@ -50,8 +50,9 @@ add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
 function superpwa_admin_notice_activation() {
  
     // Return if transient is not set
-	if ( ! get_transient( 'superpwa_admin_notice_activation' ) )
+	if ( ! get_transient( 'superpwa_admin_notice_activation' ) ) {
 		return;
+	}
 	
 	$superpwa_is_ready = is_ssl() && superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
 	
