@@ -7,7 +7,7 @@
 
 
 ## Welcome to the Super PWA GitHub repository
-SuperPWA helps you convert your WordPress website into a Progressive Web App.
+> SuperPWA helps you convert your WordPress website into a Progressive Web App.
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
@@ -58,19 +58,22 @@ Progressive web apps need browsers that support manifests and service workers. C
 
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
+### Why Build Progressive Web Apps?
+[![IMAGE ALT TEXT HERE](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](http://www.youtube.com/watch?v=1QILz1lAzWY)
+
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
 #### WordPress Installation
 
-* Visit WordPress Admin > `Plugins` > `Add New`
-* Search for `Super Progressive Web Apps`
-* Click "`Install Now`" and then "`Activate`" Super Progressive Web Apps
+* Visit WordPress Admin > **Plugins** > **Add New**
+* Search for **Super Progressive Web Apps**
+* Click "**Install Now**" and then "**Activate**" Super Progressive Web Apps
 
 To install manually:
 
 * Upload super-progressive-web-apps folder to the /wp-content/plugins/ directory on your server
-* Go to WordPress Admin > `Plugins`
-* Activate `Super Progressive Web Apps` plugin from the list.
+* Go to WordPress Admin > **Plugins**
+* Activate **Super Progressive Web Apps** plugin from the list.
 
 #### Customizing Your Progressive Web App
 
@@ -94,7 +97,7 @@ Your Progressive Web App should be ready to test with the default settings upon 
 
 
 ### About us
-We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen. When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. Please give us your constructive feedback and support. 
+> We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen. When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. Please give us your constructive feedback and support. 
 
 ## Support
 This is a developer's portal for Super Progressive Web Apps and should not be used for support. Please visit the
