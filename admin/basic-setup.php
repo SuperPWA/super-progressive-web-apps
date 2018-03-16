@@ -53,7 +53,7 @@ function superpwa_admin_notice_activation() {
 	if ( ! get_transient( 'superpwa_admin_notice_activation' ) )
 		return;
 	
-	$superpwa_is_ready = is_ssl() && superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) ? 'Your app is ready with the default settings. ' : '';
+	$superpwa_is_ready = is_ssl() && superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
 	
 	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
 	

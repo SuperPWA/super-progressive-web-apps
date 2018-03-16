@@ -171,6 +171,3 @@ function superpwa_onesignal_get_gcm_sender_id() {
 	
 	return false;
 }
-
-/** 
- * 
