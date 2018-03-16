@@ -36,13 +36,6 @@ function superpwa_activate_plugin() {
 }
 
 /**
- * Add admin notice on activation
- *
- * @since 	1.2
- */
-add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
-
-/**
  * Admin notice on plugin activation
  *
  * @since 	1.2
@@ -61,6 +54,7 @@ function superpwa_admin_notice_activation() {
 	// Delete transient
 	delete_transient( 'superpwa_admin_notice_activation' );
 }
+add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
 
 /**
  * Plugin upgrade todo list
