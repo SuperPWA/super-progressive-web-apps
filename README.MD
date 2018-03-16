@@ -1,10 +1,9 @@
 # Super Progressive Web Apps
 <p>
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
-        <img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter"
-            alt="follow on Twitter"></a>
+		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
+	</a>
 </p>
-
 
 ## Welcome to the Super PWA GitHub repository
 > SuperPWA helps you convert your WordPress website into a Progressive Web App.
