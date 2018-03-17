@@ -49,10 +49,11 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.3: Improved in-browser service worker update handling.
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
+* New in version 1.5: OneSignal integration for Push notifications.
 
 **Upcoming features:**
 
-* Push notifications.
+* Offline Indicator Notice.
 
 ### Progressive Web App Minimum Requirements
 
@@ -144,7 +145,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Changelog ==
 
 = 1.5 =
-* Date: 16.March.2018
+* Date: 18.March.2018
 * New Feature: OneSignal integration for Push notifications.
 * Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
 * Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
