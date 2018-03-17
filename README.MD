@@ -21,7 +21,7 @@ Once SuperPWA is installed, users browsing your website from a supported mobile 
 SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
 
 ### Progressive Web App Minimum Requirments
-Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
+- [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
 
 #### What's in the box
 
