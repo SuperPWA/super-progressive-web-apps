@@ -3,7 +3,12 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
+
+[![Lighthouse score: 100/100](https://lighthouse-badge.appspot.com/?score=100)](https://superpwa.com)
+
 </p>
+
+
 
 ## Welcome to the Super PWA GitHub repository
 > SuperPWA helps you convert your WordPress website into a Progressive Web App.
