@@ -198,6 +198,12 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Upgrade Notice ==
 
+= 1.5 =
+* New Feature: OneSignal integration for Push notifications.
+* Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
+* Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
+* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
+
 = 1.4 =
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape".
 * New Feature: Added UI for theme_color property in manifest.
