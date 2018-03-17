@@ -3,9 +3,9 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
-
-[![Lighthouse score: 100/100](https://lighthouse-badge.appspot.com/?score=100)](https://superpwa.com)
-
+	<a href="https://github.com/ebidel/lighthouse-badge" target="_blank">
+  <img src="https://lighthouse-badge.appspot.com?score=100">
+	</a>
 </p>
 
 
@@ -128,3 +128,4 @@ There are various ways you can contribute:
     * [Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub)
 
 **[⬆ back to top](#super-progressive-web-apps)**
+{<img src="https://ga-beacon.appspot.com/UA-115873914-2/GitHub_Readme?pixel"/>}[https://github.com/igrigorik/ga-beacon]
