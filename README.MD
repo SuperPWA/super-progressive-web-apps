@@ -58,7 +58,7 @@ Progressive web apps need browsers that support manifests and service workers. C
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
 ### Why Build Progressive Web Apps?
-[![IMAGE ALT TEXT HERE](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](http://www.youtube.com/watch?v=1QILz1lAzWY)
+[![Why Build Progressive Web Apps by Google](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](https://www.youtube.com/embed/1QILz1lAzWY){:target="_blank"}
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
@@ -112,7 +112,7 @@ There are various ways you can contribute:
 
 * [Raise an issue](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues) on GitHub.
 * Engage with us on Social Media
-    * Follow us on [Twitter](https://twitter.com/SuperPWA)
+    * Follow us on [Twitter](https://twitter.com/SuperPWA){:target="_blank"}
     * Like us on [Facebook](https://www.facebook.com/SuperPWA)
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
