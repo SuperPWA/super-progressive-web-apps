@@ -3,7 +3,10 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
+  <img src="https://lighthouse-badge.appspot.com?score=100">
 </p>
+
+
 
 ## Welcome to the Super PWA GitHub repository
 > SuperPWA helps you convert your WordPress website into a Progressive Web App.
@@ -21,7 +24,7 @@ Once SuperPWA is installed, users browsing your website from a supported mobile 
 SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
 
 ### Progressive Web App Minimum Requirments
-Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
+- [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
 
 #### What's in the box
 
@@ -58,7 +61,11 @@ Progressive web apps need browsers that support manifests and service workers. C
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
 ### Why Build Progressive Web Apps?
+<<<<<<< HEAD
 [![Why Build Progressive Web Apps](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](http://www.youtube.com/watch?v=1QILz1lAzWY)
+=======
+[![Why Build Progressive Web Apps by Google](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](https://www.youtube.com/embed/1QILz1lAzWY)
+>>>>>>> 865523dca5fb097c862584df426b727d64685156
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
@@ -123,3 +130,4 @@ There are various ways you can contribute:
     * [Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub)
 
 **[⬆ back to top](#super-progressive-web-apps)**
+<img src="https://ga-beacon.appspot.com/UA-115873914-2/GitHub_Readme?pixel"/>
