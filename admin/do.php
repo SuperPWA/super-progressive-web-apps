@@ -3,9 +3,10 @@
  * Operations and common functions of SuperPWA
  *
  * @since 1.0
- * @function	superpwa_after_save_settings_todo()		Todo list after saving admin options
- * @function	superpwa_is_amp()						Check if any AMP plugin is installed
- * @function 	superpwa_get_start_url()				Return Start Page URL
+ * @function	superpwa_after_save_settings_todo()			Todo list after saving admin options
+ * @function	superpwa_is_amp()							Check if any AMP plugin is installed
+ * @function 	superpwa_get_start_url()					Return Start Page URL
+ * @function	superpwa_onesignal_manifest_notice_check()	Check if OneSignal integration notice should be displayed or not.
  */
 
 // Exit if accessed directly
@@ -39,24 +40,29 @@ add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_tod
 function superpwa_is_amp() {
 	
 	// AMP for WordPress - https://wordpress.org/plugins/amp
-	if ( function_exists( 'amp_init' ) )
-		return 'amp/';
+	if ( function_exists( 'amp_init' ) ) {
+		return defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR . '/' : 'amp/';
+	}
 	
 	// AMP for WP - https://wordpress.org/plugins/accelerated-mobile-pages/
-	if ( function_exists( 'ampforwp_generate_endpoint' ) ) 
-		return 'amp/';
+	if ( function_exists( 'ampforwp_generate_endpoint' ) ) {
+		return defined( 'AMPFORWP_AMP_QUERY_VAR' ) ? AMPFORWP_AMP_QUERY_VAR . '/' : 'amp/';
+	}
 	
 	// Better AMP – https://wordpress.org/plugins/better-amp/
-	if ( class_exists( 'Better_AMP' ) ) 
+	if ( class_exists( 'Better_AMP' ) ) {
 		return 'amp/';
+	}
 	
 	// AMP Supremacy - https://wordpress.org/plugins/amp-supremacy/
-	if ( class_exists( 'AMP_Init' ) ) 
+	if ( class_exists( 'AMP_Init' ) ) {
 		return 'amp/';
+	}
 	
 	// WP AMP - https://wordpress.org/plugins/wp-amp-ninja/
-	if ( function_exists( 'wpamp_init' ) ) 
+	if ( function_exists( 'wpamp_init' ) ) {
 		return '?wpamp';
+	}
 	
 	return false;
 }
@@ -91,4 +97,32 @@ function superpwa_get_start_url( $rel = false ) {
 	$amp_url = superpwa_is_amp() !== false && ( isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) ? superpwa_is_amp() : '';
 	
 	return $start_url . $amp_url;
+}
+
+/** 
+ * Check if OneSignal integration notice should be displayed or not.
+ *
+ * @return	Bool	True if notice should be displayed. False otherwise.
+ * @since	1.5
+ */
+function superpwa_onesignal_manifest_notice_check() {
+	
+	// No notice needed if OneSignal is not installed or there is no gcm_sender_id
+	if ( ! superpwa_onesignal_get_gcm_sender_id() ) {
+		return false;
+	}
+	
+	// Get OneSignal settins
+	$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
+	
+	// No notice needed if OneSignal custom manifest is enabled and the manifest is the SuperPWA manifest
+	if ( 
+		( isset( $onesignal_wp_settings["use_custom_manifest"] ) ) && ( $onesignal_wp_settings["use_custom_manifest"] == 1 ) &&
+		( isset( $onesignal_wp_settings["custom_manifest_url"] ) ) && ( strcasecmp( trim( $onesignal_wp_settings["custom_manifest_url"] ), SUPERPWA_MANIFEST_SRC ) == 0  )
+	) {
+		return false;
+	}
+	
+	// Display notice for every other case
+	return true;
 }

@@ -1,5 +1,5 @@
 === Super Progressive Web Apps ===
-Contributors: arunbasillal, josevarghese
+Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.5.0
@@ -9,15 +9,15 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-SuperPWA helps you convert your WordPress website into a Progressive Web App.
+SuperPWA helps you convert your WordPress website into a Progressive Web App instantly.
 
 == Description ==
 
-Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
+Progressive Web Apps (PWA) is a new technology that combines the best of mobile web and the best of mobile apps to create a superior mobile web experience. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App instantly!
 
 Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
 
@@ -49,10 +49,11 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.3: Improved in-browser service worker update handling.
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
+* New in version 1.5: OneSignal integration for Push notifications.
 
 **Upcoming features:**
 
-* Push notifications.
+* Offline Indicator Notice.
 
 ### Progressive Web App Minimum Requirements
 
@@ -143,6 +144,13 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.5 =
+* Date: 18.March.2018
+* New Feature: OneSignal integration for Push notifications.
+* Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
+* Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
+* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
+
 = 1.4 =
 * Date: 21.February.2018
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
@@ -190,6 +198,12 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.5 =
+* New Feature: OneSignal integration for Push notifications.
+* Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
+* Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
+* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
 
 = 1.4 =
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape".

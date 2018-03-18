@@ -4,12 +4,13 @@
  *
  * @since 1.0
  * @function	superpwa_generate_manifest()			Generate and write manifest
- * @function	superpwa_add_manifest_to_header()		Add manifest to header (wp_head)
+ * @function	superpwa_add_manifest_to_wp_head()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
  * @function	superpwa_delete_manifest()				Delete manifest
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
+ * @function	superpwa_onesignal_get_gcm_sender_id()	Extract gcm_sender_id from OneSignal settings
  */
 
 // Exit if accessed directly
@@ -20,6 +21,9 @@ if ( ! defined('ABSPATH') ) exit;
  *
  * @return true on success, false on failure.
  * @since	1.0
+ * @since	1.3		Added support for 512x512 icon.
+ * @since	1.4		Added orientation and scope.
+ * @since	1.5		Added gcm_sender_id
  */
 function superpwa_generate_manifest() {
 	
@@ -38,6 +42,11 @@ function superpwa_generate_manifest() {
 		'scope'				=> superpwa_get_scope(),
 	);
 	
+	// gcm_sender_id
+	if ( superpwa_onesignal_get_gcm_sender_id() !== false ) {
+		$manifest['gcm_sender_id'] = superpwa_onesignal_get_gcm_sender_id();
+	}
+	
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
@@ -52,7 +61,7 @@ function superpwa_generate_manifest() {
  *
  * @since	1.0
  */
-function superpwa_add_manifest_to_header() {
+function superpwa_add_manifest_to_wp_head() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
@@ -60,7 +69,7 @@ function superpwa_add_manifest_to_header() {
 	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
-add_action( 'wp_head', 'superpwa_add_manifest_to_header' );
+add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 2 );
 
 /**
  * Delete manifest
@@ -145,4 +154,28 @@ function superpwa_get_orientation() {
 		default: 
 			return 'any';
 	}
+}
+
+/**
+ * Extract gcm_sender_id from OneSignal settings
+ *
+ * @link	https://wordpress.org/plugins/onesignal-free-web-push-notifications/
+ *
+ * @return	String|Bool	gcm_sender_id if it exists, false otherwise
+ * @since 	1.5
+ */
+function superpwa_onesignal_get_gcm_sender_id() {
+	
+	// If OneSignal is installed and active
+	if ( class_exists( 'OneSignal' ) ) {
+		
+		// Get OneSignal settins
+		$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
+		
+		if ( isset( $onesignal_wp_settings['gcm_sender_id'] ) && ( $onesignal_wp_settings['gcm_sender_id'] != '' ) ) {
+			return $onesignal_wp_settings['gcm_sender_id'];
+		}
+	}
+	
+	return false;
 }

@@ -183,6 +183,13 @@ function superpwa_start_url_cb() {
 				<?php if ( isset( $settings['start_url_amp'] ) ) { checked( '1', $settings['start_url_amp'] ); } ?>>
 				<label for="superpwa_settings[start_url_amp]"><?php _e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
 				<br>
+			
+			<!-- AMP for WordPress 0.6.2 doesn't support homepage, the blog index, and archive pages. -->
+			<?php if ( function_exists( 'amp_init' ) ) { ?>
+				<p class="description" id="tagline-description">
+					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
+				</p>
+			<?php } ?>
 				
 		<?php } ?>
 	
@@ -322,6 +329,19 @@ function superpwa_admin_interface_render () {
  
 	// Show Settings Saved Message
 	settings_errors( 'superpwa_settings_saved_message' ); */
+	
+	// Display the notice to use SuperPWA manifest as OneSignal custom manifest.
+	if ( superpwa_onesignal_manifest_notice_check() ) {
+		
+		echo '<div class="notice notice-error"><p>' . 
+		sprintf( 
+			__( '<strong>To integrate with OneSignal:</strong> Enable <strong>Use my own manifest.json</strong> and set <code>%s</code><br>as <strong>Custom manifest.json URL</strong> in <a href="%s" target="_blank">OneSignal Configuration > Advanced Settings &rarr;</a>', 'super-progressive-web-apps' ), 
+			SUPERPWA_MANIFEST_SRC,
+			admin_url( 'admin.php?page=onesignal-push#configuration' )
+		) . 
+		'</p></div>';
+	}
+	
 	?>
 	
 	<div class="wrap">	
