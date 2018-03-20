@@ -144,6 +144,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.6 =
+* Date: 
+
 = 1.5 =
 * Date: 18.March.2018
 * New Feature: OneSignal integration for Push notifications.
