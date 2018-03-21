@@ -146,6 +146,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.6 =
 * Date: 
+* Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 
 = 1.5 =
 * Date: 18.March.2018
