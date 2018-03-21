@@ -178,7 +178,7 @@ function superpwa_footer_text( $default ) {
 		return $default;
 	}
 	
-    $superpwa_footer_text = sprintf( __( 'If you like our plugin, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
 	'https://millionclues.com/donate/',
 	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
 	);
