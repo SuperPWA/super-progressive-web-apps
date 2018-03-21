@@ -161,8 +161,8 @@ function checkNeverCacheList(url) {
  */
 function superpwa_register_sw() {
 	
-	wp_enqueue_script('superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
-	wp_localize_script('superpwa-register-sw', 'superpwa_sw', array(
+	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
+	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
 			'url' => SUPERPWA_SW_SRC,
 		)
 	);
