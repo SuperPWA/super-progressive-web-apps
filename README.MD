@@ -3,6 +3,11 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
+	<a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps">
+		<img src="https://img.shields.io/github/stars/SuperPWA/Super-Progressive-Web-Apps.svg?style=social&logo=github&label=SuperPWA" alt="Star Super Progressive Web Apps">
+	</a>	
+
+
 </p>
 <p>
 	<img src="https://lighthouse-badge.appspot.com?score=100">
