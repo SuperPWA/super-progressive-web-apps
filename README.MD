@@ -26,14 +26,16 @@
 </p>
 
 ## Welcome to the Super PWA GitHub repository
-> SuperPWA helps you convert your WordPress website into a Progressive Web App.
+> <a href="https://superpwa.com">SuperPWA</a> helps you convert your WordPress website into a Progressive Web App.
+
+🔗 Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+<a href="https://superpwa.com">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
 ## Installation
 Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
