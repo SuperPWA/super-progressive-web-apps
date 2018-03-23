@@ -3,10 +3,22 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
-  <img src="https://lighthouse-badge.appspot.com?score=100">
 </p>
-
-
+<p>
+	<img src="https://lighthouse-badge.appspot.com?score=100">
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/dt/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Downloads">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/r/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Rating">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/v/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Version">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/v/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Version">
+	</a>	
+</p>
 
 ## Welcome to the Super PWA GitHub repository
 > SuperPWA helps you convert your WordPress website into a Progressive Web App.
