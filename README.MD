@@ -10,7 +10,9 @@
 
 </p>
 <p>
-	<img src="https://lighthouse-badge.appspot.com?score=100">
+	<a href="https://superpwa.com">
+			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
+	</a>
 	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
 		<img src="https://img.shields.io/wordpress/plugin/dt/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Downloads">
 	</a>
@@ -65,9 +67,10 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.3: Improved in-browser service worker update handling.
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
+* New in version 1.5: OneSignal integration for Push notifications.
 
 #### Upcoming features:
- * Push notifications.
+* Offline Indicator Notice.
  
  ### Device and Browser Support For PWA
  | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | Opera Mini | Samsung Internet | 
@@ -90,7 +93,7 @@ The list is fast growing and is likely to be supported in most major browsers by
 * Search for **Super Progressive Web Apps**
 * Click "**Install Now**" and then "**Activate**" Super Progressive Web Apps
 
-To install manually:
+#### To install manually:
 
 * Upload super-progressive-web-apps folder to the /wp-content/plugins/ directory on your server
 * Go to WordPress Admin > **Plugins**
