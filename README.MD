@@ -83,7 +83,7 @@ Progressive web apps need browsers that support manifests and service workers. C
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
 ### Why Build Progressive Web Apps?
-[![Why Build Progressive Web Apps](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](http://www.youtube.com/watch?v=1QILz1lAzWY)
+[![Why Build Progressive Web Apps](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](https://www.youtube.com/embed/1QILz1lAzWY)
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
