@@ -7,6 +7,7 @@
  * @function	superpwa_register_settings			Register Settings
  * @function	superpwa_validater_and_sanitizer()	Validate And Sanitize User Input Before Its Saved To Database
  * @function	superpwa_get_settings()				Get settings from database
+ * @function	superpwa_after_save_settings_todo()	Todo list after saving admin options
  */
 
 // Exit if accessed directly
@@ -241,3 +242,22 @@ function superpwa_enqueue_css_js( $hook ) {
     wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
+
+/**
+ * Todo list after saving admin options
+ *
+ * Regenerate manifest
+ * Regenerate service worker
+ *
+ * @since	1.0
+ */
+function superpwa_after_save_settings_todo() {
+	
+	// Regenerate manifest
+	superpwa_generate_manifest();
+	
+	// Regenerate service worker
+	superpwa_generate_sw();
+}
+add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
