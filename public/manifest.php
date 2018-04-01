@@ -155,27 +155,3 @@ function superpwa_get_orientation() {
 			return 'any';
 	}
 }
-
-/**
- * Extract gcm_sender_id from OneSignal settings
- *
- * @link	https://wordpress.org/plugins/onesignal-free-web-push-notifications/
- *
- * @return	String|Bool	gcm_sender_id if it exists, false otherwise
- * @since 	1.5
- */
-function superpwa_onesignal_get_gcm_sender_id() {
-	
-	// If OneSignal is installed and active
-	if ( class_exists( 'OneSignal' ) ) {
-		
-		// Get OneSignal settins
-		$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
-		
-		if ( isset( $onesignal_wp_settings['gcm_sender_id'] ) && ( $onesignal_wp_settings['gcm_sender_id'] != '' ) ) {
-			return $onesignal_wp_settings['gcm_sender_id'];
-		}
-	}
-	
-	return false;
-}
