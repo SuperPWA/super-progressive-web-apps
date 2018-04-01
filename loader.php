@@ -18,13 +18,13 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-setup.php');
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render.php');
 
 // Load Filesystem functions
-require_once( SUPERPWA_PATH_ABS . 'admin/filesystem.php');
+require_once( SUPERPWA_PATH_ABS . 'functions/filesystem.php');
+
+// Load common functions
+require_once( SUPERPWA_PATH_ABS . 'functions/do.php');
 
 // Manifest Functions
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php');
 
 // Service Worker Functions
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php');
-
-// Do plugin operations
-require_once( SUPERPWA_PATH_ABS . 'admin/do.php');
