@@ -8,23 +8,18 @@
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
-// Load basic setup. Plugin list links, text domain, footer links etc. 
+// Load admin
 require_once( SUPERPWA_PATH_ABS . 'admin/basic-setup.php');
-
-// Load admin setup. Register menus and settings
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-setup.php');
-
-// Render Admin UI
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render.php');
 
-// Load Filesystem functions
+// 3rd party compatibility
+require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php');
+
+// Load functions
+require_once( SUPERPWA_PATH_ABS . 'functions/common.php');
 require_once( SUPERPWA_PATH_ABS . 'functions/filesystem.php');
 
-// Load common functions
-require_once( SUPERPWA_PATH_ABS . 'functions/common.php');
-
-// Manifest Functions
+// Public folder
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php');
-
-// Service Worker Functions
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php');
