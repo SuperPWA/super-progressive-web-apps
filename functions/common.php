@@ -3,8 +3,8 @@
  * Operations and common functions of SuperPWA
  *
  * @since 1.0
- * @function	superpwa_is_amp()							Check if any AMP plugin is installed
- * @function 	superpwa_get_start_url()					Return Start Page URL
+ * @function	superpwa_is_amp()				Check if any AMP plugin is installed
+ * @function 	superpwa_get_start_url()		Return Start Page URL
  */
 
 // Exit if accessed directly

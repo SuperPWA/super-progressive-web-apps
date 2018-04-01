@@ -152,11 +152,11 @@ function superpwa_plugin_row_meta( $links, $file ) {
 	
 	if ( strpos( $file, 'superpwa.php' ) !== false ) {
 		$new_links = array(
-				'demo' 	=> '<a href="https://superpwa.com" target="_blank">Demo</a>',
+				'demo' 	=> '<a href="https://superpwa.com" target="_blank">' . __( 'Demo', 'super-progressive-web-apps' ) . '</a>',
 				);
 		$links = array_merge( $links, $new_links );
 	}
 	
 	return $links;
 }
-// add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 ); // Todo: To be added once demo website is ready
+add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 );
