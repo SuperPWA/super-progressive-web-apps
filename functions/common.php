@@ -6,7 +6,6 @@
  * @function	superpwa_after_save_settings_todo()			Todo list after saving admin options
  * @function	superpwa_is_amp()							Check if any AMP plugin is installed
  * @function 	superpwa_get_start_url()					Return Start Page URL
- * @function	superpwa_onesignal_manifest_notice_check()	Check if OneSignal integration notice should be displayed or not.
  */
 
 // Exit if accessed directly

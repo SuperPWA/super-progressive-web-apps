@@ -10,7 +10,6 @@
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
- * @function	superpwa_onesignal_get_gcm_sender_id()	Extract gcm_sender_id from OneSignal settings
  */
 
 // Exit if accessed directly
