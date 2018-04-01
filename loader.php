@@ -21,7 +21,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render.php');
 require_once( SUPERPWA_PATH_ABS . 'functions/filesystem.php');
 
 // Load common functions
-require_once( SUPERPWA_PATH_ABS . 'functions/do.php');
+require_once( SUPERPWA_PATH_ABS . 'functions/common.php');
 
 // Manifest Functions
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php');
