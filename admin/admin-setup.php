@@ -8,6 +8,8 @@
  * @function	superpwa_validater_and_sanitizer()	Validate And Sanitize User Input Before Its Saved To Database
  * @function	superpwa_get_settings()				Get settings from database
  * @function	superpwa_after_save_settings_todo()	Todo list after saving admin options
+ * @function	superpwa_footer_text()				Admin footer text
+ * @function	superpwa_footer_version()			Admin footer version
  */
 
 // Exit if accessed directly
@@ -261,3 +263,44 @@ function superpwa_after_save_settings_todo() {
 }
 add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
 add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+
+/**
+ * Admin footer text
+ *
+ * A function to add footer text to the settings page of the plugin.
+ * @since	1.2
+ * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
+ */
+function superpwa_footer_text( $default ) {
+    
+	// Retun default on non-plugin pages
+	$screen = get_current_screen();
+	if ( $screen->id !== "settings_page_superpwa" ) {
+		return $default;
+	}
+	
+    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+	'https://millionclues.com/donate/',
+	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
+	);
+	
+	return $superpwa_footer_text;
+}
+add_filter( 'admin_footer_text', 'superpwa_footer_text' );
+
+/**
+ * Admin footer version
+ *
+ * @since	1.0
+ */
+function superpwa_footer_version( $default ) {
+	
+	// Retun default on non-plugin pages
+	$screen = get_current_screen();
+	if ( $screen->id !== "settings_page_superpwa" ) {
+		return $default;
+	}
+	
+	return 'SuperPWA ' . SUPERPWA_VERSION;
+}
+add_filter( 'update_footer', 'superpwa_footer_version', 11 );
