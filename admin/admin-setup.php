@@ -6,7 +6,7 @@
  * @function	superpwa_add_menu_links()			Add admin menu pages
  * @function	superpwa_register_settings			Register Settings
  * @function	superpwa_validater_and_sanitizer()	Validate And Sanitize User Input Before Its Saved To Database
- * @function	superpwa_get_settings()		Get settings from database
+ * @function	superpwa_get_settings()				Get settings from database
  */
 
 // Exit if accessed directly
@@ -146,9 +146,9 @@ function superpwa_register_settings() {
 		
 		// Service Worker status
 		add_settings_field(
-			'superpwa_sw_status',								// ID
+			'superpwa_sw_status',									// ID
 			__('Service Worker', 'super-progressive-web-apps'),		// Title
-			'superpwa_sw_status_cb',							// CB
+			'superpwa_sw_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
@@ -157,7 +157,7 @@ function superpwa_register_settings() {
 		add_settings_field(
 			'superpwa_https_status',								// ID
 			__('HTTPS', 'super-progressive-web-apps'),				// Title
-			'superpwa_https_status_cb',							// CB
+			'superpwa_https_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
