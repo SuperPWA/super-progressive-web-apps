@@ -10,7 +10,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Generate and write service worker into superpwa-sw.js

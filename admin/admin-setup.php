@@ -13,7 +13,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit; 
+if ( ! defined( 'ABSPATH' ) ) exit; 
  
 /**
  * Add admin menu pages
@@ -23,7 +23,7 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_add_menu_links() {
 	
-	add_options_page( __('Super Progressive Web Apps','super-progressive-web-apps'), __('SuperPWA','super-progressive-web-apps'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
+	add_options_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 

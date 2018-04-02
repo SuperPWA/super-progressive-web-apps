@@ -13,7 +13,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Generate and write manifest into WordPress root folder
