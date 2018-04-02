@@ -5,6 +5,7 @@
  * @since 1.0
  * @function	superpwa_is_amp()				Check if any AMP plugin is installed
  * @function 	superpwa_get_start_url()		Return Start Page URL
+ * @function	superpwa_httpsify()				Convert http URL to https
  */
 
 // Exit if accessed directly
@@ -76,4 +77,17 @@ function superpwa_get_start_url( $rel = false ) {
 	$amp_url = superpwa_is_amp() !== false && ( isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) ? superpwa_is_amp() : '';
 	
 	return $start_url . $amp_url;
+}
+
+/**
+ * Convert http URL to https
+ *
+ * @param	$url	String	The URL to convert to https
+ * @return	String	Returns the converted URL
+ *
+ * @since	1.6
+ */
+function superpwa_httpsify( $url ) {
+	
+	return str_replace( 'http://', 'https://', $url );
 }
