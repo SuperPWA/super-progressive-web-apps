@@ -100,7 +100,7 @@ function superpwa_get_pwa_icons() {
 						);
 	
 	// Splash screen icon - Added since 1.3
-	if ( @$settings['splash_icon'] != null ) {
+	if ( @$settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
 							'src' 	=> $settings['splash_icon'],
