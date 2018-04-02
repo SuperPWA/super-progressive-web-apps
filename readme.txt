@@ -148,6 +148,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * Date: 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
+* Enhancement: Force https on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
 
 = 1.5 =
 * Date: 18.March.2018

@@ -65,7 +65,7 @@ function superpwa_get_start_url( $rel = false ) {
 	$start_url = get_permalink( $settings['start_url'] ) ? trailingslashit( get_permalink( $settings['start_url'] ) ) : trailingslashit( get_bloginfo( 'wpurl' ) );
 	
 	// Force HTTPS
-	$start_url = str_replace( 'http://', 'https://', $start_url );
+	$start_url = superpwa_httpsify( $start_url );
 	
 	if ( $rel === true ) {
 		

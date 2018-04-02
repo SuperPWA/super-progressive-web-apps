@@ -187,10 +187,10 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['theme_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['theme_color'] ) ? sanitize_text_field( $settings['theme_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
-	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field( $settings['icon'] );
+	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
 	
 	// Sanitize splash screen icon
-	$settings['splash_icon'] = sanitize_text_field( $settings['splash_icon'] );
+	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
 	
 	return $settings;
 }
