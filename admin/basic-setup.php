@@ -6,7 +6,7 @@
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
  * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
  * @function	superpwa_upgrader()					Plugin upgrade todo list
- * @function	superpwa_deactivate_plugin			Plugin deactivation todo list
+ * @function	superpwa_deactivate_plugin()			Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
  * @function	superpwa_plugin_row_meta()			Add donate and other links to plugins list

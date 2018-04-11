@@ -52,7 +52,7 @@ function superpwa_sw_template() {
 
 /**
  * Service Worker of SuperPWA
- * https://wordpress.org/plugins/super-progressive-web-apps/
+ * To learn more and add one to your website, visit - https://superpwa.com
  */
  
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
