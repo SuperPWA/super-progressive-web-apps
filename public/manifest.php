@@ -66,7 +66,7 @@ function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
+	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. parse_url( SUPERPWA_MANIFEST_SRC, PHP_URL_PATH ) . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
