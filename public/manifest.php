@@ -49,8 +49,9 @@ function superpwa_generate_manifest() {
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) )
+	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) ) {
 		return false;
+	}
 	
 	return true;
 }

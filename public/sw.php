@@ -29,8 +29,9 @@ function superpwa_generate_sw() {
 	// Delete service worker if it exists
 	superpwa_delete_sw();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_SW_ABS, $sw ) )
+	if ( ! superpwa_put_contents( SUPERPWA_SW_ABS, $sw ) ) {
 		return false;
+	}
 	
 	return true;
 }

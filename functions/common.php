@@ -55,6 +55,7 @@ function superpwa_is_amp() {
  *
  * @since	1.2
  * @since	1.3.1	Force HTTPS by replacing http:// with https://
+ * @since	1.6		Use superpwa_httpsify() to force HTTPS
  */
 function superpwa_get_start_url( $rel = false ) {
 	
