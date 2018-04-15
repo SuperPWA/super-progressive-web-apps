@@ -5,6 +5,7 @@
  * @since 1.0
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
+ * @function	superpwa_description_cb()				Description
  * @function	superpwa_background_color_cb()			Splash Screen Background Color
  * @function	superpwa_theme_color_cb()				Theme Color
  * @function	superpwa_app_icon_cb()					Application Icon
@@ -56,6 +57,29 @@ function superpwa_app_short_name_cb() {
 		
 		<p class="description" id="tagline-description">
 			<?php _e('Used when there is insufficient space to display the full name of the application.', 'super-progressive-web-apps'); ?>
+		</p>
+		
+	</fieldset>
+
+	<?php
+}
+
+/**
+ * Description
+ *
+ * @since 1.6
+ */
+function superpwa_description_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_settings[description]" class="regular-text" value="<?php if ( isset( $settings['description'] ) && ( ! empty( $settings['description'] ) ) ) echo esc_attr( $settings['description'] ); ?>"/>
+		
+		<p class="description" id="tagline-description">
+			<?php _e( 'A brief description of what your app is about.', 'super-progressive-web-apps' ); ?>
 		</p>
 		
 	</fieldset>

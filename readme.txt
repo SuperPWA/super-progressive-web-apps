@@ -146,6 +146,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.6 =
 * Date: 
+* New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
 * Enhancement: Force https on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.

@@ -67,6 +67,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 		
+		// Description
+		add_settings_field(
+			'superpwa_description',									// ID
+			__( 'Description', 'super-progressive-web-apps' ),		// Title
+			'superpwa_description_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
 		// Application Icon
 		add_settings_field(
 			'superpwa_icons',										// ID
@@ -170,15 +179,20 @@ add_action( 'admin_init', 'superpwa_register_settings' );
 /**
  * Validate and sanitize user input before its saved to database
  *
- * @since 		1.0
+ * @since 1.0 
+ * @since 1.3 Added splash_icon
+ * @since 1.6 Added description
  */
 function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize Application Name
-	$settings['app_name'] = sanitize_text_field($settings['app_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_name']);
+	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 	
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = sanitize_text_field($settings['app_short_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_short_name']);
+	$settings['app_short_name'] = sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] );
+	
+	// Sanitize description
+	$settings['description'] = sanitize_text_field( $settings['description'] );
 	
 	// Sanitize hex color input for background_color
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
@@ -204,8 +218,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
 function superpwa_get_settings() {
 
 	$defaults = array(
-				'app_name'			=> get_bloginfo('name'),
-				'app_short_name'	=> get_bloginfo('name'),
+				'app_name'			=> get_bloginfo( 'name' ),
+				'app_short_name'	=> get_bloginfo( 'name' ),
+				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
@@ -216,7 +231,7 @@ function superpwa_get_settings() {
 				'orientation'		=> 1,
 			);
 
-	$settings = get_option('superpwa_settings', $defaults);
+	$settings = get_option( 'superpwa_settings', $defaults );
 	
 	return $settings;
 }
