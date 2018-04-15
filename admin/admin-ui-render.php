@@ -244,7 +244,7 @@ function superpwa_offline_page_cb() {
 	</label>
 	
 	<p class="description" id="tagline-description">
-		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?>
+		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? get_permalink( $settings['offline_page'] ) : get_bloginfo( 'wpurl' ) ); ?>
 	</p>
 
 	<?php

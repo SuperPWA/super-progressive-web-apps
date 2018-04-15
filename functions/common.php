@@ -55,7 +55,8 @@ function superpwa_is_amp() {
  *
  * @since	1.2
  * @since	1.3.1	Force HTTPS by replacing http:// with https://
- * @since	1.6		Use superpwa_httpsify() to force HTTPS
+ * @since	1.6		Use superpwa_httpsify() to force HTTPS. 
+ * @since	1.6		Removed forcing of trailing slash and added dot (.) to the beginning.
  */
 function superpwa_get_start_url( $rel = false ) {
 	
@@ -63,7 +64,7 @@ function superpwa_get_start_url( $rel = false ) {
 	$settings = superpwa_get_settings();
 	
 	// Start Page
-	$start_url = get_permalink( $settings['start_url'] ) ? trailingslashit( get_permalink( $settings['start_url'] ) ) : trailingslashit( get_bloginfo( 'wpurl' ) );
+	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : get_bloginfo( 'wpurl' );
 	
 	// Force HTTPS
 	$start_url = superpwa_httpsify( $start_url );
@@ -75,9 +76,11 @@ function superpwa_get_start_url( $rel = false ) {
 	}
 	
 	// AMP URL
-	$amp_url = superpwa_is_amp() !== false && ( isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) ? superpwa_is_amp() : '';
+	if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) {
+		$start_url = trailingslashit( $start_url ) . superpwa_is_amp();
+	}
 	
-	return $start_url . $amp_url;
+	return '.' . $start_url;
 }
 
 /**
@@ -89,6 +92,5 @@ function superpwa_get_start_url( $rel = false ) {
  * @since	1.6
  */
 function superpwa_httpsify( $url ) {
-	
 	return str_replace( 'http://', 'https://', $url );
 }

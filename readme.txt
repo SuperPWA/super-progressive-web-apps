@@ -151,6 +151,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
 * Enhancement: Force https on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
 * Enhancement: Relative URL for manifest for out of the box compatibility with CDN's.
+* Enhancement: Removed forcing of trailing slash on manifest and service worker URLs for better compatibility. 
 
 = 1.5 =
 * Date: 18.March.2018
