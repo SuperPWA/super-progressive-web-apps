@@ -289,9 +289,9 @@ function superpwa_orientation_cb() {
  */
 function superpwa_manifest_status_cb() {
 
-	if ( superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) ) {
+	if ( superpwa_get_contents( superpwa_manifest( 'abs' ) ) ) {
 		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', SUPERPWA_MANIFEST_SRC );
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
 		
 		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
@@ -305,7 +305,7 @@ function superpwa_manifest_status_cb() {
  */
 function superpwa_sw_status_cb() {
 
-	if ( superpwa_get_contents( SUPERPWA_SW_ABS ) ) {
+	if ( superpwa_get_contents( superpwa_sw( 'abs' ) ) ) {
 		
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
 	} else {
@@ -360,7 +360,7 @@ function superpwa_admin_interface_render () {
 		echo '<div class="notice notice-error"><p>' . 
 		sprintf( 
 			__( '<strong>To integrate with OneSignal:</strong> Enable <strong>Use my own manifest.json</strong> and set <code>%s</code><br>as <strong>Custom manifest.json URL</strong> in <a href="%s" target="_blank">OneSignal Configuration > Advanced Settings &rarr;</a>', 'super-progressive-web-apps' ), 
-			SUPERPWA_MANIFEST_SRC,
+			superpwa_manifest( 'src' ),
 			admin_url( 'admin.php?page=onesignal-push#configuration' )
 		) . 
 		'</p></div>';

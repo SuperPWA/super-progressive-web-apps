@@ -3,6 +3,7 @@
  * Manifest related functions of SuperPWA
  *
  * @since 1.0
+ * @function	superpwa_manifest()						Manifest filename, absolute path and link
  * @function	superpwa_generate_manifest()			Generate and write manifest
  * @function	superpwa_add_manifest_to_wp_head()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
@@ -14,6 +15,43 @@
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Manifest filename, absolute path and link
+ *
+ * For Multisite compatibility. Used to be constants defined in superpwa.php
+ * On a multisite, each sub-site needs a different manifest file.
+ *
+ * @param $arg 	filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
+ *				abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
+ *				src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ *
+ * @return String filename, absolute path or link to manifest.  
+ * @since 1.6
+ */
+function superpwa_manifest( $arg = 'src' ) {
+	
+	$manifest_filename = 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
+	
+	switch( $arg ) {
+		
+		// Name of Manifest file
+		case 'filename': 
+			return $manifest_filename;
+			break;
+		
+		// Absolute path to manifest		
+		case 'abs':
+			return trailingslashit( ABSPATH ) . $manifest_filename;
+			break;
+		
+		// Link to manifest
+		case 'src':
+		default:
+			return trailingslashit( get_bloginfo('wpurl') ) . $manifest_filename;
+			break;
+	}
+}
 
 /**
  * Generate and write manifest into WordPress root folder
@@ -55,7 +93,7 @@ function superpwa_generate_manifest() {
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) ) {
+	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
 		return false;
 	}
 	
@@ -72,7 +110,7 @@ function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. parse_url( SUPERPWA_MANIFEST_SRC, PHP_URL_PATH ) . '">' . PHP_EOL;
+	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
@@ -84,8 +122,7 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
  * @since	1.0
  */
 function superpwa_delete_manifest() {
-	
-	return superpwa_delete( SUPERPWA_MANIFEST_ABS );
+	return superpwa_delete( superpwa_manifest( 'abs' ) );
 }
 
 /**

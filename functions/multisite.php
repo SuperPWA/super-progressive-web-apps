@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return String Returns the current blog ID on a multisite. An empty string otherwise
  * @since 1.6
  */
-superpwa_multisite_filename_postfix() {
+function superpwa_multisite_filename_postfix() {
 	
 	// Return empty string if not a multisite
 	if ( ! is_multisite() ) {

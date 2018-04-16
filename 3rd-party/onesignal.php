@@ -29,7 +29,7 @@ function superpwa_onesignal_manifest_notice_check() {
 	// No notice needed if OneSignal custom manifest is enabled and the manifest is the SuperPWA manifest
 	if ( 
 		( isset( $onesignal_wp_settings["use_custom_manifest"] ) ) && ( $onesignal_wp_settings["use_custom_manifest"] == 1 ) &&
-		( isset( $onesignal_wp_settings["custom_manifest_url"] ) ) && ( strcasecmp( trim( $onesignal_wp_settings["custom_manifest_url"] ), SUPERPWA_MANIFEST_SRC ) == 0  )
+		( isset( $onesignal_wp_settings["custom_manifest_url"] ) ) && ( strcasecmp( trim( $onesignal_wp_settings["custom_manifest_url"] ), superpwa_manifest( 'src' ) ) == 0  )
 	) {
 		return false;
 	}

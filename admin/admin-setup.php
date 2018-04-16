@@ -22,7 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	
 	add_options_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );

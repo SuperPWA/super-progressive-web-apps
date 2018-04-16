@@ -46,17 +46,13 @@ if ( ! defined('ABSPATH') ) exit;
 /**
  * Define constants
  *
- * @since 		1.0
+ * @since 1.0
+ * @since 1.6 Depreciated constants: SUPERPWA_MANIFEST_FILENAME, SUPERPWA_MANIFEST_ABS, SUPERPWA_MANIFEST_SRC
+ * @since 1.6 Depreciated constants: SUPERPWA_SW_FILENAME, SUPERPWA_SW_ABS, SUPERPWA_SW_SRC
  */
-if ( ! defined('SUPERPWA_VERSION') ) 			define('SUPERPWA_VERSION'			, '1.6'); // Plugin version
-if ( ! defined('SUPERPWA_PATH_ABS ') ) 			define('SUPERPWA_PATH_ABS'			, plugin_dir_path( __FILE__ )); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
-if ( ! defined('SUPERPWA_PATH_SRC') ) 			define('SUPERPWA_PATH_SRC'			, plugin_dir_url( __FILE__ )); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
-if ( ! defined('SUPERPWA_MANIFEST_FILENAME') ) 	define('SUPERPWA_MANIFEST_FILENAME'	, 'superpwa-manifest.json'); // Name of Manifest file
-if ( ! defined('SUPERPWA_MANIFEST_ABS') )		define('SUPERPWA_MANIFEST_ABS'		, trailingslashit( ABSPATH ) . SUPERPWA_MANIFEST_FILENAME); // Absolute path to manifest
-if ( ! defined('SUPERPWA_MANIFEST_SRC') )		define('SUPERPWA_MANIFEST_SRC'		, trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_MANIFEST_FILENAME); // Link to manifest
-if ( ! defined('SUPERPWA_SW_FILENAME') ) 		define('SUPERPWA_SW_FILENAME'		, 'superpwa-sw.js'); // Name of service worker file
-if ( ! defined('SUPERPWA_SW_ABS') )				define('SUPERPWA_SW_ABS'			, trailingslashit( ABSPATH ) . SUPERPWA_SW_FILENAME); // Absolute path to service worker. SW must be in the root folder
-if ( ! defined('SUPERPWA_SW_SRC') )				define('SUPERPWA_SW_SRC'			, trailingslashit( get_bloginfo('wpurl') ) . SUPERPWA_SW_FILENAME); // Link to service worker
+if ( ! defined('SUPERPWA_VERSION') ) 	define('SUPERPWA_VERSION'	, '1.6'); // SuperPWA current version
+if ( ! defined('SUPERPWA_PATH_ABS ') ) 	define('SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ )); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
+if ( ! defined('SUPERPWA_PATH_SRC') ) 	define('SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ )); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
 
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php');

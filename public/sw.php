@@ -3,14 +3,52 @@
  * Service worker related functions of SuperPWA
  *
  * @since 1.0
+ * @function	superpwa_sw()				Service worker filename, absolute path and link
  * @function	superpwa_generate_sw()		Generate and write service worker into sw.js
- * @function	superpwa_sw_template()		Service Worker Tempalte
+ * @function	superpwa_sw_template()		Service worker tempalte
  * @function	superpwa_register_sw()		Register service worker
- * @function	superpwa_delete_sw()		Delete Service Worker
+ * @function	superpwa_delete_sw()		Delete service worker
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Service worker filename, absolute path and link
+ *
+ * For Multisite compatibility. Used to be constants defined in superpwa.php
+ * On a multisite, each sub-site needs a different service worker.
+ *
+ * @param $arg 	filename for service worker filename (replaces SUPERPWA_SW_FILENAME)
+ *				abs for absolute path to service worker (replaces SUPERPWA_SW_ABS)
+ *				src for link to service worker (replaces SUPERPWA_SW_SRC). Default value
+ *
+ * @return String filename, absolute path or link to manifest.  
+ * @since 1.6
+ */
+function superpwa_sw( $arg = 'src' ) {
+	
+	$sw_filename = 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js';
+	
+	switch( $arg ) {
+		
+		// Name of service worker file
+		case 'filename': 
+			return $sw_filename;
+			break;
+		
+		// Absolute path to service worker. SW must be in the root folder	
+		case 'abs':
+			return trailingslashit( ABSPATH ) . $sw_filename;
+			break;
+		
+		// Link to service worker
+		case 'src':
+		default:
+			return trailingslashit( get_bloginfo('wpurl') ) . $sw_filename;
+			break;
+	}
+}
 
 /**
  * Generate and write service worker into superpwa-sw.js
@@ -29,7 +67,7 @@ function superpwa_generate_sw() {
 	// Delete service worker if it exists
 	superpwa_delete_sw();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_SW_ABS, $sw ) ) {
+	if ( ! superpwa_put_contents( superpwa_sw( 'abs' ), $sw ) ) {
 		return false;
 	}
 	
@@ -164,7 +202,7 @@ function superpwa_register_sw() {
 	
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
-			'url' => SUPERPWA_SW_SRC,
+			'url' => superpwa_sw( 'src' ),
 		)
 	);
 }
@@ -177,6 +215,5 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  * @since	1.0
  */
 function superpwa_delete_sw() {
-	
-	return superpwa_delete( SUPERPWA_SW_ABS );
+	return superpwa_delete( superpwa_sw( 'abs' ) );
 }
