@@ -50,9 +50,9 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.6 Depreciated constants: SUPERPWA_MANIFEST_FILENAME, SUPERPWA_MANIFEST_ABS, SUPERPWA_MANIFEST_SRC
  * @since 1.6 Depreciated constants: SUPERPWA_SW_FILENAME, SUPERPWA_SW_ABS, SUPERPWA_SW_SRC
  */
-if ( ! defined('SUPERPWA_VERSION') ) 	define( 'SUPERPWA_VERSION'	, '1.6' ); // SuperPWA current version
-if ( ! defined('SUPERPWA_PATH_ABS ') ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
-if ( ! defined('SUPERPWA_PATH_SRC') ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
+if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.6' ); // SuperPWA current version
+if ( ! defined( 'SUPERPWA_PATH_ABS' ) ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
+if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
 
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php' );
