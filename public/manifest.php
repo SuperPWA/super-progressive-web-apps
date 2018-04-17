@@ -148,7 +148,7 @@ function superpwa_get_pwa_icons() {
 		
 		$icons_array[] = array(
 							'src' 	=> $settings['splash_icon'],
-							'sizes'	=> '512x512', // must be 192x192.
+							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 						);
 	}
