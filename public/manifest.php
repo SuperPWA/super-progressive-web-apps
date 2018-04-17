@@ -48,7 +48,7 @@ function superpwa_manifest( $arg = 'src' ) {
 		// Link to manifest
 		case 'src':
 		default:
-			return trailingslashit( get_bloginfo('wpurl') ) . $manifest_filename;
+			return trailingslashit( network_home_url() ) . $manifest_filename;
 			break;
 	}
 }

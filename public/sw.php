@@ -45,7 +45,7 @@ function superpwa_sw( $arg = 'src' ) {
 		// Link to service worker
 		case 'src':
 		default:
-			return trailingslashit( get_bloginfo('wpurl') ) . $sw_filename;
+			return trailingslashit( network_home_url() ) . $sw_filename;
 			break;
 	}
 }
