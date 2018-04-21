@@ -62,18 +62,24 @@ add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
  *
  * @since 1.3.1
  * @since 1.4 Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
+ * @since 1.6 Added checks to accomodate multisite compatibility.
  */
 function superpwa_upgrader() {
 	
-	$current_ver = get_option('superpwa_version');
+	$current_ver = get_option( 'superpwa_version' );
 	
 	// Return if we have already done this todo
 	if ( version_compare( $current_ver, SUPERPWA_VERSION, '==' ) ) {
 		return;
 	}
 	
-	// Return if this is the first time the plugin is installed.
-	if ( $current_ver === false ) {
+	/**
+	 * Return if this is the first time the plugin is installed and if its not a multisite
+	 *
+	 * On a multisite, during network activation, the activation hook (and activation todo) is not fired.
+	 * Manifest and service worker is generated the first time the wp-admin is loaded (when admin_init is fired).
+	 */
+	if ( ( $current_ver === false ) && ( ! is_multisite() ) ) {
 		
 		add_option( 'superpwa_version', SUPERPWA_VERSION );
 		return;
