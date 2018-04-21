@@ -19,17 +19,25 @@ if ( ! defined('ABSPATH') ) exit;
  * Plugin activatation todo list
  *
  * This function runs when user activates the plugin. Used in register_activation_hook()
+ *
+ * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
  * 
  * @since 1.0
- * @since 1.6 register_activation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
+ * @since 1.6 register_activation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php).
+ * @since 1.6 Added checks for multisite compatibility.
  */
-function superpwa_activate_plugin() {
+function superpwa_activate_plugin( $network_active ) {
 	
-	// Generate manifest with default options
-	superpwa_generate_manifest();
-	
-	// Generate service worker
-	superpwa_generate_sw();
+	// superpwa_upgrader() handles generation of manifest and service worker on multisites. Avoiding duplicate effort.
+	if ( ! is_multisite() ) {
+		
+		// Generate manifest with default options
+		superpwa_generate_manifest();
+		
+		// Generate service worker
+		superpwa_generate_sw();
+	}
 	
 	// Set transient for activation notice
 	set_transient( 'superpwa_admin_notice_activation', true, 5 );
