@@ -6,7 +6,7 @@
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
  * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
  * @function	superpwa_upgrader()					Plugin upgrade todo list
- * @function	superpwa_deactivate_plugin()			Plugin deactivation todo list
+ * @function	superpwa_deactivate_plugin()		Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
  * @function	superpwa_plugin_row_meta()			Add donate and other links to plugins list
@@ -18,8 +18,10 @@ if ( ! defined('ABSPATH') ) exit;
 /**
  * Plugin activatation todo list
  *
- * This function runs when user activates the plugin. Used in register_activation_hook in the main plugin file. 
- * @since	1.0
+ * This function runs when user activates the plugin. Used in register_activation_hook()
+ * 
+ * @since 1.0
+ * @since 1.6 register_activation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
 function superpwa_activate_plugin() {
 	
@@ -32,11 +34,12 @@ function superpwa_activate_plugin() {
 	// Set transient for activation notice
 	set_transient( 'superpwa_admin_notice_activation', true, 5 );
 }
+register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
 /**
  * Admin notice on plugin activation
  *
- * @since 	1.2
+ * @since 1.2
  */
 function superpwa_admin_notice_activation() {
  
@@ -57,8 +60,8 @@ add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
 /**
  * Plugin upgrade todo list
  *
- * @since	1.3.1
- * @since	1.4		Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
+ * @since 1.3.1
+ * @since 1.4 Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
  */
 function superpwa_upgrader() {
 	
@@ -105,7 +108,9 @@ add_action( 'admin_init', 'superpwa_upgrader' );
  * Plugin deactivation todo list
  *
  * Runs during deactivation. During uninstall uninstall.php is also executed
- * @since	1.0
+ * 
+ * @since 1.0
+ * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
 function superpwa_deactivate_plugin() {
 	
@@ -115,6 +120,7 @@ function superpwa_deactivate_plugin() {
 	// Delete service worker
 	superpwa_delete_sw();
 }
+register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deactivate_plugin' );
 
 /**
  * Load plugin text domain

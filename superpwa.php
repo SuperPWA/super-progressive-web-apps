@@ -56,9 +56,3 @@ if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_di
 
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php' );
-
-// Register activation hook
-register_activation_hook( __FILE__, 'superpwa_activate_plugin' );
-
-// Register deactivatation hook
-register_deactivation_hook( __FILE__, 'superpwa_deactivate_plugin' );
