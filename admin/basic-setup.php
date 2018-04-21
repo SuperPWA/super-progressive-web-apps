@@ -68,8 +68,9 @@ function superpwa_upgrader() {
 	$current_ver = get_option('superpwa_version');
 	
 	// Return if we have already done this todo
-	if ( $current_ver == SUPERPWA_VERSION ) 
+	if ( version_compare( $current_ver, SUPERPWA_VERSION, '==' ) ) {
 		return;
+	}
 	
 	// Return if this is the first time the plugin is installed.
 	if ( $current_ver === false ) {
@@ -78,7 +79,8 @@ function superpwa_upgrader() {
 		return;
 	}
 	
-	if ( $current_ver < 1.4 ) {
+	// Add orientation and theme_color to database when upgrading from pre 1.4 versions
+	if ( version_compare( $current_ver, '1.4', '<' ) ) {
 		
 		// Get settings
 		$settings = superpwa_get_settings();
