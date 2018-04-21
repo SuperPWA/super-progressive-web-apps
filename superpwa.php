@@ -47,8 +47,8 @@ if ( ! defined('ABSPATH') ) exit;
  * Define constants
  *
  * @since 1.0
- * @since 1.6 Depreciated constants: SUPERPWA_MANIFEST_FILENAME, SUPERPWA_MANIFEST_ABS, SUPERPWA_MANIFEST_SRC
- * @since 1.6 Depreciated constants: SUPERPWA_SW_FILENAME, SUPERPWA_SW_ABS, SUPERPWA_SW_SRC
+ * @since 1.6 Depreciated constants for multisite compatibility: SUPERPWA_MANIFEST_FILENAME, SUPERPWA_MANIFEST_ABS, SUPERPWA_MANIFEST_SRC
+ * @since 1.6 Depreciated constants for multisite compatibility: SUPERPWA_SW_FILENAME, SUPERPWA_SW_ABS, SUPERPWA_SW_SRC
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.6' ); // SuperPWA current version
 if ( ! defined( 'SUPERPWA_PATH_ABS' ) ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
@@ -57,7 +57,7 @@ if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_di
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php' );
 
-// Register activation hook (this has to be in the main plugin file.)
+// Register activation hook
 register_activation_hook( __FILE__, 'superpwa_activate_plugin' );
 
 // Register deactivatation hook
