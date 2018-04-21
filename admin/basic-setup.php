@@ -3,8 +3,10 @@
  * Basic setup functions for the plugin
  *
  * @since 1.0
+ * 
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
  * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
+ * @function	superpwa_network_admin_notice_activation()	Admin notice on multisite network activation
  * @function	superpwa_upgrader()					Plugin upgrade todo list
  * @function	superpwa_deactivate_plugin()		Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
@@ -29,7 +31,12 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_activate_plugin( $network_active ) {
 	
-	// superpwa_upgrader() handles generation of manifest and service worker on multisites. Avoiding duplicate effort.
+	/**
+	 * Generate manifest and service worker on single installs
+	 * 
+	 * On multisites, superpwa_upgrader() handles generation of manifest and service worker on multisites. 
+	 * This check avoids duplicate effort. 
+	 */
 	if ( ! is_multisite() ) {
 		
 		// Generate manifest with default options
@@ -39,8 +46,17 @@ function superpwa_activate_plugin( $network_active ) {
 		superpwa_generate_sw();
 	}
 	
-	// Set transient for activation notice
-	set_transient( 'superpwa_admin_notice_activation', true, 5 );
+	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
+	if ( ! $network_active ) {
+		
+		// Set transient for single site activation notice
+		set_transient( 'superpwa_admin_notice_activation', true, 5 );
+		
+		return;
+	}
+		
+	// If we are here, then plugin is network activated on a multisite. Set transient for activation notice on network admin.
+	set_transient( 'superpwa_network_admin_notice_activation', true, 5 );
 }
 register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
@@ -64,6 +80,27 @@ function superpwa_admin_notice_activation() {
 	delete_transient( 'superpwa_admin_notice_activation' );
 }
 add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
+
+/**
+ * Admin notice on multisite network activation
+ *
+ * @since 1.6
+ */
+function superpwa_network_admin_notice_activation() {
+ 
+    // Return if transient is not set
+	if ( ! get_transient( 'superpwa_network_admin_notice_activation' ) ) {
+		return;
+	}
+	
+	$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready on the main website with the default settings. ' : '';
+	
+	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
+	
+	// Delete transient
+	delete_transient( 'superpwa_network_admin_notice_activation' );
+}
+add_action( 'network_admin_notices', 'superpwa_admin_notice_activation' );
 
 /**
  * Plugin upgrade todo list
@@ -123,12 +160,16 @@ add_action( 'admin_init', 'superpwa_upgrader' );
 /**
  * Plugin deactivation todo list
  *
- * Runs during deactivation. During uninstall uninstall.php is also executed
+ * Runs during deactivation. 
+ * During uninstall uninstall.php is also executed.
+ *
+ * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
  * 
  * @since 1.0
  * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
-function superpwa_deactivate_plugin() {
+function superpwa_deactivate_plugin( $network_active ) {
 	
 	// Delete manifest
 	superpwa_delete_manifest();
