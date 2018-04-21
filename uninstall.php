@@ -17,7 +17,18 @@ if ( ! defined('WP_UNINSTALL_PLUGIN') ) die;
 /**
  * Delete database settings
  *
- * @since		1.0
+ * @since 1.0
  */ 
 delete_option( 'superpwa_settings' );
 delete_option( 'superpwa_version' );
+
+/**
+ * Clean up for Multisites
+ *
+ * @since 1.6
+ */
+if ( is_multisite() ) {
+	
+	// Delete Network wide settings
+	delete_site_option( 'superpwa_network_settings' )
+}
