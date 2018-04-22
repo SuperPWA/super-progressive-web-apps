@@ -154,6 +154,9 @@ function superpwa_upgrader() {
 	
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
+	
+	// For multisites, save the activation status of current blog.
+	superpwa_multisite_activation_status( true );
 }
 add_action( 'admin_init', 'superpwa_upgrader' );
 
