@@ -21,6 +21,8 @@ if ( ! defined('ABSPATH') ) exit;
  * Plugin activatation todo list
  *
  * This function runs when user activates the plugin. Used in register_activation_hook()
+ * On multisites, during network activation, this is fired only for the main site.
+ * For the rest of the sites, superpwa_upgrader() handles generation of manifest and service worker. 
  *
  * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
  * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
@@ -31,20 +33,11 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_activate_plugin( $network_active ) {
 	
-	/**
-	 * Generate manifest and service worker on single installs
-	 * 
-	 * On multisites, superpwa_upgrader() handles generation of manifest and service worker on multisites. 
-	 * This check avoids duplicate effort. 
-	 */
-	if ( ! is_multisite() ) {
-		
-		// Generate manifest with default options
-		superpwa_generate_manifest();
-		
-		// Generate service worker
-		superpwa_generate_sw();
-	}
+	// Generate manifest with default options
+	superpwa_generate_manifest();
+	
+	// Generate service worker
+	superpwa_generate_sw();
 	
 	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
 	if ( ! $network_active ) {
@@ -100,7 +93,7 @@ function superpwa_network_admin_notice_activation() {
 	// Delete transient
 	delete_transient( 'superpwa_network_admin_notice_activation' );
 }
-add_action( 'network_admin_notices', 'superpwa_admin_notice_activation' );
+add_action( 'network_admin_notices', 'superpwa_network_admin_notice_activation' );
 
 /**
  * Plugin upgrade todo list
@@ -119,14 +112,28 @@ function superpwa_upgrader() {
 	}
 	
 	/**
-	 * Return if this is the first time the plugin is installed and if its not a multisite
+	 * Return if this is the first time the plugin is installed.
 	 *
 	 * On a multisite, during network activation, the activation hook (and activation todo) is not fired.
 	 * Manifest and service worker is generated the first time the wp-admin is loaded (when admin_init is fired).
 	 */
-	if ( ( $current_ver === false ) && ( ! is_multisite() ) ) {
+	if ( $current_ver === false ) {
 		
+		if ( is_multisite() ) {
+			
+			// Generate manifestx
+			superpwa_generate_manifest();
+			
+			// Generate service worker
+			superpwa_generate_sw();
+			
+			// For multisites, save the activation status of current blog.
+			superpwa_multisite_activation_status( true );
+		}
+		
+		// Save SuperPWA version to database.
 		add_option( 'superpwa_version', SUPERPWA_VERSION );
+		
 		return;
 	}
 	

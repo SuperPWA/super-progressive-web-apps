@@ -95,11 +95,6 @@ function superpwa_multisite_network_deactivator() {
 	// Loop through each active site.
 	foreach( $superpwa_sites as $blog_id => $actviation_status ) {
 		
-		// If plugin is already deactivated, move to next blog. 
-		if ( $actviation_status == false ) {
-			continue;
-		}
-		
 		// Switch to each blog
 		switch_to_blog( $blog_id );
 		
@@ -108,6 +103,14 @@ function superpwa_multisite_network_deactivator() {
 	
 		// Delete service worker
 		superpwa_delete_sw();
+		
+		/**
+		 * Delete SuperPWA version info for current blog.
+		 * 
+		 * This is required so that superpwa_upgrader() will run and create the manifest and service worker on next activation.
+		 * Known edge case: Database upgrade that relies on the version number will fail if user deactivates and later activates after SuperPWA is updated.
+		 */
+		delete_option( 'superpwa_version' );
 	
 		// Save the de-activation status of current blog.
 		superpwa_multisite_activation_status( false );

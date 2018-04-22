@@ -29,8 +29,7 @@ delete_option( 'superpwa_version' );
  */
 if ( is_multisite() ) {
 	
-	// Delete network wide settings.
-	delete_site_option( 'superpwa_network_settings' );
+	// Todo: Loop through all sites and delete the saved settings.superpwa_settings
 	
 	// Delete the list of websites where SuperPWA was activated.
 	delete_site_option( 'superpwa_active_sites' );
