@@ -107,7 +107,7 @@ add_action( 'network_admin_notices', 'superpwa_admin_notice_activation' );
  *
  * @since 1.3.1
  * @since 1.4 Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
- * @since 1.6 Added checks to accomodate multisite compatibility.
+ * @since 1.6 Added multisite compatibility.
  */
 function superpwa_upgrader() {
 	
@@ -179,6 +179,9 @@ function superpwa_deactivate_plugin( $network_active ) {
 	
 	// Delete service worker
 	superpwa_delete_sw();
+	
+	// For multisites, save the de-activation status of current blog.
+	superpwa_multisite_activation_status( false );
 }
 register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deactivate_plugin' );
 
