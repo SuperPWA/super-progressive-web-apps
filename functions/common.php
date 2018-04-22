@@ -72,7 +72,7 @@ function superpwa_get_start_url( $rel = false ) {
 	if ( $rel === true ) {
 		
 		// Make start_url relative for manifest
-		$start_url = parse_url( $start_url, PHP_URL_PATH );
+		$start_url = '.' . parse_url( $start_url, PHP_URL_PATH );
 	}
 	
 	// AMP URL
@@ -80,7 +80,7 @@ function superpwa_get_start_url( $rel = false ) {
 		$start_url = trailingslashit( $start_url ) . superpwa_is_amp();
 	}
 	
-	return '.' . $start_url;
+	return $start_url;
 }
 
 /**
