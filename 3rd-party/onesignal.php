@@ -41,22 +41,18 @@ function superpwa_onesignal_manifest_notice_check() {
 /**
  * Extract gcm_sender_id from OneSignal settings
  *
- * @link	https://wordpress.org/plugins/onesignal-free-web-push-notifications/
+ * @link https://wordpress.org/plugins/onesignal-free-web-push-notifications/
  *
- * @return	String|Bool	gcm_sender_id if it exists, false otherwise
- * @since 	1.5
+ * @return (String|Bool) gcm_sender_id of OneSignal if OneSignal is installed, false otherwise
+ * @since 1.5
  */
 function superpwa_onesignal_get_gcm_sender_id() {
 	
 	// If OneSignal is installed and active
 	if ( class_exists( 'OneSignal' ) ) {
 		
-		// Get OneSignal settins
-		$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
-		
-		if ( isset( $onesignal_wp_settings['gcm_sender_id'] ) && ( $onesignal_wp_settings['gcm_sender_id'] != '' ) ) {
-			return $onesignal_wp_settings['gcm_sender_id'];
-		}
+		// This is the gcm_sender_id of OneSignal, same for all installs.
+		return '482941778795';
 	}
 	
 	return false;
