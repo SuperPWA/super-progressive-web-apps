@@ -6,13 +6,11 @@
  * @since 1.0
  */
 
-
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // If uninstall not called from WordPress, then die.
-if ( ! defined('WP_UNINSTALL_PLUGIN') ) die;
- 
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) die;
 
 /**
  * Delete database settings
