@@ -182,6 +182,11 @@ function superpwa_deactivate_plugin( $network_active ) {
 	
 	// For multisites, save the de-activation status of current blog.
 	superpwa_multisite_activation_status( false );
+	
+	// Run the network deactivator during network deactivation
+	if ( $network_active === true ) {
+		superpwa_multisite_network_deactivator();
+	}
 }
 register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deactivate_plugin' );
 
