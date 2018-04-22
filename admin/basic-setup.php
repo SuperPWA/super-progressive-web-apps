@@ -137,7 +137,13 @@ function superpwa_upgrader() {
 		return;
 	}
 	
-	// Add orientation and theme_color to database when upgrading from pre 1.4 versions
+	/**
+	 * Add orientation and theme_color to database when upgrading from pre 1.4 versions
+	 * 
+	 * Until 1.4, there was no UI for orientation and theme_color.
+	 * In the manifest, orientation was hard coded as 'natural'.
+	 * background_color had UI and this value was used for both background_color and theme_color in the manifest.
+	 */
 	if ( version_compare( $current_ver, '1.4', '<' ) ) {
 		
 		// Get settings
