@@ -206,7 +206,7 @@ register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deacti
 /**
  * Load plugin text domain
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_load_plugin_textdomain() {
 	
@@ -217,7 +217,7 @@ add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
 /**
  * Print direct link to plugin settings in plugins list in admin
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_settings_link( $links ) {
 	
@@ -233,7 +233,7 @@ add_filter( 'plugin_action_links_super-progressive-web-apps/superpwa.php', 'supe
 /**
  * Add donate and other links to plugins list
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_plugin_row_meta( $links, $file ) {
 	

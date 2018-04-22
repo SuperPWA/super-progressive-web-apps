@@ -3,6 +3,7 @@
  * Functions for compatibility with WordPress multisites
  *
  * @since 1.6
+ * 
  * @function	superpwa_multisite_filename_postfix()		Filename postfix for multisites
  * @function	superpwa_multisite_activation_status()		Save activation status for current blog id
  * @function	superpwa_multisite_network_deactivator()	Handle multisite network deactivation
