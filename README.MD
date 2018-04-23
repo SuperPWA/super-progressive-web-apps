@@ -68,6 +68,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
+* New in version 1.6: WordPress Multisite Network compatibility.
 
 #### Upcoming features:
 * Offline Indicator Notice.
