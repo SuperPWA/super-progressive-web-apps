@@ -56,7 +56,7 @@ function superpwa_app_short_name_cb() {
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description" id="tagline-description">
-			<?php _e('Used when there is insufficient space to display the full name of the application. Keep <code>short_name</code> fewer than 12 characters to ensure that its not truncated on homescreens.', 'super-progressive-web-apps'); ?>
+			<?php _e('Used when there is insufficient space to display the full name of the application. <code>12</code> characters or less.', 'super-progressive-web-apps'); ?>
 		</p>
 		
 	</fieldset>
