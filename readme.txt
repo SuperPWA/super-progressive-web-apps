@@ -50,7 +50,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
-* New in version 1.6: WordPress Multisite Network compatibility. Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting!
+* New in version 1.6: WordPress Multisite Network compatibility. 
 
 **Upcoming features:**
 
@@ -147,7 +147,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.6 =
 * Date: 23.April.2018
-* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here!
+* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
 * New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
@@ -211,7 +211,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Upgrade Notice ==
 
 = 1.6 =
-* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here!
+* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
 * New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
