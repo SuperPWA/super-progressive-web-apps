@@ -3,20 +3,41 @@
     <a href="https://twitter.com/intent/follow?screen_name=superpwa">
 		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
 	</a>
-  <img src="https://lighthouse-badge.appspot.com?score=100">
+	<a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps">
+		<img src="https://img.shields.io/github/stars/SuperPWA/Super-Progressive-Web-Apps.svg?style=social&logo=github&label=SuperPWA" alt="Star Super Progressive Web Apps">
+	</a>	
+
+
+</p>
+<p>
+	<a href="https://superpwa.com">
+			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/dt/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Downloads">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/r/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Rating">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/plugin/v/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Version">
+	</a>
+	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
+		<img src="https://img.shields.io/wordpress/v/super-progressive-web-apps.svg?style=plastic" alt="Super Progressive Web Apps Version">
+	</a>	
 </p>
 
-
-
 ## Welcome to the Super PWA GitHub repository
-> SuperPWA helps you convert your WordPress website into a Progressive Web App.
+> <a href="https://superpwa.com">SuperPWA</a> helps you convert your WordPress website into a Progressive Web App.
+
+🔗 Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-Super Progressive Web Apps makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+<a href="https://superpwa.com">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
 ## Installation
 Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
@@ -46,22 +67,24 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.3: Improved in-browser service worker update handling.
 * New in version 1.4: You can now set the default orientation of your PWA. Choose from "any" (Follow Device Orientation), "Portrait" and "Landscape".
 * New in version 1.4: You can now set the theme_color property in the manifest.
+* New in version 1.5: OneSignal integration for Push notifications.
+* New in version 1.6: WordPress Multisite Network compatibility.
 
 #### Upcoming features:
- * Push notifications.
+* Offline Indicator Notice.
  
  ### Device and Browser Support For PWA
- | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | Opera Mini | Samsung Internet | 
-| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
-| Yes | Yes | Development | Beta | No | Yes |
-| 57+ | 57+ | 11.3 ships | 17 ships | - | 6.2+ |
+ | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | Opera Mini | Samsung Internet | Brave |
+| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
+| Yes | Yes | Partially | Beta | No | Yes | Yes |
+| 57+ | 57+ | 11.3+ | 17 ships | - | 6.2+ | 1.0.44+
 
 Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. 
 
 The list is fast growing and is likely to be supported in most major browsers by the end of this year.
 
 ### Why Build Progressive Web Apps?
-[![Why Build Progressive Web Apps](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](http://www.youtube.com/watch?v=1QILz1lAzWY)
+[![Why Build Progressive Web Apps](http://i3.ytimg.com/vi/1QILz1lAzWY/maxresdefault.jpg)](https://www.youtube.com/embed/1QILz1lAzWY)
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
@@ -71,7 +94,7 @@ The list is fast growing and is likely to be supported in most major browsers by
 * Search for **Super Progressive Web Apps**
 * Click "**Install Now**" and then "**Activate**" Super Progressive Web Apps
 
-To install manually:
+#### To install manually:
 
 * Upload super-progressive-web-apps folder to the /wp-content/plugins/ directory on your server
 * Go to WordPress Admin > **Plugins**
@@ -119,7 +142,7 @@ There are various ways you can contribute:
     * Like us on [Facebook](https://www.facebook.com/SuperPWA)
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
-* Share via Social Media's
+* ##### Share via Social Media's
     * [Share on Twitter](https://twitter.com/home?status=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA%20https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/%20%40SuperPWA)
     * [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/)
     * [Share on Google Plus](https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/)

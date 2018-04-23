@@ -3,15 +3,15 @@
  * Basic setup functions for the plugin
  *
  * @since 1.0
+ * 
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
  * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
+ * @function	superpwa_network_admin_notice_activation()	Admin notice on multisite network activation
  * @function	superpwa_upgrader()					Plugin upgrade todo list
- * @function	superpwa_deactivate_plugin			Plugin deactivation todo list
+ * @function	superpwa_deactivate_plugin()		Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
  * @function	superpwa_settings_link()			Print direct link to plugin settings in plugins list in admin
  * @function	superpwa_plugin_row_meta()			Add donate and other links to plugins list
- * @function	superpwa_footer_text()				Admin footer text
- * @function	superpwa_footer_version()			Admin footer version
  */
 
 // Exit if accessed directly
@@ -20,10 +20,18 @@ if ( ! defined('ABSPATH') ) exit;
 /**
  * Plugin activatation todo list
  *
- * This function runs when user activates the plugin. Used in register_activation_hook in the main plugin file. 
- * @since	1.0
+ * This function runs when user activates the plugin. Used in register_activation_hook()
+ * On multisites, during network activation, this is fired only for the main site.
+ * For the rest of the sites, superpwa_upgrader() handles generation of manifest and service worker. 
+ *
+ * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
+ * 
+ * @since 1.0
+ * @since 1.6 register_activation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php).
+ * @since 1.6 Added checks for multisite compatibility.
  */
-function superpwa_activate_plugin() {
+function superpwa_activate_plugin( $network_active ) {
 	
 	// Generate manifest with default options
 	superpwa_generate_manifest();
@@ -31,14 +39,24 @@ function superpwa_activate_plugin() {
 	// Generate service worker
 	superpwa_generate_sw();
 	
-	// Set transient for activation notice
-	set_transient( 'superpwa_admin_notice_activation', true, 5 );
+	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
+	if ( ! $network_active ) {
+		
+		// Set transient for single site activation notice
+		set_transient( 'superpwa_admin_notice_activation', true, 5 );
+		
+		return;
+	}
+		
+	// If we are here, then plugin is network activated on a multisite. Set transient for activation notice on network admin.
+	set_transient( 'superpwa_network_admin_notice_activation', true, 5 );
 }
+register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
 /**
  * Admin notice on plugin activation
  *
- * @since 	1.2
+ * @since 1.2
  */
 function superpwa_admin_notice_activation() {
  
@@ -47,7 +65,7 @@ function superpwa_admin_notice_activation() {
 		return;
 	}
 	
-	$superpwa_is_ready = is_ssl() && superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) && superpwa_get_contents( SUPERPWA_SW_ABS ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
+	$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
 	
 	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
 	
@@ -57,27 +75,76 @@ function superpwa_admin_notice_activation() {
 add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
 
 /**
- * Plugin upgrade todo list
+ * Admin notice on multisite network activation
  *
- * @since	1.3.1
- * @since	1.4		Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
+ * @since 1.6
  */
-function superpwa_upgrader() {
-	
-	$current_ver = get_option('superpwa_version');
-	
-	// Return if we have already done this todo
-	if ( $current_ver == SUPERPWA_VERSION ) 
-		return;
-	
-	// Return if this is the first time the plugin is installed.
-	if ( $current_ver === false ) {
-		
-		add_option( 'superpwa_version', SUPERPWA_VERSION );
+function superpwa_network_admin_notice_activation() {
+ 
+    // Return if transient is not set
+	if ( ! get_transient( 'superpwa_network_admin_notice_activation' ) ) {
 		return;
 	}
 	
-	if ( $current_ver < 1.4 ) {
+	$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready on the main website with the default settings. ' : '';
+	
+	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'options-general.php?page=superpwa' ) ) . '</p></div>';
+	
+	// Delete transient
+	delete_transient( 'superpwa_network_admin_notice_activation' );
+}
+add_action( 'network_admin_notices', 'superpwa_network_admin_notice_activation' );
+
+/**
+ * Plugin upgrade todo list
+ *
+ * @since 1.3.1
+ * @since 1.4 Added orientation setting and theme_color to database when upgrading from pre 1.4 versions.
+ * @since 1.6 Added multisite compatibility.
+ */
+function superpwa_upgrader() {
+	
+	$current_ver = get_option( 'superpwa_version' );
+	
+	// Return if we have already done this todo
+	if ( version_compare( $current_ver, SUPERPWA_VERSION, '==' ) ) {
+		return;
+	}
+	
+	/**
+	 * Return if this is the first time the plugin is installed.
+	 *
+	 * On a multisite, during network activation, the activation hook (and activation todo) is not fired.
+	 * Manifest and service worker is generated the first time the wp-admin is loaded (when admin_init is fired).
+	 */
+	if ( $current_ver === false ) {
+		
+		if ( is_multisite() ) {
+			
+			// Generate manifestx
+			superpwa_generate_manifest();
+			
+			// Generate service worker
+			superpwa_generate_sw();
+			
+			// For multisites, save the activation status of current blog.
+			superpwa_multisite_activation_status( true );
+		}
+		
+		// Save SuperPWA version to database.
+		add_option( 'superpwa_version', SUPERPWA_VERSION );
+		
+		return;
+	}
+	
+	/**
+	 * Add orientation and theme_color to database when upgrading from pre 1.4 versions
+	 * 
+	 * Until 1.4, there was no UI for orientation and theme_color.
+	 * In the manifest, orientation was hard coded as 'natural'.
+	 * background_color had UI and this value was used for both background_color and theme_color in the manifest.
+	 */
+	if ( version_compare( $current_ver, '1.4', '<' ) ) {
 		
 		// Get settings
 		$settings = superpwa_get_settings();
@@ -100,28 +167,46 @@ function superpwa_upgrader() {
 	
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
+	
+	// For multisites, save the activation status of current blog.
+	superpwa_multisite_activation_status( true );
 }
 add_action( 'admin_init', 'superpwa_upgrader' );
 
 /**
  * Plugin deactivation todo list
  *
- * Runs during deactivation. During uninstall uninstall.php is also executed
- * @since	1.0
+ * Runs during deactivation. 
+ * During uninstall uninstall.php is also executed.
+ *
+ * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
+ * 
+ * @since 1.0
+ * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
-function superpwa_deactivate_plugin() {
+function superpwa_deactivate_plugin( $network_active ) {
 	
 	// Delete manifest
 	superpwa_delete_manifest();
 	
 	// Delete service worker
 	superpwa_delete_sw();
+	
+	// For multisites, save the de-activation status of current blog.
+	superpwa_multisite_activation_status( false );
+	
+	// Run the network deactivator during network deactivation
+	if ( $network_active === true ) {
+		superpwa_multisite_network_deactivator();
+	}
 }
+register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deactivate_plugin' );
 
 /**
  * Load plugin text domain
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_load_plugin_textdomain() {
 	
@@ -132,7 +217,7 @@ add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
 /**
  * Print direct link to plugin settings in plugins list in admin
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_settings_link( $links ) {
 	
@@ -148,58 +233,17 @@ add_filter( 'plugin_action_links_super-progressive-web-apps/superpwa.php', 'supe
 /**
  * Add donate and other links to plugins list
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_plugin_row_meta( $links, $file ) {
 	
 	if ( strpos( $file, 'superpwa.php' ) !== false ) {
 		$new_links = array(
-				'demo' 	=> '<a href="https://superpwa.com" target="_blank">Demo</a>',
+				'demo' 	=> '<a href="https://superpwa.com" target="_blank">' . __( 'Demo', 'super-progressive-web-apps' ) . '</a>',
 				);
 		$links = array_merge( $links, $new_links );
 	}
 	
 	return $links;
 }
-// add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 ); // Todo: To be added once demo website is ready
-
-/**
- * Admin footer text
- *
- * A function to add footer text to the settings page of the plugin.
- * @since	1.2
- * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
- */
-function superpwa_footer_text( $default ) {
-    
-	// Retun default on non-plugin pages
-	$screen = get_current_screen();
-	if ( $screen->id !== "settings_page_superpwa" ) {
-		return $default;
-	}
-	
-    $superpwa_footer_text = sprintf( __( 'If you like our plugin, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
-	'https://millionclues.com/donate/',
-	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
-	);
-	
-	return $superpwa_footer_text;
-}
-add_filter('admin_footer_text', 'superpwa_footer_text');
-
-/**
- * Admin footer version
- *
- * @since	1.0
- */
-function superpwa_footer_version($default) {
-	
-	// Retun default on non-plugin pages
-	$screen = get_current_screen();
-	if ( $screen->id !== "settings_page_superpwa" ) {
-		return $default;
-	}
-	
-	return 'SuperPWA ' . SUPERPWA_VERSION;
-}
-add_filter( 'update_footer', 'superpwa_footer_version', 11 );
+add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 );

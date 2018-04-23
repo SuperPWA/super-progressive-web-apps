@@ -5,6 +5,7 @@
  * @since 1.0
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
+ * @function	superpwa_description_cb()				Description
  * @function	superpwa_background_color_cb()			Splash Screen Background Color
  * @function	superpwa_theme_color_cb()				Theme Color
  * @function	superpwa_app_icon_cb()					Application Icon
@@ -55,7 +56,30 @@ function superpwa_app_short_name_cb() {
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description" id="tagline-description">
-			<?php _e('Used when there is insufficient space to display the full name of the application.', 'super-progressive-web-apps'); ?>
+			<?php _e('Used when there is insufficient space to display the full name of the application. <code>12</code> characters or less.', 'super-progressive-web-apps'); ?>
+		</p>
+		
+	</fieldset>
+
+	<?php
+}
+
+/**
+ * Description
+ *
+ * @since 1.6
+ */
+function superpwa_description_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_settings[description]" class="regular-text" value="<?php if ( isset( $settings['description'] ) && ( ! empty( $settings['description'] ) ) ) echo esc_attr( $settings['description'] ); ?>"/>
+		
+		<p class="description" id="tagline-description">
+			<?php _e( 'A brief description of what your app is about.', 'super-progressive-web-apps' ); ?>
 		</p>
 		
 	</fieldset>
@@ -220,7 +244,7 @@ function superpwa_offline_page_cb() {
 	</label>
 	
 	<p class="description" id="tagline-description">
-		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? trailingslashit(get_permalink($settings['offline_page'])) : trailingslashit(get_bloginfo( 'wpurl' )) ); ?>
+		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? get_permalink( $settings['offline_page'] ) : get_bloginfo( 'wpurl' ) ); ?>
 	</p>
 
 	<?php
@@ -265,9 +289,9 @@ function superpwa_orientation_cb() {
  */
 function superpwa_manifest_status_cb() {
 
-	if ( superpwa_get_contents( SUPERPWA_MANIFEST_ABS ) ) {
+	if ( superpwa_get_contents( superpwa_manifest( 'abs' ) ) ) {
 		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', SUPERPWA_MANIFEST_SRC );
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
 		
 		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
@@ -281,7 +305,7 @@ function superpwa_manifest_status_cb() {
  */
 function superpwa_sw_status_cb() {
 
-	if ( superpwa_get_contents( SUPERPWA_SW_ABS ) ) {
+	if ( superpwa_get_contents( superpwa_sw( 'abs' ) ) ) {
 		
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
 	} else {
@@ -336,7 +360,7 @@ function superpwa_admin_interface_render () {
 		echo '<div class="notice notice-error"><p>' . 
 		sprintf( 
 			__( '<strong>To integrate with OneSignal:</strong> Enable <strong>Use my own manifest.json</strong> and set <code>%s</code><br>as <strong>Custom manifest.json URL</strong> in <a href="%s" target="_blank">OneSignal Configuration > Advanced Settings &rarr;</a>', 'super-progressive-web-apps' ), 
-			SUPERPWA_MANIFEST_SRC,
+			superpwa_manifest( 'src' ),
 			admin_url( 'admin.php?page=onesignal-push#configuration' )
 		) . 
 		'</p></div>';

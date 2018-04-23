@@ -3,6 +3,7 @@
  * Manifest related functions of SuperPWA
  *
  * @since 1.0
+ * @function	superpwa_manifest()						Manifest filename, absolute path and link
  * @function	superpwa_generate_manifest()			Generate and write manifest
  * @function	superpwa_add_manifest_to_wp_head()		Add manifest to header (wp_head)
  * @function	superpwa_register_service_worker()		Register service worker in the footer (wp_footer)
@@ -10,11 +11,47 @@
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
- * @function	superpwa_onesignal_get_gcm_sender_id()	Extract gcm_sender_id from OneSignal settings
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Manifest filename, absolute path and link
+ *
+ * For Multisite compatibility. Used to be constants defined in superpwa.php
+ * On a multisite, each sub-site needs a different manifest file.
+ *
+ * @param $arg 	filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
+ *				abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
+ *				src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ *
+ * @return String filename, absolute path or link to manifest.  
+ * @since 1.6
+ */
+function superpwa_manifest( $arg = 'src' ) {
+	
+	$manifest_filename = 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
+	
+	switch( $arg ) {
+		
+		// Name of Manifest file
+		case 'filename': 
+			return $manifest_filename;
+			break;
+		
+		// Absolute path to manifest		
+		case 'abs':
+			return trailingslashit( ABSPATH ) . $manifest_filename;
+			break;
+		
+		// Link to manifest
+		case 'src':
+		default:
+			return trailingslashit( network_home_url() ) . $manifest_filename;
+			break;
+	}
+}
 
 /**
  * Generate and write manifest into WordPress root folder
@@ -24,34 +61,41 @@ if ( ! defined('ABSPATH') ) exit;
  * @since	1.3		Added support for 512x512 icon.
  * @since	1.4		Added orientation and scope.
  * @since	1.5		Added gcm_sender_id
+ * @since	1.6		Added description
  */
 function superpwa_generate_manifest() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	$manifest = array(
-		'name'				=> $settings['app_name'],
-		'short_name'		=> $settings['app_short_name'],
-		'icons'				=> superpwa_get_pwa_icons(),
-		'background_color'	=> $settings['background_color'],
-		'theme_color'		=> $settings['theme_color'],
-		'display'			=> 'standalone',
-		'orientation'		=> superpwa_get_orientation(),
-		'start_url'			=> superpwa_get_start_url( true ),
-		'scope'				=> superpwa_get_scope(),
-	);
+	$manifest 						= array();
+	$manifest['name']				= $settings['app_name'];
+	$manifest['short_name']			= $settings['app_short_name'];
+	
+	// description
+	if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
+		$manifest['description'] 	= $settings['description'];
+	}
+	
+	$manifest['icons']				= superpwa_get_pwa_icons();
+	$manifest['background_color']	= $settings['background_color'];
+	$manifest['theme_color']		= $settings['theme_color'];
+	$manifest['display']			= 'standalone';
+	$manifest['orientation']		= superpwa_get_orientation();
+	$manifest['start_url']			= superpwa_get_start_url( true );
+	$manifest['scope']				= superpwa_get_scope();
 	
 	// gcm_sender_id
 	if ( superpwa_onesignal_get_gcm_sender_id() !== false ) {
-		$manifest['gcm_sender_id'] = superpwa_onesignal_get_gcm_sender_id();
+		$manifest['gcm_sender_id'] 	= superpwa_onesignal_get_gcm_sender_id();
 	}
 	
 	// Delete manifest if it exists
 	superpwa_delete_manifest();
 	
-	if ( ! superpwa_put_contents( SUPERPWA_MANIFEST_ABS, json_encode( $manifest ) ) )
+	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
 		return false;
+	}
 	
 	return true;
 }
@@ -66,10 +110,10 @@ function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. SUPERPWA_MANIFEST_SRC . '">' . PHP_EOL;
+	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
 }
-add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 2 );
+add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 
 /**
  * Delete manifest
@@ -78,8 +122,7 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 2 );
  * @since	1.0
  */
 function superpwa_delete_manifest() {
-	
-	return superpwa_delete( SUPERPWA_MANIFEST_ABS );
+	return superpwa_delete( superpwa_manifest( 'abs' ) );
 }
 
 /**
@@ -101,11 +144,11 @@ function superpwa_get_pwa_icons() {
 						);
 	
 	// Splash screen icon - Added since 1.3
-	if ( @$settings['splash_icon'] != null ) {
+	if ( @$settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
 							'src' 	=> $settings['splash_icon'],
-							'sizes'	=> '512x512', // must be 192x192.
+							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 						);
 	}
@@ -120,7 +163,6 @@ function superpwa_get_pwa_icons() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	
 	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
 }
 
@@ -154,28 +196,4 @@ function superpwa_get_orientation() {
 		default: 
 			return 'any';
 	}
-}
-
-/**
- * Extract gcm_sender_id from OneSignal settings
- *
- * @link	https://wordpress.org/plugins/onesignal-free-web-push-notifications/
- *
- * @return	String|Bool	gcm_sender_id if it exists, false otherwise
- * @since 	1.5
- */
-function superpwa_onesignal_get_gcm_sender_id() {
-	
-	// If OneSignal is installed and active
-	if ( class_exists( 'OneSignal' ) ) {
-		
-		// Get OneSignal settins
-		$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
-		
-		if ( isset( $onesignal_wp_settings['gcm_sender_id'] ) && ( $onesignal_wp_settings['gcm_sender_id'] != '' ) ) {
-			return $onesignal_wp_settings['gcm_sender_id'];
-		}
-	}
-	
-	return false;
 }

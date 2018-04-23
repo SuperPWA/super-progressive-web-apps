@@ -6,11 +6,14 @@
  * @function	superpwa_add_menu_links()			Add admin menu pages
  * @function	superpwa_register_settings			Register Settings
  * @function	superpwa_validater_and_sanitizer()	Validate And Sanitize User Input Before Its Saved To Database
- * @function	superpwa_get_settings()		Get settings from database
+ * @function	superpwa_get_settings()				Get settings from database
+ * @function	superpwa_after_save_settings_todo()	Todo list after saving admin options
+ * @function	superpwa_footer_text()				Admin footer text
+ * @function	superpwa_footer_version()			Admin footer version
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit; 
+if ( ! defined( 'ABSPATH' ) ) exit; 
  
 /**
  * Add admin menu pages
@@ -19,8 +22,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	
-	add_options_page( __('Super Progressive Web Apps','super-progressive-web-apps'), __('SuperPWA','super-progressive-web-apps'), 'manage_options', 'superpwa','superpwa_admin_interface_render'  );
+	add_options_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 
@@ -60,6 +62,15 @@ function superpwa_register_settings() {
 			'superpwa_app_short_name',								// ID
 			__('Application Short Name', 'super-progressive-web-apps'),	// Title
 			'superpwa_app_short_name_cb',							// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		
+		// Description
+		add_settings_field(
+			'superpwa_description',									// ID
+			__( 'Description', 'super-progressive-web-apps' ),		// Title
+			'superpwa_description_cb',								// CB
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -146,9 +157,9 @@ function superpwa_register_settings() {
 		
 		// Service Worker status
 		add_settings_field(
-			'superpwa_sw_status',								// ID
+			'superpwa_sw_status',									// ID
 			__('Service Worker', 'super-progressive-web-apps'),		// Title
-			'superpwa_sw_status_cb',							// CB
+			'superpwa_sw_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
@@ -157,7 +168,7 @@ function superpwa_register_settings() {
 		add_settings_field(
 			'superpwa_https_status',								// ID
 			__('HTTPS', 'super-progressive-web-apps'),				// Title
-			'superpwa_https_status_cb',							// CB
+			'superpwa_https_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
@@ -167,15 +178,20 @@ add_action( 'admin_init', 'superpwa_register_settings' );
 /**
  * Validate and sanitize user input before its saved to database
  *
- * @since 		1.0
+ * @since 1.0 
+ * @since 1.3 Added splash_icon
+ * @since 1.6 Added description
  */
 function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize Application Name
-	$settings['app_name'] = sanitize_text_field($settings['app_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_name']);
+	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 	
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = sanitize_text_field($settings['app_short_name']) == '' ? get_bloginfo('name') : sanitize_text_field($settings['app_short_name']);
+	$settings['app_short_name'] = sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] );
+	
+	// Sanitize description
+	$settings['description'] = sanitize_text_field( $settings['description'] );
 	
 	// Sanitize hex color input for background_color
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
@@ -184,10 +200,10 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['theme_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['theme_color'] ) ? sanitize_text_field( $settings['theme_color'] ) : '#D5E0EB';
 	
 	// Sanitize application icon
-	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? SUPERPWA_PATH_SRC . 'public/images/logo.png' : sanitize_text_field( $settings['icon'] );
+	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
 	
 	// Sanitize splash screen icon
-	$settings['splash_icon'] = sanitize_text_field( $settings['splash_icon'] );
+	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
 	
 	return $settings;
 }
@@ -201,8 +217,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
 function superpwa_get_settings() {
 
 	$defaults = array(
-				'app_name'			=> get_bloginfo('name'),
-				'app_short_name'	=> get_bloginfo('name'),
+				'app_name'			=> get_bloginfo( 'name' ),
+				'app_short_name'	=> get_bloginfo( 'name' ),
+				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
@@ -213,7 +230,7 @@ function superpwa_get_settings() {
 				'orientation'		=> 1,
 			);
 
-	$settings = get_option('superpwa_settings', $defaults);
+	$settings = get_option( 'superpwa_settings', $defaults );
 	
 	return $settings;
 }
@@ -241,3 +258,63 @@ function superpwa_enqueue_css_js( $hook ) {
     wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
+
+/**
+ * Todo list after saving admin options
+ *
+ * Regenerate manifest
+ * Regenerate service worker
+ *
+ * @since	1.0
+ */
+function superpwa_after_save_settings_todo() {
+	
+	// Regenerate manifest
+	superpwa_generate_manifest();
+	
+	// Regenerate service worker
+	superpwa_generate_sw();
+}
+add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+
+/**
+ * Admin footer text
+ *
+ * A function to add footer text to the settings page of the plugin.
+ * @since	1.2
+ * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
+ */
+function superpwa_footer_text( $default ) {
+    
+	// Retun default on non-plugin pages
+	$screen = get_current_screen();
+	if ( $screen->id !== "settings_page_superpwa" ) {
+		return $default;
+	}
+	
+    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+	'https://millionclues.com/donate/',
+	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
+	);
+	
+	return $superpwa_footer_text;
+}
+add_filter( 'admin_footer_text', 'superpwa_footer_text' );
+
+/**
+ * Admin footer version
+ *
+ * @since	1.0
+ */
+function superpwa_footer_version( $default ) {
+	
+	// Retun default on non-plugin pages
+	$screen = get_current_screen();
+	if ( $screen->id !== "settings_page_superpwa" ) {
+		return $default;
+	}
+	
+	return 'SuperPWA ' . SUPERPWA_VERSION;
+}
+add_filter( 'update_footer', 'superpwa_footer_version', 11 );
