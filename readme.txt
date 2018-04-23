@@ -145,6 +145,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.7 =
+* Date: 
+
 = 1.6 =
 * Date: 23.April.2018
 * New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
