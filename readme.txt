@@ -147,11 +147,11 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.6 =
 * Date: 23.April.2018
-* New Feature: WordPress Multisite Compatibility. One of the most requested features for SuperPWA is now here!
+* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here!
 * New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
-* Enhancement: Force https on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
+* Enhancement: Force https:// on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
 * Enhancement: Relative URL for manifest for out of the box compatibility with CDN's.
 * Enhancement: Removed forcing of trailing slash on manifest and service worker URLs for better compatibility. 
 
@@ -211,11 +211,11 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Upgrade Notice ==
 
 = 1.6 =
-* New Feature: WordPress Multisite Compatibility. One of the most requested features for SuperPWA is now here!
+* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here!
 * New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
 * Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
-* Enhancement: Force https on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
+* Enhancement: Force https:// on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
 * Enhancement: Relative URL for manifest for out of the box compatibility with CDN's.
 * Enhancement: Removed forcing of trailing slash on manifest and service worker URLs for better compatibility. 
 
