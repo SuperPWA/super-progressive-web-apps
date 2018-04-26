@@ -22,7 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	add_options_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render' );
+	
+	// Main menu page
+	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
+	
+	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render' );
+	
+	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-Ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_admin_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 
