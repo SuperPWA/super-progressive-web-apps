@@ -334,25 +334,24 @@ function superpwa_https_status_cb() {
  * Admin interface renderer
  *
  * @since 1.0
+ * @since 1.7 Handling of settings saved messages since UI is its own menu item in the admin menu.
  */ 
 function superpwa_admin_interface_render () {
 	
+	// Authentication
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
-
-	/**
-	 * If settings are inside WP-Admin > Settings, then WordPress will automatically display Settings Saved. If not used this block
-	 * @refer	https://core.trac.wordpress.org/ticket/31000
-	 * If the user have submitted the settings, WordPress will add the "settings-updated" $_GET parameter to the url
-	 *
+	
+	// Handing save settings
 	if ( isset( $_GET['settings-updated'] ) ) {
+		
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_saved_message', 'superpwa_settings_saved_message', __( 'Settings are Saved', 'super-progressive-web-apps' ), 'updated' );
-	}
- 
-	// Show Settings Saved Message
-	settings_errors( 'superpwa_settings_saved_message' ); */
+		add_settings_error( 'superpwa_settings_group', 'superpwa_settings_saved_message', __( 'Settings saved.', 'super-progressive-web-apps' ), 'updated' );
+		
+		// Show Settings Saved Message
+		settings_errors( 'superpwa_settings_group' );
+	}	
 	
 	// Display the notice to use SuperPWA manifest as OneSignal custom manifest.
 	if ( superpwa_onesignal_manifest_notice_check() ) {
