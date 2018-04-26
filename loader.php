@@ -11,7 +11,7 @@ if ( ! defined('ABSPATH') ) exit;
 // Load admin
 require_once( SUPERPWA_PATH_ABS . 'admin/basic-setup.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-setup.php' );
-require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render.php' );
+require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-settings.php' );
 
 // 3rd party compatibility
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
