@@ -3,6 +3,7 @@
  * Manifest related functions of SuperPWA
  *
  * @since 1.0
+ * 
  * @function	superpwa_manifest()						Manifest filename, absolute path and link
  * @function	superpwa_generate_manifest()			Generate and write manifest
  * @function	superpwa_add_manifest_to_wp_head()		Add manifest to header (wp_head)
@@ -26,7 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *				abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
  *				src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
  *
- * @return String filename, absolute path or link to manifest.  
+ * @return String filename, absolute path or link to manifest. 
+ *  
  * @since 1.6
  */
 function superpwa_manifest( $arg = 'src' ) {
@@ -56,7 +58,8 @@ function superpwa_manifest( $arg = 'src' ) {
 /**
  * Generate and write manifest into WordPress root folder
  *
- * @return true on success, false on failure.
+ * @return (boolean) true on success, false on failure.
+ * 
  * @since	1.0
  * @since	1.3		Added support for 512x512 icon.
  * @since	1.4		Added orientation and scope.
@@ -103,7 +106,7 @@ function superpwa_generate_manifest() {
 /**
  * Add manifest to header (wp_head)
  *
- * @since	1.0
+ * @since 1.0
  */
 function superpwa_add_manifest_to_wp_head() {
 	
@@ -118,8 +121,9 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 /**
  * Delete manifest
  *
- * @return true on success, false on failure
- * @since	1.0
+ * @return (boolean) true on success, false on failure
+ * 
+ * @since 1.0
  */
 function superpwa_delete_manifest() {
 	return superpwa_delete( superpwa_manifest( 'abs' ) );
