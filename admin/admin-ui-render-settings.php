@@ -3,6 +3,7 @@
  * Admin UI setup and render
  *
  * @since 1.0
+ * 
  * @function	superpwa_app_name_cb()					Application Name
  * @function	superpwa_app_short_name_cb()			Application Short Name
  * @function	superpwa_description_cb()				Description
@@ -20,7 +21,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined('ABSPATH') ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Application Name
@@ -336,7 +337,7 @@ function superpwa_https_status_cb() {
  * @since 1.0
  * @since 1.7 Handling of settings saved messages since UI is its own menu item in the admin menu.
  */ 
-function superpwa_admin_interface_render () {
+function superpwa_admin_interface_render() {
 	
 	// Authentication
 	if ( ! current_user_can( 'manage_options' ) ) {
