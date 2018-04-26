@@ -295,7 +295,7 @@ function superpwa_footer_text( $default ) {
     
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
-	if ( $screen->id !== "settings_page_superpwa" ) {
+	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
 	
@@ -317,7 +317,7 @@ function superpwa_footer_version( $default ) {
 	
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
-	if ( $screen->id !== "settings_page_superpwa" ) {
+	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
 	
