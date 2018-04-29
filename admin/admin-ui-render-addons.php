@@ -35,15 +35,14 @@ function superpwa_get_addons() {
 	
 	// Add-Ons array
 	$addons = array(
-		array(
-			'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
-			'slug'					=> 'utm_tracking',
-			'type'					=> 'bundled',
-			'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
-			'icon'					=> 'superpwa-128x128.png',
-			'more_details'			=> 'https://superpwa.com/addons/utm-tracking/',
-			'superpwa_min_version'	=> '1.7',
-		),
+		'utm_tracking' => array(
+							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
+							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+							'icon'					=> 'superpwa-128x128.png',
+							'more_details'			=> 'https://superpwa.com/addons/utm-tracking/',
+							'superpwa_min_version'	=> '1.7',
+						),
 	);
 	
 	return $addons;
@@ -177,7 +176,7 @@ function superpwa_addons_status( $slug ) {
 		case 'bundled': 
 			
 			// True means, add-on is installed and active
-			if ( in_array( $slug, $settings['active_addons'] ) ) {
+			if ( isset( $settings['active_addons'] ) && in_array( $slug, $settings['active_addons'] ) ) {
 				return 'active';
 			}
 			
@@ -195,7 +194,7 @@ function superpwa_addons_status( $slug ) {
 			}
 			
 			// Add-on is inactive, check if add-on is installed
-			if ( file_exists( plugins_url( $slug ) ) ) {
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $slug ) ) {
 				return 'inactive';
 			}
 			
