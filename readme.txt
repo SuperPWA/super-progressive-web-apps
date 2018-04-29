@@ -2,7 +2,7 @@
 Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
-Requires at least: 3.5.0
+Requires at least: 3.6.0
 Tested up to: 4.9.5
 Requires PHP: 5.3
 Stable tag: trunk
@@ -147,6 +147,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.7 =
 * Date: 
+* Minumum required WordPress version is now 3.6.0 (previously 3.5.0).
 * Enhancement: Service worker URLs are now relative to accomodate for domain mapped multisites.
 * Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when innner pages are used as start_url.
 
