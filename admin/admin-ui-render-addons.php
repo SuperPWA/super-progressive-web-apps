@@ -4,12 +4,50 @@
  *
  * @since 1.7
  * 
+ * @function 	superpwa_get_addons()					Add-ons of SuperPWA
  * @function	superpwa_addons_interface_render()		Add-Ons UI renderer
  * @function	superpwa_addons_status()				Find add-on status
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Add-ons of SuperPWA
+ * 
+ * An associative array containing all the add-ons of SuperPWA. 
+ * 		array(
+ *			'add-on-slug'	=> 	array(
+ *									'name'					=> 'Add-On Name',
+ * 									'type'					=> 'bundled | addon',
+ * 									'description'			=> 'Add-On description',
+ * 									'icon'					=> 'icon-for-addon-128x128.png',
+ * 									'more_details'			=> 'https://superpwa.com/addons/details-page-of-addon',
+ * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
+ *								)
+ *		);
+ * 
+ * @return (array) an associative array containing all the info about SuperPWA add-ons.
+ * 
+ * @since 1.7
+ */
+function superpwa_get_addons() {
+	
+	// Add-Ons array
+	$addons = array(
+		array(
+			'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
+			'slug'					=> 'utm_tracking',
+			'type'					=> 'bundled',
+			'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+			'icon'					=> 'superpwa-128x128.png',
+			'more_details'			=> 'https://superpwa.com/addons/utm-tracking/',
+			'superpwa_min_version'	=> '1.7',
+		),
+	);
+	
+	return $addons;
+}
 
 /**
  * Add-Ons UI renderer
@@ -33,20 +71,8 @@ function superpwa_addons_interface_render() {
 		settings_errors( 'superpwa_settings_group' );
 	}
 	
-	// Add-Ons array
-	$addons = array(
-		array(
-			'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
-			'slug'					=> 'utm_tracking',
-			'type'					=> 'bundled',
-			'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
-			'icon'					=> 'superpwa-128x128.png',
-			'button_text'			=> __( 'Activate', 'super-progressive-web-apps' ),
-			'button_link'			=> wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons' ), 'activate', 'superpwa_addon_activate_nonce' ),
-			'more_details'			=> 'https://superpwa.com/',
-			'superpwa_min_version'	=> '1.7',
-		),
-	);
+	// Get add-Ons array
+	$addons = superpwa_get_addons();
 	
 	?>
 	
