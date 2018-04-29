@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  * An associative array containing all the add-ons of SuperPWA. 
  * 		array(
- *			'add-on-slug'	=> 	array(
+ *			'addon-slug'	=> 	array(
  *									'name'					=> 'Add-On Name',
  * 									'type'					=> 'bundled | addon',
  * 									'description'			=> 'Add-On description',
@@ -71,7 +71,7 @@ function superpwa_addons_interface_render() {
 		settings_errors( 'superpwa_settings_group' );
 	}
 	
-	// Get add-Ons array
+	// Get add-ons array
 	$addons = superpwa_get_addons();
 	
 	?>
@@ -151,13 +151,57 @@ function superpwa_addons_interface_render() {
  *		inactive		when the add-on is installed but not activated.
  *		uninstalled		when the add-on is not installed and not available.
  * 
- * @param $slug this is the slug used in the $addons array in superpwa_addons_interface_render().
- * 		For add-ons installed as a separate plugin, this will be plugin-folder/main-plugin-file.php
+ * @param $slug this is the $key used in the $addons array in superpwa_get_addons().
+ * 		For add-ons installed as a separate plugin, this will be plugin-directory/main-plugin-file.php
  *
  * @return (string) one of the statuses as described above.
  *
  * @since 1.7
  */
-function superpwa_addons_status( $slug, $type ) {
+function superpwa_addons_status( $slug ) {
 	
+	// Get add-ons array
+	$addons = superpwa_get_addons();
+	
+	// A security check to make sure that the add-on under consideration exist.
+	if ( ! isset( $addons[$slug] ) ) {
+		return false;
+	}
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	switch( $addons[$slug]['type'] ) {
+		
+		// Bundled add-ons ships with SuperPWA and need not be installed separately.
+		case 'bundled': 
+			
+			// True means, add-on is installed and active
+			if ( in_array( $slug, $settings['active_addons'] ) ) {
+				return 'active';
+			}
+			
+			// add-on is installed, but inactive
+			return 'inactive';
+			
+			break;
+			
+		// Add-ons installed as a separate plugin
+		case 'addon':
+			
+			// True means, add-on is installed and active
+			if ( is_plugin_active( $slug ) ) {
+				return 'active';
+			}
+			
+			// Add-on is inactive, check if add-on is installed
+			if ( file_exists( plugins_url( $slug ) ) ) {
+				return 'inactive';
+			}
+			
+			// If we are here, add-on is not installed and not active
+			return 'uninstalled';
+			
+			break;
+	}
 }
