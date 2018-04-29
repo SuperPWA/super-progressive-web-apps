@@ -202,5 +202,9 @@ function superpwa_addons_status( $slug ) {
 			return 'uninstalled';
 			
 			break;
+			
+		default:
+			return false;
+			break;
 	}
 }
