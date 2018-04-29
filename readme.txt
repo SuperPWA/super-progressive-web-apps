@@ -147,6 +147,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.7 =
 * Date: 
+* Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when innner pages are used as start_url.
 
 = 1.6 =
 * Date: 23.April.2018
