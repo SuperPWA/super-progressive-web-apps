@@ -3,6 +3,7 @@
  * Service worker related functions of SuperPWA
  *
  * @since 1.0
+ * 
  * @function	superpwa_sw()				Service worker filename, absolute path and link
  * @function	superpwa_generate_sw()		Generate and write service worker into sw.js
  * @function	superpwa_sw_template()		Service worker tempalte
@@ -21,10 +22,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @param $arg 	filename for service worker filename (replaces SUPERPWA_SW_FILENAME)
  *				abs for absolute path to service worker (replaces SUPERPWA_SW_ABS)
- *				src for link to service worker (replaces SUPERPWA_SW_SRC). Default value
+ *				src for relative link to service worker (replaces SUPERPWA_SW_SRC). Default value
  *
- * @return String filename, absolute path or link to manifest.  
+ * @return (string) filename, absolute path or link to manifest.
+ * 
  * @since 1.6
+ * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
  */
 function superpwa_sw( $arg = 'src' ) {
 	
@@ -33,7 +36,7 @@ function superpwa_sw( $arg = 'src' ) {
 	switch( $arg ) {
 		
 		// Name of service worker file
-		case 'filename': 
+		case 'filename':
 			return $sw_filename;
 			break;
 		
@@ -45,7 +48,7 @@ function superpwa_sw( $arg = 'src' ) {
 		// Link to service worker
 		case 'src':
 		default:
-			return trailingslashit( network_home_url() ) . $sw_filename;
+			return parse_url( trailingslashit( network_home_url() ) . $sw_filename, PHP_URL_PATH );
 			break;
 	}
 }
@@ -53,8 +56,9 @@ function superpwa_sw( $arg = 'src' ) {
 /**
  * Generate and write service worker into superpwa-sw.js
  *
- * @return true on success, false on failure.
- * @since	1.0
+ * @return (boolean) true on success, false on failure.
+ * 
+ * @since 1.0
  */
 function superpwa_generate_sw() {
 	
@@ -77,8 +81,9 @@ function superpwa_generate_sw() {
 /**
  * Service Worker Tempalte
  *
- * @return	String	Contents to be written to superpwa-sw.js
- * @since	1.0
+ * @return (string) Contents to be written to superpwa-sw.js
+ * 
+ * @since 1.0
  */
 function superpwa_sw_template() {
 	
@@ -195,8 +200,9 @@ function checkNeverCacheList(url) {
 /**
  * Register service worker
  *
- * @since	1.0
- * @refer	https://developers.google.com/web/fundamentals/primers/service-workers/registration#conclusion
+ * @refer https://developers.google.com/web/fundamentals/primers/service-workers/registration#conclusion
+ * 
+ * @since 1.0
  */
 function superpwa_register_sw() {
 	
@@ -212,7 +218,8 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  * Delete Service Worker
  *
  * @return true on success, false on failure
- * @since	1.0
+ * 
+ * @since 1.0
  */
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );
