@@ -7,6 +7,7 @@
  * @function 	superpwa_get_addons()					Add-ons of SuperPWA
  * @function	superpwa_addons_interface_render()		Add-Ons UI renderer
  * @function	superpwa_addons_status()				Find add-on status
+ * @function	superpwa_addons_button_text()			Button text based on add-on status
  */
 
 // Exit if accessed directly
@@ -205,6 +206,44 @@ function superpwa_addons_status( $slug ) {
 			
 		default:
 			return false;
+			break;
+	}
+}
+
+/**
+ * Button text based on add-on status
+ *
+ * @param $slug this is the $key used in the $addons array in superpwa_get_addons().
+ * 		For add-ons installed as a separate plugin, this will be plugin-directory/main-plugin-file.php
+ * 
+ * @return (string)	'Activate', if plugin status is 'inactive'
+ * 					'Deactivate', if plugin status is 'active'
+ * 					'Install', if plugin status is 'uninstalled'
+ *
+ * @since 1.7
+ */
+function superpwa_addons_button_text( $slug ) {
+	
+	// Get the add-on status
+	$addon_status = superpwa_addons_status( $slug );
+	
+	switch( $addon_status ) {
+		
+		case 'inactive':
+			return 'Activate';
+			break;
+			
+		case 'active': 
+			return 'Deactivate';
+			break;
+			
+		case 'uninstalled':
+			return 'Install';
+			break;
+			
+		// Safety net for edge cases if any.
+		default:
+			return 'Install';
 			break;
 	}
 }
