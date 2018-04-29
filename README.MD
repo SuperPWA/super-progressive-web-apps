@@ -9,7 +9,35 @@
 
 
 </p>
-<p>
+
+<p align="center">
+  <a href="https://superpwa.com">
+    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=72 height=72>
+  </a>
+
+  <h3 align="center">Super Progressive Web Apps</h3>
+
+  <p align="center">
+    SuperPWA helps to convert your WordPress website into Progressive Web Apps easily.
+    <br>
+    <br>
+    <a href="https://superpwa.com"><strong>Visit Website »</strong></a>
+    <br>
+    <br>
+    <a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/new?template=bug.md">Report bug</a>
+    ·
+    <a href="https://wordpress.org/plugins/super-progressive-web-apps/">WordPress Plugin</a>
+    ·
+    <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/">Reviews</a>
+    ·
+    <a href="https://wordpress.org/plugins/super-progressive-web-apps/#faq">FAQ</a>
+    · 
+    <a href="#contributions">Contributions</a>
+  </p>
+</p>
+
+
+<p align="center">
 	<a href="https://superpwa.com">
 			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
 	</a>
@@ -28,7 +56,6 @@
 </p>
 
 ## Welcome to the Super PWA GitHub repository
-> <a href="https://superpwa.com">SuperPWA</a> helps you convert your WordPress website into a Progressive Web App.
 
 🔗 Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
 
