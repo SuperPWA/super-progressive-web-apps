@@ -9,7 +9,35 @@
 
 
 </p>
-<p>
+
+<p align="center">
+  <a href="https://superpwa.com">
+    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=72 height=72>
+  </a>
+
+  <h3 align="center">Super Progressive Web Apps</h3>
+
+  <p align="center">
+    SuperPWA helps to convert your WordPress website into Progressive Web Apps easily.
+    <br>
+    <br>
+    <a href="https://superpwa.com"><strong>Visit Website »</strong></a>
+    <br>
+    <br>
+    <a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/new?template=bug.md">Report bug</a>
+    ·
+    <a href="https://wordpress.org/plugins/super-progressive-web-apps/">WordPress Plugin</a>
+    ·
+    <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/">Reviews</a>
+    ·
+    <a href="https://wordpress.org/plugins/super-progressive-web-apps/#faq">FAQ</a>
+    · 
+    <a href="#contributions">Contributions</a>
+  </p>
+</p>
+
+
+<p align="center">
 	<a href="https://superpwa.com">
 			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
 	</a>
@@ -28,7 +56,6 @@
 </p>
 
 ## Welcome to the Super PWA GitHub repository
-> <a href="https://superpwa.com">SuperPWA</a> helps you convert your WordPress website into a Progressive Web App.
 
 🔗 Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
 
@@ -74,10 +101,10 @@ Here are the current features of Super Progressive Web Apps:
 * Offline Indicator Notice.
  
  ### Device and Browser Support For PWA
- | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | Opera Mini | Samsung Internet | Brave |
-| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
-| Yes | Yes | Partially | Beta | No | Yes | Yes |
-| 57+ | 57+ | 11.3+ | 17 ships | - | 6.2+ | 1.0.44+
+ | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge (Mobile) | Opera Mini | Samsung Internet | Brave |
+| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
+| Yes | Yes | Partially | Beta | Yes | No | Yes | Yes |
+| 57+ | 57+ | 11.3+ | 17 ships | 1.0.0.1921 | - | 6.2+ | 1.0.44+
 
 Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. 
 
