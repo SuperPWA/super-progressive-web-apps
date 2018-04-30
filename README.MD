@@ -12,7 +12,7 @@
 
 <p align="center">
   <a href="https://superpwa.com">
-    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=72 height=72>
+    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=150 height=150>
   </a>
 
   <h3 align="center">Super Progressive Web Apps</h3>
