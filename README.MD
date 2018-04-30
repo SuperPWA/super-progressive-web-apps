@@ -148,17 +148,17 @@ Your Progressive Web App should be ready to test with the default settings upon 
 * Try visiting a page that you did not visit before. You should see the page you set as your "Offline Page" in the settings of SuperPWA. 
 
 
-### About us
+### 🤝 About us
 > We are a duo who got excited about the idea. Our mission is simple: Help you build an awesome PWA that your users would want to have on their home screen. When we first heard about PWA we wanted to learn everything about it. We have spent countless hours learning and wants to share it with the world. Please give us your constructive feedback and support. 
 
-## Support
+## ⛷️ Support
 This is a developer's portal for Super Progressive Web Apps and should not be used for support. Please visit the
 [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps).
 
-## Reporting bugs
+## 🐛 Reporting bugs
 If you ever get stuck, we are here to watch your back! [Open a New Support Topic](https://wordpress.org/support/plugin/super-progressive-web-apps) ticket if you have a question or need a feature. We are super excited to hear your feedback and we want to genuinely help you build the best Progressive Web App for your WordPress website!
 
-## Contributions
+## 🎍 Contributions
 Anyone is welcome to contribute to Super PWA to make it SUPER.
 
 There are various ways you can contribute:
@@ -173,11 +173,14 @@ There are various ways you can contribute:
 <a href="https://plus.google.com/+SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Follow on Google+" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
-* ##### Share via Social Media's
+* ##### Share via Social Media's and spread SuperPWA
     * [Share on Twitter](https://twitter.com/home?status=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA%20https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/%20%40SuperPWA)
     * [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/)
     * [Share on Google Plus](https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/)
     * [Share on LinkedIn](https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub)
+    
+Emoji Credits : [Emojipedia](emojipedia.org)
+Social Media Icon Credits : [Flaticon](flaticon.com)
 
 **[⬆ back to top](#super-progressive-web-apps)**
 <img src="https://ga-beacon.appspot.com/UA-115873914-2/GitHub_Readme?pixel"/>
