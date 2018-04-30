@@ -57,7 +57,7 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-🔗 Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
+⚡️ Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
@@ -66,15 +66,15 @@ Users can come back to your website by launching the app from their home screen 
 
 <a href="https://superpwa.com">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
-## Installation
-Once SuperPWA is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
+## 🏗 Installation
+Once SuperPWA ⚡️ is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
 
 SuperPWA is easy to configure, it takes less than a minute to set-up your Progressive Web App! SuperPWA does a clean uninstall, by removing every database entry and file that it creates. In fact, none of the default settings are saved to the database until you manually save it the first time. Go ahead and give it a try.
 
-### Progressive Web App Minimum Requirments
+### 💡 Progressive Web App Minimum Requirments
 - [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
 
-#### What's in the box
+#### 📦 What's in the box
 
 Here are the current features of Super Progressive Web Apps: 
 
@@ -97,7 +97,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
 
-#### Upcoming features:
+#### 🔮 Upcoming features:
 * Offline Indicator Notice.
  
  ### Device and Browser Support For PWA
@@ -115,13 +115,13 @@ The list is fast growing and is likely to be supported in most major browsers by
 
 ### How To Convert Your WordPress Website Into A Progressive Web App
 
-#### WordPress Installation
+#### ⚙️ WordPress Installation
 
 * Visit WordPress Admin > **Plugins** > **Add New**
 * Search for **Super Progressive Web Apps**
 * Click "**Install Now**" and then "**Activate**" Super Progressive Web Apps
 
-#### To install manually:
+#### ⚙️ To install manually:
 
 * Upload super-progressive-web-apps folder to the /wp-content/plugins/ directory on your server
 * Go to WordPress Admin > **Plugins**
@@ -164,9 +164,12 @@ Anyone is welcome to contribute to Super PWA to make it SUPER.
 There are various ways you can contribute:
 
 * [Raise an issue](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues) on GitHub.
-* Engage with us on Social Media
-    * Follow us on [Twitter](https://twitter.com/SuperPWA)
-    * Like us on [Facebook](https://www.facebook.com/SuperPWA)
+* Follow and Engage with us on Social Media
+ &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" alt="Follow on Twitter" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.youtube.com/channel/UCMFlNeutNCwTNls186moUUA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174883.svg"  width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.facebook.com/SuperPWA/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg"  width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.instagram.com/superpwa/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174855.svg"  width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://plus.google.com/+SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg"  width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
 * ##### Share via Social Media's
