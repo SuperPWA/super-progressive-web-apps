@@ -99,69 +99,109 @@ function superpwa_addons_interface_render() {
 	<div class="wrap">
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
-		<p><?php _e( 'Add-Ons extend and expand the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
+		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		
 		<!-- Add-Ons UI -->
-		<form id="plugin-filter" method="post">
-			<div class="wp-list-table widefat plugin-install">
+		<div class="wp-list-table widefat addon-install">
 			
-				<h2 class="screen-reader-text">Add-Ons for SuperPWA</h2>	
+			<div id="the-list">
+			
+				<?php 
+				// Newsletter marker. Set this to false once newsletter subscription is displayed.
+				$superpwa_newsletter = true;
 				
-				<div id="the-list">
-				
-					<?php 
-					// Looping over each add-on
-					foreach( $addons as $slug => $addon ) { ?>
-				
-						<div class="plugin-card plugin-card-akismet">
+				// Looping over each add-on
+				foreach( $addons as $slug => $addon ) { ?>
+			
+					<div class="plugin-card plugin-card-<?php echo $slug; ?>">
+					
+						<div class="plugin-card-top">
 						
-							<div class="plugin-card-top">
-							
-								<div class="name column-name">
-									<h3>
-										<a href="<?php echo $addon['link']; ?>">
-											<?php echo $addon['name']; ?>
-											<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
-										</a>
-									</h3>
-								</div>
-								
-								<div class="action-links">
-									<ul class="plugin-action-buttons">
-										<li>
-											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == 'Deactivate' ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
-												<?php echo superpwa_addons_button_text( $slug ); ?>
-											</a>
-										</li>
-										<li>
-											<a href="<?php echo $addon['link']; ?>" aria-label="More information about <?php echo $addon['name']; ?>" data-title="<?php echo $addon['name']; ?>">More Details</a>
-										</li>
-									</ul>	
-								</div>
-								
-								<div class="desc column-description">
-									<p><?php echo $addon['description']; ?></p>
-								</div>
-								
+							<div class="name column-name">
+								<h3>
+									<a href="<?php echo $addon['link']; ?>">
+										<?php echo $addon['name']; ?>
+										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
+									</a>
+								</h3>
 							</div>
 							
-							<div class="plugin-card-bottom">
-								<div class="column-compatibility">
-									<?php if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) { ?>
-										<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>
-									<?php } else { ?>
-										<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>
-									<?php } ?>
-								</div>
+							<div class="action-links">
+								<ul class="plugin-action-buttons">
+									<li>
+										<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == 'Deactivate' ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<?php echo superpwa_addons_button_text( $slug ); ?>
+										</a>
+									</li>
+									<li>
+										<a href="<?php echo $addon['link']; ?>" aria-label="More information about <?php echo $addon['name']; ?>" data-title="<?php echo $addon['name']; ?>">More Details</a>
+									</li>
+								</ul>	
+							</div>
+							
+							<div class="desc column-description">
+								<p><?php echo $addon['description']; ?></p>
 							</div>
 							
 						</div>
+						
+						<div class="plugin-card-bottom">
+							<div class="column-compatibility">
+								<?php if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) { ?>
+									<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>
+								<?php } else { ?>
+									<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>
+								<?php } ?>
+							</div>
+						</div>
+						
+					</div>
 					
-					<?php } ?>
+					<?php if ( $superpwa_newsletter === true ) { ?>
 					
-				</div>
+						<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
+					
+							<div class="plugin-card-top" style="min-height: 178px;">
+							
+								<div class="name column-name" style="margin: 0px 10px;">
+									<h3>SuperPWA Newsletter</h3>
+								</div>
+								
+								<div class="desc column-description" style="margin: 0px 10px;">
+									<p>Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA</p>
+								</div>
+								
+								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
+								
+									<form method="post" action="http://localhost/superpwa/newsletter/" target="_blank">
+										<fieldset>
+											
+											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="Enter your email" style="width: 60%; margin-left: 0px;" type="email">		
+											<input name="source" value="superpwa-plugin" type="hidden">
+											<input type="submit" class="button" value="Subscribe" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+											
+											<small style="display:block; margin-top:7px;">we'll share our <code>root</code> password before we share your email with anyone else.</small>
+											
+										</fieldset>
+									</form>
+									
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						<?php 
+					
+						// Set newsletter marker to false
+						$superpwa_newsletter = false;
+					}
+				} ?>
+				
+					
+				
 			</div>
-		</form>
+		</div>
 		
 	</div>
 	<?php
