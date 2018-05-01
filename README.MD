@@ -183,4 +183,3 @@ Emoji Credits : [Emojipedia](emojipedia.org)
 Social Media Icon Credits : [Flaticon](flaticon.com)
 
 **[⬆ back to top](#super-progressive-web-apps)**
-<img src="https://ga-beacon.appspot.com/UA-115873914-2/GitHub_Readme?pixel"/>
