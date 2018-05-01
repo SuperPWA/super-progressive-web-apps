@@ -25,3 +25,6 @@ require_once( SUPERPWA_PATH_ABS . 'functions/multisite.php' );
 // Public folder
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php' );
+
+// Load bundled add-ons
+require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );
