@@ -67,40 +67,28 @@ function superpwa_addons_interface_render() {
 	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
 		
 		// Handling activation
-		superpwa_addons_activator( $_GET['addon'], true );
-		
-		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1' ) );
-		exit;
-	}
-	
-	// Activation notice
-	if ( isset( $_GET['activated'] ) ) {
-		
-		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
-		
-		// Show Settings Saved Message
-		settings_errors( 'superpwa_settings_group' );
+		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
+			
+			// Add settings saved message with the class of "updated"
+			add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
+			
+			// Show Settings Saved Message
+			settings_errors( 'superpwa_settings_group' );
+		}		
 	}
 	
 	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
+	if ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
 		
 		// Handling deactivation
-		superpwa_addons_activator( $_GET['addon'], false );
-		
-		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1' ) );
-		exit;
-	}
-	
-	// De-activation notice
-	if ( isset( $_GET['deactivated'] ) ) {
-		
-		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
-		
-		// Show Settings Saved Message
-		settings_errors( 'superpwa_settings_group' );
+		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
+			
+			// Add settings saved message with the class of "updated"
+			add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
+			
+			// Show Settings Saved Message
+			settings_errors( 'superpwa_settings_group' );
+		}
 	}
 	
 	// Get add-ons array
