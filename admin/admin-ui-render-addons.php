@@ -9,7 +9,8 @@
  * @function	superpwa_addons_status()				Find add-on status
  * @function	superpwa_addons_button_text()			Button text based on add-on status
  * @function 	superpwa_addons_button_link() 			Action URL based on add-on status
- * @function 	superpwa_addons_activator()				Handle bundled add-on activation and deactivation
+ * @function 	superpwa_addons_activator()				Do bundled add-on activation and deactivation
+ * @function	superpwa_addons_handle_activation()		Handle add-on activation and deactivation
  */
 
 // Exit if accessed directly
@@ -63,32 +64,24 @@ function superpwa_addons_interface_render() {
 		return;
 	}
 
-	// Handing add-on activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
+	// Add-on activation notice
+	if ( isset( $_GET['activated'] ) ) {
+			
+		// Add settings saved message with the class of "updated"
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
 		
-		// Handling activation
-		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
-			
-			// Add settings saved message with the class of "updated"
-			add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
-			
-			// Show Settings Saved Message
-			settings_errors( 'superpwa_settings_group' );
-		}		
+		// Show Settings Saved Message
+		settings_errors( 'superpwa_settings_group' );		
 	}
 	
-	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
+	// Add-on de-activation notice
+	if ( isset( $_GET['deactivated'] ) ) {
+			
+		// Add settings saved message with the class of "updated"
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
 		
-		// Handling deactivation
-		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
-			
-			// Add settings saved message with the class of "updated"
-			add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
-			
-			// Show Settings Saved Message
-			settings_errors( 'superpwa_settings_group' );
-		}
+		// Show Settings Saved Message
+		settings_errors( 'superpwa_settings_group' );
 	}
 	
 	// Get add-ons array
@@ -180,7 +173,7 @@ function superpwa_addons_interface_render() {
 											<input name="source" value="superpwa-plugin" type="hidden">
 											<input type="submit" class="button" value="Subscribe" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
 											
-											<small style="display:block; margin-top:7px;">we'll share our <code>root</code> password before we share your email with anyone else.</small>
+											<small style="display:block; margin-top:8px;">we'll share our <code>root</code> password before we share your email with anyone else.</small>
 											
 										</fieldset>
 									</form>
@@ -363,7 +356,7 @@ function superpwa_addons_button_link( $slug ) {
 }
 
 /**
- * Handle bundled add-on activation and deactivation
+ * Do add-on activation and deactivation
  * 
  * Adds/removes the Add-On slug from the $settings['active_addons'] in SuperPWA settings.
  * 
@@ -416,3 +409,48 @@ function superpwa_addons_activator( $slug, $status ) {
 	
 	return false;
 }
+
+/**
+ * Handle add-on activation and deactivation
+ * 
+ * Verifies that the activation / deactivation request is valid and calls superpwa_addons_activator()
+ * then redirects the page back to the add-ons page.
+ * 
+ * Hooked onto load-superpwa_page_superpwa-addons action hook and is called every time the add-ons page is loaded
+ * 
+ * @param void
+ * @return void
+ *
+ * @since 1.7
+ */
+function superpwa_addons_handle_activation() {
+	
+	// Authentication
+	if ( ! isset( $_GET['addon'] ) || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	// Handing add-on activation
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
+		
+		// Handling activation
+		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
+			
+			// Redirect to add-ons sub-menu
+			wp_redirect( admin_url("admin.php?page=superpwa-addons&activated=1") );
+			exit;
+		}		
+	}
+	
+	// Handing add-on de-activation
+	if ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
+		
+		// Handling deactivation
+		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
+			
+			wp_redirect( admin_url("admin.php?page=superpwa-addons&deactivated=1") );
+			exit;
+		}
+	}
+}
+add_action( 'load-superpwa_page_superpwa-addons', 'superpwa_addons_handle_activation' );
