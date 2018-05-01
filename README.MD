@@ -32,7 +32,7 @@
     ·
     <a href="https://wordpress.org/plugins/super-progressive-web-apps/#faq">FAQ</a>
     · 
-    <a href="#contributions">Contributions</a>
+    <a href="#-contributions">Contributions</a>
   </p>
 </p>
 
