@@ -63,7 +63,7 @@ function superpwa_addons_interface_render() {
 	}
 
 	// Handing add-on activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) ) {
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
 		
 		// Handling activation
 		
@@ -82,7 +82,7 @@ function superpwa_addons_interface_render() {
 	}
 	
 	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) ) {
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
 		
 		// Handling deactivation
 		
