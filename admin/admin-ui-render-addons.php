@@ -225,8 +225,8 @@ function superpwa_addons_status( $slug ) {
 		return false;
 	}
 	
-	// Get Settings
-	$settings = superpwa_get_settings();
+	// Get active add-ons
+	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
 	switch( $addons[$slug]['type'] ) {
 		
@@ -234,7 +234,7 @@ function superpwa_addons_status( $slug ) {
 		case 'bundled': 
 			
 			// True means, add-on is installed and active
-			if ( isset( $settings['active_addons'] ) && in_array( $slug, $settings['active_addons'] ) ) {
+			if ( in_array( $slug, $active_addons ) ) {
 				return 'active';
 			}
 			
@@ -378,17 +378,17 @@ function superpwa_addons_activator( $slug, $status ) {
 		return false;
 	}
 	
-	// Get SuperPWA Settings
-	$settings = superpwa_get_settings();
+	// Get active add-ons
+	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
 	// Activate add-on
 	if ( ( $status === true ) && ( $addon_status == 'inactive' ) ) {
 		
 		// Add the add-on to the list of active add-ons
-		$settings['active_addons'][] = $slug;
+		$active_addons[] = $slug;
 		
 		// Write settings back to database
-		update_option( 'superpwa_settings', $settings );
+		update_option( 'superpwa_active_addons', $active_addons );
 		
 		return true;
 	}
@@ -397,12 +397,12 @@ function superpwa_addons_activator( $slug, $status ) {
 	if ( ( $status === false ) && ( $addon_status == 'active' ) ) {
 		
 		// Delete the add-on from the active_addons array in SuperPWA settings.
-		$active_addons = array_flip( $settings['active_addons'] );
+		$active_addons = array_flip( $active_addons );
 		unset( $active_addons[$slug] );
-		$settings['active_addons'] = array_flip( $active_addons );
+		$active_addons = array_flip( $active_addons );
 		
 		// Write settings back to database
-		update_option( 'superpwa_settings', $settings );
+		update_option( 'superpwa_active_addons', $active_addons );
 		
 		return true;
 	}
