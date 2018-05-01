@@ -173,7 +173,7 @@ function superpwa_addons_interface_render() {
 								
 								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
 								
-									<form method="post" action="http://localhost/superpwa/newsletter/" target="_blank">
+									<form method="post" action="https://superpwa.com/newsletter/" target="_blank">
 										<fieldset>
 											
 											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="Enter your email" style="width: 60%; margin-left: 0px;" type="email">		
