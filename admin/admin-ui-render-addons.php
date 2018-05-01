@@ -65,8 +65,36 @@ function superpwa_addons_interface_render() {
 	// Handing add-on activation
 	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) ) {
 		
+		// Handling activation
+		
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1' ) );
+		exit;
+	}
+	
+	// Activation notice
+	if ( isset( $_GET['activated'] ) ) {
+		
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Settings saved.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
+		
+		// Show Settings Saved Message
+		settings_errors( 'superpwa_settings_group' );
+	}
+	
+	// Handing add-on de-activation
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) ) {
+		
+		// Handling deactivation
+		
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1' ) );
+		exit;
+	}
+	
+	// De-activation notice
+	if ( isset( $_GET['deactivated'] ) ) {
+		
+		// Add settings saved message with the class of "updated"
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -90,7 +118,9 @@ function superpwa_addons_interface_render() {
 				
 				<div id="the-list">
 				
-					<?php foreach( $addons as $slug => $addon ) { ?>
+					<?php 
+					// Looping over each add-on
+					foreach( $addons as $slug => $addon ) { ?>
 				
 						<div class="plugin-card plugin-card-akismet">
 						
@@ -287,7 +317,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Deactivation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons' . $slug ), 'deactivate', 'superpwa_addon_activate_nonce' );
+			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
 			
 			break;
 		
