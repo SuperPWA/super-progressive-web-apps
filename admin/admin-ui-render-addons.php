@@ -9,6 +9,7 @@
  * @function	superpwa_addons_status()				Find add-on status
  * @function	superpwa_addons_button_text()			Button text based on add-on status
  * @function 	superpwa_addons_button_link() 			Action URL based on add-on status
+ * @function 	superpwa_addons_activator()				Handle bundled add-on activation and deactivation
  */
 
 // Exit if accessed directly
@@ -63,9 +64,10 @@ function superpwa_addons_interface_render() {
 	}
 
 	// Handing add-on activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
 		
 		// Handling activation
+		superpwa_addons_activator( $_GET['addon'], true );
 		
 		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1' ) );
 		exit;
@@ -82,9 +84,10 @@ function superpwa_addons_interface_render() {
 	}
 	
 	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
+	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
 		
 		// Handling deactivation
+		superpwa_addons_activator( $_GET['addon'], false );
 		
 		wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1' ) );
 		exit;
@@ -138,7 +141,9 @@ function superpwa_addons_interface_render() {
 								<div class="action-links">
 									<ul class="plugin-action-buttons">
 										<li>
-											<a class="button activate-now button-primary" data-slug="" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>"><?php echo superpwa_addons_button_text( $slug ); ?></a>
+											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == 'Deactivate' ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+												<?php echo superpwa_addons_button_text( $slug ); ?>
+											</a>
 										</li>
 										<li>
 											<a href="<?php echo $addon['link']; ?>" aria-label="More information about <?php echo $addon['name']; ?>" data-title="<?php echo $addon['name']; ?>">More Details</a>
@@ -185,7 +190,7 @@ function superpwa_addons_interface_render() {
  * @param $slug this is the $key used in the $addons array in superpwa_get_addons().
  * 		For add-ons installed as a separate plugin, this will be plugin-directory/main-plugin-file.php
  *
- * @return (string) one of the statuses as described above.
+ * @return (string) one of the statuses as described above. False if $slug is not a valid add-on.
  *
  * @since 1.7
  */
@@ -327,4 +332,59 @@ function superpwa_addons_button_link( $slug ) {
 			return $addons[$slug]['link'];
 			break;
 	}
+}
+
+/**
+ * Handle bundled add-on activation and deactivation
+ * 
+ * Adds/removes the Add-On slug from the $settings['active_addons'] in SuperPWA settings.
+ * 
+ * @param $slug (string) this is the $key used in the $addons array in superpwa_get_addons().
+ * @param $status (boolean) True to activate, False to deactivate.
+ * 
+ * @return (boolean) True on success, false otherwise. 
+ *		Success = intended action, i.e. if deactivation is the intend, then success means successful deactivation.
+ * 
+ * @since 1.7
+ */
+function superpwa_addons_activator( $slug, $status ) {
+	
+	// Get the add-on status
+	$addon_status = superpwa_addons_status( $slug );
+	
+	// Check if its a valid add-on
+	if ( ! $addon_status ) {
+		return false;
+	}
+	
+	// Get SuperPWA Settings
+	$settings = superpwa_get_settings();
+	
+	// Activate add-on
+	if ( ( $status === true ) && ( $addon_status == 'inactive' ) ) {
+		
+		// Add the add-on to the list of active add-ons
+		$settings['active_addons'][] = $slug;
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	// De-activate add-on
+	if ( ( $status === false ) && ( $addon_status == 'active' ) ) {
+		
+		// Delete the add-on from the active_addons array in SuperPWA settings.
+		$active_addons = array_flip( $settings['active_addons'] );
+		unset( $active_addons[$slug] );
+		$settings['active_addons'] = array_flip( $active_addons );
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	return false;
 }
