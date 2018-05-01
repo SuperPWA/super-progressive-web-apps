@@ -27,4 +27,6 @@ require_once( SUPERPWA_PATH_ABS . 'public/manifest.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php' );
 
 // Load bundled add-ons
-require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );
+if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ) {
+	require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );
+}
