@@ -261,7 +261,7 @@ function superpwa_utm_tracking_source_cb() {
 	</fieldset>
 	
 	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php _e( 'Source is mandatory and defaults to <code>superpwa</code>', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
@@ -282,10 +282,6 @@ function superpwa_utm_tracking_medium_cb() {
 		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
 		
 	</fieldset>
-	
-	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
-	</p>
 
 	<?php
 }
@@ -305,10 +301,6 @@ function superpwa_utm_tracking_name_cb() {
 		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
 		
 	</fieldset>
-	
-	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
-	</p>
 
 	<?php
 }
@@ -328,10 +320,6 @@ function superpwa_utm_tracking_term_cb() {
 		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
 		
 	</fieldset>
-	
-	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
-	</p>
 
 	<?php
 }
@@ -351,10 +339,6 @@ function superpwa_utm_tracking_content_cb() {
 		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
 		
 	</fieldset>
-	
-	<p class="description" id="tagline-description">
-		<?php _e( 'This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps' ); ?>
-	</p>
 
 	<?php
 }
