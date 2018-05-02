@@ -5,10 +5,10 @@
  * @since 1.7
  * 
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
+ * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function	superpwa_utm_tracking_for_start_url()		Add UTM Tracking to the start_url
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
  * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
- * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
  * @function 	superpwa_utm_tracking_start_url_cb()		Current Start URL
  * @function 	superpwa_utm_tracking_source_cb()			Campaign Source
@@ -33,6 +33,20 @@ function superpwa_utm_tracking_sub_menu() {
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_utm_tracking_sub_menu' );
+
+/**
+ * Get UTM Tracking settings
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_get_settings() {
+	
+	$defaults = array(
+				'utm_source'		=> 'superpwa',
+			);
+	
+	return get_option( 'superpwa_utm_tracking_settings', $defaults );
+}
 
 /**
  * Add UTM Tracking to the start_url
@@ -169,20 +183,6 @@ function superpwa_utm_tracking_validater_sanitizer( $settings ) {
 	$settings['utm_content'] = sanitize_text_field( $settings['utm_content'] );
 	
 	return $settings;
-}
-
-/**
- * Get UTM Tracking settings
- *
- * @since 1.7
- */
-function superpwa_utm_tracking_get_settings() {
-	
-	$defaults = array(
-				'utm_source'		=> 'superpwa',
-			);
-	
-	return get_option( 'superpwa_utm_tracking_settings', $defaults );
 }
 
 /**
