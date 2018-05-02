@@ -68,7 +68,7 @@ function superpwa_addons_interface_render() {
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
 		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
-		do_action( 'superpwa_addon_activated_' . $slug );
+		do_action( 'superpwa_addon_activated_' . $_GET['addon'] );
 			
 		// Add settings saved message with the class of "updated"
 		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
