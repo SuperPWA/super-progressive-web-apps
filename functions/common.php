@@ -52,7 +52,7 @@ function superpwa_is_amp() {
 /**
  * Return Start Page URL
  *
- * @param	$rel	False by default. Set to true to return a relative URL (for use in manifest)
+ * @param $rel (boolean) False by default. Set to true to return a relative URL (for use in manifest)
  * 
  * @return (string) URL to be set as the start_url in manifest and startPage in service worker
  *

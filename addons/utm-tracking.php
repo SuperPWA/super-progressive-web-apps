@@ -227,7 +227,11 @@ function superpwa_utm_tracking_validater_sanitizer( $settings ) {
  * @since 1.7
  */
 function superpwa_utm_tracking_section_cb() {
-	echo '<p>' . __( 'A long description for the settings section goes here.', 'starter-plugin' ) . '</p>';
+	
+	// Get add-on info
+	$addon_utm_tracking = superpwa_get_addons( 'utm_tracking' );
+	
+	printf( '<p>' . __( 'Add UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about UTM Tracking.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
 }
 
 /**
@@ -236,21 +240,8 @@ function superpwa_utm_tracking_section_cb() {
  * @since 1.7
  */
 function superpwa_utm_tracking_start_url_cb() {
-
-	// Get Settings
-	$settings = superpwa_utm_tracking_get_settings(); ?>
 	
-	<fieldset>
-		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
-		
-	</fieldset>
-	
-	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
-	</p>
-
-	<?php
+	echo '<code>' . superpwa_get_start_url( true ) . '</code>';
 }
 
 /**
