@@ -5,7 +5,8 @@
  * @since 1.7
  * 
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
- * @function 	superpwa_register_utm_tracking_settings()	Register UTM Tracking settings
+ * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
+ * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
  * @function	superpwa_utm_tracking_interface_render()	UTM Tracking UI renderer
  */
 
@@ -29,7 +30,7 @@ add_action( 'admin_menu', 'superpwa_utm_tracking_sub_menu' );
  *
  * @since 	1.7
  */
-function superpwa_register_utm_tracking_settings() {
+function superpwa_utm_tracking_register_settings() {
 
 	// Register Setting
 	register_setting( 
@@ -42,7 +43,7 @@ function superpwa_register_utm_tracking_settings() {
     add_settings_section(
         'superpwa_utm_tracking_section',				// ID
         __return_false(),								// Title
-        'prefix_general_settings_section_callback',								// Callback Function
+        'superpwa_utm_tracking_section_cb',				// Callback Function
         'superpwa_utm_tracking_section'					// Page slug
     );
 	
@@ -100,19 +101,19 @@ function superpwa_register_utm_tracking_settings() {
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);	
 }
-add_action( 'admin_init', 'superpwa_register_utm_tracking_settings' );
+add_action( 'admin_init', 'superpwa_utm_tracking_register_settings' );
 
 /**
- * Callback function for General Settings section
+ * Callback function for UTM Tracking section
  *
  * @since 1.7
  */
-function prefix_general_settings_section_callback() {
-	echo '<p>' . __('A long description for the settings section goes here.', 'starter-plugin') . '</p>';
+function superpwa_utm_tracking_section_cb() {
+	echo '<p>' . __( 'A long description for the settings section goes here.', 'starter-plugin' ) . '</p>';
 }
 
 /**
- * Splash Screen Icon
+ * Application Name
  *
  * @since 1.7
  */
@@ -121,14 +122,14 @@ function something() {
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	
-	<!-- Splash Screen Icon -->
-	<input type="text" name="superpwa_utm_tracking_settings[splash_icon]" id="superpwa_utm_tracking_settings[splash_icon]" class="superpwa-splash-icon regular-text" size="50" value="<?php echo isset( $settings['splash_icon'] ) ? esc_attr( $settings['splash_icon']) : ''; ?>">
-	<button type="button" class="button superpwa-splash-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
-	</button>
+	<fieldset>
+		
+		<input type="text" name="superpwa_settings[app_name]" class="regular-text" value="<?php if ( isset( $settings['app_name'] ) && ( ! empty($settings['app_name']) ) ) echo esc_attr($settings['app_name']); ?>"/>
+		
+	</fieldset>
 	
 	<p class="description" id="tagline-description">
-		<?php _e('This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
