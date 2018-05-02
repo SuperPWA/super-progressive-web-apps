@@ -6,6 +6,7 @@
  * 
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
+ * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
  * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
  * @function	superpwa_utm_tracking_interface_render()	UTM Tracking UI renderer
@@ -35,9 +36,9 @@ function superpwa_utm_tracking_register_settings() {
 
 	// Register Setting
 	register_setting( 
-		'superpwa_utm_tracking_settings_group', // Group name
-		'superpwa_utm_tracking_settings' 		// Setting name = html form <input> name on settings form
-		// 'superpwa_utm_tracking_validater'	// Input validator and sanitizer
+		'superpwa_utm_tracking_settings_group',		 // Group name
+		'superpwa_utm_tracking_settings' 			// Setting name = html form <input> name on settings form
+		'superpwa_utm_tracking_validater_sanitizer'	// Input validator and sanitizer
 	);
 		
 	// UTM Tracking
@@ -105,6 +106,31 @@ function superpwa_utm_tracking_register_settings() {
 add_action( 'admin_init', 'superpwa_utm_tracking_register_settings' );
 
 /**
+ * Validate and sanitize user input
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_validater_sanitizer( $settings ) {
+	
+	// Sanitize and validate campaign source. Campaign source cannot be empty.
+	$settings['utm_source'] = sanitize_text_field( $settings['utm_source'] ) == '' ? 'superpwa' : sanitize_text_field( $settings['utm_source'] );
+	
+	// Sanitize campaign medium
+	$settings['utm_medium'] = sanitize_text_field( $settings['utm_medium'] );
+	
+	// Sanitize campaign name
+	$settings['utm_campaign'] = sanitize_text_field( $settings['utm_campaign'] );
+	
+	// Sanitize campaign term
+	$settings['utm_term'] = sanitize_text_field( $settings['utm_term'] );
+	
+	// Sanitize campaign medium
+	$settings['utm_content'] = sanitize_text_field( $settings['utm_content'] );
+	
+	return $settings;
+}
+
+/**
  * Get UTM Tracking settings
  *
  * @since 1.7
@@ -135,11 +161,11 @@ function superpwa_utm_tracking_section_cb() {
 function something() {
 
 	// Get Settings
-	$settings = superpwa_get_settings(); ?>
+	$settings = superpwa_utm_tracking_get_settings(); ?>
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_settings[app_name]" class="regular-text" value="<?php if ( isset( $settings['app_name'] ) && ( ! empty($settings['app_name']) ) ) echo esc_attr($settings['app_name']); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
 		
 	</fieldset>
 	
