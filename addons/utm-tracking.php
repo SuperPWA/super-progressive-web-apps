@@ -67,8 +67,8 @@ function superpwa_utm_tracking_for_start_url( $start_url ) {
 	// Get UTM Tracking settings
 	$utm_params = superpwa_utm_tracking_get_settings();
 	
-	// Add the initial '?'
-	$start_url = $start_url . '?';
+	// Add the initial '/?'
+	$start_url = trailingslashit( $start_url ) . '?';
 	
 	// Build the URL
 	foreach ( $utm_params as $param => $value ) {
