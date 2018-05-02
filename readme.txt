@@ -151,6 +151,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * New Feature: SuperPWA is now a top-level menu to accomodate for the Add-Ons sub-menu page.
 * Enhancement: Service worker URLs are now relative to accomodate for domain mapped multisites.
 * Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when innner pages are used as start_url.
+* Bug Fix: Incorrect manifest and service worker URLs when WordPress is installed in a folder. 
 
 = 1.6 =
 * Date: 23.April.2018
