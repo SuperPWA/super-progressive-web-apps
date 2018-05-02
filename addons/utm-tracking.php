@@ -7,6 +7,7 @@
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
  * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function	superpwa_utm_tracking_for_start_url()		Add UTM Tracking to the start_url
+ * @function 	superpwa_utm_tracking_save_settings_todo()	Todo list after saving UTM Tracking settings
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
  * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
@@ -81,6 +82,21 @@ function superpwa_utm_tracking_for_start_url( $start_url ) {
 	return rtrim( $start_url, '&' );
 }
 add_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
+
+/**
+ * Todo list after saving UTM Tracking settings
+ *
+ * Regenerate manifest
+ *
+ * @since	1.7
+ */
+function superpwa_utm_tracking_save_settings_todo() {
+	
+	// Regenerate manifest
+	superpwa_generate_manifest();
+}
+add_action( 'add_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
+add_action( 'update_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
 
 /**
  * Register UTM Tracking settings
