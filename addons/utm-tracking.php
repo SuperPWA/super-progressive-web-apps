@@ -9,6 +9,12 @@
  * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
  * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
+ * @function 	superpwa_utm_tracking_start_url_cb()		Current Start URL
+ * @function 	superpwa_utm_tracking_source_cb()			Campaign Source
+ * @function 	superpwa_utm_tracking_medium_cb()			Campaign Medium
+ * @function 	superpwa_utm_tracking_name_cb()				Campaign Name
+ * @function 	superpwa_utm_tracking_term_cb()				Campaign Term
+ * @function 	superpwa_utm_tracking_content_cb()			Campaign Content
  * @function	superpwa_utm_tracking_interface_render()	UTM Tracking UI renderer
  */
 
@@ -37,7 +43,7 @@ function superpwa_utm_tracking_register_settings() {
 	// Register Setting
 	register_setting( 
 		'superpwa_utm_tracking_settings_group',		 // Group name
-		'superpwa_utm_tracking_settings' 			// Setting name = html form <input> name on settings form
+		'superpwa_utm_tracking_settings', 			// Setting name = html form <input> name on settings form
 		'superpwa_utm_tracking_validater_sanitizer'	// Input validator and sanitizer
 	);
 		
@@ -51,8 +57,8 @@ function superpwa_utm_tracking_register_settings() {
 	
 		// Current Start URL
 		add_settings_field(
-			'superpwa_manifest_status',								// ID
-			__('Campaign Source', 'super-progressive-web-apps'),	// Title
+			'superpwa_utm_tracking_start_url',						// ID
+			__('Current Start URL', 'super-progressive-web-apps'),	// Title
 			'superpwa_utm_tracking_start_url_cb',					// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
@@ -60,7 +66,7 @@ function superpwa_utm_tracking_register_settings() {
 		
 		// Campaign Source
 		add_settings_field(
-			'superpwa_manifest_status',								// ID
+			'superpwa_utm_tracking_source',							// ID
 			__('Campaign Source', 'super-progressive-web-apps'),	// Title
 			'superpwa_utm_tracking_source_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
@@ -69,7 +75,7 @@ function superpwa_utm_tracking_register_settings() {
 		
 		// Campaign Medium
 		add_settings_field(
-			'superpwa_sw_status',									// ID
+			'superpwa_utm_tracking_medium',							// ID
 			__('Campaign Medium', 'super-progressive-web-apps'),	// Title
 			'superpwa_utm_tracking_medium_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
@@ -78,7 +84,7 @@ function superpwa_utm_tracking_register_settings() {
 		
 		// Campaign Name
 		add_settings_field(
-			'superpwa_https_status',								// ID
+			'superpwa_utm_tracking_name',							// ID
 			__('Campaign Name', 'super-progressive-web-apps'),		// Title
 			'superpwa_utm_tracking_name_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
@@ -87,7 +93,7 @@ function superpwa_utm_tracking_register_settings() {
 		
 		// Campaign Term
 		add_settings_field(
-			'superpwa_https_status',								// ID
+			'superpwa_utm_tracking_term',							// ID
 			__('Campaign Term', 'super-progressive-web-apps'),		// Title
 			'superpwa_utm_tracking_term_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
@@ -96,7 +102,7 @@ function superpwa_utm_tracking_register_settings() {
 		
 		// Campaign Content
 		add_settings_field(
-			'superpwa_https_status',								// ID
+			'superpwa_utm_tracking_content',						// ID
 			__('Campaign Content', 'super-progressive-web-apps'),	// Title
 			'superpwa_utm_tracking_content_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
@@ -154,7 +160,7 @@ function superpwa_utm_tracking_section_cb() {
 }
 
 /**
- * Application Name
+ * Current Start URL
  *
  * @since 1.7
  */
@@ -177,7 +183,7 @@ function superpwa_utm_tracking_start_url_cb() {
 }
 
 /**
- * Application Name
+ * Campaign Source
  *
  * @since 1.7
  */
@@ -200,7 +206,7 @@ function superpwa_utm_tracking_source_cb() {
 }
 
 /**
- * Application Name
+ * Campaign Medium
  *
  * @since 1.7
  */
@@ -211,7 +217,7 @@ function superpwa_utm_tracking_medium_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
 		
 	</fieldset>
 	
@@ -223,7 +229,7 @@ function superpwa_utm_tracking_medium_cb() {
 }
 
 /**
- * Application Name
+ * Campaign Name
  *
  * @since 1.7
  */
@@ -234,7 +240,7 @@ function superpwa_utm_tracking_name_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
 		
 	</fieldset>
 	
@@ -246,7 +252,7 @@ function superpwa_utm_tracking_name_cb() {
 }
 
 /**
- * Application Name
+ * Campaign Term
  *
  * @since 1.7
  */
@@ -257,7 +263,7 @@ function superpwa_utm_tracking_term_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
 		
 	</fieldset>
 	
@@ -269,7 +275,7 @@ function superpwa_utm_tracking_term_cb() {
 }
 
 /**
- * Application Name
+ * Campaign Content
  *
  * @since 1.7
  */
@@ -280,7 +286,7 @@ function superpwa_utm_tracking_content_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
 		
 	</fieldset>
 	
