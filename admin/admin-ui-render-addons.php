@@ -30,12 +30,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
  *								)
  *		);
+ *
+ * @param (string) addon-slug to retrieve the details about a specific add-on. False by default and then returns all add-ons.
  * 
  * @return (array) an associative array containing all the info about SuperPWA add-ons.
  * 
  * @since 1.7
  */
-function superpwa_get_addons() {
+function superpwa_get_addons( $slug = false ) {
 	
 	// Add-Ons array
 	$addons = array(
@@ -49,7 +51,11 @@ function superpwa_get_addons() {
 						),
 	);
 	
-	return $addons;
+	if ( ( $slug === false ) || ( ! isset( $addons[$slug] ) ) ) {
+		return $addons;
+	}
+	
+	return $addons[$slug];
 }
 
 /**
