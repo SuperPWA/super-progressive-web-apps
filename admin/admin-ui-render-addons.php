@@ -99,7 +99,7 @@ function superpwa_addons_interface_render() {
 	?>
 	
 	<div class="wrap">
-		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'Add-Ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		

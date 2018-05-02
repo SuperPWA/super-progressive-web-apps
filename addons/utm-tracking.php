@@ -362,7 +362,7 @@ function superpwa_utm_tracking_content_cb() {
 	</fieldset>
 	
 	<p class="description" id="tagline-description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php _e( 'This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
@@ -393,7 +393,7 @@ function superpwa_utm_tracking_interface_render() {
 	?>
 	
 	<div class="wrap">	
-		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'UTM Tracking for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
