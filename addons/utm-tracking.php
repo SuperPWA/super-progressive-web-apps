@@ -52,8 +52,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Current Start URL
 		add_settings_field(
 			'superpwa_manifest_status',								// ID
-			__('Campaign Source', 'super-progressive-web-apps'),			// Title
-			'something',							// CB
+			__('Campaign Source', 'super-progressive-web-apps'),	// Title
+			'superpwa_utm_tracking_start_url_cb',					// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);
@@ -61,8 +61,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Campaign Source
 		add_settings_field(
 			'superpwa_manifest_status',								// ID
-			__('Campaign Source', 'super-progressive-web-apps'),			// Title
-			'something',							// CB
+			__('Campaign Source', 'super-progressive-web-apps'),	// Title
+			'superpwa_utm_tracking_source_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);
@@ -70,8 +70,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Campaign Medium
 		add_settings_field(
 			'superpwa_sw_status',									// ID
-			__('Campaign Medium', 'super-progressive-web-apps'),		// Title
-			'something',								// CB
+			__('Campaign Medium', 'super-progressive-web-apps'),	// Title
+			'superpwa_utm_tracking_medium_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);	
@@ -79,8 +79,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Campaign Name
 		add_settings_field(
 			'superpwa_https_status',								// ID
-			__('Campaign Name', 'super-progressive-web-apps'),				// Title
-			'something',								// CB
+			__('Campaign Name', 'super-progressive-web-apps'),		// Title
+			'superpwa_utm_tracking_name_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);
@@ -88,8 +88,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Campaign Term
 		add_settings_field(
 			'superpwa_https_status',								// ID
-			__('Campaign Term', 'super-progressive-web-apps'),				// Title
-			'something',								// CB
+			__('Campaign Term', 'super-progressive-web-apps'),		// Title
+			'superpwa_utm_tracking_term_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);	
@@ -97,8 +97,8 @@ function superpwa_utm_tracking_register_settings() {
 		// Campaign Content
 		add_settings_field(
 			'superpwa_https_status',								// ID
-			__('Campaign Content', 'super-progressive-web-apps'),				// Title
-			'something',								// CB
+			__('Campaign Content', 'super-progressive-web-apps'),	// Title
+			'superpwa_utm_tracking_content_cb',						// CB
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);	
@@ -158,7 +158,122 @@ function superpwa_utm_tracking_section_cb() {
  *
  * @since 1.7
  */
-function something() {
+function superpwa_utm_tracking_start_url_cb() {
+
+	// Get Settings
+	$settings = superpwa_utm_tracking_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		
+	</fieldset>
+	
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Application Name
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_source_cb() {
+
+	// Get Settings
+	$settings = superpwa_utm_tracking_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		
+	</fieldset>
+	
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Application Name
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_medium_cb() {
+
+	// Get Settings
+	$settings = superpwa_utm_tracking_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		
+	</fieldset>
+	
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Application Name
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_name_cb() {
+
+	// Get Settings
+	$settings = superpwa_utm_tracking_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		
+	</fieldset>
+	
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Application Name
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_term_cb() {
+
+	// Get Settings
+	$settings = superpwa_utm_tracking_get_settings(); ?>
+	
+	<fieldset>
+		
+		<input type="text" name="superpwa_utm_tracking_settings[utm_source]" class="regular-text" value="<?php if ( isset( $settings['utm_source'] ) && ( ! empty($settings['utm_source']) ) ) echo esc_attr( $settings['utm_source'] ); ?>"/>
+		
+	</fieldset>
+	
+	<p class="description" id="tagline-description">
+		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Application Name
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_content_cb() {
 
 	// Get Settings
 	$settings = superpwa_utm_tracking_get_settings(); ?>
