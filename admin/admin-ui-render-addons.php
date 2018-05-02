@@ -404,6 +404,9 @@ function superpwa_addons_activator( $slug, $status ) {
 		// Write settings back to database
 		update_option( 'superpwa_active_addons', $active_addons );
 		
+		// Deactivation action hook
+		do_action( 'superpwa_addon_deactivated_' . $slug );
+		
 		return true;
 	}
 	
