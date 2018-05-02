@@ -125,12 +125,12 @@ function superpwa_addons_interface_render() {
 							<div class="action-links">
 								<ul class="plugin-action-buttons">
 									<li>
-										<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == 'Deactivate' ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+										<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo superpwa_addons_button_text( $slug ); ?>
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo $addon['link']; ?>" aria-label="More information about <?php echo $addon['name']; ?>" data-title="<?php echo $addon['name']; ?>">More Details</a>
+										<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
 									</li>
 								</ul>	
 							</div>
@@ -144,9 +144,9 @@ function superpwa_addons_interface_render() {
 						<div class="plugin-card-bottom">
 							<div class="column-compatibility">
 								<?php if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) { ?>
-									<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>
+									<span class="compatibility-compatible"><?php _e( '<strong>Compatible</strong> with your version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
 								<?php } else { ?>
-									<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>
+									<span class="compatibility-incompatible"><?php _e( '<strong>Please upgrade</strong> to the latest version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
 								<?php } ?>
 							</div>
 						</div>
@@ -160,11 +160,11 @@ function superpwa_addons_interface_render() {
 							<div class="plugin-card-top" style="min-height: 178px;">
 							
 								<div class="name column-name" style="margin: 0px 10px;">
-									<h3>SuperPWA Newsletter</h3>
+									<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
 								</div>
 								
 								<div class="desc column-description" style="margin: 0px 10px;">
-									<p>Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA</p>
+									<p><?php _e( 'Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
 								</div>
 								
 								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
@@ -172,11 +172,11 @@ function superpwa_addons_interface_render() {
 									<form method="post" action="https://superpwa.com/newsletter/" target="_blank">
 										<fieldset>
 											
-											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="Enter your email" style="width: 60%; margin-left: 0px;" type="email">		
+											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
 											<input name="source" value="superpwa-plugin" type="hidden">
-											<input type="submit" class="button" value="Subscribe" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+											<input type="submit" class="button" value="<?php _e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
 											
-											<small style="display:block; margin-top:8px;">we'll share our <code>root</code> password before we share your email with anyone else.</small>
+											<small style="display:block; margin-top:8px;"><?php _e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
 											
 										</fieldset>
 									</form>
@@ -193,8 +193,6 @@ function superpwa_addons_interface_render() {
 						$superpwa_newsletter = false;
 					}
 				} ?>
-				
-					
 				
 			</div>
 		</div>
