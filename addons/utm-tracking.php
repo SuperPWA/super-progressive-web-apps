@@ -8,6 +8,7 @@
  * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function	superpwa_utm_tracking_for_start_url()		Add UTM Tracking to the start_url
  * @function 	superpwa_utm_tracking_save_settings_todo()	Todo list after saving UTM Tracking settings
+ * @function 	superpwa_utm_tracking_deactivate_todo()		Deactivation Todo
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
  * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
@@ -86,7 +87,8 @@ add_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url'
 /**
  * Todo list after saving UTM Tracking settings
  *
- * Regenerate manifest
+ * Regenerate manifest when settings are saved. 
+ * Also used when add-on is activated and deactivated.
  *
  * @since	1.7
  */
@@ -97,6 +99,24 @@ function superpwa_utm_tracking_save_settings_todo() {
 }
 add_action( 'add_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
 add_action( 'update_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
+add_action( 'superpwa_addon_activated_utm_tracking', 'superpwa_utm_tracking_save_settings_todo' );
+
+/**
+ * Deactivation Todo
+ * 
+ * Unhook the filter and regenerate manifest
+ * 
+ * @since 1.7
+ */
+function superpwa_utm_tracking_deactivate_todo() {
+	
+	// Unhook the UTM tracking params filter
+	remove_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
+	
+	// Regenerate manifest
+	superpwa_generate_manifest();
+}
+add_action( 'superpwa_addon_deactivated_utm_tracking', 'superpwa_utm_tracking_deactivate_todo' );
 
 /**
  * Register UTM Tracking settings
