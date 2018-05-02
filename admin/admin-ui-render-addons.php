@@ -440,7 +440,7 @@ function superpwa_addons_handle_activation() {
 		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
 			
 			// Redirect to add-ons sub-menu
-			wp_redirect( admin_url("admin.php?page=superpwa-addons&activated=1") );
+			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
 			exit;
 		}		
 	}
@@ -451,7 +451,7 @@ function superpwa_addons_handle_activation() {
 		// Handling deactivation
 		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
 			
-			wp_redirect( admin_url("admin.php?page=superpwa-addons&deactivated=1") );
+			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
 			exit;
 		}
 	}
