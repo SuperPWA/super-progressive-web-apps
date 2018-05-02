@@ -146,9 +146,11 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Changelog ==
 
 = 1.7 =
-* Date: 
+* Date: 03.May.2018
 * Minumum required WordPress version is now 3.6.0 (previously 3.5.0).
+* New Feature: Add-Ons for SuperPWA is here!
 * New Feature: SuperPWA is now a top-level menu to accomodate for the Add-Ons sub-menu page.
+* New Feature: Add UTM Tracking parameters to the Start URL with the UTM Tracking Add-On.
 * Enhancement: Service worker URLs are now relative to accomodate for domain mapped multisites.
 * Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when innner pages are used as start_url.
 * Bug Fix: Incorrect manifest and service worker URLs when WordPress is installed in a folder. 
