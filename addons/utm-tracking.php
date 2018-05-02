@@ -5,6 +5,7 @@
  * @since 1.7
  * 
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
+ * @function	superpwa_utm_tracking_for_start_url()		Add UTM Tracking to the start_url
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
  * @function	superpwa_utm_tracking_validater_sanitizer()	Validate and sanitize user input
  * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
@@ -32,6 +33,40 @@ function superpwa_utm_tracking_sub_menu() {
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_utm_tracking_sub_menu' );
+
+/**
+ * Add UTM Tracking to the start_url
+ * 
+ * Hooks onto the superpwa_manifest_start_url filter to add the 
+ * UTM tracking parameters to the start_url
+ *
+ * Example: https://superpwa.com/?utm_source=superpwa&utm_medium=medium&utm_campaign=name&utm_term=terms&utm_content=content
+ * 
+ * @param $start_url (string) the start_url for manifest from superpwa_get_start_url()
+ * @return (string) Filtered start_url with UTM tracking added
+ * 
+ * @since 1.7
+ */
+function superpwa_utm_tracking_for_start_url( $start_url ) {
+	
+	// Get UTM Tracking settings
+	$utm_params = superpwa_utm_tracking_get_settings();
+	
+	// Add the initial '?'
+	$start_url = $start_url . '?';
+	
+	// Build the URL
+	foreach ( $utm_params as $param => $value ) {
+		
+		if ( ! empty( $value ) ) {
+			$start_url = $start_url . $param . '=' . rawurlencode( $value ) . '&';
+		}
+	}
+	
+	// Remove trailing '&'
+	return rtrim( $start_url, '&' );
+}
+add_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
 
 /**
  * Register UTM Tracking settings
