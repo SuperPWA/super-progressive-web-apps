@@ -6,6 +6,7 @@
  * 
  * @function	superpwa_utm_tracking_sub_menu()			Add sub-menu page for UTM Tracking
  * @function 	superpwa_utm_tracking_register_settings()	Register UTM Tracking settings
+ * @function 	superpwa_utm_tracking_get_settings()		Get UTM Tracking settings
  * @function 	superpwa_utm_tracking_section_cb()			Callback function for UTM Tracking section
  * @function	superpwa_utm_tracking_interface_render()	UTM Tracking UI renderer
  */
@@ -102,6 +103,20 @@ function superpwa_utm_tracking_register_settings() {
 		);	
 }
 add_action( 'admin_init', 'superpwa_utm_tracking_register_settings' );
+
+/**
+ * Get UTM Tracking settings
+ *
+ * @since 1.7
+ */
+function superpwa_utm_tracking_get_settings() {
+	
+	$defaults = array(
+				'utm_source'		=> 'superpwa',
+			);
+	
+	return get_option( 'superpwa_utm_tracking_settings', $defaults );
+}
 
 /**
  * Callback function for UTM Tracking section
