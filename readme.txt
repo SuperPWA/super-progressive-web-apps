@@ -148,6 +148,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.8 =
 * Date: 
+* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context".
 
 = 1.7 =
 * Date: 03.May.2018
