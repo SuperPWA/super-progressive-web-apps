@@ -84,6 +84,7 @@ function superpwa_generate_sw() {
  * @return (string) Contents to be written to superpwa-sw.js
  * 
  * @since 1.0
+ * @since 1.7 added filter superpwa_sw_template
  */
 function superpwa_sw_template() {
 	
@@ -194,7 +195,7 @@ function checkNeverCacheList(url) {
 	}
 	return true;
 }
-<?php return ob_get_clean();
+<?php return apply_filters( 'superpwa_sw_template', ob_get_clean() );
 }
 
 /**
