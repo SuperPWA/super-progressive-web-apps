@@ -143,8 +143,6 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Screenshots ==
 
 1. Settings page in WordPress Admin > SuperPWA > Settings
-2. Add-Ons for SuperPWA in SuperPWA > Add-Ons
-3. UTM Tracking Add-On settings page in SuperPWA > UTM Tracking
 
 == Changelog ==
 
