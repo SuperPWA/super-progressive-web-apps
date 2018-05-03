@@ -146,6 +146,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.8 =
+* Date: 
+
 = 1.7 =
 * Date: 03.May.2018
 * Minimum required WordPress version is now 3.6.0 (previously 3.5.0).
