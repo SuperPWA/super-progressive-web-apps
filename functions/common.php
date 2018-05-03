@@ -3,6 +3,7 @@
  * Operations and common functions of SuperPWA
  *
  * @since 1.0
+ * 
  * @function	superpwa_is_amp()				Check if any AMP plugin is installed
  * @function 	superpwa_get_start_url()		Return Start Page URL
  * @function	superpwa_httpsify()				Convert http URL to https
@@ -14,8 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Check if any AMP plugin is installed
  * 
- * @return	String|Bool	AMP page url on success, false otherwise
- * @since	1.2
+ * @return (string|bool) AMP page url on success, false otherwise
+ * 
+ * @since 1.2
  */
 function superpwa_is_amp() {
 	
@@ -50,13 +52,15 @@ function superpwa_is_amp() {
 /**
  * Return Start Page URL
  *
- * @param	$rel	False by default. Set to true to return a relative URL (for use in manifest)
- * @return	String	URL to be set as the start_url in manifest and startPage in service worker
+ * @param $rel (boolean) False by default. Set to true to return a relative URL (for use in manifest)
+ * 
+ * @return (string) URL to be set as the start_url in manifest and startPage in service worker
  *
- * @since	1.2
- * @since	1.3.1	Force HTTPS by replacing http:// with https://
- * @since	1.6		Use superpwa_httpsify() to force HTTPS. 
- * @since	1.6		Removed forcing of trailing slash and added dot (.) to the beginning.
+ * @since 1.2
+ * @since 1.3.1 Force HTTPS by replacing http:// with https://
+ * @since 1.6 Use superpwa_httpsify() to force HTTPS. 
+ * @since 1.6 Removed forcing of trailing slash and added dot (.) to the beginning.
+ * @since 1.7 Added filter superpwa_manifest_start_url when $rel = true, for use with manifest. First ever filter in SuperPWA.
  */
 function superpwa_get_start_url( $rel = false ) {
 	
@@ -69,15 +73,18 @@ function superpwa_get_start_url( $rel = false ) {
 	// Force HTTPS
 	$start_url = superpwa_httpsify( $start_url );
 	
-	if ( $rel === true ) {
-		
-		// Make start_url relative for manifest
-		$start_url = '.' . parse_url( $start_url, PHP_URL_PATH );
-	}
-	
 	// AMP URL
 	if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) {
 		$start_url = trailingslashit( $start_url ) . superpwa_is_amp();
+	}
+	
+	// Relative URL for manifest
+	if ( $rel === true ) {
+		
+		// Make start_url relative for manifest
+		$start_url = empty( parse_url( $start_url, PHP_URL_PATH ) ) ? '.' : parse_url( $start_url, PHP_URL_PATH );
+		
+		return apply_filters( 'superpwa_manifest_start_url', $start_url );
 	}
 	
 	return $start_url;
@@ -86,10 +93,11 @@ function superpwa_get_start_url( $rel = false ) {
 /**
  * Convert http URL to https
  *
- * @param	$url	String	The URL to convert to https
- * @return	String	Returns the converted URL
+ * @param $url (string) The URL to convert to https
+ * 
+ * @return (string) Returns the converted URL
  *
- * @since	1.6
+ * @since 1.6
  */
 function superpwa_httpsify( $url ) {
 	return str_replace( 'http://', 'https://', $url );
