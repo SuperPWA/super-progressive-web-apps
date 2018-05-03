@@ -121,7 +121,7 @@ function superpwa_addons_interface_render() {
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link']; ?>">
+									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>">
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
