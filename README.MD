@@ -96,6 +96,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
+* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme) to track visits coming from your PWA.
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
@@ -131,7 +132,7 @@ The list is fast growing and is likely to be supported in most major browsers by
 
 Your Progressive Web App should be ready to test with the default settings upon activation. You can customize it further and make it truly your own.
 
-* Go to WordPress Admin > **Settings** > "**SuperPWA**"
+* Go to WordPress Admin > "**SuperPWA**" > **Settings**
 * Set a Background Color for the splash screen to be shown when your PWA is opened on a mobile device.
 * Set the Application Icon. This will be the icon of your PWA when it is added to the homescreen in a mobile device. The icon must be a PNG image and exactly 192 x 192 pixels in size.
 * Set the Offline Page. This page will be displayed if the user is offline and the page he requested is not cached already. Ideally you should create a dedicated WordPress page and set it here. Within the page you create, you could add a note that reads, "It looks like you are offline and the page you requested is not available right now. Please check back again once you are online.". 
