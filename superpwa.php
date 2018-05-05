@@ -33,13 +33,6 @@
  * uninstall.php				- Fired when the plugin is uninstalled. 
  */
 
-/**
- * ~ Release TODO ~
- *
- * Update SUPERPWA_VERSION
- * Spellcheck readme.txt
- */
-
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
