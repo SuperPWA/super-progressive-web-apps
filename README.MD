@@ -21,7 +21,7 @@
     SuperPWA helps to convert your WordPress website into Progressive Web Apps easily.
     <br>
     <br>
-    <a href="https://superpwa.com"><strong>Visit Website »</strong></a>
+    <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-viewWeb"><strong>Visit Website »</strong></a>
     <br>
     <br>
     <a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/new?template=bug.md">Report bug</a>
@@ -57,14 +57,14 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-⚡️ Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
+⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-welcome">superpwa.com</a>
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-<a href="https://superpwa.com">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+<a href="https://superpwa.com?utm_source=github&utm_medium=readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
 ## 🏗 Installation
 Once SuperPWA ⚡️ is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
@@ -96,7 +96,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
-* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme) to track visits coming from your PWA.
+* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme-version) to track visits coming from your PWA.
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
