@@ -146,6 +146,9 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 == Changelog ==
 
+= 1.8 =
+* Date: 
+
 = 1.7.1 =
 * Date: 05.May.2018
 * Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context".
