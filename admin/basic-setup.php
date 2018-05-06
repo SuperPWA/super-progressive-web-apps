@@ -239,7 +239,7 @@ function superpwa_plugin_row_meta( $links, $file ) {
 	
 	if ( strpos( $file, 'superpwa.php' ) !== false ) {
 		$new_links = array(
-				'demo' 	=> '<a href="https://superpwa.com" target="_blank">' . __( 'Demo', 'super-progressive-web-apps' ) . '</a>',
+				'demo' 	=> '<a href="https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin_row_meta" target="_blank">' . __( 'Demo', 'super-progressive-web-apps' ) . '</a>',
 				);
 		$links = array_merge( $links, $new_links );
 	}
