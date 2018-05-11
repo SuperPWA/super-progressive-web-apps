@@ -260,7 +260,7 @@ function superpwa_utm_tracking_source_cb() {
 		
 	</fieldset>
 	
-	<p class="description" id="tagline-description">
+	<p class="description">
 		<?php _e( 'Source is mandatory and defaults to <code>superpwa</code>', 'super-progressive-web-apps' ); ?>
 	</p>
 
