@@ -148,6 +148,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.8 =
 * Date: 
+* Bug Fix: Updated plugin action links and admin notices with the correct admin menu link.
 
 = 1.7.1 =
 * Date: 05.May.2018
