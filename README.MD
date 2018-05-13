@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://superpwa.com">
-    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=150 height=150>
+  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=SuperPWALogo">
+    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="Super Progressive Web Apps" width=175 height=175>
   </a>
 
   <h3 align="center">Super Progressive Web Apps</h3>
@@ -65,6 +65,13 @@ Progressive Web Apps (PWA) is a new technology that creates a middle ground betw
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
 <a href="https://superpwa.com?utm_source=github&utm_medium=readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+
+## Support the project ⭐
+If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
+
+<img src="https://github.com/josevarghese/Progressive-Web-Apps-and-Service-Worker-Supported-Browsers/blob/master/20180513_120136.gif?raw=true" alt="Chrome" width="300px" height="76.95px" />
+
+Also you can support us via [following on social media's and share about us](#share-via-social-medias-and-spread-superpwa).
 
 ## 🏗 Installation
 Once SuperPWA ⚡️ is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
