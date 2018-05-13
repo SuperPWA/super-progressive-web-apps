@@ -66,7 +66,7 @@ Users can come back to your website by launching the app from their home screen 
 
 <a href="https://superpwa.com?utm_source=github&utm_medium=readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
-## Support the project ⭐
+## ⭐ Support the project
 If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
 
 <img src="https://github.com/josevarghese/Progressive-Web-Apps-and-Service-Worker-Supported-Browsers/blob/master/20180513_120136.gif?raw=true" alt="Chrome" width="300px" height="76.95px" />
