@@ -43,13 +43,13 @@ function superpwa_activate_plugin( $network_active ) {
 	if ( ! $network_active ) {
 		
 		// Set transient for single site activation notice
-		set_transient( 'superpwa_admin_notice_activation', true, 5 );
+		set_transient( 'superpwa_admin_notice_activation', true, 60 );
 		
 		return;
 	}
 		
 	// If we are here, then plugin is network activated on a multisite. Set transient for activation notice on network admin.
-	set_transient( 'superpwa_network_admin_notice_activation', true, 5 );
+	set_transient( 'superpwa_network_admin_notice_activation', true, 60 );
 }
 register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
