@@ -105,7 +105,7 @@ const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
 const filesToCache = [startPage, offlinePage, fallbackImage];
-const neverCacheUrls = [/\/wp-admin/,/\/wp-login/,/preview=true/];
+const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ) ?>];
 
 // Install
 self.addEventListener('install', function(e) {
