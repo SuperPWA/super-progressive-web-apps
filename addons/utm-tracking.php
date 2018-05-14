@@ -231,7 +231,7 @@ function superpwa_utm_tracking_section_cb() {
 	// Get add-on info
 	$addon_utm_tracking = superpwa_get_addons( 'utm_tracking' );
 	
-	printf( '<p>' . __( 'Add UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about UTM Tracking.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
+	printf( '<p>' . __( 'This add-on automatically adds UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about UTM Tracking.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
 }
 
 /**
@@ -261,7 +261,7 @@ function superpwa_utm_tracking_source_cb() {
 	</fieldset>
 	
 	<p class="description">
-		<?php _e( 'Source is mandatory and defaults to <code>superpwa</code>', 'super-progressive-web-apps' ); ?>
+		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>. The remaining fields are optional.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
