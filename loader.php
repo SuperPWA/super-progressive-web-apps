@@ -10,7 +10,7 @@ if ( ! defined('ABSPATH') ) exit;
 
 // Load admin
 require_once( SUPERPWA_PATH_ABS . 'admin/basic-setup.php' );
-require_once( SUPERPWA_PATH_ABS . 'admin/admin-setup.php' );
+require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-setup.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-settings.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-addons.php' );
 
