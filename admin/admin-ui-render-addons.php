@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @param (string) addon-slug to retrieve the details about a specific add-on. False by default and then returns all add-ons.
  * 
- * @return (array) an associative array containing all the info about SuperPWA add-ons.
+ * @return (array|boolean) an associative array containing all the info about the requested add-on. False if add-on not found.
  * 
  * @since 1.7
  */
@@ -53,11 +53,15 @@ function superpwa_get_addons( $slug = false ) {
 						),
 	);
 	
-	if ( ( $slug === false ) || ( ! isset( $addons[$slug] ) ) ) {
+	if ( $slug === false ) {
 		return $addons;
 	}
 	
-	return $addons[$slug];
+	if ( ! isset( $addons[ $slug ] ) ) {
+		return false;
+	}
+	
+	return $addons[ $slug ];
 }
 
 /**
