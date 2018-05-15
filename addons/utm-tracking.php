@@ -241,7 +241,7 @@ function superpwa_utm_tracking_section_cb() {
  */
 function superpwa_utm_tracking_start_url_cb() {
 	
-	echo '<code>' . superpwa_get_start_url( true ) . '</code>';
+	echo '<code style="word-break: break-all;">' . superpwa_get_start_url( true ) . '</code>';
 }
 
 /**
