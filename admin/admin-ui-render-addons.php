@@ -9,7 +9,6 @@
  * @function	superpwa_addons_status()				Find add-on status
  * @function	superpwa_addons_button_text()			Button text based on add-on status
  * @function 	superpwa_addons_button_link() 			Action URL based on add-on status
- * @function 	superpwa_addons_activator()				Do bundled add-on activation and deactivation
  * @function	superpwa_addons_handle_activation()		Handle add-on activation
  * @function	superpwa_addons_handle_deactivation()	Handle add-on deactivation
  */
@@ -366,73 +365,10 @@ function superpwa_addons_button_link( $slug ) {
 }
 
 /**
- * Do add-on activation and deactivation
- * 
- * Adds/removes the Add-On slug from the $settings['active_addons'] in SuperPWA settings.
- * 
- * @param $slug (string) this is the $key used in the $addons array in superpwa_get_addons().
- * @param $status (boolean) True to activate, False to deactivate.
- * 
- * @return (boolean) True on success, false otherwise. 
- *		Success = intended action, i.e. if deactivation is the intend, then success means successful deactivation.
- * 
- * @since 1.7
- */
-function superpwa_addons_activator( $slug, $status ) {
-	
-	// Get the add-on status
-	$addon_status = superpwa_addons_status( $slug );
-	
-	// Check if its a valid add-on
-	if ( ! $addon_status ) {
-		return false;
-	}
-	
-	// Get active add-ons
-	$active_addons = get_option( 'superpwa_active_addons', array() );
-	
-	// Activate add-on
-	if ( ( $status === true ) && ( $addon_status == 'inactive' ) ) {
-		
-		// Add the add-on to the list of active add-ons
-		$active_addons[] = $slug;
-		
-		// Write settings back to database
-		update_option( 'superpwa_active_addons', $active_addons );
-		
-		return true;
-	}
-	
-	// De-activate add-on
-	if ( ( $status === false ) && ( $addon_status == 'active' ) ) {
-		
-		// Delete the add-on from the active_addons array in SuperPWA settings.
-		$active_addons = array_flip( $active_addons );
-		unset( $active_addons[$slug] );
-		$active_addons = array_flip( $active_addons );
-		
-		// Write settings back to database
-		update_option( 'superpwa_active_addons', $active_addons );
-		
-		// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
-		do_action( 'superpwa_addon_deactivated_' . $slug );
-		
-		return true;
-	}
-	
-	return false;
-}
-
-/**
  * Handle add-on activation
  * 
- * Verifies that the activation request is valid and calls superpwa_addons_activator()
- * then redirects the page back to the add-ons page.
- * 
+ * Verifies that the activation request is valid and then redirects the page back to the add-ons page.
  * Hooked onto admin_post_superpwa_activate_addon action hook
- * 
- * @param void
- * @return void
  *
  * @since 1.7
  * @since 1.8 Handles only activation. Used to handle both activation and deactivation.
@@ -474,13 +410,8 @@ add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activa
 /**
  * Handle add-on deactivation
  * 
- * Verifies that the deactivation request is valid and calls superpwa_addons_activator()
- * then redirects the page back to the add-ons page.
- * 
- * Hooked onto admin_post_superpwa_activate_addon action hook.
- * 
- * @param void
- * @return void
+ * Verifies that the deactivation request is valid and then redirects the page back to the add-ons page.
+ * Hooked onto admin_post_superpwa_deactivate_addon action hook.
  *
  * @since 1.8
  */
