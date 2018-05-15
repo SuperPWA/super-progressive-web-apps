@@ -37,6 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return (array|boolean) an associative array containing all the info about the requested add-on. False if add-on not found.
  * 
  * @since 1.7
+ * @since 1.8 Returns false of $slug isn't found.
  */
 function superpwa_get_addons( $slug = false ) {
 	
@@ -57,11 +58,11 @@ function superpwa_get_addons( $slug = false ) {
 		return $addons;
 	}
 	
-	if ( ! isset( $addons[ $slug ] ) ) {
+	if ( ! isset( $addons[$slug] ) ) {
 		return false;
 	}
 	
-	return $addons[ $slug ];
+	return $addons[$slug];
 }
 
 /**
@@ -230,18 +231,18 @@ function superpwa_addons_interface_render() {
  */
 function superpwa_addons_status( $slug ) {
 	
-	// Get add-ons array
-	$addons = superpwa_get_addons();
+	// Get add-on details
+	$addon = superpwa_get_addons( $slug );
 	
 	// A security check to make sure that the add-on under consideration exist.
-	if ( ! isset( $addons[$slug] ) ) {
+	if ( $addon === false ) {
 		return false;
 	}
 	
 	// Get active add-ons
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
-	switch( $addons[$slug]['type'] ) {
+	switch( $addon['type'] ) {
 		
 		// Bundled add-ons ships with SuperPWA and need not be installed separately.
 		case 'bundled': 
@@ -329,8 +330,8 @@ function superpwa_addons_button_link( $slug ) {
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $slug );
 	
-	// Get add-ons array
-	$addons = superpwa_get_addons();
+	// Get add-on details
+	$addon = superpwa_get_addons( $slug );
 	
 	switch( $addon_status ) {
 		
@@ -338,7 +339,7 @@ function superpwa_addons_button_link( $slug ) {
 		case 'inactive':
 			
 			// Plugin activation link for add-on plugins that are installed separately.
-			if ( $addons[$slug]['type'] == 'addon' ) {
+			if ( $addon['type'] == 'addon' ) {
 				wp_nonce_url( admin_url( 'plugins.php?action=activate&plugin=' . $slug ), 'activate-plugin_' . $slug );
 			}
 			
@@ -351,7 +352,7 @@ function superpwa_addons_button_link( $slug ) {
 		case 'active': 
 		
 			// Plugin deactivation link for add-on plugins that are installed separately.
-			if ( $addons[$slug]['type'] == 'addon' ) {
+			if ( $addon['type'] == 'addon' ) {
 				wp_nonce_url( admin_url( 'plugins.php?action=deactivate&plugin=' . $slug ), 'deactivate-plugin_' . $slug );
 			}
 			
@@ -363,7 +364,7 @@ function superpwa_addons_button_link( $slug ) {
 		// If add-on is not installed and for edge cases where $addon_status is false, we use the add-on link.
 		case 'uninstalled':
 		default:
-			return $addons[$slug]['link'];
+			return $addon['link'];
 			break;
 	}
 }
