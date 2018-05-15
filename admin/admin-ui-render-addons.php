@@ -89,7 +89,7 @@ function superpwa_addons_interface_render() {
 		if ( $addon !== false ) {
 			
 			// Add-on activation notice
-			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On Activated: %s.</strong> <a href="%s">Customize settings &rarr;</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'] ) . '</p></div>';	
+			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s">Customize settings &rarr;</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'] ) . '</p></div>';	
 		}
 	}
 	
@@ -97,7 +97,7 @@ function superpwa_addons_interface_render() {
 	if ( isset( $_GET['deactivated'] ) ) {
 			
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On Deactivated.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -159,11 +159,16 @@ function superpwa_addons_interface_render() {
 						
 						<div class="plugin-card-bottom">
 							<div class="column-compatibility">
-								<?php if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) { ?>
-									<span class="compatibility-compatible"><?php _e( '<strong>Compatible</strong> with your version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
-								<?php } else { ?>
-									<span class="compatibility-incompatible"><?php _e( '<strong>Please upgrade</strong> to the latest version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
-								<?php } ?>
+								<?php 
+								if ( superpwa_addons_status( $slug ) == 'active' ) {
+									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s">Customize settings &rarr;</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'] ); 
+								} 
+								else if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) {
+									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>', 'super-progressive-web-apps' ); 
+								} 
+								else { 
+									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>', 'super-progressive-web-apps' );
+								} ?>
 							</div>
 						</div>
 						
