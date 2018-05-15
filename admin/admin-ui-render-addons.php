@@ -77,24 +77,27 @@ function superpwa_addons_interface_render() {
 		return;
 	}
 
-	// Add-on activation notice
+	// Add-on activation todo
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
 		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
 		do_action( 'superpwa_addon_activated_' . $_GET['addon'] );
-			
-		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
 		
-		// Show Settings Saved Message
-		settings_errors( 'superpwa_settings_group' );		
+		// Get add-on info
+		$addon = superpwa_get_addons( $_GET['addon'] );
+		
+		if ( $addon !== false ) {
+			
+			// Add-on activation notice
+			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On Activated: %s.</strong> <a href="%s">Customize settings &rarr;</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'] ) . '</p></div>';	
+		}
 	}
 	
 	// Add-on de-activation notice
 	if ( isset( $_GET['deactivated'] ) ) {
 			
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On Deactivated.', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
