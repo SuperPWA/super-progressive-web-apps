@@ -10,7 +10,8 @@
  * @function	superpwa_addons_button_text()			Button text based on add-on status
  * @function 	superpwa_addons_button_link() 			Action URL based on add-on status
  * @function 	superpwa_addons_activator()				Do bundled add-on activation and deactivation
- * @function	superpwa_addons_handle_activation()		Handle add-on activation and deactivation
+ * @function	superpwa_addons_handle_activation()		Handle add-on activation
+ * @function	superpwa_addons_handle_deactivation()	Handle add-on deactivation
  */
 
 // Exit if accessed directly
@@ -23,10 +24,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 		array(
  *			'addon-slug'	=> 	array(
  *									'name'					=> 'Add-On Name',
- * 									'type'					=> 'bundled | addon',
  * 									'description'			=> 'Add-On description',
+ * 									'type'					=> 'bundled | addon',
  * 									'icon'					=> 'icon-for-addon-128x128.png',
  * 									'link'					=> 'https://superpwa.com/addons/details-page-of-addon',
+ * 									'admin_link'			=> admin_url( 'admin.php?page=superpwa-addon-admin-page' ),
  * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
  *								)
  *		);
@@ -43,10 +45,11 @@ function superpwa_get_addons( $slug = false ) {
 	$addons = array(
 		'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
-							'type'					=> 'bundled',
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
 							'superpwa_min_version'	=> '1.7',
 						),
 	);
@@ -337,7 +340,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Activation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
 			
 			break;
 			
@@ -350,7 +353,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Deactivation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
 			
 			break;
 		
@@ -421,46 +424,100 @@ function superpwa_addons_activator( $slug, $status ) {
 }
 
 /**
- * Handle add-on activation and deactivation
+ * Handle add-on activation
  * 
- * Verifies that the activation / deactivation request is valid and calls superpwa_addons_activator()
+ * Verifies that the activation request is valid and calls superpwa_addons_activator()
  * then redirects the page back to the add-ons page.
  * 
- * Hooked onto load-superpwa_page_superpwa-addons action hook and is called every time the add-ons page is loaded
+ * Hooked onto admin_post_superpwa_activate_addon action hook
  * 
  * @param void
  * @return void
  *
  * @since 1.7
+ * @since 1.8 Handles only activation. Used to handle both activation and deactivation.
+ * @since 1.8 Hooked onto admin_post_superpwa_activate_addon. Was hooked to load-superpwa_page_superpwa-addons before. 
  */
 function superpwa_addons_handle_activation() {
 	
+	// Get the add-on status
+	$addon_status = superpwa_addons_status( $_GET['addon'] );
+	
 	// Authentication
-	if ( ! isset( $_GET['addon'] ) || ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-
-	// Handing add-on activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
+	if ( 
+		! current_user_can( 'manage_options' ) || 
+		! isset( $_GET['addon'] ) || 
+		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) || 
+		! ( $addon_status == 'inactive' ) 
+	) {
 		
-		// Handling activation
-		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
-			
-			// Redirect to add-ons sub-menu
-			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
-			exit;
-		}		
+		// Return to referer if authentication fails.
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		exit;
+	}
+		
+	// Get active add-ons
+	$active_addons = get_option( 'superpwa_active_addons', array() );
+	
+	// Add the add-on to the list of active add-ons
+	$active_addons[] = $_GET['addon'];
+	
+	// Write settings back to database
+	update_option( 'superpwa_active_addons', $active_addons );
+		
+	// Redirect back to add-ons sub-menu
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
+	exit;
+}
+add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activation' );
+
+/**
+ * Handle add-on deactivation
+ * 
+ * Verifies that the deactivation request is valid and calls superpwa_addons_activator()
+ * then redirects the page back to the add-ons page.
+ * 
+ * Hooked onto admin_post_superpwa_activate_addon action hook.
+ * 
+ * @param void
+ * @return void
+ *
+ * @since 1.8
+ */
+function superpwa_addons_handle_deactivation() {
+	
+	// Get the add-on status
+	$addon_status = superpwa_addons_status( $_GET['addon'] );
+	
+	// Authentication
+	if ( 
+		! current_user_can( 'manage_options' ) || 
+		! isset( $_GET['addon'] ) || 
+		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) || 
+		! ( $addon_status == 'active' ) 
+	) {
+		
+		// Return to referer if authentication fails.
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		exit;
 	}
 	
-	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
+	// Get active add-ons
+	$active_addons = get_option( 'superpwa_active_addons', array() );
+	
+	// Delete the add-on from the active_addons array in SuperPWA settings.
+	$active_addons = array_flip( $active_addons );
+	unset( $active_addons[ $_GET['addon'] ] );
+	$active_addons = array_flip( $active_addons );
 		
-		// Handling deactivation
-		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
-			
-			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
-			exit;
-		}
-	}
+	// Write settings back to database
+	update_option( 'superpwa_active_addons', $active_addons );
+		
+	// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
+	do_action( 'superpwa_addon_deactivated_' . $_GET['addon'] );
+	
+	// Redirect back to add-ons sub-menu
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
+	exit;
 }
-add_action( 'load-superpwa_page_superpwa-addons', 'superpwa_addons_handle_activation' );
+add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );
