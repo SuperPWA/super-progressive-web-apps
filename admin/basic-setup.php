@@ -70,6 +70,15 @@ function superpwa_admin_notices() {
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_activation' );
 	}
+	
+	// Admin notice on plugin upgrade
+	if ( get_transient( 'superpwa_admin_notice_upgrade_complete' ) ) {
+		
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>SuperPWA</strong>: Succesfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice' ) . '</p></div>';
+		
+		// Delete transient
+		delete_transient( 'superpwa_admin_notice_upgrade_complete' );
+	}
 }
 add_action( 'admin_notices', 'superpwa_admin_notices' );
 
@@ -168,6 +177,9 @@ function superpwa_upgrader() {
 	
 	// For multisites, save the activation status of current blog.
 	superpwa_multisite_activation_status( true );
+	
+	// Set transient for upgrade complete notice
+	set_transient( 'superpwa_admin_notice_upgrade_complete', true, 60 );
 }
 add_action( 'admin_init', 'superpwa_upgrader' );
 
