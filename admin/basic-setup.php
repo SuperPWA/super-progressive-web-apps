@@ -5,8 +5,8 @@
  * @since 1.0
  * 
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
- * @function	superpwa_admin_notice_activation()	Admin notice on plugin activation
- * @function	superpwa_network_admin_notice_activation()	Admin notice on multisite network activation
+ * @function	superpwa_admin_notices()			Admin notices
+ * @function	superpwa_network_admin_notices()	Network Admin notices
  * @function	superpwa_upgrader()					Plugin upgrade todo list
  * @function	superpwa_deactivate_plugin()		Plugin deactivation todo list
  * @function	superpwa_load_plugin_textdomain()	Load plugin text domain
@@ -54,46 +54,44 @@ function superpwa_activate_plugin( $network_active ) {
 register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
 /**
- * Admin notice on plugin activation
+ * Admin Notices
  *
- * @since 1.2
+ * @since 1.2 Admin notice on plugin activation
  */
-function superpwa_admin_notice_activation() {
+function superpwa_admin_notices() {
  
-    // Return if transient is not set
-	if ( ! get_transient( 'superpwa_admin_notice_activation' ) ) {
-		return;
+    // Admin notice on plugin activation
+	if ( get_transient( 'superpwa_admin_notice_activation' ) ) {
+	
+		$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
+		
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
+		
+		// Delete transient
+		delete_transient( 'superpwa_admin_notice_activation' );
 	}
-	
-	$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready with the default settings. ' : '';
-	
-	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
-	
-	// Delete transient
-	delete_transient( 'superpwa_admin_notice_activation' );
 }
-add_action( 'admin_notices', 'superpwa_admin_notice_activation' );
+add_action( 'admin_notices', 'superpwa_admin_notices' );
 
 /**
- * Admin notice on multisite network activation
+ * Network Admin notices
  *
- * @since 1.6
+ * @since 1.6 Admin notice on multisite network activation
  */
-function superpwa_network_admin_notice_activation() {
+function superpwa_network_admin_notices() {
  
-    // Return if transient is not set
-	if ( ! get_transient( 'superpwa_network_admin_notice_activation' ) ) {
-		return;
+    // Admin notice on multisite network activation
+	if ( get_transient( 'superpwa_network_admin_notice_activation' ) ) {
+	
+		$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready on the main website with the default settings. ' : '';
+		
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
+		
+		// Delete transient
+		delete_transient( 'superpwa_network_admin_notice_activation' );
 	}
-	
-	$superpwa_is_ready = is_ssl() && superpwa_get_contents( superpwa_manifest( 'abs' ) ) && superpwa_get_contents( superpwa_sw( 'abs' ) ) && ( ! superpwa_onesignal_manifest_notice_check() ) ? 'Your app is ready on the main website with the default settings. ' : '';
-	
-	echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
-	
-	// Delete transient
-	delete_transient( 'superpwa_network_admin_notice_activation' );
 }
-add_action( 'network_admin_notices', 'superpwa_network_admin_notice_activation' );
+add_action( 'network_admin_notices', 'superpwa_network_admin_notices' );
 
 /**
  * Plugin upgrade todo list
