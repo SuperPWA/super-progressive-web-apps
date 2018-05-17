@@ -148,6 +148,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.8 =
 * Date: 
+* New Feature: Application Icon and Splash Screen Icon are added as Apple Touch Icons to wp_head. These will be used when your website is added to the Home Screen on iOS. 
 * Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond.
 * Enhancement: Better add-on activation and deactivation by hooking onto admin_post action.
 * Bug Fix: Updated plugin action links and admin notices with the correct admin menu link.

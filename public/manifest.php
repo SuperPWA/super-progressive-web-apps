@@ -113,8 +113,22 @@ function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	echo '<!-- Manifest added by SuperPWA -->' . PHP_EOL . '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
+	echo '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
+	echo '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
 	echo '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
+	
+	// Apple Touch Icons
+	if ( apply_filters( 'superpwa_add_apple_touch_icons', true ) ) {
+		
+		// Get the icons added via SuperPWA > Settings
+		$icons = superpwa_get_pwa_icons();
+		
+		foreach( $icons as $icon ) {
+			echo '<link rel="apple-touch-icon" sizes="' . $icon['sizes'] . '" href="' . $icon['src'] . '">' . PHP_EOL;
+		}
+	}
+	
+	echo '<!-- / SuperPWA.com -->' . PHP_EOL . PHP_EOL; 
 }
 add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 
