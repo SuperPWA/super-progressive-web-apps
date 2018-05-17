@@ -59,6 +59,11 @@ register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate
  * @since 1.2 Admin notice on plugin activation
  */
 function superpwa_admin_notices() {
+	
+	// Notices only for admins
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
  
     // Admin notice on plugin activation
 	if ( get_transient( 'superpwa_admin_notice_activation' ) ) {
@@ -88,6 +93,11 @@ add_action( 'admin_notices', 'superpwa_admin_notices' );
  * @since 1.6 Admin notice on multisite network activation
  */
 function superpwa_network_admin_notices() {
+	
+	// Notices only for admins
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
  
     // Network admin notice on multisite network activation
 	if ( get_transient( 'superpwa_network_admin_notice_activation' ) ) {
