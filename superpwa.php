@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Super Progressive Web Apps
- * Plugin URI: https://superpwa.com
+ * Plugin URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
- * Author URI: https://superpwa.com
+ * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
  * Contributors: Arun Basil Lal, Jose Varghese
  * Version: 1.8
  * Text Domain: super-progressive-web-apps
