@@ -299,10 +299,10 @@ function superpwa_manifest_status_cb() {
 	 */
 	if ( superpwa_get_contents( superpwa_manifest( 'abs' ) ) || superpwa_generate_manifest() ) {
 		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
 		
-		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php). <a href="%s" target="_blank">Read more &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-manifest' );
 	}
 }
 
@@ -320,7 +320,7 @@ function superpwa_sw_status_cb() {
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
 	} else {
 		
-		echo '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __('Service worker generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php).', 'super-progressive-web-apps') . '</p>';
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php). <a href="%s" target="_blank">Read more &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw' );
 	}
 }
 
