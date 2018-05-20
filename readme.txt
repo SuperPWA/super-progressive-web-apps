@@ -3,7 +3,7 @@ Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 4.9.5
+Tested up to: 4.9.6
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -148,11 +148,12 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 
 = 1.8 =
 * Date: 
+* Tested with WordPress 4.9.6. 
 * New Feature: Application Icon and Splash Screen Icon are added as Apple Touch Icons to wp_head. These will be used when your website is added to the Home Screen on iOS. 
-* Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond.
-* Enhancement: Better add-on activation and deactivation by hooking onto admin_post action.
+* Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond. 
+* Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
 * Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
-* Bug Fix: Updated plugin action links and admin notices with the correct admin menu link.
+* Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
 
 = 1.7.1 =
 * Date: 05.May.2018
