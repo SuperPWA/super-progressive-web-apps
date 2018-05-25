@@ -2,26 +2,32 @@
 /**
  * OneSignal integration
  *
+ * @link https://wordpress.org/plugins/onesignal-free-web-push-notifications/
+ *
  * @since 1.6
+ * 
  * @function	superpwa_onesignal_manifest_notice_check()		Check if OneSignal integration notice should be displayed or not.
- * @function	superpwa_onesignal_get_gcm_sender_id()			Extract gcm_sender_id from OneSignal settings
+ * @function	superpwa_onesignal_add_gcm_sender_id()			Add gcm_sender_id to SuperPWA manifest
  */
 
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
+// If OneSignal is installed and active
+if ( class_exists( 'OneSignal' ) ) {
+	
+	// Add gcm_sender_id to SuperPWA manifest
+	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+}
+
 /** 
  * Check if OneSignal integration notice should be displayed or not.
  *
  * @return	Bool	True if notice should be displayed. False otherwise.
+ * 
  * @since	1.5
  */
 function superpwa_onesignal_manifest_notice_check() {
-	
-	// No notice needed if OneSignal is not installed or there is no gcm_sender_id
-	if ( ! superpwa_onesignal_get_gcm_sender_id() ) {
-		return false;
-	}
 	
 	// Get OneSignal settins
 	$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
@@ -39,21 +45,19 @@ function superpwa_onesignal_manifest_notice_check() {
 }
 
 /**
- * Extract gcm_sender_id from OneSignal settings
+ * Add gcm_sender_id to SuperPWA manifest
  *
- * @link https://wordpress.org/plugins/onesignal-free-web-push-notifications/
+ * OneSignal's gcm_sender_id is 482941778795
  *
- * @return (String|Bool) gcm_sender_id of OneSignal if OneSignal is installed, false otherwise
- * @since 1.5
+ * @param (array) $manifest Array with the manifest entries passed via the superpwa_manifest filter.
+ * 
+ * @return (array) Array appended with the gcm_sender_id of OneSignal
+ * 
+ * @since 1.8
  */
-function superpwa_onesignal_get_gcm_sender_id() {
+function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
 	
-	// If OneSignal is installed and active
-	if ( class_exists( 'OneSignal' ) ) {
-		
-		// This is the gcm_sender_id of OneSignal, same for all installs.
-		return '482941778795';
-	}
+	$manifest['gcm_sender_id'] = '482941778795';
 	
-	return false;
+	return $manifest;
 }
