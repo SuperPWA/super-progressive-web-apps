@@ -60,11 +60,12 @@ function superpwa_manifest( $arg = 'src' ) {
  *
  * @return (boolean) true on success, false on failure.
  * 
- * @since	1.0
- * @since	1.3		Added support for 512x512 icon.
- * @since	1.4		Added orientation and scope.
- * @since	1.5		Added gcm_sender_id
- * @since	1.6		Added description
+ * @since 1.0
+ * @since 1.3 Added support for 512x512 icon.
+ * @since 1.4 Added orientation and scope.
+ * @since 1.5 Added gcm_sender_id
+ * @since 1.6 Added description
+ * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
  */
 function superpwa_generate_manifest() {
 	
@@ -75,7 +76,7 @@ function superpwa_generate_manifest() {
 	$manifest['name']				= $settings['app_name'];
 	$manifest['short_name']			= $settings['app_short_name'];
 	
-	// description
+	// Description
 	if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
 		$manifest['description'] 	= $settings['description'];
 	}
@@ -88,14 +89,13 @@ function superpwa_generate_manifest() {
 	$manifest['start_url']			= superpwa_get_start_url( true );
 	$manifest['scope']				= superpwa_get_scope();
 	
-	// gcm_sender_id
-	if ( superpwa_onesignal_get_gcm_sender_id() !== false ) {
-		$manifest['gcm_sender_id'] 	= superpwa_onesignal_get_gcm_sender_id();
-	}
+	// Filter the manifest.
+	apply_filters( 'superpwa_manifest', $manifest );
 	
-	// Delete manifest if it exists
+	// Delete manifest if it exists.
 	superpwa_delete_manifest();
 	
+	// Write the manfiest to disk.
 	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
 		return false;
 	}
