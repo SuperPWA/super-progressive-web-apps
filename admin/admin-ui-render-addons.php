@@ -52,6 +52,15 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
 							'superpwa_min_version'	=> '1.7',
 						),
+		'apple_touch_icons' => array(
+							'name'					=> __( 'Apple Touch Icons', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Adds the app icons as home screen icons on iOS devices.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
+							'icon'					=> 'superpwa-128x128.png',
+							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'superpwa_min_version'	=> '1.8',
+						),
 	);
 	
 	if ( $slug === false ) {

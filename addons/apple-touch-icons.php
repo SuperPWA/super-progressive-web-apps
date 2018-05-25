@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Uses the Application Icon and Splash Screen Icon for SuperPWA > Settings
  * and adds them to wp_head using the superpwa_wp_head_tags filter.
  * 
- * @param (string) $tags HTML element tags passed on by superpwa_wp_head_tag
+ * @param (string) $tags HTML element tags passed on by superpwa_wp_head_tags
  * 
  * @return (string) Appends the Apple Touch Icons to the existing tag string
  * 
@@ -33,4 +33,4 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
 	
 	return $tags;
 }
-add_filter( 'superpwa_wp_head_tag', 'superpwa_ati_add_apple_touch_icons' );
+add_filter( 'superpwa_wp_head_tags', 'superpwa_ati_add_apple_touch_icons' );
