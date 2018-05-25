@@ -6,8 +6,10 @@
  *
  * @since 1.6
  * 
- * @function	superpwa_onesignal_manifest_notice_check()		Check if OneSignal integration notice should be displayed or not.
+ * @function	superpwa_onesignal_manifest_notice_check()		Check if OneSignal integration notice should be displayed or not
  * @function	superpwa_onesignal_add_gcm_sender_id()			Add gcm_sender_id to SuperPWA manifest
+ * @function	superpwa_onesignal_activation()					Add gcm_sender_id to manifest on OneSignal activation
+ * @function	superpwa_onesignal_deactivation()				Remove gcm_sender_id from manifest on OneSignal deactivation
  */
 
 // Exit if accessed directly
@@ -21,7 +23,7 @@ if ( class_exists( 'OneSignal' ) ) {
 }
 
 /** 
- * Check if OneSignal integration notice should be displayed or not.
+ * Check if OneSignal integration notice should be displayed or not
  *
  * @return	Bool	True if notice should be displayed. False otherwise.
  * 
@@ -61,3 +63,37 @@ function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
 	
 	return $manifest;
 }
+
+/**
+ * Add gcm_sender_id to manifest on OneSignal activation
+ * 
+ * Regenerates SuperPWA manifest with the gcm_sender_id added.
+ * 
+ * @since 1.8
+ */
+function superpwa_onesignal_activation() {
+	
+	// Filter in gcm_sender_id to SuperPWA manifest
+	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+	
+	// Regenerate SuperPWA manifest
+	superpwa_generate_manifest();
+}
+add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_activation', 11 );
+
+/**
+ * Remove gcm_sender_id from manifest on OneSignal deactivation
+ * 
+ * Regenerates SuperPWA manifest
+ * 
+ * @since 1.8
+ */
+function superpwa_onesignal_deactivation() {
+	
+	// Remove gcm_sender_id from SuperPWA manifest
+	remove_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+	
+	// Regenerate SuperPWA manifest
+	superpwa_generate_manifest();
+}
+add_action( 'deactivate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_deactivation', 11 );
