@@ -90,7 +90,7 @@ function superpwa_generate_manifest() {
 	$manifest['scope']				= superpwa_get_scope();
 	
 	// Filter the manifest.
-	apply_filters( 'superpwa_manifest', $manifest );
+	$manifest = apply_filters( 'superpwa_manifest', $manifest );
 	
 	// Delete manifest if it exists.
 	superpwa_delete_manifest();
