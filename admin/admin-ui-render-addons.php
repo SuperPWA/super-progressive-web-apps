@@ -28,6 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 									'icon'					=> 'icon-for-addon-128x128.png',
  * 									'link'					=> 'https://superpwa.com/addons/details-page-of-addon',
  * 									'admin_link'			=> admin_url( 'admin.php?page=superpwa-addon-admin-page' ),
+ * 									'admin_link_text'		=> __( 'Customize settings | More Details &rarr;', 'super-progressive-web-apps' ),
+ * 									'admin_link_target'		=> 'admin | external',
  * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
  *								)
  *		);
@@ -50,6 +52,8 @@ function superpwa_get_addons( $slug = false ) {
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.7',
 						),
 		'apple_touch_icons' => array(
@@ -58,7 +62,9 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'bundled',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
-							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'external',
 							'superpwa_min_version'	=> '1.8',
 						),
 	);
@@ -95,10 +101,18 @@ function superpwa_addons_interface_render() {
 		// Get add-on info
 		$addon = superpwa_get_addons( $_GET['addon'] );
 		
+		// Add UTM Tracking to admin_link_text if its not an admin page.
+		if ( $addon['admin_link_target'] === 'external' ) {
+			$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-activation-notice';
+		}
+		
+		// Set link target attribute so that external links open in a new tab.
+		$link_target = ( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : '';
+		
 		if ( $addon !== false ) {
 			
 			// Add-on activation notice
-			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s">Customize settings &rarr;</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'] ) . '</p></div>';	
+			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s"%s>%s</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'], $link_target, $addon['admin_link_text'] ) . '</p></div>';	
 		}
 	}
 	
@@ -106,7 +120,7 @@ function superpwa_addons_interface_render() {
 	if ( isset( $_GET['deactivated'] ) ) {
 			
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -132,7 +146,17 @@ function superpwa_addons_interface_render() {
 				$superpwa_newsletter = true;
 				
 				// Looping over each add-on
-				foreach( $addons as $slug => $addon ) { ?>
+				foreach( $addons as $slug => $addon ) { 
+				
+					// Add UTM Tracking to admin_link_text if its not an admin page.
+					if ( $addon['admin_link_target'] === 'external' ) {
+						$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-card';
+					}
+					
+					// Set link target attribute so that external links open in a new tab.
+					$link_target = ( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : '';
+					
+					?>
 			
 					<div class="plugin-card plugin-card-<?php echo $slug; ?>">
 					
@@ -140,7 +164,7 @@ function superpwa_addons_interface_render() {
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>">
+									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank">
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
@@ -170,7 +194,7 @@ function superpwa_addons_interface_render() {
 							<div class="column-compatibility">
 								<?php 
 								if ( superpwa_addons_status( $slug ) == 'active' ) {
-									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s">Customize settings &rarr;</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'] ); 
+									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s"%s>%s</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, $addon['admin_link_text'] ); 
 								} 
 								else if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) {
 									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>', 'super-progressive-web-apps' ); 
