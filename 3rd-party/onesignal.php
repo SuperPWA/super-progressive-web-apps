@@ -8,6 +8,7 @@
  * 
  * @function	superpwa_onesignal_manifest_notice_check()		Check if OneSignal integration notice should be displayed or not
  * @function	superpwa_onesignal_add_gcm_sender_id()			Add gcm_sender_id to SuperPWA manifest
+ * @function	superpwa_onesignal_sw_filename()				Change Service Worker filename to OneSignalSDKWorker.js.php
  * @function	superpwa_onesignal_activation()					Add gcm_sender_id to manifest on OneSignal activation
  * @function	superpwa_onesignal_deactivation()				Remove gcm_sender_id from manifest on OneSignal deactivation
  */
@@ -62,6 +63,25 @@ function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
 	$manifest['gcm_sender_id'] = '482941778795';
 	
 	return $manifest;
+}
+
+/**
+ * Change Service Worker filename to OneSignalSDKWorker.js.php
+ * 
+ * OneSignalSDKWorker.js.php is the name of the service worker of OneSignal.
+ * Since only one service worker is allowed in a given scope, OneSignal unregisters all other service workers and registers theirs. 
+ * Having the same name prevents OneSignal from unregistering our service worker. 
+ * 
+ * @link https://documentation.onesignal.com/docs/web-push-setup-faq
+ * 
+ * @param (string) $sw_filename Filename of SuperPWA service worker passed via superpwa_sw_filename filter.
+ * 
+ * @return (string) Service worker filename changed to OneSignalSDKWorker.js.php
+ * 
+ * @since 1.8
+ */
+function superpwa_onesignal_sw_filename( $sw_filename ) {
+	return 'OneSignalSDKWorker.js.php';
 }
 
 /**
