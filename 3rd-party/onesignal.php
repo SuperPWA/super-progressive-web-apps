@@ -91,6 +91,7 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  * OneSignal activation todo
  * 
  * Regenerates SuperPWA manifest with the gcm_sender_id added.
+ * Delete current service worker.
  * Regenerate SuperPWA service worker with the new filename.
  * 
  * @since 1.8
@@ -103,6 +104,9 @@ function superpwa_onesignal_activation() {
 	// Regenerate SuperPWA manifest
 	superpwa_generate_manifest();
 	
+	// Delete service worker if it exists
+	superpwa_delete_sw();
+	
 	// Change service worker filename to match OneSignal's service worker
 	add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	
@@ -114,7 +118,8 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
 /**
  * OneSignal deactivation todo
  * 
- * Regenerates SuperPWA manifest
+ * Regenerates SuperPWA manifest.
+ * Delete current service worker. 
  * Regenerate SuperPWA service worker.
  * 
  * @since 1.8
@@ -126,6 +131,9 @@ function superpwa_onesignal_deactivation() {
 	
 	// Regenerate SuperPWA manifest
 	superpwa_generate_manifest();
+	
+	// Delete service worker if it exists
+	superpwa_delete_sw();
 	
 	// Restore the default service worker of SuperPWA
 	remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
