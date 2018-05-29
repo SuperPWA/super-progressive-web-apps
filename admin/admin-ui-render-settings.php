@@ -361,18 +361,6 @@ function superpwa_admin_interface_render() {
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
-	}	
-	
-	// Display the notice to use SuperPWA manifest as OneSignal custom manifest.
-	if ( superpwa_onesignal_manifest_notice_check() ) {
-		
-		echo '<div class="notice notice-error"><p>' . 
-		sprintf( 
-			__( '<strong>To integrate with OneSignal:</strong> Enable <strong>Use my own manifest.json</strong> and set <code>%s</code><br>as <strong>Custom manifest.json URL</strong> in <a href="%s" target="_blank">OneSignal Configuration > Advanced Settings &rarr;</a>', 'super-progressive-web-apps' ), 
-			superpwa_manifest( 'src' ),
-			admin_url( 'admin.php?page=onesignal-push#configuration' )
-		) . 
-		'</p></div>';
 	}
 	
 	?>

@@ -153,6 +153,7 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 * Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond. 
 * Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
 * Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
+* Bug Fix: Compatibility issues with OneSignal are resolved for single installs. 
 * Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
 
 = 1.7.1 =
