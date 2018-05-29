@@ -28,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  * @since 1.6
  * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
+ * @since 1.8 Added filter superpwa_sw_filename.
  */
 function superpwa_sw( $arg = 'src' ) {
 	

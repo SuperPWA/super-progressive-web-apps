@@ -138,7 +138,7 @@ function superpwa_upgrader() {
 	}
 	
 	/**
-	 * Return if this is the first time the plugin is installed.
+	 * Todo list for fresh install.
 	 *
 	 * On a multisite, during network activation, the activation hook (and activation todo) is not fired.
 	 * Manifest and service worker is generated the first time the wp-admin is loaded (when admin_init is fired).
@@ -164,7 +164,7 @@ function superpwa_upgrader() {
 	}
 	
 	/**
-	 * Add orientation and theme_color to database when upgrading from pre 1.4 versions
+	 * Add orientation and theme_color to database when upgrading from pre 1.4 versions.
 	 * 
 	 * Until 1.4, there was no UI for orientation and theme_color.
 	 * In the manifest, orientation was hard coded as 'natural'.
@@ -183,6 +183,28 @@ function superpwa_upgrader() {
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
+	}
+	
+	/**
+	 * Delete existing service worker for single sites that use OneSignal.
+	 * 
+	 * For OneSignal compatibility, in version 1.8 the service worker filename is renamed. 
+	 * If OneSignal is active, by this point, the new filename will be filtered in. 
+	 * This upgrade routine restores the defaul service worker filename and deletes the existing service worker. 
+	 * Also adds back the filter for new filename. OneSignal compatibility for multisites is not available at this point.
+	 * 
+	 * @since 1.8
+	 */
+	if ( version_compare( $current_ver, '1.8', '<' ) && class_exists( 'OneSignal' ) && ! is_multisite() ) {
+		
+		// Restore the default service worker filename of SuperPWA.
+		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+		
+		// Delete service worker if it exists.
+		superpwa_delete_sw();
+		
+		// Change service worker filename to match OneSignal's service worker.
+		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	}
 	
 	// Re-generate manifest
