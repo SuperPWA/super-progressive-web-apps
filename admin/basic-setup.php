@@ -169,8 +169,10 @@ function superpwa_upgrader() {
 	 * Until 1.4, there was no UI for orientation and theme_color.
 	 * In the manifest, orientation was hard coded as 'natural'.
 	 * background_color had UI and this value was used for both background_color and theme_color in the manifest.
+	 * 
+	 * @since 1.4
 	 */
-	if ( version_compare( $current_ver, '1.4', '<' ) ) {
+	if ( version_compare( $current_ver, '1.3.1', '<=' ) ) {
 		
 		// Get settings
 		$settings = superpwa_get_settings();
@@ -195,7 +197,7 @@ function superpwa_upgrader() {
 	 * 
 	 * @since 1.8
 	 */
-	if ( version_compare( $current_ver, '1.8', '<' ) && class_exists( 'OneSignal' ) && ! is_multisite() ) {
+	if ( version_compare( $current_ver, '1.7.1', '<=' ) && class_exists( 'OneSignal' ) && ! is_multisite() ) {
 		
 		// Restore the default service worker filename of SuperPWA.
 		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
