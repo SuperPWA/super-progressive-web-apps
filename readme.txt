@@ -147,12 +147,13 @@ PWA's require browsers with support for service workers and for iOS devices, sup
 == Changelog ==
 
 = 1.8 =
-* Date: 
+* Date: 31.May.2018
 * Tested with WordPress 4.9.6. 
-* New Add-On: Apple Touch Icons. Adds the app icons as home screen icons on iOS devices. 
+* New Add-On: Apple Touch Icons. Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices. 
 * Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond. 
 * Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
 * Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
+* Enhancement: Generated a .pot file with all strings for translation. You can also translate SuperPWA to your language by visiting [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/super-progressive-web-apps)
 * Bug Fix: Compatibility issues with OneSignal are resolved for single installs. 
 * Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
 
