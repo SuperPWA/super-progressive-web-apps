@@ -58,7 +58,7 @@ function superpwa_get_addons( $slug = false ) {
 						),
 		'apple_touch_icons' => array(
 							'name'					=> __( 'Apple Touch Icons', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Adds the app icons as home screen icons on iOS devices.', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
