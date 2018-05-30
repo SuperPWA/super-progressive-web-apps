@@ -279,7 +279,7 @@ function superpwa_utm_tracking_medium_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
 		
 	</fieldset>
 
@@ -298,7 +298,7 @@ function superpwa_utm_tracking_name_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
 		
 	</fieldset>
 
@@ -317,7 +317,7 @@ function superpwa_utm_tracking_term_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
 		
 	</fieldset>
 
@@ -336,7 +336,7 @@ function superpwa_utm_tracking_content_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
 		
 	</fieldset>
 
