@@ -138,7 +138,27 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 = Will Progressive Web Apps work on iOS devices? =
 
-PWA's require browsers with support for service workers and for iOS devices, support is available in Safari Technology Preview 48, macOS High Sierra 10.13.4 and iOS 11.3 beta seed 2. Since none of these are production releases, the general public will not be able to install your app on their mobile phones and smart devices. We will hopefully see full support by mid 2018.
+Starting with Safai and Chrome for iOS 11.3, Apple devices offer partial support for PWA's. However, there is no native Add To Home Screen prompt just yet. You can add your app by tapping "Add to Home Screen" button in the share menu of the browser ( look for the square icon with an up arrow in the foreground ).
+
+Just like you, we are eagerly awaiting the upcoming releases and we hope to see better compatibility in the coming months. 
+
+= How To Customize Splash Screen = 
+
+You can easily change the icon and the background color in SuperPWA > Settings. 
+
+Further customizations are not available right now, not because of any limitation of SuperPWA, but because they are not availalbe in the PWA technology. When more options come up in the future, we will add them to SuperPWA then. 
+
+= How To Track Visits Originating From Your Progressive Web App = 
+
+You can track visits from your PWA in your analytics software using the UTM Tracking add-on of SuperPWA. Go to SuperPWA > Add-Ons and activate UTM Tracking. Then in SuperPWA > UTM Tracking, you can set the UTM parameters as needed. Please [refer the documentation](https://superpwa.com/addons/utm-tracking/) for further information. 
+
+= GDPR Compliance =
+
+SuperPWA does not collect or store user data, nor does it set cookies or store tracking data. Content visited by users from your PWA is stored in the user's own device, in the cache of the browser. This is very similar to how modern browsers caches content offline for faster browsing. 
+
+With the UTM Tracking Add-On, you will be able to differentiate the visits originating from your PWA in your analytics software. You may have to include this in your privacy policy. Please note that SuperPWA does track the visits, we just help you add the UTM parameters to the URL of the Start Page of your app so that third party analytics tools can differentiate the visits. 
+
+Feel free to get in touch if you have any questions. 
 
 == Screenshots ==
 
