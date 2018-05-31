@@ -25,6 +25,14 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 And the best part? If you ever get stuck, we are here to watch your back! [Open a support](https://wordpress.org/support/plugin/super-progressive-web-apps) ticket if you have a question or need a feature. We are super excited to hear your feedback and we want to genuinely help you build the best Progressive Web App for your WordPress website!
 
+#### Quick Demo? 
+
+* Open up [SuperPWA.com](https://superpwa.com/?utm_source=wordpress.org&utm_medium=description-demo) in a supported device. 
+* Add the website to your home screen either from the Add to Home Screen prompt (Chrome for Android) or from the browser menu. 
+* Open the app from your home screen and you will see the splash screen. 
+* Turn off your data and wifi to go offline and open up the app. You will still be able to see the app and browse the pages you have already visited. 
+* Browse to a page that you haven't visited before. The offline page will be displayed. 
+
 #### Thank You PWA Enthusiasts! 
 
 We are humbled by the feedback from the community. Thanks to everyone who believed in us and tried our plugin. Your feedback has been invaluable and we have learned a lot from your experience. Thank you for your love and support and we hope to return the love by striving to bring you the best ever Progressive Web Apps plugin for WordPress!
@@ -40,7 +48,7 @@ Here are the current features of Super Progressive Web Apps:
 * Aggressive caching of pages using CacheStorage API.
 * Pages once cached are served even if the user is offline. 
 * Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
-* New in version 1.2: Support for theme-color.
+* New in version 1.2: Support for theme-color meta property. Change the color of browser address bar of Chrome, Firefox OS and Opera to match your website colors. 
 * New in version 1.2: Now you can edit the Application Name and Application Short name.
 * New in version 1.2: Set the start page of your PWA.
 * New in version 1.2: Set Accelerated Mobile Pages (AMP) version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
@@ -52,6 +60,8 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility. 
 * New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=wordpress.org&utm_medium=description) to track visits coming from your PWA.
+* New in version 1.8: Compatibility issues with OneSignal are now resolved! 
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=wordpress.org&utm_medium=description) that sets your app icons as Apple Touch Icons. 
 
 **Upcoming features:**
 
@@ -107,7 +117,7 @@ Uh, oh. Your PWA did not work as expected? You do not see the "Add to Home Scree
 
 * Make sure your website has a SSL certificate installed. i.e. your website should be https instead of http (as in https://your-domain.com).
 * Make sure you are using a supported device and a supported browser. Refer to the "Device and Browser Support For PWA" list above.
-* Make sure your icon is a PNG and 192px X 192 px in size. 
+* Make sure your Application Icon and Splash Screen Icon's are of PNG format and 192px X 192px and 512px X 512px in size respectively. 
 * Clear the browser cache and try again. In Chrome for Android, go to Settings > Privacy > "Clear browsing data".
 * If the application icon does not update after first install, delete the PWA from your phone, clear browser cache and install again. (We are working on making it better.) 
 * Create a [new support ticket](https://wordpress.org/support/plugin/super-progressive-web-apps) and share a link to your website. We will take a look and figure it out for you.
@@ -138,7 +148,7 @@ If you have any questions, please ask it on the [support forum](https://wordpres
 
 = Will Progressive Web Apps work on iOS devices? =
 
-Starting with Safai and Chrome for iOS 11.3, Apple devices offer partial support for PWA's. However, there is no native Add To Home Screen prompt just yet. You can add your app by tapping "Add to Home Screen" button in the share menu of the browser ( look for the square icon with an up arrow in the foreground ).
+Starting with Safari for iOS 11.3, Apple devices offer partial support for PWA's. However, there is no native Add To Home Screen prompt just yet. You can add your app by tapping "Add to Home Screen" button in the share menu of the browser ( look for the square icon with an up arrow in the foreground ).
 
 Just like you, we are eagerly awaiting the upcoming releases and we hope to see better compatibility in the coming months. 
 
@@ -146,17 +156,17 @@ Just like you, we are eagerly awaiting the upcoming releases and we hope to see 
 
 You can easily change the icon and the background color in SuperPWA > Settings. 
 
-Further customizations are not available right now, not because of any limitation of SuperPWA, but because they are not availalbe in the PWA technology. When more options come up in the future, we will add them to SuperPWA then. 
+Further customizations are not available right now, not because of any limitation of SuperPWA, but because they are not available in the PWA technology. When more options come up in the future, we will add them to SuperPWA then. 
 
 = How To Track Visits Originating From Your Progressive Web App = 
 
-You can track visits from your PWA in your analytics software using the UTM Tracking add-on of SuperPWA. Go to SuperPWA > Add-Ons and activate UTM Tracking. Then in SuperPWA > UTM Tracking, you can set the UTM parameters as needed. Please [refer the documentation](https://superpwa.com/addons/utm-tracking/) for further information. 
+You can track visits from your PWA in your analytics software (for e.g. Google Analytics) using the UTM Tracking add-on of SuperPWA. Go to SuperPWA > Add-Ons and activate UTM Tracking. Then in SuperPWA > UTM Tracking, you can set the UTM parameters as needed. Please [refer the documentation](https://superpwa.com/addons/utm-tracking/?utm_source=wordpress.org&utm_medium=description-faq) for further information. 
 
 = GDPR Compliance =
 
 SuperPWA does not collect or store user data, nor does it set cookies or store tracking data. Content visited by users from your PWA is stored in the user's own device, in the cache of the browser. This is very similar to how modern browsers caches content offline for faster browsing. 
 
-With the UTM Tracking Add-On, you will be able to differentiate the visits originating from your PWA in your analytics software. You may have to include this in your privacy policy. Please note that SuperPWA does track the visits, we just help you add the UTM parameters to the URL of the Start Page of your app so that third party analytics tools can differentiate the visits. 
+With the UTM Tracking Add-On, you will be able to differentiate the visits originating from your PWA in your analytics software. You may have to include this in your privacy policy. Please note that SuperPWA does not track the visits, we just help you add the UTM parameters to the URL of the Start Page of your app so that third party analytics tools can differentiate the visits. 
 
 Feel free to get in touch if you have any questions. 
 
@@ -167,13 +177,13 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 1.8 =
-* Date: 31.May.2018
+* Date: [31.May.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 4.9.6. 
 * New Add-On: Apple Touch Icons. Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices. 
-* Enhancement: Added support for Add To Home Screen prompt for Chrome 68 and beyond. 
+* Enhancement: Added support for Add to Home Screen prompt for Chrome 68 and beyond. 
 * Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
 * Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
-* Enhancement: Generated a .pot file with all strings for translation. You can also translate SuperPWA to your language by visiting [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/super-progressive-web-apps)
+* Enhancement: Generated a .pot file with all strings for translation. You can also translate SuperPWA to your language by visiting [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/super-progressive-web-apps) 
 * Bug Fix: Compatibility issues with OneSignal are resolved for single installs. 
 * Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
 
@@ -182,7 +192,7 @@ Feel free to get in touch if you have any questions.
 * Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context".
 
 = 1.7 =
-* Date: 03.May.2018
+* Date: [03.May.2018](https://superpwa.com/introducing-add-ons-for-superpwa/?utm_source=wordpress.org&utm_medium=changelog)
 * Minimum required WordPress version is now 3.6.0 (previously 3.5.0).
 * New Feature: Add-Ons for SuperPWA is here!
 * New Feature: SuperPWA is now a top-level menu to accommodate for the Add-Ons sub-menu page.
@@ -192,7 +202,7 @@ Feel free to get in touch if you have any questions.
 * Bug Fix: Incorrect manifest and service worker URLs when WordPress is installed in a folder. 
 
 = 1.6 =
-* Date: 23.April.2018
+* Date: [23.April.2018](https://superpwa.com/1-6-released-multisite-network-support/?utm_source=wordpress.org&utm_medium=changelog)
 * New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
 * New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
 * Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
@@ -209,7 +219,7 @@ Feel free to get in touch if you have any questions.
 * Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
 
 = 1.4 =
-* Date: 21.February.2018
+* Date: [21.February.2018](https://wordpress.org/support/topic/you-asked-and-we-listened-superpwa-1-4-ships-with-two-user-feature-requests/)
 * New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
 * New Feature: Added UI for theme_color property in manifest. [Feature request from @krunalsm](https://wordpress.org/support/topic/diffrent-theme_color-and-background_color/).
 * Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
