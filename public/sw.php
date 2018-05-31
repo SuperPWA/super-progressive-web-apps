@@ -28,10 +28,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  * @since 1.6
  * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
+ * @since 1.8 Added filter superpwa_sw_filename.
  */
 function superpwa_sw( $arg = 'src' ) {
 	
-	$sw_filename = 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js';
+	$sw_filename = apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
 	
 	switch( $arg ) {
 		
@@ -105,7 +106,7 @@ const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
 const fallbackImage = '<?php echo $settings['icon']; ?>';
 const filesToCache = [startPage, offlinePage, fallbackImage];
-const neverCacheUrls = [/\/wp-admin/,/\/wp-login/,/preview=true/];
+const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
 // Install
 self.addEventListener('install', function(e) {

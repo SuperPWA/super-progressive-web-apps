@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://superpwa.com">
-    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="" width=150 height=150>
+  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=SuperPWALogo">
+    <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="Super Progressive Web Apps" width=175 height=175>
   </a>
 
   <h3 align="center">Super Progressive Web Apps</h3>
@@ -21,7 +21,7 @@
     SuperPWA helps to convert your WordPress website into Progressive Web Apps easily.
     <br>
     <br>
-    <a href="https://superpwa.com"><strong>Visit Website »</strong></a>
+    <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-viewWeb"><strong>Visit Website »</strong></a>
     <br>
     <br>
     <a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/new?template=bug.md">Report bug</a>
@@ -57,14 +57,21 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-⚡️ Demo :  <a href="https://superpwa.com/?utm=GitHub">superpwa.com</a>
+⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-welcome">superpwa.com</a>
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-<a href="https://superpwa.com">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+<a href="https://superpwa.com?utm_source=github&utm_medium=readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+
+## ⭐ Support the project
+If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
+
+<a href="#"><img src="https://github.com/josevarghese/Progressive-Web-Apps-and-Service-Worker-Supported-Browsers/blob/master/20180513_120136.gif?raw=true" alt="Chrome" width="300px" height="76.95px" /></a>
+
+Also you can support us via [following on social media's and share about us](#share-via-social-medias-and-spread-superpwa).
 
 ## 🏗 Installation
 Once SuperPWA ⚡️ is installed, users browsing your website from a supported mobile device will see a "Add To Home Screen" notice (from the bottom of the screen) and will be able to 'install your website' on the home screen of their device. Every page visited is stored locally on their device and will be available to read even when they are offline!
@@ -96,16 +103,38 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
-* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme) to track visits coming from your PWA.
+* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme-version) to track visits coming from your PWA.
+* New in version 1.8: Compatibility issues with OneSignal are now resolved! 
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=github&utm_medium=readme-version) that sets your app icons as Apple Touch Icons. 
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
  
  ### Device and Browser Support For PWA
- | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome | <img src="https://user-images.githubusercontent.com/1215767/34348383-9e7ed492-ea4d-11e7-910c-03b39d52f496.png" alt="Firefox" width="16px" height="16px" /> Firefox | <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge | <img src="https://user-images.githubusercontent.com/1215767/34348380-93e77ae8-ea4d-11e7-8696-9a989ddbbbf5.png" alt="Edge" width="16px" height="16px" /> Edge (Mobile) | Opera Mini | Samsung Internet | Brave |
-| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
-| Yes | Yes | Partially | Beta | Yes | No | Yes | Yes |
-| 57+ | 57+ | 11.3+ | 17 ships | 1.0.0.1921 | - | 6.2+ | 1.0.44+
+ | | <img src="https://image.flaticon.com/icons/svg/732/732205.svg" alt="Chrome" width="32px" height="32px" /> Chrome | <img src="https://image.flaticon.com/icons/svg/732/732198.svg" alt="Firefox" width="32px" height="32px" /> Firefox | <img src="https://image.flaticon.com/icons/svg/732/732219.svg" alt="Edge" width="32px" height="32px" /> Edge | <img src="https://camo.githubusercontent.com/3fb130c75d01178836d96dcf3baccbe7b95b3642/68747470733a2f2f696d6167652e666c617469636f6e2e636f6d2f69636f6e732f7376672f3733322f3733323233332e737667" alt="Opera" width="32px" height="32px" /> Opera | <img src="https://image.flaticon.com/icons/svg/732/732241.svg" alt="Safari" width="32px" height="32px" /> Safari |<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Samsung_Internet_Logo.png/800px-Samsung_Internet_Logo.png" alt="Samsung" width="32px" height="32px" /> Samsung | <img src="https://upload.wikimedia.org/wikipedia/en/d/d0/UC_Browser_Logo.png" alt="UC Browser" width="32px" height="32px" /> UC Browser | <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Brave_Software_Logo.png" alt="Brave" width="32px" height="32px" /> Brave |
+| :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: | :---------: |
+| Add to Home Screen | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/123/123381.svg" alt="Beta or Partial Support" width="20px" height="20px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/123/123381.svg" alt="Beta or Partial Support" width="20px" height="20px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> |
+| Service Workers | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> |
+| Web Push & Notifications| <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/123/123381.svg" alt="Beta or Partial Support" width="20px" height="20px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> |
+| Payment Request API | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/876/876101.svg" alt="In Development" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/876/876101.svg" alt="In Development" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> | - | - |
+| Meta Theme Color | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | - | - | - | - | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> | - | <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Yes" width="32px" height="32px" /> |
+
+</br>
+
+<p align="center">
+  <img src="https://image.flaticon.com/icons/svg/144/144008.svg" alt="Supported" width="32px" height="32px" /> Supported
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+  <img src="https://image.flaticon.com/icons/svg/123/123381.svg" alt="Beta or Partial Support" width="32px" height="32px" /> Beta or Partial Support
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+  <img src="https://image.flaticon.com/icons/svg/876/876101.svg" alt="In Development" width="32px" height="32px" /> In Development
+</p>
+
 
 Progressive web apps need browsers that support manifests and service workers. Currently Google Chrome (version 57+), Chrome for Android (62), Mozilla Firefox (57), Firefox for Android (58) are the major browsers that support PWA. 
 

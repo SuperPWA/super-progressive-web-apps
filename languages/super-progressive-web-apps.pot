@@ -1,0 +1,395 @@
+# Copyright (C) 2018 Super Progressive Web Apps
+# This file is distributed under the same license as the Super Progressive Web Apps package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Super Progressive Web Apps 1.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-"
+"web-apps\n"
+"POT-Creation-Date: 2018-05-30 17:29:08+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.8)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: addons/utm-tracking.php:35 admin/admin-ui-setup.php:28
+#: admin/admin-ui-setup.php:31 admin/admin-ui-setup.php:34
+msgid "Super Progressive Web Apps"
+msgstr ""
+
+#: addons/utm-tracking.php:35 admin/admin-ui-render-addons.php:49
+msgid "UTM Tracking"
+msgstr ""
+
+#: addons/utm-tracking.php:146
+msgid "Current Start URL"
+msgstr ""
+
+#: addons/utm-tracking.php:155
+msgid "Campaign Source"
+msgstr ""
+
+#: addons/utm-tracking.php:164
+msgid "Campaign Medium"
+msgstr ""
+
+#: addons/utm-tracking.php:173
+msgid "Campaign Name"
+msgstr ""
+
+#: addons/utm-tracking.php:182
+msgid "Campaign Term"
+msgstr ""
+
+#: addons/utm-tracking.php:191
+msgid "Campaign Content"
+msgstr ""
+
+#: addons/utm-tracking.php:234
+msgid ""
+"This add-on automatically adds UTM campaign parameters to the <code>Start "
+"Page</code> URL in your <a href=\"%s\" target=\"_blank\">manifest</a>. This "
+"will help you identify visitors coming specifically from your app. <a href="
+"\"%s\" target=\"_blank\">Read more</a> about UTM Tracking."
+msgstr ""
+
+#: addons/utm-tracking.php:264
+msgid ""
+"Campaign Source is mandatory and defaults to <code>superpwa</code>. The "
+"remaining fields are optional."
+msgstr ""
+
+#: addons/utm-tracking.php:362 admin/admin-ui-render-settings.php:360
+msgid "Settings saved."
+msgstr ""
+
+#: addons/utm-tracking.php:371
+msgid "UTM Tracking for"
+msgstr ""
+
+#: addons/utm-tracking.php:382 admin/admin-ui-render-settings.php:383
+msgid "Save Settings"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:50
+msgid ""
+"Track visits from your app by adding UTM tracking parameters to the Start "
+"Page URL."
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:55
+msgid "Customize Settings &rarr;"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:60
+msgid "Apple Touch Icons"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:61
+msgid ""
+"Set the Application Icon and Splash Screen Icon as Apple Touch Icons for "
+"compatibility with iOS devices."
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:66
+msgid "More Details &rarr;"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:115
+msgid "<strong>Add-On activated: %s.</strong> <a href=\"%s\"%s>%s</a>"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:123
+msgid "Add-On deactivated"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:135
+msgid "Add-Ons for"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:137
+msgid "Add-Ons extend the functionality of SuperPWA."
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:177 admin/admin-ui-render-addons.php:349
+msgid "Deactivate"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:182
+msgid "More information about %s"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:182
+msgid "More Details"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:197
+msgid ""
+"<span class=\"compatibility-compatible\"><strong>Add-On active.</strong> <a "
+"href=\"%s\"%s>%s</a></span>"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:200
+msgid ""
+"<span class=\"compatibility-compatible\"><strong>Compatible</strong> with "
+"your version of SuperPWA</span>"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:203
+msgid ""
+"<span class=\"compatibility-incompatible\"><strong>Please upgrade</strong> "
+"to the latest version of SuperPWA</span>"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:217
+msgid "SuperPWA Newsletter"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:221
+msgid ""
+"Learn more about Progressive Web Apps<br>and get latest updates about "
+"SuperPWA"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:229
+msgid "Enter your email"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:231
+msgid "Subscribe"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:233
+msgid ""
+"we'll share our <code>root</code> password before we share your email with "
+"anyone else."
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:345
+msgid "Activate"
+msgstr ""
+
+#: admin/admin-ui-render-addons.php:354
+msgid "Install"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:60
+msgid ""
+"Used when there is insufficient space to display the full name of the "
+"application. <code>12</code> characters or less."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:83
+msgid "A brief description of what your app is about."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:108
+msgid ""
+"This will be the icon of your app when installed on the phone. Must be a "
+"<code>PNG</code> image exactly <code>192x192</code> in size."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:131
+msgid ""
+"This icon will be displayed on the splash screen of your app on supported "
+"devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in "
+"size."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:151
+msgid "Background color of the splash screen."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:171
+msgid ""
+"Theme color is used on supported devices to tint the UI elements of the "
+"browser and app switcher. When in doubt, use the same color as "
+"<code>Background Color</code>."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:194
+msgid "&mdash; Homepage &mdash;"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:201
+msgid ""
+"Specify the page to load when the application is launched from a device. "
+"Current start page is <code>%s</code>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:209
+msgid "Use AMP version of the start page."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:215
+msgid ""
+"Do not check this if your start page is the homepage, the blog index, or the "
+"archives page. AMP for WordPress does not create AMP versions for these "
+"pages."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:241
+msgid "&mdash; Default &mdash;"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:248
+msgid ""
+"Offline page is displayed when the device is offline and the requested page "
+"is not already cached. Current offline page is <code>%s</code>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:268
+msgid "Follow Device Orientation"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:271
+msgid "Portrait"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:274
+msgid "Landscape"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:280
+msgid ""
+"Set the orientation of your app on devices. When set to <code>Follow Device "
+"Orientation</code> your app will rotate as the device is rotated."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:302
+msgid ""
+"Manifest generated successfully. You can <a href=\"%s\" target=\"_blank"
+"\">see it here &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:305
+msgid ""
+"Manifest generation failed. Check if WordPress can write to your root folder "
+"(the same folder with wp-config.php). <a href=\"%s\" target=\"_blank\">Read "
+"more &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:320
+msgid "Service worker generated successfully."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:323
+msgid ""
+"Service worker generation failed. Check if WordPress can write to your root "
+"folder (the same folder with wp-config.php). <a href=\"%s\" target=\"_blank"
+"\">Read more &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:336
+msgid "Your website is served over HTTPS."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:339
+msgid ""
+"Progressive Web Apps require that your website is served over HTTPS. Please "
+"contact your host to add a SSL certificate to your domain."
+msgstr ""
+
+#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.8)  #-#-#-#-#
+#. Author of the plugin/theme
+#: admin/admin-ui-setup.php:28
+msgid "SuperPWA"
+msgstr ""
+
+#: admin/admin-ui-setup.php:31 admin/basic-setup.php:279
+msgid "Settings"
+msgstr ""
+
+#: admin/admin-ui-setup.php:34
+msgid "Add-Ons"
+msgstr ""
+
+#: admin/admin-ui-setup.php:63
+msgid "Application Name"
+msgstr ""
+
+#: admin/admin-ui-setup.php:72
+msgid "Application Short Name"
+msgstr ""
+
+#: admin/admin-ui-setup.php:81
+msgid "Description"
+msgstr ""
+
+#: admin/admin-ui-setup.php:90
+msgid "Application Icon"
+msgstr ""
+
+#: admin/admin-ui-setup.php:99
+msgid "Splash Screen Icon"
+msgstr ""
+
+#: admin/admin-ui-setup.php:108
+msgid "Background Color"
+msgstr ""
+
+#: admin/admin-ui-setup.php:117
+msgid "Theme Color"
+msgstr ""
+
+#: admin/admin-ui-setup.php:126
+msgid "Start Page"
+msgstr ""
+
+#: admin/admin-ui-setup.php:135
+msgid "Offline Page"
+msgstr ""
+
+#: admin/admin-ui-setup.php:144
+msgid "Orientation"
+msgstr ""
+
+#: admin/admin-ui-setup.php:153
+msgid "Status"
+msgstr ""
+
+#: admin/admin-ui-setup.php:161
+msgid "Manifest"
+msgstr ""
+
+#: admin/admin-ui-setup.php:170
+msgid "Service Worker"
+msgstr ""
+
+#: admin/admin-ui-setup.php:179
+msgid "HTTPS"
+msgstr ""
+
+#: admin/admin-ui-setup.php:305
+msgid ""
+"If you like SuperPWA, please <a href=\"%s\" target=\"_blank\">make a "
+"donation</a> or leave a <a href=\"%s\" target=\"_blank\">&#9733;&#9733;"
+"&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a "
+"bunch!"
+msgstr ""
+
+#: admin/basic-setup.php:82 admin/basic-setup.php:116
+msgid ""
+"<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a "
+"href=\"%s\" target=\"_blank\">Discover new features and read the story &rarr;"
+"</a>"
+msgstr ""
+
+#: admin/basic-setup.php:295
+msgid "Demo"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Convert your WordPress website into a Progressive Web App"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri"
+msgstr ""

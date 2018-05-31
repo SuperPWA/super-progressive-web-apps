@@ -7,6 +7,7 @@
  * @function	superpwa_register_settings			Register Settings
  * @function	superpwa_validater_and_sanitizer()	Validate And Sanitize User Input Before Its Saved To Database
  * @function	superpwa_get_settings()				Get settings from database
+ * @function 	superpwa_enqueue_css_js()			Enqueue CSS and JS
  * @function	superpwa_after_save_settings_todo()	Todo list after saving admin options
  * @function	superpwa_footer_text()				Admin footer text
  * @function	superpwa_footer_version()			Admin footer version

@@ -9,8 +9,8 @@
  * @function	superpwa_addons_status()				Find add-on status
  * @function	superpwa_addons_button_text()			Button text based on add-on status
  * @function 	superpwa_addons_button_link() 			Action URL based on add-on status
- * @function 	superpwa_addons_activator()				Do bundled add-on activation and deactivation
- * @function	superpwa_addons_handle_activation()		Handle add-on activation and deactivation
+ * @function	superpwa_addons_handle_activation()		Handle add-on activation
+ * @function	superpwa_addons_handle_deactivation()	Handle add-on deactivation
  */
 
 // Exit if accessed directly
@@ -23,19 +23,23 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 		array(
  *			'addon-slug'	=> 	array(
  *									'name'					=> 'Add-On Name',
- * 									'type'					=> 'bundled | addon',
  * 									'description'			=> 'Add-On description',
+ * 									'type'					=> 'bundled | addon',
  * 									'icon'					=> 'icon-for-addon-128x128.png',
  * 									'link'					=> 'https://superpwa.com/addons/details-page-of-addon',
+ * 									'admin_link'			=> admin_url( 'admin.php?page=superpwa-addon-admin-page' ),
+ * 									'admin_link_text'		=> __( 'Customize settings | More Details &rarr;', 'super-progressive-web-apps' ),
+ * 									'admin_link_target'		=> 'admin | external',
  * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
  *								)
  *		);
  *
  * @param (string) addon-slug to retrieve the details about a specific add-on. False by default and then returns all add-ons.
  * 
- * @return (array) an associative array containing all the info about SuperPWA add-ons.
+ * @return (array|boolean) an associative array containing all the info about the requested add-on. False if add-on not found.
  * 
  * @since 1.7
+ * @since 1.8 Returns false of $slug isn't found.
  */
 function superpwa_get_addons( $slug = false ) {
 	
@@ -43,16 +47,34 @@ function superpwa_get_addons( $slug = false ) {
 	$addons = array(
 		'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
-							'type'					=> 'bundled',
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.7',
+						),
+		'apple_touch_icons' => array(
+							'name'					=> __( 'Apple Touch Icons', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
+							'icon'					=> 'superpwa-128x128.png',
+							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'external',
+							'superpwa_min_version'	=> '1.8',
 						),
 	);
 	
-	if ( ( $slug === false ) || ( ! isset( $addons[$slug] ) ) ) {
+	if ( $slug === false ) {
 		return $addons;
+	}
+	
+	if ( ! isset( $addons[$slug] ) ) {
+		return false;
 	}
 	
 	return $addons[$slug];
@@ -70,24 +92,35 @@ function superpwa_addons_interface_render() {
 		return;
 	}
 
-	// Add-on activation notice
+	// Add-on activation todo
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
 		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
 		do_action( 'superpwa_addon_activated_' . $_GET['addon'] );
-			
-		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_activated_message', __( 'Add-On activated.', 'super-progressive-web-apps' ), 'updated' );
 		
-		// Show Settings Saved Message
-		settings_errors( 'superpwa_settings_group' );		
+		// Get add-on info
+		$addon = superpwa_get_addons( $_GET['addon'] );
+		
+		// Add UTM Tracking to admin_link_text if its not an admin page.
+		if ( $addon['admin_link_target'] === 'external' ) {
+			$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-activation-notice';
+		}
+		
+		// Set link target attribute so that external links open in a new tab.
+		$link_target = ( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : '';
+		
+		if ( $addon !== false ) {
+			
+			// Add-on activation notice
+			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s"%s>%s</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'], $link_target, $addon['admin_link_text'] ) . '</p></div>';	
+		}
 	}
 	
 	// Add-on de-activation notice
 	if ( isset( $_GET['deactivated'] ) ) {
 			
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_addon_deactivated_message', __( 'Add-On deactivated', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -113,7 +146,17 @@ function superpwa_addons_interface_render() {
 				$superpwa_newsletter = true;
 				
 				// Looping over each add-on
-				foreach( $addons as $slug => $addon ) { ?>
+				foreach( $addons as $slug => $addon ) { 
+				
+					// Add UTM Tracking to admin_link_text if its not an admin page.
+					if ( $addon['admin_link_target'] === 'external' ) {
+						$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-card';
+					}
+					
+					// Set link target attribute so that external links open in a new tab.
+					$link_target = ( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : '';
+					
+					?>
 			
 					<div class="plugin-card plugin-card-<?php echo $slug; ?>">
 					
@@ -121,7 +164,7 @@ function superpwa_addons_interface_render() {
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>">
+									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank">
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
@@ -149,11 +192,16 @@ function superpwa_addons_interface_render() {
 						
 						<div class="plugin-card-bottom">
 							<div class="column-compatibility">
-								<?php if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) { ?>
-									<span class="compatibility-compatible"><?php _e( '<strong>Compatible</strong> with your version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
-								<?php } else { ?>
-									<span class="compatibility-incompatible"><?php _e( '<strong>Please upgrade</strong> to the latest version of SuperPWA', 'super-progressive-web-apps' ); ?></span>
-								<?php } ?>
+								<?php 
+								if ( superpwa_addons_status( $slug ) == 'active' ) {
+									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s"%s>%s</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, $addon['admin_link_text'] ); 
+								} 
+								else if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) {
+									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>', 'super-progressive-web-apps' ); 
+								} 
+								else { 
+									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>', 'super-progressive-web-apps' );
+								} ?>
 							</div>
 						</div>
 						
@@ -224,18 +272,18 @@ function superpwa_addons_interface_render() {
  */
 function superpwa_addons_status( $slug ) {
 	
-	// Get add-ons array
-	$addons = superpwa_get_addons();
+	// Get add-on details
+	$addon = superpwa_get_addons( $slug );
 	
 	// A security check to make sure that the add-on under consideration exist.
-	if ( ! isset( $addons[$slug] ) ) {
+	if ( $addon === false ) {
 		return false;
 	}
 	
 	// Get active add-ons
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
-	switch( $addons[$slug]['type'] ) {
+	switch( $addon['type'] ) {
 		
 		// Bundled add-ons ships with SuperPWA and need not be installed separately.
 		case 'bundled': 
@@ -323,8 +371,8 @@ function superpwa_addons_button_link( $slug ) {
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $slug );
 	
-	// Get add-ons array
-	$addons = superpwa_get_addons();
+	// Get add-on details
+	$addon = superpwa_get_addons( $slug );
 	
 	switch( $addon_status ) {
 		
@@ -332,12 +380,12 @@ function superpwa_addons_button_link( $slug ) {
 		case 'inactive':
 			
 			// Plugin activation link for add-on plugins that are installed separately.
-			if ( $addons[$slug]['type'] == 'addon' ) {
+			if ( $addon['type'] == 'addon' ) {
 				wp_nonce_url( admin_url( 'plugins.php?action=activate&plugin=' . $slug ), 'activate-plugin_' . $slug );
 			}
 			
 			// Activation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
 			
 			break;
 			
@@ -345,122 +393,108 @@ function superpwa_addons_button_link( $slug ) {
 		case 'active': 
 		
 			// Plugin deactivation link for add-on plugins that are installed separately.
-			if ( $addons[$slug]['type'] == 'addon' ) {
+			if ( $addon['type'] == 'addon' ) {
 				wp_nonce_url( admin_url( 'plugins.php?action=deactivate&plugin=' . $slug ), 'deactivate-plugin_' . $slug );
 			}
 			
 			// Deactivation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin.php?page=superpwa-addons&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
 			
 			break;
 		
 		// If add-on is not installed and for edge cases where $addon_status is false, we use the add-on link.
 		case 'uninstalled':
 		default:
-			return $addons[$slug]['link'];
+			return $addon['link'];
 			break;
 	}
 }
 
 /**
- * Do add-on activation and deactivation
+ * Handle add-on activation
  * 
- * Adds/removes the Add-On slug from the $settings['active_addons'] in SuperPWA settings.
- * 
- * @param $slug (string) this is the $key used in the $addons array in superpwa_get_addons().
- * @param $status (boolean) True to activate, False to deactivate.
- * 
- * @return (boolean) True on success, false otherwise. 
- *		Success = intended action, i.e. if deactivation is the intend, then success means successful deactivation.
- * 
+ * Verifies that the activation request is valid and then redirects the page back to the add-ons page.
+ * Hooked onto admin_post_superpwa_activate_addon action hook
+ *
  * @since 1.7
+ * @since 1.8 Handles only activation. Used to handle both activation and deactivation.
+ * @since 1.8 Hooked onto admin_post_superpwa_activate_addon. Was hooked to load-superpwa_page_superpwa-addons before. 
  */
-function superpwa_addons_activator( $slug, $status ) {
+function superpwa_addons_handle_activation() {
 	
 	// Get the add-on status
-	$addon_status = superpwa_addons_status( $slug );
+	$addon_status = superpwa_addons_status( $_GET['addon'] );
 	
-	// Check if its a valid add-on
-	if ( ! $addon_status ) {
-		return false;
+	// Authentication
+	if ( 
+		! current_user_can( 'manage_options' ) || 
+		! isset( $_GET['addon'] ) || 
+		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) || 
+		! ( $addon_status == 'inactive' ) 
+	) {
+		
+		// Return to referer if authentication fails.
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		exit;
+	}
+		
+	// Get active add-ons
+	$active_addons = get_option( 'superpwa_active_addons', array() );
+	
+	// Add the add-on to the list of active add-ons
+	$active_addons[] = $_GET['addon'];
+	
+	// Write settings back to database
+	update_option( 'superpwa_active_addons', $active_addons );
+		
+	// Redirect back to add-ons sub-menu
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
+	exit;
+}
+add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activation' );
+
+/**
+ * Handle add-on deactivation
+ * 
+ * Verifies that the deactivation request is valid and then redirects the page back to the add-ons page.
+ * Hooked onto admin_post_superpwa_deactivate_addon action hook.
+ *
+ * @since 1.8
+ */
+function superpwa_addons_handle_deactivation() {
+	
+	// Get the add-on status
+	$addon_status = superpwa_addons_status( $_GET['addon'] );
+	
+	// Authentication
+	if ( 
+		! current_user_can( 'manage_options' ) || 
+		! isset( $_GET['addon'] ) || 
+		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) || 
+		! ( $addon_status == 'active' ) 
+	) {
+		
+		// Return to referer if authentication fails.
+		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		exit;
 	}
 	
 	// Get active add-ons
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
-	// Activate add-on
-	if ( ( $status === true ) && ( $addon_status == 'inactive' ) ) {
+	// Delete the add-on from the active_addons array in SuperPWA settings.
+	$active_addons = array_flip( $active_addons );
+	unset( $active_addons[ $_GET['addon'] ] );
+	$active_addons = array_flip( $active_addons );
 		
-		// Add the add-on to the list of active add-ons
-		$active_addons[] = $slug;
+	// Write settings back to database
+	update_option( 'superpwa_active_addons', $active_addons );
 		
-		// Write settings back to database
-		update_option( 'superpwa_active_addons', $active_addons );
-		
-		return true;
-	}
+	// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
+	do_action( 'superpwa_addon_deactivated_' . $_GET['addon'] );
 	
-	// De-activate add-on
-	if ( ( $status === false ) && ( $addon_status == 'active' ) ) {
-		
-		// Delete the add-on from the active_addons array in SuperPWA settings.
-		$active_addons = array_flip( $active_addons );
-		unset( $active_addons[$slug] );
-		$active_addons = array_flip( $active_addons );
-		
-		// Write settings back to database
-		update_option( 'superpwa_active_addons', $active_addons );
-		
-		// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
-		do_action( 'superpwa_addon_deactivated_' . $slug );
-		
-		return true;
-	}
-	
-	return false;
+	// Redirect back to add-ons sub-menu
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
+	exit;
 }
-
-/**
- * Handle add-on activation and deactivation
- * 
- * Verifies that the activation / deactivation request is valid and calls superpwa_addons_activator()
- * then redirects the page back to the add-ons page.
- * 
- * Hooked onto load-superpwa_page_superpwa-addons action hook and is called every time the add-ons page is loaded
- * 
- * @param void
- * @return void
- *
- * @since 1.7
- */
-function superpwa_addons_handle_activation() {
-	
-	// Authentication
-	if ( ! isset( $_GET['addon'] ) || ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
-
-	// Handing add-on activation
-	if ( isset( $_GET['superpwa_addon_activate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) {
-		
-		// Handling activation
-		if ( superpwa_addons_activator( $_GET['addon'], true ) === true ) {
-			
-			// Redirect to add-ons sub-menu
-			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
-			exit;
-		}		
-	}
-	
-	// Handing add-on de-activation
-	if ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && isset( $_GET['addon'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) {
-		
-		// Handling deactivation
-		if ( superpwa_addons_activator( $_GET['addon'], false ) === true ) {
-			
-			wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
-			exit;
-		}
-	}
-}
-add_action( 'load-superpwa_page_superpwa-addons', 'superpwa_addons_handle_activation' );
+add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );

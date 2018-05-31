@@ -231,7 +231,7 @@ function superpwa_utm_tracking_section_cb() {
 	// Get add-on info
 	$addon_utm_tracking = superpwa_get_addons( 'utm_tracking' );
 	
-	printf( '<p>' . __( 'Add UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about UTM Tracking.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
+	printf( '<p>' . __( 'This add-on automatically adds UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about UTM Tracking.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
 }
 
 /**
@@ -241,7 +241,7 @@ function superpwa_utm_tracking_section_cb() {
  */
 function superpwa_utm_tracking_start_url_cb() {
 	
-	echo '<code>' . superpwa_get_start_url( true ) . '</code>';
+	echo '<code style="word-break: break-all;">' . superpwa_get_start_url( true ) . '</code>';
 }
 
 /**
@@ -260,8 +260,8 @@ function superpwa_utm_tracking_source_cb() {
 		
 	</fieldset>
 	
-	<p class="description" id="tagline-description">
-		<?php _e( 'Source is mandatory and defaults to <code>superpwa</code>', 'super-progressive-web-apps' ); ?>
+	<p class="description">
+		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>. The remaining fields are optional.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
@@ -279,7 +279,7 @@ function superpwa_utm_tracking_medium_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
 		
 	</fieldset>
 
@@ -298,7 +298,7 @@ function superpwa_utm_tracking_name_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
 		
 	</fieldset>
 
@@ -317,7 +317,7 @@ function superpwa_utm_tracking_term_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_term]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_term'] ) && ( ! empty($settings['utm_term']) ) ) echo esc_attr( $settings['utm_term'] ); ?>"/>
 		
 	</fieldset>
 
@@ -336,7 +336,7 @@ function superpwa_utm_tracking_content_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_content]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_content'] ) && ( ! empty($settings['utm_content']) ) ) echo esc_attr( $settings['utm_content'] ); ?>"/>
 		
 	</fieldset>
 
