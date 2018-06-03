@@ -6,7 +6,7 @@
  * Author: SuperPWA
  * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
  * Contributors: Arun Basil Lal, Jose Varghese
- * Version: 1.8
+ * Version: 1.8.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.6 Depreciated constants for multisite compatibility: SUPERPWA_MANIFEST_FILENAME, SUPERPWA_MANIFEST_ABS, SUPERPWA_MANIFEST_SRC
  * @since 1.6 Depreciated constants for multisite compatibility: SUPERPWA_SW_FILENAME, SUPERPWA_SW_ABS, SUPERPWA_SW_SRC
  */
-if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.8' ); // SuperPWA current version
+if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.8.1' ); // SuperPWA current version
 if ( ! defined( 'SUPERPWA_PATH_ABS' ) ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
 if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
 

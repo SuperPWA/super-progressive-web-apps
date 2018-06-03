@@ -176,6 +176,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 1.8.1 =
+* Date: 
+* 
+
 = 1.8 =
 * Date: [31.May.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 4.9.6. 
