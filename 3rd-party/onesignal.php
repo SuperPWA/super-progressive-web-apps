@@ -34,7 +34,7 @@ if ( class_exists( 'OneSignal' ) ) {
 	}
 	
 	// Show admin notice.
-	add_action( 'admin_notices', 'superpwa_onesignal_admin_notices' );
+	add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
 }
 
 /**
@@ -173,15 +173,13 @@ add_action( 'deactivate_onesignal-free-web-push-notifications/onesignal.php', 's
  * One Single installs, warn users to add SuperPWA manifest as custom manifest in OneSignal settings.
  * One multisites, warn users that SuperPWA and OneSignal cannot work together. 
  * 
- * @return (bool) True if notice is displayed. False otherwise.
- * 
  * @since 1.8.1
  */
 function superpwa_onesignal_admin_notices() {
 	
 	// Notices only for admins.
 	if ( ! current_user_can( 'manage_options' ) ) {
-		return false;
+		return;
 	}
 	
 	if ( is_multisite() ) {
@@ -192,7 +190,8 @@ function superpwa_onesignal_admin_notices() {
 			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice'
 		) . '</p></div>';
 		
-		return true;
+		// Filter PWA status since PWA is not ready yet. 
+		add_filter( 'superpwa_is_pwa_ready', '__return_false' );
 	}
 	
 	// Get OneSignal settings.
@@ -217,10 +216,7 @@ function superpwa_onesignal_admin_notices() {
 			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-admin-notice'
 		) . '</p></div>';
 		
-		// Return true indicating that the notice is displayed.
-		return true;
+		// Filter PWA status since PWA is not ready yet. 
+		add_filter( 'superpwa_is_pwa_ready', '__return_false' );
 	}
-	
-	// Return false for no notice. 
-	return false;
 }
