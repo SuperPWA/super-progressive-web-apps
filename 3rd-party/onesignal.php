@@ -19,14 +19,18 @@ if ( ! defined('ABSPATH') ) exit;
 // If OneSignal is installed and active
 if ( class_exists( 'OneSignal' ) ) {
 	
-	// Add gcm_sender_id to SuperPWA manifest
-	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+	// Filter manifest and service worker for singe websites and not for multisites.
+	if ( ! is_multisite() ) {
 	
-	// Change service worker filename to match OneSignal's service worker
-	add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
-	
-	// Import OneSignal service worker in SuperPWA
-	add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+		// Add gcm_sender_id to SuperPWA manifest
+		add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+		
+		// Change service worker filename to match OneSignal's service worker
+		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+		
+		// Import OneSignal service worker in SuperPWA
+		add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+	}
 }
 
 /**
@@ -93,8 +97,14 @@ function superpwa_onesignal_sw( $sw ) {
  * Regenerate SuperPWA service worker with the new filename.
  * 
  * @since 1.8
+ * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites. 
  */
 function superpwa_onesignal_activation() {
+	
+	// Do not do anything for multisites
+	if ( is_multisite() ) {
+		return;
+	}
 	
 	// Filter in gcm_sender_id to SuperPWA manifest
 	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
@@ -124,8 +134,14 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
  * Regenerate SuperPWA service worker.
  * 
  * @since 1.8
+ * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites. 
  */
 function superpwa_onesignal_deactivation() {
+	
+	// Do not do anything for multisites
+	if ( is_multisite() ) {
+		return;
+	}
 	
 	// Remove gcm_sender_id from SuperPWA manifest
 	remove_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
