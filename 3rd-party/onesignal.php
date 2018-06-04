@@ -184,6 +184,17 @@ function superpwa_onesignal_admin_notices() {
 		return false;
 	}
 	
+	if ( ! is_multisite() ) {
+		echo '<div class="notice notice-warning"><p>' . 
+		sprintf( 
+			__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Please disable one of these plugins until the compatibility is available.<br>
+			Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
+			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice'
+		) . '</p></div>';
+		
+		return true;
+	}
+	
 	// Get OneSignal settings.
 	$onesignal_wp_settings = get_option( 'OneSignalWPSetting' );
 	
