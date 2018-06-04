@@ -120,7 +120,7 @@ function superpwa_add_manifest_to_wp_head() {
 	
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 	
-	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL . PHP_EOL; 
+	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL; 
 	
 	echo $tags;
 }
