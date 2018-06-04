@@ -7,6 +7,7 @@
  * @function	superpwa_is_amp()				Check if any AMP plugin is installed
  * @function 	superpwa_get_start_url()		Return Start Page URL
  * @function	superpwa_httpsify()				Convert http URL to https
+ * @function	superpwa_is_pwa_ready()			Check if PWA is ready
  */
 
 // Exit if accessed directly
@@ -101,4 +102,28 @@ function superpwa_get_start_url( $rel = false ) {
  */
 function superpwa_httpsify( $url ) {
 	return str_replace( 'http://', 'https://', $url );
+}
+
+/**
+ * Check if PWA is ready
+ * 
+ * Check for HTTPS.
+ * Check if manifest is generated.
+ * Check if service worker is generated. 
+ * 
+ * @return (bool) True if PWA is ready. False otherwise
+ * 
+ * @since 1.8.1
+ */
+function superpwa_is_pwa_ready() {
+	
+	if ( 
+		is_ssl() && 
+		superpwa_get_contents( superpwa_manifest( 'abs' ) ) && 
+		superpwa_get_contents( superpwa_sw( 'abs' ) ) 
+	) {
+		return apply_filters( 'superpwa_is_pwa_ready', true );
+	}
+	
+	return false; 
 }
