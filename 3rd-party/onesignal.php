@@ -35,6 +35,7 @@ if ( class_exists( 'OneSignal' ) ) {
 	
 	// Show admin notice.
 	add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
+	add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
 }
 
 /**
@@ -182,6 +183,7 @@ function superpwa_onesignal_admin_notices() {
 		return;
 	}
 	
+	// Incompatibility notice for Multisites
 	if ( is_multisite() ) {
 		echo '<div class="notice notice-warning"><p>' . 
 		sprintf( 
@@ -192,6 +194,8 @@ function superpwa_onesignal_admin_notices() {
 		
 		// Filter PWA status since PWA is not ready yet. 
 		add_filter( 'superpwa_is_pwa_ready', '__return_false' );
+		
+		return;
 	}
 	
 	// Get OneSignal settings.

@@ -177,7 +177,7 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 1.8.1 =
-* Date: 
+* Date: [05.June.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement: Added an admin notice with instructions for OneSignal integration. 
 * Enhancement: Updated console log message for URLs excluded from cache for better clarity. 
 
