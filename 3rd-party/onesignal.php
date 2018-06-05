@@ -187,8 +187,7 @@ function superpwa_onesignal_admin_notices() {
 	if ( is_multisite() ) {
 		echo '<div class="notice notice-warning"><p>' . 
 		sprintf( 
-			__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Please disable one of these plugins until the compatibility is available.<br>
-			Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
+			__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
 			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice#multisites'
 		) . '</p></div>';
 		
@@ -210,11 +209,7 @@ function superpwa_onesignal_admin_notices() {
 	) {
 		echo '<div class="notice notice-warning"><p>' . 
 		sprintf( 
-			__( '<strong>Action Required to integrate SuperPWA with OneSignal:</strong><br>
-			1. Go to <a href="%s" target="_blank">OneSignal Configuration > Scroll down to Advanced Settings &rarr;</a><br>
-			2. Enable <strong>Use my own manifest.json</strong><br>
-			3. Set <code>%s</code>as <strong>Custom manifest.json URL</strong> and Save Settings.<br>
-			Please refer the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
+			__( '<strong>Action Required to integrate SuperPWA with OneSignal:</strong><br>1. Go to <a href="%s" target="_blank">OneSignal Configuration > Scroll down to Advanced Settings &rarr;</a><br>2. Enable <strong>Use my own manifest.json</strong><br>3. Set <code>%s</code>as <strong>Custom manifest.json URL</strong> and Save Settings.<br>Please refer the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
 			admin_url( 'admin.php?page=onesignal-push#configuration' ), 
 			superpwa_manifest( 'src' ),
 			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-admin-notice'
