@@ -15,7 +15,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-settings.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-addons.php' );
 
 // 3rd party compatibility
-if ( ! is_multisite() ) require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );

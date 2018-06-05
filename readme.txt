@@ -176,6 +176,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 1.8.1 =
+* Date: [05.June.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog#1.8.1)
+* Enhancement: Added an admin notice with [instructions for OneSignal integration](https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=wordpress.org&utm_medium=changelog). 
+* Enhancement: Updated console log message for URLs excluded from cache for better clarity. 
+
 = 1.8 =
 * Date: [31.May.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 4.9.6. 
@@ -265,6 +270,10 @@ Feel free to get in touch if you have any questions.
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.8.1 =
+* Enhancement: Added an admin notice with instructions for OneSignal integration. 
+* Enhancement: Updated console log message for URLs excluded from cache for better clarity. 
 
 = 1.8 =
 * Tested with WordPress 4.9.6. 

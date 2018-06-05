@@ -140,7 +140,7 @@ self.addEventListener('fetch', function(e) {
 	
 	// Return if the current request url is in the never cache list
 	if ( ! neverCacheUrls.every(checkNeverCacheList, e.request.url) ) {
-	  console.log('SuperPWA: Current page is excluded from cache');
+	  console.log( 'SuperPWA: Current request is excluded from cache.' );
 	  return;
 	}
 	
