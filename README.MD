@@ -38,7 +38,7 @@
 
 
 <p align="center">
-	<a href="https://superpwa.com">
+	<a href="https://superpwa.com/?utm_source=GitHub&utm_medium=LighthouseScore">
 			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
 	</a>
 	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
@@ -103,9 +103,9 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
-* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme-version) to track visits coming from your PWA.
+* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=GitHub&utm_medium=readme-version) to track visits coming from your PWA.
 * New in version 1.8: Compatibility issues with OneSignal are now resolved! 
-* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=github&utm_medium=readme-version) that sets your app icons as Apple Touch Icons. 
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=readme-version) that sets your app icons as Apple Touch Icons. 
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
