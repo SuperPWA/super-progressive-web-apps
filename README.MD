@@ -211,7 +211,7 @@ There are various ways you can contribute:
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174857.svg" title="Share SuperPWA on LinkedIn" width=20 height=20> Share on LinkedIn</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p> &nbsp;&nbsp;&nbsp; <a href="https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Share on Google+" width=20 height=20> Share on Google+ </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-## 🎍 Changelog
+## 📇 Changelog
 [superpwa.com/changelog/](https://superpwa.com/changelog/?utm_source=GitHub&utm_medium=Readme-Changelog).
     
 Emoji Credits : [Emojipedia](emojipedia.org)
