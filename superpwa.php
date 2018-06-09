@@ -19,11 +19,12 @@
  * @link https://github.com/arunbasillal/WordPress-Starter-Plugin
  *
  * /3rd-party/					- Functions for compatibility with 3rd party plugins and hosts.
- * /admin/ 						- Plugin backend.
+ * /addons/ 					- Bundled add-ons
+ * /admin/						- Plugin backend.
  * /functions/					- Functions and utilites.
  * /includes/					- External third party classes and libraries.
  * /languages/					- Translation files go here. 
- * /public/						- Front end files go here.
+ * /public/ 					- Front end files go here.
  * index.php					- Dummy file.
  * license.txt					- GPL v2
  * loader.php					- Loads everything.
