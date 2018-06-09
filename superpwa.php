@@ -45,7 +45,7 @@ if ( ! defined('ABSPATH') ) exit;
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.9' ); // SuperPWA current version
 if ( ! defined( 'SUPERPWA_PATH_ABS' ) ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
-if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - http://example.com/wp/wp-content/plugins/super-progressive-web-apps/
+if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - https://example.com/wp-content/plugins/super-progressive-web-apps/
 
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php' );
