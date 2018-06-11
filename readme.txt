@@ -178,6 +178,7 @@ Feel free to get in touch if you have any questions.
 
 = 1.9 =
 * Date: 
+* Enhancement: SuperPWA is now translated to French thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent). 
 * Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
 
 = 1.8.1 =
