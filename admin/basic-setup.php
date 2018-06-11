@@ -262,8 +262,7 @@ register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deacti
  * @since 1.0
  */
 function superpwa_load_plugin_textdomain() {
-	
-    load_plugin_textdomain( 'super-progressive-web-apps', FALSE, SUPERPWA_PATH_ABS . '/languages/' );
+	load_plugin_textdomain( 'super-progressive-web-apps', false, '/super-progressive-web-apps/languages/' );
 }
 add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
 

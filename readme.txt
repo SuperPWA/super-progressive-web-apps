@@ -178,7 +178,7 @@ Feel free to get in touch if you have any questions.
 
 = 1.9 =
 * Date: 
-* 
+* Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
 
 = 1.8.1 =
 * Date: [05.June.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog#1.8.1)
