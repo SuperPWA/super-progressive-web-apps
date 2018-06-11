@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the Super Progressive Web Apps package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Super Progressive Web Apps 1.8.1\n"
+"Project-Id-Version: Super Progressive Web Apps 1.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-"
 "web-apps\n"
-"POT-Creation-Date: 2018-06-05 11:24:28+00:00\n"
+"POT-Creation-Date: 2018-06-11 15:50:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgid ""
 "\">OneSignal integration documentation</a> for more info. "
 msgstr ""
 
-#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.8.1)  #-#-#-#-#
+#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.9)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: addons/utm-tracking.php:35 admin/admin-ui-setup.php:28
 #: admin/admin-ui-setup.php:31 admin/admin-ui-setup.php:34
@@ -204,6 +204,11 @@ msgstr ""
 msgid "A brief description of what your app is about."
 msgstr ""
 
+#: admin/admin-ui-render-settings.php:104
+#: admin/admin-ui-render-settings.php:127
+msgid "Choose Icon"
+msgstr ""
+
 #: admin/admin-ui-render-settings.php:108
 msgid ""
 "This will be the icon of your app when installed on the phone. Must be a "
@@ -311,13 +316,13 @@ msgid ""
 "contact your host to add a SSL certificate to your domain."
 msgstr ""
 
-#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.8.1)  #-#-#-#-#
+#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.9)  #-#-#-#-#
 #. Author of the plugin/theme
 #: admin/admin-ui-setup.php:28
 msgid "SuperPWA"
 msgstr ""
 
-#: admin/admin-ui-setup.php:31 admin/basic-setup.php:279
+#: admin/admin-ui-setup.php:31 admin/basic-setup.php:278
 msgid "Settings"
 msgstr ""
 
@@ -396,7 +401,7 @@ msgid ""
 "</a>"
 msgstr ""
 
-#: admin/basic-setup.php:295
+#: admin/basic-setup.php:294
 msgid "Demo"
 msgstr ""
 
