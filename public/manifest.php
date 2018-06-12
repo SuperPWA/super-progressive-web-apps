@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function superpwa_manifest( $arg = 'src' ) {
 	
-	$manifest_filename = apply_filters( 'superpwa_manifest_filename', 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json', $args );
+	$manifest_filename = apply_filters( 'superpwa_manifest_filename', 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json', $arg );
 	
 	switch( $arg ) {
 		
