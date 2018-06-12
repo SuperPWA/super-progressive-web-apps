@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function superpwa_sw( $arg = 'src' ) {
 	
-	$sw_filename = apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
+	$sw_filename = apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js', $arg );
 	
 	switch( $arg ) {
 		
