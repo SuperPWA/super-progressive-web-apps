@@ -1,0 +1,24 @@
+{
+    "name": "juslintek/super-progressive-web-apps",
+    "description": "Wordpress plugin for creating Progressive Web Apps wordpress compatability, required configurations and their files",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arun Basil Lal",
+            "email": "sebastiaan@hoppinger.com"
+        },
+        {
+            "name": "Linas Jysys",
+            "email": "jusys.linas@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*",
+        "wp-coding-standards/wpcs": "*",
+        "behat/behat": "*",
+        "phpunit/phpunit": "*",
+        "wpreadme2markdown/wpreadme2markdown": "*"
+    }
+}
