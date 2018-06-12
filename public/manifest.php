@@ -44,7 +44,7 @@ function superpwa_manifest( $arg = 'src' ) {
 		
 		// Absolute path to manifest		
 		case 'abs':
-			return trailingslashit( ABSPATH ) . $manifest_filename;
+			return trailingslashit( apply_filters('superpwa_manifest_path', ABSPATH) ) . $manifest_filename;
 			break;
 		
 		// Link to manifest
