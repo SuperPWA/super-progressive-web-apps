@@ -43,7 +43,7 @@ function superpwa_sw( $arg = 'src' ) {
 		
 		// Absolute path to service worker. SW must be in the root folder	
 		case 'abs':
-			return trailingslashit( ABSPATH ) . $sw_filename;
+			return trailingslashit( apply_filters('superpwa_sw_path', ABSPATH) ) . $sw_filename;
 			break;
 		
 		// Link to service worker
