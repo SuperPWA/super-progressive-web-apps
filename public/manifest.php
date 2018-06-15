@@ -50,7 +50,7 @@ function superpwa_manifest( $arg = 'src' ) {
 		// Link to manifest
 		case 'src':
 		default:
-			return trailingslashit( network_site_url() ) . $manifest_filename;
+			return trailingslashit( get_blog_details('domain', false) ) . $manifest_filename;
 			break;
 	}
 }
