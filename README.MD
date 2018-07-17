@@ -196,7 +196,7 @@ There are various ways you can contribute:
 * [Raise an issue](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues) on GitHub.
 * Follow and Engage with us on Social Media
 
- &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Follow SuperPWA on Twitter" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/intent/follow?screen_name=superpwa" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Follow SuperPWA on Twitter" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.youtube.com/channel/UCMFlNeutNCwTNls186moUUA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174883.svg" title="Follow SuperPWA on YouTube" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.facebook.com/SuperPWA/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.instagram.com/superpwa/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174855.svg" title="Follow SuperPWA on Instagram" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
