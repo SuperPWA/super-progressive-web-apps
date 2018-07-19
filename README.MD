@@ -83,8 +83,8 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
 
-|<a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android" width="160px" height="90px" /> </br>Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" width="160px" height="90px" /> </br>Mozilla Firefox for Android |
-| :---------: | :---------: |
+|<a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android" width="160px" height="90px" /> </br>Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" width="160px" height="90px" /> </br>Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Microsoft Edge for Android" width="160px" height="90px" /> </br>Microsoft Edge for Android |
+| :---------: | :---------: | :---------: |
 </br>
 
 #### 📦 What's in the box
