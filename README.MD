@@ -81,6 +81,12 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 ### 💡 Progressive Web App Minimum Requirments
 - [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
 
+##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
+
+|<a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android" width="160px" height="90px" /> </br>Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" width="160px" height="90px" /> </br>Mozilla Firefox for Android |
+| :---------: | :---------: |
+</br>
+
 #### 📦 What's in the box
 
 Here are the current features of Super Progressive Web Apps: 
