@@ -57,7 +57,7 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-WelcomeDemo">superpwa.com</a>
+ ⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-WelcomeDemo">superpwa.com</a> [Check Video's to know how it works](#videos-on-how-add-to-home-screen--progressive-web-apps-works-on-different-browsers)
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
@@ -80,6 +80,7 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ### 💡 Progressive Web App Minimum Requirments
 - [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
+</br>
 
 ##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
 
