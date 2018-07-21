@@ -57,7 +57,7 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-WelcomeDemo">superpwa.com</a>
+ ⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-WelcomeDemo">superpwa.com</a> [Check Video's to know how it works](#videos-on-how-add-to-home-screen--progressive-web-apps-works-on-different-browsers)
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
@@ -80,6 +80,13 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ### 💡 Progressive Web App Minimum Requirments
 - [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
+</br>
+
+##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
+
+|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android |
+| :---------: | :---------: | :---------: | :---------: |
+</br>
 
 #### 📦 What's in the box
 
