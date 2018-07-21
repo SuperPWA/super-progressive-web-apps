@@ -3,7 +3,7 @@ Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 4.9.6
+Tested up to: 4.9.7
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -178,7 +178,9 @@ Feel free to get in touch if you have any questions.
 
 = 1.9 =
 * Date: 
+* Tested with WordPress 4.9.7
 * Enhancement: SuperPWA is now translated to French thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent). 
+* Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar
 * Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
 
 = 1.8.1 =
