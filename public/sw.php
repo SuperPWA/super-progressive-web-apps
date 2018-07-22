@@ -86,6 +86,7 @@ function superpwa_generate_sw() {
  * 
  * @since 1.0
  * @since 1.7 added filter superpwa_sw_template
+ * @since 1.9 added filter superpwa_sw_files_to_cache
  */
 function superpwa_sw_template() {
 	
@@ -104,8 +105,7 @@ function superpwa_sw_template() {
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
-const fallbackImage = '<?php echo $settings['icon']; ?>';
-const filesToCache = [startPage, offlinePage, fallbackImage];
+const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
 // Install
