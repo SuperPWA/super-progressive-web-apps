@@ -215,6 +215,20 @@ function superpwa_start_url_cb() {
 					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
 				</p>
 			<?php } ?>
+			
+			<!-- tagDiv AMP 1.2 doesn't enable AMP for pages by default and needs to be enabled manually in settings -->			
+			<?php if ( is_plugin_active( 'td-amp/td-amp.php' ) && method_exists( 'td_util', 'get_option' ) ) { 
+				
+				// Read option value from db
+				$td_amp_page_post_type = td_util::get_option( 'tds_amp_post_type_page' );
+
+				// Show notice if option to enable AMP for pages is disabled.
+				if ( empty( $td_amp_page_post_type ) ) { ?>
+					<p class="description">
+						<?php printf( __( 'Please enable AMP support for Page in <a href="%s">Newspaper Settings > Theme Panel</a> > AMP > Post Type Support.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=td_theme_panel' ) ); ?>
+					</p>
+				<?php }
+			} ?>
 				
 		<?php } ?>
 	
