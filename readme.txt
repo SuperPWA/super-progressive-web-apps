@@ -182,6 +182,7 @@ Feel free to get in touch if you have any questions.
 * Enhancement: SuperPWA is now translated to French thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent). 
 * Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar. 
 * Enhancement: Added support for images in offline page. Images added to offline page are now cached during service worker activation. 
+* Enhancement: Improved the service worker installation routine to handle invalid entities in the service worker dependencies. 
 * Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
 
 = 1.8.1 =

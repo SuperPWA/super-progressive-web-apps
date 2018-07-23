@@ -115,7 +115,11 @@ self.addEventListener('install', function(e) {
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
 			console.log('SuperPWA service worker caching dependencies');
-			return cache.addAll(filesToCache);
+			filesToCache.map(function(url) {
+				return cache.add(url).catch(function (reason) {
+					return console.log('SuperPWA: ' + String(reason) + ' ' + url);
+				});
+			});
 		})
 	);
 });
