@@ -179,6 +179,7 @@ Feel free to get in touch if you have any questions.
 = 1.9 =
 * Date: 
 * Tested with WordPress 4.9.7. 
+* Enhancement: Added support for tagDiv AMP Plugin which ships with Newspaper theme and Newsmag theme. If you use this theme, you can now use AMP version of the start page. 
 * Enhancement: SuperPWA is now translated to French thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent). 
 * Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar. 
 * Enhancement: Added support for images in offline page. Images added to offline page are now cached during service worker activation. 

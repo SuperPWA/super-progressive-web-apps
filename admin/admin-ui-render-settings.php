@@ -210,7 +210,7 @@ function superpwa_start_url_cb() {
 				<br>
 			
 			<!-- AMP for WordPress 0.6.2 doesn't support homepage, the blog index, and archive pages. -->
-			<?php if ( function_exists( 'amp_init' ) ) { ?>
+			<?php if ( is_plugin_active( 'amp/amp.php' ) ) { ?>
 				<p class="description">
 					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
 				</p>
