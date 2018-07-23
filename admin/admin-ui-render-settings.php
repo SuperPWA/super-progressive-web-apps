@@ -225,7 +225,7 @@ function superpwa_start_url_cb() {
 				// Show notice if option to enable AMP for pages is disabled.
 				if ( empty( $td_amp_page_post_type ) ) { ?>
 					<p class="description">
-						<?php printf( __( 'Please enable AMP support for Page in <a href="%s">Newspaper Settings > Theme Panel</a> > AMP > Post Type Support.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=td_theme_panel' ) ); ?>
+						<?php printf( __( 'Please enable AMP support for Page in <a href="%s">Theme Settings > Theme Panel</a> > AMP > Post Type Support.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=td_theme_panel' ) ); ?>
 					</p>
 				<?php }
 			} ?>
