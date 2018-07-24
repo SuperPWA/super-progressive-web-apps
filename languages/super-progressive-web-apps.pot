@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Super Progressive Web Apps 1.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-"
 "web-apps\n"
-"POT-Creation-Date: 2018-06-11 15:50:32+00:00\n"
+"POT-Creation-Date: 2018-07-24 21:16:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,7 +80,7 @@ msgid ""
 "remaining fields are optional."
 msgstr ""
 
-#: addons/utm-tracking.php:362 admin/admin-ui-render-settings.php:360
+#: addons/utm-tracking.php:362 admin/admin-ui-render-settings.php:374
 msgid "Settings saved."
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "UTM Tracking for"
 msgstr ""
 
-#: addons/utm-tracking.php:382 admin/admin-ui-render-settings.php:383
+#: addons/utm-tracking.php:382 admin/admin-ui-render-settings.php:397
 msgid "Save Settings"
 msgstr ""
 
@@ -254,63 +254,69 @@ msgid ""
 "pages."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:241
+#: admin/admin-ui-render-settings.php:228
+msgid ""
+"Please enable AMP support for Page in <a href=\"%s\">Theme Settings > Theme "
+"Panel</a> > AMP > Post Type Support."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:255
 msgid "&mdash; Default &mdash;"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:248
+#: admin/admin-ui-render-settings.php:262
 msgid ""
 "Offline page is displayed when the device is offline and the requested page "
 "is not already cached. Current offline page is <code>%s</code>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:268
+#: admin/admin-ui-render-settings.php:282
 msgid "Follow Device Orientation"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:271
+#: admin/admin-ui-render-settings.php:285
 msgid "Portrait"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:274
+#: admin/admin-ui-render-settings.php:288
 msgid "Landscape"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:280
+#: admin/admin-ui-render-settings.php:294
 msgid ""
 "Set the orientation of your app on devices. When set to <code>Follow Device "
 "Orientation</code> your app will rotate as the device is rotated."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:302
+#: admin/admin-ui-render-settings.php:316
 msgid ""
 "Manifest generated successfully. You can <a href=\"%s\" target=\"_blank"
 "\">see it here &rarr;</a>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:305
+#: admin/admin-ui-render-settings.php:319
 msgid ""
 "Manifest generation failed. Check if WordPress can write to your root folder "
 "(the same folder with wp-config.php). <a href=\"%s\" target=\"_blank\">Read "
 "more &rarr;</a>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:320
+#: admin/admin-ui-render-settings.php:334
 msgid "Service worker generated successfully."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:323
+#: admin/admin-ui-render-settings.php:337
 msgid ""
 "Service worker generation failed. Check if WordPress can write to your root "
 "folder (the same folder with wp-config.php). <a href=\"%s\" target=\"_blank"
 "\">Read more &rarr;</a>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:336
+#: admin/admin-ui-render-settings.php:350
 msgid "Your website is served over HTTPS."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:339
+#: admin/admin-ui-render-settings.php:353
 msgid ""
 "Progressive Web Apps require that your website is served over HTTPS. Please "
 "contact your host to add a SSL certificate to your domain."
