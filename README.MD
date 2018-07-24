@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=SuperPWALogo">
+  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-SuperPWALogo">
     <img src="https://pbs.twimg.com/profile_images/975224418543681536/X9-CESOD_400x400.jpg" alt="Super Progressive Web Apps" width=175 height=175>
   </a>
 
@@ -21,7 +21,7 @@
     SuperPWA helps to convert your WordPress website into Progressive Web Apps easily.
     <br>
     <br>
-    <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-viewWeb"><strong>Visit Website »</strong></a>
+    <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-viewWeb"><strong>Visit Website »</strong></a>
     <br>
     <br>
     <a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/new?template=bug.md">Report bug</a>
@@ -38,7 +38,7 @@
 
 
 <p align="center">
-	<a href="https://superpwa.com">
+	<a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-LighthouseScore">
 			<img src="https://lighthouse-badge.appspot.com?score=100" alt="LightHouse Score">
 	</a>
 	<a href="https://wordpress.org/plugins/super-progressive-web-apps/">
@@ -57,14 +57,14 @@
 
 ## Welcome to the Super PWA GitHub repository
 
-⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=readme-welcome">superpwa.com</a>
+ ⚡️ Demo :  <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-WelcomeDemo">superpwa.com</a> [Check Video's to know how it works](#videos-on-how-add-to-home-screen--progressive-web-apps-works-on-different-browsers)
 
 ## What is Progressive Web Apps
 Progressive Web Apps (PWA) is a new technology that creates a middle ground between a website and a mobile app. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
-<a href="https://superpwa.com?utm_source=github&utm_medium=readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
+<a href="https://superpwa.com?utm_source=github&utm_medium=Readme-what-is-pwa">Super Progressive Web Apps</a> makes it easy for you to convert your WordPress website into a Progressive Web App easily!
 
 ## ⭐ Support the project
 If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
@@ -80,6 +80,13 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ### 💡 Progressive Web App Minimum Requirments
 - [x] Progressive Web Apps require that your WordPress website is served from a secure origin i.e. your website should be HTTPS and not HTTP. If your website isn’t HTTPS, please contact your host about it. You can also ask us [Support Forums](https://wordpress.org/support/plugin/super-progressive-web-apps) if you need help.
+</br>
+
+##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
+
+|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android |
+| :---------: | :---------: | :---------: | :---------: |
+</br>
 
 #### 📦 What's in the box
 
@@ -103,9 +110,9 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.4: You can now set the theme_color property in the manifest.
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
-* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=github&utm_medium=readme-version) to track visits coming from your PWA.
+* New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=GitHub&utm_medium=Readme-version) to track visits coming from your PWA.
 * New in version 1.8: Compatibility issues with OneSignal are now resolved! 
-* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=github&utm_medium=readme-version) that sets your app icons as Apple Touch Icons. 
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons. 
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
@@ -196,7 +203,7 @@ There are various ways you can contribute:
 * [Raise an issue](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues) on GitHub.
 * Follow and Engage with us on Social Media
 
- &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Follow SuperPWA on Twitter" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/intent/follow?screen_name=superpwa" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Follow SuperPWA on Twitter" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.youtube.com/channel/UCMFlNeutNCwTNls186moUUA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174883.svg" title="Follow SuperPWA on YouTube" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.facebook.com/SuperPWA/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.instagram.com/superpwa/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174855.svg" title="Follow SuperPWA on Instagram" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -210,6 +217,9 @@ There are various ways you can contribute:
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=20 height=20> Share on Facebook </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174857.svg" title="Share SuperPWA on LinkedIn" width=20 height=20> Share on LinkedIn</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p> &nbsp;&nbsp;&nbsp; <a href="https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Share on Google+" width=20 height=20> Share on Google+ </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+## 📇 Changelog
+[superpwa.com/changelog/](https://superpwa.com/changelog/?utm_source=GitHub&utm_medium=Readme-Changelog).
     
 Emoji Credits : [Emojipedia](emojipedia.org)
 Social Media Icon Credits : [Flaticon](flaticon.com)

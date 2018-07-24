@@ -101,7 +101,7 @@ function superpwa_app_icon_cb() {
 	<!-- Application Icon -->
 	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon regular-text" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
 	<button type="button" class="button superpwa-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
@@ -124,7 +124,7 @@ function superpwa_splash_icon_cb() {
 	<!-- Splash Screen Icon -->
 	<input type="text" name="superpwa_settings[splash_icon]" id="superpwa_settings[splash_icon]" class="superpwa-splash-icon regular-text" size="50" value="<?php echo isset( $settings['splash_icon'] ) ? esc_attr( $settings['splash_icon']) : ''; ?>">
 	<button type="button" class="button superpwa-splash-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Choose Icon
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
@@ -210,11 +210,25 @@ function superpwa_start_url_cb() {
 				<br>
 			
 			<!-- AMP for WordPress 0.6.2 doesn't support homepage, the blog index, and archive pages. -->
-			<?php if ( function_exists( 'amp_init' ) ) { ?>
+			<?php if ( is_plugin_active( 'amp/amp.php' ) ) { ?>
 				<p class="description">
 					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
 				</p>
 			<?php } ?>
+			
+			<!-- tagDiv AMP 1.2 doesn't enable AMP for pages by default and needs to be enabled manually in settings -->			
+			<?php if ( is_plugin_active( 'td-amp/td-amp.php' ) && method_exists( 'td_util', 'get_option' ) ) { 
+				
+				// Read option value from db
+				$td_amp_page_post_type = td_util::get_option( 'tds_amp_post_type_page' );
+
+				// Show notice if option to enable AMP for pages is disabled.
+				if ( empty( $td_amp_page_post_type ) ) { ?>
+					<p class="description">
+						<?php printf( __( 'Please enable AMP support for Page in <a href="%s">Theme Settings > Theme Panel</a> > AMP > Post Type Support.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=td_theme_panel' ) ); ?>
+					</p>
+				<?php }
+			} ?>
 				
 		<?php } ?>
 	

@@ -108,15 +108,20 @@ function superpwa_generate_manifest() {
  *
  * @since 1.0
  * @since 1.8 Introduced filter superpwa_wp_head_tags
+ * @since 1.9 Introduced filter superpwa_add_theme_color
  */
 function superpwa_add_manifest_to_wp_head() {
 	
-	// Get Settings
-	$settings = superpwa_get_settings();
-	
 	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
 	$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
-	$tags .= '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
+	
+	// theme-color meta tag 
+	if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
+		
+		// Get Settings
+		$settings = superpwa_get_settings();
+		$tags .= '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
+	}
 	
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 	

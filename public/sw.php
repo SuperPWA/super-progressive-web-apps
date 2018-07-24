@@ -4,11 +4,12 @@
  *
  * @since 1.0
  * 
- * @function	superpwa_sw()				Service worker filename, absolute path and link
- * @function	superpwa_generate_sw()		Generate and write service worker into sw.js
- * @function	superpwa_sw_template()		Service worker tempalte
- * @function	superpwa_register_sw()		Register service worker
- * @function	superpwa_delete_sw()		Delete service worker
+ * @function	superpwa_sw()					Service worker filename, absolute path and link
+ * @function	superpwa_generate_sw()			Generate and write service worker into sw.js
+ * @function	superpwa_sw_template()			Service worker tempalte
+ * @function	superpwa_register_sw()			Register service worker
+ * @function	superpwa_delete_sw()			Delete service worker
+ * @function 	superpwa_offline_page_images()	Add images from offline page to filesToCache
  */
 
 // Exit if accessed directly
@@ -86,6 +87,7 @@ function superpwa_generate_sw() {
  * 
  * @since 1.0
  * @since 1.7 added filter superpwa_sw_template
+ * @since 1.9 added filter superpwa_sw_files_to_cache
  */
 function superpwa_sw_template() {
 	
@@ -104,8 +106,7 @@ function superpwa_sw_template() {
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
-const fallbackImage = '<?php echo $settings['icon']; ?>';
-const filesToCache = [startPage, offlinePage, fallbackImage];
+const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
 // Install
@@ -114,7 +115,11 @@ self.addEventListener('install', function(e) {
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
 			console.log('SuperPWA service worker caching dependencies');
-			return cache.addAll(filesToCache);
+			filesToCache.map(function(url) {
+				return cache.add(url).catch(function (reason) {
+					return console.log('SuperPWA: ' + String(reason) + ' ' + url);
+				});
+			});
 		})
 	);
 });
@@ -226,3 +231,41 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );
 }
+
+/**
+ * Add images from offline page to filesToCache
+ * 
+ * If the offlinePage set by the user contains images, they need to be cached during sw install. 
+ * For most websites, other assets (css, js) would be same as that of startPage which would be cached
+ * when user visits the startPage the first time. If not superpwa_sw_files_to_cache filter can be used.
+ * 
+ * @param (string) $files_to_cache Comma separated list of files to cache during service worker install
+ * 
+ * @return (string) Comma separated list with image src's appended to $files_to_cache
+ * 
+ * @since 1.9
+ */
+function superpwa_offline_page_images( $files_to_cache ) {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	// Retrieve the post
+	$post = get_post( $settings['offline_page'] );
+	
+	// Return if the offline page is set to default
+	if( $post === NULL ) {
+		return $files_to_cache;
+	}
+	
+	// Match all images
+	preg_match_all( '/<img[^>]+src="([^">]+)"/', $post->post_content, $matches );
+	
+	// $matches[1] will be an array with all the src's
+	if( ! empty( $matches[1] ) ) {
+		return superpwa_httpsify( $files_to_cache . ', \'' . implode( '\', \'', $matches[1] ) . '\'' );
+	}
+	
+	return $files_to_cache;
+}
+add_filter( 'superpwa_sw_files_to_cache', 'superpwa_offline_page_images' );

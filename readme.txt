@@ -3,7 +3,7 @@ Contributors: arunbasillal, josevarghese, superpwa
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 4.9.6
+Tested up to: 4.9.7
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -176,6 +176,16 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 1.9 =
+* Date: [25.July.2018](https://superpwa.com/superpwa-1-9-chrome-mini-infobar-ready/?utm_source=wordpress.org&utm_medium=changelog)
+* Tested with WordPress 4.9.7. 
+* Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar. 
+* Enhancement: Added support for tagDiv AMP Plugin which ships with Newspaper theme and Newsmag theme. If you use this theme, you can now use AMP version of the start page. 
+* Enhancement: Added support for images in offline page. Images added to offline page are now cached during service worker activation. 
+* Enhancement: Improved the service worker installation routine to handle invalid entities in the service worker dependencies. 
+* Enhancement: SuperPWA is now translated to French, thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent) and Spanish, thanks to [@arkangel](https://profiles.wordpress.org/arkangel/). 
+* Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
+
 = 1.8.1 =
 * Date: [05.June.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog#1.8.1)
 * Enhancement: Added an admin notice with [instructions for OneSignal integration](https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=wordpress.org&utm_medium=changelog). 
@@ -270,6 +280,15 @@ Feel free to get in touch if you have any questions.
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 1.9 =
+* Tested with WordPress 4.9.7. 
+* Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar. 
+* Enhancement: Added support for tagDiv AMP Plugin which ships with Newspaper theme and Newsmag theme. If you use this theme, you can now use AMP version of the start page. 
+* Enhancement: Added support for images in offline page. Images added to offline page are now cached during service worker activation. 
+* Enhancement: Improved the service worker installation routine to handle invalid entities in the service worker dependencies. 
+* Enhancement: SuperPWA is now translated to French, thanks to @romainvincent and Spanish, thanks to @arkangel. 
+* Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
 
 = 1.8.1 =
 * Enhancement: Added an admin notice with instructions for OneSignal integration. 
