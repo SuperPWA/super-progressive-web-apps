@@ -44,13 +44,13 @@ function superpwa_sw( $arg = 'src' ) {
 		
 		// Absolute path to service worker. SW must be in the root folder	
 		case 'abs':
-			return trailingslashit( ABSPATH ) . $sw_filename;
+			return trailingslashit( apply_filters('superpwa_sw_abs', ABSPATH ) ) . $sw_filename;
 			break;
 		
 		// Link to service worker
 		case 'src':
 		default:
-			return parse_url( trailingslashit( network_site_url() ) . $sw_filename, PHP_URL_PATH );
+			return parse_url( trailingslashit( apply_filters('superpwa_sw_src', network_site_url() ) ) . $sw_filename, PHP_URL_PATH );
 			break;
 	}
 }

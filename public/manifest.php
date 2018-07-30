@@ -34,6 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_manifest( $arg = 'src' ) {
 	
 	$manifest_filename = 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
+	$manifest_filename = apply_filters('superpwa_manifest_filename', $manifest_filename);
 	
 	switch( $arg ) {
 		
@@ -44,13 +45,13 @@ function superpwa_manifest( $arg = 'src' ) {
 		
 		// Absolute path to manifest		
 		case 'abs':
-			return trailingslashit( ABSPATH ) . $manifest_filename;
+			return trailingslashit( apply_filters( 'superpwa_manifest_abs', ABSPATH ) ) . $manifest_filename;
 			break;
 		
 		// Link to manifest
 		case 'src':
 		default:
-			return trailingslashit( network_site_url() ) . $manifest_filename;
+			return trailingslashit( apply_filters( 'superpwa_manifest_src', network_site_url() ) ) . $manifest_filename;
 			break;
 	}
 }
