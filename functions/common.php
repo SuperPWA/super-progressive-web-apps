@@ -19,32 +19,38 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return (string|bool) AMP page url on success, false otherwise
  * 
  * @since 1.2
+ * @since 1.9 Added support for tagDiv AMP
  */
 function superpwa_is_amp() {
 	
 	// AMP for WordPress - https://wordpress.org/plugins/amp
-	if ( function_exists( 'amp_init' ) ) {
+	if ( is_plugin_active( 'amp/amp.php' ) ) {
 		return defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR . '/' : 'amp/';
 	}
 	
 	// AMP for WP - https://wordpress.org/plugins/accelerated-mobile-pages/
-	if ( function_exists( 'ampforwp_generate_endpoint' ) ) {
+	if ( is_plugin_active( 'accelerated-mobile-pages/accelerated-moblie-pages.php' ) ) {
 		return defined( 'AMPFORWP_AMP_QUERY_VAR' ) ? AMPFORWP_AMP_QUERY_VAR . '/' : 'amp/';
 	}
 	
 	// Better AMP – https://wordpress.org/plugins/better-amp/
-	if ( class_exists( 'Better_AMP' ) ) {
+	if ( is_plugin_active( 'better-amp/better-amp.php' ) ) {
 		return 'amp/';
 	}
 	
 	// AMP Supremacy - https://wordpress.org/plugins/amp-supremacy/
-	if ( class_exists( 'AMP_Init' ) ) {
+	if ( is_plugin_active( 'amp-supremacy/amp-supremacy.php' ) ) {
 		return 'amp/';
 	}
 	
 	// WP AMP - https://wordpress.org/plugins/wp-amp-ninja/
-	if ( function_exists( 'wpamp_init' ) ) {
+	if ( is_plugin_active( 'wp-amp-ninja/wp-amp-ninja.php' ) ) {
 		return '?wpamp';
+	}
+	
+	// tagDiv AMP - http://forum.tagdiv.com/tagdiv-amp/
+	if ( is_plugin_active( 'td-amp/td-amp.php' ) ) {
+		return defined( 'AMP_QUERY_VAR' ) ? AMP_QUERY_VAR . '/' : 'amp/';
 	}
 	
 	return false;
