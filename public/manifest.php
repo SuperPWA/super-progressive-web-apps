@@ -228,7 +228,7 @@ function superpwa_get_display() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	$orientation = isset( $settings['display'] ) ? $settings['display'] : 0;
+	$display = isset( $settings['display'] ) ? $settings['display'] : 0;
 	
 	switch ( $display ) {
 		
