@@ -190,7 +190,7 @@ function superpwa_upgrader() {
 	/**
 	 * Add display to database when upgrading from pre 2.0 versions.
 	 * 
-	 * Until 2.0, there was no UI for displayr.
+	 * Until 2.0, there was no UI for display.
 	 * In the manifest, display was hard coded as 'standalone'.
 	 * 
 	 * @since 2.0
