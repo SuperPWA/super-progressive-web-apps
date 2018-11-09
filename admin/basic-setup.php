@@ -76,7 +76,7 @@ function superpwa_activation_redirect( $plugin, $network_wide ) {
 	 * @link https://core.trac.wordpress.org/browser/tags/4.9.8/src/wp-admin/plugins.php#L15
 	 */
 	$wp_list_table_instance = new WP_Plugins_List_Table();
-	$current_action = $wp_list_table_instance -> current_action();
+	$current_action = $wp_list_table_instance->current_action();
 	
 	// When only one plugin is activated, the current_action() method will return activate.
 	if ( $current_action !== 'activate' ) {
@@ -103,9 +103,13 @@ function superpwa_admin_notices() {
     // Admin notice on plugin activation
 	if ( get_transient( 'superpwa_admin_notice_activation' ) ) {
 	
-		$superpwa_is_ready = superpwa_is_pwa_ready() ? 'Your app is ready with the default settings. ' : '';
+		$superpwa_is_ready = superpwa_is_pwa_ready() ? __( 'Your app is ready with the default settings. ', 'super-progressive-web-apps' ) : '';
 		
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
+		// Do not display link to settings UI if we are already in the UI.
+		$screen = get_current_screen();
+		$superpwa_ui_link_text = ( strpos( $screen->id, 'superpwa' ) === false ) ? sprintf( __( '<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) : '';
+		
+		echo '<div class="updated notice is-dismissible"><p>' . __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> ', 'super-progressive-web-apps' ) . $superpwa_is_ready . $superpwa_ui_link_text . '</p></div>';
 		
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_activation' );
