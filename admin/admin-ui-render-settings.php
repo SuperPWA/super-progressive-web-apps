@@ -14,6 +14,7 @@
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_orientation_cb()				Default Orientation Dropdown
+ * @function	superpwa_display_cb()					Default Display Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
@@ -297,6 +298,40 @@ function superpwa_orientation_cb() {
 	<?php
 }
 
+/**
+ * Default Display Dropdown
+ *
+ * @since 1.4
+ */
+function superpwa_display_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Display Dropdown -->
+	<label for="superpwa_settings[display]">
+		<select name="superpwa_settings[display]" id="superpwa_settings[display]">
+			<option value="0" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 0 ); } ?>>
+				<?php _e( 'Full Screen', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="1" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 1 ); } ?>>
+				<?php _e( 'Standalone', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="2" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 2 ); } ?>>
+				<?php _e( 'Minimal UI', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="3" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 3 ); } ?>>
+				<?php _e( 'Browser', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
+	</label>
+	
+	<p class="description">
+		<?php _e( 'Set the browser UI to be shown when your app is launched. When set to <code>Full Screen</code> web application opens without any browser UI and takes up the entirety of the available display area. On <code>Minimal UI</code>, the user can access a minimal set of UI elements for controlling navigation and over <code>Browser<code>, a standard browser experience will be shown and the Add to Homescreen prompt wont occur on this case. ', 'super-progressive-web-apps' ); ?>
+	</p>
+
+	<?php
+}
 /**
  * Manifest Status
  *
