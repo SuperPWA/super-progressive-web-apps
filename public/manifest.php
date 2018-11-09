@@ -12,6 +12,7 @@
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
+* @function	superpwa_get_display()					Get display of PWA
  */
 
 // Exit if accessed directly
@@ -66,6 +67,7 @@ function superpwa_manifest( $arg = 'src' ) {
  * @since 1.5 Added gcm_sender_id
  * @since 1.6 Added description
  * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
+* @since 2.0 Added display
  */
 function superpwa_generate_manifest() {
 	
@@ -84,7 +86,7 @@ function superpwa_generate_manifest() {
 	$manifest['icons']				= superpwa_get_pwa_icons();
 	$manifest['background_color']	= $settings['background_color'];
 	$manifest['theme_color']		= $settings['theme_color'];
-	$manifest['display']			= 'standalone';
+	$manifest['display']			= superpwa_get_display();
 	$manifest['orientation']		= superpwa_get_orientation();
 	$manifest['start_url']			= superpwa_get_start_url( true );
 	$manifest['scope']				= superpwa_get_scope();
@@ -212,5 +214,41 @@ function superpwa_get_orientation() {
 			
 		default: 
 			return 'any';
+	}
+}
+
+/**
+ * Get display of PWA
+ *
+ * @return	string	Display of PWA as set in the plugin settings. 
+ * @since	2.0
+ */
+function superpwa_get_display() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$orientation = isset( $settings['display'] ) ? $settings['display'] : 0;
+	
+	switch ( $display ) {
+		
+		case 0:
+			return 'fullscreen';
+			break;
+			
+		case 1:
+			return 'standalone';
+			break;
+			
+		case 2:
+			return 'minimal-ui';
+			break;
+
+		case 3:
+			return 'browser';
+			break;
+			
+		default: 
+			return 'standalone';
 	}
 }
