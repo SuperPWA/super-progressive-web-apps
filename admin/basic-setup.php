@@ -311,7 +311,7 @@ add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
  * @since 1.0
  */
 function superpwa_settings_link( $links ) {
-	
+
 	return array_merge(
 		array(
 			'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>'
@@ -319,7 +319,8 @@ function superpwa_settings_link( $links ) {
 		$links
 	);
 }
-add_filter( 'plugin_action_links_super-progressive-web-apps/superpwa.php', 'superpwa_settings_link' );
+
+add_filter( 'plugin_action_links_' . plugin_basename( SUPERPWA_PLUGIN_FILE ), 'superpwa_settings_link' );
 
 /**
  * Add donate and other links to plugins list
