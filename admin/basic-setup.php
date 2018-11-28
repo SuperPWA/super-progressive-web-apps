@@ -319,7 +319,6 @@ function superpwa_settings_link( $links ) {
 		$links
 	);
 }
-
 add_filter( 'plugin_action_links_' . plugin_basename( SUPERPWA_PLUGIN_FILE ), 'superpwa_settings_link' );
 
 /**
