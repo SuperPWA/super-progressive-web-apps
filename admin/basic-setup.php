@@ -56,36 +56,36 @@ register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate
 
 /**
  * Redirect to SuperPWA UI on plugin activation.
- * 
- * Will redirect to SuperPWA settings page when plugin is activated. 
- * Will not redirect if multiple plugins are activated at the same time. 
+ *
+ * Will redirect to SuperPWA settings page when plugin is activated.
+ * Will not redirect if multiple plugins are activated at the same time.
  * Will not redirect when activated network wide on multisite. Network admins know their way.
- * 
+ *
  * @since 2.0
  */
 function superpwa_activation_redirect( $plugin, $network_wide ) {
-	
-	// Return if not SuperPWA or if plugin is activated network wide. 
-	if ( $plugin !== 'super-progressive-web-apps/superpwa.php' || $network_wide === true ) {
+	// Return if not SuperPWA or if plugin is activated network wide.
+	if ( $plugin !== plugin_basename( SUPERPWA_PLUGIN_FILE ) || $network_wide === true ) {
 		return false;
 	}
-	
+
 	/**
 	 * An instance of the WP_Plugins_List_Table class.
-	 * 
+	 *
 	 * @link https://core.trac.wordpress.org/browser/tags/4.9.8/src/wp-admin/plugins.php#L15
 	 */
 	$wp_list_table_instance = new WP_Plugins_List_Table();
-	$current_action = $wp_list_table_instance->current_action();
-	
+	$current_action         = $wp_list_table_instance->current_action();
+
 	// When only one plugin is activated, the current_action() method will return activate.
 	if ( $current_action !== 'activate' ) {
-		return false; 
+		return false;
 	}
-	
+
 	// Redirect to SuperPWA settings page. 
-    exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
+	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
 }
+
 add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 );
 
 /**
