@@ -16,6 +16,17 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the Service worker's filename.
+ *
+ * @since 2.0
+ *
+ * @return string
+ */
+function superpwa_get_sw_filename() {
+    return apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
+}
+
+/**
  * Service worker filename, absolute path and link
  *
  * For Multisite compatibility. Used to be constants defined in superpwa.php
@@ -33,20 +44,22 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function superpwa_sw( $arg = 'src' ) {
 	
-	$sw_filename = apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
+	$sw_filename = superpwa_get_sw_filename();
 	
 	switch( $arg ) {
-		
+		// TODO: Case `filename` can be deprecated in favor of @see superpwa_get_sw_filename().
 		// Name of service worker file
 		case 'filename':
 			return $sw_filename;
 			break;
-		
-		// Absolute path to service worker. SW must be in the root folder	
+
+		// TODO: Case `abs` can be deprecated as the file would be generated dynamically.
+		// Absolute path to service worker. SW must be in the root folder.
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $sw_filename;
 			break;
-		
+
+		// TODO: Case `src` and default can be deprecated in favor of @see superpwa_get_sw_filename().
 		// Link to service worker
 		case 'src':
 		default:
@@ -61,12 +74,10 @@ function superpwa_sw( $arg = 'src' ) {
  * @return (boolean) true on success, false on failure.
  * 
  * @since 1.0
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_sw() {
-	
-	// Get Settings
-	$settings = superpwa_get_settings();
-	
 	// Get the service worker tempalte
 	$sw = superpwa_sw_template();
 	
@@ -227,6 +238,8 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  * @return true on success, false on failure
  * 
  * @since 1.0
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );
