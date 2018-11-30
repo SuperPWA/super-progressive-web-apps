@@ -19,7 +19,7 @@
 if ( ! defined('ABSPATH') ) exit;
  
 /**
- * Plugin activatation todo list
+ * Plugin activation todo list
  *
  * This function runs when user activates the plugin. Used in register_activation_hook()
  * On multisites, during network activation, this is fired only for the main site.
@@ -398,8 +398,8 @@ endif;
  *
  * Possibly put in the same order as execution for better understanding.
  *
- * @link  https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
  * @link  https://codex.wordpress.org/Plugin_API/Action_Reference Actions run during a typical Request.
+ * @link  https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
  *
  * @since 2.0
  */
