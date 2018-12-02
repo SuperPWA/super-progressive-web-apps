@@ -338,59 +338,55 @@ function superpwa_plugin_row_meta( $links, $file ) {
 }
 add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 );
 
-if ( ! function_exists( 'superpwa_add_rewrite_rules' ) ) :
-	/**
-	 * Adds rewrite rules to handle request to SW javascript and Manifest json.
-	 *
-	 * @since 2.0
-	 *
-	 * @uses superpwa_get_sw_filename()
-	 * @uses superpwa_get_manifest_filename()
-	 */
-	function superpwa_add_rewrite_rules() {
-		$sw_filename = superpwa_get_sw_filename();
-		add_rewrite_rule( "^/{$sw_filename}$",
-			"index.php?{$sw_filename}=1"
-		);
+/**
+ * Adds rewrite rules to handle request to SW javascript and Manifest json.
+ *
+ * @since 2.0
+ *
+ * @uses superpwa_get_sw_filename()
+ * @uses superpwa_get_manifest_filename()
+ */
+function superpwa_add_rewrite_rules() {
+	$sw_filename = superpwa_get_sw_filename();
+	add_rewrite_rule( "^/{$sw_filename}$",
+		"index.php?{$sw_filename}=1"
+	);
 
-		$manifest_filename = superpwa_get_manifest_filename();
-		add_rewrite_rule( "^/{$manifest_filename}$",
-			"index.php?{$manifest_filename}=1"
-		);
+	$manifest_filename = superpwa_get_manifest_filename();
+	add_rewrite_rule( "^/{$manifest_filename}$",
+		"index.php?{$manifest_filename}=1"
+	);
+}
+
+/**
+ * Generates SW and Manifest on the fly.
+ *
+ * This way no physical files have to be placed on WP root folder. Hallelujah!
+ *
+ * @since 2.0
+ *
+ * @uses  superpwa_get_sw_filename()
+ * @uses  superpwa_get_manifest_filename()
+ * @uses  superpwa_get_manifest()
+ */
+function superpwa_generate_sw_and_manifest_on_fly( $query ) {
+	$query             = implode( ',', $query->query_vars );
+	$manifest_filename = superpwa_get_manifest_filename();
+	$sw_filename       = superpwa_get_sw_filename();
+
+	if ( strpos( $query, $manifest_filename ) !== false ) {
+		// Generate manifest from Settings and send the response w/ header.
+		header( 'Content-Type: application/json' );
+		echo json_encode( superpwa_manifest_template() );
+		exit();
 	}
-endif;
-
-if ( ! function_exists( 'superpwa_generate_sw_and_manifest_on_fly' ) ) :
-	/**
-	 * Generates SW and Manifest on the fly.
-	 *
-	 * This way no physical files have to be placed on WP root folder. Hallelujah!
-	 *
-	 * @since 2.0
-	 *
-	 * @uses  superpwa_get_sw_filename()
-	 * @uses  superpwa_get_manifest_filename()
-	 * @uses  superpwa_get_manifest()
-	 */
-	function superpwa_generate_sw_and_manifest_on_fly( $query ) {
-		$query             = implode( ',', $query->query_vars );
-		$manifest_filename = superpwa_get_manifest_filename();
-		$sw_filename       = superpwa_get_sw_filename();
-
-		if ( strpos( $query, $manifest_filename ) !== false ) {
-			// Generate manifest from Settings and send the response w/ header.
-			header( 'Content-Type: application/json' );
-			echo json_encode( superpwa_manifest_template() );
-			exit();
-		}
-		if ( strpos( $query, $sw_filename ) !== false ) {
-			// Include from wp-content/uploads dir.
-			header( 'Content-type: text/javascript' );
-			echo superpwa_sw_template();
-			exit();
-		}
+	if ( strpos( $query, $sw_filename ) !== false ) {
+		// Include from wp-content/uploads dir.
+		header( 'Content-type: text/javascript' );
+		echo superpwa_sw_template();
+		exit();
 	}
-endif;
+}
 
 /**
  * Sets up the hooks once.
