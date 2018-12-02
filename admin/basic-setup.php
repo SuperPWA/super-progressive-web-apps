@@ -381,7 +381,6 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 		exit();
 	}
 	if ( strpos( $query, $sw_filename ) !== false ) {
-		// Include from wp-content/uploads dir.
 		header( 'Content-type: text/javascript' );
 		echo superpwa_sw_template();
 		exit();
