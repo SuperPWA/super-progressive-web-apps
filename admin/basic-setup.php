@@ -178,15 +178,6 @@ function superpwa_upgrader() {
 	if ( $current_ver === false ) {
 		
 		if ( is_multisite() ) {
-
-			// TODO: Commenting the following line for now. Delete it later.
-			// Generate manifestx
-			// superpwa_generate_manifest();
-
-			// TODO: Commenting the following line for now. Delete it later.
-			// Generate service worker
-			// superpwa_generate_sw();
-			
 			// For multisites, save the activation status of current blog.
 			superpwa_multisite_activation_status( true );
 		}
@@ -244,14 +235,6 @@ function superpwa_upgrader() {
 		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	}
 
-	// TODO: Commenting the following line for now. Delete it later.
-	// Re-generate manifest
-	// superpwa_generate_manifest();
-
-	//
-	// Re-generate service worker
-	// superpwa_generate_sw();
-	
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
 	

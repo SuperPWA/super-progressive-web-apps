@@ -304,14 +304,12 @@ function superpwa_orientation_cb() {
  * @since 1.8 Attempt to generate manifest again if the manifest doesn't exist.
  */
 function superpwa_manifest_status_cb() {
-	
-	/** 
-	 * Check to see if the manifest exists, If not attempts to generate a new one.
-	 * 
-	 * Users who had permissions issue in the beginning will check the status after changing file system permissions. 
-	 * At this point we try to generate the manifest and service worker to see if its possible with the new permissions. 
-	 */
-	if ( superpwa_get_contents( superpwa_manifest( 'abs' ) ) || superpwa_generate_manifest() ) {
+	$superpwa_manifest_url         = trailingslashit( network_site_url() ) . superpwa_get_manifest_filename();
+	$superpwa_manifest_response    = wp_remote_head( $superpwa_manifest_url, array( 'sslverify' => SUPERPWA_DEV_MODE ? false : true ) );
+	$superpwa_manifest_status_code = wp_remote_retrieve_response_code( $superpwa_manifest_response );
+
+	// Since Manifest is dynamically generated, we check for the status code to ensure its presence.
+	if ( 200 === $superpwa_manifest_status_code ) {
 		
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
@@ -323,17 +321,22 @@ function superpwa_manifest_status_cb() {
 /**
  * Service Worker Status
  *
- * @since 1.2
- * @since 1.8 Attempt to generate service worker again if it doesn't exist.
+ * @since  1.2
+ * @since  1.8 Attempt to generate service worker again if it doesn't exist.
+ * @since  2.0 Modify logic to check if Service worker exists.
+ *
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  */
 function superpwa_sw_status_cb() {
+	$superpwa_sw_url         = trailingslashit( network_site_url() ) . superpwa_get_sw_filename();
+	$superpwa_sw_response    = wp_remote_head( $superpwa_sw_url, array( 'sslverify' => SUPERPWA_DEV_MODE ? false : true ) );
+	$superpwa_sw_status_code = wp_remote_retrieve_response_code( $superpwa_sw_response );
 
-	// See superpwa_manifest_status_cb() for documentation.
-	if ( superpwa_get_contents( superpwa_sw( 'abs' ) ) || superpwa_generate_sw() ) {
-		
+	// Since Service worker is dynamically generated, we check for the status code to ensure its presence.
+	if ( 200 === $superpwa_sw_status_code ) {
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
 	} else {
-		
 		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php). <a href="%s" target="_blank">Read more &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw' );
 	}
 }

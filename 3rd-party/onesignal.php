@@ -114,20 +114,11 @@ function superpwa_onesignal_activation() {
 	// Filter in gcm_sender_id to SuperPWA manifest
 	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 	
-	// Regenerate SuperPWA manifest
-	superpwa_generate_manifest();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
 	// Change service worker filename to match OneSignal's service worker
 	add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	
 	// Import OneSignal service worker in SuperPWA
 	add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
-	
-	// Regenerate SuperPWA service worker
-	superpwa_generate_sw();
 }
 add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_activation', 11 );
 
@@ -151,20 +142,11 @@ function superpwa_onesignal_deactivation() {
 	// Remove gcm_sender_id from SuperPWA manifest
 	remove_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 	
-	// Regenerate SuperPWA manifest
-	superpwa_generate_manifest();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
 	// Restore the default service worker of SuperPWA
 	remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	
 	// Remove OneSignal service worker in SuperPWA
 	remove_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
-	
-	// Regenerate SuperPWA service worker
-	superpwa_generate_sw();
 }
 add_action( 'deactivate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_deactivation', 11 );
 

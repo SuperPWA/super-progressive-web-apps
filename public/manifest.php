@@ -120,20 +120,16 @@ function superpwa_manifest_template() {
  * @since      1.6 Added description
  * @since      1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in
  *             /3rd-party/onesignal.php
+ * @since      2.0 Deprecated since Manifest is generated on the fly
+ *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ *
+ * @author     Arun Basil Lal
+ * @author     Maria Daniel Deepak <daniel@danieldeepak.com>
  *
  * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_manifest() {
-	$manifest = superpwa_manifest_template();
-	
-	// Delete manifest if it exists.
-	superpwa_delete_manifest();
-	
-	// Write the manfiest to disk.
-	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
-		return false;
-	}
-	
+	// Returns TRUE for backward compatibility.
 	return true;
 }
 

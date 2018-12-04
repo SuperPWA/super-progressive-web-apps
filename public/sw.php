@@ -71,23 +71,16 @@ function superpwa_sw( $arg = 'src' ) {
 /**
  * Generate and write service worker into superpwa-sw.js
  *
- * @return (boolean) true on success, false on failure.
- * 
- * @since 1.0
+ * @return     (boolean) true on success, false on failure.
+ *
+ * @since      1.0
+ * @since      2.0 Deprecated since Service worker is generated on the fly
+ *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
  *
  * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_sw() {
-	// Get the service worker tempalte
-	$sw = superpwa_sw_template();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
-	if ( ! superpwa_put_contents( superpwa_sw( 'abs' ), $sw ) ) {
-		return false;
-	}
-	
+	// Returns TRUE for backward compatibility.
 	return true;
 }
 
