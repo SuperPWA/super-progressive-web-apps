@@ -62,6 +62,7 @@ if ( ! defined( 'SUPERPWA_DEV_MODE' ) ) {
 	 * @param bool Default false.
 	 */
 	$dev_mode = apply_filters( 'superpwa_dev_mode', false );
+	$dev_mode = is_bool( $dev_mode ) ? $dev_mode : false;
 
 	/**
 	 * @const Global Set TRUE to enable Dev mode.
