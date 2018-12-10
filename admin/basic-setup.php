@@ -353,17 +353,20 @@ function superpwa_add_rewrite_rules() {
  * @uses  superpwa_get_manifest()
  */
 function superpwa_generate_sw_and_manifest_on_fly( $query ) {
-	$query             = implode( ',', $query->query_vars );
-	$manifest_filename = superpwa_get_manifest_filename();
-	$sw_filename       = superpwa_get_sw_filename();
+	if ( ! property_exists( $query, 'query_vars' ) || ! is_array( $query->query_vars ) ) {
+		return;
+	}
+	$query_vars_as_string = implode( ',', $query->query_vars );
+	$manifest_filename    = superpwa_get_manifest_filename();
+	$sw_filename          = superpwa_get_sw_filename();
 
-	if ( strpos( $query, $manifest_filename ) !== false ) {
+	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
 		// Generate manifest from Settings and send the response w/ header.
 		header( 'Content-Type: application/json' );
 		echo json_encode( superpwa_manifest_template() );
 		exit();
 	}
-	if ( strpos( $query, $sw_filename ) !== false ) {
+	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
 		header( 'Content-type: text/javascript' );
 		echo superpwa_sw_template();
 		exit();
