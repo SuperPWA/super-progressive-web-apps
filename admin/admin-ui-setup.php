@@ -146,6 +146,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
+	
+		// Display
+		add_settings_field(
+			'superpwa_display',									// ID
+			__('Display', 'super-progressive-web-apps'),		// Title
+			'superpwa_display_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		
 	// PWA Status
     add_settings_section(
@@ -237,6 +246,7 @@ function superpwa_get_settings() {
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
+				'display'		=> 1,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
