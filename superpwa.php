@@ -50,31 +50,6 @@ if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_di
 if ( ! defined( 'SUPERPWA_PLUGIN_FILE' ) ) {
 	define( 'SUPERPWA_PLUGIN_FILE', __FILE__ ); // Full path to the plugin file. eg - /var/www/html/wp-content/plugins/Super-Progressive-Web-Apps/superpwa.php
 }
-if ( ! defined( 'SUPERPWA_DEV_MODE' ) ) {
-	/**
-	 * Allows you to enable Dev mode when using SuperPWA plugin.
-	 *
-	 * To quickly enable Dev mode, use the following
-	 * @example `add_filter( 'superpwa_dev_mode', '__return_true' );`
-	 *
-	 * @since   2.0
-	 *
-	 * @param bool Default false.
-	 */
-	$dev_mode = apply_filters( 'superpwa_dev_mode', false );
-	$dev_mode = is_bool( $dev_mode ) ? $dev_mode : false;
-
-	/**
-	 * @const Global Set TRUE to enable Dev mode.
-	 *
-	 * Dev Mode disables SSL verification when using wp_remote_head()
-	 * @see   superpwa_sw_status_cb()
-	 * @see   superpwa_manifest_status_cb()
-	 *
-	 * @since 2.0
-	 */
-	define( 'SUPERPWA_DEV_MODE', $dev_mode );
-}
 
 // Load everything
 require_once( SUPERPWA_PATH_ABS . 'loader.php' );
