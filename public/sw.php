@@ -54,7 +54,6 @@ function superpwa_sw( $arg = 'src' ) {
 			return $sw_filename;
 			break;
 
-		// TODO: Case `abs` can be deprecated as the file would be generated dynamically.
 		// Absolute path to service worker. SW must be in the root folder.
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $sw_filename;

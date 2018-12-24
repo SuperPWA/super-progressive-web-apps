@@ -56,7 +56,6 @@ function superpwa_manifest( $arg = 'src' ) {
 			return $manifest_filename;
 			break;
 
-		// TODO: Case `abs` can be deprecated as the file would be generated dynamically.
 		// Absolute path to manifest
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
