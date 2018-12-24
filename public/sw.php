@@ -34,13 +34,14 @@ function superpwa_get_sw_filename() {
  *
  * @param $arg 	filename for service worker filename (replaces SUPERPWA_SW_FILENAME)
  *				abs for absolute path to service worker (replaces SUPERPWA_SW_ABS)
- *				src for relative link to service worker (replaces SUPERPWA_SW_SRC). Default value
+ *				src for link to service worker (replaces SUPERPWA_SW_SRC). Default value
  *
  * @return (string) filename, absolute path or link to manifest.
  * 
  * @since 1.6
  * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
  * @since 1.8 Added filter superpwa_sw_filename.
+ * @since 2.0 src actually returns the link and the URL_PATH is extracted in superpwa_register_sw()
  */
 function superpwa_sw( $arg = 'src' ) {
 	
@@ -59,11 +60,10 @@ function superpwa_sw( $arg = 'src' ) {
 			return trailingslashit( ABSPATH ) . $sw_filename;
 			break;
 
-		// TODO: Case `src` and default can be deprecated in favor of @see superpwa_get_sw_filename().
 		// Link to service worker
 		case 'src':
 		default:
-			return parse_url( trailingslashit( network_site_url() ) . $sw_filename, PHP_URL_PATH );
+			return trailingslashit( network_site_url() ) . $sw_filename;
 			break;
 	}
 }
@@ -219,7 +219,7 @@ function superpwa_register_sw() {
 	
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
-			'url' => superpwa_sw( 'src' ),
+			'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
 		)
 	);
 }

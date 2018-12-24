@@ -361,11 +361,9 @@ function superpwa_manifest_status_cb() {
  * @since  2.0 Modify logic to check if Service worker exists.
  */
 function superpwa_sw_status_cb() {
-	
-	$superpwa_sw_url         = trailingslashit( network_site_url() ) . superpwa_get_sw_filename();
 
 	// Since Service worker is dynamically generated, it should always be present. 
-	printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a target="_blank" href="%s">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', $superpwa_sw_url );
+	printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a target="_blank" href="%s">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
 }
 
 /**

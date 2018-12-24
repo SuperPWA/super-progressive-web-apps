@@ -62,7 +62,6 @@ function superpwa_manifest( $arg = 'src' ) {
 			return trailingslashit( ABSPATH ) . $manifest_filename;
 			break;
 
-		// TODO: Case `src` and default can be deprecated in favor of @see superpwa_get_manifest_filename().
 		// Link to manifest
 		case 'src':
 		default:
