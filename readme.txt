@@ -176,6 +176,9 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.0 =
+* Date: [xx.December.2018]()
+
 = 1.9 =
 * Date: [25.July.2018](https://superpwa.com/superpwa-1-9-chrome-mini-infobar-ready/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 4.9.7. 
