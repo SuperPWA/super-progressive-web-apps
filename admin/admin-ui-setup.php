@@ -229,8 +229,11 @@ function superpwa_validater_and_sanitizer( $settings ) {
 /**
  * Get settings from database
  *
- * @since 	1.0
- * @return	Array	A merged array of default and settings saved in database. 
+ * @return (Array) A merged array of default and settings saved in database. 
+ *
+ * @author Arun Basil Lal
+ * 
+ * @since 1.0
  */
 function superpwa_get_settings() {
 
@@ -246,7 +249,7 @@ function superpwa_get_settings() {
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
-				'display'		=> 1,
+				'display'			=> 1,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );

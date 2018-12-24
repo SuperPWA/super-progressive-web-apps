@@ -301,6 +301,8 @@ function superpwa_orientation_cb() {
 /**
  * Default Display Dropdown
  *
+ * @author Jose Varghese
+ * 
  * @since 2.0
  */
 function superpwa_display_cb() {
@@ -327,11 +329,12 @@ function superpwa_display_cb() {
 	</label>
 	
 	<p class="description">
-		<?php _e( 'Set the browser UI to be shown when your app is launched. When set to <code>Full Screen</code> web application opens without any browser UI and takes up the entirety of the available display area. On <code>Minimal UI</code>, the user can access a minimal set of UI elements for controlling navigation and over <code>Browser</code>, a standard browser experience will be shown and the Add to Homescreen prompt wont occur on this case. ', 'super-progressive-web-apps' ); ?>
+		<?php _e( 'Set the browser UI to be shown when your app is launched. <code>standalone</code> is default and your app will look like a natice app. This is required for the Add To Home Screen Prompt. <code>Full Screen</code> hides the status bar. In some browsers, <code>Minimal UI</code> gives your app a minimal navigation UI. <code>Browser</code> display retains the standard browser experience.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
 }
+
 /**
  * Manifest Status
  *
