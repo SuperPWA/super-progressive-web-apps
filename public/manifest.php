@@ -73,11 +73,15 @@ function superpwa_manifest( $arg = 'src' ) {
 /**
  * Returns the Manifest template.
  *
- * @since 2.0
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  *
  * @return array
+ * 
+ * @since 2.0 Replaces superpwa_generate_manifest()
+ * @since 2.0 Added display
  */
 function superpwa_manifest_template() {
+	
 	// Get Settings
 	$settings = superpwa_get_settings();
 
@@ -93,7 +97,7 @@ function superpwa_manifest_template() {
 	$manifest['icons']            = superpwa_get_pwa_icons();
 	$manifest['background_color'] = $settings['background_color'];
 	$manifest['theme_color']      = $settings['theme_color'];
-	$manifest['display']          = 'standalone';
+	$manifest['display']          = superpwa_get_display();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = superpwa_get_start_url( true );
 	$manifest['scope']            = superpwa_get_scope();
