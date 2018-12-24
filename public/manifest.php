@@ -19,35 +19,50 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the Manifest filename.
+ *
+ * @since 2.0
+ *
+ * @return string
+ */
+function superpwa_get_manifest_filename() {
+	return 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
+}
+
+/**
  * Manifest filename, absolute path and link
  *
  * For Multisite compatibility. Used to be constants defined in superpwa.php
  * On a multisite, each sub-site needs a different manifest file.
  *
- * @param $arg 	filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
- *				abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
- *				src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ * @uses  superpwa_get_manifest_filename()
  *
- * @return String filename, absolute path or link to manifest. 
- *  
+ * @param $arg    filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
+ *                abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
+ *                src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ *
+ * @return String filename, absolute path or link to manifest.
+ *
  * @since 1.6
  */
 function superpwa_manifest( $arg = 'src' ) {
-	
-	$manifest_filename = 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
-	
-	switch( $arg ) {
-		
+
+	$manifest_filename = superpwa_get_manifest_filename();
+
+	switch ( $arg ) {
+		// TODO: Case `filename` can be deprecated in favor of @see superpwa_get_manifest_filename().
 		// Name of Manifest file
-		case 'filename': 
+		case 'filename':
 			return $manifest_filename;
 			break;
-		
-		// Absolute path to manifest		
+
+		// TODO: Case `abs` can be deprecated as the file would be generated dynamically.
+		// Absolute path to manifest
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
 			break;
-		
+
+		// TODO: Case `src` and default can be deprecated in favor of @see superpwa_get_manifest_filename().
 		// Link to manifest
 		case 'src':
 		default:
@@ -57,51 +72,69 @@ function superpwa_manifest( $arg = 'src' ) {
 }
 
 /**
- * Generate and write manifest into WordPress root folder
+ * Returns the Manifest template.
  *
- * @return (boolean) true on success, false on failure.
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ *
+ * @return array
  * 
- * @since 1.0
- * @since 1.3 Added support for 512x512 icon.
- * @since 1.4 Added orientation and scope.
- * @since 1.5 Added gcm_sender_id
- * @since 1.6 Added description
- * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
-* @since 2.0 Added display
+ * @since 2.0 Replaces superpwa_generate_manifest()
+ * @since 2.0 Added display
  */
-function superpwa_generate_manifest() {
+function superpwa_manifest_template() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
-	
-	$manifest 						= array();
-	$manifest['name']				= $settings['app_name'];
-	$manifest['short_name']			= $settings['app_short_name'];
-	
+
+	$manifest               = array();
+	$manifest['name']       = $settings['app_name'];
+	$manifest['short_name'] = $settings['app_short_name'];
+
 	// Description
 	if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
-		$manifest['description'] 	= $settings['description'];
+		$manifest['description'] = $settings['description'];
 	}
-	
-	$manifest['icons']				= superpwa_get_pwa_icons();
-	$manifest['background_color']	= $settings['background_color'];
-	$manifest['theme_color']		= $settings['theme_color'];
-	$manifest['display']			= superpwa_get_display();
-	$manifest['orientation']		= superpwa_get_orientation();
-	$manifest['start_url']			= superpwa_get_start_url( true );
-	$manifest['scope']				= superpwa_get_scope();
-	
-	// Filter the manifest.
-	$manifest = apply_filters( 'superpwa_manifest', $manifest );
-	
-	// Delete manifest if it exists.
-	superpwa_delete_manifest();
-	
-	// Write the manfiest to disk.
-	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
-		return false;
-	}
-	
+
+	$manifest['icons']            = superpwa_get_pwa_icons();
+	$manifest['background_color'] = $settings['background_color'];
+	$manifest['theme_color']      = $settings['theme_color'];
+	$manifest['display']          = superpwa_get_display();
+	$manifest['orientation']      = superpwa_get_orientation();
+	$manifest['start_url']        = superpwa_get_start_url( true );
+	$manifest['scope']            = superpwa_get_scope();
+
+	/**
+	 * Values that go in to Manifest JSON.
+	 *
+	 * The Web app manifest is a simple JSON file that tells the browser about your web application.
+	 *
+	 * @param array $manifest
+	 */
+	return apply_filters( 'superpwa_manifest', $manifest );
+}
+
+/**
+ * Generate and write manifest into WordPress root folder
+ *
+ * @return     (boolean) true on success, false on failure.
+ *
+ * @since      1.0
+ * @since      1.3 Added support for 512x512 icon.
+ * @since      1.4 Added orientation and scope.
+ * @since      1.5 Added gcm_sender_id
+ * @since      1.6 Added description
+ * @since      1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in
+ *             /3rd-party/onesignal.php
+ * @since      2.0 Deprecated since Manifest is generated on the fly
+ *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ *
+ * @author     Arun Basil Lal
+ * @author     Maria Daniel Deepak <daniel@danieldeepak.com>
+ *
+ * @deprecated 2.0 No longer used by internal code.
+ */
+function superpwa_generate_manifest() {
+	// Returns TRUE for backward compatibility.
 	return true;
 }
 
@@ -136,9 +169,11 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 /**
  * Delete manifest
  *
- * @return (boolean) true on success, false on failure
- * 
- * @since 1.0
+ * @return     (boolean) true on success, false on failure
+ *
+ * @since      1.0
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_manifest() {
 	return superpwa_delete( superpwa_manifest( 'abs' ) );

@@ -282,25 +282,6 @@ function superpwa_enqueue_css_js( $hook ) {
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
 
 /**
- * Todo list after saving admin options
- *
- * Regenerate manifest
- * Regenerate service worker
- *
- * @since	1.0
- */
-function superpwa_after_save_settings_todo() {
-	
-	// Regenerate manifest
-	superpwa_generate_manifest();
-	
-	// Regenerate service worker
-	superpwa_generate_sw();
-}
-add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
-add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
-
-/**
  * Admin footer text
  *
  * A function to add footer text to the settings page of the plugin.

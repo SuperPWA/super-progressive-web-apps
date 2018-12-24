@@ -19,7 +19,7 @@
 if ( ! defined('ABSPATH') ) exit;
  
 /**
- * Plugin activatation todo list
+ * Plugin activation todo list
  *
  * This function runs when user activates the plugin. Used in register_activation_hook()
  * On multisites, during network activation, this is fired only for the main site.
@@ -33,13 +33,6 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.6 Added checks for multisite compatibility.
  */
 function superpwa_activate_plugin( $network_active ) {
-	
-	// Generate manifest with default options
-	superpwa_generate_manifest();
-	
-	// Generate service worker
-	superpwa_generate_sw();
-	
 	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
 	if ( ! $network_active ) {
 		
@@ -56,36 +49,36 @@ register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate
 
 /**
  * Redirect to SuperPWA UI on plugin activation.
- * 
- * Will redirect to SuperPWA settings page when plugin is activated. 
- * Will not redirect if multiple plugins are activated at the same time. 
+ *
+ * Will redirect to SuperPWA settings page when plugin is activated.
+ * Will not redirect if multiple plugins are activated at the same time.
  * Will not redirect when activated network wide on multisite. Network admins know their way.
- * 
+ *
  * @since 2.0
  */
 function superpwa_activation_redirect( $plugin, $network_wide ) {
-	
-	// Return if not SuperPWA or if plugin is activated network wide. 
-	if ( $plugin !== 'super-progressive-web-apps/superpwa.php' || $network_wide === true ) {
+	// Return if not SuperPWA or if plugin is activated network wide.
+	if ( $plugin !== plugin_basename( SUPERPWA_PLUGIN_FILE ) || $network_wide === true ) {
 		return false;
 	}
-	
+
 	/**
 	 * An instance of the WP_Plugins_List_Table class.
-	 * 
+	 *
 	 * @link https://core.trac.wordpress.org/browser/tags/4.9.8/src/wp-admin/plugins.php#L15
 	 */
 	$wp_list_table_instance = new WP_Plugins_List_Table();
-	$current_action = $wp_list_table_instance->current_action();
-	
+	$current_action         = $wp_list_table_instance->current_action();
+
 	// When only one plugin is activated, the current_action() method will return activate.
 	if ( $current_action !== 'activate' ) {
-		return false; 
+		return false;
 	}
-	
+
 	// Redirect to SuperPWA settings page. 
-    exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
+	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
 }
+
 add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 );
 
 /**
@@ -185,13 +178,6 @@ function superpwa_upgrader() {
 	if ( $current_ver === false ) {
 		
 		if ( is_multisite() ) {
-			
-			// Generate manifestx
-			superpwa_generate_manifest();
-			
-			// Generate service worker
-			superpwa_generate_sw();
-			
 			// For multisites, save the activation status of current blog.
 			superpwa_multisite_activation_status( true );
 		}
@@ -240,9 +226,10 @@ function superpwa_upgrader() {
 		
 		// Restore the default service worker filename of SuperPWA.
 		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
-		
+
+		// TODO: Commenting the following line for now. Delete it later.
 		// Delete service worker if it exists.
-		superpwa_delete_sw();
+		// superpwa_delete_sw();
 		
 		// Change service worker filename to match OneSignal's service worker.
 		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
@@ -267,7 +254,7 @@ function superpwa_upgrader() {
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
 	}
-	
+
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
 	
@@ -292,12 +279,13 @@ add_action( 'admin_init', 'superpwa_upgrader' );
  * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
 function superpwa_deactivate_plugin( $network_active ) {
-	
+	// TODO: Commenting the following line for now. Delete it later.
 	// Delete manifest
-	superpwa_delete_manifest();
-	
+	// superpwa_delete_manifest();
+
+	// TODO: Commenting the following line for now. Delete it later.
 	// Delete service worker
-	superpwa_delete_sw();
+	// superpwa_delete_sw();
 	
 	// For multisites, save the de-activation status of current blog.
 	superpwa_multisite_activation_status( false );
@@ -352,3 +340,72 @@ function superpwa_plugin_row_meta( $links, $file ) {
 	return $links;
 }
 add_filter( 'plugin_row_meta', 'superpwa_plugin_row_meta', 10, 2 );
+
+/**
+ * Adds rewrite rules to handle request to SW javascript and Manifest json.
+ *
+ * @since 2.0
+ *
+ * @uses superpwa_get_sw_filename()
+ * @uses superpwa_get_manifest_filename()
+ */
+function superpwa_add_rewrite_rules() {
+	$sw_filename = superpwa_get_sw_filename();
+	add_rewrite_rule( "^/{$sw_filename}$",
+		"index.php?{$sw_filename}=1"
+	);
+
+	$manifest_filename = superpwa_get_manifest_filename();
+	add_rewrite_rule( "^/{$manifest_filename}$",
+		"index.php?{$manifest_filename}=1"
+	);
+}
+
+/**
+ * Generates SW and Manifest on the fly.
+ *
+ * This way no physical files have to be placed on WP root folder. Hallelujah!
+ *
+ * @since 2.0
+ *
+ * @uses  superpwa_get_sw_filename()
+ * @uses  superpwa_get_manifest_filename()
+ * @uses  superpwa_get_manifest()
+ */
+function superpwa_generate_sw_and_manifest_on_fly( $query ) {
+	if ( ! property_exists( $query, 'query_vars' ) || ! is_array( $query->query_vars ) ) {
+		return;
+	}
+	$query_vars_as_string = implode( ',', $query->query_vars );
+	$manifest_filename    = superpwa_get_manifest_filename();
+	$sw_filename          = superpwa_get_sw_filename();
+
+	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
+		// Generate manifest from Settings and send the response w/ header.
+		header( 'Content-Type: application/json' );
+		echo json_encode( superpwa_manifest_template() );
+		exit();
+	}
+	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
+		header( 'Content-type: text/javascript' );
+		echo superpwa_sw_template();
+		exit();
+	}
+}
+
+/**
+ * Sets up the hooks once.
+ *
+ * Possibly put in the same order as execution for better understanding.
+ *
+ * @link  https://codex.wordpress.org/Plugin_API/Action_Reference Actions run during a typical Request.
+ * @link  https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
+ *
+ * @since 2.0
+ */
+function superpwa_setup_hooks() {
+	add_action( 'init', 'superpwa_add_rewrite_rules' );
+	add_action( 'parse_request', 'superpwa_generate_sw_and_manifest_on_fly' );
+}
+
+add_action( 'plugins_loaded', 'superpwa_setup_hooks' );
