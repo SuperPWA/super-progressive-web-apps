@@ -18,10 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 
  * @return (string|bool) AMP page url on success, false otherwise
  * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ * 
  * @since 1.2
  * @since 1.9 Added support for tagDiv AMP
+ * @since 2.0 require wp-admin/includes/plugin.php if is_plugin_active isn't defined
  */
 function superpwa_is_amp() {
+	
 	if ( ! function_exists( 'is_plugin_active' ) ) {
 		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 	}
@@ -36,7 +41,7 @@ function superpwa_is_amp() {
 		return defined( 'AMPFORWP_AMP_QUERY_VAR' ) ? AMPFORWP_AMP_QUERY_VAR . '/' : 'amp/';
 	}
 
-	// Better AMP � https://wordpress.org/plugins/better-amp/
+	// Better AMP - https://wordpress.org/plugins/better-amp/
 	if ( is_plugin_active( 'better-amp/better-amp.php' ) ) {
 		return 'amp/';
 	}
