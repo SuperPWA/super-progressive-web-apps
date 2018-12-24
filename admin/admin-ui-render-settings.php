@@ -351,7 +351,7 @@ function superpwa_manifest_status_cb() {
 		// Since Manifest is dynamically generated, it should always be present. 
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
 	}
 }
 
@@ -370,9 +370,9 @@ function superpwa_sw_status_cb() {
 	// Dynamic files need a custom permalink structure.
 	if ( get_option( 'permalink_structure' ) !== '' ) {
 		// Since Service worker is dynamically generated, it should always be present. 
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a target="_blank" href="%s">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
 	} else {
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
 	}
 }
 
