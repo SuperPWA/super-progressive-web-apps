@@ -12,6 +12,7 @@
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
+ * @function	superpwa_get_display()					Get display of PWA
  */
 
 // Exit if accessed directly
@@ -248,5 +249,44 @@ function superpwa_get_orientation() {
 			
 		default: 
 			return 'any';
+	}
+}
+
+/**
+ * Get display of PWA
+ *
+ * @return	string	Display of PWA as set in the plugin settings.
+ * 
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_get_display() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$display = isset( $settings['display'] ) ? $settings['display'] : 0;
+	
+	switch ( $display ) {
+		
+		case 0:
+			return 'fullscreen';
+			break;
+			
+		case 1:
+			return 'standalone';
+			break;
+			
+		case 2:
+			return 'minimal-ui';
+			break;
+
+		case 3:
+			return 'browser';
+			break;
+			
+		default: 
+			return 'standalone';
 	}
 }

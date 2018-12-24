@@ -14,6 +14,7 @@
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_orientation_cb()				Default Orientation Dropdown
+ * @function	superpwa_display_cb()					Default Display Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
@@ -292,6 +293,43 @@ function superpwa_orientation_cb() {
 	
 	<p class="description">
 		<?php _e( 'Set the orientation of your app on devices. When set to <code>Follow Device Orientation</code> your app will rotate as the device is rotated.', 'super-progressive-web-apps' ); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Default Display Dropdown
+ *
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_display_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Display Dropdown -->
+	<label for="superpwa_settings[display]">
+		<select name="superpwa_settings[display]" id="superpwa_settings[display]">
+			<option value="0" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 0 ); } ?>>
+				<?php _e( 'Full Screen', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="1" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 1 ); } ?>>
+				<?php _e( 'Standalone', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="2" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 2 ); } ?>>
+				<?php _e( 'Minimal UI', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="3" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 3 ); } ?>>
+				<?php _e( 'Browser', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
+	</label>
+	
+	<p class="description">
+		<?php _e( 'Set the browser UI to be shown when your app is launched. <code>standalone</code> is default and your app will look like a natice app. This is required for the Add To Home Screen Prompt. <code>Full Screen</code> hides the status bar. In some browsers, <code>Minimal UI</code> gives your app a minimal navigation UI. <code>Browser</code> display retains the standard browser experience.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
