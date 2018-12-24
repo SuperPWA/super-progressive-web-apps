@@ -268,12 +268,6 @@ function superpwa_upgrader() {
 		update_option( 'superpwa_settings', $settings );
 	}
 	
-	// Re-generate manifest
-	superpwa_generate_manifest();
-	
-	// Re-generate service worker
-	superpwa_generate_sw();
-	
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
 	
