@@ -234,6 +234,26 @@ function superpwa_upgrader() {
 		// Change service worker filename to match OneSignal's service worker.
 		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	}
+	
+	/**
+	 * Add display to database when upgrading from pre 2.0 versions.
+	 * 
+	 * Until 2.0, there was no UI for display.
+	 * In the manifest, display was hard coded as 'standalone'.
+	 * 
+	 * @since 2.0
+	 */
+	if ( version_compare( $current_ver, '1.9', '<=' ) ) {
+		
+		// Get settings
+		$settings = superpwa_get_settings();
+		
+		// Display was set as 'standalone' until version 2.0. Set it as 1, which is 'standalone'.
+		$settings['display'] = 1;
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
+	}
 
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
