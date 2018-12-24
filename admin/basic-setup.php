@@ -237,9 +237,12 @@ function superpwa_upgrader() {
 	
 	/**
 	 * Add display to database when upgrading from pre 2.0 versions.
+	 * Delete manifest and service worker files. 
 	 * 
 	 * Until 2.0, there was no UI for display.
 	 * In the manifest, display was hard coded as 'standalone'.
+	 * 
+	 * Starting with 2.0, manifest and servcei worker files are dynamic and no longer static. 
 	 * 
 	 * @since 2.0
 	 */
@@ -253,6 +256,12 @@ function superpwa_upgrader() {
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
+		
+		// Delete manifest
+		superpwa_delete_manifest();
+		
+		// Delete service worker
+		superpwa_delete_sw();
 	}
 
 	// Add current version to database
