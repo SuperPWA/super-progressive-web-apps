@@ -82,14 +82,14 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  * 
  * @return (string) Import OneSignal's service worker into SuperPWA 
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.8
+ * @since 2.0 Removed content-type header for compatibility with dynamic service workers. 
  */
 function superpwa_onesignal_sw( $sw ) {
 	
-	$onesignal  = '<?php' . PHP_EOL; 
-	$onesignal .= 'header( "Content-Type: application/javascript" );' . PHP_EOL;
-	$onesignal .= 'echo "importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );";' . PHP_EOL;
-	$onesignal .= '?>' . PHP_EOL . PHP_EOL;
+	$onesignal = 'importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );' . PHP_EOL;
 	
 	return $onesignal . $sw;
 }
