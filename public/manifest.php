@@ -222,7 +222,7 @@ function superpwa_get_pwa_icons() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
+	return parse_url( trailingslashit( get_bloginfo( 'url' ) ), PHP_URL_PATH );
 }
 
 /**
