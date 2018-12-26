@@ -41,7 +41,8 @@ function superpwa_get_sw_filename() {
  * @since 1.6
  * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
  * @since 1.8 Added filter superpwa_sw_filename.
- * @since 2.0 src actually returns the link and the URL_PATH is extracted in superpwa_register_sw()
+ * @since 2.0 src actually returns the link and the URL_PATH is extracted in superpwa_register_sw().
+ * @since 2.0 src uses home_url instead of network_site_url since manifest is no longer in the root folder.
  */
 function superpwa_sw( $arg = 'src' ) {
 	
@@ -54,7 +55,13 @@ function superpwa_sw( $arg = 'src' ) {
 			return $sw_filename;
 			break;
 
-		// Absolute path to service worker. SW must be in the root folder.
+		/**
+		* Absolute path to service worker. SW must be in the root folder.
+		* 
+		* @since 2.0 service worker is no longer a physical file and absolute path doesn't make sense. 
+		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
+		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $sw_filename;
 			break;
@@ -62,7 +69,7 @@ function superpwa_sw( $arg = 'src' ) {
 		// Link to service worker
 		case 'src':
 		default:
-			return trailingslashit( network_site_url() ) . $sw_filename;
+			return home_url( '/' ) . $sw_filename;
 			break;
 	}
 }

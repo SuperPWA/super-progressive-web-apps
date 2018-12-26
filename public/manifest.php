@@ -44,6 +44,7 @@ function superpwa_get_manifest_filename() {
  * @return String filename, absolute path or link to manifest.
  *
  * @since 1.6
+ * @since 2.0 src uses home_url instead of network_site_url since manifest is no longer in the root folder.
  */
 function superpwa_manifest( $arg = 'src' ) {
 
@@ -56,7 +57,13 @@ function superpwa_manifest( $arg = 'src' ) {
 			return $manifest_filename;
 			break;
 
-		// Absolute path to manifest
+		/**
+		* Absolute path to manifest. 
+		* 
+		* @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
+		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
+		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
 			break;
@@ -64,7 +71,7 @@ function superpwa_manifest( $arg = 'src' ) {
 		// Link to manifest
 		case 'src':
 		default:
-			return trailingslashit( network_site_url() ) . $manifest_filename;
+			return home_url( '/' ) . $manifest_filename;
 			break;
 	}
 }
