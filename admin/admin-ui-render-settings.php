@@ -329,7 +329,7 @@ function superpwa_display_cb() {
 	</label>
 	
 	<p class="description">
-		<?php _e( 'Set the browser UI to be shown when your app is launched. <code>standalone</code> is default and your app will look like a natice app. This is required for the Add To Home Screen Prompt. <code>Full Screen</code> hides the status bar. In some browsers, <code>Minimal UI</code> gives your app a minimal navigation UI. <code>Browser</code> display retains the standard browser experience.', 'super-progressive-web-apps' ); ?>
+		<?php printf( __( 'Display mode decides what browser UI is shown when your app is launched. <code>Standalone</code> is default. <a href="%s" target="_blank">What\'s the difference? &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/web-app-manifest-display-modes/?utm_source=superpwa-plugin&utm_medium=settings-display' ); ?>
 	</p>
 
 	<?php
