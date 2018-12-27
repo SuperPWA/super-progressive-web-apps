@@ -1,44 +1,54 @@
-# Copyright (C) 2018 Super Progressive Web Apps
-# This file is distributed under the same license as the Super Progressive Web Apps package.
+# Copyright (C) 2018 SuperPWA
+# This file is distributed under the same license as the Super Progressive Web Apps plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Super Progressive Web Apps 1.9\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-"
-"web-apps\n"
-"POT-Creation-Date: 2018-07-24 21:16:49+00:00\n"
+"Project-Id-Version: Super Progressive Web Apps 2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-web-apps\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2018-12-27T20:31:33+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.1.0\n"
+"X-Domain: super-progressive-web-apps\n"
 
-#: 3rd-party/onesignal.php:190
-msgid ""
-"<strong>SuperPWA</strong> is not compatible with OneSignal on multisites "
-"yet. Disable one of these plugins until the compatibility is available."
-"<br>Please refer to the <a href=\"%s\" target=\"_blank\">OneSignal "
-"integration documentation</a> for more info. "
-msgstr ""
-
-#: 3rd-party/onesignal.php:212
-msgid ""
-"<strong>Action Required to integrate SuperPWA with OneSignal:</strong><br>1. "
-"Go to <a href=\"%s\" target=\"_blank\">OneSignal Configuration > Scroll down "
-"to Advanced Settings &rarr;</a><br>2. Enable <strong>Use my own manifest."
-"json</strong><br>3. Set <code>%s</code>as <strong>Custom manifest.json URL</"
-"strong> and Save Settings.<br>Please refer the <a href=\"%s\" target=\"_blank"
-"\">OneSignal integration documentation</a> for more info. "
-msgstr ""
-
-#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.9)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: addons/utm-tracking.php:35 admin/admin-ui-setup.php:28
-#: admin/admin-ui-setup.php:31 admin/admin-ui-setup.php:34
+#. Plugin Name of the plugin
+#: addons/utm-tracking.php:35
+#: admin/admin-ui-setup.php:28
+#: admin/admin-ui-setup.php:31
+#: admin/admin-ui-setup.php:34
 msgid "Super Progressive Web Apps"
 msgstr ""
 
-#: addons/utm-tracking.php:35 admin/admin-ui-render-addons.php:49
+#. Plugin URI of the plugin
+msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri"
+msgstr ""
+
+#. Description of the plugin
+msgid "Convert your WordPress website into a Progressive Web App"
+msgstr ""
+
+#. Author of the plugin
+#: admin/admin-ui-setup.php:28
+msgid "SuperPWA"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri"
+msgstr ""
+
+#: 3rd-party/onesignal.php:172
+msgid "<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href=\"%s\" target=\"_blank\">OneSignal integration documentation</a> for more info. "
+msgstr ""
+
+#: 3rd-party/onesignal.php:194
+msgid "<strong>Action Required to integrate SuperPWA with OneSignal:</strong><br>1. Go to <a href=\"%s\" target=\"_blank\">OneSignal Configuration > Scroll down to Advanced Settings &rarr;</a><br>2. Enable <strong>Use my own manifest.json</strong><br>3. Set <code>%s</code>as <strong>Custom manifest.json URL</strong> and Save Settings.<br>Please refer the <a href=\"%s\" target=\"_blank\">OneSignal integration documentation</a> for more info. "
+msgstr ""
+
+#: addons/utm-tracking.php:35
+#: admin/admin-ui-render-addons.php:49
 msgid "UTM Tracking"
 msgstr ""
 
@@ -67,20 +77,15 @@ msgid "Campaign Content"
 msgstr ""
 
 #: addons/utm-tracking.php:234
-msgid ""
-"This add-on automatically adds UTM campaign parameters to the <code>Start "
-"Page</code> URL in your <a href=\"%s\" target=\"_blank\">manifest</a>. This "
-"will help you identify visitors coming specifically from your app. <a href="
-"\"%s\" target=\"_blank\">Read more</a> about UTM Tracking."
+msgid "This add-on automatically adds UTM campaign parameters to the <code>Start Page</code> URL in your <a href=\"%s\" target=\"_blank\">manifest</a>. This will help you identify visitors coming specifically from your app. <a href=\"%s\" target=\"_blank\">Read more</a> about UTM Tracking."
 msgstr ""
 
 #: addons/utm-tracking.php:264
-msgid ""
-"Campaign Source is mandatory and defaults to <code>superpwa</code>. The "
-"remaining fields are optional."
+msgid "Campaign Source is mandatory and defaults to <code>superpwa</code>. The remaining fields are optional."
 msgstr ""
 
-#: addons/utm-tracking.php:362 admin/admin-ui-render-settings.php:374
+#: addons/utm-tracking.php:362
+#: admin/admin-ui-render-settings.php:412
 msgid "Settings saved."
 msgstr ""
 
@@ -88,14 +93,13 @@ msgstr ""
 msgid "UTM Tracking for"
 msgstr ""
 
-#: addons/utm-tracking.php:382 admin/admin-ui-render-settings.php:397
+#: addons/utm-tracking.php:382
+#: admin/admin-ui-render-settings.php:435
 msgid "Save Settings"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:50
-msgid ""
-"Track visits from your app by adding UTM tracking parameters to the Start "
-"Page URL."
+msgid "Track visits from your app by adding UTM tracking parameters to the Start Page URL."
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:55
@@ -107,9 +111,7 @@ msgid "Apple Touch Icons"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:61
-msgid ""
-"Set the Application Icon and Splash Screen Icon as Apple Touch Icons for "
-"compatibility with iOS devices."
+msgid "Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices."
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:66
@@ -132,7 +134,8 @@ msgstr ""
 msgid "Add-Ons extend the functionality of SuperPWA."
 msgstr ""
 
-#: admin/admin-ui-render-addons.php:177 admin/admin-ui-render-addons.php:349
+#: admin/admin-ui-render-addons.php:177
+#: admin/admin-ui-render-addons.php:349
 msgid "Deactivate"
 msgstr ""
 
@@ -145,21 +148,15 @@ msgid "More Details"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:197
-msgid ""
-"<span class=\"compatibility-compatible\"><strong>Add-On active.</strong> <a "
-"href=\"%s\"%s>%s</a></span>"
+msgid "<span class=\"compatibility-compatible\"><strong>Add-On active.</strong> <a href=\"%s\"%s>%s</a></span>"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:200
-msgid ""
-"<span class=\"compatibility-compatible\"><strong>Compatible</strong> with "
-"your version of SuperPWA</span>"
+msgid "<span class=\"compatibility-compatible\"><strong>Compatible</strong> with your version of SuperPWA</span>"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:203
-msgid ""
-"<span class=\"compatibility-incompatible\"><strong>Please upgrade</strong> "
-"to the latest version of SuperPWA</span>"
+msgid "<span class=\"compatibility-incompatible\"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:217
@@ -167,9 +164,7 @@ msgid "SuperPWA Newsletter"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:221
-msgid ""
-"Learn more about Progressive Web Apps<br>and get latest updates about "
-"SuperPWA"
+msgid "Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:229
@@ -181,9 +176,7 @@ msgid "Subscribe"
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:233
-msgid ""
-"we'll share our <code>root</code> password before we share your email with "
-"anyone else."
+msgid "we'll share our <code>root</code> password before we share your email with anyone else."
 msgstr ""
 
 #: admin/admin-ui-render-addons.php:345
@@ -194,141 +187,114 @@ msgstr ""
 msgid "Install"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:60
-msgid ""
-"Used when there is insufficient space to display the full name of the "
-"application. <code>12</code> characters or less."
+#: admin/admin-ui-render-settings.php:61
+msgid "Used when there is insufficient space to display the full name of the application. <span id=\"superpwa-app-short-name-limit\"><code>12</code> characters or less.</span>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:83
+#: admin/admin-ui-render-settings.php:84
 msgid "A brief description of what your app is about."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:104
-#: admin/admin-ui-render-settings.php:127
+#: admin/admin-ui-render-settings.php:105
+#: admin/admin-ui-render-settings.php:128
 msgid "Choose Icon"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:108
-msgid ""
-"This will be the icon of your app when installed on the phone. Must be a "
-"<code>PNG</code> image exactly <code>192x192</code> in size."
+#: admin/admin-ui-render-settings.php:109
+msgid "This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:131
-msgid ""
-"This icon will be displayed on the splash screen of your app on supported "
-"devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in "
-"size."
+#: admin/admin-ui-render-settings.php:132
+msgid "This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:151
+#: admin/admin-ui-render-settings.php:152
 msgid "Background color of the splash screen."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:171
-msgid ""
-"Theme color is used on supported devices to tint the UI elements of the "
-"browser and app switcher. When in doubt, use the same color as "
-"<code>Background Color</code>."
+#: admin/admin-ui-render-settings.php:172
+msgid "Theme color is used on supported devices to tint the UI elements of the browser and app switcher. When in doubt, use the same color as <code>Background Color</code>."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:194
-msgid "&mdash; Homepage &mdash;"
+#: admin/admin-ui-render-settings.php:202
+msgid "Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:201
-msgid ""
-"Specify the page to load when the application is launched from a device. "
-"Current start page is <code>%s</code>"
-msgstr ""
-
-#: admin/admin-ui-render-settings.php:209
+#: admin/admin-ui-render-settings.php:210
 msgid "Use AMP version of the start page."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:215
-msgid ""
-"Do not check this if your start page is the homepage, the blog index, or the "
-"archives page. AMP for WordPress does not create AMP versions for these "
-"pages."
+#: admin/admin-ui-render-settings.php:216
+msgid "Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:228
-msgid ""
-"Please enable AMP support for Page in <a href=\"%s\">Theme Settings > Theme "
-"Panel</a> > AMP > Post Type Support."
+#: admin/admin-ui-render-settings.php:229
+msgid "Please enable AMP support for Page in <a href=\"%s\">Theme Settings > Theme Panel</a> > AMP > Post Type Support."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:255
-msgid "&mdash; Default &mdash;"
+#: admin/admin-ui-render-settings.php:263
+msgid "Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:262
-msgid ""
-"Offline page is displayed when the device is offline and the requested page "
-"is not already cached. Current offline page is <code>%s</code>"
-msgstr ""
-
-#: admin/admin-ui-render-settings.php:282
+#: admin/admin-ui-render-settings.php:283
 msgid "Follow Device Orientation"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:285
+#: admin/admin-ui-render-settings.php:286
 msgid "Portrait"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:288
+#: admin/admin-ui-render-settings.php:289
 msgid "Landscape"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:294
-msgid ""
-"Set the orientation of your app on devices. When set to <code>Follow Device "
-"Orientation</code> your app will rotate as the device is rotated."
+#: admin/admin-ui-render-settings.php:295
+msgid "Set the orientation of your app on devices. When set to <code>Follow Device Orientation</code> your app will rotate as the device is rotated."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:316
-msgid ""
-"Manifest generated successfully. You can <a href=\"%s\" target=\"_blank"
-"\">see it here &rarr;</a>"
+#: admin/admin-ui-render-settings.php:317
+msgid "Full Screen"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:319
-msgid ""
-"Manifest generation failed. Check if WordPress can write to your root folder "
-"(the same folder with wp-config.php). <a href=\"%s\" target=\"_blank\">Read "
-"more &rarr;</a>"
+#: admin/admin-ui-render-settings.php:320
+msgid "Standalone"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:334
-msgid "Service worker generated successfully."
+#: admin/admin-ui-render-settings.php:323
+msgid "Minimal UI"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:337
-msgid ""
-"Service worker generation failed. Check if WordPress can write to your root "
-"folder (the same folder with wp-config.php). <a href=\"%s\" target=\"_blank"
-"\">Read more &rarr;</a>"
+#: admin/admin-ui-render-settings.php:326
+msgid "Browser"
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:350
+#: admin/admin-ui-render-settings.php:332
+msgid "Display mode decides what browser UI is shown when your app is launched. <code>Standalone</code> is default. <a href=\"%s\" target=\"_blank\">What's the difference? &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:352
+msgid "Manifest generated successfully. You can <a href=\"%s\" target=\"_blank\">see it here &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:354
+#: admin/admin-ui-render-settings.php:375
+msgid "SuperPWA requires a custom permalink structure. Go to <a href=\"%s\" target=\"_blank\">WordPress Settings > Permalinks</a> and choose anything other than \"Plain\"."
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:373
+msgid "Service worker generated successfully. <a href=\"%s\" target=\"_blank\">see it here &rarr;</a>"
+msgstr ""
+
+#: admin/admin-ui-render-settings.php:388
 msgid "Your website is served over HTTPS."
 msgstr ""
 
-#: admin/admin-ui-render-settings.php:353
-msgid ""
-"Progressive Web Apps require that your website is served over HTTPS. Please "
-"contact your host to add a SSL certificate to your domain."
+#: admin/admin-ui-render-settings.php:391
+msgid "Progressive Web Apps require that your website is served over HTTPS. Please contact your host to add a SSL certificate to your domain."
 msgstr ""
 
-#. #-#-#-#-#  super-progressive-web-apps.pot (Super Progressive Web Apps 1.9)  #-#-#-#-#
-#. Author of the plugin/theme
-#: admin/admin-ui-setup.php:28
-msgid "SuperPWA"
-msgstr ""
-
-#: admin/admin-ui-setup.php:31 admin/basic-setup.php:278
+#: admin/admin-ui-setup.php:31
+#: admin/basic-setup.php:328
 msgid "Settings"
 msgstr ""
 
@@ -377,48 +343,47 @@ msgid "Orientation"
 msgstr ""
 
 #: admin/admin-ui-setup.php:153
+msgid "Display"
+msgstr ""
+
+#: admin/admin-ui-setup.php:162
 msgid "Status"
 msgstr ""
 
-#: admin/admin-ui-setup.php:161
+#: admin/admin-ui-setup.php:170
 msgid "Manifest"
 msgstr ""
 
-#: admin/admin-ui-setup.php:170
+#: admin/admin-ui-setup.php:179
 msgid "Service Worker"
 msgstr ""
 
-#: admin/admin-ui-setup.php:179
+#: admin/admin-ui-setup.php:188
 msgid "HTTPS"
 msgstr ""
 
-#: admin/admin-ui-setup.php:305
-msgid ""
-"If you like SuperPWA, please <a href=\"%s\" target=\"_blank\">make a "
-"donation</a> or leave a <a href=\"%s\" target=\"_blank\">&#9733;&#9733;"
-"&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a "
-"bunch!"
+#: admin/admin-ui-setup.php:299
+msgid "If you like SuperPWA, please <a href=\"%s\" target=\"_blank\">make a donation</a> or leave a <a href=\"%s\" target=\"_blank\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!"
 msgstr ""
 
-#: admin/basic-setup.php:82 admin/basic-setup.php:116
-msgid ""
-"<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a "
-"href=\"%s\" target=\"_blank\">Discover new features and read the story &rarr;"
-"</a>"
+#: admin/basic-setup.php:99
+msgid "Your app is ready with the default settings. "
 msgstr ""
 
-#: admin/basic-setup.php:294
+#: admin/basic-setup.php:103
+msgid "<a href=\"%s\">Customize your app &rarr;</a>"
+msgstr ""
+
+#: admin/basic-setup.php:105
+#: admin/basic-setup.php:139
+msgid "Thank you for installing <strong>Super Progressive Web Apps!</strong> "
+msgstr ""
+
+#: admin/basic-setup.php:114
+#: admin/basic-setup.php:148
+msgid "<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href=\"%s\" target=\"_blank\">Discover new features and read the story &rarr;</a>"
+msgstr ""
+
+#: admin/basic-setup.php:344
 msgid "Demo"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Convert your WordPress website into a Progressive Web App"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri"
 msgstr ""
