@@ -30,4 +30,13 @@ jQuery(document).ready(function($){
 		})
 		.open();
 	});
+	$('.superpwa-app-short-name').on('input', function(e) {	// Warn when app_short_name exceeds 12 characters.
+		if ( $('.superpwa-app-short-name').val().length > 12 ) {
+			$('.superpwa-app-short-name').css({'color': '#dc3232'});
+			$('#superpwa-app-short-name-limit').css({'color': '#dc3232'});
+		} else {
+			$('.superpwa-app-short-name').css({'color': 'inherit'});
+			$('#superpwa-app-short-name-limit').css({'color': 'inherit'});
+		}
+	});
 });

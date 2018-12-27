@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<ruleset name="Super Progressive Web Apps">
+	<description>Super Progressive Web Apps coding standard</description>
+
+	<rule ref="WordPress-Extra"/>
+</ruleset>

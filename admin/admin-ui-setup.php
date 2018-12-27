@@ -146,6 +146,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
+	
+		// Display
+		add_settings_field(
+			'superpwa_display',									// ID
+			__('Display', 'super-progressive-web-apps'),		// Title
+			'superpwa_display_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		
 	// PWA Status
     add_settings_section(
@@ -197,7 +206,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 	
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] );
+	$settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 12 );
 	
 	// Sanitize description
 	$settings['description'] = sanitize_text_field( $settings['description'] );
@@ -220,14 +229,17 @@ function superpwa_validater_and_sanitizer( $settings ) {
 /**
  * Get settings from database
  *
- * @since 	1.0
- * @return	Array	A merged array of default and settings saved in database. 
+ * @return (Array) A merged array of default and settings saved in database. 
+ *
+ * @author Arun Basil Lal
+ * 
+ * @since 1.0
  */
 function superpwa_get_settings() {
 
 	$defaults = array(
 				'app_name'			=> get_bloginfo( 'name' ),
-				'app_short_name'	=> get_bloginfo( 'name' ),
+				'app_short_name'	=> substr( get_bloginfo( 'name' ), 0, 12 ),
 				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
@@ -237,6 +249,7 @@ function superpwa_get_settings() {
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
+				'display'			=> 1,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
@@ -267,25 +280,6 @@ function superpwa_enqueue_css_js( $hook ) {
     wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
-
-/**
- * Todo list after saving admin options
- *
- * Regenerate manifest
- * Regenerate service worker
- *
- * @since	1.0
- */
-function superpwa_after_save_settings_todo() {
-	
-	// Regenerate manifest
-	superpwa_generate_manifest();
-	
-	// Regenerate service worker
-	superpwa_generate_sw();
-}
-add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
-add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
 
 /**
  * Admin footer text

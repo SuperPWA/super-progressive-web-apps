@@ -12,10 +12,22 @@
  * @function 	superpwa_get_pwa_icons()				Get PWA Icons
  * @function	superpwa_get_scope()					Get navigation scope of PWA
  * @function	superpwa_get_orientation()				Get orientation of PWA
+ * @function	superpwa_get_display()					Get display of PWA
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+/**
+ * Returns the Manifest filename.
+ *
+ * @since 2.0
+ *
+ * @return string
+ */
+function superpwa_get_manifest_filename() {
+	return 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
+}
 
 /**
  * Manifest filename, absolute path and link
@@ -23,83 +35,111 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * For Multisite compatibility. Used to be constants defined in superpwa.php
  * On a multisite, each sub-site needs a different manifest file.
  *
- * @param $arg 	filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
- *				abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
- *				src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ * @uses  superpwa_get_manifest_filename()
  *
- * @return String filename, absolute path or link to manifest. 
- *  
+ * @param $arg    filename for manifest filename (replaces SUPERPWA_MANIFEST_FILENAME)
+ *                abs for absolute path to manifest (replaces SUPERPWA_MANIFEST_ABS)
+ *                src for link to manifest (replaces SUPERPWA_MANIFEST_SRC). Default value
+ *
+ * @return String filename, absolute path or link to manifest.
+ *
  * @since 1.6
+ * @since 2.0 src uses home_url instead of network_site_url since manifest is no longer in the root folder.
  */
 function superpwa_manifest( $arg = 'src' ) {
-	
-	$manifest_filename = 'superpwa-manifest' . superpwa_multisite_filename_postfix() . '.json';
-	
-	switch( $arg ) {
-		
+
+	$manifest_filename = superpwa_get_manifest_filename();
+
+	switch ( $arg ) {
+		// TODO: Case `filename` can be deprecated in favor of @see superpwa_get_manifest_filename().
 		// Name of Manifest file
-		case 'filename': 
+		case 'filename':
 			return $manifest_filename;
 			break;
-		
-		// Absolute path to manifest		
+
+		/**
+		* Absolute path to manifest. 
+		* 
+		* @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
+		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
+		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
 			break;
-		
+
 		// Link to manifest
 		case 'src':
 		default:
-			return trailingslashit( network_site_url() ) . $manifest_filename;
+			return home_url( '/' ) . $manifest_filename;
 			break;
 	}
 }
 
 /**
- * Generate and write manifest into WordPress root folder
+ * Returns the Manifest template.
  *
- * @return (boolean) true on success, false on failure.
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ *
+ * @return array
  * 
- * @since 1.0
- * @since 1.3 Added support for 512x512 icon.
- * @since 1.4 Added orientation and scope.
- * @since 1.5 Added gcm_sender_id
- * @since 1.6 Added description
- * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
+ * @since 2.0 Replaces superpwa_generate_manifest()
+ * @since 2.0 Added display
  */
-function superpwa_generate_manifest() {
+function superpwa_manifest_template() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
-	
-	$manifest 						= array();
-	$manifest['name']				= $settings['app_name'];
-	$manifest['short_name']			= $settings['app_short_name'];
-	
+
+	$manifest               = array();
+	$manifest['name']       = $settings['app_name'];
+	$manifest['short_name'] = $settings['app_short_name'];
+
 	// Description
 	if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
-		$manifest['description'] 	= $settings['description'];
+		$manifest['description'] = $settings['description'];
 	}
-	
-	$manifest['icons']				= superpwa_get_pwa_icons();
-	$manifest['background_color']	= $settings['background_color'];
-	$manifest['theme_color']		= $settings['theme_color'];
-	$manifest['display']			= 'standalone';
-	$manifest['orientation']		= superpwa_get_orientation();
-	$manifest['start_url']			= superpwa_get_start_url( true );
-	$manifest['scope']				= superpwa_get_scope();
-	
-	// Filter the manifest.
-	$manifest = apply_filters( 'superpwa_manifest', $manifest );
-	
-	// Delete manifest if it exists.
-	superpwa_delete_manifest();
-	
-	// Write the manfiest to disk.
-	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( $manifest ) ) ) {
-		return false;
-	}
-	
+
+	$manifest['icons']            = superpwa_get_pwa_icons();
+	$manifest['background_color'] = $settings['background_color'];
+	$manifest['theme_color']      = $settings['theme_color'];
+	$manifest['display']          = superpwa_get_display();
+	$manifest['orientation']      = superpwa_get_orientation();
+	$manifest['start_url']        = superpwa_get_start_url( true );
+	$manifest['scope']            = superpwa_get_scope();
+
+	/**
+	 * Values that go in to Manifest JSON.
+	 *
+	 * The Web app manifest is a simple JSON file that tells the browser about your web application.
+	 *
+	 * @param array $manifest
+	 */
+	return apply_filters( 'superpwa_manifest', $manifest );
+}
+
+/**
+ * Generate and write manifest into WordPress root folder
+ *
+ * @return     (boolean) true on success, false on failure.
+ *
+ * @since      1.0
+ * @since      1.3 Added support for 512x512 icon.
+ * @since      1.4 Added orientation and scope.
+ * @since      1.5 Added gcm_sender_id
+ * @since      1.6 Added description
+ * @since      1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in
+ *             /3rd-party/onesignal.php
+ * @since      2.0 Deprecated since Manifest is generated on the fly
+ *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ *
+ * @author     Arun Basil Lal
+ * @author     Maria Daniel Deepak <daniel@danieldeepak.com>
+ *
+ * @deprecated 2.0 No longer used by internal code.
+ */
+function superpwa_generate_manifest() {
+	// Returns TRUE for backward compatibility.
 	return true;
 }
 
@@ -134,9 +174,11 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 /**
  * Delete manifest
  *
- * @return (boolean) true on success, false on failure
- * 
- * @since 1.0
+ * @return     (boolean) true on success, false on failure
+ *
+ * @since      1.0
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_manifest() {
 	return superpwa_delete( superpwa_manifest( 'abs' ) );
@@ -180,7 +222,7 @@ function superpwa_get_pwa_icons() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	return parse_url( trailingslashit( get_bloginfo( 'wpurl' ) ), PHP_URL_PATH );
+	return parse_url( trailingslashit( get_bloginfo( 'url' ) ), PHP_URL_PATH );
 }
 
 /**
@@ -212,5 +254,44 @@ function superpwa_get_orientation() {
 			
 		default: 
 			return 'any';
+	}
+}
+
+/**
+ * Get display of PWA
+ *
+ * @return	string	Display of PWA as set in the plugin settings.
+ * 
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_get_display() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$display = isset( $settings['display'] ) ? $settings['display'] : 0;
+	
+	switch ( $display ) {
+		
+		case 0:
+			return 'fullscreen';
+			break;
+			
+		case 1:
+			return 'standalone';
+			break;
+			
+		case 2:
+			return 'minimal-ui';
+			break;
+
+		case 3:
+			return 'browser';
+			break;
+			
+		default: 
+			return 'standalone';
 	}
 }

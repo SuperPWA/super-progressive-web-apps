@@ -69,7 +69,7 @@ Users can come back to your website by launching the app from their home screen 
 ## ⭐ Support the project
 If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
 
-<a href="#"><img src="https://github.com/josevarghese/Progressive-Web-Apps-and-Service-Worker-Supported-Browsers/blob/master/star-superpwa-github.gif?raw=true" alt="Star our repo" width="300px" height="76.95px" /></a>
+<a href="#"><img src="https://raw.githubusercontent.com/josevarghese/Super-Progressive-Web-Apps/master/jose-github-star-gif.gif" alt="Star our repo" width="300px" height="76.95px" /></a>
 
 Also you can support us via [following on social media's and share about us](#share-via-social-medias-and-spread-superpwa).
 
@@ -84,9 +84,17 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
 
-|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android |
-| :---------: | :---------: | :---------: | :---------: |
+|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android | <a href="https://www.youtube.com/watch?v=bV8xE6lOdoY"><img src="http://i3.ytimg.com/vi/bV8xE6lOdoY/maxresdefault.jpg" alt="PWA on iOS - Safari Browser"/> </br>📽️ PWA on iOS - Safari Browser  |
+| :---------: | :---------: | :---------: | :---------: | :---------: |
 </br>
+
+##### Detailed Documentations for testing PWA on Browsers
+
+* [PWA on Chrome for Android](https://superpwa.com/doc/test-pwa-google-chrome/)
+* [PWA on Desktop - Chrome](https://superpwa.com/doc/test-pwa-on-desktop/)
+* [PWA on iOS device - Safari Browser](https://superpwa.com/doc/test-pwa-ios-devices/)
+* [PWA on Microsoft Edge Browser for Android](https://superpwa.com/doc/test-pwa-microsoft-edge/)
+* [PWA on Samsung Internet Browser for Android](https://superpwa.com/doc/test-pwa-samsung-internet-browser/)
 
 #### 📦 What's in the box
 
@@ -113,6 +121,8 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=GitHub&utm_medium=Readme-version) to track visits coming from your PWA.
 * New in version 1.8: Compatibility issues with OneSignal are now resolved! 
 * New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons. 
+* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
+* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=GitHub&utm_medium=Readme-version) from SuperPWA settings. 
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.

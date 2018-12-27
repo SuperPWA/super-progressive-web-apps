@@ -16,6 +16,17 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Returns the Service worker's filename.
+ *
+ * @since 2.0
+ *
+ * @return string
+ */
+function superpwa_get_sw_filename() {
+    return apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
+}
+
+/**
  * Service worker filename, absolute path and link
  *
  * For Multisite compatibility. Used to be constants defined in superpwa.php
@@ -23,34 +34,42 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  *
  * @param $arg 	filename for service worker filename (replaces SUPERPWA_SW_FILENAME)
  *				abs for absolute path to service worker (replaces SUPERPWA_SW_ABS)
- *				src for relative link to service worker (replaces SUPERPWA_SW_SRC). Default value
+ *				src for link to service worker (replaces SUPERPWA_SW_SRC). Default value
  *
  * @return (string) filename, absolute path or link to manifest.
  * 
  * @since 1.6
  * @since 1.7 src to service worker is made relative to accomodate for domain mapped multisites.
  * @since 1.8 Added filter superpwa_sw_filename.
+ * @since 2.0 src actually returns the link and the URL_PATH is extracted in superpwa_register_sw().
+ * @since 2.0 src uses home_url instead of network_site_url since manifest is no longer in the root folder.
  */
 function superpwa_sw( $arg = 'src' ) {
 	
-	$sw_filename = apply_filters( 'superpwa_sw_filename', 'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js' );
+	$sw_filename = superpwa_get_sw_filename();
 	
 	switch( $arg ) {
-		
+		// TODO: Case `filename` can be deprecated in favor of @see superpwa_get_sw_filename().
 		// Name of service worker file
 		case 'filename':
 			return $sw_filename;
 			break;
-		
-		// Absolute path to service worker. SW must be in the root folder	
+
+		/**
+		* Absolute path to service worker. SW must be in the root folder.
+		* 
+		* @since 2.0 service worker is no longer a physical file and absolute path doesn't make sense. 
+		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
+		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $sw_filename;
 			break;
-		
+
 		// Link to service worker
 		case 'src':
 		default:
-			return parse_url( trailingslashit( network_site_url() ) . $sw_filename, PHP_URL_PATH );
+			return home_url( '/' ) . $sw_filename;
 			break;
 	}
 }
@@ -58,25 +77,16 @@ function superpwa_sw( $arg = 'src' ) {
 /**
  * Generate and write service worker into superpwa-sw.js
  *
- * @return (boolean) true on success, false on failure.
- * 
- * @since 1.0
+ * @return     (boolean) true on success, false on failure.
+ *
+ * @since      1.0
+ * @since      2.0 Deprecated since Service worker is generated on the fly
+ *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_sw() {
-	
-	// Get Settings
-	$settings = superpwa_get_settings();
-	
-	// Get the service worker tempalte
-	$sw = superpwa_sw_template();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
-	if ( ! superpwa_put_contents( superpwa_sw( 'abs' ), $sw ) ) {
-		return false;
-	}
-	
+	// Returns TRUE for backward compatibility.
 	return true;
 }
 
@@ -103,9 +113,9 @@ function superpwa_sw_template() {
  * To learn more and add one to your website, visit - https://superpwa.com
  */
  
-const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
-const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
+const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'url' ) ); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
@@ -215,7 +225,7 @@ function superpwa_register_sw() {
 	
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
-			'url' => superpwa_sw( 'src' ),
+			'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
 		)
 	);
 }
@@ -227,6 +237,8 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  * @return true on success, false on failure
  * 
  * @since 1.0
+ *
+ * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );

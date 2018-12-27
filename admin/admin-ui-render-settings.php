@@ -14,6 +14,7 @@
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_orientation_cb()				Default Orientation Dropdown
+ * @function	superpwa_display_cb()					Default Display Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
@@ -54,10 +55,10 @@ function superpwa_app_short_name_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
+		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text superpwa-app-short-name" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description">
-			<?php _e('Used when there is insufficient space to display the full name of the application. <code>12</code> characters or less.', 'super-progressive-web-apps'); ?>
+			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>12</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
 		</p>
 		
 	</fieldset>
@@ -259,7 +260,7 @@ function superpwa_offline_page_cb() {
 	</label>
 	
 	<p class="description">
-		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? get_permalink( $settings['offline_page'] ) : get_bloginfo( 'wpurl' ) ); ?>
+		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? get_permalink( $settings['offline_page'] ) : get_bloginfo( 'url' ) ); ?>
 	</p>
 
 	<?php
@@ -298,43 +299,80 @@ function superpwa_orientation_cb() {
 }
 
 /**
+ * Default Display Dropdown
+ *
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_display_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Display Dropdown -->
+	<label for="superpwa_settings[display]">
+		<select name="superpwa_settings[display]" id="superpwa_settings[display]">
+			<option value="0" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 0 ); } ?>>
+				<?php _e( 'Full Screen', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="1" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 1 ); } ?>>
+				<?php _e( 'Standalone', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="2" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 2 ); } ?>>
+				<?php _e( 'Minimal UI', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="3" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 3 ); } ?>>
+				<?php _e( 'Browser', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
+	</label>
+	
+	<p class="description">
+		<?php printf( __( 'Display mode decides what browser UI is shown when your app is launched. <code>Standalone</code> is default. <a href="%s" target="_blank">What\'s the difference? &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=superpwa-plugin&utm_medium=settings-display' ); ?>
+	</p>
+
+	<?php
+}
+
+/**
  * Manifest Status
+ *
+ * @author Arun Basil Lal
  *
  * @since 1.2
  * @since 1.8 Attempt to generate manifest again if the manifest doesn't exist.
+ * @since 2.0 Remove logic to check if manifest exists in favour of dynamic manifest.
  */
 function superpwa_manifest_status_cb() {
 	
-	/** 
-	 * Check to see if the manifest exists, If not attempts to generate a new one.
-	 * 
-	 * Users who had permissions issue in the beginning will check the status after changing file system permissions. 
-	 * At this point we try to generate the manifest and service worker to see if its possible with the new permissions. 
-	 */
-	if ( superpwa_get_contents( superpwa_manifest( 'abs' ) ) || superpwa_generate_manifest() ) {
-		
+	// Dynamic files need a custom permalink structure. 
+	if ( get_option( 'permalink_structure' ) !== '' ) {
+		// Since Manifest is dynamically generated, it should always be present. 
 		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
-		
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Manifest generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php). <a href="%s" target="_blank">Read more &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-manifest' );
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
 	}
 }
 
 /**
  * Service Worker Status
  *
- * @since 1.2
- * @since 1.8 Attempt to generate service worker again if it doesn't exist.
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ * 
+ * @since  1.2
+ * @since  1.8 Attempt to generate service worker again if it doesn't exist.
+ * @since  2.0 Modify logic to check if Service worker exists.
  */
 function superpwa_sw_status_cb() {
-
-	// See superpwa_manifest_status_cb() for documentation.
-	if ( superpwa_get_contents( superpwa_sw( 'abs' ) ) || superpwa_generate_sw() ) {
-		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully.', 'super-progressive-web-apps' ) . '</p>' );
+	
+	// Dynamic files need a custom permalink structure.
+	if ( get_option( 'permalink_structure' ) !== '' ) {
+		// Since Service worker is dynamically generated, it should always be present. 
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
 	} else {
-		
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker generation failed. Check if WordPress can write to your root folder (the same folder with wp-config.php). <a href="%s" target="_blank">Read more &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw' );
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
 	}
 }
 

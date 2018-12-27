@@ -1,9 +1,9 @@
 === Super Progressive Web Apps ===
-Contributors: arunbasillal, josevarghese, superpwa
+Contributors: superpwa, arunbasillal, josevarghese, mariadanieldeepak
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 4.9.7
+Tested up to: 5.0.2
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -62,6 +62,8 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=wordpress.org&utm_medium=description) to track visits coming from your PWA.
 * New in version 1.8: Compatibility issues with OneSignal are now resolved! 
 * New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=wordpress.org&utm_medium=description) that sets your app icons as Apple Touch Icons. 
+* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
+* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=wordpress.org&utm_medium=description) from SuperPWA settings.  
 
 **Upcoming features:**
 
@@ -176,6 +178,16 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.0 =
+* Date: [28.December.2018](https://superpwa.com/superpwa-2-0/)
+* Tested with WordPress 5.0.2. 
+* Enhancement: Dynamic service worker and manifest. 
+* Enhancement: SuperPWA is now compatible with WordPress in a sub-folder. 
+* Enhancement: Added UI to set [Display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=wordpress.org&utm_medium=changelog) in the web app manifest. 
+* Enhancement: Limit short_name to 12 characters to meet Lighthouse recommendation. 
+* Enhancement: Added PHP CodeSniffer to stick to "WordPress-Extra" coding standards. Thanks Daniel for the work. 
+* Enhancement: SuperPWA is available in 12 languages now, thanks to the awesome translators! Translators are credited in the [release note](https://superpwa.com/superpwa-2-0/). 
+
 = 1.9 =
 * Date: [25.July.2018](https://superpwa.com/superpwa-1-9-chrome-mini-infobar-ready/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 4.9.7. 
@@ -280,6 +292,15 @@ Feel free to get in touch if you have any questions.
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Tested with WordPress 5.0.2. 
+* Enhancement: Dynamic service worker and manifest. 
+* Enhancement: SuperPWA is now compatible with WordPress in a sub-folder. 
+* Enhancement: Added UI to set Display property in the web app manifest. 
+* Enhancement: Limit short_name to 12 characters to meet Lighthouse recommendation. 
+* Enhancement: Added PHP CodeSniffer to stick to "WordPress-Extra" coding standards. Thanks Daniel for the work. 
+* Enhancement: SuperPWA is available in 12 languages now, thanks to the awesome translators! Translators are credited in the release note. 
 
 = 1.9 =
 * Tested with WordPress 4.9.7. 

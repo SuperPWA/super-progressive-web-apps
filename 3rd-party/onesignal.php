@@ -82,14 +82,14 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  * 
  * @return (string) Import OneSignal's service worker into SuperPWA 
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.8
+ * @since 2.0 Removed content-type header for compatibility with dynamic service workers. 
  */
 function superpwa_onesignal_sw( $sw ) {
 	
-	$onesignal  = '<?php' . PHP_EOL; 
-	$onesignal .= 'header( "Content-Type: application/javascript" );' . PHP_EOL;
-	$onesignal .= 'echo "importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );";' . PHP_EOL;
-	$onesignal .= '?>' . PHP_EOL . PHP_EOL;
+	$onesignal = 'importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );' . PHP_EOL;
 	
 	return $onesignal . $sw;
 }
@@ -114,20 +114,11 @@ function superpwa_onesignal_activation() {
 	// Filter in gcm_sender_id to SuperPWA manifest
 	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 	
-	// Regenerate SuperPWA manifest
-	superpwa_generate_manifest();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
 	// Change service worker filename to match OneSignal's service worker
 	add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	
 	// Import OneSignal service worker in SuperPWA
 	add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
-	
-	// Regenerate SuperPWA service worker
-	superpwa_generate_sw();
 }
 add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_activation', 11 );
 
@@ -151,20 +142,11 @@ function superpwa_onesignal_deactivation() {
 	// Remove gcm_sender_id from SuperPWA manifest
 	remove_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 	
-	// Regenerate SuperPWA manifest
-	superpwa_generate_manifest();
-	
-	// Delete service worker if it exists
-	superpwa_delete_sw();
-	
 	// Restore the default service worker of SuperPWA
 	remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 	
 	// Remove OneSignal service worker in SuperPWA
 	remove_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
-	
-	// Regenerate SuperPWA service worker
-	superpwa_generate_sw();
 }
 add_action( 'deactivate_onesignal-free-web-push-notifications/onesignal.php', 'superpwa_onesignal_deactivation', 11 );
 
