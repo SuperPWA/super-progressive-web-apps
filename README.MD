@@ -69,7 +69,7 @@ Users can come back to your website by launching the app from their home screen 
 ## ⭐ Support the project
 If you feel super excited and want to support us in a small way, please consider starring and/or sharing the repo! This helps us getting known and grow the community.
 
-<a href="#"><img src="https://github.com/josevarghese/Progressive-Web-Apps-and-Service-Worker-Supported-Browsers/blob/master/star-superpwa-github.gif?raw=true" alt="Star our repo" width="300px" height="76.95px" /></a>
+<a href="#"><img src="https://raw.githubusercontent.com/josevarghese/Super-Progressive-Web-Apps/master/jose-github-star-gif.gif" alt="Star our repo" width="300px" height="76.95px" /></a>
 
 Also you can support us via [following on social media's and share about us](#share-via-social-medias-and-spread-superpwa).
 
