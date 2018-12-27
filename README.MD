@@ -84,9 +84,17 @@ SuperPWA is easy to configure, it takes less than a minute to set-up your Progre
 
 ##### Videos on How Add to Home Screen & Progressive Web Apps works on Different Browsers
 
-|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android |
-| :---------: | :---------: | :---------: | :---------: |
+|<a href="https://www.youtube.com/watch?v=n3TjhNblvqs"><img src="http://i3.ytimg.com/vi/n3TjhNblvqs/maxresdefault.jpg" alt="Google Chrome for Android"/> </br>📽️ Google Chrome for Android| <a href="https://www.youtube.com/watch?v=9v4RwahRQFU"><img src="http://i3.ytimg.com/vi/9v4RwahRQFU/maxresdefault.jpg" alt="Mozilla Firefox for Android" /> </br>📽️ Mozilla Firefox for Android | <a href="https://www.youtube.com/watch?v=V8-AdKxm134"><img src="http://i3.ytimg.com/vi/V8-AdKxm134/maxresdefault.jpg" alt="Microsoft Edge for Android"/> </br>📽️ Microsoft Edge for Android | <a href="https://www.youtube.com/watch?v=Sbhgb6_QKfQ"><img src="http://i3.ytimg.com/vi/Sbhgb6_QKfQ/maxresdefault.jpg" alt="Samung Internet for Android "/> </br>📽️ Samung Internet for Android | <a href="https://www.youtube.com/watch?v=bV8xE6lOdoY"><img src="http://i3.ytimg.com/vi/bV8xE6lOdoY/maxresdefault.jpg" alt="PWA on iOS - Safari Browser"/> </br>📽️ PWA on iOS - Safari Browser  |
+| :---------: | :---------: | :---------: | :---------: | :---------: |
 </br>
+
+##### Detailed Documentations for testing PWA on Browsers
+
+* [PWA on Chrome for Android](https://superpwa.com/doc/test-pwa-google-chrome/)
+* [PWA on Desktop - Chrome](https://superpwa.com/doc/test-pwa-on-desktop/)
+* [PWA on iOS device - Safari Browser](https://superpwa.com/doc/test-pwa-ios-devices/)
+* [PWA on Microsoft Edge Browser for Android](https://superpwa.com/doc/test-pwa-microsoft-edge/)
+* [PWA on Samsung Internet Browser for Android](https://superpwa.com/doc/test-pwa-samsung-internet-browser/)
 
 #### 📦 What's in the box
 
