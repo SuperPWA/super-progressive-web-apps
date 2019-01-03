@@ -99,6 +99,15 @@ function superpwa_app_icon_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	
+	<!-- Test Button -->
+	<?php $heading_picture = esc_attr(get_option( 'heading_picture' )); ?>
+	<div>
+		<input type="hidden" name="heading_picture" id="heading_picture" value="<?php echo $heading_picture; ?>" />
+		<img id="heading_picture_preview" class="heading-picture" src="<?php echo $heading_picture; ?>" />
+		<button id="btn_heading_picture" name="btn_heading_picture" class="button default">Choose Picture</button>
+	</div>
+	<!-- Test Button -->
+	
 	<!-- Application Icon -->
 	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon regular-text" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
 	<button type="button" class="button superpwa-icon-upload" data-editor="content">
