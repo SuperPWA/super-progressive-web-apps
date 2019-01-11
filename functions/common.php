@@ -141,3 +141,27 @@ function superpwa_is_pwa_ready() {
 	
 	return false; 
 }
+
+/**
+ * Check if file exists
+ * 
+ * @param $file (string) URL to check
+ * 
+ * @return (bool) True, if file exists. False otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ * 
+ * @since 2.0.1
+ */
+function superpwa_file_exists( $file ) {
+	
+	$response 		= wp_remote_head( $file, array( 'sslverify' => false ) );
+	$response_code 	= wp_remote_retrieve_response_code( $response );
+	
+	if ( 200 === $response_code ) {
+		return true;
+	}
+	
+	return false;
+}
