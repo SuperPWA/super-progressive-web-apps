@@ -120,26 +120,40 @@ function superpwa_manifest_template() {
 
 /**
  * Generate and write manifest into WordPress root folder
+ * 
+ * Starting with 2.0, files are only generated if dynamic files are not possible. 
+ * Some webserver configurations does not load WordPress and attempts to server files directly
+ * from the server. This returns 404 when files do not exist physically. 
  *
- * @return     (boolean) true on success, false on failure.
+ * @return (boolean) true on success, false on failure.
+ * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  *
- * @since      1.0
- * @since      1.3 Added support for 512x512 icon.
- * @since      1.4 Added orientation and scope.
- * @since      1.5 Added gcm_sender_id
- * @since      1.6 Added description
- * @since      1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in
- *             /3rd-party/onesignal.php
- * @since      2.0 Deprecated since Manifest is generated on the fly
- *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
- *
- * @author     Arun Basil Lal
- * @author     Maria Daniel Deepak <daniel@danieldeepak.com>
- *
- * @deprecated 2.0 No longer used by internal code.
+ * @since 1.0
+ * @since 1.3 Added support for 512x512 icon.
+ * @since 1.4 Added orientation and scope.
+ * @since 1.5 Added gcm_sender_id
+ * @since 1.6 Added description
+ * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
+ * @since 2.0 Deprecated since Manifest is generated on the fly {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  */
 function superpwa_generate_manifest() {
-	// Returns TRUE for backward compatibility.
+	
+	// Delete manifest if it exists.
+	superpwa_delete_manifest();
+	
+	// Return true if dynamic file returns a 200 response.
+	if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) ) {
+		return true;
+	}
+	
+	// Write the manfiest to disk. Returns false if writing fails. 
+	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
+		return false;
+	}
+	
 	return true;
 }
 
@@ -174,11 +188,11 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 /**
  * Delete manifest
  *
- * @return     (boolean) true on success, false on failure
+ * @return (boolean) true on success, false on failure
+ * 
+ * @author Arun Basil Lal
  *
- * @since      1.0
- *
- * @deprecated 2.0 No longer used by internal code.
+ * @since 1.0
  */
 function superpwa_delete_manifest() {
 	return superpwa_delete( superpwa_manifest( 'abs' ) );
