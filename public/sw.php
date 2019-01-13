@@ -77,16 +77,33 @@ function superpwa_sw( $arg = 'src' ) {
 /**
  * Generate and write service worker into superpwa-sw.js
  *
- * @return     (boolean) true on success, false on failure.
+ * Starting with 2.0, files are only generated if dynamic files are not possible. 
+ * Some webserver configurations does not load WordPress and attempts to server files directly
+ * from the server. This returns 404 when files do not exist physically. 
+ * 
+ * @return (boolean) true on success, false on failure.
+ * 
+ * @author Arun Basil Lal
  *
- * @since      1.0
- * @since      2.0 Deprecated since Service worker is generated on the fly
- *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 1.0
+ * @since 2.0 Deprecated since Service worker is generated on the fly {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  *
- * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_sw() {
-	// Returns TRUE for backward compatibility.
+	
+	// Delete service worker if it exists
+	superpwa_delete_sw();
+	
+	// Return true if dynamic file returns a 200 response.
+	if ( superpwa_file_exists( superpwa_sw( 'src' ) ) ) {
+		return true;
+	}
+	
+	if ( ! superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+		return false;
+	}
+	
 	return true;
 }
 
@@ -236,9 +253,9 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  *
  * @return true on success, false on failure
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.0
- *
- * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );
