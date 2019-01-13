@@ -26,6 +26,9 @@ if ( ! defined('ABSPATH') ) exit;
  * For the rest of the sites, superpwa_upgrader() handles generation of manifest and service worker. 
  *
  * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
  * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
  * 
  * @since 1.0
@@ -33,6 +36,13 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.6 Added checks for multisite compatibility.
  */
 function superpwa_activate_plugin( $network_active ) {
+	
+	// Generate manifest with default options
+	superpwa_generate_manifest();
+	
+	// Generate service worker
+	superpwa_generate_sw();
+	
 	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
 	if ( ! $network_active ) {
 		
@@ -178,6 +188,13 @@ function superpwa_upgrader() {
 	if ( $current_ver === false ) {
 		
 		if ( is_multisite() ) {
+			
+			// Generate manifest
+			superpwa_generate_manifest();
+			
+			// Generate service worker
+			superpwa_generate_sw();
+			
 			// For multisites, save the activation status of current blog.
 			superpwa_multisite_activation_status( true );
 		}
@@ -227,9 +244,8 @@ function superpwa_upgrader() {
 		// Restore the default service worker filename of SuperPWA.
 		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
-		// TODO: Commenting the following line for now. Delete it later.
-		// Delete service worker if it exists.
-		// superpwa_delete_sw();
+		// Delete service worker
+		superpwa_delete_sw();
 		
 		// Change service worker filename to match OneSignal's service worker.
 		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
@@ -256,13 +272,13 @@ function superpwa_upgrader() {
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
-		
-		// Delete manifest
-		superpwa_delete_manifest();
-		
-		// Delete service worker
-		superpwa_delete_sw();
 	}
+	
+	// Re-generate manifest
+	superpwa_generate_manifest();
+	
+	// Re-generate service worker
+	superpwa_generate_sw();
 
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
@@ -288,13 +304,12 @@ add_action( 'admin_init', 'superpwa_upgrader' );
  * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
 function superpwa_deactivate_plugin( $network_active ) {
-	// TODO: Commenting the following line for now. Delete it later.
-	// Delete manifest
-	// superpwa_delete_manifest();
 
-	// TODO: Commenting the following line for now. Delete it later.
+	// Delete manifest
+	superpwa_delete_manifest();
+
 	// Delete service worker
-	// superpwa_delete_sw();
+	superpwa_delete_sw();
 	
 	// For multisites, save the de-activation status of current blog.
 	superpwa_multisite_activation_status( false );
@@ -416,5 +431,4 @@ function superpwa_setup_hooks() {
 	add_action( 'init', 'superpwa_add_rewrite_rules' );
 	add_action( 'parse_request', 'superpwa_generate_sw_and_manifest_on_fly' );
 }
-
 add_action( 'plugins_loaded', 'superpwa_setup_hooks' );
