@@ -171,7 +171,7 @@ function superpwa_file_exists( $file ) {
  * 
  * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
  *
- * @return (bool) True if the file tested is dynamic. False otherwise. 
+ * @return (bool) True if the file is dynamic. False otherwise. 
  * 
  * @author Arun Basil Lal
  * 
@@ -185,10 +185,10 @@ function superpwa_is_dynamic( $file = 'manifest' ) {
 			
 			// Check if file exists
 			if ( file_exists( superpwa_sw( 'abs' ) ) ) {
-				return true;
+				return false;
 			}
 			
-			return false;
+			return true;
 			break;
 		
 		case 'manifest':
@@ -196,10 +196,10 @@ function superpwa_is_dynamic( $file = 'manifest' ) {
 			
 			// Check if file exists
 			if ( file_exists( superpwa_manifest( 'abs' ) ) ) {
-				return true;
+				return false;
 			}
 		
-			return false;
+			return true;
 			break;
 	}
 }
