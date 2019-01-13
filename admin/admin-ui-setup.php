@@ -234,6 +234,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
  * @author Arun Basil Lal
  * 
  * @since 1.0
+ * @since 2.0 Added display
+ * @since 2.0.1 Added is_static_manifest. 1 for static files, 0 for dynamic files.
+ * @since 2.0.1 Added is_static_sw. 1 for static files, 0 for dynamic files.
  */
 function superpwa_get_settings() {
 
@@ -250,6 +253,8 @@ function superpwa_get_settings() {
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
 				'display'			=> 1,
+				'is_static_manifest'=> 0,
+				'is_static_sw'		=> 0,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
