@@ -37,12 +37,6 @@ if ( ! defined('ABSPATH') ) exit;
  */
 function superpwa_activate_plugin( $network_active ) {
 	
-	// Generate manifest with default options
-	superpwa_generate_manifest();
-	
-	// Generate service worker
-	superpwa_generate_sw();
-	
 	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
 	if ( ! $network_active ) {
 		
@@ -187,13 +181,13 @@ function superpwa_upgrader() {
 	 */
 	if ( $current_ver === false ) {
 		
+		// Generate manifest
+		superpwa_generate_manifest();
+		
+		// Generate service worker
+		superpwa_generate_sw();
+		
 		if ( is_multisite() ) {
-			
-			// Generate manifest
-			superpwa_generate_manifest();
-			
-			// Generate service worker
-			superpwa_generate_sw();
 			
 			// For multisites, save the activation status of current blog.
 			superpwa_multisite_activation_status( true );
