@@ -182,34 +182,22 @@ function superpwa_is_dynamic( $file = 'manifest' ) {
 	switch ( $file ) {
 		
 		case 'sw':
-		
-			// Delete file if it exists
-			superpwa_delete_sw();
 			
-			// If file still exists, then its dynamic.
-			if ( superpwa_file_exists( superpwa_sw( 'src' ) ) ) {
+			// Check if file exists
+			if ( file_exists( superpwa_sw( 'abs' ) ) ) {
 				return true;
 			}
-			
-			// Regnerate the file. 
-			superpwa_generate_sw();
 			
 			return false;
 			break;
 		
-		case 'mainfest':
+		case 'manifest':
 		default: 
-		
-			// Delete file if it exists
-			superpwa_delete_manifest();
 			
-			// If file still exists, then its dynamic.
-			if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) ) {
+			// Check if file exists
+			if ( file_exists( superpwa_manifest( 'abs' ) ) ) {
 				return true;
 			}
-			
-			// Regnerate the file. 
-			superpwa_generate_manifest();
 		
 			return false;
 			break;
