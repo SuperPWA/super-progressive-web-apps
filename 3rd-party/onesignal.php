@@ -90,7 +90,7 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  */
 function superpwa_onesignal_sw( $sw ) {
 	
-	if ( superpwa_is_dynamic( 'sw' ) ) {
+	if ( ! empty ( preg_grep( '#Content-type: text/javascript#i', headers_list() ) ) ) {
 		
 		$onesignal = 'importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );' . PHP_EOL;
 	
