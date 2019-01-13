@@ -165,3 +165,53 @@ function superpwa_file_exists( $file ) {
 	
 	return false;
 }
+
+/**
+ * Check if service worker or manifest is dynamic or static
+ * 
+ * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
+ *
+ * @return (bool) True if the file tested is dynamic. False otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_is_dynamic( $file = 'manifest' ) {
+	
+	switch ( $file ) {
+		
+		case 'sw':
+		
+			// Delete file if it exists
+			superpwa_delete_sw();
+			
+			// If file still exists, then its dynamic.
+			if ( superpwa_file_exists( superpwa_sw( 'src' ) ) ) {
+				return true;
+			}
+			
+			// Regnerate the file. 
+			superpwa_generate_sw();
+			
+			return false;
+			break;
+		
+		case 'mainfest':
+		default: 
+		
+			// Delete file if it exists
+			superpwa_delete_manifest();
+			
+			// If file still exists, then its dynamic.
+			if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) ) {
+				return true;
+			}
+			
+			// Regnerate the file. 
+			superpwa_generate_manifest();
+		
+			return false;
+			break;
+	}
+}
