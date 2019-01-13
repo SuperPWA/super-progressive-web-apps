@@ -85,12 +85,13 @@ function superpwa_manifest( $arg = 'src' ) {
 			 * The site_url template tag retrieves the site url for the 
 			 * current site (where the WordPress core files reside).
 			 */
-			if ( $settings['is_static_manifest'] === 0 ) {
+			if ( $settings['is_static_manifest'] === 1 ) {
 				return trailingslashit( network_site_url() ) . $manifest_filename;
 			}
 			
 			// For dynamic files, return the home_url
 			return home_url( '/' ) . $manifest_filename;
+			
 			break;
 	}
 }
@@ -178,7 +179,7 @@ function superpwa_generate_manifest() {
 		return true;
 	}
 	
-	// Write the manfiest to disk. Returns false if writing fails. 
+	// Write the manfiest to disk.
 	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
