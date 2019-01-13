@@ -69,7 +69,24 @@ function superpwa_sw( $arg = 'src' ) {
 		// Link to service worker
 		case 'src':
 		default:
+		
+			// Get Settings
+			$settings = superpwa_get_settings();
+			
+			/**
+			 * For static file, return site_url and network_site_url
+			 * 
+			 * Static files are generated in the root directory. 
+			 * The site_url template tag retrieves the site url for the 
+			 * current site (where the WordPress core files reside).
+			 */
+			if ( $settings['is_static_sw'] === 1 ) {
+				return trailingslashit( network_site_url() ) . $manifest_filename;
+			}
+			
+			// For dynamic files, return the home_url
 			return home_url( '/' ) . $sw_filename;
+			
 			break;
 	}
 }
@@ -95,16 +112,33 @@ function superpwa_generate_sw() {
 	// Delete service worker if it exists
 	superpwa_delete_sw();
 	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
 	// Return true if dynamic file returns a 200 response.
-	if ( superpwa_file_exists( superpwa_sw( 'src' ) ) ) {
+	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) ) {
+		
+		// set file status as dynamic file in database.
+		$settings['is_static_sw'] = 0;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
 		return true;
 	}
 	
-	if ( ! superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
-		return false;
+	if ( superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+		
+		// set file status as satic file in database.
+		$settings['is_static_sw'] = 1;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
 	}
 	
-	return true;
+	return false;
 }
 
 /**
