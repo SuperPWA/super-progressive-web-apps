@@ -258,6 +258,27 @@ function superpwa_get_settings() {
 }
 
 /**
+ * Todo list after saving admin options
+ *
+ * Regenerate manifest
+ * Regenerate service worker
+ * 
+ * @author Arun Basil Lal
+ *
+ * @since	1.0
+ */
+function superpwa_after_save_settings_todo() {
+	
+	// Regenerate manifest
+	superpwa_generate_manifest();
+	
+	// Regenerate service worker
+	superpwa_generate_sw();
+}
+add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+
+/**
  * Enqueue CSS and JS
  *
  * @since	1.0
