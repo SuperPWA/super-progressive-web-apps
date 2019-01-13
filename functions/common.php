@@ -145,6 +145,9 @@ function superpwa_is_pwa_ready() {
 /**
  * Check if file exists
  * 
+ * Not to be confused with file_exists PHP function. 
+ * In SuperPWA context, file exists if the response code is 200. 
+ * 
  * @param $file (string) URL to check
  * 
  * @return (bool) True, if file exists. False otherwise. 
