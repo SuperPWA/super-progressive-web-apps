@@ -60,9 +60,12 @@ function superpwa_manifest( $arg = 'src' ) {
 		/**
 		* Absolute path to manifest. 
 		* 
-		* @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
+		* Note: @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
 		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
 		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		* 
+		* Since static files are being used in conditions where dynamic files are not possible, this path 
+		* pointing to the root folder of WordPress is still useful. 
 		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
@@ -71,6 +74,22 @@ function superpwa_manifest( $arg = 'src' ) {
 		// Link to manifest
 		case 'src':
 		default:
+		
+			// Get Settings
+			$settings = superpwa_get_settings();
+			
+			/**
+			 * For static file, return site_url and network_site_url
+			 * 
+			 * Static files are generated in the root directory. 
+			 * The site_url template tag retrieves the site url for the 
+			 * current site (where the WordPress core files reside).
+			 */
+			if ( $settings['is_static_manifest'] === 0 ) {
+				return trailingslashit( network_site_url() ) . $manifest_filename;
+			}
+			
+			// For dynamic files, return the home_url
 			return home_url( '/' ) . $manifest_filename;
 			break;
 	}
@@ -144,17 +163,34 @@ function superpwa_generate_manifest() {
 	// Delete manifest if it exists.
 	superpwa_delete_manifest();
 	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
 	// Return true if dynamic file returns a 200 response.
-	if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) ) {
+	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_manifest_filename() ) ) {
+		
+		// set file status as dynamic file in database.
+		$settings['is_static_manifest'] = 0;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
 		return true;
 	}
 	
 	// Write the manfiest to disk. Returns false if writing fails. 
-	if ( ! superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
-		return false;
+	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
+		
+		// set file status as satic file in database.
+		$settings['is_static_manifest'] = 1;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
 	}
 	
-	return true;
+	return false;
 }
 
 /**
