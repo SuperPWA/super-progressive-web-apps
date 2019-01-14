@@ -81,7 +81,7 @@ function superpwa_sw( $arg = 'src' ) {
 			 * current site (where the WordPress core files reside).
 			 */
 			if ( $settings['is_static_sw'] === 1 ) {
-				return trailingslashit( network_site_url() ) . $manifest_filename;
+				return trailingslashit( network_site_url() ) . $sw_filename;
 			}
 			
 			// For dynamic files, return the home_url
