@@ -6,6 +6,7 @@
  *
  * @since 1.6
  * 
+ * @function	superpwa_onesignal_todo()						Compatibility with OneSignal
  * @function	superpwa_onesignal_add_gcm_sender_id()			Add gcm_sender_id to SuperPWA manifest
  * @function	superpwa_onesignal_sw_filename()				Change Service Worker filename to OneSignalSDKWorker.js.php
  * @function 	superpwa_onesignal_sw() 						Import OneSignal service worker in SuperPWA
@@ -17,26 +18,40 @@
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
-// If OneSignal is installed and active
-if ( class_exists( 'OneSignal' ) ) {
+/**
+ * Compatibility with OneSignal
+ * 
+ * This was written without a function @since 1.6 but that caused issues in certain cases where 
+ * SuperPWA was loaded before OneSignal. Hooked everything to plugins_loaded @since 2.0.1
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_onesignal_todo() {
 	
-	// Filter manifest and service worker for singe websites and not for multisites.
-	if ( ! is_multisite() ) {
-	
-		// Add gcm_sender_id to SuperPWA manifest
-		add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+	// If OneSignal is installed and active
+	if ( class_exists( 'OneSignal' ) ) {
 		
-		// Change service worker filename to match OneSignal's service worker
-		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+		// Filter manifest and service worker for singe websites and not for multisites.
+		if ( ! is_multisite() ) {
 		
-		// Import OneSignal service worker in SuperPWA
-		add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+			// Add gcm_sender_id to SuperPWA manifest
+			add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+			
+			// Change service worker filename to match OneSignal's service worker
+			add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+			
+			// Import OneSignal service worker in SuperPWA
+			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+		}
+		
+		// Show admin notice.
+		add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
+		add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
 	}
-	
-	// Show admin notice.
-	add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
-	add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
 }
+add_action( 'plugins_loaded', 'superpwa_onesignal_todo' );
 
 /**
  * Add gcm_sender_id to SuperPWA manifest
