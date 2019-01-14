@@ -170,26 +170,26 @@ function superpwa_file_exists( $file ) {
 }
 
 /**
- * Check if service worker or manifest is dynamic or static
- * 
- * A file is dynamic if the physical file doesn't exist on the server ( checked with file_exists() ) AND 
- * if the response code for the file is a 200 ( checked with superpwa_file_exists() ).
+ * Check if service worker or manifest is static or dynamic
  * 
  * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
  *
- * @return (bool) True if the file is dynamic. False otherwise. 
+ * @return (bool) True if the file is static. False otherwise. 
  * 
  * @author Arun Basil Lal
  * 
  * @since 2.0.1
  */
-function superpwa_is_dynamic( $file = 'manifest' ) {
+function superpwa_is_static( $file = 'manifest' ) {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
 	
 	switch ( $file ) {
 		
 		case 'sw':
 			
-			if ( ( ! file_exists( superpwa_sw( 'abs' ) ) ) && superpwa_file_exists( superpwa_sw( 'src' ) ) ) {
+			if ( $settings['is_static_sw'] === 1 ) { 
 				return true;
 			}
 			
@@ -199,7 +199,7 @@ function superpwa_is_dynamic( $file = 'manifest' ) {
 		case 'manifest':
 		default: 
 			
-			if ( ( ! file_exists( superpwa_manifest( 'abs' ) ) ) && superpwa_file_exists( superpwa_manifest( 'src' ) ) ) {
+			if ( $settings['is_static_manifest'] === 1 ) { 
 				return true;
 			}
 		
