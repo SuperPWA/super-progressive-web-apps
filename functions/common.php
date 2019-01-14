@@ -207,3 +207,31 @@ function superpwa_is_static( $file = 'manifest' ) {
 			break;
 	}
 }
+
+/**
+ * Returns WordPress URL v/s Site URL depending on the status of the file. 
+ * 
+ * Static files are generated in the root directory of WordPress. So if static 
+ * files are used, the WordPress URL will be needed for many use cases, like
+ * offline page, start_url etc. 
+ * 
+ * The status of the service worker is mostly relevant since the service worker 
+ * can work on the folder it is located and its sub folders. Not the folders above
+ * its own directory. 
+ * 
+ * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
+ * 
+ * @return (string) get_bloginfo( 'wpurl' ) if file is static. get_bloginfo( 'url' ) otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_get_bloginfo( $file = 'sw' ) {
+	
+	if ( superpwa_is_static( $file ) ) {
+		return get_bloginfo( 'wpurl' );
+	}
+	
+	return get_bloginfo( 'url' );
+}
