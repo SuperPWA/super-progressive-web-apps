@@ -83,13 +83,11 @@ function superpwa_multisite_network_deactivator() {
 		// Switch to each blog
 		switch_to_blog( $blog_id );
 
-		// TODO: Commenting the following line for now. Delete it later.
 		// Delete manifest
-		// superpwa_delete_manifest();
+		superpwa_delete_manifest();
 
-		// TODO: Commenting the following line for now. Delete it later.
 		// Delete service worker
-		// superpwa_delete_sw();
+		superpwa_delete_sw();
 		
 		/**
 		 * Delete SuperPWA version info for current blog.
