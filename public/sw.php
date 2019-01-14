@@ -166,7 +166,7 @@ function superpwa_sw_template() {
  
 const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
-const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'url' ) ); ?>';
+const offlinePage = '<?php echo superpwa_get_offline_page(); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
@@ -342,10 +342,10 @@ add_filter( 'superpwa_sw_files_to_cache', 'superpwa_offline_page_images' );
  * 
  * @since 2.0.1
  */
-function superpwa_offline_page() {
+function superpwa_get_offline_page() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	return get_permalink( $settings['offline_page'] ) ? get_permalink( $settings['offline_page'] ) : superpwa_get_bloginfo( 'sw' );
+	return get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
 }
