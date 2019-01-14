@@ -3,7 +3,7 @@ Contributors: superpwa, arunbasillal, josevarghese, mariadanieldeepak
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.0.2
+Tested up to: 5.0.3
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -177,6 +177,10 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.0.1 =
+* Date: 14.January.2019
+* Enhancement: Added compatibility for setups where dynamic files are not supported. 
 
 = 2.0 =
 * Date: [28.December.2018](https://superpwa.com/superpwa-2-0/)
