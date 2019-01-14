@@ -83,7 +83,7 @@ function superpwa_get_start_url( $rel = false ) {
 	$settings = superpwa_get_settings();
 	
 	// Start Page
-	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : get_bloginfo( 'url' );
+	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : superpwa_get_bloginfo( 'sw' );
 	
 	// Force HTTPS
 	$start_url = superpwa_httpsify( $start_url );
