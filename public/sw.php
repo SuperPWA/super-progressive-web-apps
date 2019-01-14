@@ -332,3 +332,20 @@ function superpwa_offline_page_images( $files_to_cache ) {
 	return $files_to_cache;
 }
 add_filter( 'superpwa_sw_files_to_cache', 'superpwa_offline_page_images' );
+
+/**
+ * Get offline page
+ * 
+ * @return (string) the URL of the offline page.
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_offline_page() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	return get_permalink( $settings['offline_page'] ) ? get_permalink( $settings['offline_page'] ) : superpwa_get_bloginfo( 'sw' );
+}
