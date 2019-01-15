@@ -196,9 +196,15 @@ add_action( 'admin_init', 'superpwa_register_settings' );
 /**
  * Validate and sanitize user input before its saved to database
  *
+ * @author Arun Basil Lal
+ * 
+ * @param (array) $settings Values passed from the Settings API from SuperPWA > Settings
+ * 
  * @since 1.0 
  * @since 1.3 Added splash_icon
  * @since 1.6 Added description
+ * @since 2.0 Limit app_short_name to 12 characters
+ * @since 2.0.1 Added is_static_sw and is_static_manifest
  */
 function superpwa_validater_and_sanitizer( $settings ) {
 	
@@ -222,6 +228,23 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
+	
+	/**
+	 * Get current settings already saved in the database.
+	 * 
+	 * When the SuperPWA > Settings page is saved, the form does not have the values for
+	 * is_static_sw or is_static_manifest. So this is added here to match the already saved 
+	 * values in the database. 
+	 */
+	$current_settings = superpwa_get_settings();
+	
+	if ( ! isset( $settings['is_static_sw'] ) ) {
+		$settings['is_static_sw'] = $current_settings['is_static_sw'];
+	}
+	
+	if ( ! isset( $settings['is_static_manifest'] ) ) {
+		$settings['is_static_manifest'] = $current_settings['is_static_manifest'];
+	}
 	
 	return $settings;
 }
