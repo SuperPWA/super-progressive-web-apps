@@ -179,11 +179,11 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.0.1 =
-* Date: 15.January.2019
+* Date: [15.January.2019](https://superpwa.com/superpwa-2-0/?utm_source=wordpress.org&utm_medium=changelog#2.0.1)
 * Enhancement: Added compatibility for setups where dynamic files are not supported. 
 
 = 2.0 =
-* Date: [28.December.2018](https://superpwa.com/superpwa-2-0/)
+* Date: [28.December.2018](https://superpwa.com/superpwa-2-0/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 5.0.2. 
 * Enhancement: Dynamic service worker and manifest. 
 * Enhancement: SuperPWA is now compatible with WordPress in a sub-folder. 
