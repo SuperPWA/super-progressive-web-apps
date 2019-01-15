@@ -116,7 +116,7 @@ function superpwa_generate_sw() {
 	$settings = superpwa_get_settings();
 	
 	// Return true if dynamic file returns a 200 response.
-	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) ) {
+	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
 		
 		// set file status as dynamic file in database.
 		$settings['is_static_sw'] = 0;
