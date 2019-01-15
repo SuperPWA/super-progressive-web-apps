@@ -69,7 +69,24 @@ function superpwa_sw( $arg = 'src' ) {
 		// Link to service worker
 		case 'src':
 		default:
+		
+			// Get Settings
+			$settings = superpwa_get_settings();
+			
+			/**
+			 * For static file, return site_url and network_site_url
+			 * 
+			 * Static files are generated in the root directory. 
+			 * The site_url template tag retrieves the site url for the 
+			 * current site (where the WordPress core files reside).
+			 */
+			if ( $settings['is_static_sw'] === 1 ) {
+				return trailingslashit( network_site_url() ) . $sw_filename;
+			}
+			
+			// For dynamic files, return the home_url
 			return home_url( '/' ) . $sw_filename;
+			
 			break;
 	}
 }
@@ -77,17 +94,51 @@ function superpwa_sw( $arg = 'src' ) {
 /**
  * Generate and write service worker into superpwa-sw.js
  *
- * @return     (boolean) true on success, false on failure.
+ * Starting with 2.0, files are only generated if dynamic files are not possible. 
+ * Some webserver configurations does not load WordPress and attempts to server files directly
+ * from the server. This returns 404 when files do not exist physically. 
+ * 
+ * @return (boolean) true on success, false on failure.
+ * 
+ * @author Arun Basil Lal
  *
- * @since      1.0
- * @since      2.0 Deprecated since Service worker is generated on the fly
- *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 1.0
+ * @since 2.0 Deprecated since Service worker is generated on the fly {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  *
- * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_generate_sw() {
-	// Returns TRUE for backward compatibility.
-	return true;
+	
+	// Delete service worker if it exists
+	superpwa_delete_sw();
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	// Return true if dynamic file returns a 200 response.
+	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
+		
+		// set file status as dynamic file in database.
+		$settings['is_static_sw'] = 0;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	if ( superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+		
+		// set file status as satic file in database.
+		$settings['is_static_sw'] = 1;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -115,7 +166,7 @@ function superpwa_sw_template() {
  
 const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
-const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'url' ) ); ?>';
+const offlinePage = '<?php echo superpwa_get_offline_page(); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 
@@ -236,9 +287,9 @@ add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
  *
  * @return true on success, false on failure
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.0
- *
- * @deprecated 2.0 No longer used by internal code.
  */
 function superpwa_delete_sw() {
 	return superpwa_delete( superpwa_sw( 'abs' ) );
@@ -281,3 +332,20 @@ function superpwa_offline_page_images( $files_to_cache ) {
 	return $files_to_cache;
 }
 add_filter( 'superpwa_sw_files_to_cache', 'superpwa_offline_page_images' );
+
+/**
+ * Get offline page
+ * 
+ * @return (string) the URL of the offline page.
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_get_offline_page() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	return get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
+}

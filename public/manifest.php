@@ -60,9 +60,12 @@ function superpwa_manifest( $arg = 'src' ) {
 		/**
 		* Absolute path to manifest. 
 		* 
-		* @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
+		* Note: @since 2.0 manifest is no longer a physical file and absolute path doesn't make sense. 
 		* Also using home_url instead of network_site_url in "src" in 2.0 changes the apparent location of the file. 
 		* However, absolute path is preserved at the "old" location, so that phyiscal files can be deleted when upgrading from pre-2.0 versions.
+		* 
+		* Since static files are being used in conditions where dynamic files are not possible, this path 
+		* pointing to the root folder of WordPress is still useful. 
 		*/
 		case 'abs':
 			return trailingslashit( ABSPATH ) . $manifest_filename;
@@ -71,7 +74,24 @@ function superpwa_manifest( $arg = 'src' ) {
 		// Link to manifest
 		case 'src':
 		default:
+		
+			// Get Settings
+			$settings = superpwa_get_settings();
+			
+			/**
+			 * For static file, return site_url and network_site_url
+			 * 
+			 * Static files are generated in the root directory. 
+			 * The site_url template tag retrieves the site url for the 
+			 * current site (where the WordPress core files reside).
+			 */
+			if ( $settings['is_static_manifest'] === 1 ) {
+				return trailingslashit( network_site_url() ) . $manifest_filename;
+			}
+			
+			// For dynamic files, return the home_url
 			return home_url( '/' ) . $manifest_filename;
+			
 			break;
 	}
 }
@@ -120,27 +140,58 @@ function superpwa_manifest_template() {
 
 /**
  * Generate and write manifest into WordPress root folder
+ * 
+ * Starting with 2.0, files are only generated if dynamic files are not possible. 
+ * Some webserver configurations does not load WordPress and attempts to server files directly
+ * from the server. This returns 404 when files do not exist physically. 
  *
- * @return     (boolean) true on success, false on failure.
+ * @return (boolean) true on success, false on failure.
+ * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  *
- * @since      1.0
- * @since      1.3 Added support for 512x512 icon.
- * @since      1.4 Added orientation and scope.
- * @since      1.5 Added gcm_sender_id
- * @since      1.6 Added description
- * @since      1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in
- *             /3rd-party/onesignal.php
- * @since      2.0 Deprecated since Manifest is generated on the fly
- *             {@see superpwa_generate_sw_and_manifest_on_fly()}.
- *
- * @author     Arun Basil Lal
- * @author     Maria Daniel Deepak <daniel@danieldeepak.com>
- *
- * @deprecated 2.0 No longer used by internal code.
+ * @since 1.0
+ * @since 1.3 Added support for 512x512 icon.
+ * @since 1.4 Added orientation and scope.
+ * @since 1.5 Added gcm_sender_id
+ * @since 1.6 Added description
+ * @since 1.8 Removed gcm_sender_id and introduced filter superpwa_manifest. gcm_sender_id is added in /3rd-party/onesignal.php
+ * @since 2.0 Deprecated since Manifest is generated on the fly {@see superpwa_generate_sw_and_manifest_on_fly()}.
+ * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  */
 function superpwa_generate_manifest() {
-	// Returns TRUE for backward compatibility.
-	return true;
+	
+	// Delete manifest if it exists.
+	superpwa_delete_manifest();
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	// Return true if dynamic file returns a 200 response.
+	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_manifest_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
+		
+		// set file status as dynamic file in database.
+		$settings['is_static_manifest'] = 0;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	// Write the manfiest to disk.
+	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
+		
+		// set file status as satic file in database.
+		$settings['is_static_manifest'] = 1;
+		
+		// Write settings back to database.
+		update_option( 'superpwa_settings', $settings );
+		
+		return true;
+	}
+	
+	return false;
 }
 
 /**
@@ -174,11 +225,11 @@ add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 /**
  * Delete manifest
  *
- * @return     (boolean) true on success, false on failure
+ * @return (boolean) true on success, false on failure
+ * 
+ * @author Arun Basil Lal
  *
- * @since      1.0
- *
- * @deprecated 2.0 No longer used by internal code.
+ * @since 1.0
  */
 function superpwa_delete_manifest() {
 	return superpwa_delete( superpwa_manifest( 'abs' ) );
@@ -222,7 +273,7 @@ function superpwa_get_pwa_icons() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	return parse_url( trailingslashit( get_bloginfo( 'url' ) ), PHP_URL_PATH );
+	return parse_url( trailingslashit( superpwa_get_bloginfo( 'sw' ) ), PHP_URL_PATH );
 }
 
 /**

@@ -26,6 +26,9 @@ if ( ! defined('ABSPATH') ) exit;
  * For the rest of the sites, superpwa_upgrader() handles generation of manifest and service worker. 
  *
  * @param $network_active (Boolean) True if the plugin is network activated, false otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
  * @link https://www.alexgeorgiou.gr/network-activated-wordpress-plugins/ (Thanks Alex!)
  * 
  * @since 1.0
@@ -33,6 +36,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.6 Added checks for multisite compatibility.
  */
 function superpwa_activate_plugin( $network_active ) {
+	
 	// Not network active i.e. plugin is activated on a single install (normal WordPress install) or a single site on a multisite network
 	if ( ! $network_active ) {
 		
@@ -177,7 +181,14 @@ function superpwa_upgrader() {
 	 */
 	if ( $current_ver === false ) {
 		
+		// Generate manifest
+		superpwa_generate_manifest();
+		
+		// Generate service worker
+		superpwa_generate_sw();
+		
 		if ( is_multisite() ) {
+			
 			// For multisites, save the activation status of current blog.
 			superpwa_multisite_activation_status( true );
 		}
@@ -227,9 +238,8 @@ function superpwa_upgrader() {
 		// Restore the default service worker filename of SuperPWA.
 		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
-		// TODO: Commenting the following line for now. Delete it later.
-		// Delete service worker if it exists.
-		// superpwa_delete_sw();
+		// Delete service worker
+		superpwa_delete_sw();
 		
 		// Change service worker filename to match OneSignal's service worker.
 		add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
@@ -242,7 +252,7 @@ function superpwa_upgrader() {
 	 * Until 2.0, there was no UI for display.
 	 * In the manifest, display was hard coded as 'standalone'.
 	 * 
-	 * Starting with 2.0, manifest and servcei worker files are dynamic and no longer static. 
+	 * Starting with 2.0, manifest and service worker files are dynamic and no longer static. 
 	 * 
 	 * @since 2.0
 	 */
@@ -256,13 +266,31 @@ function superpwa_upgrader() {
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
-		
-		// Delete manifest
-		superpwa_delete_manifest();
-		
-		// Delete service worker
-		superpwa_delete_sw();
 	}
+	
+	/**
+	 * Add file state variables to database
+	 * 
+	 * @since 2.0.1
+	 */
+	if ( version_compare( $current_ver, '2.0', '<=' ) ) {
+		
+		// Get settings
+		$settings = superpwa_get_settings();
+		
+		// 1 for static files, 0 for dynamic files (default).
+		$settings['is_static_manifest'] = 0;
+		$settings['is_static_sw'] = 0;
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
+	}
+	
+	// Re-generate manifest
+	superpwa_generate_manifest();
+	
+	// Re-generate service worker
+	superpwa_generate_sw();
 
 	// Add current version to database
 	update_option( 'superpwa_version', SUPERPWA_VERSION );
@@ -288,13 +316,12 @@ add_action( 'admin_init', 'superpwa_upgrader' );
  * @since 1.6 register_deactivation_hook() moved to this file (basic-setup.php) from main plugin file (superpwa.php)
  */
 function superpwa_deactivate_plugin( $network_active ) {
-	// TODO: Commenting the following line for now. Delete it later.
-	// Delete manifest
-	// superpwa_delete_manifest();
 
-	// TODO: Commenting the following line for now. Delete it later.
+	// Delete manifest
+	superpwa_delete_manifest();
+
 	// Delete service worker
-	// superpwa_delete_sw();
+	superpwa_delete_sw();
 	
 	// For multisites, save the de-activation status of current blog.
 	superpwa_multisite_activation_status( false );
@@ -396,7 +423,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 		exit();
 	}
 	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
-		header( 'Content-type: text/javascript' );
+		header( 'Content-Type: text/javascript' );
 		echo superpwa_sw_template();
 		exit();
 	}
@@ -416,5 +443,4 @@ function superpwa_setup_hooks() {
 	add_action( 'init', 'superpwa_add_rewrite_rules' );
 	add_action( 'parse_request', 'superpwa_generate_sw_and_manifest_on_fly' );
 }
-
 add_action( 'plugins_loaded', 'superpwa_setup_hooks' );

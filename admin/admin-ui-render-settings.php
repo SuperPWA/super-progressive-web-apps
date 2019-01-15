@@ -260,7 +260,7 @@ function superpwa_offline_page_cb() {
 	</label>
 	
 	<p class="description">
-		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), get_permalink($settings['offline_page']) ? get_permalink( $settings['offline_page'] ) : get_bloginfo( 'url' ) ); ?>
+		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_offline_page() ); ?>
 	</p>
 
 	<?php
@@ -343,15 +343,19 @@ function superpwa_display_cb() {
  * @since 1.2
  * @since 1.8 Attempt to generate manifest again if the manifest doesn't exist.
  * @since 2.0 Remove logic to check if manifest exists in favour of dynamic manifest.
+ * @since 2.0.1 Added checks to see if dynamic file is valid. If not, generates a physical file. 
  */
 function superpwa_manifest_status_cb() {
 	
-	// Dynamic files need a custom permalink structure. 
-	if ( get_option( 'permalink_structure' ) !== '' ) {
-		// Since Manifest is dynamically generated, it should always be present. 
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
+	/** 
+	 * Check to see if the file exists, If not attempts to generate a new one.
+	 */
+	if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) || superpwa_generate_manifest() ) {
+		
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">See it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
 	} else {
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
+		
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Manifest generation failed. <a href="%s" target="_blank">Fix it &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-manifest' );
 	}
 }
 
@@ -359,20 +363,23 @@ function superpwa_manifest_status_cb() {
  * Service Worker Status
  *
  * @author Arun Basil Lal
- * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  * 
- * @since  1.2
- * @since  1.8 Attempt to generate service worker again if it doesn't exist.
- * @since  2.0 Modify logic to check if Service worker exists.
+ * @since 1.2
+ * @since 1.8 Attempt to generate service worker again if it doesn't exist.
+ * @since 2.0 Modify logic to check if Service worker exists.
+ * @since 2.0.1 Added checks to see if dynamic file is valid. If not, generates a physical file. 
  */
 function superpwa_sw_status_cb() {
 	
-	// Dynamic files need a custom permalink structure.
-	if ( get_option( 'permalink_structure' ) !== '' ) {
-		// Since Service worker is dynamically generated, it should always be present. 
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a href="%s" target="_blank">see it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
+	/** 
+	 * Check to see if the file exists, If not attempts to generate a new one.
+	 */
+	if ( superpwa_file_exists( superpwa_sw( 'src' ) ) || superpwa_generate_sw() ) {
+		
+		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a href="%s" target="_blank">See it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
 	} else {
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'SuperPWA requires a custom permalink structure. Go to <a href="%s" target="_blank">WordPress Settings > Permalinks</a> and choose anything other than "Plain".', 'super-progressive-web-apps' ) . '</p>', admin_url( 'options-permalink.php' ) );
+		
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker generation failed. <a href="%s" target="_blank">Fix it &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw' );
 	}
 }
 
