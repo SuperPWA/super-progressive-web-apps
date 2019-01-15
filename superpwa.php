@@ -6,7 +6,7 @@
  * Author: SuperPWA
  * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
  * Contributors: Arun Basil Lal, Jose Varghese
- * Version: 2.0.1-alpha1
+ * Version: 2.0.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.0
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) ) {
-	define( 'SUPERPWA_VERSION'	, '2.0.1-alpha1' ); 
+	define( 'SUPERPWA_VERSION'	, '2.0.1' ); 
 }
 
 /**

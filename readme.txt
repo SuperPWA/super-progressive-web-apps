@@ -179,7 +179,7 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.0.1 =
-* Date: 14.January.2019
+* Date: 15.January.2019
 * Enhancement: Added compatibility for setups where dynamic files are not supported. 
 
 = 2.0 =
@@ -296,6 +296,9 @@ Feel free to get in touch if you have any questions.
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+* Enhancement: Added compatibility for setups where dynamic files are not supported. 
 
 = 2.0 =
 * Tested with WordPress 5.0.2. 
