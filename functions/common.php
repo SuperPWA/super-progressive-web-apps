@@ -8,6 +8,9 @@
  * @function 	superpwa_get_start_url()		Return Start Page URL
  * @function	superpwa_httpsify()				Convert http URL to https
  * @function	superpwa_is_pwa_ready()			Check if PWA is ready
+ * @function 	superpwa_file_exists()			Check if file exists
+ * @function	superpwa_is_static()			Check if service worker or manifest is static or dynamic
+ * @function	superpwa_get_bloginfo()			Returns WordPress URL v/s Site URL depending on the status of the file. 
  */
 
 // Exit if accessed directly
@@ -127,14 +130,17 @@ function superpwa_httpsify( $url ) {
  * 
  * @return (bool) True if PWA is ready. False otherwise
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.8.1
+ * @since 2.0.1 replaced superpwa_get_contents() with superpwa_file_exists() to accommodate dynamic files. 
  */
 function superpwa_is_pwa_ready() {
 	
 	if ( 
 		is_ssl() && 
-		superpwa_get_contents( superpwa_manifest( 'abs' ) ) && 
-		superpwa_get_contents( superpwa_sw( 'abs' ) ) 
+		superpwa_file_exists( superpwa_manifest( 'src' ) ) && 
+		superpwa_file_exists( superpwa_sw( 'src' ) ) 
 	) {
 		return apply_filters( 'superpwa_is_pwa_ready', true );
 	}
