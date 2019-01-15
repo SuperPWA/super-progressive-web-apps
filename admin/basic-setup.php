@@ -405,7 +405,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 		exit();
 	}
 	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
-		header( 'Content-type: text/javascript' );
+		header( 'Content-Type: text/javascript' );
 		echo superpwa_sw_template();
 		exit();
 	}
