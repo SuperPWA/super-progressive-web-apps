@@ -195,7 +195,7 @@ function superpwa_is_static( $file = 'manifest' ) {
 		
 		case 'sw':
 			
-			if ( $settings['is_static_sw'] === 1 ) { 
+			if ( $settings['is_static_sw'] === 1 ) {
 				return true;
 			}
 			
@@ -205,7 +205,7 @@ function superpwa_is_static( $file = 'manifest' ) {
 		case 'manifest':
 		default: 
 			
-			if ( $settings['is_static_manifest'] === 1 ) { 
+			if ( $settings['is_static_manifest'] === 1 ) {
 				return true;
 			}
 		

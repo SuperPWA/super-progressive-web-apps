@@ -252,7 +252,7 @@ function superpwa_upgrader() {
 	 * Until 2.0, there was no UI for display.
 	 * In the manifest, display was hard coded as 'standalone'.
 	 * 
-	 * Starting with 2.0, manifest and servcei worker files are dynamic and no longer static. 
+	 * Starting with 2.0, manifest and service worker files are dynamic and no longer static. 
 	 * 
 	 * @since 2.0
 	 */
@@ -263,6 +263,24 @@ function superpwa_upgrader() {
 		
 		// Display was set as 'standalone' until version 2.0. Set it as 1, which is 'standalone'.
 		$settings['display'] = 1;
+		
+		// Write settings back to database
+		update_option( 'superpwa_settings', $settings );
+	}
+	
+	/**
+	 * Add file state variables to database
+	 * 
+	 * @since 2.0.1
+	 */
+	if ( version_compare( $current_ver, '2.0', '<=' ) ) {
+		
+		// Get settings
+		$settings = superpwa_get_settings();
+		
+		// 1 for static files, 0 for dynamic files (default).
+		$settings['is_static_manifest'] = 0;
+		$settings['is_static_sw'] = 0;
 		
 		// Write settings back to database
 		update_option( 'superpwa_settings', $settings );
