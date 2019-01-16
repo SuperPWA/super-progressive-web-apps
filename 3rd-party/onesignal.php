@@ -105,7 +105,14 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  */
 function superpwa_onesignal_sw( $sw ) {
 	
-	if ( ! empty ( preg_grep( '#Content-Type: text/javascript#i', headers_list() ) ) ) {
+	/** 
+	 * Checking to see if we are already sending the Content-Type header. 
+	 * 
+	 * @see superpwa_generate_sw_and_manifest_on_fly()
+	 */
+	$match = preg_grep( '#Content-Type: text/javascript#i', headers_list() );
+	
+	if ( ! empty ( $match ) ) {
 		
 		$onesignal = 'importScripts( \'' . superpwa_httpsify( plugin_dir_url( 'onesignal-free-web-push-notifications/onesignal.php' ) ) . 'sdk_files/OneSignalSDKWorker.js.php\' );' . PHP_EOL;
 	
