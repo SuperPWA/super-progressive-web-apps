@@ -401,18 +401,22 @@ function superpwa_add_rewrite_rules() {
  * Generates SW and Manifest on the fly.
  *
  * This way no physical files have to be placed on WP root folder. Hallelujah!
- *
- * @since 2.0
+ * 
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  *
  * @uses  superpwa_get_sw_filename()
  * @uses  superpwa_get_manifest_filename()
- * @uses  superpwa_get_manifest()
+ * @uses  superpwa_manifest_template()
+ * @uses  superpwa_sw_template()
+ * 
+ * @since 2.0
+ * @since 2.1 uses http_build_query() instead of implode() to convert query_vars to string.
  */
 function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	if ( ! property_exists( $query, 'query_vars' ) || ! is_array( $query->query_vars ) ) {
 		return;
 	}
-	$query_vars_as_string = implode( ',', $query->query_vars );
+	$query_vars_as_string = http_build_query( $query->query_vars );
 	$manifest_filename    = superpwa_get_manifest_filename();
 	$sw_filename          = superpwa_get_sw_filename();
 
