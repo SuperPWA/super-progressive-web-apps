@@ -311,7 +311,7 @@ function superpwa_get_orientation() {
 /**
  * Get display of PWA
  *
- * @return	string	Display of PWA as set in the plugin settings.
+ * @return (string) Display of PWA as set in the plugin settings.
  * 
  * @author Jose Varghese
  * 
@@ -322,7 +322,7 @@ function superpwa_get_display() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	$display = isset( $settings['display'] ) ? $settings['display'] : 0;
+	$display = isset( $settings['display'] ) ? $settings['display'] : 1;
 	
 	switch ( $display ) {
 		

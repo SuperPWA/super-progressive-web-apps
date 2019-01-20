@@ -178,6 +178,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1 =
+* Date: 
+* Bug Fix: Fixed a rare PHP Notice: Array to string conversion in basic-setup.php on line 415
+
 = 2.0.2 =
 * Date: 16.January.2019
 * Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". 
