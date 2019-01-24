@@ -57,12 +57,23 @@ register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate
  * Will redirect to SuperPWA settings page when plugin is activated.
  * Will not redirect if multiple plugins are activated at the same time.
  * Will not redirect when activated network wide on multisite. Network admins know their way.
+ * 
+ * @param (string) $plugin Path to the main plugin file from plugins directory.
+ * @param (bool) $network_wide True when network activated on multisites. False otherwise. 
+ * 
+ * @author Arun Basil Lal
  *
  * @since 2.0
+ * @since 2.1 Added a check to see if WP_Plugins_List_Table class is available. 
  */
 function superpwa_activation_redirect( $plugin, $network_wide ) {
+	
 	// Return if not SuperPWA or if plugin is activated network wide.
 	if ( $plugin !== plugin_basename( SUPERPWA_PLUGIN_FILE ) || $network_wide === true ) {
+		return false;
+	}
+	
+	if ( ! class_exists( 'WP_Plugins_List_Table' ) ) {
 		return false;
 	}
 
@@ -82,7 +93,6 @@ function superpwa_activation_redirect( $plugin, $network_wide ) {
 	// Redirect to SuperPWA settings page. 
 	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
 }
-
 add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 );
 
 /**
