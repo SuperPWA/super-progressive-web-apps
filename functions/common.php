@@ -8,6 +8,9 @@
  * @function 	superpwa_get_start_url()		Return Start Page URL
  * @function	superpwa_httpsify()				Convert http URL to https
  * @function	superpwa_is_pwa_ready()			Check if PWA is ready
+ * @function 	superpwa_file_exists()			Check if file exists
+ * @function	superpwa_is_static()			Check if service worker or manifest is static or dynamic
+ * @function	superpwa_get_bloginfo()			Returns WordPress URL v/s Site URL depending on the status of the file. 
  */
 
 // Exit if accessed directly
@@ -83,7 +86,7 @@ function superpwa_get_start_url( $rel = false ) {
 	$settings = superpwa_get_settings();
 	
 	// Start Page
-	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : get_bloginfo( 'url' );
+	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : superpwa_get_bloginfo( 'sw' );
 	
 	// Force HTTPS
 	$start_url = superpwa_httpsify( $start_url );
@@ -127,17 +130,114 @@ function superpwa_httpsify( $url ) {
  * 
  * @return (bool) True if PWA is ready. False otherwise
  * 
+ * @author Arun Basil Lal
+ * 
  * @since 1.8.1
+ * @since 2.0.1 replaced superpwa_get_contents() with superpwa_file_exists() to accommodate dynamic files. 
  */
 function superpwa_is_pwa_ready() {
 	
 	if ( 
 		is_ssl() && 
-		superpwa_get_contents( superpwa_manifest( 'abs' ) ) && 
-		superpwa_get_contents( superpwa_sw( 'abs' ) ) 
+		superpwa_file_exists( superpwa_manifest( 'src' ) ) && 
+		superpwa_file_exists( superpwa_sw( 'src' ) ) 
 	) {
 		return apply_filters( 'superpwa_is_pwa_ready', true );
 	}
 	
 	return false; 
+}
+
+/**
+ * Check if file exists
+ * 
+ * Not to be confused with file_exists PHP function. 
+ * In SuperPWA context, file exists if the response code is 200. 
+ * 
+ * @param $file (string) URL to check
+ * 
+ * @return (bool) True, if file exists. False otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ * 
+ * @since 2.0.1
+ */
+function superpwa_file_exists( $file ) {
+	
+	$response 		= wp_remote_head( $file, array( 'sslverify' => false ) );
+	$response_code 	= wp_remote_retrieve_response_code( $response );
+	
+	if ( 200 === $response_code ) {
+		return true;
+	}
+	
+	return false;
+}
+
+/**
+ * Check if service worker or manifest is static or dynamic
+ * 
+ * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
+ *
+ * @return (bool) True if the file is static. False otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_is_static( $file = 'manifest' ) {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	switch ( $file ) {
+		
+		case 'sw':
+			
+			if ( $settings['is_static_sw'] === 1 ) {
+				return true;
+			}
+			
+			return false;
+			break;
+		
+		case 'manifest':
+		default: 
+			
+			if ( $settings['is_static_manifest'] === 1 ) {
+				return true;
+			}
+		
+			return false;
+			break;
+	}
+}
+
+/**
+ * Returns WordPress URL v/s Site URL depending on the status of the file. 
+ * 
+ * Static files are generated in the root directory of WordPress. So if static 
+ * files are used, the WordPress URL will be needed for many use cases, like
+ * offline page, start_url etc. 
+ * 
+ * The status of the service worker is mostly relevant since the service worker 
+ * can work on the folder it is located and its sub folders. Not the folders above
+ * its own directory. 
+ * 
+ * @param (string) $file keyword 'manifest' to test manifest and 'sw' to test service worker. 
+ * 
+ * @return (string) get_bloginfo( 'wpurl' ) if file is static. get_bloginfo( 'url' ) otherwise. 
+ * 
+ * @author Arun Basil Lal
+ * 
+ * @since 2.0.1
+ */
+function superpwa_get_bloginfo( $file = 'sw' ) {
+	
+	if ( superpwa_is_static( $file ) ) {
+		return get_bloginfo( 'wpurl' );
+	}
+	
+	return get_bloginfo( 'url' );
 }
