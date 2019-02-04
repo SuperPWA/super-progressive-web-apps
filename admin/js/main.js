@@ -1,5 +1,5 @@
 var mediaUploader;
-
+/*
 var cropControl = {
     id: "control-id",
     params: {
@@ -46,7 +46,7 @@ cropControl.mustBeCropped = function (flexW, flexH, dstW, dstH, imgW, imgH) {
 
     return true;
 };
-
+*/
 function superPWACalculateImageSelectOptions(attachment, controller) {
 
     var control = controller.get( 'control' );
@@ -96,39 +96,29 @@ function superPWACalculateImageSelectOptions(attachment, controller) {
     return imgSelectOptions;
 }
 
-function superPWAsetImageFromURL(url, attachmentId, width, height) {
-    var choice, data = {};
-
-    data.url = url;
-    data.thumbnail_url = url;
-    data.timestamp = _.now();
-
-    if (attachmentId) {
-        data.attachment_id = attachmentId;
-    }
-
-    if (width) {
-        data.width = width;
-    }
-
-    if (height) {
-        data.height = height;
-    }
-
-    console.log('url: ' + url);
-
-    $("input[name='superpwa_settings[splash_icon]']").val( url );
+function superPWAsetImageFromURL(url, attachmentId, width, height, inputName) {
+    $("input[name='" + inputName + "']").val( url );
 }
 
-function superPWAsetImageFromAttachment(attachment) {
-
-    $("#heading_picture").val( attachment.url );
-    $("#heading_picture_preview").prop("src", attachment.url);
-
+function superPWAsetImageFromAttachment(attachment, inputName) {
+    $("input[name='" + inputName +"']").val( attachment.url );
 }
 
 function selectAndCropBtnHandler(e) {
     e.preventDefault();
+
+    var inputNamesList = {
+        'superpwa-icon-upload': 'superpwa_settings[icon]',
+        'superpwa-splash-icon-upload': 'superpwa_settings[splash_icon]',
+    }, inputName;
+
+    if($(e.target).hasClass('superpwa-icon-upload')) {
+        inputName = inputNamesList['superpwa-icon-upload']
+    } else if ($(e.target).hasClass('superpwa-splash-icon-upload')) {
+        inputName = inputNamesList['superpwa-splash-icon-upload'];
+    } else {
+        inputName = '';
+    }
 
     /* We need to setup a Crop control that contains a few parameters
        and a method to indicate if the CropController can skip cropping the image.
@@ -220,7 +210,7 @@ function selectAndCropBtnHandler(e) {
             w = croppedImage.width,
             h = croppedImage.height;
 
-        superPWAsetImageFromURL(url, attachmentId, w, h);
+        superPWAsetImageFromURL(url, attachmentId, w, h, inputName);
 
     });
 
@@ -230,7 +220,7 @@ function selectAndCropBtnHandler(e) {
             w = selection.get('width'),
             h = selection.get('height');
 
-        superPWAsetImageFromURL(url, selection.id, w, h);
+        superPWAsetImageFromURL(url, selection.id, w, h, inputName);
 
     });
 
@@ -242,7 +232,7 @@ function selectAndCropBtnHandler(e) {
             && cropControl.params.height === attachment.height
             && !cropControl.params.flex_width
             && !cropControl.params.flex_height) {
-            superPWAsetImageFromAttachment(attachment);
+            superPWAsetImageFromAttachment(attachment, inputName);
             mediaUploader.close();
         } else {
             mediaUploader.setState('cropper');
@@ -277,7 +267,7 @@ jQuery(document).ready(function($){
                     suggestedWidth: 192,
                     suggestedHeight: 192
                 }),
-                new wp.media.controller.CustomizeImageCropper({
+                new wp.media.controller.CustomizeImageCropper(  {
                     imgSelectOptions: superPWACalculateImageSelectOptions,
                     control: cropControl
                 })
