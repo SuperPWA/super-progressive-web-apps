@@ -1,52 +1,5 @@
 var mediaUploader;
-/*
-var cropControl = {
-    id: "control-id",
-    params: {
-        flex_width: false,  // set to true if the width of the cropped image can be different to the width defined here
-        flex_height: true, // set to true if the height of the cropped image can be different to the height defined here
-        width: 192,  // set the desired width of the destination image here
-        height: 192, // set the desired height of the destination image here
-    }
-};
 
-cropControl.mustBeCropped = function (flexW, flexH, dstW, dstH, imgW, imgH) {
-
-    // If the width and height are both flexible
-    // then the user does not need to crop the image.
-
-    if (true === flexW && true === flexH) {
-        return false;
-    }
-
-    // If the width is flexible and the cropped image height matches the current image height,
-    // then the user does not need to crop the image.
-    if (true === flexW && dstH === imgH) {
-        return false;
-    }
-
-    // If the height is flexible and the cropped image width matches the current image width,
-    // then the user does not need to crop the image.
-    if (true === flexH && dstW === imgW) {
-        return false;
-    }
-
-    // If the cropped image width matches the current image width,
-    // and the cropped image height matches the current image height
-    // then the user does not need to crop the image.
-    if (dstW === imgW && dstH === imgH) {
-        return false;
-    }
-
-    // If the destination width is equal to or greater than the cropped image width
-    // then the user does not need to crop the image...
-    if (imgW <= dstW) {
-        return false;
-    }
-
-    return true;
-};
-*/
 function superPWACalculateImageSelectOptions(attachment, controller) {
 
     var control = controller.get( 'control' );
@@ -248,71 +201,7 @@ jQuery(document).ready(function($){
 
     $('.superpwa-icon-upload').click(selectAndCropBtnHandler);
 
-	$('.superpwa-splash-icon-upload').click(function(e) {	// Splash Screen Icon upload
-		e.preventDefault();
-
-		var superpwa_meda_uploader = wp.media({
-			title: 'Splash Screen Icon',
-			button: {
-				text: 'Select and Crop',
-                close: false
-			},
-            states: [
-                new wp.media.controller.Library({
-                    title: 'Select and Crop', // l10n.chooseImage,
-                    library: wp.media.query({type: 'image'}),
-                    multiple: false,
-                    date: false,
-                    priority: 20,
-                    suggestedWidth: 192,
-                    suggestedHeight: 192
-                }),
-                new wp.media.controller.CustomizeImageCropper(  {
-                    imgSelectOptions: superPWACalculateImageSelectOptions,
-                    control: cropControl
-                })
-            ]
-		});
-
-        superpwa_meda_uploader.on('cropped', function (croppedImage) {
-
-            var url = croppedImage.url,
-                attachmentId = croppedImage.attachment_id,
-                w = croppedImage.width,
-                h = croppedImage.height;
-
-            superPWAsetImageFromURL(url, attachmentId, w, h);
-
-        });
-
-        superpwa_meda_uploader.on('skippedcrop', function (selection) {
-
-            var url = selection.get('url'),
-                w = selection.get('width'),
-                h = selection.get('height');
-
-            superPWAsetImageFromURL(url, selection.id, w, h);
-
-        });
-
-        superpwa_meda_uploader.on("select", function () {
-
-            var attachment = superpwa_meda_uploader.state().get('selection').first().toJSON();
-
-            if (cropControl.params.width === attachment.width
-                && cropControl.params.height === attachment.height
-                && !cropControl.params.flex_width
-                && !cropControl.params.flex_height) {
-                superPWAsetImageFromAttachment(attachment);
-                superpwa_meda_uploader.close();
-            } else {
-                superpwa_meda_uploader.setState('cropper');
-            }
-
-        });
-
-        superpwa_meda_uploader.open();
-	});
+    $('.superpwa-splash-icon-upload').click(selectAndCropBtnHandler);
 
 	$('.superpwa-app-short-name').on('input', function(e) {	// Warn when app_short_name exceeds 12 characters.
 		if ( $('.superpwa-app-short-name').val().length > 12 ) {
