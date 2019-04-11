@@ -60,15 +60,17 @@ function superPWAsetImageFromAttachment(attachment, inputName) {
 function selectAndCropBtnHandler(e) {
     e.preventDefault();
 
-    var inputNamesList = {
-        'superpwa-icon-upload': 'superpwa_settings[icon]',
-        'superpwa-splash-icon-upload': 'superpwa_settings[splash_icon]',
-    }, inputName;
+    var inputFieldsList = {
+        'superpwa-icon-upload': {name: 'superpwa_settings[icon]', width: 192, height: 192},
+        'superpwa-splash-icon-upload': {name: 'superpwa_settings[splash_icon]', width: 512, height: 512},
+    }, inputName, fieldKey;
 
     if($(e.target).hasClass('superpwa-icon-upload')) {
-        inputName = inputNamesList['superpwa-icon-upload']
+        fieldKey = 'superpwa-icon-upload';
+        inputName = inputFieldsList[fieldKey]['name']
     } else if ($(e.target).hasClass('superpwa-splash-icon-upload')) {
-        inputName = inputNamesList['superpwa-splash-icon-upload'];
+        fieldKey = 'superpwa-splash-icon-upload';
+        inputName = inputFieldsList[fieldKey]['name'];
     } else {
         inputName = '';
     }
@@ -84,8 +86,8 @@ function selectAndCropBtnHandler(e) {
         params: {
             flex_width: false,  // set to true if the width of the cropped image can be different to the width defined here
             flex_height: true, // set to true if the height of the cropped image can be different to the height defined here
-            width: 192,  // set the desired width of the destination image here
-            height: 192, // set the desired height of the destination image here
+            width: inputFieldsList[fieldKey]['width'],  // set the desired width of the destination image here
+            height: inputFieldsList[fieldKey]['height'], // set the desired height of the destination image here
         }
     };
 
@@ -146,8 +148,8 @@ function selectAndCropBtnHandler(e) {
                 multiple: false,
                 date: false,
                 priority: 20,
-                suggestedWidth: 192,
-                suggestedHeight: 192
+                suggestedWidth: inputFieldsList[fieldKey]['width'],
+                suggestedHeight: inputFieldsList[fieldKey]['height']
             }),
             new wp.media.controller.CustomizeImageCropper({
                 imgSelectOptions: superPWACalculateImageSelectOptions,
