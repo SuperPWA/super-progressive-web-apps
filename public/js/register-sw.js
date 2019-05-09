@@ -40,7 +40,7 @@ if ('serviceWorker' in navigator) {
 		button.type = 'button';
 		button.className = 'snackbar-close';
 		button.setAttribute('aria-label', 'snackbar-close');
-		button.addEventListener('click', hideMsg);
+		button.addEventListener('click', hideSnackbar);
 		button.innerHTML = '&times;';
 
 		container.appendChild(button);
@@ -139,11 +139,11 @@ if ('serviceWorker' in navigator) {
 	function runOnlineOfflineIndicator() {
 		if (navigator.onLine) {
 			if (isOffline === true) {
-				showMsg(backOnlineMsg);
+				showSnackbar(backOnlineMsg);
 			}
 			isOffline = false;
 		} else {
-			showMsg(goOfflineMsg);
+			showSnackbar(goOfflineMsg);
 			isOffline = true;
 		}
 	}
@@ -153,7 +153,7 @@ if ('serviceWorker' in navigator) {
  	* @param {String} msg 
  	*/
 	function showSnackbar(msg) {
-		document.getElementById('msgOffline').innerHTML = msg;
+		document.getElementById('snackbar-msg').innerHTML = msg;
 		document.body.classList.add('snackbar--show');
 	}
 
