@@ -99,7 +99,7 @@ if ('serviceWorker' in navigator) {
 			width: 45px;
 			height: 100%;
 			padding: 0;
-			background: #dbb11c;
+			background: #2a2a2a;
 			border: none;
 			font-size: 28px;
 			font-weight: normal;
@@ -110,7 +110,7 @@ if ('serviceWorker' in navigator) {
 
 		.snackbar .snackbar-close:hover,
 		.snackbar .snackbar-close:focus {
-			background: #ddb728;
+			background: #3f3f3f;
 		}
 
 		.snackbar a {
