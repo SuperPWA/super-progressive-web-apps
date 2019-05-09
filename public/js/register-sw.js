@@ -29,6 +29,26 @@ if ('serviceWorker' in navigator) {
  	* Inject html of snackbar
  	*/
 	function injectSnackbarHtml() {
+		const container = document.createElement('div');
+		container.className = 'snackbar';
+
+		const parag = document.createElement('p');
+		parag.id = 'snackbar-msg';
+		container.appendChild(parag);
+
+		const button = document.createElement('button');
+		button.type = 'button';
+		button.className = 'snackbar-close';
+		button.setAttribute('aria-label', 'snackbar-close');
+		button.addEventListener('click', hideMsg);
+		button.innerHTML = '&times;';
+
+		container.appendChild(button);
+
+		document.body.appendChild(container);
+
+		window.addEventListener('online', runOnlineOfflineIndicator);
+		window.addEventListener('offline', runOnlineOfflineIndicator);
 	}
 
 	/**
