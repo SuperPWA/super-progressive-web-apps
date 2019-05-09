@@ -51,6 +51,18 @@ if ('serviceWorker' in navigator) {
 
 		window.addEventListener('online', runOnlineOfflineIndicator);
 		window.addEventListener('offline', runOnlineOfflineIndicator);
+
+		// Clean snackbarTimeToHide varibale when user hover on the snackbar to prevent hide it
+		container.addEventListener('mouseover', function () {
+			if (snackbarTimeoutHide !== null)
+				clearTimeout(snackbarTimeoutHide);
+		});
+
+		// Call setTimeout and set snackbarTimeToHide variable to hide snackbar
+		container.addEventListener('mouseout', function () {
+			if (snackbarTimeoutHide !== null)
+				snackbarTimeoutHide = setTimeout(hideSnackbar, snackbarTimeToHide / 2);
+		});
 	}
 
 	/**
