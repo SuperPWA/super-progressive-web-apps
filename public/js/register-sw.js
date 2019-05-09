@@ -161,6 +161,7 @@ if ('serviceWorker' in navigator) {
 	* Hide snackbar
 	*/
 	function hideSnackbar() {
+		document.body.classList.remove('snackbar--show');
 	}
 
 	/****************** End : Online/Offline Indicator ******************/
