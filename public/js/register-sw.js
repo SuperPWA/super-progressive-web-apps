@@ -12,7 +12,9 @@ if ('serviceWorker' in navigator) {
 	/****************** Start : Online/Offline Indicator ******************/
 
 	// Variables & default values
+	const snackbarTimeToHide = 5000; // 5s
 	let isOffline = false,
+		snackbarTimeoutHide = null,
 		goOfflineMsg = 'You\'re currently offline',
 		backOnlineMsg = 'You\'re back online <a href="javascript:location.reload()">refresh</a>';
 
@@ -155,6 +157,9 @@ if ('serviceWorker' in navigator) {
 	function showSnackbar(msg) {
 		document.getElementById('snackbar-msg').innerHTML = msg;
 		document.body.classList.add('snackbar--show');
+
+		clearTimeout(snackbarTimeoutHide);
+		snackbarTimeoutHide = setTimeout(hideSnackbar, snackbarTimeToHide);
 	}
 
 	/**
