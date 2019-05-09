@@ -153,6 +153,8 @@ if ('serviceWorker' in navigator) {
  	* @param {String} msg 
  	*/
 	function showSnackbar(msg) {
+		document.getElementById('msgOffline').innerHTML = msg;
+		document.body.classList.add('snackbar--show');
 	}
 
 	/**
