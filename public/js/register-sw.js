@@ -137,6 +137,15 @@ if ('serviceWorker' in navigator) {
  	* Show the state of the mode of connectivity to the user :  back onLine | go offLine
  	*/
 	function runOnlineOfflineIndicator() {
+		if (navigator.onLine) {
+			if (isOffline === true) {
+				showMsg(backOnlineMsg);
+			}
+			isOffline = false;
+		} else {
+			showMsg(goOfflineMsg);
+			isOffline = true;
+		}
 	}
 
 	/**
