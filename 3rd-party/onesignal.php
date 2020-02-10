@@ -45,10 +45,6 @@ function superpwa_onesignal_todo() {
 			// Import OneSignal service worker in SuperPWA
 			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
 		}
-		
-		// Show admin notice.
-		add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
-		add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
 	}
 }
 add_action( 'plugins_loaded', 'superpwa_onesignal_todo' );
