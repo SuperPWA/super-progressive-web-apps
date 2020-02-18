@@ -1,0 +1,20 @@
+<wpml-config>
+    <admin-texts>
+        <key name="superpwa_settings">
+            <key name="app_name"/>
+            <key name="app_short_name"/>
+            <key name="description"/>
+            <key name="icon"/>
+            <key name="splash_icon"/>
+            <key name="start_url"/>
+            <key name="offline_page"/>
+        </key>
+        <key name="superpwa_utm_tracking_settings">
+            <key name="utm_source"/>
+            <key name="utm_medium"/>
+            <key name="utm_campaign"/>
+            <key name="utm_term"/>
+            <key name="utm_content"/>
+        </key>
+    </admin-texts>
+</wpml-config>
