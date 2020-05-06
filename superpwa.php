@@ -6,7 +6,7 @@
  * Author: SuperPWA
  * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
  * Contributors: Arun Basil Lal, Jose Varghese
- * Version: 2.0.2
+ * Version: 2.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -20,7 +20,7 @@
  *
  * /3rd-party/					- Functions for compatibility with 3rd party plugins and hosts.
  * /addons/ 					- Bundled add-ons
- * /admin/						- Plugin backend.
+ * /admin/					- Plugin backend.
  * /functions/					- Functions and utilites.
  * /includes/					- External third party classes and libraries.
  * /languages/					- Translation files go here. 
@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.0
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) ) {
-	define( 'SUPERPWA_VERSION'	, '2.0.2' ); 
+	define( 'SUPERPWA_VERSION'	, '2.1' ); 
 }
 
 /**
