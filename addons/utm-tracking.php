@@ -45,6 +45,8 @@ function superpwa_utm_tracking_get_settings() {
 	
 	$defaults = array(
 				'utm_source'		=> 'superpwa',
+				'utm_medium'		=> 'superpwa',
+				'utm_campaign'		=> 'superpwa',
 			);
 	
 	return get_option( 'superpwa_utm_tracking_settings', $defaults );
@@ -207,10 +209,10 @@ function superpwa_utm_tracking_validater_sanitizer( $settings ) {
 	$settings['utm_source'] = sanitize_text_field( $settings['utm_source'] ) == '' ? 'superpwa' : sanitize_text_field( $settings['utm_source'] );
 	
 	// Sanitize campaign medium
-	$settings['utm_medium'] = sanitize_text_field( $settings['utm_medium'] );
+	$settings['utm_medium'] = sanitize_text_field( $settings['utm_medium'] ) == '' ? 'superpwa' : sanitize_text_field( $settings['utm_medium'] );
 	
 	// Sanitize campaign name
-	$settings['utm_campaign'] = sanitize_text_field( $settings['utm_campaign'] );
+	$settings['utm_campaign'] = sanitize_text_field( $settings['utm_campaign'] ) == '' ? 'superpwa' : sanitize_text_field( $settings['utm_campaign'] );
 	
 	// Sanitize campaign term
 	$settings['utm_term'] = sanitize_text_field( $settings['utm_term'] );
@@ -261,7 +263,7 @@ function superpwa_utm_tracking_source_cb() {
 	</fieldset>
 	
 	<p class="description">
-		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>. The remaining fields are optional.', 'super-progressive-web-apps' ); ?>
+		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
 	</p>
 
 	<?php
@@ -279,9 +281,13 @@ function superpwa_utm_tracking_medium_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_medium]" class="regular-text" value="<?php if ( isset( $settings['utm_medium'] ) && ( ! empty($settings['utm_medium']) ) ) echo esc_attr( $settings['utm_medium'] ); ?>"/>
 		
 	</fieldset>
+	
+	<p class="description">
+		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
+	</p>
 
 	<?php
 }
@@ -298,9 +304,13 @@ function superpwa_utm_tracking_name_cb() {
 	
 	<fieldset>
 		
-		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" placeholder="Optional" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
+		<input type="text" name="superpwa_utm_tracking_settings[utm_campaign]" class="regular-text" value="<?php if ( isset( $settings['utm_campaign'] ) && ( ! empty($settings['utm_campaign']) ) ) echo esc_attr( $settings['utm_campaign'] ); ?>"/>
 		
 	</fieldset>
+	
+	<p class="description">
+		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
+	</p>
 
 	<?php
 }
