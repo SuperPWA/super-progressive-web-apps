@@ -184,6 +184,7 @@ Feel free to get in touch if you have any questions.
 * Bug Fix: Added a check to see if WP_Plugins_List_Table class is available before using it. [#93](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/93)
 * Enhancement: Updated fallback value in superpwa_get_display() to match the default value in superpwa_get_settings().
 * Enhancement: UTM Tracking Add-on: Added default values for Campaign Medium and Campaign Name.
+* Enhancement: Removed the WordPress admin notice suggesting to add SuperPWA manifest to OneSignal. [#114] (https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/114)
 
 = 2.0.2 =
 * Date: 16.January.2019
