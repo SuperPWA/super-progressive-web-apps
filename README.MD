@@ -119,10 +119,10 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
 * New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=GitHub&utm_medium=Readme-version) to track visits coming from your PWA.
-* New in version 1.8: Compatibility issues with OneSignal are now resolved! 
-* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons. 
-* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
-* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=GitHub&utm_medium=Readme-version) from SuperPWA settings. 
+* New in version 1.8: Compatibility issues with OneSignal are now resolved!
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons.
+* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder.
+* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=GitHub&utm_medium=Readme-version) from SuperPWA settings.
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
@@ -186,7 +186,7 @@ Your Progressive Web App should be ready to test with the default settings upon 
 
 #### Testing Your Progressive Web App
 
-* Open a supported browser in a supported device (for eg: Chrome for Android (62 or higher) in an Android Phone)
+* Open a supported browser in a supported device (for eg: Chrome for Android (62 or higher) in an Android device)
 * Enter your website and wait till it fully loads
 * You should see a pop-up that has your Application Icon and a button that reads "ADD TO HOME SCREEN".
 * Click on it and your PWA will be added to your home screen. Wait for the install to complete. 
