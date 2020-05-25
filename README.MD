@@ -217,7 +217,6 @@ There are various ways you can contribute:
 <a href="https://www.youtube.com/channel/UCMFlNeutNCwTNls186moUUA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174883.svg" title="Follow SuperPWA on YouTube" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.facebook.com/SuperPWA/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.instagram.com/superpwa/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174855.svg" title="Follow SuperPWA on Instagram" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://plus.google.com/+SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Follow on Google+" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
@@ -226,7 +225,6 @@ There are various ways you can contribute:
  &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/home?status=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA%20https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/%20%40SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Share SuperPWA on Twitter" width=20 height=20> Share on Twitter </a>&nbsp;&nbsp;&nbsp;&nbsp;
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=20 height=20> Share on Facebook </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174857.svg" title="Share SuperPWA on LinkedIn" width=20 height=20> Share on LinkedIn</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p> &nbsp;&nbsp;&nbsp; <a href="https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Share on Google+" width=20 height=20> Share on Google+ </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
 ## 📇 Changelog
 [superpwa.com/changelog/](https://superpwa.com/changelog/?utm_source=GitHub&utm_medium=Readme-Changelog).
