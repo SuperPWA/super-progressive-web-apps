@@ -218,15 +218,14 @@ function superpwa_onesignal_admin_notices() {
 	
 	// Incompatibility notice for Multisites
 	if ( is_multisite() && current_user_can( 'manage_options' ) ) {
+		
 		echo '<div class="notice notice-warning"><p>' . 
-	sprintf( 
-		__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
-		'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice#multisites'
-	) . '</p></div>';
+		sprintf( 
+			__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
+			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice#multisites'
+		) . '</p></div>';
+		
+		// Filter PWA status since PWA is not ready yet. 
+		add_filter( 'superpwa_is_pwa_ready', '__return_false' );
 	}
-
-	
-	
-	// Filter PWA status since PWA is not ready yet. 
-	add_filter( 'superpwa_is_pwa_ready', '__return_false' );
 }
