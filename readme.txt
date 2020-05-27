@@ -1,5 +1,5 @@
 === Super Progressive Web Apps ===
-Contributors: superpwa, arunbasillal, josevarghese, mariadanieldeepak
+Contributors: superpwa, arunbasillal, josevarghese
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
