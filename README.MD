@@ -119,10 +119,10 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 1.5: OneSignal integration for Push notifications.
 * New in version 1.6: WordPress Multisite Network compatibility.
 * New in version 1.7: Add-Ons for SuperPWA is here! Ships with [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=GitHub&utm_medium=Readme-version) to track visits coming from your PWA.
-* New in version 1.8: Compatibility issues with OneSignal are now resolved! 
-* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons. 
-* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
-* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=GitHub&utm_medium=Readme-version) from SuperPWA settings. 
+* New in version 1.8: Compatibility issues with OneSignal are now resolved!
+* New in version 1.8: New Add-On: [Apple Touch Icons](https://superpwa.com/addons/apple-touch-icons/?utm_source=GitHub&utm_medium=Readme-version) that sets your app icons as Apple Touch Icons.
+* New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder.
+* New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=GitHub&utm_medium=Readme-version) from SuperPWA settings.
 
 #### 🔮 Upcoming features:
 * Offline Indicator Notice.
@@ -186,7 +186,7 @@ Your Progressive Web App should be ready to test with the default settings upon 
 
 #### Testing Your Progressive Web App
 
-* Open a supported browser in a supported device (for eg: Chrome for Android (62 or higher) in an Android Phone)
+* Open a supported browser in a supported device (for eg: Chrome for Android (62 or higher) in an Android device)
 * Enter your website and wait till it fully loads
 * You should see a pop-up that has your Application Icon and a button that reads "ADD TO HOME SCREEN".
 * Click on it and your PWA will be added to your home screen. Wait for the install to complete. 
@@ -217,7 +217,6 @@ There are various ways you can contribute:
 <a href="https://www.youtube.com/channel/UCMFlNeutNCwTNls186moUUA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174883.svg" title="Follow SuperPWA on YouTube" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.facebook.com/SuperPWA/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.instagram.com/superpwa/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174855.svg" title="Follow SuperPWA on Instagram" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://plus.google.com/+SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Follow on Google+" width=35 height=35></a>&nbsp;&nbsp;&nbsp;&nbsp;
 
 * Send us a Pull Request with your bug fixes and/or new features.
 * Provide feedback and [suggestions on enhancements](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
@@ -226,7 +225,6 @@ There are various ways you can contribute:
  &nbsp;&nbsp;&nbsp; <a href="https://twitter.com/home?status=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA%20https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/%20%40SuperPWA" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174876.svg" title="Share SuperPWA on Twitter" width=20 height=20> Share on Twitter </a>&nbsp;&nbsp;&nbsp;&nbsp;
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174848.svg" title="Follow SuperPWA on Facebook" width=20 height=20> Share on Facebook </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p> &nbsp;&nbsp;&nbsp; <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/&title=Super%20Progressive%20Web%20Apps&summary=Super%20Progressive%20Web%20Apps%20helps%20to%20convert%20your%20WordPress%20website%20into%20PWA%20%23SuperPWA&source=GitHub" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174857.svg" title="Share SuperPWA on LinkedIn" width=20 height=20> Share on LinkedIn</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p> &nbsp;&nbsp;&nbsp; <a href="https://plus.google.com/share?url=https%3A//github.com/SuperPWA/Super-Progressive-Web-Apps/" target="_blank" style="width:100%"><img src="https://image.flaticon.com/icons/svg/174/174851.svg" title="Share on Google+" width=20 height=20> Share on Google+ </a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
 ## 📇 Changelog
 [superpwa.com/changelog/](https://superpwa.com/changelog/?utm_source=GitHub&utm_medium=Readme-Changelog).

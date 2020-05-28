@@ -57,12 +57,23 @@ register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate
  * Will redirect to SuperPWA settings page when plugin is activated.
  * Will not redirect if multiple plugins are activated at the same time.
  * Will not redirect when activated network wide on multisite. Network admins know their way.
+ * 
+ * @param (string) $plugin Path to the main plugin file from plugins directory.
+ * @param (bool) $network_wide True when network activated on multisites. False otherwise. 
+ * 
+ * @author Arun Basil Lal
  *
  * @since 2.0
+ * @since 2.1 Added a check to see if WP_Plugins_List_Table class is available. 
  */
 function superpwa_activation_redirect( $plugin, $network_wide ) {
+	
 	// Return if not SuperPWA or if plugin is activated network wide.
 	if ( $plugin !== plugin_basename( SUPERPWA_PLUGIN_FILE ) || $network_wide === true ) {
+		return false;
+	}
+	
+	if ( ! class_exists( 'WP_Plugins_List_Table' ) ) {
 		return false;
 	}
 
@@ -82,7 +93,6 @@ function superpwa_activation_redirect( $plugin, $network_wide ) {
 	// Redirect to SuperPWA settings page. 
 	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
 }
-
 add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 );
 
 /**
@@ -401,18 +411,22 @@ function superpwa_add_rewrite_rules() {
  * Generates SW and Manifest on the fly.
  *
  * This way no physical files have to be placed on WP root folder. Hallelujah!
- *
- * @since 2.0
+ * 
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
  *
  * @uses  superpwa_get_sw_filename()
  * @uses  superpwa_get_manifest_filename()
- * @uses  superpwa_get_manifest()
+ * @uses  superpwa_manifest_template()
+ * @uses  superpwa_sw_template()
+ * 
+ * @since 2.0
+ * @since 2.1 uses http_build_query() instead of implode() to convert query_vars to string.
  */
 function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	if ( ! property_exists( $query, 'query_vars' ) || ! is_array( $query->query_vars ) ) {
 		return;
 	}
-	$query_vars_as_string = implode( ',', $query->query_vars );
+	$query_vars_as_string = http_build_query( $query->query_vars );
 	$manifest_filename    = superpwa_get_manifest_filename();
 	$sw_filename          = superpwa_get_sw_filename();
 
