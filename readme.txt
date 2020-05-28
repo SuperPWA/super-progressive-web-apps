@@ -13,6 +13,9 @@ SuperPWA helps you convert your WordPress website into a Progressive Web App ins
 
 == Description ==
 
+> **Help decide on the future of SuperPWA**
+> We are looking for your input to decide on the future of SuperPWA. If you wish to acquire SuperPWA as a whole and continue it's development or if you are interested in a premium version of the plugin with extended features, [please fill in the form and let us know](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=description-future). 
+
 Progressive Web Apps (PWA) is a new technology that combines the best of mobile web and the best of mobile apps to create a superior mobile web experience. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
@@ -179,13 +182,13 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.1 =
-* Date:
+* Date: [29.May.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 5.4.1.
-* Bug Fix: Fixed a rare PHP Notice: Array to string conversion in basic-setup.php on line 415. [#92](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/92)
-* Bug Fix: Added a check to see if WP_Plugins_List_Table class is available before using it. [#93](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/93)
+* Enhancement: Removed the WordPress admin notice suggesting to add SuperPWA manifest to OneSignal. [#114] (https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/114)
 * Enhancement: Updated fallback value in superpwa_get_display() to match the default value in superpwa_get_settings().
 * Enhancement: UTM Tracking Add-on: Added default values for Campaign Medium and Campaign Name.
-* Enhancement: Removed the WordPress admin notice suggesting to add SuperPWA manifest to OneSignal. [#114] (https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/114)
+* Bug Fix: Fixed a rare PHP Notice: Array to string conversion in basic-setup.php on line 415. [#92](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/92)
+* Bug Fix: Added a check to see if WP_Plugins_List_Table class is available before using it. [#93](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/93)
 
 = 2.0.2 =
 * Date: 16.January.2019
@@ -309,6 +312,14 @@ Feel free to get in touch if you have any questions.
 * First release of the plugin.
 
 == Upgrade Notice ==
+
+= 2.1 =
+* Tested with WordPress 5.4.1.
+* Enhancement: Removed the WordPress admin notice suggesting to add SuperPWA manifest to OneSignal. 
+* Enhancement: Updated fallback value in superpwa_get_display() to match the default value in superpwa_get_settings().
+* Enhancement: UTM Tracking Add-on: Added default values for Campaign Medium and Campaign Name.
+* Bug Fix: Fixed a rare PHP Notice: Array to string conversion in basic-setup.php on line 415. 
+* Bug Fix: Added a check to see if WP_Plugins_List_Table class is available before using it. 
 
 = 2.0.2 =
 * Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". 
