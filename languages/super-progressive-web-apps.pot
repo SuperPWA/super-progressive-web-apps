@@ -1,17 +1,17 @@
-# Copyright (C) 2019 SuperPWA
+# Copyright (C) 2020 SuperPWA
 # This file is distributed under the same license as the Super Progressive Web Apps plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Super Progressive Web Apps 2.0.1\n"
+"Project-Id-Version: Super Progressive Web Apps 2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-progressive-web-apps\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-01-15T05:23:48+00:00\n"
+"POT-Creation-Date: 2020-05-28T22:12:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.1.0\n"
+"X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: super-progressive-web-apps\n"
 
 #. Plugin Name of the plugin
@@ -39,12 +39,8 @@ msgstr ""
 msgid "https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri"
 msgstr ""
 
-#: 3rd-party/onesignal.php:220
+#: 3rd-party/onesignal.php:224
 msgid "<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href=\"%s\" target=\"_blank\">OneSignal integration documentation</a> for more info. "
-msgstr ""
-
-#: 3rd-party/onesignal.php:242
-msgid "<strong>Action Required to integrate SuperPWA with OneSignal:</strong><br>1. Go to <a href=\"%s\" target=\"_blank\">OneSignal Configuration > Scroll down to Advanced Settings &rarr;</a><br>2. Enable <strong>Use my own manifest.json</strong><br>3. Set <code>%s</code>as <strong>Custom manifest.json URL</strong> and Save Settings.<br>Please refer the <a href=\"%s\" target=\"_blank\">OneSignal integration documentation</a> for more info. "
 msgstr ""
 
 #: addons/utm-tracking.php:35
@@ -52,48 +48,50 @@ msgstr ""
 msgid "UTM Tracking"
 msgstr ""
 
-#: addons/utm-tracking.php:146
+#: addons/utm-tracking.php:148
 msgid "Current Start URL"
 msgstr ""
 
-#: addons/utm-tracking.php:155
+#: addons/utm-tracking.php:157
 msgid "Campaign Source"
 msgstr ""
 
-#: addons/utm-tracking.php:164
+#: addons/utm-tracking.php:166
 msgid "Campaign Medium"
 msgstr ""
 
-#: addons/utm-tracking.php:173
+#: addons/utm-tracking.php:175
 msgid "Campaign Name"
 msgstr ""
 
-#: addons/utm-tracking.php:182
+#: addons/utm-tracking.php:184
 msgid "Campaign Term"
 msgstr ""
 
-#: addons/utm-tracking.php:191
+#: addons/utm-tracking.php:193
 msgid "Campaign Content"
 msgstr ""
 
-#: addons/utm-tracking.php:234
+#: addons/utm-tracking.php:236
 msgid "This add-on automatically adds UTM campaign parameters to the <code>Start Page</code> URL in your <a href=\"%s\" target=\"_blank\">manifest</a>. This will help you identify visitors coming specifically from your app. <a href=\"%s\" target=\"_blank\">Read more</a> about UTM Tracking."
 msgstr ""
 
-#: addons/utm-tracking.php:264
-msgid "Campaign Source is mandatory and defaults to <code>superpwa</code>. The remaining fields are optional."
+#: addons/utm-tracking.php:266
+#: addons/utm-tracking.php:289
+#: addons/utm-tracking.php:312
+msgid "Campaign Source is mandatory and defaults to <code>superpwa</code>."
 msgstr ""
 
-#: addons/utm-tracking.php:362
+#: addons/utm-tracking.php:372
 #: admin/admin-ui-render-settings.php:419
 msgid "Settings saved."
 msgstr ""
 
-#: addons/utm-tracking.php:371
+#: addons/utm-tracking.php:381
 msgid "UTM Tracking for"
 msgstr ""
 
-#: addons/utm-tracking.php:382
+#: addons/utm-tracking.php:392
 #: admin/admin-ui-render-settings.php:442
 msgid "Save Settings"
 msgstr ""
@@ -297,7 +295,7 @@ msgid "Progressive Web Apps require that your website is served over HTTPS. Plea
 msgstr ""
 
 #: admin/admin-ui-setup.php:31
-#: admin/basic-setup.php:337
+#: admin/basic-setup.php:365
 msgid "Settings"
 msgstr ""
 
@@ -365,28 +363,28 @@ msgstr ""
 msgid "HTTPS"
 msgstr ""
 
-#: admin/admin-ui-setup.php:325
+#: admin/admin-ui-setup.php:348
 msgid "If you like SuperPWA, please <a href=\"%s\" target=\"_blank\">make a donation</a> or leave a <a href=\"%s\" target=\"_blank\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!"
 msgstr ""
 
-#: admin/basic-setup.php:103
+#: admin/basic-setup.php:113
 msgid "Your app is ready with the default settings. "
 msgstr ""
 
-#: admin/basic-setup.php:107
+#: admin/basic-setup.php:117
 msgid "<a href=\"%s\">Customize your app &rarr;</a>"
 msgstr ""
 
-#: admin/basic-setup.php:109
-#: admin/basic-setup.php:143
+#: admin/basic-setup.php:119
+#: admin/basic-setup.php:153
 msgid "Thank you for installing <strong>Super Progressive Web Apps!</strong> "
 msgstr ""
 
-#: admin/basic-setup.php:118
-#: admin/basic-setup.php:152
+#: admin/basic-setup.php:128
+#: admin/basic-setup.php:162
 msgid "<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href=\"%s\" target=\"_blank\">Discover new features and read the story &rarr;</a>"
 msgstr ""
 
-#: admin/basic-setup.php:353
+#: admin/basic-setup.php:381
 msgid "Demo"
 msgstr ""
