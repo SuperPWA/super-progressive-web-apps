@@ -179,7 +179,8 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.1 =
-* Date: 
+* Date:
+* Tested with WordPress 5.4.1.
 * Bug Fix: Fixed a rare PHP Notice: Array to string conversion in basic-setup.php on line 415. [#92](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/92)
 * Bug Fix: Added a check to see if WP_Plugins_List_Table class is available before using it. [#93](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/93)
 * Enhancement: Updated fallback value in superpwa_get_display() to match the default value in superpwa_get_settings().
