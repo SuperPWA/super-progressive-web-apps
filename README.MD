@@ -1,5 +1,5 @@
 **Help decide on the future of SuperPWA**
-We are looking for your input to decide on the future of SuperPWA. If you wish to acquire SuperPWA as a whole and continue it's development or if you are interested in a premium version of the plugin with extended features, [please fill in the form and let us know](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=description-future). 
+We are looking for your input to decide on the future of SuperPWA. If you wish to acquire SuperPWA as a whole and continue it's development or if you are interested in a premium version of the plugin with extended features, [please fill in the form and let us know](https://superpwa.com/superpwa-2-1/?utm_source=github&utm_medium=description-future). 
 
 # Super Progressive Web Apps
 <p>
