@@ -239,7 +239,11 @@ function superpwa_delete_manifest() {
  * Get PWA Icons
  *
  * @return	array	An array of icons to be used as the application icons and splash screen icons
+ *
+ * @author Jose Varghese
  * @since	1.3
+ * @since	2.1.1 Added support for Maskable Icons
+ *
  */
 function superpwa_get_pwa_icons() {
 	
