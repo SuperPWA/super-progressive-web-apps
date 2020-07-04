@@ -251,6 +251,7 @@ function superpwa_get_pwa_icons() {
 							'src' 	=> $settings['icon'],
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
+							'purpose'=> 'any maskable', // any maskable to support adaptive icons
 						);
 	
 	// Splash screen icon - Added since 1.3
@@ -260,6 +261,7 @@ function superpwa_get_pwa_icons() {
 							'src' 	=> $settings['splash_icon'],
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
+							'purpose'=> 'any maskable', // any maskable to support adaptive icons
 						);
 	}
 	
