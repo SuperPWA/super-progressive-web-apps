@@ -3,7 +3,7 @@ Contributors: superpwa, arunbasillal, josevarghese
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -183,7 +183,7 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.1.1 =
-* Date: [5.July.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [4.July.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 5.4.2.
 * Enhancement: Added support for Maskable Icons [#127](https://github.com/SuperPWA/Super-Progressive-Web-Apps/issues/127)
 
