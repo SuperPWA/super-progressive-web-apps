@@ -265,7 +265,6 @@ function superpwa_get_pwa_icons() {
 							'src' 	=> $settings['splash_icon'],
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'any maskable', // any maskable to support adaptive icons
 						);
 	}
 	
