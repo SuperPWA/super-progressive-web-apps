@@ -182,6 +182,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.2 =
+* Date: [25.July.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
+* Bug Fix: Fixed issue where Application Icon was not showing.
+
 = 2.1.1 =
 * Date: [4.July.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested with WordPress 5.4.2.
