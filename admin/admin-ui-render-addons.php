@@ -67,6 +67,28 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'external',
 							'superpwa_min_version'	=> '1.8',
 						),
+		'call_to_action' => array(
+							'name'					=> __( 'Call To Action', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Easily gives notification banner your users to Add to Homescreen on website.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'superpwa-128x128.png',
+							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'admin_link'			=> 'https://superpwa.com/addons/call-to-action/',
+							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'external',
+							'superpwa_min_version'	=> '1.8',
+						),
+		'android_apk_app_generator' => array(
+							'name'					=> __( 'Android APK APP Generator', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Easily generate APK APP of your current PWA website.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'superpwa-128x128.png',
+							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'admin_link'			=> 'https://superpwa.com/addons/call-to-action/',
+							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'external',
+							'superpwa_min_version'	=> '1.8',
+						),
 	);
 	
 	if ( $slug === false ) {
@@ -132,7 +154,7 @@ function superpwa_addons_interface_render() {
 	?>
 	
 	<div class="wrap">
-		<h1><?php _e( 'Add-Ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'Add-ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		
@@ -315,6 +337,23 @@ function superpwa_addons_status( $slug ) {
 			return 'uninstalled';
 			
 			break;
+		// Add-ons pro installed as a separate plugin
+		case 'addon_pro':
+			$slug = 'super-progressive-web-apps-pro';
+			// True means, add-on is installed and active
+			if ( is_plugin_active( $slug ) ) {
+				return 'active';
+			}
+			
+			// Add-on is inactive, check if add-on is installed
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $slug ) ) {
+				return 'inactive';
+			}
+			
+			// If we are here, add-on is not installed and not active
+			return 'upgrade';
+			
+			break;
 			
 		default:
 			return false;
@@ -349,6 +388,9 @@ function superpwa_addons_button_text( $slug ) {
 			return __( 'Deactivate', 'super-progressive-web-apps' );
 			break;
 			
+		case 'upgrade':
+			return __( 'Upgrade', 'super-progressive-web-apps' );
+			break;
 		case 'uninstalled':
 		default: // Safety net for edge cases if any.
 			return __( 'Install', 'super-progressive-web-apps' );
@@ -404,6 +446,7 @@ function superpwa_addons_button_link( $slug ) {
 		
 		// If add-on is not installed and for edge cases where $addon_status is false, we use the add-on link.
 		case 'uninstalled':
+		case 'upgrade':
 		default:
 			return $addon['link'];
 			break;
