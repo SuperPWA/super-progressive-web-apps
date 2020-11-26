@@ -73,9 +73,9 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
-							'admin_link'			=> 'https://superpwa.com/addons/call-to-action/',
-							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
-							'admin_link_target'		=> 'external',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-call-to-action'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.8',
 						),
 		'android_apk_app_generator' => array(
@@ -86,7 +86,7 @@ function superpwa_get_addons( $slug = false ) {
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
 							'admin_link'			=> 'https://superpwa.com/addons/call-to-action/',
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
-							'admin_link_target'		=> 'external',
+							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.8',
 						),
 	);
@@ -339,19 +339,26 @@ function superpwa_addons_status( $slug ) {
 			break;
 		// Add-ons pro installed as a separate plugin
 		case 'addon_pro':
-			$slug = 'super-progressive-web-apps-pro';
+			$pro_plugin = 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php';
 			// True means, add-on is installed and active
-			if ( is_plugin_active( $slug ) ) {
-				return 'active';
-			}
-			
-			// Add-on is inactive, check if add-on is installed
-			if ( file_exists( WP_PLUGIN_DIR . '/' . $slug ) ) {
+			if ( is_plugin_active( $pro_plugin ) ) {
+				// True means, add-on is installed and active
+				if ( in_array( $slug, $active_addons ) ) {
+					return 'active';
+				}
 				return 'inactive';
 			}
 			
+			
+			// Add-on is inactive, check if add-on is installed
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $pro_plugin ) ) {
+				return 'inactive';
+			}
+
 			// If we are here, add-on is not installed and not active
 			return 'upgrade';
+			
+			
 			
 			break;
 			

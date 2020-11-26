@@ -23,7 +23,7 @@ function superpwa_upgread_pro_interface_render(){
 		<div class="wp-list-table widefat addon-install">
 			
 			<div id="the-list">
-				
+				<?php do_action("admin_upgrade_license_page"); ?>
 			</div>
 		</div>
 	</div>
