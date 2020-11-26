@@ -346,6 +346,7 @@ function superpwa_addons_status( $slug ) {
 				if ( in_array( $slug, $active_addons ) ) {
 					return 'active';
 				}
+				return 'inactive';
 			}
 			
 			
