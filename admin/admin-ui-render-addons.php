@@ -76,7 +76,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link'			=>  admin_url('admin.php?page=superpwa-call-to-action'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '1.8',
+							'superpwa_min_version'	=> '2.1.2',
 						),
 		'android_apk_app_generator' => array(
 							'name'					=> __( 'Android APK APP Generator', 'super-progressive-web-apps' ),
@@ -84,10 +84,10 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'superpwa-128x128.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
-							'admin_link'			=> 'https://superpwa.com/addons/call-to-action/',
-							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link'			=> admin_url('admin.php?page=superpwa-android-apk-app'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '1.8',
+							'superpwa_min_version'	=> '2.1.2',
 						),
 	);
 	
@@ -186,7 +186,7 @@ function superpwa_addons_interface_render() {
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank">
+									<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')? '?utm_source=superpwa-plugin&utm_medium=addon-card': '') ; ?>" target="_blank">
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
@@ -201,7 +201,7 @@ function superpwa_addons_interface_render() {
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
+										<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': ''); ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
 									</li>
 								</ul>	
 							</div>
@@ -346,13 +346,12 @@ function superpwa_addons_status( $slug ) {
 				if ( in_array( $slug, $active_addons ) ) {
 					return 'active';
 				}
-				return 'inactive';
 			}
 			
 			
 			// Add-on is inactive, check if add-on is installed
 			if ( file_exists( WP_PLUGIN_DIR . '/' . $pro_plugin ) ) {
-				return 'inactive';
+				return 'upgrade';
 			}
 
 			// If we are here, add-on is not installed and not active
