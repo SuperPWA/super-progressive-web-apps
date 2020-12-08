@@ -362,7 +362,8 @@ function superpwa_settings_link( $links ) {
 
 	return array_merge(
 		array(
-			'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>'
+			'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
+			'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
 		),
 		$links
 	);
