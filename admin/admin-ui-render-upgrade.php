@@ -26,7 +26,10 @@ function superpwa_upgread_pro_interface_render(){
 		<div class="wp-list-table widefat addon-install">
 			
 			<div id="the-list">
-				<?php do_action("admin_upgrade_license_page"); ?>
+				<?php
+				if(defined('SUPERPWA_PRO_VERSION')){
+				 do_action("admin_upgrade_license_page");
+				}else{ ?>
 
 
 				<div class="fp-wr">
@@ -35,80 +38,80 @@ function superpwa_upgread_pro_interface_render(){
 				        <span class="ov"></span>
 				    </div>
 				    <div class="fp-cnt">
-				            <h1>Upgrade to Pro</h1>
-				            <p>Take your AMP to the next level with more beautiful themes, great extensions and more powerful features.</p>
-				            <a class="buy" href="#upgrade">BUY NOW</a>
+				            <h1><?php _e( 'Upgrade to Pro'); ?></h1>
+				            <p><?php _e( 'Take your AMP to the next level with more beautiful themes, great extensions and more powerful features.', 'super-progressive-web-apps' ); ?></p>
+				            <a class="buy" href="#upgrade"><?php _e( 'BUY NOW', 'super-progressive-web-apps' ); ?></a>
 				    </div>
 				    <div class="pvf">
 				        <div class="ext">
 				            <div class="ex-1 e-1">
 				                <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/ex-1.png' ?>">
-				                <h4>Extensions</h4>
-				                <p>Includes a suite of advanced features like Ads, Email Optin, Contact Forms, E-Commerce, CTA, Cache and 15+ premium extensions.</p>
+				                <h4><?php _e( 'Extensions', 'super-progressive-web-apps' ); ?></h4>
+				                <p><?php _e( 'Includes a suite of advanced features like Ads, Email Optin, Contact Forms, E-Commerce, CTA, Cache and 15+ premium extensions.', 'super-progressive-web-apps' ); ?></p>
 				            </div>
 				            <div class="ex-1 e-2">
 				                <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/ex-2.png' ?>">
-				                <h4>Designs</h4>
-				                <p>Wide Variety of AMP Theme Designs included with AMP Layouts. We are dedicated to release 2-3 new designs every month.</p>
+				                <h4><?php _e( 'Designs', 'super-progressive-web-apps' ); ?></h4>
+				                <p><?php _e( 'Wide Variety of AMP Theme Designs included with AMP Layouts. We are dedicated to release 2-3 new designs every month.', 'super-progressive-web-apps' ); ?></p>
 				            </div>
 				            <div class="ex-1 e-3">
 				                <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/ex-3.png' ?>">
-				                <h4>Dedicated Support</h4>
-				                <p>Get private ticketing help from our full-time staff who helps you with the technical issues.</p>
+				                <h4><?php _e( 'Dedicated Support', 'super-progressive-web-apps' ); ?></h4>
+				                <p><?php _e( 'Get private ticketing help from our full-time staff who helps you with the technical issues.', 'super-progressive-web-apps' ); ?></p>
 				            </div>
 				        </div><!-- /. ext -->
 				        <div class="pvf-cnt">
 				            <div class="pvf-tlt">
-				                <h2>Compare Pro vs. Free Version</h2>
-				                <span>See what you'll get with the professional version</span>
+				                <h2><?php _e( 'Compare Pro vs. Free Version', 'super-progressive-web-apps' ); ?></h2>
+				                <span><?php _e( 'See what you\'ll get with the professional version', 'super-progressive-web-apps' ); ?></span>
 				            </div>
 				            <div class="pvf-cmp">
 				                <div class="fr">
 				                    <h1>FREE</h1>
 				                    <div class="fr-fe">
 				                        <div class="fe-1">
-				                            <h4>Continious Development</h4>
-				                            <p>We take bug reports and feature requests seriously. We’re continiously developing &amp; improve this product for last 2 years with passion and love.</p>
+				                            <h4><?php _e( 'Continious Development', 'super-progressive-web-apps' ); ?></h4>
+				                            <p><?php _e( 'We take bug reports and feature requests seriously. We’re continiously developing &amp; improve this product for last 2 years with passion and love.', 'super-progressive-web-apps' ); ?></p>
 				                        </div>
 				                        <div class="fe-1">
-				                            <h4>300+ Features</h4>
-				                            <p>We're constantly expanding the plugin and make it more useful. We have wide variety of features which will fit any use-case.</p>
+				                            <h4><?php _e( '300+ Features', 'super-progressive-web-apps' ); ?></h4>
+				                            <p><?php _e( 'We\'re constantly expanding the plugin and make it more useful. We have wide variety of features which will fit any use-case.', 'super-progressive-web-apps' ); ?></p>
 				                        </div>
 				                        <div class="fe-1">
-				                            <h4>Design</h4>
-				                            <p>We have 4 Built in themes for AMP which elevates your AMP exeprience.</p>
+				                            <h4><?php _e( 'Design', 'super-progressive-web-apps' ); ?></h4>
+				                            <p><?php _e( 'We have 4 Built in themes for AMP which elevates your AMP exeprience.', 'super-progressive-web-apps' ); ?></p>
 				                        </div>
 				                        <div class="fe-1">
-				                            <h4>Technical Support</h4>
-				                            <p>We have a full time team which helps you with each and every issue regarding AMP.</p>
+				                            <h4><?php _e( 'Technical Support', 'super-progressive-web-apps' ); ?></h4>
+				                            <p><?php _e( 'We have a full time team which helps you with each and every issue regarding AMP.', 'super-progressive-web-apps' ); ?></p>
 				                        </div>
 				                    </div><!-- /. fr-fe -->
 				                </div><!-- /. fr -->
 				                <div class="pr">
 				                    <h1>PRO</h1>
 				                    <div class="pr-fe">
-				                        <span>Everything in Free, and:</span>
+				                        <span><?php _e( 'Everything in Free, and:', 'super-progressive-web-apps' ); ?></span>
 				                        <div class="fet">
 				                            <div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Advertisement</h4>
+				                                    <h4><?php _e( 'Advertisement', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>Advanced Ad slots, Incontent ads &amp; Supports all Ad networks.</p>
+				                                <p><?php _e( 'Advanced Ad slots, Incontent ads &amp; Supports all Ad networks.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 				                            <div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>AMP Cache</h4>
+				                                    <h4><?php _e( 'AMP Cache', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>Revolutionary cache system for AMP which makes it insanely fast.</p>
+				                                <p><?php _e( 'Revolutionary cache system for AMP which makes it insanely fast.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 				                            <div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Contact Forms</h4>
+				                                    <h4><?php _e( 'Contact Forms', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>Gravity Forms and Contact form 7 Support for the AMP.</p>
+				                                <p><?php _e( 'Gravity Forms and Contact form 7 Support for the AMP.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 				                            <div class="fe-2">
 				                                <div class="fe-t">
@@ -350,6 +353,7 @@ function superpwa_upgread_pro_interface_render(){
 				        </div><!-- /.faq -->
 				    </div><!-- /. pvf -->
 				</div>
+			<?php } ?>
 
 
 
