@@ -39,7 +39,9 @@ function superpwa_add_menu_links() {
 	}
 
 	// Upgrade to pro page
-	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Upgrade to Pro', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 9999999);
+	$textlicense = __( 'Upgrade to Pro', 'super-progressive-web-apps' );
+	if(defined('SUPERPWA_PRO_VERSION')){ $textlicense = __( 'License', 'super-progressive-web-apps' ); }
+	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), $textlicense, 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 9999999);
 	
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
