@@ -33,9 +33,14 @@ function superpwa_add_menu_links() {
 	// Add-Ons page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render', 70);
 
+	// UTM Tracking sub-menu
+	if ( superpwa_addons_status( 'utm_tracking' ) 		== 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render', 72 );
+	}
+
 	// Upgrade to pro page
 	if(!defined('SUPERPWA_PRO_VERSION')){
-		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Upgrade to Pro', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 999);
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Upgrade to Pro', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 9999999);
 	}
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
