@@ -439,7 +439,9 @@ function superpwa_admin_interface_render() {
 			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
 			
 			// Output save settings button
+			 echo '<style>.submit{float:left;}</style>';
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );
+			echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'">Go PRO</a>';
 			?>
 		</form>
 	</div>
