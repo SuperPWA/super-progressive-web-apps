@@ -4,8 +4,8 @@
  * Plugin URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
- * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
- * Contributors: Arun Basil Lal, Jose Varghese
+ * Author URI: https://profiles.wordpress.org/superpwa/
+ * Contributors: SuperPWA
  * Version: 2.1.3
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
