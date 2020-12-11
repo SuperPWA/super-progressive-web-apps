@@ -182,6 +182,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.3 =
+Improvement: Changes in Admin Options
+Enhancement: Added more pages
+
 = 2.1.2 =
 * Date: [25.July.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 * Bug Fix: Fixed issue where Application Icon was not showing.
