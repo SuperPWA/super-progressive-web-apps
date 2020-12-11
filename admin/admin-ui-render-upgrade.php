@@ -137,7 +137,7 @@ function superpwa_upgread_pro_interface_render(){
 				            </div>
 				            <div class="sp-pri-lst">
 				                <div class="pri-tb">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=1">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=1" target="_blank">
 				                        <h5>PERSONAL</h5>
 				                        <span class="d-amt"><sup>$</sup>99</span>
 				                        <span class="amt"><sup>$</sup>99</span>
@@ -151,7 +151,7 @@ function superpwa_upgread_pro_interface_render(){
 				                    </a>
 				                </div>
 				                <div class="pri-tb rec">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=2">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=2" target="_blank">
 				                        <h5>MULTIPLE</h5>
 				                        <span class="d-amt"><sup>$</sup>129</span>
 				                        <span class="amt"><sup>$</sup>129</span>
@@ -166,7 +166,7 @@ function superpwa_upgread_pro_interface_render(){
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=3">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=3" target="_blank">
 				                        <h5>WEBMASTER</h5>
 				                        <span class="d-amt"><sup>$</sup>199</span>
 				                        <span class="amt"><sup>$</sup>199</span>
@@ -180,7 +180,7 @@ function superpwa_upgread_pro_interface_render(){
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=4">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=4" target="_blank">
 				                        <h5>FREELANCER</h5>
 				                        <span class="d-amt"><sup>$</sup>249</span>
 				                        <span class="amt"><sup>$</sup>249</span>
@@ -194,7 +194,7 @@ function superpwa_upgread_pro_interface_render(){
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=5">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=5" target="_blank">
 				                        <h5>AGENCY</h5>
 				                        <span class="d-amt"><sup>$</sup>499</span>
 				                        <span class="amt"><sup>$</sup>499</span>
@@ -208,7 +208,7 @@ function superpwa_upgread_pro_interface_render(){
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
-				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=6">
+				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=6" target="_blank">
 				                        <h5>LIFETIME</h5>
 				                        <span class="d-amt"><sup>$</sup>999</span>
 				                        <span class="amt"><sup>$</sup>999</span>
