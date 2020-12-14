@@ -224,7 +224,7 @@ function superpwa_upgread_pro_interface_render(){
 				            </div><!-- /.pri-lst -->
 				            <div class="tru-us">
 				                <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/rating.png' ?>">
-				                <h2>Used by more that 40000+ Users!</h2>
+				                <h2>Used by more than 40000+ Users!</h2>
 				                <p>More than 40k Websites, Blogs &amp; E-Commerce shops are powered by our SuperPWA making it the #1 Independent PWA plugin in WordPress.</p>
 				                <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?filter=5" target="_blank">Read The Reviews</a>
 				            </div>
