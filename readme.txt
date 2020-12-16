@@ -12,10 +12,9 @@ SuperPWA helps you convert your WordPress website into a Progressive Web App ins
 
 == Description ==
 
-> **Help decide on the future of SuperPWA**
-> We are looking for your input to decide on the future of SuperPWA. If you wish to acquire SuperPWA as a whole and continue it's development or if you are interested in a premium version of the plugin with extended features, [please fill in the form and let us know](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=description-future). 
+Progressive Web Apps (PWA) is a new technology that combines the best of mobile web and the best of mobile apps to create a superior mobile web experience. They are installed on the phone like a normal app (web app) and can be accessed from the home screen.
 
-Progressive Web Apps (PWA) is a new technology that combines the best of mobile web and the best of mobile apps to create a superior mobile web experience. They are installed on the phone like a normal app (web app) and can be accessed from the home screen. 
+[Home](https://superpwa.com/) | [Documentation](https://superpwa.com/docs/) | [Help](https://superpwa.com/contact/) | [Premium version Features](https://superpwa.com/docs/#pro-doc) 
 
 Users can come back to your website by launching the app from their home screen and interact with your website through an app-like interface. Your return visitors will experience almost-instant loading times and enjoy the great performance benefits of your PWA!
 
@@ -71,6 +70,10 @@ Here are the current features of Super Progressive Web Apps:
 **Upcoming features:**
 
 * Offline Indicator Notice.
+
+**PRO Version** support additional [advance feature](https://superpwa.com/docs/)
+* Call To Action (CTA) [More Info](https://superpwa.com/doc/call-to-action-cta-add-on-for-superpwa/)
+* Android APK APP Generator [More Info](https://superpwa.com/doc/android-apk-app-generator-add-on-for-superpwa/)
 
 ### Progressive Web App Minimum Requirements
 
