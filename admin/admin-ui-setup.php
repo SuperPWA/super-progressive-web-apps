@@ -39,7 +39,7 @@ function superpwa_add_menu_links() {
 	}
 
 	// Upgrade to pro page
-	$textlicense = __( 'Upgrade to Pro', 'super-progressive-web-apps' );
+	$textlicense = "<span style='color: #ff4c4c;font-weight: 700;font-size: 15px;'>".__( 'Upgrade to Pro', 'super-progressive-web-apps' )."</span>";
 	if(defined('SUPERPWA_PRO_VERSION')){ $textlicense = __( 'License', 'super-progressive-web-apps' ); }
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), $textlicense, 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 9999999);
 	
@@ -276,7 +276,7 @@ function superpwa_get_settings() {
 
 	$defaults = array(
 				'app_name'			=> get_bloginfo( 'name' ),
-				'app_short_name'	=> substr( get_bloginfo( 'name' ), 0, 12 ),
+				'app_short_name'	=> substr( get_bloginfo( 'name' ), 0, 15 ),
 				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
