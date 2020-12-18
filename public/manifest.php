@@ -68,7 +68,11 @@ function superpwa_manifest( $arg = 'src' ) {
 		* pointing to the root folder of WordPress is still useful. 
 		*/
 		case 'abs':
-			return trailingslashit( ABSPATH ) . $manifest_filename;
+			$filepath = trailingslashit( ABSPATH ) . $manifest_filename;
+			if(!file_exists($filepath)){
+				$filepath = trailingslashit( get_home_path() ). $manifest_filename;
+			}
+			return $filepath 
 			break;
 
 		// Link to manifest
