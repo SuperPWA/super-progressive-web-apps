@@ -184,6 +184,14 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.4 =
+* Date: [18.December.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
+Bug Fix: Wrong manifest path if installed WordPress in a sub-folder #134
+Enhancement: Need to increase character limit of APP name. #139
+Bug Fix: Default Add to home screen banner is not showing #140
+Bug Fix: Changes in Presentation #141 / #143
+
+
 = 2.1.3 =
 Improvement: Changes in Admin Options
 Enhancement: Added more pages
