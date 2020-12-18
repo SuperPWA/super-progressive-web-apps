@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
 		deferredPrompt = e;
 		if(deferredPrompt != null || deferredPrompt != undefined){
 			var a2hsBanner = document.getElementsByClassName("superpwa-sticky-banner");
-			if(a2hsBanner){
+			if(a2hsBanner.length){
 				deferredPrompt.preventDefault();
 				for (var i = 0; i < a2hsBanner.length; i++) {
 					var showbanner = a2hsBanner[i].getAttribute("data-show");
@@ -22,7 +22,7 @@ if ('serviceWorker' in navigator) {
 
 	window.addEventListener('appinstalled', function(evt){
 		var a2hsBanner = document.getElementsByClassName("superpwa-sticky-banner");
-		if(a2hsBanner){
+		if(a2hsBanner.length){
 			for (var i = 0; i < a2hsBanner.length; i++) {
 				var showbanner = a2hsBanner[i].getAttribute("data-show");
 				a2hsBanner[i].style.display="none";
