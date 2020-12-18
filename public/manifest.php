@@ -72,7 +72,7 @@ function superpwa_manifest( $arg = 'src' ) {
 			if(!file_exists($filepath)){
 				$filepath = trailingslashit( get_home_path() ). $manifest_filename;
 			}
-			return $filepath 
+			return $filepath;
 			break;
 
 		// Link to manifest
