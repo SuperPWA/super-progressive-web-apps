@@ -49,7 +49,7 @@ function superpwa_get_addons( $slug = false ) {
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
-							'icon'					=> 'superpwa-128x128.png',
+							'icon'					=> 'utm-action.png',
 							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
@@ -60,12 +60,34 @@ function superpwa_get_addons( $slug = false ) {
 							'name'					=> __( 'Apple Touch Icons', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
-							'icon'					=> 'superpwa-128x128.png',
+							'icon'					=> 'apple-touch.png',
 							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
 							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'external',
 							'superpwa_min_version'	=> '1.8',
+						),
+		'call_to_action' => array(
+							'name'					=> __( 'Call To Action', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Easily gives notification banner your users to Add to Homescreen on website.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'call-to-action.png',
+							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-call-to-action'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.2',
+						),
+		'android_apk_app_generator' => array(
+							'name'					=> __( 'Android APK APP Generator', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Easily generate APK APP of your current PWA website.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'android-apk-app.png',
+							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'admin_link'			=> admin_url('admin.php?page=superpwa-android-apk-app'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.2',
 						),
 	);
 	
@@ -132,7 +154,7 @@ function superpwa_addons_interface_render() {
 	?>
 	
 	<div class="wrap">
-		<h1><?php _e( 'Add-Ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'Add-ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		
@@ -164,7 +186,7 @@ function superpwa_addons_interface_render() {
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank">
+									<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')? '?utm_source=superpwa-plugin&utm_medium=addon-card': '') ; ?>" target="_blank">
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
@@ -179,7 +201,7 @@ function superpwa_addons_interface_render() {
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo $addon['link'] . '?utm_source=superpwa-plugin&utm_medium=addon-card'; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
+										<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': ''); ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
 									</li>
 								</ul>	
 							</div>
@@ -315,6 +337,30 @@ function superpwa_addons_status( $slug ) {
 			return 'uninstalled';
 			
 			break;
+		// Add-ons pro installed as a separate plugin
+		case 'addon_pro':
+			$pro_plugin = 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php';
+			// True means, add-on is installed and active
+			if ( is_plugin_active( $pro_plugin ) ) {
+				// True means, add-on is installed and active
+				if ( in_array( $slug, $active_addons ) ) {
+					return 'active';
+				}
+				return 'inactive';
+			}
+			
+			
+			// Add-on is inactive, check if add-on is installed
+			if ( file_exists( WP_PLUGIN_DIR . '/' . $pro_plugin ) ) {
+				return 'upgrade';
+			}
+
+			// If we are here, add-on is not installed and not active
+			return 'upgrade';
+			
+			
+			
+			break;
 			
 		default:
 			return false;
@@ -349,6 +395,9 @@ function superpwa_addons_button_text( $slug ) {
 			return __( 'Deactivate', 'super-progressive-web-apps' );
 			break;
 			
+		case 'upgrade':
+			return __( 'Upgrade', 'super-progressive-web-apps' );
+			break;
 		case 'uninstalled':
 		default: // Safety net for edge cases if any.
 			return __( 'Install', 'super-progressive-web-apps' );
@@ -404,6 +453,7 @@ function superpwa_addons_button_link( $slug ) {
 		
 		// If add-on is not installed and for edge cases where $addon_status is false, we use the add-on link.
 		case 'uninstalled':
+		case 'upgrade':
 		default:
 			return $addon['link'];
 			break;

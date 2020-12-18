@@ -4,9 +4,9 @@
  * Plugin URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=plugin-uri
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
- * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
- * Contributors: Arun Basil Lal, Jose Varghese
- * Version: 2.1.2
+ * Author URI: https://profiles.wordpress.org/superpwa/
+ * Contributors: SuperPWA
+ * Version: 2.1.4
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.0
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) ) {
-	define( 'SUPERPWA_VERSION'	, '2.1.2' ); 
+	define( 'SUPERPWA_VERSION'	, '2.1.4' ); 
 }
 
 /**

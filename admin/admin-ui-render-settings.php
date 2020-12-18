@@ -58,7 +58,7 @@ function superpwa_app_short_name_cb() {
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text superpwa-app-short-name" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description">
-			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>12</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
+			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>15</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
 		</p>
 		
 	</fieldset>
@@ -439,7 +439,11 @@ function superpwa_admin_interface_render() {
 			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
 			
 			// Output save settings button
+			 echo '<style>.submit{float:left;}</style>';
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );
+			if(!defined('SUPERPWA_PRO_VERSION')){
+				echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+			}
 			?>
 		</form>
 	</div>
