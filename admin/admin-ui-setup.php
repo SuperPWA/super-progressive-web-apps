@@ -223,7 +223,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 	
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 12 );
+	$settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
 	
 	// Sanitize description
 	$settings['description'] = sanitize_text_field( $settings['description'] );
