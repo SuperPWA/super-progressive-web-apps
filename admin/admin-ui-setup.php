@@ -201,6 +201,22 @@ function superpwa_register_settings() {
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
+
+	// PWA Advance settings
+    add_settings_section(
+        'superpwa_pwa_advance_section',					// ID
+        __('Advance', 'super-progressive-web-apps'),		// Title
+        '__return_false',								// Callback Function
+        'superpwa_pwa_advance_section'					// Page slug
+    );
+    	// Disabling "Add to home screen"
+		add_settings_field(
+			'superpwa_disable_add_to_home',								// ID
+			__('Disabling "Add to home screen"', 'super-progressive-web-apps'),				// Title
+			'superpwa_disable_add_to_home_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
@@ -289,6 +305,7 @@ function superpwa_get_settings() {
 				'display'			=> 1,
 				'is_static_manifest'=> 0,
 				'is_static_sw'		=> 0,
+				'disable_add_to_home'=> 0,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );

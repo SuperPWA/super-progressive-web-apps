@@ -9,6 +9,10 @@ if ('serviceWorker' in navigator) {
 	window.addEventListener('beforeinstallprompt', function(e){
 		deferredPrompt = e;
 		if(deferredPrompt != null || deferredPrompt != undefined){
+			if(superpwa_sw.disable_addtohome==1){
+				deferredPrompt.preventDefault();
+			}
+
 			var a2hsBanner = document.getElementsByClassName("superpwa-sticky-banner");
 			if(a2hsBanner.length){
 				deferredPrompt.preventDefault();

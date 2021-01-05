@@ -18,6 +18,7 @@
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
+ * @function	superpwa_disable_add_to_home_cb()		Disable Add to home
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -399,6 +400,22 @@ function superpwa_https_status_cb() {
 	}
 }
  
+
+/**
+ * Admin can disable the add to home bar
+ *
+ * @since 2.1.4
+ */ 
+function superpwa_disable_add_to_home_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[disable_add_to_home]" id="superpwa_settings[disable_add_to_home]" value="1" 
+	<?php if ( isset( $settings['disable_add_to_home'] ) ) { checked( '1', $settings['disable_add_to_home'] ); } ?>>
+	<label for="superpwa_settings[disable_add_to_home]"><?php _e('Remove default banner', 'super-progressive-web-apps') ?></label>
+	<br>
+	<?php
+}
+
 /**
  * Admin interface renderer
  *
@@ -437,6 +454,9 @@ function superpwa_admin_interface_render() {
 			
 			// Status
 			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
+
+			// Advance
+			do_settings_sections( 'superpwa_pwa_advance_section' );	// Page slug
 			
 			// Output save settings button
 			 echo '<style>.submit{float:left;}</style>';
