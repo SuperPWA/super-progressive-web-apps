@@ -132,6 +132,28 @@ function superpwa_manifest_template() {
 	$manifest['start_url']        = superpwa_get_start_url( true );
 	$manifest['scope']            = superpwa_get_scope();
 
+	if(isset($settings['shortcut_url']) && $settings['shortcut_url']!=0){
+		$shortcut_url = get_permalink( $settings['shortcut_url'] );
+		$shortcut_url = superpwa_httpsify( $shortcut_url );
+		// AMP URL
+		if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) {
+			$shortcut_url = trailingslashit( $shortcut_url ) . superpwa_is_amp();
+		}
+		if(function_exists('superpwa_utm_tracking_for_start_url')){
+			$shortcut_url = superpwa_utm_tracking_for_start_url($shortcut_url);
+		}
+
+		$manifest['shortcuts'] = array(
+									array(
+										'name'=>get_the_title( $settings['shortcut_url'] ),
+										'short_name'=>get_the_title( $settings['shortcut_url'] ),
+										'description'=>get_the_title( $settings['shortcut_url'] ),
+										'url'=>$shortcut_url,
+										'icons'=>$settings['icon']
+									)
+								);
+	}
+
 	/**
 	 * Values that go in to Manifest JSON.
 	 *

@@ -417,6 +417,38 @@ function superpwa_disable_add_to_home_cb() {
 }
 
 /**
+ * App Shortcut link Dropdown
+ *
+ * @since 1.2
+ */
+function superpwa_app_shortcut_link_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+	
+		<!-- WordPress Pages Dropdown -->
+		<label for="superpwa_settings[shortcut_url]">
+		<?php echo wp_dropdown_pages( array( 
+				'name' => 'superpwa_settings[shortcut_url]', 
+				'echo' => 0, 
+				'show_option_none' => __( 'Select Page' ), 
+				'option_none_value' => '0', 
+				'selected' =>  isset($settings['shortcut_url']) ? $settings['shortcut_url'] : '',
+			)); ?>
+		</label>
+		
+		<p class="description">
+			<?php echo __( 'Specify the page to load when the application is launched via Shortcut.', 'super-progressive-web-apps' ); ?>
+		</p>
+	</fieldset>
+
+	<?php
+}
+
+
+/**
  * Admin interface renderer
  *
  * @since 1.0
@@ -457,7 +489,7 @@ function superpwa_admin_interface_render() {
 
 			// Advance
 			do_settings_sections( 'superpwa_pwa_advance_section' );	// Page slug
-			
+
 			// Output save settings button
 			 echo '<style>.submit{float:left;}</style>';
 			submit_button( __('Save Settings', 'super-progressive-web-apps') );
