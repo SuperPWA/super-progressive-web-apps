@@ -460,6 +460,19 @@ function superpwa_yandex_support_cb() {
 	<br>
 	<?php
 }
+/**
+ * Enable or disable the analytics support
+ *
+ * @since 2.1.5
+ */ 
+function superpwa_analytics_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[analytics_support]" id="superpwa_settings[analytics_support]" value="1" 
+	<?php if ( isset( $settings['analytics_support'] ) ) { checked( '1', $settings['analytics_support'] ); } ?>>
+	<br>
+	<?php
+}
 
 
 /**

@@ -262,6 +262,16 @@ function checkNeverCacheList(url) {
 	}
 	return true;
 }
+<?php
+ if(isset($settings['analytics_support']) && $settings['analytics_support']==1){
+	echo 'importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
+                if(workbox.googleAnalytics){
+                  try{
+                    workbox.googleAnalytics.initialize();
+                  } catch (e){}
+                }';    
+}
+?>
 <?php return apply_filters( 'superpwa_sw_template', ob_get_clean() );
 }
 

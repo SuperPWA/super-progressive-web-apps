@@ -234,6 +234,14 @@ function superpwa_register_settings() {
 			'superpwa_yandex_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Analytics support
+		add_settings_field(
+			'superpwa_analytics_support_shortcut',								// ID
+			__('Offline analytics ', 'super-progressive-web-apps'),				// Title
+			'superpwa_analytics_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
