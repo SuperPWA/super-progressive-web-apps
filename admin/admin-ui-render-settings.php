@@ -447,6 +447,20 @@ function superpwa_app_shortcut_link_cb() {
 	<?php
 }
 
+/**
+ * Enable or disable the yandex support
+ *
+ * @since 2.1.4
+ */ 
+function superpwa_yandex_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[yandex_support]" id="superpwa_settings[yandex_support]" value="1" 
+	<?php if ( isset( $settings['yandex_support'] ) ) { checked( '1', $settings['yandex_support'] ); } ?>>
+	<br>
+	<?php
+}
+
 
 /**
  * Admin interface renderer

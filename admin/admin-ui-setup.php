@@ -226,6 +226,14 @@ function superpwa_register_settings() {
 			'superpwa_app_shortcut_link_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Yandex Support
+		add_settings_field(
+			'superpwa_yandex_support_shortcut',								// ID
+			__('Yandex support', 'super-progressive-web-apps'),				// Title
+			'superpwa_yandex_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );

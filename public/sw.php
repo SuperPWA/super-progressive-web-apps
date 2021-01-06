@@ -278,7 +278,7 @@ function superpwa_register_sw() {
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
 			'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
-			'disable_addtohome' => $settings['disable_add_to_home'],
+			'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 		)
 	);
 }
