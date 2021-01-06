@@ -73,6 +73,7 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'call-to-action.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'more_link'					=> 'https://superpwa.com/doc/call-to-action-cta-add-on-for-superpwa/',
 							'admin_link'			=>  admin_url('admin.php?page=superpwa-call-to-action'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
@@ -84,6 +85,7 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'android-apk-app.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'more_link'					=> 'https://superpwa.com/doc/android-apk-app-generator-add-on-for-superpwa/',
 							'admin_link'			=> admin_url('admin.php?page=superpwa-android-apk-app'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
@@ -201,7 +203,13 @@ function superpwa_addons_interface_render() {
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': ''); ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
+										<?php
+											$link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+										if(isset($addon['more_link'])){
+											$link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+										}
+										?>
+										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
 									</li>
 								</ul>	
 							</div>
