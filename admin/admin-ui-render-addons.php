@@ -578,3 +578,4 @@ function superpwa_newsletter_submit(){
     die;
 }
 add_action( 'wp_ajax_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
+add_action( 'wp_ajax_nopriv_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
