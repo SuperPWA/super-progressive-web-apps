@@ -207,7 +207,7 @@ function superpwa_register_settings() {
 	// PWA Advance settings
     add_settings_section(
         'superpwa_pwa_advance_section',					// ID
-        __('Advance', 'super-progressive-web-apps'),		// Title
+        __return_false(),		// Title
         '__return_false',								// Callback Function
         'superpwa_pwa_advance_section'					// Page slug
     );

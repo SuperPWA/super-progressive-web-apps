@@ -472,7 +472,8 @@ function superpwa_admin_interface_render() {
 	}
 	
 	?>
-	
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0.3s; }.spwa-tab a:hover {background-color: #ddd; }.spwa-tab a.active {background-color: #ccc;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
@@ -480,24 +481,40 @@ function superpwa_admin_interface_render() {
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
-			
-			// Basic Application Settings
-			do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
-			
-			// Status
-			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
-
-			// Advance
-			do_settings_sections( 'superpwa_pwa_advance_section' );	// Page slug
-
-			// Output save settings button
-			 echo '<style>.submit{float:left;}</style>';
-			submit_button( __('Save Settings', 'super-progressive-web-apps') );
-			if(!defined('SUPERPWA_PRO_VERSION')){
-				echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
-			}
 			?>
+			<div class="spwa-tab">
+			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
+			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advance</a>
+			</div>
+			<div id="settings" class="spwa-tabcontent">
+			 <?php
+			  	// Basic Application Settings
+				do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
+				
+				// Status
+				do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
+				// Output save settings button
+				echo '<style>.submit{float:left;}</style>';
+				submit_button( __('Save Settings', 'super-progressive-web-apps') );
+				if(!defined('SUPERPWA_PRO_VERSION')){
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+				}
+			?>
+			</div>
+			<div id="advance" class="spwa-tabcontent">
+			 <?php
+			  	// Advance
+			  	do_settings_sections( 'superpwa_pwa_advance_section' );	// Page slug
+			  	// Output save settings button
+				echo '<style>.submit{float:left;}</style>';
+				submit_button( __('Save Settings', 'super-progressive-web-apps') );
+				if(!defined('SUPERPWA_PRO_VERSION')){
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+				}
+			?>
+			</div>
 		</form>
 	</div>
+	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }document.getElementById("spwa-default").click();</script>
 	<?php
 }
