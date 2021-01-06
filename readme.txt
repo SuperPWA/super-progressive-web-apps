@@ -184,6 +184,15 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.5 =
+* Date: [06.January.2021](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
+Enhancement: Added the support of google analytics #149
+Enhancement: Disabling “Add to home screen” #150
+Enhancement: Support for Yandex manifest #146
+Enhancement: Addex Quick action (shortcut) feature for PWA #147
+Enhancement: Improve user interface #142
+Enhancement: Added the tutorial link for Call To Action and Android APK APP Generator #145
+
 = 2.1.4 =
 * Date: [18.December.2020](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 Bug Fix: Wrong manifest path if installed WordPress in a sub-folder #134
