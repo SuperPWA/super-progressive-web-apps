@@ -265,9 +265,9 @@ function checkNeverCacheList(url) {
 <?php
  if(isset($settings['analytics_support']) && $settings['analytics_support']==1){
 	echo 'importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
-	            if(googleAnalytics){
+	            if(workbox.googleAnalytics){
                   try{
-                    googleAnalytics.initialize();
+                    workbox.googleAnalytics.initialize();
                   } catch (e){ console.log(e.message); }
                 }';    
 }
