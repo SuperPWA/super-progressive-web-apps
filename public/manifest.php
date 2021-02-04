@@ -148,8 +148,8 @@ function superpwa_manifest_template() {
 										'name'=>get_the_title( $settings['shortcut_url'] ),
 										'short_name'=>get_the_title( $settings['shortcut_url'] ),
 										'description'=>get_the_title( $settings['shortcut_url'] ),
-										'url'=>$shortcut_url,
-										'icons'=>$settings['icon']
+										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
+										'icons'=>array(array('src'=>$settings['icon'], 'sizes'=>'192x192'))
 									)
 								);
 	}
