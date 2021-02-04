@@ -39,4 +39,13 @@ jQuery(document).ready(function($){
 			$('#superpwa-app-short-name-limit').css({'color': 'inherit'});
 		}
 	});
+	$('#superpwa_newsletter').submit(function(e){
+		//e.preventDefault();
+		var form = jQuery(this);
+        var email = form.find('input[name="newsletter-email"]').val();
+        jQuery.post(ajaxurl, {action:'superpwa_newsletter_submit',email:email},
+          function(data) {}
+        );
+        return true;
+	});
 });

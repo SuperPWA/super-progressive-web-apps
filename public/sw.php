@@ -262,6 +262,16 @@ function checkNeverCacheList(url) {
 	}
 	return true;
 }
+<?php
+ if(isset($settings['analytics_support']) && $settings['analytics_support']==1){
+	echo 'importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
+	            if(workbox.googleAnalytics){
+                  try{
+                    workbox.googleAnalytics.initialize();
+                  } catch (e){ console.log(e.message); }
+                }';    
+}
+?>
 <?php return apply_filters( 'superpwa_sw_template', ob_get_clean() );
 }
 
@@ -274,11 +284,15 @@ function checkNeverCacheList(url) {
  */
 function superpwa_register_sw() {
 	
+	$settings = superpwa_get_settings(); 
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
-	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
+	$localize = array(
 			'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
-		)
-	);
+			'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
+			'enableOnDesktop'=> false,
+		);
+	$localize = apply_filters('superpwa_sw_localize_data', $localize);
+	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw',  $localize);
 }
 add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
 

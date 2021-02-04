@@ -29,7 +29,7 @@ function superpwa_add_menu_links() {
 	
 	// Settings page - Same as main menu page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render', 60);
-	
+
 	// Add-Ons page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render', 70);
 
@@ -201,6 +201,48 @@ function superpwa_register_settings() {
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);	
+
+
+	//Advance Page
+	// PWA Advance settings
+    add_settings_section(
+        'superpwa_pwa_advance_section',					// ID
+        __return_false(),		// Title
+        '__return_false',								// Callback Function
+        'superpwa_pwa_advance_section'					// Page slug
+    );
+    	// Disabling "Add to home screen"
+		add_settings_field(
+			'superpwa_disable_add_to_home',								// ID
+			__('Disable "Add to home screen"', 'super-progressive-web-apps'),				// Title
+			'superpwa_disable_add_to_home_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// App shortcuts
+		add_settings_field(
+			'superpwa_app_shortcut',								// ID
+			__('App shortcuts link', 'super-progressive-web-apps'),				// Title
+			'superpwa_app_shortcut_link_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Yandex Support
+		add_settings_field(
+			'superpwa_yandex_support_shortcut',								// ID
+			__('Yandex support', 'super-progressive-web-apps'),				// Title
+			'superpwa_yandex_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Analytics support
+		add_settings_field(
+			'superpwa_analytics_support_shortcut',								// ID
+			__('Offline analytics ', 'super-progressive-web-apps'),				// Title
+			'superpwa_analytics_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
@@ -289,6 +331,7 @@ function superpwa_get_settings() {
 				'display'			=> 1,
 				'is_static_manifest'=> 0,
 				'is_static_sw'		=> 0,
+				'disable_add_to_home'=> 0,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );

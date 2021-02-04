@@ -73,6 +73,7 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'call-to-action.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'more_link'					=> 'https://superpwa.com/doc/call-to-action-cta-add-on-for-superpwa/',
 							'admin_link'			=>  admin_url('admin.php?page=superpwa-call-to-action'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
@@ -84,6 +85,7 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'addon_pro',
 							'icon'					=> 'android-apk-app.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'more_link'					=> 'https://superpwa.com/doc/android-apk-app-generator-add-on-for-superpwa/',
 							'admin_link'			=> admin_url('admin.php?page=superpwa-android-apk-app'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
@@ -201,7 +203,13 @@ function superpwa_addons_interface_render() {
 										</a>
 									</li>
 									<li>
-										<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': ''); ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
+										<?php
+											$link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+										if(isset($addon['more_link'])){
+											$link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+										}
+										?>
+										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
 									</li>
 								</ul>	
 							</div>
@@ -245,7 +253,7 @@ function superpwa_addons_interface_render() {
 								
 								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
 								
-									<form method="post" action="https://superpwa.com/newsletter/" target="_blank">
+									<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
 										<fieldset>
 											
 											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
@@ -548,3 +556,26 @@ function superpwa_addons_handle_deactivation() {
 	exit;
 }
 add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );
+
+/**
+ * Handle newsletter submit
+ *
+ *
+ * @since 2.1.5
+ */
+function superpwa_newsletter_submit(){
+	global $current_user;
+	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
+    $api_params = array(
+        'name' => esc_attr($current_user->display_name),
+        'email'=> sanitize_text_field($_POST['email']),
+        'website'=> sanitize_text_field( get_site_url() ),
+        'type'=> 'superpwa'
+    );
+    $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+    $response = wp_remote_retrieve_body( $response );
+    echo json_encode(array('status'=>200, 'message'=>'Submitted ', 'response'=> $response));
+    die;
+}
+add_action( 'wp_ajax_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
+add_action( 'wp_ajax_nopriv_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );

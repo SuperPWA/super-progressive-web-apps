@@ -18,6 +18,7 @@
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
+ * @function	superpwa_disable_add_to_home_cb()		Disable Add to home
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
 
@@ -399,6 +400,81 @@ function superpwa_https_status_cb() {
 	}
 }
  
+
+/**
+ * Admin can disable the add to home bar
+ *
+ * @since 2.1.4
+ */ 
+function superpwa_disable_add_to_home_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[disable_add_to_home]" id="superpwa_settings[disable_add_to_home]" value="1" 
+	<?php if ( isset( $settings['disable_add_to_home'] ) ) { checked( '1', $settings['disable_add_to_home'] ); } ?>>
+	<label for="superpwa_settings[disable_add_to_home]"><?php _e('Remove default banner', 'super-progressive-web-apps') ?></label>
+	<br>
+	<?php
+}
+
+/**
+ * App Shortcut link Dropdown
+ *
+ * @since 1.2
+ */
+function superpwa_app_shortcut_link_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+	
+		<!-- WordPress Pages Dropdown -->
+		<label for="superpwa_settings[shortcut_url]">
+		<?php echo wp_dropdown_pages( array( 
+				'name' => 'superpwa_settings[shortcut_url]', 
+				'echo' => 0, 
+				'show_option_none' => __( 'Select Page' ), 
+				'option_none_value' => '0', 
+				'selected' =>  isset($settings['shortcut_url']) ? $settings['shortcut_url'] : '',
+			)); ?>
+		</label>
+		
+		<p class="description">
+			<?php echo __( 'Specify the page to load when the application is launched via Shortcut.', 'super-progressive-web-apps' ); ?>
+		</p>
+	</fieldset>
+
+	<?php
+}
+
+/**
+ * Enable or disable the yandex support
+ *
+ * @since 2.1.4
+ */ 
+function superpwa_yandex_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[yandex_support]" id="superpwa_settings[yandex_support]" value="1" 
+	<?php if ( isset( $settings['yandex_support'] ) ) { checked( '1', $settings['yandex_support'] ); } ?>>
+	<br>
+	<?php
+}
+/**
+ * Enable or disable the analytics support
+ *
+ * @since 2.1.5
+ */ 
+function superpwa_analytics_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[analytics_support]" id="superpwa_settings[analytics_support]" value="1" 
+	<?php if ( isset( $settings['analytics_support'] ) ) { checked( '1', $settings['analytics_support'] ); } ?>>
+	<br>
+	<?php
+}
+
+
 /**
  * Admin interface renderer
  *
@@ -423,7 +499,8 @@ function superpwa_admin_interface_render() {
 	}
 	
 	?>
-	
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0.3s; }.spwa-tab a:hover {background-color: #ddd; }.spwa-tab a.active {background-color: #ccc;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
@@ -431,21 +508,40 @@ function superpwa_admin_interface_render() {
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
-			
-			// Basic Application Settings
-			do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
-			
-			// Status
-			do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
-			
-			// Output save settings button
-			 echo '<style>.submit{float:left;}</style>';
-			submit_button( __('Save Settings', 'super-progressive-web-apps') );
-			if(!defined('SUPERPWA_PRO_VERSION')){
-				echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
-			}
 			?>
+			<div class="spwa-tab">
+			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
+			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advance</a>
+			</div>
+			<div id="settings" class="spwa-tabcontent">
+			 <?php
+			  	// Basic Application Settings
+				do_settings_sections( 'superpwa_basic_settings_section' );	// Page slug
+				
+				// Status
+				do_settings_sections( 'superpwa_pwa_status_section' );	// Page slug
+				// Output save settings button
+				echo '<style>.submit{float:left;}</style>';
+				submit_button( __('Save Settings', 'super-progressive-web-apps') );
+				if(!defined('SUPERPWA_PRO_VERSION')){
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+				}
+			?>
+			</div>
+			<div id="advance" class="spwa-tabcontent">
+			 <?php
+			  	// Advance
+			  	do_settings_sections( 'superpwa_pwa_advance_section' );	// Page slug
+			  	// Output save settings button
+				echo '<style>.submit{float:left;}</style>';
+				submit_button( __('Save Settings', 'super-progressive-web-apps') );
+				if(!defined('SUPERPWA_PRO_VERSION')){
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+				}
+			?>
+			</div>
 		</form>
 	</div>
+	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }document.getElementById("spwa-default").click();</script>
 	<?php
 }

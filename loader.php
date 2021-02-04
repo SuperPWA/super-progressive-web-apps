@@ -17,6 +17,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-upgrade.php' );
 
 // 3rd party compatibility
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/yandex.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );
