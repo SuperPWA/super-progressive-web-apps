@@ -214,7 +214,7 @@ function superpwa_register_settings() {
     	// Disabling "Add to home screen"
 		add_settings_field(
 			'superpwa_disable_add_to_home',								// ID
-			__('Disabling "Add to home screen"', 'super-progressive-web-apps'),				// Title
+			__('Disable "Add to home screen"', 'super-progressive-web-apps'),				// Title
 			'superpwa_disable_add_to_home_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
