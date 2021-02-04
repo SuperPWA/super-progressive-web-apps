@@ -34,3 +34,25 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
 	return $tags;
 }
 add_filter( 'superpwa_wp_head_tags', 'superpwa_ati_add_apple_touch_icons' );
+
+/**
+ * Remove apple-touch-icon added by WordPress in heading (site_icon_meta_tags)
+ *
+ * Wordpress introduce this filter since 4.3.0 (site_icon_meta_tags)
+ * @since 2.1.6 introduce
+ * @param (string) $tags HTML element tags passed on by site_icon_meta_tags
+ * 
+ * @return (string) Remove the Apple Touch Icons from the existing tag string
+ */
+function superpwa_remove_site_apple_touch_icon($meta_tags) {
+	if(is_customize_preview() && is_admin()){
+            return $meta_tags;
+        }
+        foreach ($meta_tags as $key => $value) {
+            if(strpos($value, 'apple-touch-icon') !== false){
+                unset($meta_tags[$key]);
+            }
+        }
+        return $meta_tags;
+}
+add_filter( 'site_icon_meta_tags', 'superpwa_remove_site_apple_touch_icon', 0 );
