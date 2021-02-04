@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator) {
 				deferredPrompt.preventDefault();
 				//Disable on desktop
 				if(superpwa_sw.enableOnDesktop!=1 && !window.mobileCheck()){return ;}
+				if(typeof super_check_bar_closed_or_not == 'function' && !super_check_bar_closed_or_not()){return ;}
 				for (var i = 0; i < a2hsBanner.length; i++) {
 					var showbanner = a2hsBanner[i].getAttribute("data-show");
 					a2hsBanner[i].style.display="flex";
