@@ -183,6 +183,19 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.1.5 =
+* Date: [04.February.2021](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
+BugFixed: Manifest shows start URL is out of the scope URL in Specific cases #162
+BugFixed: Offline analytics undefined variable #99
+Enhancement: iOS application icons are blur overwrite by WordPress #161
+BugFixed: Quick action feature for PWA icons need to specify size #147
+
+
+Enhancement: Support for Yandex manifest #146
+Enhancement: Addex Quick action (shortcut) feature for PWA #147
+Enhancement: Improve user interface #142
+Enhancement: Added the tutorial link for Call To Action and Android APK APP Generator #145
+
 
 = 2.1.5 =
 * Date: [06.January.2021](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
