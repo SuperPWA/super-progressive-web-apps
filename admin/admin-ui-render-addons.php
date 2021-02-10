@@ -91,6 +91,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.2',
 						),
+		'app_shortcut' => array(
+							'name'					=> __( 'App Shortcuts', 'super-progressive-web-apps' ),
+							'description'			=> __( 'App shortcuts give quick access to a handful of common actions that users need frequently.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'android-apk-app.png',
+							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
+							'more_link'					=> 'https://superpwa.com/doc/app-shortcut-add-on-for-superpwa/',
+							'admin_link'			=> admin_url('admin.php?page=superpwa-app-shortcut'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.6',
+						),
 	);
 	
 	if ( $slug === false ) {
