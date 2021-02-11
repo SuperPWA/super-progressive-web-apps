@@ -38,6 +38,11 @@ function superpwa_add_menu_links() {
 		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render', 72 );
 	}
 
+	// Caching Strategies sub-menu
+	if ( superpwa_addons_status( 'caching_strategies' ) 		== 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Caching Strategies', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-caching strategies', 'superpwa_caching_strategies_interface_render', 74 );
+	}
+
 	// Upgrade to pro page
 	$textlicense = "<span style='color: #ff4c4c;font-weight: 700;font-size: 15px;'>".__( 'Upgrade to Pro', 'super-progressive-web-apps' )."</span>";
 	if(defined('SUPERPWA_PRO_VERSION')){ $textlicense = __( 'License', 'super-progressive-web-apps' ); }

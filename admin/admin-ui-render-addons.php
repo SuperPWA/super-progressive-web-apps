@@ -67,6 +67,17 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'external',
 							'superpwa_min_version'	=> '1.8',
 						),
+		'caching_strategies' => array(
+							'name'					=> __( 'Caching Strategies', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Take full control over network access.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
+							'icon'					=> 'apple-touch.png',
+							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'external',
+							'superpwa_min_version'	=> '2.1.6',
+						),
 		'call_to_action' => array(
 							'name'					=> __( 'Call To Action', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Easily gives notification banner your users to Add to Homescreen on website.', 'super-progressive-web-apps' ),
