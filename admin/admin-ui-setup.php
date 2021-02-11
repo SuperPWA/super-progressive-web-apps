@@ -219,14 +219,16 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
-		// App shortcuts
-		add_settings_field(
-			'superpwa_app_shortcut',								// ID
-			__('App shortcuts link', 'super-progressive-web-apps'),				// Title
-			'superpwa_app_shortcut_link_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
+        if (!defined('SUPERPWA_PRO_VERSION')) {
+            // App shortcuts
+            add_settings_field(
+                'superpwa_app_shortcut',								// ID
+            __('App shortcuts link', 'super-progressive-web-apps'),				// Title
+            'superpwa_app_shortcut_link_cb',								// CB
+            'superpwa_pwa_advance_section',							// Page slug
+            'superpwa_pwa_advance_section'							// Settings Section ID
+            );
+        }
 		// Yandex Support
 		add_settings_field(
 			'superpwa_yandex_support_shortcut',								// ID
