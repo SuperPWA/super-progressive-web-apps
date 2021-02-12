@@ -25,7 +25,82 @@ function superpwa_caching_strategies_get_settings() {
 }
 
 function superpwa_caching_strategies_sw_template($file_string){
-    echo $file_string;die;
+	$settings = superpwa_caching_strategies_get_settings();
+	$caching_type = isset($settings['caching_type'])? $settings['caching_type'] : 'network_first';
+	if($caching_type=='network_first'){ return $file_string; }
+	$script = '';
+	switch($caching_type){
+		case 'network_first':
+			$script = ''; //already working with network first, so no need to edit
+			break;
+		case 'cache_first':
+			$script	= 	'e.respondWith(
+			caches.open(cacheName)
+				.then(function(cache) {
+					cache.match(e.request)
+						.then( function(cacheResponse) {
+							if(cacheResponse)
+								return cacheResponse
+							else
+								return fetch(e.request)
+									.then(function(networkResponse) {
+										cache.put(e.request, networkResponse.clone())
+										return networkResponse
+									})
+						})
+				}).catch(function(){
+					return fetch(e.request).then(function(response) {
+						return caches.open(cacheName).then(function(cache) {
+							cache.put(e.request, response.clone());
+							return response;
+						});  
+					})
+				})
+		);';
+			break;
+		case 'steal_while_revalidate':
+			$script = 'e.respondWith(
+			caches.open(cacheName)
+				.then(function(cache) {
+					cache.match(e.request)
+						.then( function(cacheResponse) {
+							fetch(e.request)
+								.then(function(networkResponse) {
+									cache.put(e.request, networkResponse)
+								})
+							return cacheResponse || networkResponse
+						})
+				})
+		);';
+			break;
+		case 'cache_only':
+			$script = 	'e.respondWith(
+			caches.open(cacheName).then(function(cache) {
+				cache.match(e.request).then(function(cacheResponse) {
+					return cacheResponse;
+				})
+			})
+		);';
+			break;
+		case 'network_only':
+			$script = 	'e.respondWith(
+							fetch(event.request).then(function(networkResponse) {
+								return networkResponse
+							})
+						);';
+			break;
+	}
+	if(!empty($script)){
+		$replaceContent = 'e.respondWith(
+			fetch(e.request).then(function(response) {
+				return caches.open(cacheName).then(function(cache) {
+					cache.put(e.request, response.clone());
+					return response;
+				});  
+			})
+		);';
+		$file_string = str_replace($replaceContent, $script, $file_string);
+	}
     return $file_string;
 }
 add_filter( 'superpwa_sw_template', 'superpwa_caching_strategies_sw_template', 10, 1 );
@@ -126,12 +201,13 @@ function superpwa_caching_strategies_section_cb() {
  */
 function superpwa_caching_strategies_caching_type_cb() {
 	$cachingSettings = superpwa_caching_strategies_get_settings();
-	echo '<p><label class="label"><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" class="regulat-text" value="network_first"> Network first, then Cache </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_first"> Cache first, then Network </label>
+
+	echo '<p><label class="label"><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_first" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_first'? 'checked': '').'> Network first, then Cache </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_first" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_first'? 'checked': '').'> Cache first, then Network </label>
     </p> 
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="steal_while_revalidate"> Stale While Revalidate </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_only"> Cache only </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_only"> Network only </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="steal_while_revalidate" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='steal_while_revalidate'? 'checked': '').'> Stale While Revalidate </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_only" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_only'? 'checked': '').'> Cache only </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_only" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_only'? 'checked': '').'> Network only </label></p>
     ';
 }
 
