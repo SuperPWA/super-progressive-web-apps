@@ -56,3 +56,193 @@ function superpwa_remove_site_apple_touch_icon($meta_tags) {
         return $meta_tags;
 }
 add_filter( 'site_icon_meta_tags', 'superpwa_remove_site_apple_touch_icon', 0 );
+
+
+/**
+ * Get UTM Tracking settings
+ *
+ * @since 1.7
+ */
+function superpwa_apple_icons_get_settings() {
+	
+	$defaults = array(
+                'screen_icon'       => '',
+				'splash_screen'		=> array('640x1136'=>'',
+                                        '750x1334'=>'',
+                                        '1242x2208'=>'',
+                                        '1125x2436'=>'',
+                                        '828x1792'=>'',
+                                        '1242x2688'=>'',
+                                        '1536x2048'=>'',
+                                        '1668x2224'=>'',
+                                        '1668x2388'=>'',
+                                        '2048x2732'=>'',
+                                        )
+			);
+	
+	return get_option( 'superpwa_apple_icons_settings', $defaults );
+}
+/**
+ * Register Apple icons & splash screen settings
+ *
+ * @since 	2.1.7
+ */
+function superpwa_apple_icons_register_settings() {
+    // Register Setting
+	register_setting( 
+		'superpwa_apple_icons_settings_group',		 // Group name
+		'superpwa_apple_icons_settings', 			// Setting name = html form <input> name on settings form
+		'superpwa_apple_icons_validater_sanitizer'	// Input validator and sanitizer
+	);
+
+    // Apple icons
+    add_settings_section(
+        'superpwa_apple_icons_section',				// ID
+        __return_false(),								// Title
+        'superpwa_apple_icons_section_cb',				// Callback Function
+        'superpwa_apple_icons_section'					// Page slug
+    );
+        // Splash screen URL
+		add_settings_field(
+			'superpwa_apple_icons_splash_screen',						// ID
+			esc_html__('Splash Screens Image', 'super-progressive-web-apps'),	// Title
+			'superpwa_apple_icons_splash_screen_cb',					// CB
+			'superpwa_apple_icons_section',						// Page slug
+			'superpwa_apple_icons_section'							// Settings Section ID
+		);
+
+        // Splash screen URL
+		add_settings_field(
+			'superpwa_apple_icons_splash_color_screen',						// ID
+			esc_html__('Splash Screens Background Color', 'super-progressive-web-apps'),	// Title
+			'superpwa_apple_icons_splash_color_screen_cb',					// CB
+			'superpwa_apple_icons_section',						// Page slug
+			'superpwa_apple_icons_section'							// Settings Section ID
+		);
+}
+add_action( 'admin_init', 'superpwa_apple_icons_register_settings' );
+
+/**
+ * Upload the image of splash screen
+ *
+ * @since 	2.1.7
+ */
+function superpwa_apple_icons_section_cb() {
+    echo esc_html__( 'Select png icon and background colour to show in splash screen, we automatically create images for all multiple other screen sizes', 'super-progressive-web-apps' );
+}
+
+/**
+ * Upload the image of splash screen
+ *
+ * @since 	2.1.7
+ */
+function superpwa_apple_icons_splash_screen_cb() {
+    $splashIcons = superpwa_apple_icons_get_settings();
+    ?>
+    <input type="text" name="superpwa_apple_icons_settings[screen_icon]" class="superpwa-splash-icon select-apple-splash-icon" value="<?php echo isset($splashIcons['screen_icon'])? $splashIcons['screen_icon']: '' ?>">
+    <button type="button" class="button button superpwa-splash-icon-upload" data-editor="content">
+        <span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> Select Image
+    </button><img id="a" src="">
+    <?php
+}
+
+/**
+ * Splash Screen Pro 
+ *
+ * @since 	2.1.7
+ */
+function superpwa_apple_icons_splash_color_screen_cb() {
+    $splashIcons = apple_splashscreen_files_data();
+    ?>
+    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo isset($splashIcons['screen_icon'])? $splashIcons['screen_icon']: '' ?>">
+    <?php
+}
+
+/**
+ * Apple Touch Icon & splash screen require tags data
+ *
+ * @since 1.7
+ */ 
+function apple_splashscreen_files_data(){
+    $iosSplashData = array(
+            '1136x640'=> array("device-width"=> '320px', "device-height"=> "568px","ratio"=> 2,"orientation"=> "landscape","file"=> "icon_1136x640.png",'name'=> 'iPhone 5/iPhone SE'),
+            '640x1136'=> array("device-width"=> '320px', "device-height"=> "568px","ratio"=> 2,"orientation"=> "portrait", "file"=> "icon_640x1136.png",'name'=> 'iPhone 5/iPhone SE'),
+            '2688x1242'=>array("device-width"=> '414px', "device-height"=> "896px","ratio"=> 3,"orientation"=> "landscape", "file"=> "icon_2688x1242.png", 'name'=>'iPhone XS Max'),
+            '1792x828'=> array("device-width"=> '414px', "device-height"=> "896px","ratio"=> 2, "orientation"=> "landscape", "file"=> "icon_1792x828.png", 'name'=>'iPhone XR'),
+            '1125x2436'=>array("device-width"=> '375px', "device-height"=> "812px","ratio"=> 3,"orientation"=> 'portrait', "file"=>"icon_1125x2436.png", 'name'=> 'iPhone X/Xs'),
+            '828x1792'=> array("device-width"=> "414px", "device-height"=> "896px","ratio"=> 2,"orientation"=> "portrait","file"=>"icon_828x1792.png",'name' => 'iPhone Xr'),
+            '2436x1125'=> array("device-width"=> "375px","device-height"=> "812px","ratio"=> 3,"orientation"=> "landscape", "file"=>"icon_2436x1125.png", 'name'=> 'iPhone X/Xs'),
+            '1242x2208'=> array("device-width"=> "414px","device-height"=> "736px","ratio"=> 3,"orientation"=> "portrait", "file"=>"icon_1242x2208.png", 'name'=> 'iPhone 6/7/8 Plus'),
+            '2208x1242'=>array("device-width"=> "414px","device-height"=> "736px","ratio"=> 3,"orientation"=> "landscape", "file"=>"icon_2208x1242.png", 'name'=> 'iPhone 6/7/8 Plus'),
+            '1334x750'=>array("device-width"=> "375px","device-height"=> "667px","ratio"=> 2,"orientation"=> "landscape", "file"=>"icon_1334x750.png", 'name'=> 'iPhone 6/7/8'),
+            '750x1334'=>array("device-width"=> "375px","device-height"=> "667px","ratio"=> 2,"orientation"=> "portrait","file"=>"icon_750x1334.png", 'name'=> 'iPhone 6/7/8'),
+            '2732x2048'=>array("device-width"=> "1024px","device-height"=>"1366px","ratio"=> 2,"orientation"=> "landscape","file"=>"icon_2732x2048.png", 'name'=> 'iPad Pro 12.9"'),
+            '2048x2732'=>array("device-width"=> "1024px","device-height"=> "1366px","ratio"=> 2,"orientation"=> "portrait","file"=>"icon_2048x2732.png", 'name'=> 'iPad Pro 12.9"'),
+            '2388x1668'=>array("device-width"=> "834px","device-height"=> "1194px","ratio"=> 2,"orientation"=> "landscape", "file"=>"icon_2388x1668.png",'name'=> 'iPad Pro 11"'),
+            '1668x2388'=>array("device-width"=> "834px","device-height"=> "1194px","ratio"=> 2,"orientation"=> "portrait","file"=>"icon_1668x2388.png",'name'=> 'iPad Pro 11"'),
+            '2224x1668'=>array("device-width"=> "834px", "device-height"=> "1112px","ratio"=> 2,"orientation"=>"landscape","file"=>"icon_2224x1668.png", 'name'=> 'iPad Pro 10.5"'),
+            '1242x2688'=>array("device-width"=> "414px","device-height"=> "896px","ratio"=> 3, "orientation"=> "portrait","file"=>"icon_1242x2688.png", 'name' => 'iPhone Xs Max'),
+            '1668x2224'=>array("device-width"=> "834px","device-height"=> "1112px","ratio"=> 2, "orientation"=> "portrait","file"=>"icon_1668x2224.png", 'name'=> 'iPad Pro 10.5"'),
+            '1536x2048'=>array("device-width"=> "768px","device-height"=> "1024px","ratio"=> 2, "orientation"=> "portrait","file"=>"icon_1536x2048.png", 'name'=> 'iPad Mini/iPad Air'),
+            '2048x1536'=>array("device-width"=> "768px","device-height"=> "1024px","ratio"=> 2,"orientation"=> "landscape","file"=>"icon_2048x1536.png", 'name'=> 'iPad Mini/iPad Air'),
+            );
+    return $iosSplashData;
+}
+
+/**
+ * Validate and sanitize user input
+ *
+ * @since 2.1.7
+ */
+function superpwa_apple_icons_validater_sanitizer( $settings ) {
+    // Sanitize and validate campaign source. Campaign source cannot be empty.
+	$settings['screen_icon'] = sanitize_text_field( $settings['screen_icon'] ) == '' ? '' : sanitize_text_field( $settings['screen_icon'] );
+
+    // Sanitize and validate campaign source. Campaign source cannot be empty.
+	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
+
+    return $settings;
+}
+/**
+ * Apple Touch Icon & splash screen UI renderer
+ *
+ * @since 1.7
+ */ 
+function superpwa_apple_icons_interface_render() {
+	
+	// Authentication
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	
+	// Handing save settings
+	if ( isset( $_GET['settings-updated'] ) ) {
+		
+		// Add settings saved message with the class of "updated"
+		add_settings_error( 'superpwa_settings_group', 'superpwa_apple_icons_settings_saved_message', __( 'Settings saved.', 'super-progressive-web-apps' ), 'updated' );
+		
+		// Show Settings Saved Message
+		settings_errors( 'superpwa_settings_group' );
+	}
+	
+	?>
+	
+	<div class="wrap">	
+		<h1><?php _e( 'Apple touch icons & splash screen  for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		
+		<form action="options.php" method="post" enctype="multipart/form-data">		
+			<?php
+			// Output nonce, action, and option_page fields for a settings page.
+			settings_fields( 'superpwa_apple_icons_settings_group' );
+			
+			// Status
+			do_settings_sections( 'superpwa_apple_icons_section' );	// Page slug
+			
+            echo "<p id='superpwa-apple-splash-message'></p>";
+			// Output save settings button
+			submit_button( __('Save Settings', 'super-progressive-web-apps'), 'primary ', 'submit', true, array( 'data-type' => 'create_images', 'id' => 'submit_splash_screen' ) );
+			?>
+		</form>
+	</div>
+	<?php
+}

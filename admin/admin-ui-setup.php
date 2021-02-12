@@ -38,9 +38,14 @@ function superpwa_add_menu_links() {
 		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render', 72 );
 	}
 
+	// apple touch icons sub-menu
+	if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Apple icons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-apple-icons', 'superpwa_apple_icons_interface_render', 74 );
+	}
+	
 	// Caching Strategies sub-menu
-	if ( superpwa_addons_status( 'caching_strategies' ) 		== 'active' ){ 
-		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Caching Strategies', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-caching strategies', 'superpwa_caching_strategies_interface_render', 74 );
+	if ( superpwa_addons_status( 'caching_strategies' ) == 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Caching Strategies', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-caching-strategies', 'superpwa_caching_strategies_interface_render', 74 );
 	}
 
 	// Upgrade to pro page

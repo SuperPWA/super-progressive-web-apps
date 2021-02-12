@@ -57,15 +57,15 @@ function superpwa_get_addons( $slug = false ) {
 							'superpwa_min_version'	=> '1.7',
 						),
 		'apple_touch_icons' => array(
-							'name'					=> __( 'Apple Touch Icons', 'super-progressive-web-apps' ),
+							'name'					=> __( 'Apple Touch Icons & Splash Screen', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
 							'icon'					=> 'apple-touch.png',
 							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
-							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
-							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
-							'admin_link_target'		=> 'external',
-							'superpwa_min_version'	=> '1.8',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-apple-icons' ),
+							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.7',//1.8
 						),
 		'caching_strategies' => array(
 							'name'					=> __( 'Caching Strategies', 'super-progressive-web-apps' ),
