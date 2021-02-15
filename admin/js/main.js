@@ -49,81 +49,99 @@ jQuery(document).ready(function($){
         return true;
 	});
 	$("#submit_splash_screen").click(function(e){
-		e.preventDefault();
-		var self = $(this);
-		var imageUrl = $('.select-apple-splash-icon').val();
-		if(imageUrl==''){alert("Please Select Image");return false;}
-		getBase64Image(imageUrl);
-		//superpwaGetImageDiffrentScreen(imageUrl);
-		return false;
+		$('#superpwa-apple-splash-message').text("Please wait...");
+		superpwaGetZip();
 	})
 });
-function getBase64Image(imgUrl) {
-    var img = new Image();
-    img.onload = function(){
-		var canvas = document.createElement("canvas");
-		canvas.width = img.width;
-		canvas.height = img.height;
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(img, 0, 0);
-		var dataURL = canvas.toDataURL("image/png"),
-			dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+var image = '';
+document.addEventListener('DOMContentLoaded', function() {
+    var elmFileUpload = document.getElementById('upload_apple_function');
+    if (elmFileUpload) {
+        elmFileUpload.addEventListener('change', superpwaOnFileUploadChange, false);
+    }
+});
 
-		superpwaGetImageDiffrentScreen(dataURL); // the base64 string
-    };
-
-    img.setAttribute('crossOrigin', 'anonymous'); 
-    img.src = imgUrl;
-
+function superpwaOnFileUploadChange(e) {
+    var file = e.target.files[0];
+    var fr = new FileReader();
+    fr.onload = function(e) {
+		image = e.target.result;
+		document.getElementById('thumbnail').src = e.target.result;
+		document.getElementById('thumbnail').style.display = 'block';
+	};
+    fr.readAsDataURL(file);
 }
-function superpwaGetImageDiffrentScreen(imageUrl){
-	if(imageUrl==''){alert("Please Select Image");return;}
-	var imageMessage = document.getElementById("superpwa-apple-splash-message")
-	imageMessage.innerHTML = 'Generating splash screen...';
-	imageMessage.setAttribute("class", "updating-message");
 
-	//var zip=new JSZip();
-	//var folder=zip.folder('splashscreens');
-	var canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
-	var img=new Image();
-	img.src=imageUrl;
-	Object.keys(pwaforwp_obj.iosSplashIcon).forEach(function(key, index) {
-		var phone = pwaforwp_obj.iosSplashIcon[key];
-		var ws=key.split("x")[0];
-		var hs=key.split("x")[1];
-		canvas.width=ws;
-		canvas.height=hs;
-		var wi=img.width;
-		var hi=img.height;
-		var wnew=wi;
-		var hnew=hi;
+function superpwaGetZip() {
+	jQuery('#superpwa-apple-splash-message').text("Please wait...");
+	if(image==''){
+		alert("Please Select Image"); jQuery('#superpwa-apple-splash-message').text("");
+		return;
+	}
+    var zip = new JSZip();
+    var folder = zip.folder('super_splash_screens');
+    var canvas = document.createElement('canvas'),
+        ctx = canvas.getContext('2d');
+
+    var img = new Image();
+    img.src = image;
+	var phones = JSON.parse(document.getElementById('iosScreen-data').innerHTML)
+    Object.keys(phones).forEach(function(key, index) {
+		var phone = phones[key];
+            var ws=key.split("x")[0];
+            var hs=key.split("x")[1];
+            canvas.width=ws;
+            canvas.height=hs;
+            var wi=img.width;
+            var hi=img.height;
+            var wnew=wi;
+            var hnew=hi;
+            
+			if (document.getElementById('center-mode').checked == true) {
+            ctx.fillStyle = document.getElementById('ios-splash-color').value;
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+			}else{
+				var rs = ws / hs;
+                var ri = wi / hi;
+                var scale = rs > ri ? (ws / wi) : (hs / hi);
+                wnew = wi * scale;
+                hnew = hi * scale;
+			}
+            
+            ctx.drawImage(img,(ws-wnew)/2,(hs-hnew)/2,wnew,hnew);
+            var img2=canvas.toDataURL();
+            folder.file(phone.file,img2.split(';base64,')[1],{base64:true});
+    });
+    zip.generateAsync({
+        type: 'blob'
+    }).then(function(content) {
+        //saveAs(content, 'splashscreens.zip');
+
+		var fileName = 'splashscreens.zip';
+		var fileObj = new File([content], fileName, {
+			type : 'application/zip'
+		});
+		console.log('File object created:', fileObj);
+		var fd = new FormData();
+   		fd.append('fileName', fileName);
+		fd.append('file', fileObj);
+		fd.append('action', 'superpwa_splashscreen_uploader');
+		fd.append('security_nonce', superpwaIosScreen.nonce);
 		
-		ctx.fillStyle = document.getElementById('ios-splash-color').value;
-		ctx.fillRect(0,0,canvas.width,canvas.height);
-		
-		ctx.drawImage(img,(ws-wnew)/2,(hs-hnew)/2,wnew,hnew);
-		var img2=canvas.toDataURL();
-		alert(img2);
-		//document.getElementById('a').src= img2;
-		//folder.file(phone.file,img2.split(';base64,')[1],{base64:true});
-	});
-	// zip.generateAsync({type:'blob'}).then(function(content){
-	// 	saveAs(content,'splashscreens.zip');
-	// 	// var request = new XMLHttpRequest();
-	// 	// request.open("POST", ajaxurl+"?action=pwaforwp_splashscreen_uploader&pwaforwp_security_nonce="+pwaforwp_obj.pwaforwp_security_nonce);
-	// 	// request.send(content);
-	// 	// request.onreadystatechange = function() {
-	// 	// 	if (request.readyState === 4) {
-	// 	// 		var reponse = JSON.parse(request.response);
-	// 	// 	  if(reponse.status==200){
-	// 	// 		imageMessage.innerHTML = 'Splash Screen generated';
-	// 	// 		imageMessage.setAttribute("class", "dashicons dashicons-yes");
-	// 	// 		imageMessage.style.color = "#46b450";
-	// 	// 		setTimeout(function(){
-	// 	// 			window.location.reload();
-	// 	// 		}, 1000);
-	// 	// 	  }
-	// 	// 	}
-	// 	//   }
-	// });
+
+		// POST Ajax call
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxurl,
+			data: fd,
+			dataType: 'json',
+			success: function (data) {
+				console.log(data)
+				window.location.reload();
+			},
+			cache: false,
+			contentType: false,
+			processData: false
+		})
+    });
 }
