@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
 	});
 	//Hide superPWA other menus
 	$('#toplevel_page_superpwa').find('ul').find('li').each(function(v, i){
-		arr = ['superpwa', 'settings', 'add-ons', 'license'];
+		arr = ['superpwa', 'settings', 'add-ons', 'license', 'upgrade to pro'];
 		var txt = $(this).text().toLowerCase();
 		if($.inArray( txt, arr ) ===-1){
 			$(this).hide();
@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
 	arr = ['superpwa', 'superpwa-addons', 'superpwa-upgrade']
 	if($.inArray( urlParams.get('page'), arr ) ===-1){
 		var heading = $('.wrap').find('h1').html()
-		$('.wrap').find('h1').html('<a href="./admin.php?page=superpwa-addons">Add-ons</a> > ' + heading)
+		$('.wrap').find('h1').html('<a href="./admin.php?page=superpwa-addons" style="text-decoration:none;color: #5b5b5d;">SuperPWA Add-ons</a> > ' + heading)
 	}
 	$("#submit_splash_screen").click(function(e){
 		$('#superpwa-apple-splash-message').text("Please wait...");

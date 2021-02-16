@@ -362,11 +362,13 @@ function superpwa_utm_tracking_interface_render() {
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
 	}
+	// Get add-on info
+	$addon_utm_tracking = superpwa_get_addons( 'utm_tracking' );
 	
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'UTM Tracking for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'UTM Tracking', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php

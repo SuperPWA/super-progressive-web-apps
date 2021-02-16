@@ -232,11 +232,13 @@ function superpwa_caching_strategies_interface_render() {
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
 	}
+	// Get add-on info
+	$addon_utm_tracking = superpwa_get_addons( 'caching_strategies' );
 	
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'Caching Strategies for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'Caching Strategies', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></h1>
 		
 		<form action="options.php" method="post" class="form-table" enctype="multipart/form-data">		
 			<?php
