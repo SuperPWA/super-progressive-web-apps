@@ -383,6 +383,7 @@ function superpwa_enqueue_css_js( $hook ) {
 	if ( strpos( $hook, 'superpwa' ) === false ) {
 		return;
 	}
+	remove_all_actions('admin_notices'); 
 	
 	// Color picker CSS
 	// @refer https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/

@@ -73,9 +73,9 @@ function superpwa_get_addons( $slug = false ) {
 							'type'					=> 'bundled',
 							'icon'					=> 'caching-strategy.png',
 							'link'					=> 'https://superpwa.com/addons/caching-strategies/',
-							'admin_link'			=> 'https://superpwa.com/addons/caching-strategies/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-caching-strategies' ),
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
-							'admin_link_target'		=> 'external',
+							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
 						),
 		'call_to_action' => array(
@@ -103,8 +103,8 @@ function superpwa_get_addons( $slug = false ) {
 							'superpwa_min_version'	=> '2.1.2',
 						),
 		'app_shortcut' => array(
-							'name'					=> __( 'App Shortcuts', 'super-progressive-web-apps' ),
-							'description'			=> __( 'App shortcuts give quick access to a handful of common actions that users need frequently.', 'super-progressive-web-apps' ),
+							'name'					=> __( 'APP Shortcuts', 'super-progressive-web-apps' ),
+							'description'			=> __( 'APP shortcuts give quick access to a handful of common actions that users need frequently.', 'super-progressive-web-apps' ),
 							'type'					=> 'addon_pro',
 							'icon'					=> 'app-shortcut.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
