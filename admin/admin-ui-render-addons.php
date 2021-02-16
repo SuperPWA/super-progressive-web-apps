@@ -431,7 +431,7 @@ function superpwa_addons_button_text( $slug ) {
 			break;
 			
 		case 'upgrade':
-			return __( 'Upgrade', 'super-progressive-web-apps' );
+			return __( 'Upgrade to PRO', 'super-progressive-web-apps' );
 			break;
 		case 'uninstalled':
 		default: // Safety net for edge cases if any.
