@@ -69,11 +69,11 @@ function superpwa_get_addons( $slug = false ) {
 						),
 		'caching_strategies' => array(
 							'name'					=> __( 'Caching Strategies', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Take full control over network access.', 'super-progressive-web-apps' ),
+							'description'			=> __( 'To serve content from the cache and make your app available offline you need to intercept network requests and respond with files stored in the cache. ', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
-							'icon'					=> 'apple-touch.png',
-							'link'					=> 'https://superpwa.com/addons/apple-touch-icons/',
-							'admin_link'			=> 'https://superpwa.com/addons/apple-touch-icons/',
+							'icon'					=> 'caching-strategy.png',
+							'link'					=> 'https://superpwa.com/addons/caching-strategies/',
+							'admin_link'			=> 'https://superpwa.com/addons/caching-strategies/',
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'external',
 							'superpwa_min_version'	=> '2.1.6',
@@ -106,7 +106,7 @@ function superpwa_get_addons( $slug = false ) {
 							'name'					=> __( 'App Shortcuts', 'super-progressive-web-apps' ),
 							'description'			=> __( 'App shortcuts give quick access to a handful of common actions that users need frequently.', 'super-progressive-web-apps' ),
 							'type'					=> 'addon_pro',
-							'icon'					=> 'android-apk-app.png',
+							'icon'					=> 'app-shortcut.png',
 							'link'					=> admin_url('admin.php?page=superpwa-upgrade'),
 							'more_link'					=> 'https://superpwa.com/doc/app-shortcut-add-on-for-superpwa/',
 							'admin_link'			=> admin_url('admin.php?page=superpwa-app-shortcut'),
@@ -182,12 +182,12 @@ function superpwa_addons_interface_render() {
 		<h1><?php _e( 'Add-ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
-		
+		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
 			
 			<div id="the-list">
-			
+				
 				<?php 
 				// Newsletter marker. Set this to false once newsletter subscription is displayed.
 				$superpwa_newsletter = true;
@@ -225,15 +225,19 @@ function superpwa_addons_interface_render() {
 											<?php echo superpwa_addons_button_text( $slug ); ?>
 										</a>
 									</li>
+									<?php if ( superpwa_addons_status( $slug ) == 'active' ) { 
+										printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') ); 
+									 }else{ ?>
 									<li>
 										<?php
-											$link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
-										if(isset($addon['more_link'])){
-											$link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
-										}
-										?>
-										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf( __( 'More information about %s', 'super-progressive-web-apps' ), $addon['name'] ); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e( 'More Details', 'super-progressive-web-apps' ); ?></a>
+                                            $link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+                                        if (isset($addon['more_link'])) {
+                                            $link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
+                                        }
+                                        ?>
+										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e('More Details', 'super-progressive-web-apps'); ?></a>
 									</li>
+									<?php } ?>
 								</ul>	
 							</div>
 							
@@ -243,7 +247,7 @@ function superpwa_addons_interface_render() {
 							
 						</div>
 						
-						<div class="plugin-card-bottom">
+						<?php /*<div class="plugin-card-bottom">
 							<div class="column-compatibility">
 								<?php 
 								if ( superpwa_addons_status( $slug ) == 'active' ) {
@@ -254,9 +258,9 @@ function superpwa_addons_interface_render() {
 								} 
 								else { 
 									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>', 'super-progressive-web-apps' );
-								} ?>
+								}  ?>
 							</div>
-						</div>
+						</div>*/ ?> 
 						
 					</div>
 					
@@ -264,14 +268,14 @@ function superpwa_addons_interface_render() {
 					
 						<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
 					
-							<div class="plugin-card-top" style="min-height: 178px;">
+							<div class="plugin-card-top" style="min-height: 135px;">
 							
 								<div class="name column-name" style="margin: 0px 10px;">
 									<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
 								</div>
 								
 								<div class="desc column-description" style="margin: 0px 10px;">
-									<p><?php _e( 'Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+									<p><?php _e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
 								</div>
 								
 								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">

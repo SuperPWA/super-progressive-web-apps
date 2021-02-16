@@ -48,10 +48,25 @@ jQuery(document).ready(function($){
         );
         return true;
 	});
+	//Hide superPWA other menus
+	$('#toplevel_page_superpwa').find('ul').find('li').each(function(v, i){
+		arr = ['superpwa', 'settings', 'add-ons', 'license'];
+		var txt = $(this).text().toLowerCase();
+		if($.inArray( txt, arr ) ===-1){
+			$(this).hide();
+		}
+	})
+	//Hide superPWA other menus
+	const urlParams = new URLSearchParams(window.location.search);
+	arr = ['superpwa', 'superpwa-addons', 'superpwa-upgrade']
+	if($.inArray( urlParams.get('page'), arr ) ===-1){
+		var heading = $('.wrap').find('h1').html()
+		$('.wrap').find('h1').html('<a href="./admin.php?page=superpwa-addons">Add-ons</a> > ' + heading)
+	}
 	$("#submit_splash_screen").click(function(e){
 		$('#superpwa-apple-splash-message').text("Please wait...");
 		superpwaGetZip();
-	})
+	});
 });
 var image = '';
 document.addEventListener('DOMContentLoaded', function() {
