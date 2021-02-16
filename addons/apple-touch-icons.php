@@ -270,7 +270,7 @@ function superpwa_apple_icons_interface_render() {
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'Apple touch icons & splash screen', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></sup></h1>
+		<h1><?php _e( 'Apple touch icons & splash screen', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php

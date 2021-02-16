@@ -499,7 +499,7 @@ function superpwa_admin_interface_render() {
 	}
 	
 	?>
-	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0.3s; }.spwa-tab a:hover {background-color: #ddd; }.spwa-tab a.active {background-color: #ccc;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0.3s; }.spwa-tab a:hover {background-color: #ddd; }.spwa-tab a.active {background-color: #ccc;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
