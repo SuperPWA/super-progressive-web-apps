@@ -183,6 +183,12 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.1.7 =
+* Date: [16.February.2021](https://superpwa.com/superpwa-2-1.7/?utm_source=wordpress.org&utm_medium=changelog)
+BugFixed: Manifest shortcut icons json issue resolve image size 192x192  #163
+Enhancement: iOS application splash screen support for all screens #160
+Enhancement: Feature of caching, multiple strategies  #138
+
 = 2.1.6 =
 * Date: [04.February.2021](https://superpwa.com/superpwa-2-1/?utm_source=wordpress.org&utm_medium=changelog)
 BugFixed: Manifest shows start URL is out of the scope URL in Specific cases #162
