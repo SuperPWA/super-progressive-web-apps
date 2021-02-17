@@ -38,6 +38,16 @@ function superpwa_add_menu_links() {
 		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render', 72 );
 	}
 
+	// apple touch icons sub-menu
+	if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Apple icons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-apple-icons', 'superpwa_apple_icons_interface_render', 74 );
+	}
+	
+	// Caching Strategies sub-menu
+	if ( superpwa_addons_status( 'caching_strategies' ) == 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Caching Strategies', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-caching-strategies', 'superpwa_caching_strategies_interface_render', 74 );
+	}
+
 	// Upgrade to pro page
 	$textlicense = "<span style='color: #ff4c4c;font-weight: 700;font-size: 15px;'>".__( 'Upgrade to Pro', 'super-progressive-web-apps' )."</span>";
 	if(defined('SUPERPWA_PRO_VERSION')){ $textlicense = __( 'License', 'super-progressive-web-apps' ); }
@@ -219,14 +229,16 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
-		// App shortcuts
-		add_settings_field(
-			'superpwa_app_shortcut',								// ID
-			__('App shortcuts link', 'super-progressive-web-apps'),				// Title
-			'superpwa_app_shortcut_link_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
+        if (!defined('SUPERPWA_PRO_VERSION')) {
+            // App shortcuts
+            add_settings_field(
+                'superpwa_app_shortcut',								// ID
+            __('App shortcuts link', 'super-progressive-web-apps'),				// Title
+            'superpwa_app_shortcut_link_cb',								// CB
+            'superpwa_pwa_advance_section',							// Page slug
+            'superpwa_pwa_advance_section'							// Settings Section ID
+            );
+        }
 		// Yandex Support
 		add_settings_field(
 			'superpwa_yandex_support_shortcut',								// ID
@@ -371,6 +383,7 @@ function superpwa_enqueue_css_js( $hook ) {
 	if ( strpos( $hook, 'superpwa' ) === false ) {
 		return;
 	}
+	remove_all_actions('admin_notices'); 
 	
 	// Color picker CSS
 	// @refer https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
