@@ -44,11 +44,19 @@ function superpwa_onesignal_todo() {
 			
 			// Import OneSignal service worker in SuperPWA
 			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+		}else{
+			//Added filter for multisites
+			// Add gcm_sender_id to SuperPWA manifest
+			add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
+			
+			// Change service worker filename to match OneSignal's service worker
+			add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+			
+			// Import OneSignal service worker in SuperPWA
+			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
 		}
 		
-		// Show admin notice.
-		add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
-		add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
+
 	}
 }
 add_action( 'plugins_loaded', 'superpwa_onesignal_todo' );
@@ -87,7 +95,7 @@ function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
  * @since 1.8
  */
 function superpwa_onesignal_sw_filename( $sw_filename ) {
-	return 'OneSignalSDKWorker.js.php';
+	return 'OneSignalSDKWorker' . superpwa_multisite_filename_postfix() . '.js.php';
 }
 
 /**
@@ -97,7 +105,7 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
  * 
  * @return (string) Import OneSignal's service worker into SuperPWA 
  * 
- * @author Arun Basil Lal
+ * @author SuperPWA Team
  * 
  * @since 1.8
  * @since 2.0 Removed content-type header for compatibility with dynamic service workers. 
@@ -134,7 +142,7 @@ function superpwa_onesignal_sw( $sw ) {
  * Delete current service worker.
  * Regenerate SuperPWA service worker with the new filename.
  * 
- * @author Arun Basil Lal
+ * @author SuperPWA Team
  * 
  * @since 1.8
  * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites. 
@@ -173,7 +181,7 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
  * Delete current service worker. 
  * Regenerate SuperPWA service worker.
  * 
- * @author Arun Basil Lal
+ * @author SuperPWA Team
  * 
  * @since 1.8
  * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites. 
