@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.5
+Tested up to: 5.7
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -183,6 +183,12 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.1.8 =
+* Date: [15.March.2021](https://superpwa.com/superpwa-2-1-8/?utm_source=wordpress.org&utm_medium=changelog)
+BugFixed: manifest json file taking a long time to load #130
+Enhancement: Compatibility with Onesignal on multisite #94
+
+
 = 2.1.7 =
 * Date: [16.February.2021](https://superpwa.com/superpwa-2-1-7/?utm_source=wordpress.org&utm_medium=changelog)
 BugFixed: Manifest shortcut icons json issue resolve image size 192x192  #163
