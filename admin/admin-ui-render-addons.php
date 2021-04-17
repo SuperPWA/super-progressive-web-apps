@@ -114,6 +114,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
 						),
+		'data_analytics' => array(
+							'name'					=> __( 'Data Analytics', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Data analytics allows you to see how many customers interact with your website using Super Progressive Web App.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'data-analytics.png',
+							'link'					=> 'https://superpwa.com/doc/data-analytics-add-on-for-superpwa/',
+							'more_link'					=> 'https://superpwa.com/doc/data-analytics-add-on-for-superpwa/',
+							'admin_link'			=> admin_url('admin.php?page=superpwa-data-analytics'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.8',
+						),
 	);
 	
 	if ( $slug === false ) {

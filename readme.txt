@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.7
+Tested up to: 5.7.1
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -66,6 +66,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
 * New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=wordpress.org&utm_medium=description) from SuperPWA settings.
 * New in version 2.1.1: SuperPWA now supports Maskable Icons.
+* [Full changelog](https://superpwa.com/changelog/) 
 
 **Upcoming features:**
 
@@ -74,6 +75,7 @@ Here are the current features of Super Progressive Web Apps:
 **PRO Version** support additional [advance feature](https://superpwa.com/docs/)
 * Call To Action (CTA) [More Info](https://superpwa.com/doc/call-to-action-cta-add-on-for-superpwa/)
 * Android APK APP Generator [More Info](https://superpwa.com/doc/android-apk-app-generator-add-on-for-superpwa/)
+* Data Analytics [More Info](https://superpwa.com/doc/data-analytics-add-on-for-superpwa/)
 
 ### Progressive Web App Minimum Requirements
 
@@ -183,6 +185,10 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.1.9 =
+* Date: [17.April.2021](https://superpwa.com/changelog/)
+Minor Improvment: Added Data Analytics Addon Array #152
+
 = 2.1.8 =
 * Date: [15.March.2021](https://superpwa.com/superpwa-2-1-8/?utm_source=wordpress.org&utm_medium=changelog)
 BugFixed: manifest json file taking a long time to load #130
