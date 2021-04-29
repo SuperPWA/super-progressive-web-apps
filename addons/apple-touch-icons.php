@@ -41,6 +41,15 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
             }//if closed
         }//foreach closed
     }
+    // Get settings
+    $settings = superpwa_get_settings();
+    
+    $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+    $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="black">' . PHP_EOL;
+    $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
+    $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
 	
 	return $tags;
 }
