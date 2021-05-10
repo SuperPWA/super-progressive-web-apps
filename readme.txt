@@ -185,6 +185,11 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.1.10 =
+* Date: [10.May.2021](https://superpwa.com/superpwa-2-1-10-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+BugFixed: iOS splash screen not working using apple icons addon #182
+BugFixed: iOS - Splash Screen #175
+
 = 2.1.9 =
 * Date: [17.April.2021](https://superpwa.com/changelog/)
 Minor Improvment: Added Data Analytics Addon Array #152
