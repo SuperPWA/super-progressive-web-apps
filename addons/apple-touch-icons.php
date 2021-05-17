@@ -159,7 +159,7 @@ function superpwa_apple_icons_splash_screen_cb() {
     $splashIconsScreens = apple_splashscreen_files_data();
     $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' ) ; //New generated icons
     ?>
-    <input type="file" id="upload_apple_function" accept="images/png">
+    <input type="file" id="upload_apple_function" accept="image/png">
     <p class="description"><?php echo esc_html__('Must select PNG images only', 'super-progressive-web-apps'); ?> </p><br/>
     <?php
         $a = 'style="display:none"';$src = '';
@@ -299,7 +299,7 @@ function superpwa_apple_icons_interface_render() {
 }
 
 function superpwa_splashscreen_uploader(){
-    if(isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' ) ) {
+    if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
         echo json_encode(array('status'=>400, 'message'=>'security nonce not matched'));die;
     }
     if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
