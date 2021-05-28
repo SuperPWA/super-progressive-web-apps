@@ -255,6 +255,14 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
+		// Exclude Urls from Cache list
+		add_settings_field(
+			'superpwa_exclude_url_cache_shortcut',								// ID
+			__('Exclude Urls from Cache list', 'super-progressive-web-apps'),				// Title
+			'superpwa_exclude_url_cache_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 

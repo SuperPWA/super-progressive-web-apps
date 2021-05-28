@@ -474,6 +474,23 @@ function superpwa_analytics_support_cb() {
 	<?php
 }
 
+/**
+ * Exclude Urls from Cache list of service worker
+ *
+ * @since 2.1.2
+ */
+
+function superpwa_exclude_url_cache_cb(){
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?>
+        <label><textarea placeholder="https://example.com/contact-us/, https://example.com/checkout/"  rows="4" cols="70" id="superpwa_settings[excluded_urls]" name="superpwa_settings[excluded_urls]"><?php echo (isset($settings['excluded_urls']) ? esc_attr($settings['excluded_urls']): ''); ?></textarea></label>
+        <p><?php echo esc_html__('Note: Seperate the Urls using a Comma(,)', 'super-progressive-web-apps'); ?></p>
+	<p><?php echo esc_html__('Place the list of urls which you do not want to cache by service worker', 'super-progressive-web-apps'); ?></p>	
+	
+	<?php
+}
+
 
 /**
  * Admin interface renderer

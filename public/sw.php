@@ -347,6 +347,37 @@ function superpwa_offline_page_images( $files_to_cache ) {
 }
 add_filter( 'superpwa_sw_files_to_cache', 'superpwa_offline_page_images' );
 
+
+/**
+ * Exclude Urls from Cache list of service worker
+ *
+ * @since 2.1.2
+ */
+function superpwa_exclude_urls_cache_sw($never_cacheurls){
+
+	// Get Settings
+	$settings = superpwa_get_settings();
+	 if(isset($settings['excluded_urls']) && !empty($settings['excluded_urls'])){
+
+                  $exclude_from_cache     = $settings['excluded_urls']; 
+
+                  $exclude_from_cache     = str_replace('/', '\/', $exclude_from_cache);     
+                  $exclude_from_cache     = '/'.str_replace(',', '/,/', $exclude_from_cache);
+
+                  $exclude_from_cache     = str_replace('\//', '/', $exclude_from_cache);
+
+                  $exclude_from_cache  = $exclude_from_cache.'endslash';
+
+                  $exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
+
+				 $never_cacheurls  .= ','.$exclude_from_cache;
+      }
+
+	return $never_cacheurls;
+}
+
+add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_exclude_urls_cache_sw' );
+
 /**
  * Get offline page
  * 
