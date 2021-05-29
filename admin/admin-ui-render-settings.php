@@ -474,6 +474,23 @@ function superpwa_analytics_support_cb() {
 	<?php
 }
 
+/**
+ * Exclude Urls from Cache list of service worker
+ *
+ * @since 2.1.2
+ */
+
+function superpwa_exclude_url_cache_cb(){
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?>
+        <label><textarea placeholder="https://example.com/contact-us/, https://example.com/checkout/"  rows="4" cols="70" id="superpwa_settings[excluded_urls]" name="superpwa_settings[excluded_urls]"><?php echo (isset($settings['excluded_urls']) ? esc_attr($settings['excluded_urls']): ''); ?></textarea></label>
+        <p><?php echo esc_html__('Note: Seperate the URLs using a Comma(,)', 'super-progressive-web-apps'); ?></p>
+	<p><?php echo esc_html__('Place the list of URLs which you do not want to cache by service worker', 'super-progressive-web-apps'); ?></p>	
+	
+	<?php
+}
+
 
 /**
  * Admin interface renderer
@@ -499,7 +516,7 @@ function superpwa_admin_interface_render() {
 	}
 	
 	?>
-	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #f1f1f1;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0.3s; }.spwa-tab a:hover {background-color: #ddd; }.spwa-tab a.active {background-color: #ccc;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>

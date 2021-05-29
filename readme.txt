@@ -186,6 +186,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.12 =
+* Date: [29.May.2021](https://superpwa.com/superpwa-2-1-12-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+Enhancement: Need An Option to exclude the URL #183
+Enhancement: Improved Tabs UI design #190
+
 = 2.1.11 =
 * Date: [17.May.2021](https://superpwa.com/superpwa-2-1-11-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 BugFixed: Remediation of Splash Screen Settings #178

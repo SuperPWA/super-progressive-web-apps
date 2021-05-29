@@ -299,6 +299,12 @@ function superpwa_apple_icons_interface_render() {
 }
 
 function superpwa_splashscreen_uploader(){
+
+    // Authentication
+    if ( ! current_user_can( 'manage_options' ) ) {
+       return;
+    }
+
     if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
         echo json_encode(array('status'=>400, 'message'=>'security nonce not matched'));die;
     }
@@ -310,14 +316,23 @@ function superpwa_splashscreen_uploader(){
     }
 
     $upload = wp_upload_dir();
-    $path = $upload['basedir']."/superpwa-splashIcons/";
+    $path =  $upload['basedir']."/superpwa-splashIcons/";
+    $subpath = $upload['basedir']."/superpwa-splashIcons/super_splash_screens/";
     wp_mkdir_p($path);
-
+    file_put_contents($path.'/index.html','');
+    file_put_contents($subpath.'/index.html','');
     WP_Filesystem();
     $zipFileName = $path."/splashScreen.zip";
     $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
     if($moveFile){
         $result = unzip_file($zipFileName, $path);
+        $file_ext = list_files($subpath);
+        foreach ($file_ext as $key => $value) {
+            $ext = wp_check_filetype($value);
+            if(!in_array(strtolower($ext['ext']), array('png','html'))){
+                unlink($value); 
+            }    
+        }
         unlink($zipFileName);    
     }else{
         echo json_encode(array('status'=>500, 'message'=>'Files are not uploading'));die;
