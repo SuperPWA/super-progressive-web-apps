@@ -63,8 +63,8 @@ jQuery(document).ready(function($){
 		var heading = $('.wrap').find('h1').html()
 		$('.wrap').find('h1').html('<a href="./admin.php?page=superpwa-addons" style="text-decoration:none;color: #5b5b5d;">SuperPWA Add-ons</a> > ' + heading)
 	}
-	$("#submit_splash_screen").click(function(e){
-		$('#superpwa-apple-splash-message').text("Please wait...");
+	$("#generate_image").click(function(e){
+		$('#aft_img_gen').text("Please wait...");
 		superpwaGetZip();
 	});
 });
@@ -83,12 +83,13 @@ function superpwaOnFileUploadChange(e) {
 		image = e.target.result;
 		document.getElementById('thumbnail').src = e.target.result;
 		document.getElementById('thumbnail').style.display = 'block';
+		document.getElementById('generate_image').style.display = 'block';
 	};
     fr.readAsDataURL(file);
 }
 
 function superpwaGetZip() {
-	jQuery('#superpwa-apple-splash-message').text("Please wait...");
+	jQuery('#aft_img_gen').text("Please wait...");
 	if(image==''){
 		alert("Please Select Image"); jQuery('#superpwa-apple-splash-message').text("");
 		return;
@@ -152,7 +153,10 @@ function superpwaGetZip() {
 			dataType: 'json',
 			success: function (data) {
 				console.log(data)
-				window.location.reload();
+		   jQuery('#aft_img_gen').text("Splash Screen Images Generated Successfully");
+		   jQuery('#aft_img_gen').css("color", "green");
+		   jQuery('#submit_splash_screen').trigger('click');	
+				//window.location.reload();
 			},
 			cache: false,
 			contentType: false,

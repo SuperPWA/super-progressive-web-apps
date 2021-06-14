@@ -171,6 +171,9 @@ function superpwa_apple_icons_splash_screen_cb() {
     <img src="<?php echo $src; ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
 
     <script id="iosScreen-data" type="application/json"><?php echo json_encode($splashIconsScreens);?></script>
+    <br/>
+    <input type="button" id="generate_image" class="button"  value="Generate" style="display: none">
+    <p id="aft_img_gen"> </p>
     <?php
 }
 
@@ -324,15 +327,8 @@ function superpwa_splashscreen_uploader(){
     WP_Filesystem();
     $zipFileName = $path."/splashScreen.zip";
     $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
-    if($moveFile){
+    if($moveFile && spwa_zip_allowed_extensions($zipFileName,['png'])){
         $result = unzip_file($zipFileName, $path);
-        $file_ext = list_files($subpath);
-        foreach ($file_ext as $key => $value) {
-            $ext = wp_check_filetype($value);
-            if(!in_array(strtolower($ext['ext']), array('png','html'))){
-                unlink($value); 
-            }    
-        }
         unlink($zipFileName);    
     }else{
         echo json_encode(array('status'=>500, 'message'=>'Files are not uploading'));die;
@@ -348,5 +344,22 @@ function superpwa_splashscreen_uploader(){
 	
 	echo json_encode(array("status"=>200, "message"=> "Splash screen uploaded successfully"));
 	 	  die;
+}
+function spwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
+    $zip = new ZipArchive;
+    $zip->open($zip_path);
+
+    for ($i = 0; $i < $zip->numFiles; $i++) {
+        $stat = $zip->statIndex( $i );
+        $ext = pathinfo($stat['name'], PATHINFO_EXTENSION);
+    
+        // Skip folders name (but their content will be checked)
+        if ($ext === '' && substr($stat['name'], -1) === '/')
+            continue;
+        
+        if (!in_array(strtolower($ext), $allowed_extensions))
+            return false;
+    }
+    return true;
 }
 add_action('wp_ajax_superpwa_splashscreen_uploader', 'superpwa_splashscreen_uploader');
