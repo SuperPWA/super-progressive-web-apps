@@ -270,7 +270,7 @@ function superpwa_apple_icons_interface_render() {
 	if ( isset( $_GET['settings-updated'] ) ) {
 		
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_apple_icons_settings_saved_message', __( 'Settings saved.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_apple_icons_settings_saved_message', __( 'Settings Saved.', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -280,7 +280,9 @@ function superpwa_apple_icons_interface_render() {
 	
 	?>
 	
-	<div class="wrap">	
+	<div class="wrap">
+    <!--Duplicate h1 To show saved settings message above h1 tag -->
+        <h1 style="display: none" ><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>	
 		<h1><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
