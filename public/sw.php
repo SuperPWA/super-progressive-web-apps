@@ -370,6 +370,8 @@ function superpwa_exclude_urls_cache_sw($never_cacheurls){
 
                   $exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
 
+                  $exclude_from_cache     = str_replace('endslash', '', $exclude_from_cache);
+                  
 				 $never_cacheurls  .= ','.$exclude_from_cache;
       }
 

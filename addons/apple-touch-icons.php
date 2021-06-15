@@ -115,7 +115,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_screen',						// ID
-			esc_html__('Splash Screens Image', 'super-progressive-web-apps'),	// Title
+			esc_html__('Splash Screen Image', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -124,7 +124,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_screen_center_background_color',						// ID
-			esc_html__('Center with Background Color', 'super-progressive-web-apps'),	// Title
+			esc_html__('Centralize Image with Background Color', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_with_centre_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -132,7 +132,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_color_screen',						// ID
-			esc_html__('Splash Screens Background Color', 'super-progressive-web-apps'),	// Title
+			esc_html__('Background Color', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_color_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -168,9 +168,11 @@ function superpwa_apple_icons_splash_screen_cb() {
             $src = end($iosScreenSetting['ios_splash_icon']);
         } 
     ?>
+    <p id="aft_img_gen"> </p>
     <img src="<?php echo $src; ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
 
     <script id="iosScreen-data" type="application/json"><?php echo json_encode($splashIconsScreens);?></script>
+    <br/>
     <?php
 }
 
@@ -268,7 +270,7 @@ function superpwa_apple_icons_interface_render() {
 	if ( isset( $_GET['settings-updated'] ) ) {
 		
 		// Add settings saved message with the class of "updated"
-		add_settings_error( 'superpwa_settings_group', 'superpwa_apple_icons_settings_saved_message', __( 'Settings saved.', 'super-progressive-web-apps' ), 'updated' );
+		add_settings_error( 'superpwa_settings_group', 'superpwa_apple_icons_settings_saved_message', __( 'Settings Saved.', 'super-progressive-web-apps' ), 'updated' );
 		
 		// Show Settings Saved Message
 		settings_errors( 'superpwa_settings_group' );
@@ -278,8 +280,10 @@ function superpwa_apple_icons_interface_render() {
 	
 	?>
 	
-	<div class="wrap">	
-		<h1><?php _e( 'Apple touch icons & splash screen', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></h1>
+	<div class="wrap">
+    <!--Duplicate h1 To show saved settings message above h1 tag -->
+        <h1 style="display: none" ><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>	
+		<h1><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
@@ -324,15 +328,8 @@ function superpwa_splashscreen_uploader(){
     WP_Filesystem();
     $zipFileName = $path."/splashScreen.zip";
     $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
-    if($moveFile){
+    if($moveFile && spwa_zip_allowed_extensions($zipFileName,['png'])){
         $result = unzip_file($zipFileName, $path);
-        $file_ext = list_files($subpath);
-        foreach ($file_ext as $key => $value) {
-            $ext = wp_check_filetype($value);
-            if(!in_array(strtolower($ext['ext']), array('png','html'))){
-                unlink($value); 
-            }    
-        }
         unlink($zipFileName);    
     }else{
         echo json_encode(array('status'=>500, 'message'=>'Files are not uploading'));die;
@@ -348,5 +345,22 @@ function superpwa_splashscreen_uploader(){
 	
 	echo json_encode(array("status"=>200, "message"=> "Splash screen uploaded successfully"));
 	 	  die;
+}
+function spwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
+    $zip = new ZipArchive;
+    $zip->open($zip_path);
+
+    for ($i = 0; $i < $zip->numFiles; $i++) {
+        $stat = $zip->statIndex( $i );
+        $ext = pathinfo($stat['name'], PATHINFO_EXTENSION);
+    
+        // Skip folders name (but their content will be checked)
+        if ($ext === '' && substr($stat['name'], -1) === '/')
+            continue;
+        
+        if (!in_array(strtolower($ext), $allowed_extensions))
+            return false;
+    }
+    return true;
 }
 add_action('wp_ajax_superpwa_splashscreen_uploader', 'superpwa_splashscreen_uploader');

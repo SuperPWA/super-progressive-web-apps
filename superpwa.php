@@ -6,7 +6,7 @@
  * Author: SuperPWA
  * Author URI: https://profiles.wordpress.org/superpwa/
  * Contributors: SuperPWA
- * Version: 2.1.12
+ * Version: 2.1.13
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.0
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) ) {
-	define( 'SUPERPWA_VERSION'	, '2.1.12' ); 
+	define( 'SUPERPWA_VERSION'	, '2.1.13' ); 
 }
 
 /**

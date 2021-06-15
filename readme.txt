@@ -186,6 +186,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.13 =
+* Date: [15.June.2021](https://superpwa.com/superpwa-2-1-13-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+BugFixed: iOS Splash Screen Images are not getting saved #191
+
 = 2.1.12 =
 * Date: [29.May.2021](https://superpwa.com/superpwa-2-1-12-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 Enhancement: Need An Option to exclude the URL #183
