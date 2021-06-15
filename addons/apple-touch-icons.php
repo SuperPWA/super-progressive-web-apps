@@ -115,7 +115,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_screen',						// ID
-			esc_html__('Splash Screens Image', 'super-progressive-web-apps'),	// Title
+			esc_html__('Splash Screen Image', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -124,7 +124,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_screen_center_background_color',						// ID
-			esc_html__('Center with Background Color', 'super-progressive-web-apps'),	// Title
+			esc_html__('Centralize Image with Background Color', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_with_centre_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -132,7 +132,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_color_screen',						// ID
-			esc_html__('Splash Screens Background Color', 'super-progressive-web-apps'),	// Title
+			esc_html__('Background Color', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_color_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
@@ -168,12 +168,11 @@ function superpwa_apple_icons_splash_screen_cb() {
             $src = end($iosScreenSetting['ios_splash_icon']);
         } 
     ?>
+    <p id="aft_img_gen"> </p>
     <img src="<?php echo $src; ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
 
     <script id="iosScreen-data" type="application/json"><?php echo json_encode($splashIconsScreens);?></script>
     <br/>
-    <input type="button" id="generate_image" class="button"  value="Generate" style="display: none">
-    <p id="aft_img_gen"> </p>
     <?php
 }
 
@@ -282,7 +281,7 @@ function superpwa_apple_icons_interface_render() {
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'Apple touch icons & splash screen', 'super-progressive-web-apps' ); ?> <small><sub>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</sub></small></h1>
+		<h1><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
