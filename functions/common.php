@@ -241,3 +241,76 @@ function superpwa_get_bloginfo( $file = 'sw' ) {
 	
 	return get_bloginfo( 'url' );
 }
+/**
+ * Returns Superpwa setting tabs html
+ */
+function superpwa_setting_tabs_html(){
+
+ $general_settings = admin_url( 'admin.php?page=superpwa#general-settings');
+ $advance_settings = admin_url( 'admin.php?page=superpwa#advance-settings');
+  $addon_page = admin_url( 'admin.php?page=superpwa-addons');
+ ?>
+			<div class="spwa-tab">
+				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes">Settings</a>
+				  <a class="spwa-tablinks active" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Add-ons (Features)</a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes">Advance</a>
+				</div>
+ <?php
+}
+/**
+ * Returns Superpwa Setting tabs Styles
+ */
+function superpwa_setting_tabs_styles(){
+	?>
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;margin-bottom: 20px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+	<?php
+}
+/**
+ * Returns Superpwa Setting Newsletter Forms
+ */
+function superpwa_newsletter_form(){
+
+	$hide_form = get_option('superpwa_hide_newsletter');
+
+	// Newsletter marker. Set this to false once newsletter subscription is displayed.
+		$superpwa_newsletter = true;
+
+	if ( $superpwa_newsletter === true && $hide_form !== 'yes') { ?>
+	  <div class="superpwa-newsletter-wrapper">
+		<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
+						
+					<div class="plugin-card-top" style="min-height: 135px;">
+					     <span class="dashicons dashicons-dismiss superpwa_newsletter_hide" style="float: right;cursor: pointer;"></span>
+					    <span style="clear:both;"></span>
+						<div class="name column-name" style="margin: 0px 10px;">
+							<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
+						</div>
+						<div class="desc column-description" style="margin: 0px 10px;">
+							<p><?php _e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+						</div>
+						
+						<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
+						
+							<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
+								<fieldset>
+									<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
+									<input name="source" value="superpwa-plugin" type="hidden">
+									<input type="submit" class="button" value="<?php _e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+									<span class="superpwa_newsletter_hide" style="box-shadow: unset;cursor: pointer;margin-left: 10px;">
+									<?php _e( 'No thanks', 'super-progressive-web-apps' ); ?>
+									</span>
+									<small style="display:block; margin-top:8px;"><?php _e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
+									
+								</fieldset>
+							</form>
+							
+						</div>
+						
+					</div>
+								
+				</div>
+		</div>
+	<?php }
+			// Set newsletter marker to false
+			  $superpwa_newsletter = false;
+}

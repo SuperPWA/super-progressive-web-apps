@@ -1,5 +1,8 @@
+var changes = false;
 jQuery(document).ready(function($){
     $('.superpwa-colorpicker').wpColorPicker();	// Color picker
+    $('.superpwa-colorpicker').wpColorPicker('option','change',function(event, ui) {
+  	changes = true;});	// When Color picker changes
 	$('.superpwa-icon-upload').click(function(e) {	// Application Icon upload
 		e.preventDefault();
 		var superpwa_meda_uploader = wp.media({
@@ -44,6 +47,15 @@ jQuery(document).ready(function($){
 		var form = jQuery(this);
         var email = form.find('input[name="newsletter-email"]').val();
         jQuery.post(ajaxurl, {action:'superpwa_newsletter_submit',email:email},
+          function(data) {}
+        );
+        return true;
+	});
+	$('.superpwa_newsletter_hide').click(function(e){
+		//e.preventDefault();
+		jQuery('.superpwa-newsletter-wrapper').css("display", "none");
+		var form = jQuery(this);
+        jQuery.post(ajaxurl, {action:'superpwa_newsletter_hide_form'},
           function(data) {}
         );
         return true;
@@ -162,3 +174,48 @@ function superpwaGetZip() {
 		})
     });
 }
+
+// Settings unsaved alert message
+    var tablinks,select_tag,input_tag,button_tag;
+    	tablinks = document.getElementsByClassName("spwa-tablinks");
+    	select_tag = document.getElementsByTagName("select");
+    	input_tag = document.getElementsByTagName("input");
+    	button_tag = document.getElementsByTagName("button");
+
+    if(input_tag){
+		  for(var h=0; h<input_tag.length;h++ ){
+		    input_tag[h].addEventListener( 'change', function(e) {
+		      console.log(changes);
+		      changes = true;
+		      console.log(changes);
+		    });
+		  }
+     }
+     if(select_tag){
+		  for(var j=0; j<select_tag.length;j++ ){
+		    select_tag[j].addEventListener( 'change', function(e) {
+		      changes = true;
+		    });
+		  }
+     }
+     if(button_tag){
+		  for(var k=0; k<button_tag.length;k++ ){
+		    button_tag[k].addEventListener( 'click', function(e) {
+		      changes = true;
+		    });
+		  }
+     }
+
+    if(tablinks){
+	  for(var l=0; l<tablinks.length;l++ ){
+         tablinks[l].addEventListener( 'click', function(e) {
+
+				    if(changes){
+     				    window.onbeforeunload = function(e) {
+   							 return "Sure you want to leave?";
+						};
+					} 
+	         	
+			});
+        }
+     }

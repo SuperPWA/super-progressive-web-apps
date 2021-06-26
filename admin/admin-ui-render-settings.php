@@ -525,11 +525,14 @@ function superpwa_admin_interface_render() {
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
+			$addon_page = admin_url( 'admin.php?page=superpwa-addons');
 			?>
 			<div class="spwa-tab">
-			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
-			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advance</a>
+			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')">Settings</a>
+			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes">Add-ons (Features)</a>
+			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no">Advance</a>
 			</div>
+			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>
 			<div id="settings" class="spwa-tabcontent">
 			 <?php
 			  	// Basic Application Settings
@@ -559,6 +562,14 @@ function superpwa_admin_interface_render() {
 			</div>
 		</form>
 	</div>
-	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }document.getElementById("spwa-default").click();</script>
+	<?php superpwa_newsletter_form(); ?>
+	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }
+	     var url = window.location.href; 
+	    if(url.indexOf('#advance-settings') > -1){
+            document.getElementById("spwa-advance").click();
+	    }else{	
+        	document.getElementById("spwa-default").click();
+	    }
+        </script>
 	<?php
 }

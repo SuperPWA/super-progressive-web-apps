@@ -189,10 +189,10 @@ function superpwa_addons_interface_render() {
 	$addons = superpwa_get_addons();
 	
 	?>
-	
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<div class="wrap">
-		<h1><?php _e( 'Add-ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
-		
+	<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+       <?php superpwa_setting_tabs_html(); ?>
 		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
 		<!-- Add-Ons UI -->
@@ -275,48 +275,7 @@ function superpwa_addons_interface_render() {
 						</div>*/ ?> 
 						
 					</div>
-					
-					<?php if ( $superpwa_newsletter === true ) { ?>
-					
-						<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
-					
-							<div class="plugin-card-top" style="min-height: 135px;">
-							
-								<div class="name column-name" style="margin: 0px 10px;">
-									<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
-								</div>
-								
-								<div class="desc column-description" style="margin: 0px 10px;">
-									<p><?php _e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
-								</div>
-								
-								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
-								
-									<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
-										<fieldset>
-											
-											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
-											<input name="source" value="superpwa-plugin" type="hidden">
-											<input type="submit" class="button" value="<?php _e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
-											
-											<small style="display:block; margin-top:8px;"><?php _e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
-											
-										</fieldset>
-									</form>
-									
-								</div>
-								
-							</div>
-							
-						</div>
-						
-						<?php 
-					
-						// Set newsletter marker to false
-						$superpwa_newsletter = false;
-					}
-				} ?>
-				
+				<?php } ?>
 			</div>
 		</div>
 		
@@ -618,3 +577,16 @@ function superpwa_newsletter_submit(){
 }
 add_action( 'wp_ajax_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
 add_action( 'wp_ajax_nopriv_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
+
+function superpwa_newsletter_hide_form(){
+	
+    $hide_newsletter  = get_option('superpwa_hide_newsletter');
+    if($hide_newsletter == false){
+    	add_option( 'superpwa_hide_newsletter', 'no' );
+    }
+	update_option( 'superpwa_hide_newsletter', 'yes' );
+    echo json_encode(array('status'=>200, 'message'=>'Submitted '));
+    die;
+}
+add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
+add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
