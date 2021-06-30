@@ -186,6 +186,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.14 =
+* Date: [30.June.2021](https://superpwa.com/superpwa-2-1-14-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+Enhancement: Need to Improve Admin UI #196
+
 = 2.1.13 =
 * Date: [15.June.2021](https://superpwa.com/superpwa-2-1-13-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 BugFixed: iOS Splash Screen Images are not getting saved #191
