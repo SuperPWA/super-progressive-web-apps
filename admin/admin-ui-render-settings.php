@@ -516,7 +516,7 @@ function superpwa_admin_interface_render() {
 	}
 	
 	?>
-	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; }p.support-cont {font-size: 14px;font-weight: 500;color: #646970; @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 
 	<div class="wrap">	
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
@@ -525,11 +525,15 @@ function superpwa_admin_interface_render() {
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
+			$addon_page = admin_url( 'admin.php?page=superpwa-addons');
 			?>
 			<div class="spwa-tab">
-			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
-			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advance</a>
+			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')">Settings</a>
+			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes">Add-ons (Features)</a>
+			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no">Advanced</a>
+			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no">Help & Support</a>
 			</div>
+			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>
 			<div id="settings" class="spwa-tabcontent">
 			 <?php
 			  	// Basic Application Settings
@@ -557,8 +561,37 @@ function superpwa_admin_interface_render() {
 				}
 			?>
 			</div>
+			<div id="support" class="spwa-tabcontent">
+
+			 <?php
+              //1)Docs 2)Find new or whats new in superpwa(Blog Post Link)
+			 //3)Technical issue (supportLink) 4)Report a Bug(Support Link)
+
+			  ?>
+			 <h1>1) Documentation</h1>
+			 <p class="support-cont">All the documents regarding SuperPWA Setup, it's settings detail and also about add-ons setup all you can go through this <b><a href="https://superpwa.com/docs/" target="_blank">Docs link</a></b></p>
+
+			 <h1>2) What's New</h1>
+			 <p class="support-cont">We will be continuously working on new features whereas also fixing the bugs and at the sametime releasing new feature add-ons, So to catch all those things just check this link <b><a href="https://superpwa.com/blog/" target="_blank">What's new in SuperPWA</a></b></p>
+
+			 <h1>3) Technical Issue</h1>
+			 <p class="support-cont">If you are facing any issues or unable to Setup, you can directly connect us using this link <b><a href="https://superpwa.com/contact/" target="_blank">Contact us</a></b></p>
+
+			 <h1>4) Report a Bug</h1>
+			 <p class="support-cont">If you found any bug or having issues with any third party plugins you can contact us <b><a href="https://superpwa.com/contact/" target="_blank">Bug Report</a></b></p>
+			</div>
 		</form>
 	</div>
-	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }document.getElementById("spwa-default").click();</script>
+	<?php superpwa_newsletter_form(); ?>
+	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }
+	     var url = window.location.href; 
+	    if(url.indexOf('#advance-settings') > -1){
+            document.getElementById("spwa-advance").click();
+	    }else if(url.indexOf('#support-settings') > -1){
+            document.getElementById("spwa-support").click();
+	    }else{	
+        	document.getElementById("spwa-default").click();
+	    }
+        </script>
 	<?php
 }

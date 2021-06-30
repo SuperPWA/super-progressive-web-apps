@@ -277,14 +277,16 @@ function superpwa_apple_icons_interface_render() {
 	}
 	// Get add-on info
 	$addon_utm_tracking = superpwa_get_addons( 'apple_touch_icons' );
-	
+
+	superpwa_setting_tabs_styles();
 	?>
-	
 	<div class="wrap">
     <!--Duplicate h1 To show saved settings message above h1 tag -->
         <h1 style="display: none" ><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>	
 		<h1><?php _e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
-		
+
+		  <?php superpwa_setting_tabs_html(); ?>
+          
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
@@ -299,6 +301,7 @@ function superpwa_apple_icons_interface_render() {
 			?>
 		</form>
 	</div>
+    <?php superpwa_newsletter_form(); ?>
 	<?php
 }
 
