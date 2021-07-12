@@ -24,12 +24,21 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function superpwa_ati_add_apple_touch_icons( $tags ) {
 	
-	// Get the icons added via SuperPWA > Settings
-	$icons = superpwa_get_pwa_icons();
-	
-	foreach( $icons as $icon ) {
-		$tags .= '<link rel="apple-touch-icon" sizes="' . $icon['sizes'] . '" href="' . $icon['src'] . '">' . PHP_EOL;
-	}
+    // Get the icons added via SuperPWA > Settings
+    $icons = superpwa_get_pwa_icons();
+        // Get settings
+    $settings = superpwa_get_settings();
+    
+    $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
+    $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+    $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="default">' . PHP_EOL;
+
+    foreach( $icons as $icon ) {
+        $tags .= '<link rel="apple-touch-icon" sizes="' . $icon['sizes'] . '" href="' . $icon['src'] . '">' . PHP_EOL;
+    }
     //Ios splash screen
     $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' );
     if( $iosScreenSetting && isset($iosScreenSetting['ios_splash_icon']) && !empty($iosScreenSetting['ios_splash_icon']) ) {
@@ -37,21 +46,12 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
         foreach ( $iosScreenSetting['ios_splash_icon'] as $key => $value ) {
             if( !empty($value) && !empty($key) && isset($iconsInfo[$key]) ) {
                 $screenData = $iconsInfo[$key];
-                echo '<link rel="apple-touch-startup-image" media="screen and (device-width: '.$screenData['device-width'].') and (device-height: '.$screenData['device-height'].') and (-webkit-device-pixel-ratio: '.$screenData['ratio'].') and (orientation: '.$screenData['orientation'].')" href="'.$value.'"/>'."\n";
+                $tags .= '<link rel="apple-touch-startup-image" media="screen and (device-width: '.$screenData['device-width'].') and (device-height: '.$screenData['device-height'].') and (-webkit-device-pixel-ratio: '.$screenData['ratio'].') and (orientation: '.$screenData['orientation'].')" href="'.$value.'"/>'."\n";
             }//if closed
         }//foreach closed
     }
-    // Get settings
-    $settings = superpwa_get_settings();
-    
-    $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
-    $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="black">' . PHP_EOL;
-    $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
-	
-	return $tags;
+
+    return $tags;
 }
 add_filter( 'superpwa_wp_head_tags', 'superpwa_ati_add_apple_touch_icons' );
 
@@ -87,10 +87,10 @@ function superpwa_apple_icons_get_settings() {
 	
 	$defaults = array(
                 'background_color'  => '#cdcdcd',
-				'mode'		        => ''
+				'screen_centre_icon'=> ''
 			);
 	
-	return get_option( 'superpwa_apple_icons_settings', $defaults );
+	return get_option( 'superpwa_apple_icons_settings',$defaults);
 }
 /**
  * Register Apple icons & splash screen settings
@@ -178,7 +178,8 @@ function superpwa_apple_icons_splash_screen_cb() {
 
 function superpwa_apple_icons_splash_with_centre_screen_cb() {
     $splashIcons = superpwa_apple_icons_get_settings();
-    echo '<input type="checkbox" id="center-mode" name="mode" value="center" name="superpwa_apple_icons_settings[screen_centre_icon]" '.(isset( $splashIcons['screen_centre_icon']) && $splashIcons['screen_centre_icon']=='center'? 'checked': '') .'/>';
+
+    echo '<input type="checkbox" id="center-mode"  value="center" name="superpwa_apple_icons_settings[screen_centre_icon]" '.(isset( $splashIcons['screen_centre_icon']) && $splashIcons['screen_centre_icon']=='center'? 'checked': '') .'/>';
 }
 
 /**
@@ -187,8 +188,9 @@ function superpwa_apple_icons_splash_with_centre_screen_cb() {
  * @since 	2.1.7
  */
 function superpwa_apple_icons_splash_color_screen_cb() {
+    $splashIcons = superpwa_apple_icons_get_settings();
     ?>
-    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo isset($splashIcons['screen_icon'])? $splashIcons['screen_icon']: '#cdcdcd' ?>">
+    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? $splashIcons['screen_icon']: $splashIcons['background_color'] ?>">
     <?php
 }
 
@@ -248,9 +250,8 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
 
     // Sanitize and validate campaign source. Campaign source cannot be empty.
 	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
-    if($settings['ios_splash_icon']){
-        print_r($settings['ios_splash_icon']);die;;
-    }
+
+    $settings['screen_centre_icon'] = sanitize_text_field( $settings['screen_centre_icon'] ) == '' ? '' : sanitize_text_field( $settings['screen_centre_icon'] );
 
     return $settings;
 }
