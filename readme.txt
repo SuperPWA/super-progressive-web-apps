@@ -186,6 +186,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.15 =
+* Date: [12.July.2021](https://superpwa.com/superpwa-2-1-15-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+Bug Fixed : User end issue: Apple splash icon not working properly #200
+Bug Fixed : Centralize image with background color not getting saved. #205
+
 = 2.1.14 =
 * Date: [30.June.2021](https://superpwa.com/superpwa-2-1-14-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 Enhancement: Need to Improve Admin UI #196
