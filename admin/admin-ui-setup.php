@@ -254,6 +254,14 @@ function superpwa_register_settings() {
 			'superpwa_analytics_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Force Update Service Worker	
+		add_settings_field(
+			'superpwa_force_update_sw_shortcut',								// ID
+			__('Force Update Service Worker', 'super-progressive-web-apps'),				// Title
+			'superpwa_force_update_sw_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
 		// Exclude Urls from Cache list
 		add_settings_field(

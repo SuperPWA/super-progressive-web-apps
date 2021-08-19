@@ -154,6 +154,15 @@ function superpwa_sw_template() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
+
+	$cache_version = SUPERPWA_VERSION;
+                
+    if(isset($settings['force_update_sw_setting']) && $settings['force_update_sw_setting'] !=''){
+      $cache_version =   $settings['force_update_sw_setting'];
+      if(!version_compare($cache_version,SUPERPWA_VERSION, '>=') ){
+        $cache_version = SUPERPWA_VERSION;
+      }
+    }
 	
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
@@ -164,7 +173,7 @@ function superpwa_sw_template() {
  * To learn more and add one to your website, visit - https://superpwa.com
  */
  
-const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . $cache_version; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo superpwa_get_offline_page(); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];

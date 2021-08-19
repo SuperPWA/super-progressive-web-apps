@@ -491,6 +491,28 @@ function superpwa_exclude_url_cache_cb(){
 	<?php
 }
 
+/**
+ * Force Update Service Worker
+ *
+ * @since 2.1.6
+ */
+
+function superpwa_force_update_sw_cb(){
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?>
+         <label><input type="text" id="superpwa_settings[force_update_sw_setting]" name="superpwa_settings[force_update_sw_setting]" value="<?php if(isset($settings['force_update_sw_setting'])){ 
+        	if(!version_compare($settings['force_update_sw_setting'],SUPERPWA_VERSION, '>=') ){
+				$settings['force_update_sw_setting'] = SUPERPWA_VERSION;
+			}
+        	echo esc_attr($settings['force_update_sw_setting']);
+        }else{ echo SUPERPWA_VERSION; } ?>"></label>      
+        <code>Current Version <?php echo SUPERPWA_VERSION; ?></code>
+	<p><?php echo esc_html__('Change the version. It will automatically update the service worker for all the users', 'pwa-for-wp'); ?></p>
+	
+	<?php
+}
+
 
 /**
  * Admin interface renderer
