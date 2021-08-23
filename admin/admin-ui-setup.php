@@ -255,6 +255,14 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
+		// Cache External Origin URLs
+		add_settings_field(
+			'superpwa_cache_external_urls_shortcut',								// ID
+			__('Cache External Origin URLs', 'super-progressive-web-apps'),				// Title
+			'superpwa_cache_external_urls_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
 		// Force Update Service Worker	
 		add_settings_field(
 			'superpwa_force_update_sw_shortcut',								// ID

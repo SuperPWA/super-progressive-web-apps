@@ -475,6 +475,20 @@ function superpwa_analytics_support_cb() {
 }
 
 /**
+ * Enable or disable cache external urls support
+ *
+ * @since 2.1.6
+ */ 
+function superpwa_cache_external_urls_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[cache_external_urls]" id="superpwa_settings[cache_external_urls]" value="1" 
+	<?php if ( isset( $settings['cache_external_urls'] ) ) { checked( '1', $settings['cache_external_urls'] ); } ?>>
+	<br>
+	<?php
+}
+
+/**
  * Exclude Urls from Cache list of service worker
  *
  * @since 2.1.2

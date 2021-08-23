@@ -163,7 +163,7 @@ function superpwa_sw_template() {
         $cache_version = SUPERPWA_VERSION;
       }
     }
-	
+   
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
 'use strict';
@@ -223,10 +223,11 @@ self.addEventListener('fetch', function(e) {
 	if ( ! e.request.url.match(/^(http|https):\/\//i) )
 		return;
 	
+    <?php if(!isset($settings['cache_external_urls']) || (isset($settings['cache_external_urls']) && $settings['cache_external_urls'] !== '1')){	?>
 	// Return if request url is from an external domain.
 	if ( new URL(e.request.url).origin !== location.origin )
 		return;
-	
+    <?php }	?>
 	// For POST requests, do not use the cache. Serve offline page if offline.
 	if ( e.request.method !== 'GET' ) {
 		e.respondWith(
