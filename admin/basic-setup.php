@@ -441,6 +441,14 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 		echo json_encode( superpwa_manifest_template() );
 		exit();
 	}
+    // Needed new query_vars of pagename for Wp Fastest Cache 
+	if(class_exists('WpFastestCache')){
+		$query_vars_as_string = isset($query->query_vars['pagename']) ? $query->query_vars['pagename'] : false;
+		if($query_vars_as_string == false){
+		$query_vars_as_string = isset($query->query_vars['name']) ? $query->query_vars['name'] : '';
+	    }
+    }
+
 	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
 		header( 'Content-Type: text/javascript' );
 		echo superpwa_sw_template();

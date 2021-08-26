@@ -475,6 +475,20 @@ function superpwa_analytics_support_cb() {
 }
 
 /**
+ * Enable or disable cache external urls support
+ *
+ * @since 2.1.6
+ */ 
+function superpwa_cache_external_urls_support_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[cache_external_urls]" id="superpwa_settings[cache_external_urls]" value="1" 
+	<?php if ( isset( $settings['cache_external_urls'] ) ) { checked( '1', $settings['cache_external_urls'] ); } ?>>
+	<br>
+	<?php
+}
+
+/**
  * Exclude Urls from Cache list of service worker
  *
  * @since 2.1.2
@@ -487,6 +501,28 @@ function superpwa_exclude_url_cache_cb(){
         <label><textarea placeholder="https://example.com/contact-us/, https://example.com/checkout/"  rows="4" cols="70" id="superpwa_settings[excluded_urls]" name="superpwa_settings[excluded_urls]"><?php echo (isset($settings['excluded_urls']) ? esc_attr($settings['excluded_urls']): ''); ?></textarea></label>
         <p><?php echo esc_html__('Note: Seperate the URLs using a Comma(,)', 'super-progressive-web-apps'); ?></p>
 	<p><?php echo esc_html__('Place the list of URLs which you do not want to cache by service worker', 'super-progressive-web-apps'); ?></p>	
+	
+	<?php
+}
+
+/**
+ * Force Update Service Worker
+ *
+ * @since 2.1.6
+ */
+
+function superpwa_force_update_sw_cb(){
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?>
+         <label><input type="text" id="superpwa_settings[force_update_sw_setting]" name="superpwa_settings[force_update_sw_setting]" value="<?php if(isset($settings['force_update_sw_setting'])){ 
+        	if(!version_compare($settings['force_update_sw_setting'],SUPERPWA_VERSION, '>=') ){
+				$settings['force_update_sw_setting'] = SUPERPWA_VERSION;
+			}
+        	echo esc_attr($settings['force_update_sw_setting']);
+        }else{ echo SUPERPWA_VERSION; } ?>"></label>      
+        <code>Current Version <?php echo SUPERPWA_VERSION; ?></code>
+	<p><?php echo esc_html__('Update the version number. It will automatically re-install the service worker for all the users', 'super-progressive-web-apps'); ?></p>
 	
 	<?php
 }

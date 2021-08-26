@@ -154,7 +154,16 @@ function superpwa_sw_template() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
-	
+
+	$cache_version = SUPERPWA_VERSION;
+                
+    if(isset($settings['force_update_sw_setting']) && $settings['force_update_sw_setting'] !=''){
+      $cache_version =   $settings['force_update_sw_setting'];
+      if(!version_compare($cache_version,SUPERPWA_VERSION, '>=') ){
+        $cache_version = SUPERPWA_VERSION;
+      }
+    }
+   
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
 'use strict';
@@ -164,7 +173,7 @@ function superpwa_sw_template() {
  * To learn more and add one to your website, visit - https://superpwa.com
  */
  
-const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
+const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . $cache_version; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo superpwa_get_offline_page(); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
@@ -214,10 +223,11 @@ self.addEventListener('fetch', function(e) {
 	if ( ! e.request.url.match(/^(http|https):\/\//i) )
 		return;
 	
+    <?php if(!isset($settings['cache_external_urls']) || (isset($settings['cache_external_urls']) && $settings['cache_external_urls'] !== '1')){	?>
 	// Return if request url is from an external domain.
 	if ( new URL(e.request.url).origin !== location.origin )
 		return;
-	
+    <?php }	?>
 	// For POST requests, do not use the cache. Serve offline page if offline.
 	if ( e.request.method !== 'GET' ) {
 		e.respondWith(
@@ -396,3 +406,28 @@ function superpwa_get_offline_page() {
 	
 	return get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
 }
+
+/**
+  * Change superpwa_sw_filename When WP Fastest Cache is active.  
+ * @since 2.1.6
+ */
+function superpwa_wp_fastest_cache_sw_filename( $sw_filename ) {
+	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js&action=wpfastestcache';
+}
+
+function superpwa_third_party_plugins_sw_filename(){
+	 /**
+	 * Change superpwa_sw_filename When WP Fastest Cache is active. 
+	 * 
+	 * @since 2.1.6
+	 */
+	if ( class_exists('WpFastestCache') ) {
+		
+		// Change service worker filename to match WP Fastest Cache action type for js.
+
+		add_filter( 'superpwa_sw_filename', 'superpwa_wp_fastest_cache_sw_filename',99 );
+	}
+
+}
+
+add_action('plugins_loaded','superpwa_third_party_plugins_sw_filename');
