@@ -522,7 +522,7 @@ function superpwa_force_update_sw_cb(){
         	echo esc_attr($settings['force_update_sw_setting']);
         }else{ echo SUPERPWA_VERSION; } ?>"></label>      
         <code>Current Version <?php echo SUPERPWA_VERSION; ?></code>
-	<p><?php echo esc_html__('Change the version. It will automatically update the service worker for all the users', 'super-progressive-web-apps'); ?></p>
+	<p><?php echo esc_html__('Update the version number. It will automatically re-install the service worker for all the users', 'super-progressive-web-apps'); ?></p>
 	
 	<?php
 }

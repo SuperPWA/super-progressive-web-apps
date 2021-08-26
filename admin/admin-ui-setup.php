@@ -266,7 +266,7 @@ function superpwa_register_settings() {
 		// Force Update Service Worker	
 		add_settings_field(
 			'superpwa_force_update_sw_shortcut',								// ID
-			__('Force Update Service Worker', 'super-progressive-web-apps'),				// Title
+			__('Re-Install Service Worker', 'super-progressive-web-apps'),				// Title
 			'superpwa_force_update_sw_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
