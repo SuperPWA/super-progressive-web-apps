@@ -28,13 +28,20 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
     $icons = superpwa_get_pwa_icons();
         // Get settings
     $settings = superpwa_get_settings();
-    
+
+    $splashIcons = superpwa_apple_icons_get_settings();
+
+    if(isset($splashIcons['status_bar_style']) && !empty($splashIcons['status_bar_style'])){
+         $status_bar_style = $splashIcons['status_bar_style'];
+     }else{
+        $status_bar_style = 'default';
+     }
     $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
     $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
     $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
     $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
     $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="default">' . PHP_EOL;
+    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="'.esc_attr($status_bar_style).'">' . PHP_EOL;
 
     foreach( $icons as $icon ) {
         $tags .= '<link rel="apple-touch-icon" sizes="' . $icon['sizes'] . '" href="' . $icon['src'] . '">' . PHP_EOL;
@@ -87,7 +94,8 @@ function superpwa_apple_icons_get_settings() {
 	
 	$defaults = array(
                 'background_color'  => '#cdcdcd',
-				'screen_centre_icon'=> ''
+				'screen_centre_icon'=> '',
+                'status_bar_style'  => 'default'
 			);
 	
 	return get_option( 'superpwa_apple_icons_settings',$defaults);
@@ -137,6 +145,14 @@ function superpwa_apple_icons_register_settings() {
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
 		);
+      // Display
+        add_settings_field(
+            'superpwa_apple_icons_status_bar_style',                                 // ID
+            __('Mobile App Status Bar Style', 'super-progressive-web-apps'),        // Title
+            'superpwa_apple_icons_status_bar_style_cb',                              // CB
+            'superpwa_apple_icons_section',                      // Page slug
+            'superpwa_apple_icons_section'                       // Settings Section ID
+        );
 }
 add_action( 'admin_init', 'superpwa_apple_icons_register_settings' );
 
@@ -191,6 +207,31 @@ function superpwa_apple_icons_splash_color_screen_cb() {
     $splashIcons = superpwa_apple_icons_get_settings();
     ?>
     <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? $splashIcons['screen_icon']: $splashIcons['background_color'] ?>">
+    <?php
+}
+
+/**
+ * Splash Screen Pro 
+ *
+ * @since   2.1.17
+ */
+function superpwa_apple_icons_status_bar_style_cb() {
+    $splashIcons = superpwa_apple_icons_get_settings();
+    ?>
+    <!-- Display Dropdown -->
+    <label for="superpwa_apple_icons_settings[status_bar_style]">
+        <select name="superpwa_apple_icons_settings[status_bar_style]" id="superpwa_apple_icons_settings[status_bar_style]">
+            <option value="default" <?php if ( isset( $splashIcons['status_bar_style'] ) ) { selected( $splashIcons['status_bar_style'], 'default' ); } ?>>
+                <?php _e( 'Default', 'super-progressive-web-apps' ); ?>
+            </option>
+            <option value="black" <?php if ( isset( $splashIcons['status_bar_style'] ) ) { selected( $splashIcons['status_bar_style'], 'black' ); } ?>>
+                <?php _e( 'Black', 'super-progressive-web-apps' ); ?>
+            </option>
+            <option value="black-translucent" <?php if ( isset( $splashIcons['status_bar_style'] ) ) { selected( $splashIcons['status_bar_style'], 'black-translucent' ); } ?>>
+                <?php _e( 'Black translucent', 'super-progressive-web-apps' ); ?>
+            </option>
+        </select>
+    </label>
     <?php
 }
 
@@ -252,6 +293,8 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
 	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
 
     $settings['screen_centre_icon'] = sanitize_text_field( $settings['screen_centre_icon'] ) == '' ? '' : sanitize_text_field( $settings['screen_centre_icon'] );
+
+    $settings['status_bar_style'] = sanitize_text_field( $settings['status_bar_style'] ) == '' ? 'default' : sanitize_text_field( $settings['status_bar_style'] );
 
     return $settings;
 }
