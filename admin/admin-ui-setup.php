@@ -301,7 +301,11 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 	
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	if(function_exists('mb_substr')){
+	$settings['app_short_name'] = mb_substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	} else {
+	    $settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	}
 	
 	// Sanitize description
 	$settings['description'] = sanitize_text_field( $settings['description'] );
@@ -354,7 +358,7 @@ function superpwa_get_settings() {
 
 	$defaults = array(
 				'app_name'			=> get_bloginfo( 'name' ),
-				'app_short_name'	=> substr( get_bloginfo( 'name' ), 0, 15 ),
+				'app_short_name'	=>  function_exists('mb_substr') ? mb_substr( get_bloginfo( 'name' ), 0, 15 ) : substr( get_bloginfo( 'name' ), 0, 15 ),
 				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
