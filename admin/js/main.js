@@ -185,9 +185,9 @@ function superpwaGetZip() {
     if(input_tag){
 		  for(var h=0; h<input_tag.length;h++ ){
 		    input_tag[h].addEventListener( 'change', function(e) {
-		      console.log(changes);
+		      //console.log(changes);
 		      changes = true;
-		      console.log(changes);
+		     // console.log(changes);
 		    });
 		  }
      }

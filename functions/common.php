@@ -253,7 +253,7 @@ function superpwa_setting_tabs_html(){
  ?>
 			<div class="spwa-tab">
 				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes">Settings</a>
-				  <a class="spwa-tablinks active" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Add-ons (Features)</a>
+				  <a class="spwa-tablinks active" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Features (Addons)</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes">Advanced</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes">Help & Support</a>
 				</div>
