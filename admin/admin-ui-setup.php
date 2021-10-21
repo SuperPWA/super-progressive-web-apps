@@ -50,8 +50,39 @@ function superpwa_add_menu_links() {
 
 	// Upgrade to pro page
 	$textlicense = "<span style='color: #ff4c4c;font-weight: 700;font-size: 15px;'>".__( 'Upgrade to Pro', 'super-progressive-web-apps' )."</span>";
-	if(defined('SUPERPWA_PRO_VERSION')){ $textlicense = __( 'License', 'super-progressive-web-apps' ); }
+	if( defined('SUPERPWA_PRO_VERSION') ){
+
+		$license_alert = $days = '';
+		$license_info = get_option("superpwa_pro_upgrade_license");
+		if (isset($license_info)) {
+
+		$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
+		$license_info_lifetime = $license_info['pro']['license_key_expires'];
+		$today = date('Y-m-d');
+		$exp_date = $license_exp;
+		$date1 = date_create($today);
+		$date2 = date_create($exp_date);
+		$diff = date_diff($date1,$date2);
+		$days = $diff->format("%a");
+		if( $license_info_lifetime == 'lifetime' ){
+			$days = 'Lifetime';
+			if ($days == 'Lifetime') {
+				$expire_msg = " Your License is Valid for Lifetime ";
+			}
+		}
+		else if($today > $exp_date){
+			$days = -$days;
+		}
+
+    }
+
+        $license_alert = isset($days) && $days!==0 && $days<=30 && $days!=='Lifetime' ? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>": "" ;
+        $textlicense = __( 'License', 'super-progressive-web-apps' );
+
+        add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), $textlicense.$license_alert, 'manage_options', 'superpwa#license-settings', 'superpwa_upgread_pro_interface_render' , 9999999);
+    }else{
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), $textlicense, 'manage_options', 'superpwa-upgrade', 'superpwa_upgread_pro_interface_render' , 9999999);
+}
 	
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
@@ -422,6 +453,11 @@ function superpwa_enqueue_css_js( $hook ) {
 	
 	// Main JS
     wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
+    if( defined('SUPERPWA_PRO_VERSION') ){
+    	 if ($hook == 'toplevel_page_superpwa') {    	 	
+    wp_enqueue_style('superpwa-admin-panel-css', SUPERPWA_PATH_SRC . 'admin/css/admin-panel.css', array(), SUPERPWA_PRO_VERSION, 'all');
+    	 }
+}
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
 

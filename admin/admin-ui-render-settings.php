@@ -555,6 +555,22 @@ function superpwa_admin_interface_render() {
 	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; }p.support-cont {font-size: 14px;font-weight: 500;color: #646970;}#support{margin-top: 1em;} @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 
 	<div class="wrap">	
+		<?php
+        if ( defined('SUPERPWA_PRO_VERSION') ) {
+        	wp_enqueue_script('superpwa-pro-admin', trailingslashit(SUPERPWA_PRO_PATH_SRC).'assets/js/admin.js', array('jquery'), SUPERPWA_PRO_VERSION, true);
+        	$array = array('security_nonce'=>wp_create_nonce('superpwa_pro_post_nonce'));
+		wp_localize_script('superpwa-pro-admin', 'superpwa_pro_var', $array);
+            $license_info = get_option("superpwa_pro_upgrade_license");
+            if ( defined('SUPERPWA_PRO_PLUGIN_DIR_NAME') && !empty($license_info) ){
+            $superpwa_pro_manager = SUPERPWA_PRO_PLUGIN_DIR_NAME.'/assets/inc/superpwa-pro-license-data.php';                
+                if( file_exists($superpwa_pro_manager) ){
+                    require_once $superpwa_pro_manager;
+                    if( $_GET['page'] == 'superpwa' ) {
+                wp_enqueue_style( 'superpwa-license-panel-css', SUPERPWA_PRO_PATH_SRC . '/assets/inc/css/superpwa-pro-license-data.css', array() , SUPERPWA_PRO_VERSION );
+            }
+        }
+    }
+} ?>
 		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
@@ -568,6 +584,10 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes">Features (Addons)</a>
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no">Advanced</a>
 			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no">Help & Support</a>
+			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ ?>
+			  <!-- <a class="spwa-tablinks" id="spwa-license" href="<?php echo admin_url('admin.php?page=superpwa-upgrade')?> " data-href="no">License</a> -->
+			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License</a>
+			<?php } ?>
 			</div>
 			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>
 			<div id="settings" class="spwa-tabcontent">
@@ -616,7 +636,18 @@ function superpwa_admin_interface_render() {
 			 <h1>4) Report a Bug</h1>
 			 <p class="support-cont">If you found any bug or having issues with any third party plugins you can contact us <b><a href="https://superpwa.com/contact/" target="_blank">Bug Report</a></b></p>
 			</div>
-		</form>
+
+			<div id="superpwa_pro_license" class="spwa-tabcontent">
+
+			 <?php
+			 if ( function_exists('superpwa_pro_upgrade_license_page') ) {
+			 	superpwa_pro_upgrade_license_page();
+			 }
+			 ?>
+			 
+			</div>
+ 
+</form>
 	</div>
 	<?php superpwa_newsletter_form(); ?>
 	<script type="text/javascript">function openCity(evt, cityName) {var i, tabcontent, tablinks;tabcontent = document.getElementsByClassName("spwa-tabcontent");for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; } tablinks = document.getElementsByClassName("spwa-tablinks"); for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); } document.getElementById(cityName).style.display = "block"; evt.currentTarget.className += " active"; }
@@ -625,6 +656,8 @@ function superpwa_admin_interface_render() {
             document.getElementById("spwa-advance").click();
 	    }else if(url.indexOf('#support-settings') > -1){
             document.getElementById("spwa-support").click();
+	    }else if(url.indexOf('#license-settings') > -1){
+            document.getElementById("spwa-license").click();
 	    }else{	
         	document.getElementById("spwa-default").click();
 	    }
