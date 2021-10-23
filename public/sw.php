@@ -266,14 +266,7 @@ self.addEventListener('fetch', function(e) {
 			if ( e.request.method !== 'GET' ) {
 				e.respondWith(
 					fetch(e.request).catch( function() {
-
-					      if(e.request.method == 'POST' ){
-									console.log(form_data);
-									savePostRequests(event.request.url, form_data)
-									//return;
-								}else{
 						        return caches.match(offlinePage);
-						    }
 					})
 				);
 				return;
