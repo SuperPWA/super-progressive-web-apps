@@ -210,6 +210,36 @@ self.addEventListener('activate', function(e) {
 	return self.clients.claim();
 });
 
+// Range Data Code
+var fetchRangeData = function(event){
+    var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
+            console.log('Range request for', event.request.url, ', starting position:', pos);
+            event.respondWith(
+              caches.open(cacheName)
+              .then(function(cache) {
+                return cache.match(event.request.url);
+              }).then(function(res) {
+                if (!res) {
+                  return fetch(event.request)
+                  .then(res => {
+                    return res.arrayBuffer();
+                  });
+                }
+                return res.arrayBuffer();
+              }).then(function(ab) {
+                return new Response(
+                  ab.slice(pos),
+                  {
+                    status: 206,
+                    statusText: 'Partial Content',
+                    headers: [
+                      // ['Content-Type', 'video/webm'],
+                      ['Content-Range', 'bytes ' + pos + '-' +
+                        (ab.byteLength - 1) + '/' + ab.byteLength]]
+                  });
+              }));
+}
+
 // Fetch
 self.addEventListener('fetch', function(e) {
 	
@@ -228,41 +258,46 @@ self.addEventListener('fetch', function(e) {
 	if ( new URL(e.request.url).origin !== location.origin )
 		return;
     <?php }	?>
-	// For POST requests, do not use the cache. Serve offline page if offline.
-	if ( e.request.method !== 'GET' ) {
-		e.respondWith(
-			fetch(e.request).catch( function() {
-				return caches.match(offlinePage);
-			})
-		);
-		return;
-	}
-	
-	// Revving strategy
-	if ( e.request.mode === 'navigate' && navigator.onLine ) {
-		e.respondWith(
-			fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
-					cache.put(e.request, response.clone());
-					return response;
-				});  
-			})
-		);
-		return;
-	}
+       // For Range Headers
+    if (e.request.headers.get('range')) {
+            fetchRangeData(e);
+        } else {
+			// For POST requests, do not use the cache. Serve offline page if offline.
+			if ( e.request.method !== 'GET' ) {
+				e.respondWith(
+					fetch(e.request).catch( function() {
+						        return caches.match(offlinePage);
+					})
+				);
+				return;
+			}
+			
+			// Revving strategy
+			if ( e.request.mode === 'navigate' && navigator.onLine ) {
+				e.respondWith(
+					fetch(e.request).then(function(response) {
+						return caches.open(cacheName).then(function(cache) {
+							cache.put(e.request, response.clone());
+							return response;
+						});  
+					})
+				);
+				return;
+			}
 
-	e.respondWith(
-		caches.match(e.request).then(function(response) {
-			return response || fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
-					cache.put(e.request, response.clone());
-					return response;
-				});  
-			});
-		}).catch(function() {
-			return caches.match(offlinePage);
-		})
-	);
+			e.respondWith(
+				caches.match(e.request).then(function(response) {
+					return response || fetch(e.request).then(function(response) {
+						return caches.open(cacheName).then(function(cache) {
+							cache.put(e.request, response.clone());
+							return response;
+						});  
+					});
+				}).catch(function() {
+					return caches.match(offlinePage);
+				})
+			);
+   }
 });
 
 // Check if current url is in the neverCacheUrls list
@@ -380,7 +415,7 @@ function superpwa_exclude_urls_cache_sw($never_cacheurls){
 
                   $exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
 
-                  $exclude_from_cache     = str_replace('endslash', '', $exclude_from_cache);
+                  $exclude_from_cache     = str_replace('endslash', '/', $exclude_from_cache);
                   
 				 $never_cacheurls  .= ','.$exclude_from_cache;
       }

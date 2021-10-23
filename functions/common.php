@@ -249,13 +249,36 @@ function superpwa_setting_tabs_html(){
  $general_settings = admin_url( 'admin.php?page=superpwa#general-settings');
  $advance_settings = admin_url( 'admin.php?page=superpwa#advance-settings');
  $support_settings = admin_url( 'admin.php?page=superpwa#support-settings');
-  $addon_page = admin_url( 'admin.php?page=superpwa-addons');
- ?>
+ $license_settings = admin_url( 'admin.php?page=superpwa#license-settings');
+ $addon_page = admin_url( 'admin.php?page=superpwa-addons');
+ if( $_GET['page'] == 'superpwa-upgrade' ) {
+ 	$license_settings_class = $addon_page_class =  '' ;
+ 	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {
+ 		$license_settings_class = 'active';
+ 	}else{
+ 		$addon_page_class = 'active';
+ 	}
+ }
+ if( $_GET['page'] == 'superpwa-addons' ) {
+ 	$license_settings_class = $addon_page_class =  '' ;
+ 	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {
+ 		$license_settings_class = 'active';
+ 	}else{
+ 		$addon_page_class = 'active';
+ 	}
+ } ?>
 			<div class="spwa-tab">
 				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes">Settings</a>
-				  <a class="spwa-tablinks active" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Add-ons (Features)</a>
+				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Features (Addons)</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes">Advanced</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes">Help & Support</a>
+				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
+				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License</a>
+				  <?php } ?>
+				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
+				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License</a>
+				<?php } ?>
+				  
 				</div>
  <?php
 }
@@ -264,7 +287,7 @@ function superpwa_setting_tabs_html(){
  */
 function superpwa_setting_tabs_styles(){
 	?>
-	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;margin-bottom: 20px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
+	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;margin-bottom: 6px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<?php
 }
 /**
