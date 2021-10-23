@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.8
+Tested up to: 5.8.1
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -185,6 +185,15 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.1.17 =
+* Date: [23.October.2021](https://superpwa.com/superpwa-2-1-17-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Bug Fixed : Resolved the issue of Invalid regular expression error when exclude cache URL is placed without end slash #216
+* Bug Fixed : Added Seperate caching for range header request urls to aviod 206 type error #220
+* Enhancement : Added Pre Caching Feature in Caching Strategies Addon. #222
+* Enhancement : Updated License Page to display Complete License Information. #227
+* Enhancement : Added Status bar style option for apple icons. #210
+* Enhancement : Added Proper Method to render Application name and shortname of PWA App even with non-standard characters. #112
 
 = 2.1.16 =
 * Date: [26.August.2021](https://superpwa.com/superpwa-2-1-16-release-note/?utm_source=wordpress.org&utm_medium=changelog)
