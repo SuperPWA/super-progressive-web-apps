@@ -126,6 +126,17 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.8',
 						),
+		'pre_loader' => array(
+							'name'					=> __( 'Pre Loader', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Set the Pre Loading Feature and provide your user an eye catchy loading functionality to the site.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'spinner-of-dots.png',
+							'link'					=> 'https://superpwa.com/doc/preloader-add-on-for-superpwa/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-pre-loader' ),
+							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.1.18',//1.8
+						),
 	);
 	
 	if ( $slug === false ) {
