@@ -54,7 +54,7 @@ function superpwa_add_menu_links() {
 
 		$license_alert = $days = '';
 		$license_info = get_option("superpwa_pro_upgrade_license");
-		if (isset($license_info)) {
+		if ($license_info) {
 
 		$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
 		$license_info_lifetime = $license_info['pro']['license_key_expires'];
@@ -74,9 +74,10 @@ function superpwa_add_menu_links() {
 			$days = -$days;
 		}
 
-    }
+    
 
         $license_alert = isset($days) && $days!==0 && $days<=30 && $days!=='Lifetime' ? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>": "" ;
+        }
         $textlicense = __( 'License', 'super-progressive-web-apps' );
 
         add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), $textlicense.$license_alert, 'manage_options', 'superpwa#license-settings', 'superpwa_upgread_pro_interface_render' , 9999999);
