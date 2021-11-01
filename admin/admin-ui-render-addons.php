@@ -127,8 +127,8 @@ function superpwa_get_addons( $slug = false ) {
 							'superpwa_min_version'	=> '2.1.8',
 						),
 		'pre_loader' => array(
-							'name'					=> __( 'Pre Loader', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Set the Pre Loading Feature and provide your user an eye catchy loading functionality to the site.', 'super-progressive-web-apps' ),
+							'name'					=> __( 'PreLoader', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Set the Pre-Loading Feature and provide your user an eye catchy loading functionality to the site.', 'super-progressive-web-apps' ),
 							'type'					=> 'addon_pro',
 							'icon'					=> 'spinner-of-dots.png',
 							'link'					=> 'https://superpwa.com/doc/preloader-add-on-for-superpwa/',
