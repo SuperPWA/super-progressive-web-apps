@@ -186,6 +186,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.1.18 =
+* Date: [1.November.2021](https://superpwa.com/superpwa-2-1-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Bug Fixed : Resolved the issue of License alert showing when key is not activated #230
+* Bug Fixed : PHP Warning: Trying to access array offset on value of type bool #230
+* Enhancement : Added New Addon PreLoader Array #226
+
 = 2.1.17 =
 * Date: [23.October.2021](https://superpwa.com/superpwa-2-1-17-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Bug Fixed : Resolved the issue of Invalid regular expression error when exclude cache URL is placed without end slash #216
