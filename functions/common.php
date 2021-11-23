@@ -259,14 +259,14 @@ function superpwa_setting_tabs_html(){
  		$addon_page_class = 'active';
  	}
  }
- if( $_GET['page'] == 'superpwa-addons' ) {
+ 
  	$license_settings_class = $addon_page_class =  '' ;
  	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {
  		$license_settings_class = 'active';
  	}else{
  		$addon_page_class = 'active';
  	}
- } ?>
+?>
 			<div class="spwa-tab">
 				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes">Settings</a>
 				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Features (Addons)</a>

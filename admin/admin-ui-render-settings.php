@@ -506,6 +506,23 @@ function superpwa_exclude_url_cache_cb(){
 }
 
 /**
+ * Exclude add to home screen popup on particular pages
+ *
+ * @since 2.1.19
+ */
+
+function superpwa_exclude_add_to_homescreen_cb(){
+	// Get Settings
+	$settings = superpwa_get_settings(); 
+	?>
+        <label><textarea placeholder="https://example.com/contact-us/, https://example.com/checkout/"  rows="4" cols="70" id="superpwa_settings[exclude_homescreen]" name="superpwa_settings[exclude_homescreen]"><?php echo (isset($settings['exclude_homescreen']) ? esc_attr($settings['exclude_homescreen']): ''); ?></textarea></label>
+        <p><?php echo esc_html__('Note: Seperate the URLs using a Comma(,)', 'super-progressive-web-apps'); ?></p>
+	<p><?php echo esc_html__('Place the list of URLs on which add to homescreen will be hidden', 'super-progressive-web-apps'); ?></p>	
+	
+	<?php
+}
+
+/**
  * Force Update Service Worker
  *
  * @since 2.1.6

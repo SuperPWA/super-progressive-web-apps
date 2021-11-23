@@ -311,6 +311,14 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
+		// Exclude Urls from Cache list
+		add_settings_field(
+			'superpwa_exclude_add_to_homescreen_shortcut',								// ID
+			__('Exclude Add to homescreen banner', 'super-progressive-web-apps'),				// Title
+			'superpwa_exclude_add_to_homescreen_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
