@@ -219,3 +219,28 @@ function superpwaGetZip() {
 			});
         }
      }
+
+ //Reset settings
+   	 jQuery(document).on("click",".superpwa-reset-settings", function(e){
+	 //$('.superpwa-reset-settings').click(function(e){
+	        e.preventDefault();
+	     
+	        var reset_confirm = confirm("Are you sure?");
+	     
+	        if(reset_confirm == true){
+	            
+	        jQuery.ajax({
+	                    type: "POST",    
+	                    url:ajaxurl,                    
+	                    dataType: "json",
+	                    data:{action:"superpwa_reset_all_settings", superpwa_security_nonce:superpwa_obj.superpwa_security_nonce},
+	                    success:function(response){                               
+	                        setTimeout(function(){ location.reload(); }, 1000);
+	                    },
+	                    error: function(response){                    
+	                    console.log(response);
+	                    }
+	                    }); 
+        
+       }
+    });    

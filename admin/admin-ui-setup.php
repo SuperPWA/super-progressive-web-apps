@@ -318,6 +318,14 @@ function superpwa_register_settings() {
 			'superpwa_exclude_add_to_homescreen_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Exclude Urls from Cache list
+		add_settings_field(
+			'superpwa_reset_settings_shortcut',								// ID
+			__('Reset Settings', 'super-progressive-web-apps'),				// Title
+			'superpwa_reset_settings_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
 		);	
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
@@ -412,10 +420,47 @@ function superpwa_get_settings() {
 				'is_static_manifest'=> 0,
 				'is_static_sw'		=> 0,
 				'disable_add_to_home'=> 0,
+				'analytics_support'=> 1,
+				'cache_external_urls'=> 0,
+				'yandex_support'=> 0,
+				'force_update_sw_setting'=> SUPERPWA_VERSION,
+				'excluded_urls'=> '',
+				'exclude_homescreen'=> '',
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
 	
+	return $settings;
+}
+/***
+ Returns default Superpwa settings
+***/
+function superpwa_get_default_settings() {
+
+	$defaults = array(
+				'app_name'			=> get_bloginfo( 'name' ),
+				'app_short_name'	=>  function_exists('mb_substr') ? mb_substr( get_bloginfo( 'name' ), 0, 15 ) : substr( get_bloginfo( 'name' ), 0, 15 ),
+				'description'		=> get_bloginfo( 'description' ),
+				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
+				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
+				'background_color' 	=> '#D5E0EB',
+				'theme_color' 		=> '#D5E0EB',
+				'start_url' 		=> 0,
+				'start_url_amp'		=> 0,
+				'offline_page' 		=> 0,
+				'orientation'		=> 1,
+				'display'			=> 1,
+				'is_static_manifest'=> 0,
+				'is_static_sw'		=> 0,
+				'disable_add_to_home'=> 0,
+				'analytics_support'=> 1,
+				'cache_external_urls'=> 0,
+				'yandex_support'=> 0,
+				'force_update_sw_setting'=> SUPERPWA_VERSION,
+				'excluded_urls'=> '',
+				'exclude_homescreen'=> '',
+			);
+
 	return $settings;
 }
 
@@ -461,7 +506,17 @@ function superpwa_enqueue_css_js( $hook ) {
 	wp_enqueue_media();
 	
 	// Main JS
-    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
+    wp_register_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
+
+    $object_name = array(
+            'ajax_url'                  => admin_url( 'admin-ajax.php' ),
+            'superpwa_security_nonce'   => wp_create_nonce('superpwa_ajax_check_nonce'),
+        );
+    $object_name = apply_filters('superpwa_localize_filter',$object_name,'superpwa_obj');
+        
+    wp_localize_script('superpwa-main-js', 'superpwa_obj', $object_name);
+    wp_enqueue_script('superpwa-main-js');
+
     if( defined('SUPERPWA_PRO_VERSION') ){
     	 if ($hook == 'toplevel_page_superpwa') {    	 	
     wp_enqueue_style('superpwa-admin-panel-css', SUPERPWA_PATH_SRC . 'admin/css/admin-panel.css', array(), SUPERPWA_PRO_VERSION, 'all');

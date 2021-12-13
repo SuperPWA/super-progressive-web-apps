@@ -522,6 +522,15 @@ function superpwa_exclude_add_to_homescreen_cb(){
 	<?php
 }
 
+function superpwa_reset_settings_cb(){		
+	?>              
+        <button class="button superpwa-reset-settings">
+            <?php echo esc_html__('Reset','super-progressive-web-apps'); ?>
+        </button>
+        
+	<?php
+}
+
 /**
  * Force Update Service Worker
  *

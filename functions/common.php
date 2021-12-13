@@ -242,6 +242,40 @@ function superpwa_get_bloginfo( $file = 'sw' ) {
 	return get_bloginfo( 'url' );
 }
 /**
+ * Reset Settings Ajax Callback
+ */
+function superpwa_reset_all_settings(){ 
+    
+        if ( ! isset( $_POST['superpwa_security_nonce'] ) ){
+           return; 
+        }
+        if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
+           return;  
+        }  
+        if ( ! current_user_can( 'manage_options' ) ) {
+           return;
+        }
+        
+        $default = superpwa_get_default_settings();
+                     
+        $result  = update_option('superpwa_settings', $default);
+       // delete_transient('pwaforwp_restapi_check');   
+        
+        if($result){    
+            
+            echo json_encode(array('status'=>'t'));            
+        
+        }else{
+            
+            echo json_encode(array('status'=>'f'));            
+        
+        }        
+        wp_die();           
+}
+
+add_action('wp_ajax_superpwa_reset_all_settings', 'superpwa_reset_all_settings');
+
+/**
  * Returns Superpwa setting tabs html
  */
 function superpwa_setting_tabs_html(){
