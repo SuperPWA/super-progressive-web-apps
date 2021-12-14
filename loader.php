@@ -18,6 +18,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-upgrade.php' );
 // 3rd party compatibility
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/yandex.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/amp.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );
@@ -27,6 +28,7 @@ require_once( SUPERPWA_PATH_ABS . 'functions/multisite.php' );
 // Public folder
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php' );
+require_once( SUPERPWA_PATH_ABS . 'public/amphtml.php' );
 
 // Load bundled add-ons
 if ( superpwa_addons_status( 'utm_tracking' ) 		== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );

@@ -241,6 +241,57 @@ function superpwa_get_bloginfo( $file = 'sw' ) {
 	
 	return get_bloginfo( 'url' );
 }
+
+/**
+* only for Automattic amp Support
+* When user enabled Standard & Transitional mode 
+* it will check and give respective values
+*/
+
+function superpwa_is_automattic_amp($case=null){
+    //Check if current theme support amp
+    switch ($case) {
+        case 'amp_support':
+            if(class_exists('AMP_Theme_Support')){
+                return current_theme_supports( AMP_Theme_Support::SLUG );
+            }
+            break;
+        default:
+            if ( current_theme_supports( 'amp' ) && function_exists('is_amp_endpoint') && is_amp_endpoint() ) {
+                return true;
+            }
+            break;
+    }
+    return false;
+}
+
+function superpwa_home_url(){
+    
+        if ( is_multisite() ) {
+            $link = get_site_url();              
+        }
+        else {
+            $link = home_url();
+        }    
+            $link = superpwa_httpsify($link);
+    
+        return trailingslashit($link);
+}
+function superpwa_site_url(){
+    
+        if (is_multisite() ) {
+            
+           $link = get_site_url();   
+           
+        }
+        else {
+            $link = site_url();
+        }    
+            $link = superpwa_httpsify($link);
+            
+        return trailingslashit($link);
+}
+
 /**
  * Reset Settings Ajax Callback
  */

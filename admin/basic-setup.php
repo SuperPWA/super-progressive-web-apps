@@ -434,6 +434,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	$query_vars_as_string = http_build_query( $query->query_vars );
 	$manifest_filename    = superpwa_get_manifest_filename();
 	$sw_filename          = superpwa_get_sw_filename();
+	$amphtml_filename    = 'superpwa-amp-sw.html';
 
 	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
 		// Generate manifest from Settings and send the response w/ header.
@@ -452,6 +453,11 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
 		header( 'Content-Type: text/javascript' );
 		echo superpwa_sw_template();
+		exit();
+	}
+	if ( strpos( $query_vars_as_string, $amphtml_filename ) !== false ) {
+		header( 'Content-Type: text/html' );
+		echo amp_service_worker_template();
 		exit();
 	}
 }
