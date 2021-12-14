@@ -186,6 +186,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2 =
+* Date: [14.December.2021](https://superpwa.com/superpwa-2-2-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Bug Fixed   : Fixed Manifest Warnings Regarding Icon Purpose Value#237
+* Enhancement : Added AMP Support with Official AMP and AMPforWP Plugins#218
+* Enhancement : Added New option to Reset Settings#233
+
 = 2.1.19 =
 * Date: [23.November.2021](https://superpwa.com/superpwa-2-1-19-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement : Added New option to exclude Add to homescreen banner on particular pages #232
