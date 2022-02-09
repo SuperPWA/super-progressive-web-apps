@@ -267,7 +267,7 @@ function apple_splashscreen_files_data(){
 }
 
 function superpwa_load_admin_scripts($hooks){
-    if( !in_array($hooks, array('superpwa_page_superpwa-apple-icons', 'super-pwa_page_superpwa-apple-icons')) ) {
+    if( !in_array($hooks, array('superpwa_page_superpwa-apple-icons', 'super-pwa_page_superpwa-apple-icons')) && strpos($hooks, 'superpwa-apple-icons') == false ) {
         return false;
     }
     wp_enqueue_media();

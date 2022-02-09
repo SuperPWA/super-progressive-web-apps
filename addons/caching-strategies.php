@@ -418,7 +418,7 @@ function superpwa_caching_strategies_pre_caching_cb() {
  */ 
 
 function superpwa_precache_load_admin_scripts($hooks){
-    if( !in_array($hooks, array('superpwa_page_superpwa-caching-strategies', 'super-pwa_page_superpwa-caching-strategies')) ) {
+    if( !in_array($hooks, array('superpwa_page_superpwa-caching-strategies', 'super-pwa_page_superpwa-caching-strategies')) && strpos($hooks, 'superpwa-caching-strategies') == false ) {
         return false;
     }
 
