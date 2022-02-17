@@ -186,6 +186,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.1 =
+* Date: [17.February.2022](https://superpwa.com/superpwa-2-2-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Bug Fixed : Some extension addon features are not working properly  #245
+
 = 2.2 =
 * Date: [14.December.2021](https://superpwa.com/superpwa-2-2-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Bug Fixed   : Fixed Manifest Warnings Regarding Icon Purpose Value#237

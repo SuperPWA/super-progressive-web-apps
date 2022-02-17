@@ -3,7 +3,7 @@
 function amp_service_worker_template(){
 	$url = superpwa_site_url();
     $home_url = superpwa_home_url();
-    $swjs_path_amp     = $url.'superpwa-amp-sw'.superpwa_multisite_filename_postfix().'.js';
+    $swjs_path_amp     = $url.'superpwa-sw'.superpwa_multisite_filename_postfix().'.js';
 	?>
       <!doctype html>
 		<html>

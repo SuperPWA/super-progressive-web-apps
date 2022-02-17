@@ -19,7 +19,7 @@ class SUPERPWA_AMP_SW{
             $this->superpwa_is_amp_activated();
 
             // Change service worker filename to match OneSignal's service worker
-			add_filter( 'superpwa_sw_filename', array($this, 'superpwa_amp_sw_filename') );
+			//add_filter( 'superpwa_sw_filename', array($this, 'superpwa_amp_sw_filename') );
 
             add_action('pre_amp_render_post', array($this, 'superpwa_amp_entry_point'));
             //Automattic AMP will be done here
@@ -54,7 +54,7 @@ class SUPERPWA_AMP_SW{
 	                $url = superpwa_site_url();
 	                $home_url = superpwa_home_url();
 	                $swhtml            = $url.'superpwa-amp-sw'.superpwa_multisite_filename_postfix().'.html';
-	                $swjs_path_amp     = $url.'superpwa-amp-sw'.superpwa_multisite_filename_postfix().'.js';
+	                $swjs_path_amp     = $url.'superpwa-sw'.superpwa_multisite_filename_postfix().'.js';
 	                ?>
 	            <amp-install-serviceworker data-scope="<?php echo trailingslashit($home_url); ?>" 
 	                        src="<?php echo esc_url_raw($swjs_path_amp); ?>" 
