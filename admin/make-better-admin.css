@@ -1,0 +1,42 @@
+/* makebetter admin css*/
+
+/**
+ PLUGINS ADMIN PAGE
+*/
+#superpwa-reloaded-feedback-overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+    height: 100%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 10000; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(120,120,120); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity */
+}
+#superpwa-reloaded-feedback-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 500px;
+    max-width: 100%;
+    margin: auto;
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+    max-height: 50%;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+#superpwa-reloaded-feedback-content textarea,
+#superpwa-reloaded-feedback-content input[type="text"] { display:none;width:100%; }
+.superpwa-for-wp-feedback-not-deactivate { display: block; text-align: right; }
+
+#superpwa-reloaded-feedback-content h3{
+    margin:5px;
+}
+
+@media screen and (max-width:400px){
+    #superpwa-reloaded-feedback-content {
+        padding:0px;
+        padding-bottom:50px;
+    }
+}
