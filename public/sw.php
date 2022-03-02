@@ -211,7 +211,31 @@ self.addEventListener('activate', function(e) {
 });
 
 // Range Data Code
+var db;
+if (window.indexedDB) {
+    var request = window.indexedDB.open("spwaVideoDB", 1);
+    request.onerror = event => {
+		  // Do something with !
+		    console.log("Didn't you allow web app to use IndexedDB?! error code: "+request.errorCode);
 
+		};
+		request.onsuccess = event => {
+		  db = event.target.result;
+		};
+		request.onupgradeneeded = event => {
+		  /* Save the IDBDatabase interface*/
+		  var db = event.target.result;
+
+		  /* Create an objectStore for this database*/
+		  var objectStore = db.createObjectStore("Videolist", { keyPath: "myKey" });
+		  objectStore.createIndex("url", "url", { unique: false });
+		  objectStore.createIndex("rangestart", "rangestart", { unique: false });
+		  objectStore.createIndex("rangeend", "rangeend", { unique: false });
+		  objectStore.createIndex("data", "data", { unique: false });
+		};
+
+}
+let openRequest = indexedDB.open(name, version);
 
 async function downloadRangeFile(event,fileMeta) {
 	var url = event.request.url;
