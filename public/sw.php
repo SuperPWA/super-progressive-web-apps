@@ -211,33 +211,90 @@ self.addEventListener('activate', function(e) {
 });
 
 // Range Data Code
+
+
+async function downloadRangeFile(event,fileMeta) {
+	var url = event.request.url;
+	const rangeRequest = event.headers.get('range') || '';
+  const byteRanges = rangeRequest.match(/bytes=(?<from>[0-9]+)?-(?<to>[0-9]+)?/);
+
+  // Using the optional chaining here to access properties of
+  // possibly nullish objects.
+  const rangeFrom = Number(byteRanges?.groups?.from || 0);
+  const rangeTo = Number(byteRanges?.groups?.to || fileMeta.bytesTotal - 1);
+
+  const response = await fetch(url);
+  const reader = response.body.getReader();
+  do {
+    const { done, dataChunk } = await reader.read();
+    /* Store the `dataChunk` to IndexedDB.*/
+    const dataItem = {
+		  url: url,
+		  rangeStart: dataStartByte,
+		  rangeEnd: dataEndByte,
+		  data: dataChunk,
+		}
+
+		// Name of the store that will hold your data.
+		const storeName = 'videoChunksStorageDB'
+
+		// `db` is an instance of `IDBDatabase`.
+		const transaction = db.transaction([storeName], 'readwrite');
+		const store = transaction.objectStore(storeName);
+		const putRequest = store.put(dataItem);
+
+		putRequest.onsuccess = () => { console.log("file stored with success"); }
+
+  } while (!done);
+}
+
+const getVideoResponse = (request, fileMeta) => {
+  const rangeRequest = request.headers.get('range') || '';
+  const byteRanges = rangeRequest.match(/bytes=(?<from>[0-9]+)?-(?<to>[0-9]+)?/);
+
+  // Using the optional chaining here to access properties of
+  // possibly nullish objects.
+  const rangeFrom = Number(byteRanges?.groups?.from || 0);
+  const rangeTo = Number(byteRanges?.groups?.to || fileMeta.bytesTotal - 1);
+
+  // Omitting implementation for brevity.
+  const streamSource = {
+     pull(controller) {
+       // Read file data here and call `controller.enqueue`
+       // with every retrieved chunk, then `controller.close`
+       // once all data is read.
+     }
+  }
+  const stream = new ReadableStream(streamSource);
+
+  // Make sure to set proper headers when supporting range requests.
+  const responseOpts = {
+    status: rangeRequest ? 206 : 200,
+    statusText: rangeRequest ? 'Partial Content' : 'OK',
+    headers: {
+      'Accept-Ranges': 'bytes',
+      'Content-Length': rangeTo - rangeFrom + 1,
+    },
+  };
+  if (rangeRequest) {
+    responseOpts.headers['Content-Range'] = `bytes ${rangeFrom}-${rangeTo}/${fileMeta.bytesTotal}`;
+  }
+  const response = new Response(stream, responseOpts);
+  return response;
+}
 var fetchRangeData = function(event){
-    var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
-            console.log('Range request for', event.request.url, ', starting position:', pos);
-            event.respondWith(
-              caches.open(cacheName)
-              .then(function(cache) {
-                return cache.match(event.request.url);
-              }).then(function(res) {
-                if (!res) {
-                  return fetch(event.request)
-                  .then(res => {
-                    return res.arrayBuffer();
-                  });
-                }
-                return res.arrayBuffer();
-              }).then(function(ab) {
-                return new Response(
-                  ab.slice(pos),
-                  {
-                    status: 206,
-                    statusText: 'Partial Content',
-                    headers: [
-                      // ['Content-Type', 'video/webm'],
-                      ['Content-Range', 'bytes ' + pos + '-' +
-                        (ab.byteLength - 1) + '/' + ab.byteLength]]
-                  });
-              }));
+
+		const getResponse = async () => {
+    // Omitted Cache API code used to serve static assets.
+
+    const videoResponse = await getVideoResponse(event);
+    if (videoResponse) { return videoResponse; }else{ downloadRangeFile(event)  }
+
+    // Fallback to network.
+    return fetch(event.request);
+  };
+  event.respondWith(getResponse());
+
 }
 
 // Fetch
