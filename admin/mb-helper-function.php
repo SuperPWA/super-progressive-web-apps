@@ -72,7 +72,7 @@ function superpwa_send_feedback() {
 
     $subject = $subject.' - Super Progressive Web Apps';
 
-    if($subject == 'technical issue - Super Progressive Web Apps'){
+    if($subject == 'technical - Super Progressive Web Apps'){
 
           $text = trim($text);
 
