@@ -70,7 +70,9 @@ function superpwa_send_feedback() {
 
     $subject = isset( $form['superpwa_disable_reason'] ) ? $form['superpwa_disable_reason'] : '(no reason given)';
 
-    if($subject == 'technical issue'){
+    $subject = $subject.' - Super Progressive Web Apps';
+
+    if($subject == 'technical issue - Super Progressive Web Apps'){
 
           $text = trim($text);
 
