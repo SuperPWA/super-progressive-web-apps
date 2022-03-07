@@ -26,12 +26,12 @@
     background-color: #fff;
     overflow-y: auto;
 }
-#superpwa-reloaded-feedback-content textarea,
-#superpwa-reloaded-feedback-content input[type="text"] { display:none;width:100%; }
+.mb-box{display: none;width:100%;}
 .superpwa-for-wp-feedback-not-deactivate { display: block; text-align: right; }
 
 #superpwa-reloaded-feedback-content h3{
     margin:5px;
+    font-size: 1em;
 }
 
 @media screen and (max-width:400px){

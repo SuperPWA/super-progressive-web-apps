@@ -1,15 +1,15 @@
 <?php 
 $reasons = array(
     		1 => '<li><label><input type="radio" name="superpwa_disable_reason" value="temporary"/>' . __('It is only temporary', 'superpwa-for-wp') . '</label></li>',
-		2 => '<li><label><input type="radio" name="superpwa_disable_reason" value="stopped showing ads"/>' . __('I stopped showing ads on my site', 'superpwa-for-wp') . '</label></li>',
-		3 => '<li><label><input type="radio" name="superpwa_disable_reason" value="missing feature"/>' . __('I miss a feature', 'superpwa-for-wp') . '</label></li>
-		<li><input type="text" name="superpwa_disable_text[]" value="" placeholder="Please describe the feature"/></li>',
-		4 => '<li><label><input type="radio" name="superpwa_disable_reason" value="technical issue"/>' . __('Technical Issue', 'superpwa-for-wp') . '</label></li>
-		<li><textarea name="superpwa_disable_text[]" placeholder="' . __('Can we help? Please describe your problem', 'superpwa-for-wp') . '"></textarea></li>',
-		5 => '<li><label><input type="radio" name="superpwa_disable_reason" value="other plugin"/>' . __('I switched to another plugin', 'superpwa-for-wp') .  '</label></li>
-		<li><input type="text" name="superpwa_disable_text[]" value="" placeholder="Name of the plugin"/></li>',
+		2 => '<li><label><input type="radio" name="superpwa_disable_reason" value="stopped"/>' . __('I stopped using superPWA on my site', 'superpwa-for-wp') . '</label></li>',
+		3 => '<li><label><input type="radio" name="superpwa_disable_reason" value="missing"/>' . __('I miss a feature', 'superpwa-for-wp') . '</label></li>
+		<li><input class="mb-box missing" type="text" name="superpwa_disable_text[]" value="" placeholder="Please describe the feature"/></li>',
+		4 => '<li><label><input type="radio" name="superpwa_disable_reason" value="technical"/>' . __('Technical Issue', 'superpwa-for-wp') . '</label></li>
+		<li><textarea class="mb-box technical" name="superpwa_disable_text[]" placeholder="' . __('How Can we help? Please describe your problem', 'superpwa-for-wp') . '"></textarea></li>',
+		5 => '<li><label><input type="radio" name="superpwa_disable_reason" value="another"/>' . __('I switched to another plugin', 'superpwa-for-wp') .  '</label></li>
+		<li><input class="mb-box another" type="text" name="superpwa_disable_text[]" value="" placeholder="Name of the plugin"/></li>',
 		6 => '<li><label><input type="radio" name="superpwa_disable_reason" value="other"/>' . __('Other reason', 'superpwa-for-wp') . '</label></li>
-		<li><textarea name="superpwa_disable_text[]" placeholder="' . __('Please specify, if possible', 'superpwa-for-wp') . '"></textarea></li>',
+		<li><textarea class="mb-box other" name="superpwa_disable_text[]" placeholder="' . __('Please specify, if possible', 'superpwa-for-wp') . '"></textarea></li>',
     );
 shuffle($reasons);
 ?>

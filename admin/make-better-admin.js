@@ -24,7 +24,10 @@ jQuery(document).ready(function ($) {
     // show text fields
     $('#superpwa-reloaded-feedback-content input[type="radio"]').click(function () {
         // show text field if there is one
-        $(this).parents('li').next('li').children('input[type="text"], textarea').show();
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".mb-box").not(targetBox).hide();
+        $(targetBox).show();
     });
     // send form or close it
     $('#superpwa-reloaded-feedback-content .button').click(function (e) {
