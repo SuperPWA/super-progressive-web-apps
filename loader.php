@@ -20,6 +20,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/mb-helper-function.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/yandex.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/amp.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/wonderpush.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );
