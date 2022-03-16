@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.9
+Tested up to: 5.9.2
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -185,6 +185,11 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.2.2 =
+* Date: [16.March.2022](https://superpwa.com/superpwa-2-2-2-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : Added Compatibility with WonderPush Pushnotifications plugin #188
+* Enhancement : Improved the Design of User feedback auto email system #252
 
 = 2.2.1 =
 * Date: [17.February.2022](https://superpwa.com/superpwa-2-2-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
