@@ -14,11 +14,13 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-setup.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-settings.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-addons.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-upgrade.php' );
+require_once( SUPERPWA_PATH_ABS . 'admin/mb-helper-function.php' );
 
 // 3rd party compatibility
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/yandex.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/amp.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/wonderpush.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );
