@@ -357,8 +357,10 @@ function superpwa_setting_tabs_html(){
 				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Features (Addons)</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes">Advanced</a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes">Help & Support</a>
-				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License</a>
+				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { 
+                     $expiry_warning = superpwa_license_expire_warning();
+				  	?>
+				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License <?php echo $expiry_warning; ?></a>
 				  <?php } ?>
 				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
 				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License</a>
@@ -367,6 +369,30 @@ function superpwa_setting_tabs_html(){
 				</div>
  <?php
 }
+
+/**
+ * Returns Warning Icon When License Key is Expired
+ */
+function superpwa_license_expire_warning(){
+
+	$license_alert ='';
+		if( defined('SUPERPWA_PRO_VERSION') ){
+
+			$license_info = get_option("superpwa_pro_upgrade_license");
+			if ($license_info) {
+
+			$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
+			$license_info_lifetime = $license_info['pro']['license_key_expires'];
+			$today = date('Y-m-d');
+			$exp_date = $license_exp;
+
+	        $license_alert = $today > $exp_date ? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>": "" ;
+	        }
+	    }
+    return $license_alert;
+}
+
+
 /**
  * Returns Superpwa Setting tabs Styles
  */
