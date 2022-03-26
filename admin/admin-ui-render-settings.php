@@ -610,9 +610,10 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes">Features (Addons)</a>
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no">Advanced</a>
 			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no">Help & Support</a>
-			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ ?>
-			  <!-- <a class="spwa-tablinks" id="spwa-license" href="<?php echo admin_url('admin.php?page=superpwa-upgrade')?> " data-href="no">License</a> -->
-			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License</a>
+			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ 
+			     $expiry_warning = superpwa_license_expire_warning();
+			  	?>
+			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License <?php echo $expiry_warning; ?></a>
 			<?php } ?>
 			</div>
 			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>

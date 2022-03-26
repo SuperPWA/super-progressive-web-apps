@@ -137,6 +137,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.18',//1.8
 						),
+		'qr_code_generator' => array(
+							'name'					=> __( 'QR Code Generator', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Provides you with Install App QR Code which you can download and share with your users to give them easy to use and engaging user experience.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'qr-code.png',
+							'link'					=> 'https://superpwa.com/doc/qr-code-generator-add-on-for-superpwa/',
+							'more_link'					=> 'https://superpwa.com/doc/qr-code-generator-add-on-for-superpwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-qr-code-generator'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.3',
+						),
 	);
 	
 	if ( $slug === false ) {

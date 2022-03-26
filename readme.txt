@@ -186,6 +186,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.3 =
+* Date: [26.March.2022](https://superpwa.com/superpwa-2-2-3-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : Added New Addon QR Code Generator Array #255
+* Enhancement : Added Warning UI on License tab when key is expired #258
+
 = 2.2.2 =
 * Date: [16.March.2022](https://superpwa.com/superpwa-2-2-2-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement : Added Compatibility with WonderPush Pushnotifications plugin #188
