@@ -24,17 +24,19 @@ if ('serviceWorker' in navigator) {
 					a2hsBanner[i].style.display="flex";
 				}
 			}
+			document.cookie = "hidecta=no";
 		}
 	})
 
-	window.addEventListener('appinstalled', function(evt){
+window.addEventListener('appinstalled', function(evt){
 		var a2hsBanner = document.getElementsByClassName("superpwa-sticky-banner");
 		if(a2hsBanner.length){
 			for (var i = 0; i < a2hsBanner.length; i++) {
 				var showbanner = a2hsBanner[i].getAttribute("data-show");
-				a2hsBanner[i].style.display="none";
+					    document.cookie = "hidecta=yes";
+					a2hsBanner[i].style.display="none";
+			    }
 			}
-		}
 	});
 	
 	var a2hsviaClass = document.getElementsByClassName("superpwa-add-via-class");
