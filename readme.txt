@@ -186,6 +186,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.5 =
+* Date: [21.April.2022](https://superpwa.com/superpwa-2-2-5-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Add to home screen was not working when theme manifest is active #271
+
 = 2.2.4 =
 * Date: [8.April.2022](https://superpwa.com/superpwa-2-2-4-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : CTA Banner should be hidden once app is installed #264
