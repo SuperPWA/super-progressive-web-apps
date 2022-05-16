@@ -181,11 +181,11 @@ function superpwa_apple_icons_splash_screen_cb() {
         $a = 'style="display:none"';$src = '';
         if(isset($iosScreenSetting['ios_splash_icon']) && !empty($iosScreenSetting['ios_splash_icon'])){
             $a = '';
-            $src = end($iosScreenSetting['ios_splash_icon']);
+            $src = end($iosScreenSetting['ios_splash_icon']).'?nocache='.uniqid();
         } 
     ?>
     <p id="aft_img_gen"> </p>
-    <img src="<?php echo $src; ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
+    <img src="<?php echo esc_url_raw($src); ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
 
     <script id="iosScreen-data" type="application/json"><?php echo json_encode($splashIconsScreens);?></script>
     <br/>
