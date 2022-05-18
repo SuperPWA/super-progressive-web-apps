@@ -259,9 +259,6 @@ self.addEventListener('fetch', function(e) {
 		return;
     <?php }	?>
        // For Range Headers
-    if (e.request.headers.get('range')) {
-            fetchRangeData(e);
-        } else {
 			// For POST requests, do not use the cache. Serve offline page if offline.
 			if ( e.request.method !== 'GET' ) {
 				e.respondWith(
@@ -297,7 +294,7 @@ self.addEventListener('fetch', function(e) {
 					return caches.match(offlinePage);
 				})
 			);
-   }
+
 });
 
 // Check if current url is in the neverCacheUrls list
