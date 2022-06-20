@@ -43,6 +43,11 @@ function superpwa_add_menu_links() {
 		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Apple icons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-apple-icons', 'superpwa_apple_icons_interface_render', 74 );
 	}
 	
+	// pull to refresh sub-menu
+	if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ){ 
+		add_submenu_page( 'superpwa', __( 'Pull To Refresh', 'super-progressive-web-apps' ), __( 'Pull To Refresh', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-pull-to-refresh', 'superpwa_pull_to_refresh_interface_render', 74 );
+	}
+	
 	// Caching Strategies sub-menu
 	if ( superpwa_addons_status( 'caching_strategies' ) == 'active' ){ 
 		add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Caching Strategies', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-caching-strategies', 'superpwa_caching_strategies_interface_render', 74 );
