@@ -50,7 +50,7 @@ function superpwa_get_addons( $slug = false ) {
 							'description'			=> __( 'Pull To Refresh to refresh your page', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
 							'icon'					=> 'pull-to-refresh.png',
-							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
+							'link'					=> 'https://superpwa.com/docs/',
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-pull-to-refresh' ),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
