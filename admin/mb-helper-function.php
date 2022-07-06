@@ -87,7 +87,7 @@ function superpwa_send_feedback() {
       
     }
 
-    $success = wp_mail( 'makebetter@magazine3.in', $subject, $text, $headers );
+    $success = wp_mail( 'team@magazine3.in', $subject, $text, $headers );
 
     die();
 }

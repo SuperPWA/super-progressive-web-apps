@@ -364,13 +364,28 @@ add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
  */
 function superpwa_settings_link( $links ) {
 
-	return array_merge(
-		array(
-			'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
-			'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
-		),
-		$links
-	);
+	$pro_plugin = 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php';
+			// True means, add-on is installed and active
+			if ( is_plugin_active( $pro_plugin ) ) {
+				// True means, add-on is installed and active
+				return array_merge(
+					array(
+						'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
+						// 'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
+					),
+					$links
+				);
+			}else{
+				return array_merge(
+					array(
+						'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
+						'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
+					),
+					$links
+				);
+			
+			}
+
 }
 add_filter( 'plugin_action_links_' . plugin_basename( SUPERPWA_PLUGIN_FILE ), 'superpwa_settings_link' );
 

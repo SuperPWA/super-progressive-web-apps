@@ -186,6 +186,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.6 =
+* Date: [06.July.2022](https://superpwa.com/superpwa-2-2-6-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Stop servicework for caching the videos. #279
+* BugFixed : Apple Touch Icons & Splash Screen not fetching Welcome screen image #284
+* Enhancement : Added New Addon Pull To Refresh #285
+
 = 2.2.5 =
 * Date: [21.April.2022](https://superpwa.com/superpwa-2-2-5-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : Add to home screen was not working when theme manifest is active #271
