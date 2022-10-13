@@ -248,19 +248,17 @@ function superpwa_add_manifest_to_wp_head() {
 	echo $tags;
 }
 $settings = superpwa_get_settings();
-global $wp;
-$sit_url = home_url( $wp->request );
-$current_page = add_query_arg( home_url( $wp->request, $wp->query_vars ) );
-$current_page_url = $sit_url.$current_page;
-
+$current_page_url = home_url( $_SERVER['REQUEST_URI'] );
 $excluded_urls = explode(",", $settings['excluded_urls']);
 $show_manifest_icon = 0;
-foreach($excluded_urls as $excluded_page_url) {
-	if(trim($excluded_page_url) == trim($current_page_url)){
-		$show_manifest_icon = 1;
+if(!empty($excluded_urls)){
+	foreach($excluded_urls as $excluded_page_url) {
+		if(trim($excluded_page_url) == trim($current_page_url)){
+			$show_manifest_icon = 1;
+		}
 	}
 }
-if($show_manifest_icon ==0){
+if($show_manifest_icon == 0){
 	add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 }
 
