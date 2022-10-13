@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 5.9.3
+Tested up to: 6.0.2
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -185,6 +185,13 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.2.7 =
+* Date: [13.October.2022](https://superpwa.com/superpwa-2-2-7-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Preloader not working in IOS device #288
+* BugFixed : Exclude URLs from Cache list option is not working properly. #300
+* BugFixed : getting error when we are adding range data in cache #311
+* BugFixed : Bug with network-first cache strategy and REST calls #329
 
 = 2.2.6 =
 * Date: [06.July.2022](https://superpwa.com/superpwa-2-2-6-release-note/?utm_source=wordpress.org&utm_medium=changelog)
