@@ -270,7 +270,7 @@ self.addEventListener('fetch', function(e) {
 			}
 			
 			// Revving strategy
-			if ( e.request.mode === 'navigate' && navigator.onLine ) {
+			if ( (e.request.mode === 'navigate' || e.request.mode === 'cors') && navigator.onLine ) {
 				e.respondWith(
 					fetch(e.request).then(function(response) {
 						return caches.open(cacheName).then(function(cache) {
