@@ -613,8 +613,11 @@ function superpwa_admin_interface_render() {
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ 
 			     $expiry_warning = superpwa_license_expire_warning();
 			  	?>
-			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License <?php echo $expiry_warning; ?></a>
-			<?php } ?>
+			    <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License <?php echo $expiry_warning; ?></a>
+			  <?php } ?>
+			  <?php if(!defined('SUPERPWA_PRO_VERSION')){ ?>
+				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;margin-right: 5px; float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no">Upgrade to PRO</a>
+			  <?php } ?>
 			</div>
 			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>
 			<div id="settings" class="spwa-tabcontent">
