@@ -11,10 +11,13 @@
  * @function	superpwa_theme_color_cb()				Theme Color
  * @function	superpwa_app_icon_cb()					Application Icon
  * @function	superpwa_app_icon_cb()					Splash Screen Icon
+ * @function	superpwa_app_screenshots_cb()			Screenshots Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
+ * @function	superpwa_app_category_cb()				App Category Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
  * @function	superpwa_orientation_cb()				Default Orientation Dropdown
  * @function	superpwa_display_cb()					Default Display Dropdown
+ * @function	superpwa_text_direction_cb()			Text Direction Dropdown
  * @function	superpwa_manifest_status_cb()			Manifest Status
  * @function	superpwa_sw_status_cb()					Service Worker Status
  * @function	superpwa_https_status_cb()				HTTPS Status
@@ -137,6 +140,29 @@ function superpwa_splash_icon_cb() {
 }
 
 /**
+ * Screenshots Icon
+ *
+ * @since 1.0
+ */
+function superpwa_app_screenshots_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Application Icon -->
+	<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
+	<button type="button" class="button superpwa-screenshots-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
+	</button>
+	
+	<p class="description">
+		<?php _e('This will be the screenshots of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
  * Splash Screen Background Color
  *
  * @since 1.0
@@ -240,6 +266,36 @@ function superpwa_start_url_cb() {
 }
 
 /**
+ * App Category Dropdown
+ *
+ * @since 1.2
+ */
+function superpwa_app_category_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<fieldset>
+	
+		<!-- WordPress Pages Dropdown -->
+		<label for="superpwa_settings[app_category]">
+		<?php 
+		echo wp_dropdown_categories( array( 
+			'name' => 'superpwa_settings[app_category]', 
+			'echo' => 0, 
+			'show_option_none' => __( '&mdash; Default &mdash;' ), 
+			'taxonomy' => 'category', 
+			'option_none_value' => '0',
+			'selected' =>  isset($settings['app_category']) ? $settings['app_category'] : '',
+		)); ?>
+		</label>
+	
+	</fieldset>
+
+	<?php
+}
+
+/**
  * Offline Page Dropdown
  *
  * @since 1.1
@@ -331,6 +387,37 @@ function superpwa_display_cb() {
 	
 	<p class="description">
 		<?php printf( __( 'Display mode decides what browser UI is shown when your app is launched. <code>Standalone</code> is default. <a href="%s" target="_blank">What\'s the difference? &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=superpwa-plugin&utm_medium=settings-display' ); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Text Direction Dropdown
+ *
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_text_direction_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Display Dropdown -->
+	<label for="superpwa_settings[text_dir]">
+		<select name="superpwa_settings[text_dir]" id="superpwa_settings[display]">
+			<option value="0" <?php if ( isset( $settings['text_dir'] ) ) { selected( $settings['text_dir'], 0 ); } ?>>
+				<?php _e( 'LTR', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="1" <?php if ( isset( $settings['text_dir'] ) ) { selected( $settings['text_dir'], 1 ); } ?>>
+				<?php _e( 'RTL', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
+	</label>
+	
+	<p class="description">
+		<?php printf( __( 'The text direction of your PWA', 'super-progressive-web-apps' )); ?>
 	</p>
 
 	<?php

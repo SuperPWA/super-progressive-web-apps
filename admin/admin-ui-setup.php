@@ -159,6 +159,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
+
+		// Screenshots Icon
+		add_settings_field(
+			'superpwa_app_screenshots',										// ID
+			__('APP Screenshots', 'super-progressive-web-apps'),	// Title
+			'superpwa_app_screenshots_cb',									// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		
 		// Splash Screen Background Color
 		add_settings_field(
@@ -183,6 +192,15 @@ function superpwa_register_settings() {
 			'superpwa_start_url',									// ID
 			__('Start Page', 'super-progressive-web-apps'),			// Title
 			'superpwa_start_url_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+
+		// App Category
+		add_settings_field(
+			'superpwa_app_category',									// ID
+			__('App Category', 'super-progressive-web-apps'),			// Title
+			'superpwa_app_category_cb',								// CB
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -214,6 +232,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 		
+		// Direction
+		add_settings_field(
+			'superpwa_text_direction',									// ID
+			__('Text Direction', 'super-progressive-web-apps'),		// Title
+			'superpwa_text_direction_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+
 	// PWA Status
     add_settings_section(
         'superpwa_pwa_status_section',					// ID
@@ -371,6 +398,8 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
+
+	$settings['screenshots'] = sanitize_text_field( $settings['screenshots'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png' ) : sanitize_text_field( superpwa_httpsify( $settings['screenshots'] ) );
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
@@ -415,13 +444,16 @@ function superpwa_get_settings() {
 				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
+				'screenshots'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
 				'theme_color' 		=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
+				'app_category' 		=> 0,
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
 				'display'			=> 1,
+				'dir'				=> 'ltr',
 				'is_static_manifest'=> 0,
 				'is_static_sw'		=> 0,
 				'disable_add_to_home'=> 0,
@@ -448,13 +480,16 @@ function superpwa_get_default_settings() {
 				'description'		=> get_bloginfo( 'description' ),
 				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
 				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
+				'screenshots'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 				'background_color' 	=> '#D5E0EB',
 				'theme_color' 		=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
 				'offline_page' 		=> 0,
+				'app_category'		=> 0,
 				'orientation'		=> 1,
 				'display'			=> 1,
+				'dir'				=> 'ltr',
 				'is_static_manifest'=> 0,
 				'is_static_sw'		=> 0,
 				'disable_add_to_home'=> 0,

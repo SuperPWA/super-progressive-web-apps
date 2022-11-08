@@ -33,6 +33,21 @@ jQuery(document).ready(function($){
 		})
 		.open();
 	});
+	$('.screenshots-icon-upload').click(function(e) {	// Application Icon upload
+		e.preventDefault();
+		var superpwa_meda_uploader = wp.media({
+			title: 'Screenshots',
+			button: {
+				text: 'Select Icon'
+			},
+			multiple: false  // Set this to true to allow multiple files to be selected
+		})
+		.on('select', function() {
+			var attachment = superpwa_meda_uploader.state().get('selection').first().toJSON();
+			$('.superpwa-screenshots').val(attachment.url);
+		})
+		.open();
+	});
 	$('.superpwa-app-short-name').on('input', function(e) {	// Warn when app_short_name exceeds 12 characters.
 		if ( $('.superpwa-app-short-name').val().length > 15 ) {
 			$('.superpwa-app-short-name').css({'color': '#dc3232'});

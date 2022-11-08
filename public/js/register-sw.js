@@ -50,6 +50,8 @@ if ('serviceWorker' in navigator) {
 		window.addEventListener('online', runOnlineOfflineIndicator);
 		window.addEventListener('offline', runOnlineOfflineIndicator);
 
+		window.addEventListener('fetch',() => console.log("fetch"));
+
 		// Clean snackbarTimeToHide varibale when user hover on the snackbar to prevent hide it
 		container.addEventListener('mouseover', function () {
 			if (snackbarTimeoutHide !== null)

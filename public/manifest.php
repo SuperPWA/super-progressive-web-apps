@@ -125,15 +125,18 @@ function superpwa_manifest_template() {
 	}
 
 	$manifest['icons']            = superpwa_get_pwa_icons();
+	$manifest['screenshots']      = superpwa_get_pwa_icons();
 	$manifest['background_color'] = $settings['background_color'];
 	$manifest['theme_color']      = $settings['theme_color'];
 	$manifest['display']          = superpwa_get_display();
+	$manifest['dir']          	  = superpwa_get_text_dir();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = strlen( superpwa_get_start_url( true ) )>2?user_trailingslashit(superpwa_get_start_url( true )) : superpwa_get_start_url( true );
+	$manifest['categories']       = $settings['app_category'];
 	$manifest['scope']            = strlen(superpwa_get_scope())>2? user_trailingslashit(superpwa_get_scope()) : superpwa_get_scope();
 
-	if(isset($settings['shortcut_url']) && $settings['shortcut_url']!=0){
-		$shortcut_url = get_permalink( $settings['shortcut_url'] );
+	// if(isset($settings['shortcut_url']) && $settings['shortcut_url']!=0){
+		$shortcut_url = !empty($settings['shortcut_url']) ? get_permalink( $settings['shortcut_url'] ) : '';
 		$shortcut_url = superpwa_httpsify( $shortcut_url );
 		// AMP URL
 		if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) {
@@ -143,16 +146,23 @@ function superpwa_manifest_template() {
 			$shortcut_url = superpwa_utm_tracking_for_start_url($shortcut_url);
 		}
 
+
 		$manifest['shortcuts'] = array(
 									array(
 										'name'=>get_the_title( $settings['shortcut_url'] ),
 										'short_name'=>get_the_title( $settings['shortcut_url'] ),
 										'description'=>get_the_title( $settings['shortcut_url'] ),
 										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
-										'icons'=>array(array('src'=>$settings['icon'], 'sizes'=>'192x192'))
+										'icons'=>array(array('src'=>$settings['icon'], 'sizes'=>'192x192')),
+										'screenshots'=>array(array('src'=>$settings['screenshots'], 'sizes'=>'512x512')),
+										'categories'=>$settings['app_category'],
+										'shortcode'=>array('name'=>get_the_title( $settings['shortcut_url'] ),
+										'short_name'=>get_the_title( $settings['shortcut_url'] ),
+										'description'=>get_the_title( $settings['shortcut_url'] ),
+										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),),
 									)
 								);
-	}
+	// }
 
 	/**
 	 * Values that go in to Manifest JSON.
@@ -322,6 +332,23 @@ function superpwa_get_pwa_icons() {
 							'purpose'=> 'maskable',
 						);
 	}
+
+	// Screenshots - Added since 2.2.8
+	if ( @$settings['screenshots'] != '' ) {
+		
+		$icons_array[] = array(
+							'src' 	=> $settings['screenshots'],
+							'sizes'	=> '512x512', // must be 512x512.
+							'type'	=> 'image/png', // must be image/png
+							'purpose'=> 'any',
+						);
+		$icons_array[] = array(
+							'src' 	=> $settings['screenshots'],
+							'sizes'	=> '512x512', // must be 512x512.
+							'type'	=> 'image/png', // must be image/png
+							'purpose'=> 'maskable',
+						);
+	}
 	
 	return $icons_array;
 }
@@ -404,5 +431,37 @@ function superpwa_get_display() {
 			
 		default: 
 			return 'standalone';
+	}
+}
+
+
+/**
+ * Get display of PWA
+ *
+ * @return (string) Display of PWA as set in the plugin settings.
+ * 
+ * @author Jose Varghese
+ * 
+ * @since 2.0
+ */
+function superpwa_get_text_dir() {
+	
+	// Get Settings
+	$settings = superpwa_get_settings();
+	
+	$display = isset( $settings['text_dir'] ) ? $settings['text_dir'] : 0;
+	
+	switch ( $display ) {
+		
+		case 0:
+			return 'ltr';
+			break;
+			
+		case 1:
+			return 'rtl';
+			break;
+			
+		default: 
+			return 'ltr';
 	}
 }
