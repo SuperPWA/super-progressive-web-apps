@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 6.0.2
+Tested up to: 6.0.3
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -185,6 +185,13 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.2.8 =
+* Date: [09.November.2022](https://superpwa.com/superpwa-2-2-8-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : While testing the SupwerPwa on https://www.pwabuilder.com/tool, the service for offline shows zero scores. #316 (Screenshots, Category, Direction, Offline issue)
+* Enhancement : upgrade to pro button #319
+* Enhancement : feat (issue #101): Offline Indicator Notice feature #106
+* BugFixed : issue: excluded_urls" in /wp-content/plugins/super-progressive-web-apps/public/manifest.php on line 252 #333
 
 = 2.2.7 =
 * Date: [13.October.2022](https://superpwa.com/superpwa-2-2-7-release-note/?utm_source=wordpress.org&utm_medium=changelog)
