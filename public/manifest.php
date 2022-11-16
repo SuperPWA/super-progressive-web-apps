@@ -149,19 +149,16 @@ function superpwa_manifest_template() {
 
 		$manifest['shortcuts'] = array(
 									array(
-										'name'=>get_the_title( $settings['shortcut_url'] ),
-										'short_name'=>get_the_title( $settings['shortcut_url'] ),
-										'description'=>get_the_title( $settings['shortcut_url'] ),
+										'name'=>$settings['app_short_name'],
 										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
 										'icons'=>array(array('src'=>$settings['icon'], 'sizes'=>'192x192')),
-										'screenshots'=>array(array('src'=>$settings['screenshots'], 'sizes'=>'512x512')),
-										'categories'=>$settings['app_category'],
-										'shortcode'=>array('name'=>get_the_title( $settings['shortcut_url'] ),
-										'short_name'=>get_the_title( $settings['shortcut_url'] ),
-										'description'=>get_the_title( $settings['shortcut_url'] ),
-										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),),
 									)
 								);
+
+		if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
+			$manifest['shortcuts'][0]['description'] = $settings['description'];
+		}
+
 	// }
 
 	/**
