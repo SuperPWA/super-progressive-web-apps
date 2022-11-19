@@ -353,17 +353,17 @@ function superpwa_setting_tabs_html(){
  	}
 ?>
 			<div class="spwa-tab">
-				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes">Settings</a>
-				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes">Features (Addons)</a>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes">Advanced</a>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes">Help & Support</a>
+				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes"><?php _e('Settings', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes"><?php _e('Features (Addons)', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes"><?php _e('Advanced', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes"><?php _e('Help & Support', 'super-progressive-web-apps') ?></a>
 				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { 
                      $expiry_warning = superpwa_license_expire_warning();
 				  	?>
 				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License <?php echo $expiry_warning; ?></a>
 				  <?php } ?>
 				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License</a>
+				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes"><?php _e('License', 'super-progressive-web-apps') ?></a>
 				<?php } ?>
 				  
 				</div>

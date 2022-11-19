@@ -35,7 +35,7 @@ function superpwa_upgread_pro_interface_render(){
 				        <span class="sp_ov"></span>
 				    </div>
 				    <div class="sp-fp-cnt">
-				            <h1><?php _e( 'Upgrade to SuperPWA Pro'); ?></h1>
+				            <h1><?php _e( 'Upgrade to SuperPWA Pro','super-progressive-web-apps'); ?></h1>
           <p><?php _e( 'Take your PWA to the next level with SuperPWA PRO version.', 'super-progressive-web-apps' ); ?></p>
 				            <a class="buy" href="#upgrade"><?php _e( 'Purchase now', 'super-progressive-web-apps' ); ?></a>
 				    </div>
@@ -96,35 +96,35 @@ function superpwa_upgread_pro_interface_render(){
 				                            <div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Android APK APP Generator</h4>
+				                                    <h4><?php _e( 'Android APK APP Generator', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>Easily generate Android APP (APK package) of your current PWA website.</p>
+				                                <p><?php _e( 'Easily generate Android APP (APK package) of your current PWA website.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 
 				                            <div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Continious Updates</h4>
+				                                    <h4><?php _e( 'Continuous Updates', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>We're continiously updating our premium features and releasing them.</p>
+				                                <p><?php _e( 'We\'re continuously updating our premium features and releasing them.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 																		<div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Innovation</h4>
+				                                    <h4><?php _e( 'Innovation', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>Be the first one to get the innovative features that we build in the future.</p>
+				                                <p><?php _e( 'Be the first one to get the innovative features that we build in the future.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 																		<div class="fe-2">
 				                                <div class="fe-t">
 				                                    <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/tick.png' ?>">
-				                                    <h4>Documentation</h4>
+				                                    <h4><?php _e( 'Documentation', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
-				                                <p>We create tutorials for every possible feature and keep it updated for you.</p>
+				                                <p><?php _e( 'We create tutorials for every possible feature and keep it updated for you.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
 				                        </div><!-- /. fet -->
 				                        <div class="pr-btn">
-				                            <a href="#upgrade">Upgrade to Pro</a>
+				                            <a href="#upgrade"><?php _e( 'Upgrade to Pro', 'super-progressive-web-apps' ); ?></a>
 				                        </div><!-- /. pr-btn -->
 				                    </div><!-- /. pr-fe -->
 				                </div><!-- /.pr -->
@@ -132,155 +132,155 @@ function superpwa_upgread_pro_interface_render(){
 				        </div><!-- /. pvf-cnt -->
 				        <div id="upgrade" class="amp-upg">
 				            <div class="upg-t">
-				                <h2>Let's Upgrade Your PWA</h2>
-				                <span>Choose your plan and upgrade in minutes!</span>
+				                <h2><?php _e( 'Let\'s Upgrade Your PWA', 'super-progressive-web-apps' ); ?></h2>
+				                <span><?php _e( 'Choose your plan and upgrade in minutes!', 'super-progressive-web-apps' ); ?></span>
 				            </div>
 				            <div class="sp-pri-lst">
 				                <div class="pri-tb">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=1" target="_blank">
-				                        <h5>PERSONAL</h5>
-				                        <span class="d-amt"><sup>$</sup>99</span>
-				                        <span class="amt"><sup>$</sup>99</span>
-				                        <span class="s-amt">(Save $59)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">1 Site License</span>
-				                        <span class="e">Tech Support</span>
-				                        <span class="f">1 year Updates </span>
-				                        <span class="sp-sv">Pro Features </span>
-				                        <span class="pri-by">Buy Now</span>
+				                        <h5><?php _e( 'PERSONAL', 'super-progressive-web-apps' ); ?></h5>
+				                        <span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '99', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '99', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $59)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( '1 Site License', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( '1 year Updates', 'super-progressive-web-apps' ); ?> </span>
+				                        <span class="sp-sv"><?php _e( 'Pro Features', 'super-progressive-web-apps' ); ?> </span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				                <div class="pri-tb rec">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=2" target="_blank">
-				                        <h5>MULTIPLE</h5>
-				                        <span class="d-amt"><sup>$</sup>129</span>
-				                        <span class="amt"><sup>$</sup>129</span>
-				                        <span class="s-amt">(Save $79)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">3 Site License</span>
-				                        <span class="e">Tech Support</span>
-				                        <span class="f">1 year Updates</span>
-				                        <span class="sp-sv">Save 78%</span>
-				                        <span class="pri-by">Buy Now</span>
-				                        <span class="sp-rcm">RECOMMENDED</span>
+				                        <h5><?php _e( 'MULTIPLE', 'super-progressive-web-apps' ); ?></h5>
+				                        <span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '129', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '129', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $79)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( '3 Site License', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( '1 year Updates', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-sv"><?php _e( 'Save 78%', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-rcm"><?php _e( 'RECOMMENDED', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=3" target="_blank">
-				                        <h5>WEBMASTER</h5>
-				                        <span class="d-amt"><sup>$</sup>199</span>
-				                        <span class="amt"><sup>$</sup>199</span>
-				                        <span class="s-amt">(Save $99)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">10 Site License</span>
-				                        <span class="e">Tech Support</span>
-				                        <span class="f">Pro Features</span>
-				                        <span class="sp-sv">Save 83%</span>
-				                        <span class="pri-by">Buy Now</span>
+				                        <h5><?php _e( 'WEBMASTER', 'super-progressive-web-apps' ); ?></h5>
+										<span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '199', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '199', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $99)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( '10 Site License', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( 'Pro Features', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-sv"><?php _e( 'Save 83%', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=4" target="_blank">
-				                        <h5>FREELANCER</h5>
-				                        <span class="d-amt"><sup>$</sup>249</span>
-				                        <span class="amt"><sup>$</sup>249</span>
-				                        <span class="s-amt">(Save $119)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">25 Site License</span>
-				                        <span class="e">Tech Support</span>
-				                        <span class="f">Pro Features</span>
-				                        <span class="sp-sv">Save 90%</span>
-				                        <span class="pri-by">Buy Now</span>
+				                        <h5><?php _e( 'FREELANCER', 'super-progressive-web-apps' ); ?></h5>
+										<span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '249', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '249', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $119)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( '25 Site License', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( 'Pro Features', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-sv"><?php _e( 'Save 90%', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=5" target="_blank">
-				                        <h5>AGENCY</h5>
-				                        <span class="d-amt"><sup>$</sup>499</span>
-				                        <span class="amt"><sup>$</sup>499</span>
-				                        <span class="s-amt">(Save $199)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">Unlimited Site</span>
-				                        <span class="e">E-mail support</span>
-				                        <span class="f">Pro Features</span>
-				                        <span class="sp-sv">UNLIMITED</span>
-				                        <span class="pri-by">Buy Now</span>
+				                        <h5><?php _e( 'AGENCY', 'super-progressive-web-apps' ); ?></h5>
+				               			<span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '499', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '499', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $199)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( 'Unlimited Site', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'E-mail Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( 'Pro Features', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-sv"><?php _e( 'UNLIMITED', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				                <div class="pri-tb">
 				                    <a href="https://superpwa.com/checkout?edd_action=add_to_cart&download_id=666&edd_options[price_id]=6" target="_blank">
-				                        <h5>LIFETIME</h5>
-				                        <span class="d-amt"><sup>$</sup>999</span>
-				                        <span class="amt"><sup>$</sup>999</span>
-				                        <span class="s-amt">(Save $199)</span>
-				                        <span class="bil">Billed Annually</span>
-				                        <span class="s">Unlimited Site</span>
-				                        <span class="e">Tech Support</span>
-				                        <span class="f">Pro Features</span>
-				                        <span class="sp-sv">UNLIMITED</span>
-				                        <span class="pri-by">Buy Now</span>
+				                        <h5><?php _e( 'LIFETIME', 'super-progressive-web-apps' ); ?></h5>
+										<span class="d-amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '999', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="amt"><sup><?php _e( '$', 'super-progressive-web-apps' ); ?></sup><?php _e( '999', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s-amt"><?php _e( '(Save $199)', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="bil"><?php _e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="s"><?php _e( 'Unlimited Site', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="e"><?php _e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="f"><?php _e( 'Pro Features', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="sp-sv"><?php _e( 'UNLIMITED', 'super-progressive-web-apps' ); ?></span>
+				                        <span class="pri-by"><?php _e( 'Buy Now', 'super-progressive-web-apps' ); ?></span>
 				                    </a>
 				                </div>
 				            </div><!-- /.pri-lst -->
 				            <div class="tru-us">
 				                <img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/rating.png' ?>">
-				                <h2>Used by more than 40000+ Users!</h2>
-				                <p>More than 40k Websites, Blogs &amp; E-Commerce shops are powered by our SuperPWA making it the #1 Independent PWA plugin in WordPress.</p>
-				                <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?filter=5" target="_blank">Read The Reviews</a>
+				                <h2><?php _e( 'Used by more than 40000+ Users!', 'super-progressive-web-apps' ); ?></h2>
+				                <p><?php _e( 'More than 40k Websites, Blogs &amp; E-Commerce shops are powered by our SuperPWA making it the #1 Independent PWA plugin in WordPress.', 'super-progressive-web-apps' ); ?></p>
+				                <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?filter=5" target="_blank"><?php _e( 'Read The Reviews', 'super-progressive-web-apps' ); ?></a>
 				            </div>
 				        </div><!--/ .amp-upg -->
 				        <div class="ampfaq">
-				            <h4>Frequently Asked Questions</h4>
+				            <h4><?php _e( 'Frequently Asked Questions', 'super-progressive-web-apps' ); ?></h4>
 				            <div class="faq-lst">
 				                <div class="lt">
 				                    <ul>
 				                        <li>
-				                            <span>Is there a setup fee?</span>
-				                            <p>No. There are no setup fees on any of our plans</p>
+				                            <span><?php _e( 'Is there a setup fee?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'No. There are no setup fees on any of our plans', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>What's the time span for your contracts?</span>
-				                            <p>All the plans are year-to-year which are subscribed annually except for lifetime plan.</p>
+				                            <span><?php _e( 'What\'s the time span for your contracts?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'All the plans are year-to-year which are subscribed annually except for lifetime plan.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>What payment methods are accepted?</span>
-				                            <p>We accepts PayPal and Credit Card payments.</p>
+				                            <span><?php _e( 'What payment methods are accepted?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'RWe accepts PayPal and Credit Card payments.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>Do you offer support if I need help?</span>
-				                            <p>Yes! Top-notch customer support for our paid customers is key for a quality product, so we’ll do our very best to resolve any issues you encounter via our support page.</p>
+				                            <span><?php _e( 'Do you offer support if I need help?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'Yes! Top-notch customer support for our paid customers is key for a quality product, so we’ll do our very best to resolve any issues you encounter via our support page.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>Can I use the plugins after my subscription is expired?</span>
-				                            <p>Yes, you can use the plugins but you will not get future updates for those plugins.</p>
+				                            <span><?php _e( 'Can I use the plugins after my subscription is expired?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'Yes, you can use the plugins but you will not get future updates for those plugins.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                    </ul>
 				                </div>
 				                <div class="rt">
 				                    <ul>
 				                        <li>
-				                            <span>Can I cancel my membership at any time?</span>
-				                            <p>Yes. You can cancel your membership by contacting us.</p>
+				                            <span><?php _e( 'Can I cancel my membership at any time?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'Yes. You can cancel your membership by contacting us.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>Can I change my plan later on?</span>
-				                            <p>Yes. You can upgrade your plan by contacting us.</p>
+				                            <span><?php _e( 'Can I change my plan later on?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'Yes. You can upgrade your plan by contacting us.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>Do you offer refunds?</span>
-				                            <p>You are fully protected by our 100% Money Back Guarantee Unconditional. If during the next 14 days you experience an issue that makes the plugin unusable and we are unable to resolve it, we’ll happily offer a full refund.</p>
+				                            <span><?php _e( 'Do you offer refunds?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'You are fully protected by our 100% Money Back Guarantee Unconditional. If during the next 14 days you experience an issue that makes the plugin unusable and we are unable to resolve it, we\'ll happily offer a full refund.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                        <li>
-				                            <span>Do I get updates for the premium plugin?</span>
-				                            <p>Yes, you will get updates for all the premium plugins until your subscription is active.</p>
+				                            <span><?php _e( 'Do I get updates for the premium plugin?', 'super-progressive-web-apps' ); ?></span>
+				                            <p><?php _e( 'Yes, you will get updates for all the premium plugins until your subscription is active.', 'super-progressive-web-apps' ); ?></p>
 				                        </li>
 				                    </ul>
 				                </div>
 				            </div><!-- /.faq-lst -->
 				            <div class="f-cnt">
-				                <span>I have other pre-sale questions, can you help?</span>
-				                <p>All the plans are year-to-year which are subscribed annually.</p>
-				                <a href="https://superpwa.com/contact/'?utm_source=superpwa-plugin&utm_medium=addon-card'">Contact a Human</a>
+				                <span><?php _e( 'I have other pre-sale questions, can you help?', 'super-progressive-web-apps' ); ?></span>
+				                <p><?php _e( 'All the plans are year-to-year which are subscribed annually.', 'super-progressive-web-apps' ); ?></p>
+				                <a href="https://superpwa.com/contact/'?utm_source=superpwa-plugin&utm_medium=addon-card'"><?php _e( 'Contact a Human', 'super-progressive-web-apps' ); ?></a>
 				            </div><!-- /.f-cnt -->
 				        </div><!-- /.faq -->
 				    </div><!-- /. pvf -->

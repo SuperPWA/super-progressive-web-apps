@@ -684,7 +684,7 @@ function superpwa_admin_interface_render() {
         }
     }
 } ?>
-		<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php echo esc_html__('Super Progressive Web Apps', 'super-progressive-web-apps'); ?> <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 		
 		<form action="options.php" method="post" enctype="multipart/form-data">		
 			<?php
@@ -693,10 +693,10 @@ function superpwa_admin_interface_render() {
 			$addon_page = admin_url( 'admin.php?page=superpwa-addons');
 			?>
 			<div class="spwa-tab">
-			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')">Settings</a>
-			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes">Features (Addons)</a>
-			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no">Advanced</a>
-			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no">Help & Support</a>
+			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')"><?php echo __('Settings', 'super-progressive-web-apps'); ?></a>
+			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes"><?php echo __('Features (Addons)', 'super-progressive-web-apps'); ?></a>
+			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo __('Advanced', 'super-progressive-web-apps'); ?></a>
+			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo __('Help & Support', 'super-progressive-web-apps'); ?></a>
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ 
 			     $expiry_warning = superpwa_license_expire_warning();
 			  	?>
@@ -706,7 +706,7 @@ function superpwa_admin_interface_render() {
 				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;margin-right: 5px; float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>
 			  <?php } ?>
 			</div>
-			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> Please Save the settings before moving to other tabs </span>
+			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> <?php _e( 'Please Save the settings before moving to other tabs', 'super-progressive-web-apps' ); ?> </span>
 			<div id="settings" class="spwa-tabcontent">
 			 <?php
 			  	// Basic Application Settings
@@ -718,7 +718,7 @@ function superpwa_admin_interface_render() {
 				echo '<style>.submit{float:left;}</style>';
 				submit_button( __('Save Settings', 'super-progressive-web-apps') );
 				if(!defined('SUPERPWA_PRO_VERSION')){
-					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">'.__( 'Go PRO', 'super-progressive-web-apps').'</a>';
 				}
 			?>
 			</div>
@@ -730,7 +730,7 @@ function superpwa_admin_interface_render() {
 				echo '<style>.submit{float:left;}</style>';
 				submit_button( __('Save Settings', 'super-progressive-web-apps') );
 				if(!defined('SUPERPWA_PRO_VERSION')){
-					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
+					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">'.__( 'Go PRO', 'super-progressive-web-apps').'</a>';
 				}
 			?>
 			</div>
@@ -741,17 +741,17 @@ function superpwa_admin_interface_render() {
 			 //3)Technical issue (supportLink) 4)Report a Bug(Support Link)
 
 			  ?>
-			 <h1>1) Documentation</h1>
-			 <p class="support-cont">All the documents regarding SuperPWA Setup, it's settings detail and also about add-ons setup all you can go through this <b><a href="https://superpwa.com/docs/" target="_blank">Docs link</a></b></p>
+			 <h1><?php esc_html_e(' 1) Documentation', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('All the documents regarding SuperPWA Setup, it\'s settings detail and also about add-ons setup all you can go through this ', 'super-progressive-web-apps'); ?><b><a href="https://superpwa.com/docs/" target="_blank"><?php esc_html_e('Docs link', 'super-progressive-web-apps'); ?></a></b></p>
 
-			 <h1>2) What's New</h1>
-			 <p class="support-cont">We will be continuously working on new features whereas also fixing the bugs and at the sametime releasing new feature add-ons, So to catch all those things just check this link <b><a href="https://superpwa.com/blog/" target="_blank">What's new in SuperPWA</a></b></p>
+			 <h1><?php esc_html_e(' 2) What\'s New', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('We will be continuously working on new features whereas also fixing the bugs and at the sametime releasing new feature add-ons, So to catch all those things just check this link ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/blog/" target="_blank"><?php esc_html_e('What\'s new in SuperPWA', 'super-progressive-web-apps'); ?></a></b></p>
 
-			 <h1>3) Technical Issue</h1>
-			 <p class="support-cont">If you are facing any issues or unable to Setup, you can directly connect us using this link <b><a href="https://superpwa.com/contact/" target="_blank">Contact us</a></b></p>
+			 <h1><?php esc_html_e(' 3) Technical Issue', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('If you are facing any issues or unable to Setup, you can directly connect us using this link', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Contact us', 'super-progressive-web-apps'); ?></a></b></p>
 
-			 <h1>4) Report a Bug</h1>
-			 <p class="support-cont">If you found any bug or having issues with any third party plugins you can contact us <b><a href="https://superpwa.com/contact/" target="_blank">Bug Report</a></b></p>
+			 <h1><?php esc_html_e(' 4) Report a Bug', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('If you found any bug or having issues with any third party plugins you can contact us ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Bug Report', 'super-progressive-web-apps'); ?></a></b></p>
 			</div>
 
 			<div id="superpwa_pro_license" class="spwa-tabcontent">
