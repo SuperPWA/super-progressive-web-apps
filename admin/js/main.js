@@ -33,7 +33,7 @@ jQuery(document).ready(function($){
 		})
 		.open();
 	});
-	$('.screenshots-icon-upload').click(function(e) {	// Application Icon upload
+	$('.superpwa-screenshots-upload').click(function(e) {	// Application Icon upload
 		e.preventDefault();
 		var superpwa_meda_uploader = wp.media({
 			title: 'Screenshots',
