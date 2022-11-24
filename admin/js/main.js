@@ -40,11 +40,26 @@ jQuery(document).ready(function($){
 			button: {
 				text: 'Select Icon'
 			},
-			multiple: false  // Set this to true to allow multiple files to be selected
+			multiple: true  // Set this to true to allow multiple files to be selected
 		})
 		.on('select', function() {
-			var attachment = superpwa_meda_uploader.state().get('selection').first().toJSON();
-			$('.superpwa-screenshots').val(attachment.url);
+			var attachment = superpwa_meda_uploader.state().get('selection').toJSON();
+			var len= attachment.length;
+			var screenshots=[];
+			if(len>8)
+			{
+				alert('Screenshots must be less than or equal to 8');
+				return;
+			}
+			if(len>0)
+			{
+				for(var i=0;i<len;i++)
+				{
+					screenshots.push(attachment[i].url);
+				}
+			}
+			
+			$('.superpwa-screenshots').val(screenshots.join(','));
 		})
 		.open();
 	});

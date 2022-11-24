@@ -125,7 +125,7 @@ function superpwa_manifest_template() {
 	}
 
 	$manifest['icons']            = superpwa_get_pwa_icons();
-	$manifest['screenshots']      = superpwa_get_pwa_icons();
+	$manifest['screenshots']      = superpwa_get_pwa_screenshots();
 	$manifest['background_color'] = $settings['background_color'];
 	$manifest['theme_color']      = $settings['theme_color'];
 	$manifest['display']          = superpwa_get_display();
@@ -329,25 +329,40 @@ function superpwa_get_pwa_icons() {
 							'purpose'=> 'maskable',
 						);
 	}
-
-	// Screenshots - Added since 2.2.8
-	if ( @$settings['screenshots'] != '' ) {
-		
-		$icons_array[] = array(
-							'src' 	=> $settings['screenshots'],
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'any',
-						);
-		$icons_array[] = array(
-							'src' 	=> $settings['screenshots'],
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'maskable',
-						);
-	}
 	
 	return $icons_array;
+}
+
+/**
+ * Get PWA Screenshot
+ *
+ * @return	array	An array of images to be used as the screenshot
+ *
+ * @since	 2.2.8
+ *
+ */
+function superpwa_get_pwa_screenshots() {
+	
+	// Get settings
+	$settings = superpwa_get_settings();
+
+	// Screenshots - Added since 2.2.8
+
+	if ( @$settings['screenshots'] != '' ) {
+		
+		$tmp_arr=explode(',',$settings['screenshots']);
+
+		foreach($tmp_arr as $item){
+			$screenshot_array[] = array(
+				'src' 	=> $item,
+				'sizes'	=> '472x1024', // must be 472x1024.
+				'type'	=> 'image/png', // must be image/png
+				
+			);
+		}
+	}
+	
+	return $screenshot_array;
 }
 
 /**
