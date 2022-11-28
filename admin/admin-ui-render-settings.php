@@ -618,6 +618,17 @@ function superpwa_reset_settings_cb(){
 	<?php
 }
 
+function superpwa_bypass_sw_url_cache_cb(){		
+	$settings = superpwa_get_settings(); 
+	?><input type="checkbox" name="superpwa_settings[bypass_sw_url_cache]" id="superpwa_settings[bypass_sw_url_cache]" value="1" 
+	<?php if ( isset( $settings['bypass_sw_url_cache'] ) ) { checked( '1', $settings['bypass_sw_url_cache'] ); } ?>>
+	<br>
+	<p><?php echo esc_html__(' Enable this option when ', 'super-progressive-web-apps'); ?></p>	
+	<p><?php echo esc_html__(' * Your service worker file does not update or is cached by your server.', 'super-progressive-web-apps'); ?></p>	
+	<p><?php echo esc_html__(' * If manual pre caching pages are not cached.', 'super-progressive-web-apps'); ?></p>	
+	<?php
+}
+
 /**
  * Force Update Service Worker
  *

@@ -464,6 +464,14 @@ function superpwa_wp_fastest_cache_sw_filename( $sw_filename ) {
 	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js&action=wpfastestcache';
 }
 
+/**
+  * Change superpwa_sw_filename When WP Fastest Cache is active.  
+ * @since 2.1.6
+ */
+function superpwa_wp_bypass_sw_url_cache_filename( $sw_filename ) {
+	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js&action=bypasscache';
+}
+
 function superpwa_third_party_plugins_sw_filename(){
 	 /**
 	 * Change superpwa_sw_filename When WP Fastest Cache is active. 
@@ -475,6 +483,13 @@ function superpwa_third_party_plugins_sw_filename(){
 		// Change service worker filename to match WP Fastest Cache action type for js.
 
 		add_filter( 'superpwa_sw_filename', 'superpwa_wp_fastest_cache_sw_filename',99 );
+	}
+	else{
+		$settings = superpwa_get_settings();
+		if ( isset( $settings['bypass_sw_url_cache'] ) && $settings['bypass_sw_url_cache']==1)
+		{
+			add_filter( 'superpwa_sw_filename', 'superpwa_wp_bypass_sw_url_cache_filename',99 );
+		}
 	}
 
 }

@@ -351,6 +351,14 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
+		//Regenerate Service worker
+		add_settings_field(
+			'superpwa_bypass_sw_url_cache',								// ID
+			__('Bypass Service Worker Caching', 'super-progressive-web-apps'),				// Title
+			'superpwa_bypass_sw_url_cache_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
 		// Exclude Urls from Cache list
 		add_settings_field(
 			'superpwa_reset_settings_shortcut',								// ID
@@ -463,6 +471,7 @@ function superpwa_get_settings() {
 				'force_update_sw_setting'=> SUPERPWA_VERSION,
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
+				'bypass_sw_url_cache'=> '',
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
@@ -499,6 +508,7 @@ function superpwa_get_default_settings() {
 				'force_update_sw_setting'=> SUPERPWA_VERSION,
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
+				'bypass_sw_url_cache'=> '',
 			);
 
 	return $settings;
