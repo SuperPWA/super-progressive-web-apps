@@ -151,12 +151,16 @@ function superpwa_manifest_template() {
 									array(
 										'name'=>$settings['app_short_name'],
 										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
-										'icons'=>array(array('src'=>$settings['icon'], 'sizes'=>'192x192')),
 									)
 								);
+		
 
 		if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
 			$manifest['shortcuts'][0]['description'] = $settings['description'];
+		}
+
+		if ( isset( $settings['icon'] ) && ! empty( $settings['icon'] ) ) {
+			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$settings['icon'], 'sizes'=>'192x192'));
 		}
 
 	// }
