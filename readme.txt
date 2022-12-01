@@ -186,6 +186,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.9.1 =
+* Date: [01.December.2022](https://superpwa.com/superpwa-2-2-9-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Fixed issue undefined variable $screenshot_array
+* BugFixed : The APK has crashed at the user's end, and URL shown inside the APK. #359
+
 = 2.2.9 =
 * Date: [29.November.2022](https://superpwa.com/superpwa-2-2-9-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement : Security nonce is missing #349

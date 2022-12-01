@@ -125,7 +125,10 @@ function superpwa_manifest_template() {
 	}
 
 	$manifest['icons']            = superpwa_get_pwa_icons();
-	$manifest['screenshots']      = superpwa_get_pwa_screenshots();
+	if(superpwa_get_pwa_screenshots())
+	{
+		$manifest['screenshots']      = superpwa_get_pwa_screenshots();
+	}
 	$manifest['background_color'] = $settings['background_color'];
 	$manifest['theme_color']      = $settings['theme_color'];
 	$manifest['display']          = superpwa_get_display();
@@ -351,6 +354,8 @@ function superpwa_get_pwa_screenshots() {
 	$settings = superpwa_get_settings();
 
 	// Screenshots - Added since 2.2.8
+
+	$screenshot_array=null;
 
 	if ( @$settings['screenshots'] != '' ) {
 		

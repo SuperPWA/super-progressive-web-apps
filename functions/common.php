@@ -100,7 +100,15 @@ function superpwa_get_start_url( $rel = false ) {
 	if ( $rel === true ) {
 		
 		// Make start_url relative for manifest
-		$start_url = ( parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '' : parse_url( $start_url, PHP_URL_PATH );
+		$addons=get_option('superpwa_active_addons',array());
+		if(in_array('utm_tracking',$addons))
+		{
+			$start_url = ( parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '' : parse_url( $start_url, PHP_URL_PATH );
+		}
+		else
+		{
+			$start_url = ( parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '.' : parse_url( $start_url, PHP_URL_PATH );
+		}
 		
 		return apply_filters( 'superpwa_manifest_start_url', $start_url );
 	}
