@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 6.0.3
+Tested up to: 6.1
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -185,6 +185,18 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.2.9 =
+* Date: [29.November.2022](https://superpwa.com/superpwa-2-2-9-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : Security nonce is missing #349
+* Enhancement : Escaping is missing #348
+* Enhancement : Functions must have a prefix #347
+* Enhancement : BFCM internal offer #352
+* BugFixed : Offline pages not working on Android Devices #91
+* BugFixed : In iOS, the splash screen icon does not work #343
+* BugFixed : Error in manifest file "name of shortcut is an empty string" #351
+* BugFixed : APP Screenshots option not working #353
+* BugFixed : The APK has crashed at the user's end, and URL shown inside the APK. #359
 
 = 2.2.8 =
 * Date: [09.November.2022](https://superpwa.com/superpwa-2-2-8-release-note/?utm_source=wordpress.org&utm_medium=changelog)

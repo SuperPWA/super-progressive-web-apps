@@ -49,7 +49,7 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
     //Ios splash screen
     $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' );
     if( $iosScreenSetting && isset($iosScreenSetting['ios_splash_icon']) && !empty($iosScreenSetting['ios_splash_icon']) ) {
-        $iconsInfo = apple_splashscreen_files_data();
+        $iconsInfo = superpwa_apple_splashscreen_files_data();
         foreach ( $iosScreenSetting['ios_splash_icon'] as $key => $value ) {
             if( !empty($value) && !empty($key) && isset($iconsInfo[$key]) ) {
                 $screenData = $iconsInfo[$key];
@@ -172,7 +172,7 @@ function superpwa_apple_icons_section_cb() {
  */
 function superpwa_apple_icons_splash_screen_cb() {
     $splashIcons = superpwa_apple_icons_get_settings();
-    $splashIconsScreens = apple_splashscreen_files_data();
+    $splashIconsScreens = superpwa_apple_splashscreen_files_data();
     $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' ) ; //New generated icons
     ?>
     <input type="file" id="upload_apple_function" accept="image/png">
@@ -240,7 +240,7 @@ function superpwa_apple_icons_status_bar_style_cb() {
  *
  * @since 1.7
  */ 
-function apple_splashscreen_files_data(){
+function superpwa_apple_splashscreen_files_data(){
     $iosSplashData = array(
             '1136x640'=> array("device-width"=> '320px', "device-height"=> "568px","ratio"=> 2,"orientation"=> "landscape","file"=> "icon_1136x640.png",'name'=> 'iPhone 5/iPhone SE'),
             '640x1136'=> array("device-width"=> '320px', "device-height"=> "568px","ratio"=> 2,"orientation"=> "portrait", "file"=> "icon_640x1136.png",'name'=> 'iPhone 5/iPhone SE'),
@@ -262,6 +262,15 @@ function apple_splashscreen_files_data(){
             '1668x2224'=>array("device-width"=> "834px","device-height"=> "1112px","ratio"=> 2, "orientation"=> "portrait","file"=>"icon_1668x2224.png", 'name'=> 'iPad Pro 10.5"'),
             '1536x2048'=>array("device-width"=> "768px","device-height"=> "1024px","ratio"=> 2, "orientation"=> "portrait","file"=>"icon_1536x2048.png", 'name'=> 'iPad Mini/iPad Air'),
             '2048x1536'=>array("device-width"=> "768px","device-height"=> "1024px","ratio"=> 2,"orientation"=> "landscape","file"=>"icon_2048x1536.png", 'name'=> 'iPad Mini/iPad Air'),
+            '1170x2532'=>array("device-width"=> "390px","device-height"=> "844px","ratio"=> 3,"orientation"=> "portrait","file"=>"icon_1170x2532.png", 'name'=> 'iPhone 12/13/14'),
+            '2532x1170'=>array("device-width"=> "844px","device-height"=> "390px","ratio"=> 3,"orientation"=> "landscape","file"=>"icon_2532x1170.png", 'name'=> 'iPhone 12/13/14'),
+            '2778x1284'=>array("device-width"=> "926px","device-height"=> "428px","ratio"=> 3,"orientation"=> "landscape","file"=>"icon_2778x1284.png", 'name'=> 'iPhone 12 Pro Max/13 Pro Max/14 Plus'),
+            '1284x2778'=>array("device-width"=> "428px","device-height"=> "926px","ratio"=> 3,"orientation"=> "portrait","file"=>"icon_2532x1170.png", 'name'=> 'iPhone 12 Pro Max/13 Pro Max/14 Plus'),
+            '2556x1179'=>array("device-width"=> "852px","device-height"=> "393px","ratio"=> 3,"orientation"=> "landscape","file"=>"icon_2556x1179.png", 'name'=> 'iPhone 14 Pro'),
+            '1179x2556'=>array("device-width"=> "393px","device-height"=> "852px","ratio"=> 3,"orientation"=> "portrait","file"=>"icon_1179x2556.png", 'name'=> 'iPhone 14 Pro'),
+            '2796x1290'=>array("device-width"=> "932px","device-height"=> "430px","ratio"=> 3,"orientation"=> "landscape","file"=>"icon_2796x1290.png", 'name'=> 'iPhone 14 Pro Max'),
+            '1290x2796'=>array("device-width"=> "430px","device-height"=> "932px","ratio"=> 3,"orientation"=> "portrait","file"=>"icon_1290x2796.png", 'name'=> 'iPhone 14 Pro Max'),
+
             );
     return $iosSplashData;
 }
@@ -375,7 +384,7 @@ function superpwa_splashscreen_uploader(){
     WP_Filesystem();
     $zipFileName = $path."/splashScreen.zip";
     $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
-    if($moveFile && spwa_zip_allowed_extensions($zipFileName,['png'])){
+    if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
         $result = unzip_file($zipFileName, $path);
         unlink($zipFileName);    
     }else{
@@ -383,7 +392,7 @@ function superpwa_splashscreen_uploader(){
     }
 
     $pathURL = $upload['baseurl']."/superpwa-splashIcons/super_splash_screens/";
-    $iosScreenData = apple_splashscreen_files_data(); 
+    $iosScreenData = superpwa_apple_splashscreen_files_data(); 
     $iosScreenSetting = (array)get_option( 'superpwa_apple_icons_uploaded' ) ;
     foreach ($iosScreenData as $key => $value) {
          $iosScreenSetting['ios_splash_icon'][$key] = $pathURL.$value['file'];
@@ -393,7 +402,7 @@ function superpwa_splashscreen_uploader(){
 	echo json_encode(array("status"=>200, "message"=> "Splash screen uploaded successfully"));
 	 	  die;
 }
-function spwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
+function superpwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
     $zip = new ZipArchive;
     $zip->open($zip_path);
 

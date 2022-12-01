@@ -1,6 +1,4 @@
 <?php
-
-
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) )
     exit;
@@ -55,6 +53,11 @@ function superpwa_send_feedback() {
         parse_str( $_POST['data'], $form );
     }
 
+    if ( ! wp_verify_nonce( $form['superpwa_deactivate_nonce'], 'superpwa-deactivate-nonce' ) ) {
+        // nonce is not valid.
+        die( __( 'Security check', 'superpwa-for-wp' ) ); 
+    }
+
     $text = '';
     if( isset( $form['superpwa_disable_text'] ) ) {
         $text = implode( "\n\r", $form['superpwa_disable_text'] );
@@ -93,8 +96,6 @@ function superpwa_send_feedback() {
 }
 add_action( 'wp_ajax_superpwa_send_feedback', 'superpwa_send_feedback' );
 
-
-
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_makebetter_email_js' );
 
 function superpwa_enqueue_makebetter_email_js(){
@@ -111,5 +112,4 @@ function superpwa_enqueue_makebetter_email_js(){
 if( is_admin() && superpwa_is_plugins_page()) {
     add_filter('admin_footer', 'superpwa_add_deactivation_feedback_modal');
 }
-
 

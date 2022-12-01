@@ -30,6 +30,7 @@ shuffle($reasons);
     	    <input type="hidden" name="superpwa_disable_from" value="<?php echo $email; ?>"/>
 	    <?php endif; ?>
 	    <input id="superpwa-reloaded-feedback-submit" class="button button-primary" type="submit" name="superpwa_disable_submit" value="<?php _e('Submit & Deactivate', 'superpwa-for-wp'); ?>"/>
+		<input type="hidden" name="superpwa_deactivate_nonce" value="<?=wp_create_nonce( 'superpwa-deactivate-nonce' )?>">
 	    <a class="button"><?php _e('Only Deactivate', 'superpwa-for-wp'); ?></a>
 	    <a class="superpwa-for-wp-feedback-not-deactivate" href="#"><?php _e('Don\'t deactivate', 'superpwa-for-wp'); ?></a>
 	</form>
