@@ -135,7 +135,15 @@ function superpwa_manifest_template() {
 	$manifest['dir']          	  = superpwa_get_text_dir();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = strlen( superpwa_get_start_url( true ) )>2?user_trailingslashit(superpwa_get_start_url( true )) : superpwa_get_start_url( true );
-	$manifest['categories']       = (!empty($settings['app_category']) ? $settings['app_category'] : '');
+	if(!empty($settings['app_category']))
+	{
+		$cat_name=get_cat_name( $settings['app_category']);
+		if(!empty($cat_name))
+		{
+			$manifest['categories']       = [$cat_name];
+		}
+		
+	}
 	$manifest['scope']            = strlen(superpwa_get_scope())>2? user_trailingslashit(superpwa_get_scope()) : superpwa_get_scope();
 
 	// if(isset($settings['shortcut_url']) && $settings['shortcut_url']!=0){
