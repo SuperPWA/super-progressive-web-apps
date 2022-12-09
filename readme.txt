@@ -186,6 +186,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.10 =
+* Date: [09.December.2022](https://superpwa.com/superpwa-2-2-10-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : An error with SuperPWA is displayed while testing in the Page speed dev tool.  #362
+* BugFixed : CTA button in menu is appearing in PWA even if user has downloaded the PWA. #356
+* BugFixed : CTA banner display option "Show on Scroll" not working properly. #350
+* Enhancement :CTA menu button warning on IOS only appears in the English language. #363
+
 = 2.2.9.1 =
 * Date: [01.December.2022](https://superpwa.com/superpwa-2-2-9-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : Fixed issue undefined variable $screenshot_array
