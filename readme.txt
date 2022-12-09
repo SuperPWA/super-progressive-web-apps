@@ -191,6 +191,7 @@ Feel free to get in touch if you have any questions.
 * BugFixed : An error with SuperPWA is displayed while testing in the Page speed dev tool.  #362
 * BugFixed : CTA button in menu is appearing in PWA even if user has downloaded the PWA. #356
 * BugFixed : CTA banner display option "Show on Scroll" not working properly. #350
+* BugFixed : PWA Category issue fixed 
 * Enhancement :CTA menu button warning on IOS only appears in the English language. #363
 
 = 2.2.9.1 =
