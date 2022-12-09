@@ -280,14 +280,17 @@ function superpwa_app_category_cb() {
 		<!-- WordPress Pages Dropdown -->
 		<label for="superpwa_settings[app_category]">
 		<?php 
-		echo wp_dropdown_categories( array( 
-			'name' => 'superpwa_settings[app_category]', 
-			'echo' => 0, 
-			'show_option_none' => __( '&mdash; Default &mdash;' ), 
-			'taxonomy' => 'category', 
-			'option_none_value' => '0',
-			'selected' =>  isset($settings['app_category']) ? $settings['app_category'] : '',
-		)); ?>
+		// Allowed manifest categories
+		$manifest_categories=["business","education","entertainment","finance","fitness","food","games","government","health","kids","lifestyle","magazines","medical","music","navigation","security","shopping","social","sports","travel","utilities","weather"];
+		?>
+			<select name="superpwa_settings[app_category]" id="superpwa_settings[app_category]">
+			<option value=""><?php _e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
+				<?php foreach($manifest_categories as $category){ ?>
+				<option value="<?php echo $category?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $category); } ?>>
+					<?php _e($category, 'super-progressive-web-apps' ); ?>
+				</option>
+				<?php } ?>
+			</select>
 		</label>
 	
 	</fieldset>
