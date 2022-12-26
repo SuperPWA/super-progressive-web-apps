@@ -407,7 +407,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
 
-	$settings['screenshots'] = sanitize_text_field( $settings['screenshots'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/screenshot-472x1024.png' ) : sanitize_text_field( superpwa_httpsify( $settings['screenshots'] ) );
+	$settings['screenshots'] = sanitize_text_field( $settings['screenshots'] );
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
