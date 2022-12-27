@@ -461,7 +461,7 @@ function superpwa_get_offline_page() {
  * @since 2.1.6
  */
 function superpwa_wp_fastest_cache_sw_filename( $sw_filename ) {
-	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js&action=wpfastestcache';
+	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js?timestamp='.time().'&action=wpfastestcache.js';
 }
 
 /**
@@ -469,7 +469,7 @@ function superpwa_wp_fastest_cache_sw_filename( $sw_filename ) {
  * @since 2.1.6
  */
 function superpwa_wp_bypass_sw_url_cache_filename( $sw_filename ) {
-	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js&action=bypasscache';
+	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js?timestamp='.time().'&action=bypasscache.js';
 }
 
 function superpwa_third_party_plugins_sw_filename(){
