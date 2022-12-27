@@ -453,7 +453,7 @@ function superpwa_get_offline_page() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	
-	return get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
+	return (isset($settings['offline_page'] ) && get_permalink( $settings['offline_page'] )) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
 }
 
 /**
