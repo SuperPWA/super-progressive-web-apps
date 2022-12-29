@@ -186,6 +186,14 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.11 =
+* Date: [29.December.2022](https://superpwa.com/superpwa-2-2-11-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Error and warning in application section #358
+* BugFixed : APP screenshots option default link #370
+* BugFixed : A warning appears under the start page and offline page options after resting the settings. #313
+* BugFixed : Script does not have a MIME type. #280
+* BugFixed : Splash Screen Icon is taking app icon image IOS  #290 #302
+
 = 2.2.10 =
 * Date: [09.December.2022](https://superpwa.com/superpwa-2-2-10-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : An error with SuperPWA is displayed while testing in the Page speed dev tool.  #362
