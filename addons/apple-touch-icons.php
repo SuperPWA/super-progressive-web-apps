@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_ati_add_apple_touch_icons( $tags ) {
 	
     // Get the icons added via SuperPWA > Settings
-    $icons = superpwa_get_pwa_icons();
+    //$icons = superpwa_get_pwa_icons();
         // Get settings
     $settings = superpwa_get_settings();
 
@@ -43,8 +43,10 @@ function superpwa_ati_add_apple_touch_icons( $tags ) {
     $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
     $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="'.esc_attr($status_bar_style).'">' . PHP_EOL;
 
-    foreach( $icons as $icon ) {
-        $tags .= '<link rel="apple-touch-icon" sizes="' . $icon['sizes'] . '" href="' . $icon['src'] . '">' . PHP_EOL;
+    if(isset($settings['icon']) && !empty($settings['icon']))
+    {
+        $tags .= '<link rel="apple-touch-icon"  href="' .$settings['icon'] . '">' . PHP_EOL; 
+        $tags .= '<link rel="apple-touch-icon" sizes="192x192" href="' .$settings['icon'] . '">' . PHP_EOL; 
     }
     //Ios splash screen
     $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' );
