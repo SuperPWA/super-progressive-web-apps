@@ -98,13 +98,13 @@ function superpwa_caching_strategies_sw_template($file_string){
 	}
 	if(!empty($script)){
 		$replaceContent = 'e.respondWith(
-			fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
-					cache.put(e.request, response.clone());
-					return response;
-				});  
-			})
-		);';
+					fetch(e.request).then(function(response) {
+						return caches.open(cacheName).then(function(cache) {
+							cache.put(e.request, response.clone());
+							return response;
+						});  
+					})
+				);';
 		$file_string = str_replace($replaceContent, $script, $file_string);
 	}
     return $file_string;
