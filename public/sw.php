@@ -277,7 +277,10 @@ self.addEventListener('fetch', function(e) {
 							cache.put(e.request, response.clone());
 							return response;
 						});  
-					})
+					}).catch(() => {
+						// If the network is unavailable, get
+						return cache.match(e.request.url);
+					});
 				);
 				return;
 			}

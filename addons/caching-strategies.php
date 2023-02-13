@@ -103,7 +103,10 @@ function superpwa_caching_strategies_sw_template($file_string){
 					cache.put(e.request, response.clone());
 					return response;
 				});  
-			})
+			}).catch(() => {
+				// If the network is unavailable, get
+				return cache.match(e.request.url);
+			 });
 		);';
 		$file_string = str_replace($replaceContent, $script, $file_string);
 	}

@@ -186,6 +186,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.12 =
+* Date: [13.February.2023](https://superpwa.com/superpwa-2-2-12-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Issue with Network first, then Cache #336
+* BugFixed : Preloader not working properly. #375
+* Enhancement :Remove Offer Banner #372
+
 = 2.2.11 =
 * Date: [29.December.2022](https://superpwa.com/superpwa-2-2-11-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : Error and warning in application section #358
