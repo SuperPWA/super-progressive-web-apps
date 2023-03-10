@@ -97,18 +97,8 @@ function superpwa_caching_strategies_sw_template($file_string){
 			break;
 	}
 	if(!empty($script)){
-		$replaceContent = 'e.respondWith(
-			fetch(e.request).then(function(response) {
-				return caches.open(cacheName).then(function(cache) {
-					cache.put(e.request, response.clone());
-					return response;
-				});  
-			}).catch(() => {
-				// If the network is unavailable, get
-				return cache.match(e.request.url);
-			 });
-		);';
-		$file_string = str_replace($replaceContent, $script, $file_string);
+		$replace_preg="/\/\/strategy_replace_start((.|\n|\t)*?)\/\/strategy_replace_end/i";
+		$file_string = preg_replace($replace_preg, $script, $file_string);
 	}
     return $file_string;
 }

@@ -186,6 +186,15 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.13 =
+* Date: [10.March.2023](https://superpwa.com/superpwa-2-2-13-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : CTA install banner is appearing even after installing the PWA #381
+* BugFixed : Manifest file showing wrong logo images link #379
+* BugFixed : QR code install link not working #394
+* BugFixed : Preloader showing with delay and takes longer when click is on Image link #395
+* BugFixed : "Stale while revalidate" in the Caching Strategies addon has no effect, it doesn't change the service worker js at all. #396
+
+
 = 2.2.12 =
 * Date: [13.February.2023](https://superpwa.com/superpwa-2-2-12-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : Issue with Network first, then Cache #336
