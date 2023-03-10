@@ -285,6 +285,7 @@ self.addEventListener('fetch', function(e) {
 				return;
 			}
 
+			//strategy_replace_start
 			e.respondWith(
 				caches.match(e.request).then(function(response) {
 					return response || fetch(e.request).then(function(response) {
@@ -297,6 +298,7 @@ self.addEventListener('fetch', function(e) {
 					return caches.match(offlinePage);
 				})
 			);
+			//strategy_replace_end
 
 });
 
