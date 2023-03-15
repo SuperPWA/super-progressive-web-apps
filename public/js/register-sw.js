@@ -261,4 +261,21 @@ window.mobileCheck = function() {
 	        	}
 	        }
 	    }
+		// fix for href="#" in Ios safari standalone
+		var ua = window.navigator.userAgent;
+		var iOS = ua.match(/iPad/i) || ua.match(/iPhone/i);
+		var webkit = ua.match(/WebKit/i);
+		var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
+		if(iOSSafari && (window.matchMedia('(display-mode: standalone)').matches)){
+		setTimeout(function(){
+			const anchor_fix = document.querySelectorAll("a[href='#']");
+			if(anchor_fix.length > 1){
+				for (var i = 0; i < anchor_fix.length; i++) {
+				 anchor_fix[i].setAttribute("href","javascript:void(0);");
+				}
+			}
+		},600);
+	}
+
  });
