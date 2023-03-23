@@ -80,7 +80,7 @@ function superpwa_manifest( $arg = 'src' ) {
 		default:
 		
 			// Get Settings
-			$settings = superpwa_get_settings();
+			$superpwa_settings = superpwa_get_settings();
 			
 			/**
 			 * For static file, return site_url and network_site_url
@@ -89,7 +89,7 @@ function superpwa_manifest( $arg = 'src' ) {
 			 * The site_url template tag retrieves the site url for the 
 			 * current site (where the WordPress core files reside).
 			 */
-			if ( $settings['is_static_manifest'] === 1 ) {
+			if ( $superpwa_settings['is_static_manifest'] === 1 ) {
 				return trailingslashit( network_site_url() ) . $manifest_filename;
 			}
 			
@@ -113,15 +113,15 @@ function superpwa_manifest( $arg = 'src' ) {
 function superpwa_manifest_template() {
 	
 	// Get Settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 
 	$manifest               = array();
-	$manifest['name']       = $settings['app_name'];
-	$manifest['short_name'] = $settings['app_short_name'];
+	$manifest['name']       = $superpwa_settings['app_name'];
+	$manifest['short_name'] = $superpwa_settings['app_short_name'];
 
 	// Description
-	if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
-		$manifest['description'] = $settings['description'];
+	if ( isset( $superpwa_settings['description'] ) && ! empty( $superpwa_settings['description'] ) ) {
+		$manifest['description'] = $superpwa_settings['description'];
 	}
 
 	$manifest['icons']            = superpwa_get_pwa_icons();
@@ -130,23 +130,23 @@ function superpwa_manifest_template() {
 	{
 		$manifest['screenshots']      = $screenshots;
 	}
-	$manifest['background_color'] = $settings['background_color'];
-	$manifest['theme_color']      = $settings['theme_color'];
+	$manifest['background_color'] = $superpwa_settings['background_color'];
+	$manifest['theme_color']      = $superpwa_settings['theme_color'];
 	$manifest['display']          = superpwa_get_display();
 	$manifest['dir']          	  = superpwa_get_text_dir();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = strlen( superpwa_get_start_url( true ) )>2?user_trailingslashit(superpwa_get_start_url( true )) : superpwa_get_start_url( true );
-	if(isset($settings['app_category']) && !empty($settings['app_category']))
+	if(isset($superpwa_settings['app_category']) && !empty($superpwa_settings['app_category']))
 	{
-		$manifest['categories']       = [$settings['app_category']];
+		$manifest['categories']       = [$superpwa_settings['app_category']];
 	}
 	$manifest['scope']            = strlen(superpwa_get_scope())>2? user_trailingslashit(superpwa_get_scope()) : superpwa_get_scope();
 
 	// if(isset($settings['shortcut_url']) && $settings['shortcut_url']!=0){
-		$shortcut_url = !empty($settings['shortcut_url']) ? get_permalink( $settings['shortcut_url'] ) : '';
+		$shortcut_url = !empty($superpwa_settings['shortcut_url']) ? get_permalink( $superpwa_settings['shortcut_url'] ) : '';
 		$shortcut_url = superpwa_httpsify( $shortcut_url );
 		// AMP URL
-		if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $settings['start_url_amp'] == 1 ) {
+		if ( superpwa_is_amp() !== false && isset( $settings['start_url_amp'] ) && $superpwa_settings['start_url_amp'] == 1 ) {
 			$shortcut_url = trailingslashit( $shortcut_url ) . superpwa_is_amp();
 		}
 		if(function_exists('superpwa_utm_tracking_for_start_url')){
@@ -156,18 +156,18 @@ function superpwa_manifest_template() {
 
 		$manifest['shortcuts'] = array(
 									array(
-										'name'=>$settings['app_short_name'],
+										'name'=>$superpwa_settings['app_short_name'],
 										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
 									)
 								);
 		
 
-		if ( isset( $settings['description'] ) && ! empty( $settings['description'] ) ) {
-			$manifest['shortcuts'][0]['description'] = $settings['description'];
+		if ( isset( $superpwa_settings['description'] ) && ! empty( $superpwa_settings['description'] ) ) {
+			$manifest['shortcuts'][0]['description'] = $superpwa_settings['description'];
 		}
 
-		if ( isset( $settings['icon'] ) && ! empty( $settings['icon'] ) ) {
-			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$settings['icon'], 'sizes'=>'192x192'));
+		if ( isset( $superpwa_settings['icon'] ) && ! empty( $superpwa_settings['icon'] ) ) {
+			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$superpwa_settings['icon'], 'sizes'=>'192x192'));
 		}
 
 	// }
@@ -209,16 +209,16 @@ function superpwa_generate_manifest() {
 	superpwa_delete_manifest();
 	
 	// Get Settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 	
 	// Return true if dynamic file returns a 200 response.
 	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_manifest_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
 		
 		// set file status as dynamic file in database.
-		$settings['is_static_manifest'] = 0;
+		$superpwa_settings['is_static_manifest'] = 0;
 		
 		// Write settings back to database.
-		update_option( 'superpwa_settings', $settings );
+		update_option( 'superpwa_settings', $superpwa_settings );
 		
 		return true;
 	}
@@ -227,10 +227,10 @@ function superpwa_generate_manifest() {
 	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
-		$settings['is_static_manifest'] = 1;
+		$superpwa_settings['is_static_manifest'] = 1;
 		
 		// Write settings back to database.
-		update_option( 'superpwa_settings', $settings );
+		update_option( 'superpwa_settings', $superpwa_settings );
 		
 		return true;
 	}
@@ -250,13 +250,12 @@ function superpwa_add_manifest_to_wp_head() {
 	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
 	$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
 	$tags .= '<link rel="prefetch" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
-	
+	// Get Settings
+	$superpwa_settings = superpwa_get_settings();
 	// theme-color meta tag 
 	if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
 		
-		// Get Settings
-		$settings = superpwa_get_settings();
-		$tags .= '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
+		$tags .= '<meta name="theme-color" content="'. $superpwa_settings['theme_color'] .'">' . PHP_EOL;
 	}
 	
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
@@ -265,11 +264,10 @@ function superpwa_add_manifest_to_wp_head() {
 	
 	echo $tags;
 }
-$settings = superpwa_get_settings();
 $show_manifest_icon = 0;
 $current_page_url = home_url( $_SERVER['REQUEST_URI'] );
-if(!empty($settings['excluded_urls'])){
-	$excluded_urls = explode(",", $settings['excluded_urls']);
+if(!empty($superpwa_settings['excluded_urls'])){
+	$excluded_urls = explode(",", $superpwa_settings['excluded_urls']);
 	if(!empty($excluded_urls)){
 		foreach($excluded_urls as $excluded_page_url) {
 			if(trim($excluded_page_url) == trim($current_page_url)){
@@ -308,33 +306,33 @@ function superpwa_delete_manifest() {
 function superpwa_get_pwa_icons() {
 	
 	// Get settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> $settings['icon'],
+							'src' 	=> $superpwa_settings['icon'],
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'any', // any maskable to support adaptive icons
 						);
 	$icons_array[] = array(
-							'src' 	=> $settings['icon'],
+							'src' 	=> $superpwa_settings['icon'],
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'maskable', // any maskable to support adaptive icons
 						);
 	
 	// Splash screen icon - Added since 1.3
-	if ( @$settings['splash_icon'] != '' ) {
+	if ( @$superpwa_settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> $settings['splash_icon'],
+							'src' 	=> $superpwa_settings['splash_icon'],
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'any',
 						);
 		$icons_array[] = array(
-							'src' 	=> $settings['splash_icon'],
+							'src' 	=> $superpwa_settings['splash_icon'],
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'maskable',
@@ -355,15 +353,15 @@ function superpwa_get_pwa_icons() {
 function superpwa_get_pwa_screenshots() {
 	
 	// Get settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 
 	// Screenshots - Added since 2.2.8
 
 	$screenshot_array=null;
 
-	if ( @$settings['screenshots'] != '' ) {
+	if ( @$superpwa_settings['screenshots'] != '' ) {
 		
-		$tmp_arr=explode(',',$settings['screenshots']);
+		$tmp_arr=explode(',',$superpwa_settings['screenshots']);
 
 		foreach($tmp_arr as $item){
 			$screenshot_array[] = array(
@@ -397,9 +395,9 @@ function superpwa_get_scope() {
 function superpwa_get_orientation() {
 	
 	// Get Settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 	
-	$orientation = isset( $settings['orientation'] ) ? $settings['orientation'] : 0;
+	$orientation = isset( $superpwa_settings['orientation'] ) ? $superpwa_settings['orientation'] : 0;
 	
 	switch ( $orientation ) {
 		
@@ -432,9 +430,9 @@ function superpwa_get_orientation() {
 function superpwa_get_display() {
 	
 	// Get Settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 	
-	$display = isset( $settings['display'] ) ? $settings['display'] : 1;
+	$display = isset( $superpwa_settings['display'] ) ? $superpwa_settings['display'] : 1;
 	
 	switch ( $display ) {
 		
@@ -472,9 +470,9 @@ function superpwa_get_display() {
 function superpwa_get_text_dir() {
 	
 	// Get Settings
-	$settings = superpwa_get_settings();
+	$superpwa_settings = superpwa_get_settings();
 	
-	$display = isset( $settings['text_dir'] ) ? $settings['text_dir'] : 0;
+	$display = isset( $superpwa_settings['text_dir'] ) ? $superpwa_settings['text_dir'] : 0;
 	
 	switch ( $display ) {
 		
