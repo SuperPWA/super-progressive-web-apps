@@ -290,8 +290,9 @@ self.addEventListener('fetch', function(e) {
 				caches.match(e.request).then(function(response) {
 					return response || fetch(e.request).then(function(response) {
 						return caches.open(cacheName).then(function(cache) {
-							cache.put(e.request, response.clone());
-							return response;
+							return response.status === 200 
+							? cache.put(e.request, response.clone())
+							: newPromise((resolve, reject) => resolve('Partial Content')); 
 						});  
 					});
 				}).catch(function() {
