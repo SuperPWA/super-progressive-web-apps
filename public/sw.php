@@ -258,7 +258,7 @@ self.addEventListener('fetch', function(e) {
 	if ( new URL(e.request.url).origin !== location.origin )
 		return;
     <?php }	?>
-       // For Range Headers
+
 			// For POST requests, do not use the cache. Serve offline page if offline.
 			if ( e.request.method !== 'GET' ) {
 				e.respondWith(
@@ -269,6 +269,12 @@ self.addEventListener('fetch', function(e) {
 				return;
 			}
 			
+			// For Range Headers
+			if (e.request.headers.get('range')) {
+
+				fetchRangeData(e);
+			}
+			else{
 			// Revving strategy
 			if ( (e.request.mode === 'navigate' || e.request.mode === 'cors') && navigator.onLine ) {
 				e.respondWith(
@@ -290,8 +296,9 @@ self.addEventListener('fetch', function(e) {
 				caches.match(e.request).then(function(response) {
 					return response || fetch(e.request).then(function(response) {
 						return caches.open(cacheName).then(function(cache) {
-							cache.put(e.request, response.clone());
-							return response;
+							return response.status === 200 
+							? cache.put(e.request, response.clone())
+							: newPromise((resolve, reject) => resolve('Partial Content')); 
 						});  
 					});
 				}).catch(function() {
@@ -299,6 +306,8 @@ self.addEventListener('fetch', function(e) {
 				})
 			);
 			//strategy_replace_end
+
+		}
 
 });
 
@@ -500,3 +509,14 @@ function superpwa_third_party_plugins_sw_filename(){
 }
 
 add_action('plugins_loaded','superpwa_third_party_plugins_sw_filename');
+
+function superpwa_sanitize_exclude_urls_cache_sw($urls)
+{
+	$urls_array = explode(',',$urls);
+	foreach($urls_array as $key=>$url){
+		$urls_array[$key]=trailingslashit( $url );
+	}
+	return implode(',',$urls_array);
+}
+
+add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cache_sw' ,9999);

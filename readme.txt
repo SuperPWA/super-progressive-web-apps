@@ -186,6 +186,18 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.14 =
+* Date: [01.April.2023](https://superpwa.com/superpwa-2-2-14-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Call To Action banner should not be shown on inner page #392
+* BugFixed : Super PWA conflicts with the Real Media Library plugin. #391
+* BugFixed : Conflict issue with Wolmart theme #390
+* BugFixed : An error appears in the console if the page contains a video #386
+* BugFixed : QR code is not working #400
+* BugFixed : <a class="superpwa_add_home_close"> effect on SEO #385
+* BugFixed : Conflict with CHP ads block detector #399
+* BugFixed : Need to add JavaScript:void instead of href # in the SuperPwa  #398
+* BugFixed : Need to create an option where the user can show the add-to-screen banner for particular pages. #402
+
 = 2.2.13 =
 * Date: [10.March.2023](https://superpwa.com/superpwa-2-2-13-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : CTA install banner is appearing even after installing the PWA #381
@@ -193,7 +205,6 @@ Feel free to get in touch if you have any questions.
 * BugFixed : QR code install link not working #394
 * BugFixed : Preloader showing with delay and takes longer when click is on Image link #395
 * BugFixed : "Stale while revalidate" in the Caching Strategies addon has no effect, it doesn't change the service worker js at all. #396
-
 
 = 2.2.12 =
 * Date: [13.February.2023](https://superpwa.com/superpwa-2-2-12-release-note/?utm_source=wordpress.org&utm_medium=changelog)
