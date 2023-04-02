@@ -271,8 +271,8 @@ self.addEventListener('fetch', function(e) {
 			
 			// For Range Headers
 			if (e.request.headers.get('range')) {
-
 				fetchRangeData(e);
+				return;
 			}
 			else{
 			// Revving strategy
@@ -296,9 +296,8 @@ self.addEventListener('fetch', function(e) {
 				caches.match(e.request).then(function(response) {
 					return response || fetch(e.request).then(function(response) {
 						return caches.open(cacheName).then(function(cache) {
-							return response.status === 200 
-							? cache.put(e.request, response.clone())
-							: newPromise((resolve, reject) => resolve('Partial Content')); 
+							cache.put(e.request, response.clone());
+							return response; 
 						});  
 					});
 				}).catch(function() {
