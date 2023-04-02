@@ -186,6 +186,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+
+= 2.2.14.1 =
+* Date: [02.April.2023](https://superpwa.com/superpwa-2-2-14-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed : Media files not loading properly after 2.2.14 update #405
+
 = 2.2.14 =
 * Date: [01.April.2023](https://superpwa.com/superpwa-2-2-14-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed : Call To Action banner should not be shown on inner page #392
