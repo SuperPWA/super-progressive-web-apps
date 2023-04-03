@@ -270,11 +270,9 @@ self.addEventListener('fetch', function(e) {
 			}
 			
 			// For Range Headers
-			if (e.request.headers.get('range')) {
-				fetchRangeData(e);
+			if (e.request.headers.has('range')) {
 				return;
 			}
-			else{
 			// Revving strategy
 			if ( (e.request.mode === 'navigate' || e.request.mode === 'cors') && navigator.onLine ) {
 				e.respondWith(
@@ -306,7 +304,6 @@ self.addEventListener('fetch', function(e) {
 			);
 			//strategy_replace_end
 
-		}
 
 });
 
