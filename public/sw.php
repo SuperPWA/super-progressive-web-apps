@@ -353,8 +353,9 @@ function superpwa_register_sw() {
 
 	if($include_script){
 		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
+		$superpwa_sw_version = isset($settings['force_update_sw_setting'])? $settings['force_update_sw_setting'] : time();
 		$localize = array(
-				'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
+				'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ).'?'.$superpwa_sw_version,
 				'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 				'enableOnDesktop'=> false,
 			);
