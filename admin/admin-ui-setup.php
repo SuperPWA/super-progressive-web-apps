@@ -390,9 +390,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize Application Short Name
 	if(function_exists('mb_substr')){
-	$settings['app_short_name'] = mb_substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	$settings['app_short_name'] = mb_substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 20 );
 	} else {
-	    $settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	    $settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 20 );
 	}
 	
 	// Sanitize description
