@@ -216,8 +216,8 @@ function superpwa_start_url_cb() {
 			<!-- WordPress Pages Dropdown -->
 			<label for="superpwa_settings[startpage_type]">
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
-				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php _e(' Page ', 'super-progressive-web-apps') ?></option>
-				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php _e(' Post ', 'super-progressive-web-apps') ?></option>
+				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php _e(' Select Page ', 'super-progressive-web-apps') ?></option>
+				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php _e(' Select Post ', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
