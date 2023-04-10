@@ -351,14 +351,6 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
-		//Regenerate Service worker
-		add_settings_field(
-			'superpwa_bypass_sw_url_cache',								// ID
-			__('Bypass Service Worker Caching', 'super-progressive-web-apps'),				// Title
-			'superpwa_bypass_sw_url_cache_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
 		// Exclude Urls from Cache list
 		add_settings_field(
 			'superpwa_reset_settings_shortcut',								// ID
