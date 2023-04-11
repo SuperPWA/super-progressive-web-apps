@@ -338,6 +338,16 @@ function superpwa_get_pwa_icons() {
 							'purpose'=> 'maskable',
 						);
 	}
+
+	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
+		
+		$icons_array[] = array(
+							'src' 	=> $superpwa_settings['monochrome_icon'],
+							'sizes'	=> '512x512', // must be 512x512.
+							'type'	=> 'image/png', // must be image/png
+							'purpose'=> 'monochrome',
+						);
+	}
 	
 	return $icons_array;
 }

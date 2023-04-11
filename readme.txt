@@ -66,6 +66,7 @@ Here are the current features of Super Progressive Web Apps:
 * New in version 2.0: SuperPWA is now compatible with WordPress installed in a sub-folder. 
 * New in version 2.0: You can now set [display property](https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=wordpress.org&utm_medium=description) from SuperPWA settings.
 * New in version 2.1.1: SuperPWA now supports Maskable Icons.
+* New in version 2.1.15: SuperPWA now supports Monochrome Icon.
 * [Full changelog](https://superpwa.com/changelog/) 
 
 **Upcoming features:**
@@ -186,6 +187,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+
+= 2.2.15 =
+* Date: [11.April.2023](https://superpwa.com/superpwa-2-2-15-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* New : Added Monochrome icon to manifest  #328
+* Enhancement : Set post as Start Page #328 
+* Enhancement : Increased character limit of app name to 20  #328  
+* BugFixed : Conflict with WP Fastescache plugin. #401
 
 = 2.2.14.1 =
 * Date: [02.April.2023](https://superpwa.com/superpwa-2-2-14-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)

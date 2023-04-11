@@ -12,6 +12,7 @@
  * @function	superpwa_app_icon_cb()					Application Icon
  * @function	superpwa_app_icon_cb()					Splash Screen Icon
  * @function	superpwa_app_screenshots_cb()			Screenshots Icon
+ * @function	superpwa_app_monochrome_icon_cb()		Monochrome Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_app_category_cb()				App Category Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
@@ -157,6 +158,29 @@ function superpwa_app_screenshots_cb() {
 	
 	<p class="description">
 		<?php _e('This will be the screenshots of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>472x1024</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
+ * Monochrome Icon
+ *
+ * @since 1.0
+ */
+function superpwa_app_monochrome_icon_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Monochrome Icon -->
+	<input type="text" name="superpwa_settings[monochrome_icon]" id="superpwa_settings[monochrome_icon]" class="superpwa-monochromeicon regular-text" size="50" value="<?php echo isset( $settings['monochrome_icon'] ) ? esc_attr( $settings['monochrome_icon']) : ''; ?>">
+	<button type="button" class="button superpwa-monochrome-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Monochrome Icon', 'super-progressive-web-apps' ); ?>
+	</button>
+	
+	<p class="description">
+		<?php _e('Please upload Monochrome icon with transparent background. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php

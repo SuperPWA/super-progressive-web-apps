@@ -150,7 +150,14 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+		// Monodchome Icon
+		add_settings_field(
+			'superpwa_app_monochrome',								// ID
+			__('Monochome Icon', 'super-progressive-web-apps'),	    // Title
+			'superpwa_app_monochrome_icon_cb',						// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		// Splash Screen Icon
 		add_settings_field(
 			'superpwa_splash_icon',									// ID
@@ -466,6 +473,7 @@ function superpwa_get_settings() {
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
 				'bypass_sw_url_cache'=> '',
+				'monochrome_icon'=>'',
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
