@@ -45,7 +45,6 @@ function superpwa_caching_strategies_sw_template($file_string){
 					.then(function(cache) {
 						return cache.match(e.request)
 							.then( function(cacheResponse) {
-							
 									return cacheResponse || fetch(e.request.url).then(function(networkResponse) {
 											cache.put(e.request, networkResponse.clone())
 											return networkResponse;
