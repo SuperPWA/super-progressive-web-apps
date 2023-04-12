@@ -189,11 +189,12 @@ Feel free to get in touch if you have any questions.
 
 
 = 2.2.15 =
-* Date: [11.April.2023](https://superpwa.com/superpwa-2-2-15-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [12.April.2023](https://superpwa.com/superpwa-2-2-15-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * New : Added Monochrome icon to manifest  #328
 * Enhancement : Set post as Start Page #328 
 * Enhancement : Increased character limit of app name to 20  #328  
 * BugFixed : Conflict with WP Fastescache plugin. #401
+* BugFixed : Assets not loading with Cache First then Network strategy. #408
 
 = 2.2.14.1 =
 * Date: [02.April.2023](https://superpwa.com/superpwa-2-2-14-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
