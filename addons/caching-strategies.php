@@ -41,27 +41,24 @@ function superpwa_caching_strategies_sw_template($file_string){
 			break;
 		case 'cache_first':
 			$script	= 	'e.respondWith(
-			caches.open(cacheName)
-				.then(function(cache) {
-					cache.match(e.request)
-						.then( function(cacheResponse) {
-							if(cacheResponse)
-								return cacheResponse
-							else
-								return fetch(e.request)
-									.then(function(networkResponse) {
-										cache.put(e.request, networkResponse.clone())
-										return networkResponse
-									})
+				caches.open(cacheName)
+					.then(function(cache) {
+						return cache.match(e.request)
+							.then( function(cacheResponse) {
+							
+									return cacheResponse || fetch(e.request.url).then(function(networkResponse) {
+											cache.put(e.request, networkResponse.clone())
+											return networkResponse;
+										})
+							})
+					}).catch(function(){
+						return fetch(e.request.url).then(function(response) {
+							return caches.open(cacheName).then(function(cache) {
+								cache.put(e.request, response.clone());
+								return response;
+							});  
 						})
-				}).catch(function(){
-					return fetch(e.request).then(function(response) {
-						return caches.open(cacheName).then(function(cache) {
-							cache.put(e.request, response.clone());
-							return response;
-						});  
 					})
-				})
 		);';
 			break;
 		case 'steal_while_revalidate':
