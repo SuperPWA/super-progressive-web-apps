@@ -467,46 +467,6 @@ function superpwa_get_offline_page() {
 	return (isset($settings['offline_page'] ) && get_permalink( $settings['offline_page'] )) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( superpwa_get_bloginfo( 'sw' ) );
 }
 
-/**
-  * Change superpwa_sw_filename When WP Fastest Cache is active.  
- * @since 2.1.6
- */
-function superpwa_wp_fastest_cache_sw_filename( $sw_filename ) {
-	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js?timestamp='.time();
-}
-
-/**
-  * Change superpwa_sw_filename When Bypass cache option is active.  
- * @since 2.1.6
- */
-function superpwa_wp_bypass_sw_url_cache_filename( $sw_filename ) {
-	return  'superpwa-sw' . superpwa_multisite_filename_postfix() . '.js?timestamp='.time();
-}
-
-function superpwa_third_party_plugins_sw_filename(){
-	 /**
-	 * Change superpwa_sw_filename When WP Fastest Cache is active. 
-	 * 
-	 * @since 2.1.6
-	 */
-	if ( class_exists('WpFastestCache') ) {
-		
-		// Change service worker filename to match WP Fastest Cache action type for js.
-
-		add_filter( 'superpwa_sw_filename', 'superpwa_wp_fastest_cache_sw_filename',99 );
-	}
-	else{
-		$settings = superpwa_get_settings();
-		if ( isset( $settings['bypass_sw_url_cache'] ) && $settings['bypass_sw_url_cache']==1)
-		{
-			add_filter( 'superpwa_sw_filename', 'superpwa_wp_bypass_sw_url_cache_filename',99 );
-		}
-	}
-
-}
-
-add_action('plugins_loaded','superpwa_third_party_plugins_sw_filename');
-
 function superpwa_sanitize_exclude_urls_cache_sw($urls)
 {
 	$urls_array = explode(',',$urls);

@@ -150,7 +150,14 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+		// Monodchome Icon
+		add_settings_field(
+			'superpwa_app_monochrome',								// ID
+			__('Monochome Icon', 'super-progressive-web-apps'),	    // Title
+			'superpwa_app_monochrome_icon_cb',						// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		// Splash Screen Icon
 		add_settings_field(
 			'superpwa_splash_icon',									// ID
@@ -351,14 +358,6 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
-		//Regenerate Service worker
-		add_settings_field(
-			'superpwa_bypass_sw_url_cache',								// ID
-			__('Bypass Service Worker Caching', 'super-progressive-web-apps'),				// Title
-			'superpwa_bypass_sw_url_cache_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
 		// Exclude Urls from Cache list
 		add_settings_field(
 			'superpwa_reset_settings_shortcut',								// ID
@@ -390,9 +389,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize Application Short Name
 	if(function_exists('mb_substr')){
-	$settings['app_short_name'] = mb_substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	$settings['app_short_name'] = mb_substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 20 );
 	} else {
-	    $settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 15 );
+	    $settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 20 );
 	}
 	
 	// Sanitize description
@@ -411,7 +410,9 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
-	
+
+	// Sanitize startpage type
+	$settings['startpage_type'] = sanitize_text_field( $settings['startpage_type'] );
 	/**
 	 * Get current settings already saved in the database.
 	 * 
@@ -472,6 +473,7 @@ function superpwa_get_settings() {
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
 				'bypass_sw_url_cache'=> '',
+				'monochrome_icon'=>'',
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );

@@ -12,6 +12,7 @@
  * @function	superpwa_app_icon_cb()					Application Icon
  * @function	superpwa_app_icon_cb()					Splash Screen Icon
  * @function	superpwa_app_screenshots_cb()			Screenshots Icon
+ * @function	superpwa_app_monochrome_icon_cb()		Monochrome Icon
  * @function	superpwa_start_url_cb()					Start URL Dropdown
  * @function	superpwa_app_category_cb()				App Category Dropdown
  * @function	superpwa_offline_page_cb()				Offline Page Dropdown
@@ -24,7 +25,7 @@
  * @function	superpwa_disable_add_to_home_cb()		Disable Add to home
  * @function	superpwa_admin_interface_render()		Admin interface renderer
  */
-
+require_once( SUPERPWA_PATH_ABS . 'functions/wp_dropdown_posts.php' );
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -62,7 +63,7 @@ function superpwa_app_short_name_cb() {
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text superpwa-app-short-name" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description">
-			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>15</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
+			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>20</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
 		</p>
 		
 	</fieldset>
@@ -163,6 +164,29 @@ function superpwa_app_screenshots_cb() {
 }
 
 /**
+ * Monochrome Icon
+ *
+ * @since 1.0
+ */
+function superpwa_app_monochrome_icon_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	
+	<!-- Monochrome Icon -->
+	<input type="text" name="superpwa_settings[monochrome_icon]" id="superpwa_settings[monochrome_icon]" class="superpwa-monochromeicon regular-text" size="50" value="<?php echo isset( $settings['monochrome_icon'] ) ? esc_attr( $settings['monochrome_icon']) : ''; ?>">
+	<button type="button" class="button superpwa-monochrome-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Monochrome Icon', 'super-progressive-web-apps' ); ?>
+	</button>
+	
+	<p class="description">
+		<?php _e('Please upload Monochrome icon with transparent background. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+/**
  * Splash Screen Background Color
  *
  * @since 1.0
@@ -213,7 +237,13 @@ function superpwa_start_url_cb() {
 	$settings = superpwa_get_settings(); ?>
 	
 	<fieldset>
-	
+			<!-- WordPress Pages Dropdown -->
+			<label for="superpwa_settings[startpage_type]">
+			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
+				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php _e(' Select Page ', 'super-progressive-web-apps') ?></option>
+				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php _e(' Select Post ', 'super-progressive-web-apps') ?></option>
+			</select>
+		</label>
 		<!-- WordPress Pages Dropdown -->
 		<label for="superpwa_settings[start_url]">
 		<?php echo wp_dropdown_pages( array( 
@@ -221,14 +251,54 @@ function superpwa_start_url_cb() {
 				'echo' => 0, 
 				'show_option_none' => __( '&mdash; Homepage &mdash;' ), 
 				'option_none_value' => '0', 
+				'id' =>'superpwa_start_pages',
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>
+		<!-- WordPress Posts Dropdown -->
+		<label for="superpwa_settings[start_url]">
+		<?php   wp_dropdown_posts( array( 
+				'select_name' => 'superpwa_settings[start_url]', 
+				'echo' => 1,
+				'id' =>'superpwa_start_posts',
+				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
+			)); ?>
+		</label>
+
 		
 		<p class="description">
 			<?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?>
 		</p>
+		<script>
 		
+		document.addEventListener('DOMContentLoaded', () => {
+			const superpwa_stype = document.getElementById('superpwa_settings_startpage_type');
+			if(superpwa_stype){
+				superpwa_stype_toggle(superpwa_stype.value);
+				superpwa_stype.addEventListener("change", (e) => {
+				superpwa_stype_toggle(e.target.value);
+            });
+			}
+           
+        });
+	
+		function superpwa_stype_toggle(status ='page') {
+			const page_select = document.getElementById('superpwa_start_pages');
+			const post_select = document.getElementById('superpwa_start_posts');
+			if(status=="post"){
+				page_select.setAttribute('disabled',true);
+				page_select.parentNode.style.display="none";
+				post_select.removeAttribute('disabled');
+				post_select.parentNode.style.display="inline-block";
+			}
+			else{
+				post_select.setAttribute('disabled',true);
+				post_select.parentNode.style.display="none";
+				page_select.removeAttribute('disabled');
+				page_select.parentNode.style.display="inline-block";
+			} 
+		}
+	    </script>
 		<?php if ( superpwa_is_amp() ) { ?>
 		
 			<!--  AMP Page As Start Page -->
@@ -618,17 +688,6 @@ function superpwa_reset_settings_cb(){
             <?php echo esc_html__('Reset','super-progressive-web-apps'); ?>
         </button>
         
-	<?php
-}
-
-function superpwa_bypass_sw_url_cache_cb(){		
-	$settings = superpwa_get_settings(); 
-	?><input type="checkbox" name="superpwa_settings[bypass_sw_url_cache]" id="superpwa_settings[bypass_sw_url_cache]" value="1" 
-	<?php if ( isset( $settings['bypass_sw_url_cache'] ) ) { checked( '1', $settings['bypass_sw_url_cache'] ); } ?>>
-	<br>
-	<p><?php echo esc_html__(' Enable this option when ', 'super-progressive-web-apps'); ?></p>	
-	<p><?php echo esc_html__(' * Your service worker file does not update or is cached by your server.', 'super-progressive-web-apps'); ?></p>	
-	<p><?php echo esc_html__(' * If manual pre caching pages are not cached.', 'super-progressive-web-apps'); ?></p>	
 	<?php
 }
 
