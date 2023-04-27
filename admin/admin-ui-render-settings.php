@@ -495,6 +495,21 @@ function superpwa_text_direction_cb() {
 
 	<?php
 }
+function superpwa_related_applications_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	<fieldset>
+		<label for="superpwa_settings[related_applications]">PlayStore App ID</label>&nbsp;
+		<input type="text" name="superpwa_settings[related_applications]" class="regular-text" placeholder="com.example.app" value="<?php if ( isset( $settings['related_applications'] ) && ( ! empty($settings['related_applications']) ) ) echo esc_attr($settings['related_applications']); ?>"/>
+	</fieldset>
+	<fieldset>
+		<label for="superpwa_settings[related_applications_ios]">AppStore App ID</label>&nbsp;
+		<input type="text" name="superpwa_settings[related_applications_ios]" placeholder="id123456789" class="regular-text" value="<?php if ( isset( $settings['related_applications_ios'] ) && ( ! empty($settings['related_applications_ios']) ) ) echo esc_attr($settings['related_applications_ios']); ?>"/>
+	</fieldset>
+
+	<?php
+}
 
 /**
  * Manifest Status

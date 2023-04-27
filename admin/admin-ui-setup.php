@@ -248,6 +248,14 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 
+		add_settings_field(
+			'superpwa_related_applications',									// ID
+			esc_html__('Related Application', 'super-progressive-web-apps'),	// Title
+			'superpwa_related_applications_cb',								// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+
 	// PWA Status
     add_settings_section(
         'superpwa_pwa_status_section',					// ID
@@ -295,7 +303,7 @@ function superpwa_register_settings() {
     	// Disabling "Add to home screen"
 		add_settings_field(
 			'superpwa_disable_add_to_home',								// ID
-			__('Disable "Add to home screen"', 'super-progressive-web-apps'),				// Title
+			__('<label for="superpwa_settings[disable_add_to_home]">Disable "Add to home screen"</label>', 'super-progressive-web-apps'),				// Title
 			'superpwa_disable_add_to_home_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -313,7 +321,7 @@ function superpwa_register_settings() {
 		// Yandex Support
 		add_settings_field(
 			'superpwa_yandex_support_shortcut',								// ID
-			__('Yandex support', 'super-progressive-web-apps'),				// Title
+			__('<label for="superpwa_settings[yandex_support]">Yandex support</label>', 'super-progressive-web-apps'),				// Title
 			'superpwa_yandex_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -321,7 +329,7 @@ function superpwa_register_settings() {
 		// Analytics support
 		add_settings_field(
 			'superpwa_analytics_support_shortcut',								// ID
-			__('Offline analytics ', 'super-progressive-web-apps'),				// Title
+			__('<label for="superpwa_settings[analytics_support]">Offline analytics </label>', 'super-progressive-web-apps'),				// Title
 			'superpwa_analytics_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -329,7 +337,7 @@ function superpwa_register_settings() {
 		// Cache External Origin URLs
 		add_settings_field(
 			'superpwa_cache_external_urls_shortcut',								// ID
-			__('Cache External Origin URLs', 'super-progressive-web-apps'),				// Title
+			__('<label for="superpwa_settings[cache_external_urls]">Cache External Origin URLs</label>', 'super-progressive-web-apps'),				// Title
 			'superpwa_cache_external_urls_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
