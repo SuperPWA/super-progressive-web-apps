@@ -252,6 +252,7 @@ function superpwa_start_url_cb() {
 				'show_option_none' => __( '&mdash; Homepage &mdash;' ), 
 				'option_none_value' => '0', 
 				'id' =>'superpwa_start_pages',
+				'class' =>'superpwa-select2 regular-text js_page',
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>
@@ -261,6 +262,8 @@ function superpwa_start_url_cb() {
 				'select_name' => 'superpwa_settings[start_url]', 
 				'echo' => 1,
 				'id' =>'superpwa_start_posts',
+				'class' =>'superpwa-select2 regular-text js_post',
+				'posts_per_page' => 50,
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>

@@ -120,6 +120,50 @@ jQuery(document).ready(function($){
 		var heading = $('.wrap').find('h1').html()
 		$('.wrap').find('h1').html('<a href="./admin.php?page=superpwa-addons" style="text-decoration:none;color: #5b5b5d;">SuperPWA Add-ons</a> > ' + heading)
 	}
+
+	function superpwa_select2(){
+		var $select2 = jQuery('.superpwa-select2');
+		if($select2.length > 0){
+
+			jQuery($select2).each(function(i, obj) {
+				var currentP = jQuery(this);  
+				var $defaultResults = jQuery('option[value]:not([selected])', currentP);  
+				
+				var defaultResults = [];
+				$defaultResults.each(function () {
+					var $option = jQuery(this);
+					defaultResults.push({
+						id: $option.attr('value'),
+						text: $option.text()
+					});
+				});
+
+				var type = jQuery('#superpwa_settings_startpage_type').val();
+				type = 'page';
+				if (currentP.hasClass("js_post")) {
+					type = 'post';
+				}
+				var ajaxnewurl = ajaxurl + '?action=superpwa_get_select2_data&superpwa_security_nonce='+superpwa_obj.superpwa_security_nonce+'&type='+type;
+
+				currentP.select2({           
+					ajax: {             
+						url: ajaxnewurl,
+						delay: 250, 
+						cache: false,
+					},            
+					minimumInputLength: 2, 
+					minimumResultsForSearch : 50,
+					dataAdapter: jQuery.fn.select2.amd.require('select2/data/extended-ajax'),
+					defaultResults: defaultResults
+				});
+
+			});
+
+		}                    
+		
+	}
+
+	superpwa_select2();
 });
 var image = '';
 document.addEventListener('DOMContentLoaded', function() {
@@ -288,4 +332,6 @@ function superpwaGetZip() {
 	                    }); 
         
        }
-    });    
+    });
+	
+	

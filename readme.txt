@@ -187,6 +187,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.17 =
+* Date: [30.May.2023](https://superpwa.com/superpwa-2-2-17-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement :Need to create an option where the user can disable/enable the Add to Home Screens banner on desktop or tablet. #417
+* Enhancement :Need to make Start page dropdown with ajax search #412 
+* BugFixed :Warning appears in all pages when we install pro version #421
+
 = 2.2.16 =
 * Date: [27.April.2023](https://superpwa.com/superpwa-2-2-16-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * New : Add related_applications to manifest #387

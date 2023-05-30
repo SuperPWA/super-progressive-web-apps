@@ -170,6 +170,22 @@ function superpwa_manifest_template() {
 			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$superpwa_settings['icon'], 'sizes'=>'192x192'));
 		}
 
+		$related_applications = array();
+		if (isset($superpwa_settings['related_applications']) && $superpwa_settings['related_applications']) {
+			$related_applications[] = array('id' =>$superpwa_settings['related_applications'],
+						'platform' => 'play',
+						'url' => 'https://play.google.com/store/apps/details?id='.$superpwa_settings['related_applications'] );
+		}
+		if (isset($superpwa_settings['related_applications_ios']) && $superpwa_settings['related_applications_ios']) {
+			$related_applications[] = array('id' =>$superpwa_settings['related_applications_ios'],
+						'platform' => 'itunes',
+						'url' => 'https://apps.apple.com/app/'.$superpwa_settings['related_applications_ios'] );
+		}
+
+		if (count($related_applications) > 0) {
+			$manifest['related_applications']       = $related_applications;
+		}
+
 	// }
 
 	/**
