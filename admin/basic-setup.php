@@ -513,12 +513,10 @@ function superpwa_get_select2_data(){
               $arg['s']              = $search;
             }
 			$result = [];
-			if ($type == 'post') {
-				$posts  = get_posts( $arg );
-				if(!empty($posts)){
-					foreach($posts as $post){  
-						$result[] = array('id' => $post->ID, 'text' => $post->post_title);
-					}
+			$posts  = get_posts( $arg );
+			if(!empty($posts)){
+				foreach($posts as $post){  
+					$result[] = array('id' => $post->ID, 'text' => $post->post_title);
 				}
 			}
           	wp_send_json(['results' => $result] );            
@@ -532,7 +530,7 @@ function superpwa_get_select2_data(){
 
 add_action( 'wp_ajax_superpwa_get_select2_data', 'superpwa_get_select2_data');
 
-function superpwa_enqueue_superpwa_select2_js( $hook ) { 
+function superpwa_enqueue_superpwa_select2_js( $hook ) {
 	wp_enqueue_style('superpwa-select2-style', SUPERPWA_PATH_SRC. 'admin/css/select2.min.css' , false, SUPERPWA_VERSION);
 	wp_enqueue_script('select2', SUPERPWA_PATH_SRC. 'admin/js/select2.min.js', array( 'jquery'), SUPERPWA_VERSION, true);
 	wp_enqueue_script('select2-extended-script', SUPERPWA_PATH_SRC. 'admin/js/select2-extended.min.js', array( 'jquery' ), SUPERPWA_VERSION, true);
