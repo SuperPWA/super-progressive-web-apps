@@ -512,7 +512,7 @@ function superpwa_get_select2_data(){
             if(!empty($search)){
               $arg['s']              = $search;
             }
-			$result = [];
+			$result = array();
 			$posts  = get_posts( $arg );
 			if(!empty($posts)){
 				foreach($posts as $post){  
@@ -531,9 +531,27 @@ function superpwa_get_select2_data(){
 add_action( 'wp_ajax_superpwa_get_select2_data', 'superpwa_get_select2_data');
 
 function superpwa_enqueue_superpwa_select2_js( $hook ) {
-	wp_enqueue_style('superpwa-select2-style', SUPERPWA_PATH_SRC. 'admin/css/select2.min.css' , false, SUPERPWA_VERSION);
-	wp_enqueue_script('select2', SUPERPWA_PATH_SRC. 'admin/js/select2.min.js', array( 'jquery'), SUPERPWA_VERSION, true);
-	wp_enqueue_script('select2-extended-script', SUPERPWA_PATH_SRC. 'admin/js/select2-extended.min.js', array( 'jquery' ), SUPERPWA_VERSION, true);
+	if($hook  == 'toplevel_page_superpwa'){
+
+		wp_dequeue_script( 'select2-js' );   
+		wp_dequeue_script( 'select2' );
+		wp_deregister_script( 'select2' );
+		//conflict with jupitor theme fixed starts here
+		wp_dequeue_script( 'mk-select2' );
+		wp_deregister_script( 'mk-select2' );                
+		//conflict with jupitor theme fixed ends here                
+		wp_dequeue_script( 'wds-shared-ui' );
+		wp_deregister_script( 'wds-shared-ui' );
+		wp_dequeue_script( 'pum-admin-general' );
+		wp_deregister_script( 'pum-admin-general' );
+		//Hide vidoe pro select2 on schema type dashboard
+		wp_dequeue_script( 'cmb-select2' );
+		wp_deregister_script( 'cmb-select2' );
+	
+		wp_enqueue_style('superpwa-select2-style', SUPERPWA_PATH_SRC. 'admin/css/select2.min.css' , false, SUPERPWA_VERSION);
+		wp_enqueue_script('select2', SUPERPWA_PATH_SRC. 'admin/js/select2.min.js', array( 'jquery'), SUPERPWA_VERSION, true);
+		wp_enqueue_script('select2-extended-script', SUPERPWA_PATH_SRC. 'admin/js/select2-extended.min.js', array( 'jquery' ), SUPERPWA_VERSION, true);
+	  }
 	
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_superpwa_select2_js',9999 );

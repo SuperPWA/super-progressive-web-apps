@@ -170,7 +170,7 @@ function superpwa_manifest_template() {
 			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$superpwa_settings['icon'], 'sizes'=>'192x192'));
 		}
 
-		$related_applications = [];
+		$related_applications = array();
 		if (isset($superpwa_settings['related_applications']) && $superpwa_settings['related_applications']) {
 			$related_applications[] = array('id' =>$superpwa_settings['related_applications'],
 						'platform' => 'play',
