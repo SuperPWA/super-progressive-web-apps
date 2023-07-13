@@ -387,7 +387,7 @@ function superpwa_license_expire_warning(){
 		if( defined('SUPERPWA_PRO_VERSION') ){
 
 			$license_info = get_option("superpwa_pro_upgrade_license");
-			if ($license_info) {
+			if ($license_info && isset($license_info['pro']['license_key_expires'])) {
 
 			$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
 			$license_info_lifetime = $license_info['pro']['license_key_expires'];

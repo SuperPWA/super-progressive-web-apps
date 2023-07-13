@@ -160,6 +160,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.3',
 						),
+		'wpml_for_superpwa' => array(
+							'name'					=> __( 'WPML', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Provides you with Install WPML to translate WPML.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'wpml.png',
+							'link'					=> 'https://superpwa.com/doc/wpml-for-superpwa/',
+							'more_link'					=> 'https://superpwa.com/doc/wpml-for-superpwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-wpml'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.18',
+						),
 	);
 	
 	if ( $slug === false ) {
