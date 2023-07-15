@@ -107,7 +107,7 @@ function superpwa_sw( $arg = 'src' ) {
  * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  *
  */
-function get_language_shortcode() {
+function superpwa_get_language_shortcode() {
     return apply_filters( 'wpml_current_language', null );
 }
 
@@ -122,8 +122,8 @@ function superpwa_generate_sw() {
 	$wpml_settings = get_option( 'superpwa_wpml_settings');
 
 	if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
-		$current_language = get_language_shortcode();
-		$start_url = get_bloginfo( 'wpurl' ).'/'.$current_language;
+		$current_language = superpwa_get_language_shortcode();
+		$start_url = superpwa_home_url().$current_language;
 		$manifest['start_url'] = $start_url;
 	}
 	

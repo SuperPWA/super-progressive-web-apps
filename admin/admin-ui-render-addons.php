@@ -162,7 +162,7 @@ function superpwa_get_addons( $slug = false ) {
 						),
 		'wpml_for_superpwa' => array(
 							'name'					=> __( 'WPML', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Provides you with Install WPML to translate WPML.', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Provides you to install pwa on WPML site based on selected language.', 'super-progressive-web-apps' ),
 							'type'					=> 'addon_pro',
 							'icon'					=> 'wpml.png',
 							'link'					=> 'https://superpwa.com/doc/wpml-for-superpwa/',

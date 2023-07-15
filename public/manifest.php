@@ -189,8 +189,8 @@ function superpwa_manifest_template() {
 		$wpml_settings = get_option( 'superpwa_wpml_settings');
 
 		if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
-			$current_language = get_language_shortcode();
-			$start_url = get_bloginfo( 'wpurl' ).'/'.$current_language;
+			$current_language = superpwa_get_language_shortcode();
+			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
 		}
 
