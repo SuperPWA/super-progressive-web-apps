@@ -125,6 +125,7 @@ function superpwa_generate_sw() {
 		$current_language = superpwa_get_language_shortcode();
 		$start_url = superpwa_home_url().$current_language;
 		$manifest['start_url'] = $start_url;
+		$manifest['scope'] = "";
 	}
 	
 	// Return true if dynamic file returns a 200 response.

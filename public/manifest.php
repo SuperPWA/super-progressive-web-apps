@@ -192,6 +192,7 @@ function superpwa_manifest_template() {
 			$current_language = superpwa_get_language_shortcode();
 			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "";
 		}
 
 	// }
