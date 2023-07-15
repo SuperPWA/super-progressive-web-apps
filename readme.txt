@@ -189,7 +189,7 @@ Feel free to get in touch if you have any questions.
 
 = 2.2.18 =
 * Date: [15.July.2023](https://superpwa.com/superpwa-2-2-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Enhancement :Need to add compatibility with WPML #438
+* Feature: Added compatibility with WPML #438
 * Enhancement :fix php 8 error #332
 
 = 2.2.17 =
