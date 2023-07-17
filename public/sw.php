@@ -107,6 +107,10 @@ function superpwa_sw( $arg = 'src' ) {
  * @since 2.0.1 No longer deprecated since physical files are now generated in certain cases. See funtion description. 
  *
  */
+function superpwa_get_language_shortcode() {
+    return apply_filters( 'wpml_current_language', null );
+}
+
 function superpwa_generate_sw() {
 	
 	// Delete service worker if it exists
@@ -114,6 +118,15 @@ function superpwa_generate_sw() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
+
+	$wpml_settings = get_option( 'superpwa_wpml_settings');
+
+	if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
+		$current_language = superpwa_get_language_shortcode();
+		$start_url = superpwa_home_url().$current_language;
+		$manifest['start_url'] = $start_url;
+		$manifest['scope'] = "";
+	}
 	
 	// Return true if dynamic file returns a 200 response.
 	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
@@ -475,5 +488,7 @@ function superpwa_sanitize_exclude_urls_cache_sw($urls)
 	}
 	return implode(',',$urls_array);
 }
+
+
 
 add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cache_sw' ,9999);

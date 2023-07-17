@@ -86,7 +86,7 @@ function superpwa_caching_strategies_sw_template($file_string){
 			break;
 		case 'network_only':
 			$script = 	'e.respondWith(
-							fetch(event.request).then(function(networkResponse) {
+							fetch(e.request).then(function(networkResponse) {
 								return networkResponse
 							})
 						);';

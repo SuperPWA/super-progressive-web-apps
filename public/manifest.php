@@ -186,6 +186,15 @@ function superpwa_manifest_template() {
 			$manifest['related_applications']       = $related_applications;
 		}
 
+		$wpml_settings = get_option( 'superpwa_wpml_settings');
+
+		if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
+			$current_language = superpwa_get_language_shortcode();
+			$start_url = superpwa_home_url().$current_language;
+			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "";
+		}
+
 	// }
 
 	/**
@@ -280,9 +289,10 @@ function superpwa_add_manifest_to_wp_head() {
 	
 	echo $tags;
 }
+
 $show_manifest_icon = 0;
 $current_page_url = home_url( $_SERVER['REQUEST_URI'] );
-if(!empty($superpwa_settings['excluded_urls'])){
+if(isset($superpwa_settings['excluded_urls']) && !empty($superpwa_settings['excluded_urls'])){
 	$excluded_urls = explode(",", $superpwa_settings['excluded_urls']);
 	if(!empty($excluded_urls)){
 		foreach($excluded_urls as $excluded_page_url) {
