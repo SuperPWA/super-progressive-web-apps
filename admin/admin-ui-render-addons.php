@@ -172,6 +172,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
 						),
+		'push_notification_for_superpwa' => array(
+							'name'					=> __( 'Push Notification', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Push notification provides you to send push notification using firebase.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'notification.jpg',
+							'link'					=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
+							'more_link'					=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-push-notification'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.19',
+						),
 	);
 	
 	if ( $slug === false ) {
