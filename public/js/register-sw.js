@@ -1,12 +1,17 @@
+var superpwa_registration;
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
 	navigator.serviceWorker.register(superpwa_sw.url)
 	.then(function(registration) { console.log('SuperPWA service worker ready'); 
+	 superpwa_registration =registration;
 		if(registration.active)
 		{
 			registration.update(); 
 		}
 		subOnlineOfflineIndicator();
+		if (typeof obj === 'superpwa_push_register') { 
+			superpwa_push_register();
+		 }
 	})
 	.catch(function(error) { console.log('Registration failed with ' + error); });
 

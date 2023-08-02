@@ -95,6 +95,7 @@ function superpwa_caching_strategies_sw_template($file_string){
 	if(!empty($script)){
 		$replace_preg="/\/\/strategy_replace_start((.|\n|\t)*?)\/\/strategy_replace_end/i";
 		$file_string = preg_replace($replace_preg, $script, $file_string);
+		$file_string = apply_filters('superpwa_sw_template',$file_string);
 	}
     return $file_string;
 }

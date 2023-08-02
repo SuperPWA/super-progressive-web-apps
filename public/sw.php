@@ -327,6 +327,11 @@ function checkNeverCacheList(url) {
 	}
 	return true;
 }
+
+//push_notify_code_start
+#####################
+//push_notify_code_end
+
 <?php
  if(isset($settings['analytics_support']) && $settings['analytics_support']==1){
 	echo 'importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
