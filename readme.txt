@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -186,6 +186,10 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+
+= 2.2.19 =
+* Date: [11.August.2023](https://superpwa.com/superpwa-2-2-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added Push Notifications support #452
 
 = 2.2.18 =
 * Date: [15.July.2023](https://superpwa.com/superpwa-2-2-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
