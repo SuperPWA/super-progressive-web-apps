@@ -56,16 +56,17 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.0',
 						),
-		'utm_tracking' => array(
-							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+		'push_notification_for_superpwa' => array(
+							'name'					=> __( 'Push Notification', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Push notification provides you to send push notification.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
-							'icon'					=> 'utm-action.png',
-							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
-							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'icon'					=> 'notification.jpg',
+							'link'					=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
+							'more_link'				=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-push-notification'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '1.7',
+							'superpwa_min_version'	=> '2.2.19',
 						),
 		'apple_touch_icons' => array(
 							'name'					=> __( 'Apple Touch Icons & Splash Screen', 'super-progressive-web-apps' ),
@@ -172,6 +173,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
 						),
+						'utm_tracking' => array(
+							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
+							'type'					=> 'bundled',
+							'icon'					=> 'utm-action.png',
+							'link'					=> 'https://superpwa.com/addons/utm-tracking/',
+							'admin_link'			=> admin_url( 'admin.php?page=superpwa-utm-tracking' ),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '1.7',
+						),
+	
 	);
 	
 	if ( $slug === false ) {
@@ -278,14 +291,45 @@ function superpwa_addons_interface_render() {
 							
 							<div class="action-links">
 								<ul class="plugin-action-buttons">
+
 									<li>
-										<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
-											<?php echo superpwa_addons_button_text( $slug ); ?>
+										<?php if($slug=='push_notification_for_superpwa'){ 
+						
+											if(push_notification_for_superpwa_status()=='installed'){
+												
+												//plugin deactivated
+												$class = 'pushnotification';
+												$plugin = 'push-notification/push-notification.php';
+												$action = 'activate';
+												if ( strpos( $plugin, '/' ) ) {
+													$plugin = str_replace( '\/', '%2F', $plugin );
+												}
+												$url = sprintf( admin_url( 'plugins.php?action=' . $action . '&plugin=%s&plugin_status=all&paged=1&s' ), $plugin );
+												$activate_url = wp_nonce_url( $url, $action . '-plugin_' . $plugin );
+												?>
+										<a class="button button-primary"  href="<?php echo esc_url($activate_url)?>" aria-label="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<?php echo __('Activate','super-progressive-web-apps'); ?>
 										</a>
+											 <?php } else if(push_notification_for_superpwa_status()=='not_installed'){?>
+												
+										<a class="button button-primary superpwa-install-require-plugin not-exist" data-secure="<?php echo wp_create_nonce('verify_request')?>" id="pushnotification"  aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<?php echo __('Activate','super-progressive-web-apps'); ?>
+										</a>
+										<?php } } else{ ?>
+											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<?php echo superpwa_addons_button_text( $slug ); ?>
+											</a>
+										<?php } ?>
 									</li>
-									<?php if ( superpwa_addons_status( $slug ) == 'active' ) { 
-										printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') ); 
-									 }else{ ?>
+									<?php
+										 if($slug=='push_notification_for_superpwa'){ 
+										 if(push_notification_for_superpwa_status()=='active'){
+										  printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
+										 }
+										 }else{
+											printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') ); 
+										 }
+									  ?>
 									<li>
 										<?php
                                             $link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
@@ -293,9 +337,11 @@ function superpwa_addons_interface_render() {
                                             $link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
                                         }
                                         ?>
+										<?php if($slug!='push_notification_for_superpwa'){  ?>
 										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e('More Details', 'super-progressive-web-apps'); ?></a>
+										<?php } ?>
 									</li>
-									<?php } ?>
+						
 								</ul>	
 							</div>
 							
@@ -635,3 +681,25 @@ function superpwa_newsletter_hide_form(){
 }
 add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
+
+function push_notification_for_superpwa_status(){
+	$status='';
+	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
+	{
+		if(!function_exists('is_plugin_active')){
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		if(is_plugin_active('push-notification/push-notification.php'))
+		{
+			$status='active';
+		}
+		else{
+			$status='installed';
+		}
+
+	}
+	else{
+		$status = 'not_installed';
+	}
+	return $status;
+}
