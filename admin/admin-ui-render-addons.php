@@ -58,11 +58,11 @@ function superpwa_get_addons( $slug = false ) {
 						),
 		'push_notification_for_superpwa' => array(
 							'name'					=> __( 'Push Notification', 'super-progressive-web-apps' ),
-							'description'			=> __( 'Push notification provides you to send push notification using firebase.', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Push notification provides you to send push notification.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
 							'icon'					=> 'notification.jpg',
 							'link'					=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
-							'more_link'					=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
+							'more_link'				=> 'https://superpwa.com/doc/push-notification-for-superpwa/',
 							'admin_link'			=>  admin_url('admin.php?page=superpwa-push-notification'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
@@ -337,7 +337,9 @@ function superpwa_addons_interface_render() {
                                             $link = $addon['more_link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
                                         }
                                         ?>
+										<?php if($slug!='push_notification_for_superpwa'){  ?>
 										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e('More Details', 'super-progressive-web-apps'); ?></a>
+										<?php } ?>
 									</li>
 						
 								</ul>	
