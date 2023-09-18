@@ -426,9 +426,12 @@ add_action( 'admin_enqueue_scripts', 'superpwa_precache_load_admin_scripts' );
 function superpwa_caching_strategies_interface_render() {
 	
 	// Authentication
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	// if ( ! current_user_can( 'manage_options' ) ) {
+	// 	return;
+	// }
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
 	
 	// Handing save settings
 	if ( isset( $_GET['settings-updated'] ) ) {

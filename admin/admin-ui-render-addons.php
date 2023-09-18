@@ -206,9 +206,12 @@ function superpwa_get_addons( $slug = false ) {
 function superpwa_addons_interface_render() {
 	
 	// Authentication
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	// if ( ! current_user_can( 'manage_options' ) ) {
+	// 	return;
+	// }
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
 
 	// Add-on activation todo
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
@@ -572,9 +575,10 @@ function superpwa_addons_handle_activation() {
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $_GET['addon'] );
 	
-	// Authentication
+	// Authentication	
 	if ( 
-		! current_user_can( 'manage_options' ) || 
+		! current_user_can( superpwa_current_user_can() ) ||
+		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
 		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) || 
 		! ( $addon_status == 'inactive' ) 
@@ -612,10 +616,10 @@ function superpwa_addons_handle_deactivation() {
 	
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $_GET['addon'] );
-	
 	// Authentication
 	if ( 
-		! current_user_can( 'manage_options' ) || 
+		! current_user_can( superpwa_current_user_can() ) ||
+		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
 		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) || 
 		! ( $addon_status == 'active' ) 

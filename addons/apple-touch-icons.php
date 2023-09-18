@@ -317,9 +317,12 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
 function superpwa_apple_icons_interface_render() {
 	
 	// Authentication
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+    if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
+	// if ( ! current_user_can( 'manage_options' ) ) {
+	// 	return;
+	// }
 	
 	// Handing save settings
 	if ( isset( $_GET['settings-updated'] ) ) {
