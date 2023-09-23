@@ -173,6 +173,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
 						),
+		'navigation_bar_for_superpwa' => array(
+							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Navigate should be a high priority for almost every app. The easier your product is for people to use, the more likely they’ll be to use it..', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'navigation-bar.png',
+							'link'					=> 'https://superpwa.com/doc/navigation-bar-for-super-pwa/',
+							'more_link'					=> 'https://superpwa.com/doc/navigation-bar-for-super-pwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-navigation-bar'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.20',
+						),
 						'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
@@ -687,6 +699,27 @@ add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_f
 add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 
 function push_notification_for_superpwa_status(){
+	$status='';
+	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
+	{
+		if(!function_exists('is_plugin_active')){
+			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		if(is_plugin_active('push-notification/push-notification.php'))
+		{
+			$status='active';
+		}
+		else{
+			$status='installed';
+		}
+
+	}
+	else{
+		$status = 'not_installed';
+	}
+	return $status;
+}
+function navigation_bar_for_superpwa_status(){
 	$status='';
 	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
 	{
