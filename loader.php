@@ -37,4 +37,6 @@ if ( superpwa_addons_status( 'utm_tracking' ) 		== 'active' ) require_once( SUPE
 if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/apple-touch-icons.php' );
 if ( superpwa_addons_status( 'caching_strategies' ) 	== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/caching-strategies.php' );
 if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/pull-to-refresh.php' );
-if ( superpwa_addons_status( 'push_notification_for_superpwa' ) 	== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/superpwa-push-notification.php' );
+
+// superpwa-push-notification
+require_once( SUPERPWA_PATH_ABS . 'addons/superpwa-push-notification.php' );
