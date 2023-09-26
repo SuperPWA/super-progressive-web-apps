@@ -310,10 +310,7 @@ function superpwa_reset_all_settings(){
         }
         if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
            return;  
-        }  
-        // if ( ! current_user_can( 'manage_options' ) ) {
-        //    return;
-        // }
+        }
 		if ( ! current_user_can( superpwa_current_user_can() ) ) {
 			return;
 		}

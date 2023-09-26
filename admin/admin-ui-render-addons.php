@@ -218,9 +218,6 @@ function superpwa_get_addons( $slug = false ) {
 function superpwa_addons_interface_render() {
 	
 	// Authentication
-	// if ( ! current_user_can( 'manage_options' ) ) {
-	// 	return;
-	// }
 	if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }
@@ -310,7 +307,7 @@ function superpwa_addons_interface_render() {
 									<li>
 										<?php if($slug=='push_notification_for_superpwa'){ 
 						
-											if(push_notification_for_superpwa_status()=='installed'){
+											if(superpwa_push_notification_status()=='installed'){
 												
 												//plugin deactivated
 												$class = 'pushnotification';
@@ -325,7 +322,7 @@ function superpwa_addons_interface_render() {
 										<a class="button button-primary"  href="<?php echo esc_url($activate_url)?>" aria-label="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
 										</a>
-											 <?php } else if(push_notification_for_superpwa_status()=='not_installed'){?>
+											 <?php } else if(superpwa_push_notification_status()=='not_installed'){?>
 												
 										<a class="button button-primary superpwa-install-require-plugin not-exist" data-secure="<?php echo wp_create_nonce('verify_request')?>" id="pushnotification"  aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
@@ -338,7 +335,7 @@ function superpwa_addons_interface_render() {
 									</li>
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
-										 if(push_notification_for_superpwa_status()=='active'){
+										 if(superpwa_push_notification_status()=='active'){
 										  printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
 										 }
 										 }else{
@@ -698,28 +695,7 @@ function superpwa_newsletter_hide_form(){
 add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 
-function push_notification_for_superpwa_status(){
-	$status='';
-	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
-	{
-		if(!function_exists('is_plugin_active')){
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-		if(is_plugin_active('push-notification/push-notification.php'))
-		{
-			$status='active';
-		}
-		else{
-			$status='installed';
-		}
-
-	}
-	else{
-		$status = 'not_installed';
-	}
-	return $status;
-}
-function navigation_bar_for_superpwa_status(){
+function superpwa_push_notification_status(){
 	$status='';
 	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
 	{

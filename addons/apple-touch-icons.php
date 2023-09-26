@@ -320,9 +320,6 @@ function superpwa_apple_icons_interface_render() {
     if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }
-	// if ( ! current_user_can( 'manage_options' ) ) {
-	// 	return;
-	// }
 	
 	// Handing save settings
 	if ( isset( $_GET['settings-updated'] ) ) {

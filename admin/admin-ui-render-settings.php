@@ -714,7 +714,7 @@ function superpwa_role_based_access_cb(){
 							$selected = "selected";
 						}
 						?>
-						<option value="<?php echo $key;?>" <?php echo $selected;?>><?php echo $opval; ?></option>
+						<option value="<?php echo esc_attr($key);?>" <?php echo $selected;?>><?php echo esc_html($opval); ?></option>
 					<?php }
 				?>
 			</select>
@@ -766,9 +766,6 @@ function superpwa_force_update_sw_cb(){
 function superpwa_admin_interface_render() {
 	
 	// Authentication
-	// if ( ! current_user_can( 'manage_options' ) ) {
-	// 	return;
-	// }
 	if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }

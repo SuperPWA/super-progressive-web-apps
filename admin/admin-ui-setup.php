@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	// print_r(superpwa_current_user_can());die;
 	// Main menu page
 	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ),
 	'edit_pages',

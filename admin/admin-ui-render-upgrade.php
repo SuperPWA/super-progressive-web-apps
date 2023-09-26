@@ -12,9 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function superpwa_upgread_pro_interface_render(){
 	// Authentication
-	// if ( ! current_user_can( 'manage_options' ) ) {
-	// 	return;
-	// }
 	if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }
