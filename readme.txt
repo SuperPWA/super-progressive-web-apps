@@ -187,6 +187,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.20 =
+* Date: [26.September.2023](https://superpwa.com/superpwa-2-2-20-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added feature for Role managers #450
+* Feature: Added navigation Bar feature #443
+* BugFixed: DevTools Console Warning for Source Map 404 Error in Plugin #466
+* BugFixed: The push notification add-on keeps on installing. #465
+
 = 2.2.19 =
 * Date: [11.August.2023](https://superpwa.com/superpwa-2-2-19-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added Push Notifications support #452
