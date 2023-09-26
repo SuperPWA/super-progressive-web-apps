@@ -710,7 +710,7 @@ function superpwa_role_based_access_cb(){
 				<?php
 					foreach ($user_roles as $key => $opval) {
 						$selected = "";
-						if (isset($settings['superpwa_role_based_access']) && in_array($key,$settings['superpwa_role_based_access'])) {
+						if (isset($settings['superpwa_role_based_access']) && in_array($key,$settings['superpwa_role_based_access']) || $key == 'administrator') {
 							$selected = "selected";
 						}
 						?>
