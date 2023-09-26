@@ -23,12 +23,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	
 	// Main menu page
-	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
+	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ),
+	'edit_pages',
+	// superpwa_current_user_can(),
+	'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
 	
 	// Settings page - Same as main menu page
-	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render', 60);
+	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ),
+	'edit_pages',
+	// superpwa_current_user_can(),
+	'superpwa', 'superpwa_admin_interface_render', 60);
 
 	// Add-Ons page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render', 70);
@@ -99,6 +104,9 @@ add_action( 'admin_menu', 'superpwa_add_menu_links' );
  * @since 	1.0
  */
 function superpwa_register_settings() {
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+		return;
+	}
 
 	// Register Setting
 	register_setting( 
@@ -363,6 +371,14 @@ function superpwa_register_settings() {
 			'superpwa_exclude_add_to_homescreen_shortcut',								// ID
 			__('Exclude Add to homescreen banner', 'super-progressive-web-apps'),				// Title
 			'superpwa_exclude_add_to_homescreen_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Role Based Access
+		add_settings_field(
+			'superpwa_role_based_access',								// ID
+			__('Role Based Access', 'super-progressive-web-apps'),				// Title
+			'superpwa_role_based_access_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);

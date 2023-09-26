@@ -700,6 +700,31 @@ function superpwa_exclude_add_to_homescreen_cb(){
 	<?php
 }
 
+function superpwa_role_based_access_cb(){
+	if( function_exists('is_super_admin') &&  is_super_admin() ){
+		$settings = superpwa_get_settings(); 
+		$user_roles = superpwa_get_user_roles(); 
+		?>
+		<label>
+			<select id="superpwa_role_based_access" class="regular-text" name="superpwa_settings[superpwa_role_based_access][]" multiple="multiple">
+				<?php
+					foreach ($user_roles as $key => $opval) {
+						$selected = "";
+						if (isset($settings['superpwa_role_based_access']) && in_array($key,$settings['superpwa_role_based_access']) || $key == 'administrator') {
+							$selected = "selected";
+						}
+						?>
+						<option value="<?php echo esc_attr($key);?>" <?php echo $selected;?>><?php echo esc_html($opval); ?></option>
+					<?php }
+				?>
+			</select>
+		</label>
+		<p>
+		<?php echo esc_html__('Choose the users whom you want to allow full access of this plugin','super-progressive-web-apps');?> </p>
+		<?php
+	} 
+}
+
 function superpwa_reset_settings_cb(){		
 	?>              
         <button class="button superpwa-reset-settings">
@@ -741,9 +766,9 @@ function superpwa_force_update_sw_cb(){
 function superpwa_admin_interface_render() {
 	
 	// Authentication
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
 	
 	// Handing save settings
 	if ( isset( $_GET['settings-updated'] ) ) {

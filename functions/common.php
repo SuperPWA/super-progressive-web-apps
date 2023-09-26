@@ -310,10 +310,10 @@ function superpwa_reset_all_settings(){
         }
         if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
            return;  
-        }  
-        if ( ! current_user_can( 'manage_options' ) ) {
-           return;
         }
+		if ( ! current_user_can( superpwa_current_user_can() ) ) {
+			return;
+		}
         
         $default = superpwa_get_default_settings();
                      
@@ -457,4 +457,71 @@ function superpwa_newsletter_form(){
 	<?php }
 			// Set newsletter marker to false
 			  $superpwa_newsletter = false;
+}
+
+function superpwa_get_user_roles(){
+    global $wp_roles;
+    $allroles = array();
+    foreach ( $wp_roles->roles as $key=>$value ){
+        $allroles[esc_attr($key)] = esc_html($value['name']);
+    }
+    return $allroles;
+}
+
+function superpwa_get_capability_by_role($role){
+    $cap = apply_filters('superpwa_default_manage_option_capability', 'manage_options' );
+    switch ($role) {
+        case 'wpseo_editor':
+            $cap = 'edit_pages';                
+            break;                  
+        case 'editor':
+            $cap = 'edit_pages';                
+            break;            
+        case 'author':
+            $cap = 'publish_posts';                
+            break;
+        case 'contributor':
+            $cap = 'edit_posts';                
+            break;
+        case 'wpseo_manager':
+            $cap = 'edit_posts';                
+            break;
+        case 'subscriber':
+            $cap = 'read';                
+            break;
+        default:
+            break;
+    }
+    return $cap;
+
+}
+
+function superpwa_current_user_allowed(){
+    $currentuserrole = array();
+    if( ( function_exists('is_user_logged_in') && is_user_logged_in() )  && function_exists('wp_get_current_user') ) {
+        $settings       = superpwa_get_settings();
+        $currentUser    = wp_get_current_user();
+        $superpwa_roles = isset($settings['superpwa_role_based_access']) ? $settings['superpwa_role_based_access'] : array('administrator');
+        if($currentUser){
+            if($currentUser->roles){
+                $currentuserrole = (array) $currentUser->roles;
+            }else{
+                if( isset($currentUser->caps['administrator']) ){
+                    $currentuserrole = array('administrator');
+                }	
+            }
+            if( is_array($currentuserrole) ){
+                $hasrole         = array_intersect( $currentuserrole, $superpwa_roles );
+                if( !empty($hasrole)){                                     
+                    return reset($hasrole);
+                }
+            }
+        }       
+    }
+    return false;
+}
+
+function superpwa_current_user_can(){
+    $capability = superpwa_current_user_allowed() ? superpwa_get_capability_by_role(superpwa_current_user_allowed()) : 'manage_options';
+    return $capability;                    
 }

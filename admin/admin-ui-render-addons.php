@@ -173,6 +173,18 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
 						),
+		'navigation_bar_for_superpwa' => array(
+							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Navigate should be a high priority for almost every app. The easier your product is for people to use, the more likely they’ll be to use it..', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'navigation-bar.png',
+							'link'					=> 'https://superpwa.com/doc/navigation-bar-for-super-pwa/',
+							'more_link'					=> 'https://superpwa.com/doc/navigation-bar-for-super-pwa/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-navigation-bar'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.20',
+						),
 						'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
@@ -206,9 +218,9 @@ function superpwa_get_addons( $slug = false ) {
 function superpwa_addons_interface_render() {
 	
 	// Authentication
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
 
 	// Add-on activation todo
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
@@ -295,7 +307,7 @@ function superpwa_addons_interface_render() {
 									<li>
 										<?php if($slug=='push_notification_for_superpwa'){ 
 						
-											if(push_notification_for_superpwa_status()=='installed'){
+											if(superpwa_push_notification_status()=='installed'){
 												
 												//plugin deactivated
 												$class = 'pushnotification';
@@ -310,7 +322,7 @@ function superpwa_addons_interface_render() {
 										<a class="button button-primary"  href="<?php echo esc_url($activate_url)?>" aria-label="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
 										</a>
-											 <?php } else if(push_notification_for_superpwa_status()=='not_installed'){?>
+											 <?php } else if(superpwa_push_notification_status()=='not_installed'){?>
 												
 										<a class="button button-primary superpwa-install-require-plugin not-exist" data-secure="<?php echo wp_create_nonce('verify_request')?>" id="pushnotification"  aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
@@ -323,7 +335,7 @@ function superpwa_addons_interface_render() {
 									</li>
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
-										 if(push_notification_for_superpwa_status()=='active'){
+										 if(superpwa_push_notification_status()=='active'){
 										  printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
 										 }
 										 }else{
@@ -572,9 +584,10 @@ function superpwa_addons_handle_activation() {
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $_GET['addon'] );
 	
-	// Authentication
+	// Authentication	
 	if ( 
-		! current_user_can( 'manage_options' ) || 
+		! current_user_can( superpwa_current_user_can() ) ||
+		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
 		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) || 
 		! ( $addon_status == 'inactive' ) 
@@ -612,10 +625,10 @@ function superpwa_addons_handle_deactivation() {
 	
 	// Get the add-on status
 	$addon_status = superpwa_addons_status( $_GET['addon'] );
-	
 	// Authentication
 	if ( 
-		! current_user_can( 'manage_options' ) || 
+		! current_user_can( superpwa_current_user_can() ) ||
+		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
 		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) || 
 		! ( $addon_status == 'active' ) 
@@ -682,7 +695,7 @@ function superpwa_newsletter_hide_form(){
 add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 
-function push_notification_for_superpwa_status(){
+function superpwa_push_notification_status(){
 	$status='';
 	if(file_exists( SUPERPWA_PATH_ABS."/../push-notification/push-notification.php"))
 	{

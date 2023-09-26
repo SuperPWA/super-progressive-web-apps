@@ -107,9 +107,9 @@ add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 )
 function superpwa_admin_notices() {
 	
 	// Notices only for admins
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
  
     // Admin notice on plugin activation
 	if ( get_transient( 'superpwa_admin_notice_activation' ) ) {
@@ -145,9 +145,9 @@ add_action( 'admin_notices', 'superpwa_admin_notices' );
 function superpwa_network_admin_notices() {
 	
 	// Notices only for admins
-	if ( ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        return;
+    }
  
     // Network admin notice on multisite network activation
 	if ( get_transient( 'superpwa_network_admin_notice_activation' ) ) {
