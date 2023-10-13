@@ -335,11 +335,13 @@ function superpwa_addons_interface_render() {
 									</li>
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
-										 if(superpwa_push_notification_status()=='active'){
-										  printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
-										 }
+											if(superpwa_push_notification_status()=='active'){
+												printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
+											}
 										 }else{
-											printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') ); 
+											if(superpwa_addons_status( $slug ) == 'active'){
+											printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') );
+											}
 										 }
 									  ?>
 									<li>
