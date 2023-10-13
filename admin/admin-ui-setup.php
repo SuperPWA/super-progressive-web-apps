@@ -25,14 +25,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_add_menu_links() {
 	// Main menu page
 	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ),
-	'edit_pages',
-	// superpwa_current_user_can(),
+	superpwa_current_user_can(),
 	'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
 	
 	// Settings page - Same as main menu page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ),
-	'edit_pages',
-	// superpwa_current_user_can(),
+	superpwa_current_user_can(),
 	'superpwa', 'superpwa_admin_interface_render', 60);
 
 	// Add-Ons page
