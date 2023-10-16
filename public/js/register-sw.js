@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator) {
 		{
 			registration.update(); 
 		}
-		if(firebase && typeof pushnotification_load_messaging =='function'){
+		if(typeof firebase !='undefined' && typeof pushnotification_load_messaging =='function'){
 			const messaging = firebase.messaging();
 			messaging.useServiceWorker(registration);
 			pushnotification_load_messaging();
