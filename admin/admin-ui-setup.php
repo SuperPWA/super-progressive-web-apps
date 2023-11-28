@@ -373,13 +373,15 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
 		// Role Based Access
-		add_settings_field(
-			'superpwa_role_based_access',								// ID
-			__('Role Based Access', 'super-progressive-web-apps'),				// Title
-			'superpwa_role_based_access_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
+		if( function_exists('is_super_admin') &&  is_super_admin() ){
+			add_settings_field(
+				'superpwa_role_based_access',								// ID
+				__('Role Based Access', 'super-progressive-web-apps'),				// Title
+				'superpwa_role_based_access_cb',								// CB
+				'superpwa_pwa_advance_section',							// Page slug
+				'superpwa_pwa_advance_section'							// Settings Section ID
+			);
+		}
 		// Exclude Urls from Cache list
 		add_settings_field(
 			'superpwa_reset_settings_shortcut',								// ID

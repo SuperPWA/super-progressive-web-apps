@@ -64,7 +64,9 @@ function superpwa_send_feedback() {
         // nonce is not valid.
         die( __( 'Security check', 'superpwa-for-wp' ) ); 
     }
-
+    if ( ! current_user_can( superpwa_current_user_can() ) ) {
+        die( __( 'Unauthorised Access', 'superpwa-for-wp' ) ); 
+    }
     $text = '';
     if( isset( $form['superpwa_disable_text'] ) ) {
         $text = implode( "\n\r", $form['superpwa_disable_text'] );
