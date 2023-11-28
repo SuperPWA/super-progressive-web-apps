@@ -317,8 +317,7 @@ function superpwa_reset_all_settings(){
         
         $default = superpwa_get_default_settings();
                      
-        $result  = update_option('superpwa_settings', $default);
-       // delete_transient('pwaforwp_restapi_check');   
+        $result  = update_option('superpwa_settings', $default); 
         
         if($result){    
             
@@ -529,7 +528,7 @@ function superpwa_current_user_can(){
 add_filter(
     'option_page_capability_superpwa_settings_group',
     function( $capability ) {
-        return 'edit_pages';
+        return superpwa_current_user_can();
     }
 );
 

@@ -190,7 +190,7 @@ Feel free to get in touch if you have any questions.
 = 2.2.22 =
 * Date: [28.November.2023](https://superpwa.com/superpwa-2-2-22-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Role Based Access is not working #472
-* BugFixed: Broken Access Control vulnerability [Learn More](https://patchstack.com/database/vulnerability/super-progressive-web-apps/wordpress-super-progressive-web-apps-plugin-2-2-21-broken-access-control-vulnerability)
+* BugFixed: Fixed Broken Access Control vulnerability [Learn More](https://patchstack.com/database/vulnerability/super-progressive-web-apps/wordpress-super-progressive-web-apps-plugin-2-2-21-broken-access-control-vulnerability)
 
 = 2.2.21 =
 * Date: [18.October.2023](https://superpwa.com/superpwa-2-2-21-release-note/?utm_source=wordpress.org&utm_medium=changelog)

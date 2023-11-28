@@ -537,7 +537,7 @@ function superpwa_get_default_settings() {
 				'bypass_sw_url_cache'=> '',
 			);
 
-	return $settings;
+	return $defaults;
 }
 
 /**
