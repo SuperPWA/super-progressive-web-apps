@@ -26,7 +26,11 @@ function superpwa_upgread_pro_interface_render(){
 			<div id="the-list">
 				<?php
 				if(defined('SUPERPWA_PRO_VERSION')){
-				 do_action("admin_upgrade_license_page");
+					if(version_compare(SUPERPWA_VERSION, '2.2.23') >= 0){
+						do_action("superpwa_admin_upgrade_license_page");
+					}else{
+						do_action("admin_upgrade_license_page");
+					}
 				}else{ ?>
 
 
