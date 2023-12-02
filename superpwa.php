@@ -43,7 +43,7 @@ if ( ! defined('ABSPATH') ) exit;
  * @since 1.0
  */
 if ( ! defined( 'SUPERPWA_VERSION' ) ) {
-	define( 'SUPERPWA_VERSION'	, '2.2.22' ); 
+	define( 'SUPERPWA_VERSION'	, '2.2.23' ); 
 }
 
 /**
