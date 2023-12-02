@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 3.6.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -187,6 +187,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.22 =
+* Date: [28.November.2023](https://superpwa.com/superpwa-2-2-22-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Role Based Access is not working #472
+* BugFixed: Fixed Broken Access Control vulnerability [Learn More](https://patchstack.com/database/vulnerability/super-progressive-web-apps/wordpress-super-progressive-web-apps-plugin-2-2-21-broken-access-control-vulnerability)
+
 = 2.2.21 =
 * Date: [18.October.2023](https://superpwa.com/superpwa-2-2-21-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Push notification is not working on IOS. #468
@@ -194,7 +199,6 @@ Feel free to get in touch if you have any questions.
 * BugFixed: Role Based Access is not working #472
 * BugFixed: If add-on is not activated than do not show the settings button #470
 * BugFixed: The button network deactivate is not working #475
-
 
 = 2.2.20 =
 * Date: [26.September.2023](https://superpwa.com/superpwa-2-2-20-release-note/?utm_source=wordpress.org&utm_medium=changelog)

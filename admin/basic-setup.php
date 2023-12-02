@@ -499,6 +499,9 @@ function superpwa_get_select2_data(){
         if ( ! isset( $_GET['superpwa_security_nonce'] ) ){
           return; 
         }
+		if ( ! current_user_can( superpwa_current_user_can() ) ) {
+			return; 
+		}
         
         if ( (wp_verify_nonce( $_GET['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
 

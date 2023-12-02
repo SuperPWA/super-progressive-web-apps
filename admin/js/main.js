@@ -91,7 +91,7 @@ jQuery(document).ready(function($){
 		//e.preventDefault();
 		var form = jQuery(this);
         var email = form.find('input[name="newsletter-email"]').val();
-        jQuery.post(ajaxurl, {action:'superpwa_newsletter_submit',email:email},
+        jQuery.post(ajaxurl, {action:'superpwa_newsletter_submit',email:email,superpwa_security_nonce:superpwa_obj.superpwa_security_nonce},
           function(data) {}
         );
         return true;
@@ -100,7 +100,7 @@ jQuery(document).ready(function($){
 		//e.preventDefault();
 		jQuery('.superpwa-newsletter-wrapper').css("display", "none");
 		var form = jQuery(this);
-        jQuery.post(ajaxurl, {action:'superpwa_newsletter_hide_form'},
+        jQuery.post(ajaxurl, {action:'superpwa_newsletter_hide_form',superpwa_security_nonce:superpwa_obj.superpwa_security_nonce},
           function(data) {}
         );
         return true;

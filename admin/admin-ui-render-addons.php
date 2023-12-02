@@ -668,6 +668,8 @@ add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deac
  * @since 2.1.5
  */
 function superpwa_newsletter_submit(){
+	
+	if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
 	global $current_user;
 	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
     $api_params = array(
@@ -677,25 +679,34 @@ function superpwa_newsletter_submit(){
         'type'=> 'superpwa'
     );
     $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
-    $response = wp_remote_retrieve_body( $response );
-    echo json_encode(array('status'=>200, 'message'=>'Submitted ', 'response'=> $response));
+	if ( !is_wp_error( $response ) ) {
+		$response = wp_remote_retrieve_body( $response );
+		echo json_encode(array('status'=>200, 'message'=>'Submitted ', 'response'=> $response));
+	}else{
+		echo json_encode(array('status'=>500, 'message'=>'No response from API'));	
+	}
+}
+else{
+	echo json_encode(array('status'=>403, 'message'=>'Unauthorized Request'));
+}
     die;
 }
 add_action( 'wp_ajax_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
-add_action( 'wp_ajax_nopriv_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
 
-function superpwa_newsletter_hide_form(){
-	
-    $hide_newsletter  = get_option('superpwa_hide_newsletter');
-    if($hide_newsletter == false){
-    	add_option( 'superpwa_hide_newsletter', 'no' );
-    }
-	update_option( 'superpwa_hide_newsletter', 'yes' );
-    echo json_encode(array('status'=>200, 'message'=>'Submitted '));
+function superpwa_newsletter_hide_form(){   
+	  if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
+			$hide_newsletter  = get_option('superpwa_hide_newsletter');
+			if($hide_newsletter == false){
+				add_option( 'superpwa_hide_newsletter', 'no' );
+			}
+			update_option( 'superpwa_hide_newsletter', 'yes' );
+			echo json_encode(array('status'=>200, 'message'=>'Submitted '));
+    }else{
+		echo json_encode(array('status'=>403, 'message'=>'Unauthorized Request'));
+	}
     die;
 }
 add_action( 'wp_ajax_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
-add_action( 'wp_ajax_nopriv_superpwa_newsletter_hide_form', 'superpwa_newsletter_hide_form' );
 
 function superpwa_push_notification_status(){
 	$status='';

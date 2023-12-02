@@ -317,8 +317,7 @@ function superpwa_reset_all_settings(){
         
         $default = superpwa_get_default_settings();
                      
-        $result  = update_option('superpwa_settings', $default);
-       // delete_transient('pwaforwp_restapi_check');   
+        $result  = update_option('superpwa_settings', $default); 
         
         if($result){    
             
@@ -525,3 +524,42 @@ function superpwa_current_user_can(){
     $capability = superpwa_current_user_allowed() ? superpwa_get_capability_by_role(superpwa_current_user_allowed()) : 'manage_options';
     return $capability;                    
 }
+
+add_filter(
+    'option_page_capability_superpwa_settings_group',
+    function( $capability ) {
+        return superpwa_current_user_can();
+    }
+);
+
+function superpwa_pre_update_settings($value, $old_value,  $option){
+    
+           
+        
+        if( function_exists('is_super_admin') && function_exists('wp_get_current_user') ){
+
+                   if(!is_super_admin()){
+    
+                        if(isset($old_value['superpwa_role_based_access'])){
+                           $value['superpwa_role_based_access'] = $old_value['superpwa_role_based_access']; 
+                        }
+                        
+                    }else{
+                        
+                        if(isset($value['superpwa_role_based_access']) && !empty($value['superpwa_role_based_access'])){
+                                if(!in_array('administrator', $value['superpwa_role_based_access'])){
+                                    array_push($value['superpwa_role_based_access'], 'administrator');
+                                }
+                        }else{
+                                $value['superpwa_role_based_access'] = array();
+                                array_push($value['superpwa_role_based_access'], 'administrator');
+                        }
+                                
+                    }
+
+        }   
+
+        return $value; 
+}
+
+add_filter('pre_update_option_superpwa_settings', 'superpwa_pre_update_settings',10,3);
