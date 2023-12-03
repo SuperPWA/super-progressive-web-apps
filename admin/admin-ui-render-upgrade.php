@@ -291,9 +291,6 @@ function superpwa_upgread_pro_interface_render(){
 				</div>
 			<?php } ?>
 
-
-
-
 			</div>
 		</div>
 	</div>
