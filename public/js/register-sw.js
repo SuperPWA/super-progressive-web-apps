@@ -47,7 +47,7 @@ if ('serviceWorker' in navigator) {
 		const button = document.createElement('button');
 		button.type = 'button';
 		button.className = 'snackbar-close';
-		button.setAttribute('aria-label', 'snackbar-close');
+		button.setAttribute('aria-label', 'Close ×');
 		button.addEventListener('click', hideSnackbar);
 		button.innerHTML = '&times;';
 
