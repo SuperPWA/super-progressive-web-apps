@@ -184,10 +184,10 @@ add_action( 'publish_page', 'superpwa_store_latest_post_ids', 10, 2 );
                 if($previousIds){
                     $previousIds = json_decode($previousIds);
                     if(array_diff($post_ids, $previousIds)){
-                        set_transient('superpwa_pre_cache_post_ids', json_encode($post_ids));
+                        set_transient('superpwa_pre_cache_post_ids', wp_json_encode($post_ids));
                     }
                 }else{
-                    set_transient('superpwa_pre_cache_post_ids', json_encode($post_ids));
+                    set_transient('superpwa_pre_cache_post_ids', wp_json_encode($post_ids));
                 }
             }
 
@@ -300,12 +300,12 @@ function superpwa_caching_strategies_section_cb() {
 function superpwa_caching_strategies_caching_type_cb() {
 	$cachingSettings = superpwa_caching_strategies_get_settings();
 
-	echo '<p><label class="label"><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_first" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_first'? 'checked': '').'> Network first, then Cache </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_first" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_first'? 'checked': '').'> Cache first, then Network </label>
+	echo '<p><label class="label"><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_first" '.esc_attr(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_first'? 'checked': '').'> Network first, then Cache </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_first" '.esc_attr(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_first'? 'checked': '').'> Cache first, then Network </label>
     </p> 
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="steal_while_revalidate" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='steal_while_revalidate'? 'checked': '').'> Stale While Revalidate </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_only" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_only'? 'checked': '').'> Cache only </label></p>
-    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_only" '.(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_only'? 'checked': '').'> Network only </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="steal_while_revalidate" '.esc_attr(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='steal_while_revalidate'? 'checked': '').'> Stale While Revalidate </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="cache_only" '.esc_attr(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='cache_only'? 'checked': '').'> Cache only </label></p>
+    <p><label><input type="radio" name="superpwa_caching_strategies_settings[caching_type]" value="network_only" '.esc_attr(isset($cachingSettings['caching_type']) && $cachingSettings['caching_type']=='network_only'? 'checked': '').'> Network only </label></p>
     ';
 }
 
@@ -317,12 +317,7 @@ function superpwa_caching_strategies_caching_type_cb() {
 function superpwa_caching_strategies_pre_caching_cb() {
 	$cachingSettings = superpwa_caching_strategies_get_settings();
 
-	$settings = superpwa_caching_strategies_get_settings(); 
-        
-        $arrayOPT = array(                    
-                        'automatic'=>'Automatic',
-                        'manual'=>'Manual',            
-                     );
+	$settings = superpwa_caching_strategies_get_settings();
 	?>
 
 	<style type="text/css">.pre-manual-suboption span {display: table-cell;margin-bottom: 9px;padding: 15px 10px;line-height: 1.3;vertical-align: middle;}.show{display: block;}.hide{display: none}
@@ -333,10 +328,9 @@ function superpwa_caching_strategies_pre_caching_cb() {
                <div class="pre-automatic-checkbox" style="margin-bottom: 10px;"> 
                   <input type="checkbox" name="superpwa_caching_strategies_settings[precaching_automatic]" id="precaching_automatic" class="" <?php echo (isset( $settings['precaching_automatic'] ) &&  $settings['precaching_automatic'] == 1 ? 'checked="checked"' : ''); ?> data-uncheck-val="0" value="1">
 
-                  <strong><?php echo esc_html__('Automatic', 'super-progressive-web-apps'); ?></strong>   
-                  <!-- <span class="pwafw-tooltip"><i class="dashicons dashicons-editor-help"></i> 
-                    <span class="pwafw-help-subtitle"><a href="https://pwa-for-wp.com/docs/article/setting-up-precaching-in-pwa/"><?php //echo esc_html__('For details click here', 'pwa-for-wp'); ?></a></span>
-                </span> -->
+                  <strong><?php echo esc_html__('Automatic', 'super-progressive-web-apps'); ?></strong>
+				  
+                    <span class="pwafw-help-subtitle"><a href="https://superpwa.com/docs/article/how-to-setup-precaching-in-superpwa/" target="_blank"><?php echo '<span class="pwafw-tooltip"><i class="dashicons dashicons-editor-help"></i>'.esc_html__('Learn more', 'super-progressive-web-apps'); ?></a></span>
                  </div>
                  <div id="pre-automatic-suboption" class="pre-automatic-suboption <?php echo (isset( $settings['precaching_automatic'] ) &&  $settings['precaching_automatic'] == 1 ? ' show' : ' hide'); ?>" style="margin-bottom: 30px;margin-left: 40px;">  
                 <table class="pre-automatic-cache-table" style="margin-bottom: 12px;">
@@ -377,10 +371,6 @@ function superpwa_caching_strategies_pre_caching_cb() {
 	              <input type="checkbox" name="superpwa_caching_strategies_settings[precaching_manual]" id="precaching_manual" class="" <?php echo (isset( $settings['precaching_manual'] ) &&  $settings['precaching_manual'] == 1 ? 'checked="checked"' : ''); ?> data-uncheck-val="0" value="1">
 
 	              <strong><?php echo esc_html__('Manual', 'super-progressive-web-apps'); ?></strong>   
-	              <!-- <span class="pwafw-tooltip"><i class="dashicons dashicons-editor-help"></i> 
-	                <span class="pwafw-help-subtitle"><a href="https://pwa-for-wp.com/docs/article/setting-up-precaching-in-pwa/"><?php //echo esc_html__('For details click here', 'pwa-for-wp'); ?></a></span>
-	            </span> -->
-
                </div> 
 	             <div id="pre-manual-suboption" class="pre-manual-suboption <?php echo (isset( $settings['precaching_manual'] ) &&  $settings['precaching_manual'] == 1 ? ' show' : ' hide'); ?>" style="margin-left: 45px;">    
                     <span class="pre-manual-label"> <strong> <?php echo esc_html__('Enter Urls To Be Cached', 'super-progressive-web-apps'); ?> </strong></span>
@@ -446,7 +436,7 @@ function superpwa_caching_strategies_interface_render() {
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'Caching Strategies', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
+		<h1><?php esc_html_e( 'Caching Strategies', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 		
 		<?php superpwa_setting_tabs_html(); ?>
 

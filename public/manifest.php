@@ -249,7 +249,7 @@ function superpwa_generate_manifest() {
 	}
 	
 	// Write the manfiest to disk.
-	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
+	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
 		$superpwa_settings['is_static_manifest'] = 1;
@@ -273,14 +273,14 @@ function superpwa_generate_manifest() {
 function superpwa_add_manifest_to_wp_head() {
 	
 	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-	$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
-	$tags .= '<link rel="prefetch" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
+	$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+	$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
 	// theme-color meta tag 
-	if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
+	if ( apply_filters( 'superpwa_add_theme_color', true ) && isset($superpwa_settings['theme_color'])) {
 		
-		$tags .= '<meta name="theme-color" content="'. $superpwa_settings['theme_color'] .'">' . PHP_EOL;
+		$tags .= '<meta name="theme-color" content="'. esc_attr($superpwa_settings['theme_color']) .'">' . PHP_EOL;
 	}
 	
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
@@ -336,13 +336,13 @@ function superpwa_get_pwa_icons() {
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> $superpwa_settings['icon'],
+							'src' 	=> esc_url($superpwa_settings['icon']),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'any', // any maskable to support adaptive icons
 						);
 	$icons_array[] = array(
-							'src' 	=> $superpwa_settings['icon'],
+							'src' 	=> esc_url($superpwa_settings['icon']),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'maskable', // any maskable to support adaptive icons
@@ -352,13 +352,13 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['splash_icon'],
+							'src' 	=> esc_url($superpwa_settings['splash_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'any',
 						);
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['splash_icon'],
+							'src' 	=> esc_url($superpwa_settings['splash_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'maskable',
@@ -368,7 +368,7 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['monochrome_icon'],
+							'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'monochrome',
@@ -398,14 +398,14 @@ function superpwa_get_pwa_screenshots() {
 	if ( @$superpwa_settings['screenshots'] != '' ) {
 		
 		$tmp_arr=explode(',',$superpwa_settings['screenshots']);
-
-		foreach($tmp_arr as $item){
-			$screenshot_array[] = array(
-				'src' 	=> $item,
-			//	'sizes'	=> '472x1024', // must be 472x1024.
-				'type'	=> 'image/png', // must be image/png
-				
-			);
+		if(!empty($tmp_arr)){
+			foreach($tmp_arr as $item){
+				$screenshot_array[] = array(
+					'src' 	=> $item,
+					'type'	=> 'image/png', // must be image/png
+					
+				);
+			}
 		}
 	}
 	

@@ -98,7 +98,7 @@ function superpwa_wonderpush_sw( $sw ) {
 		$wonderpush = 'importScripts(\'https://cdn.by.wonderpush.com/sdk/1.1/wonderpush-loader.min.js\');
 			WonderPush = self.WonderPush || [];
 			WonderPush.push([\'init\', {
-							webKey: \''.$web_key.'\',
+							webKey: \''.esc_js($web_key).'\',
 						}]);' . PHP_EOL;
 	
 		return $wonderpush . $sw;
@@ -109,7 +109,7 @@ function superpwa_wonderpush_sw( $sw ) {
 	$wonderpush .= 'echo "importScripts(\'https://cdn.by.wonderpush.com/sdk/1.1/wonderpush-loader.min.js\');
 			WonderPush = self.WonderPush || [];
 			WonderPush.push([\'init\', {
-							webKey: \''.$web_key.'\',
+							webKey: \''.esc_js($web_key).'\',
 						}]);";' . PHP_EOL;
 	$wonderpush .= '?>' . PHP_EOL . PHP_EOL;
 	

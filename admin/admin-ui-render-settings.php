@@ -63,7 +63,7 @@ function superpwa_app_short_name_cb() {
 		<input type="text" name="superpwa_settings[app_short_name]" class="regular-text superpwa-app-short-name" value="<?php if ( isset( $settings['app_short_name'] ) && ( ! empty($settings['app_short_name']) ) ) echo esc_attr($settings['app_short_name']); ?>"/>
 		
 		<p class="description">
-			<?php _e('Used when there is insufficient space to display the full name of the application. <span id="superpwa-app-short-name-limit"><code>20</code> characters or less.</span>', 'super-progressive-web-apps'); ?>
+			<?php echo esc_html__('Used when there is insufficient space to display the full name of the application. ', 'super-progressive-web-apps').'<span id="superpwa-app-short-name-limit"><code>'. esc_html__('20', 'super-progressive-web-apps').'</code> '. esc_html__('characters or less.', 'super-progressive-web-apps').'</span>'; ?>
 		</p>
 		
 	</fieldset>
@@ -86,7 +86,7 @@ function superpwa_description_cb() {
 		<input type="text" name="superpwa_settings[description]" class="regular-text" value="<?php if ( isset( $settings['description'] ) && ( ! empty( $settings['description'] ) ) ) echo esc_attr( $settings['description'] ); ?>"/>
 		
 		<p class="description">
-			<?php _e( 'A brief description of what your app is about.', 'super-progressive-web-apps' ); ?>
+			<?php esc_html_e( 'A brief description of what your app is about.', 'super-progressive-web-apps' ); ?>
 		</p>
 		
 	</fieldset>
@@ -107,11 +107,11 @@ function superpwa_app_icon_cb() {
 	<!-- Application Icon -->
 	<input type="text" name="superpwa_settings[icon]" id="superpwa_settings[icon]" class="superpwa-icon regular-text" size="50" value="<?php echo isset( $settings['icon'] ) ? esc_attr( $settings['icon']) : ''; ?>">
 	<button type="button" class="button superpwa-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
-		<?php _e('This will be the icon of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>192x192</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('This will be the icon of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('192x192', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -130,11 +130,11 @@ function superpwa_splash_icon_cb() {
 	<!-- Splash Screen Icon -->
 	<input type="text" name="superpwa_settings[splash_icon]" id="superpwa_settings[splash_icon]" class="superpwa-splash-icon regular-text" size="50" value="<?php echo isset( $settings['splash_icon'] ) ? esc_attr( $settings['splash_icon']) : ''; ?>">
 	<button type="button" class="button superpwa-splash-icon-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
-		<?php _e('This icon will be displayed on the splash screen of your app on supported devices. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('This icon will be displayed on the splash screen of your app on supported devices. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('512x512', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -153,11 +153,11 @@ function superpwa_app_screenshots_cb() {
 	<!-- Application Icon -->
 	<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
 	<button type="button" class="button superpwa-screenshots-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
-		<?php _e('This will be the screenshots of your app when installed on the phone. Must be a <code>PNG</code> image exactly <code>472x1024</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -176,11 +176,11 @@ function superpwa_app_monochrome_icon_cb() {
 	<!-- Monochrome Icon -->
 	<input type="text" name="superpwa_settings[monochrome_icon]" id="superpwa_settings[monochrome_icon]" class="superpwa-monochromeicon regular-text" size="50" value="<?php echo isset( $settings['monochrome_icon'] ) ? esc_attr( $settings['monochrome_icon']) : ''; ?>">
 	<button type="button" class="button superpwa-monochrome-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php _e( 'Choose Monochrome Icon', 'super-progressive-web-apps' ); ?>
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Monochrome Icon', 'super-progressive-web-apps' ); ?>
 	</button>
 	
 	<p class="description">
-		<?php _e('Please upload Monochrome icon with transparent background. Must be a <code>PNG</code> image exactly <code>512x512</code> in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('Please upload Monochrome icon with transparent background. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('512x512', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -200,7 +200,7 @@ function superpwa_background_color_cb() {
 	<input type="text" name="superpwa_settings[background_color]" id="superpwa_settings[background_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['background_color'] ) ? esc_attr( $settings['background_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
 	
 	<p class="description">
-		<?php _e('Background color of the splash screen.', 'super-progressive-web-apps'); ?>
+		<?php esc_html_e('Background color of the splash screen.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -220,7 +220,7 @@ function superpwa_theme_color_cb() {
 	<input type="text" name="superpwa_settings[theme_color]" id="superpwa_settings[theme_color]" class="superpwa-colorpicker" value="<?php echo isset( $settings['theme_color'] ) ? esc_attr( $settings['theme_color']) : '#D5E0EB'; ?>" data-default-color="#D5E0EB">
 	
 	<p class="description">
-		<?php _e('Theme color is used on supported devices to tint the UI elements of the browser and app switcher. When in doubt, use the same color as <code>Background Color</code>.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('Theme color is used on supported devices to tint the UI elements of the browser and app switcher. When in doubt, use the same color as ', 'super-progressive-web-apps').'<code>'. esc_html__('Background Color', 'super-progressive-web-apps').'</code>'; ?>
 	</p>
 
 	<?php
@@ -240,8 +240,8 @@ function superpwa_start_url_cb() {
 			<!-- WordPress Pages Dropdown -->
 			<label for="superpwa_settings[startpage_type]">
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
-				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php _e(' Select Page ', 'super-progressive-web-apps') ?></option>
-				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php _e(' Select Post ', 'super-progressive-web-apps') ?></option>
+				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
+				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
@@ -307,13 +307,13 @@ function superpwa_start_url_cb() {
 			<!--  AMP Page As Start Page -->
 			<br><input type="checkbox" name="superpwa_settings[start_url_amp]" id="superpwa_settings[start_url_amp]" value="1" 
 				<?php if ( isset( $settings['start_url_amp'] ) ) { checked( '1', $settings['start_url_amp'] ); } ?>>
-				<label for="superpwa_settings[start_url_amp]"><?php _e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
+				<label for="superpwa_settings[start_url_amp]"><?php esc_html_e('Use AMP version of the start page.', 'super-progressive-web-apps') ?></label>
 				<br>
 			
 			<!-- AMP for WordPress 0.6.2 doesn't support homepage, the blog index, and archive pages. -->
 			<?php if ( is_plugin_active( 'amp/amp.php' ) ) { ?>
 				<p class="description">
-					<?php _e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
+					<?php esc_html_e( 'Do not check this if your start page is the homepage, the blog index, or the archives page. AMP for WordPress does not create AMP versions for these pages.', 'super-progressive-web-apps' ); ?>
 				</p>
 			<?php } ?>
 			
@@ -357,10 +357,10 @@ function superpwa_app_category_cb() {
 		$manifest_categories=["business","education","entertainment","finance","fitness","food","games","government","health","kids","lifestyle","magazines","medical","music","navigation","security","shopping","social","sports","travel","utilities","weather"];
 		?>
 			<select name="superpwa_settings[app_category]" id="superpwa_settings[app_category]">
-			<option value=""><?php _e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
+			<option value=""><?php esc_html_e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
 				<?php foreach($manifest_categories as $category){ ?>
 				<option value="<?php echo $category?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $category); } ?>>
-					<?php _e($category, 'super-progressive-web-apps' ); ?>
+					<?php esc_html_e($category, 'super-progressive-web-apps' ); ?>
 				</option>
 				<?php } ?>
 			</select>
@@ -413,19 +413,20 @@ function superpwa_orientation_cb() {
 	<label for="superpwa_settings[orientation]">
 		<select name="superpwa_settings[orientation]" id="superpwa_settings[orientation]">
 			<option value="0" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 0 ); } ?>>
-				<?php _e( 'Follow Device Orientation', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Follow Device Orientation', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="1" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 1 ); } ?>>
-				<?php _e( 'Portrait', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Portrait', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="2" <?php if ( isset( $settings['orientation'] ) ) { selected( $settings['orientation'], 2 ); } ?>>
-				<?php _e( 'Landscape', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Landscape', 'super-progressive-web-apps' ); ?>
 			</option>
 		</select>
 	</label>
 	
 	<p class="description">
-		<?php _e( 'Set the orientation of your app on devices. When set to <code>Follow Device Orientation</code> your app will rotate as the device is rotated.', 'super-progressive-web-apps' ); ?>
+		<?php echo esc_html__('Set the orientation of your app on devices. When set to ', 'super-progressive-web-apps').'<code>'. esc_html__('Follow Device Orientation', 'super-progressive-web-apps').'</code>'. esc_html__(' your app will rotate as the device is rotated.', 'super-progressive-web-apps'); ?>
+		
 	</p>
 
 	<?php
@@ -447,16 +448,16 @@ function superpwa_display_cb() {
 	<label for="superpwa_settings[display]">
 		<select name="superpwa_settings[display]" id="superpwa_settings[display]">
 			<option value="0" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 0 ); } ?>>
-				<?php _e( 'Full Screen', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Full Screen', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="1" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 1 ); } ?>>
-				<?php _e( 'Standalone', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Standalone', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="2" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 2 ); } ?>>
-				<?php _e( 'Minimal UI', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Minimal UI', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="3" <?php if ( isset( $settings['display'] ) ) { selected( $settings['display'], 3 ); } ?>>
-				<?php _e( 'Browser', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'Browser', 'super-progressive-web-apps' ); ?>
 			</option>
 		</select>
 	</label>
@@ -484,10 +485,10 @@ function superpwa_text_direction_cb() {
 	<label for="superpwa_settings[text_dir]">
 		<select name="superpwa_settings[text_dir]" id="superpwa_settings[display]">
 			<option value="0" <?php if ( isset( $settings['text_dir'] ) ) { selected( $settings['text_dir'], 0 ); } ?>>
-				<?php _e( 'LTR', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'LTR', 'super-progressive-web-apps' ); ?>
 			</option>
 			<option value="1" <?php if ( isset( $settings['text_dir'] ) ) { selected( $settings['text_dir'], 1 ); } ?>>
-				<?php _e( 'RTL', 'super-progressive-web-apps' ); ?>
+				<?php esc_html_e( 'RTL', 'super-progressive-web-apps' ); ?>
 			</option>
 		</select>
 	</label>
@@ -503,11 +504,11 @@ function superpwa_related_applications_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	<fieldset>
-		<label for="superpwa_settings[related_applications]">PlayStore App ID</label>&nbsp;
+		<label for="superpwa_settings[related_applications]"><?php esc_html_e( 'PlayStore App ID', 'super-progressive-web-apps' ); ?></label>&nbsp;
 		<input type="text" name="superpwa_settings[related_applications]" class="regular-text" placeholder="com.example.app" value="<?php if ( isset( $settings['related_applications'] ) && ( ! empty($settings['related_applications']) ) ) echo esc_attr($settings['related_applications']); ?>"/>
 	</fieldset>
 	<fieldset>
-		<label for="superpwa_settings[related_applications_ios]">AppStore App ID</label>&nbsp;
+		<label for="superpwa_settings[related_applications_ios]"><?php esc_html_e( 'AppStore App ID', 'super-progressive-web-apps' ); ?></label>&nbsp;
 		<input type="text" name="superpwa_settings[related_applications_ios]" placeholder="id123456789" class="regular-text" value="<?php if ( isset( $settings['related_applications_ios'] ) && ( ! empty($settings['related_applications_ios']) ) ) echo esc_attr($settings['related_applications_ios']); ?>"/>
 	</fieldset>
 
@@ -589,7 +590,7 @@ function superpwa_disable_add_to_home_cb() {
 	$settings = superpwa_get_settings(); 
 	?><input type="checkbox" name="superpwa_settings[disable_add_to_home]" id="superpwa_settings[disable_add_to_home]" value="1" 
 	<?php if ( isset( $settings['disable_add_to_home'] ) ) { checked( '1', $settings['disable_add_to_home'] ); } ?>>
-	<label for="superpwa_settings[disable_add_to_home]"><?php _e('Remove default banner', 'super-progressive-web-apps') ?></label>
+	<label for="superpwa_settings[disable_add_to_home]"><?php esc_html_e('Remove default banner', 'super-progressive-web-apps') ?></label>
 	<br>
 	<?php
 }
@@ -750,7 +751,7 @@ function superpwa_force_update_sw_cb(){
 			}
         	echo esc_attr($settings['force_update_sw_setting']);
         }else{ echo SUPERPWA_VERSION; } ?>"></label>      
-        <code>Current Version <?php echo SUPERPWA_VERSION; ?></code>
+        <code><?php echo esc_html__('Current Version', 'super-progressive-web-apps').' '.SUPERPWA_VERSION; ?></code>
 	<p><?php echo esc_html__('Update the version number. It will automatically re-install the service worker for all the users', 'super-progressive-web-apps'); ?></p>
 	
 	<?php
@@ -813,16 +814,14 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo $addon_page;  ?>" data-href="yes"><?php echo __('Features (Addons)', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo __('Advanced', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo __('Help & Support', 'super-progressive-web-apps'); ?></a>
-			  <?php if( defined('SUPERPWA_PRO_VERSION') ){ 
-			     $expiry_warning = superpwa_license_expire_warning();
-			  	?>
-			    <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no">License <?php echo $expiry_warning; ?></a>
+			  <?php if( defined('SUPERPWA_PRO_VERSION') ){  ?>
+			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
 			  <?php } ?>
 			  <?php if(!defined('SUPERPWA_PRO_VERSION')){ ?>
 				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;margin-right: 5px; float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>
 			  <?php } ?>
 			</div>
-			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> <?php _e( 'Please Save the settings before moving to other tabs', 'super-progressive-web-apps' ); ?> </span>
+			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> <?php esc_html_e( 'Please Save the settings before moving to other tabs', 'super-progressive-web-apps' ); ?> </span>
 			<div id="settings" class="spwa-tabcontent">
 			 <?php
 			  	// Basic Application Settings

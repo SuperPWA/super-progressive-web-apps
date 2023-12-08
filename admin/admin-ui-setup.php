@@ -75,7 +75,7 @@ function superpwa_add_menu_links() {
 		if( $license_info_lifetime == 'lifetime' ){
 			$days = 'Lifetime';
 			if ($days == 'Lifetime') {
-				$expire_msg = " Your License is Valid for Lifetime ";
+				$expire_msg = esc_html__(' Your License is Valid for Lifetime ','super-progressive-web-apps');
 			}
 		}
 		else if($today > $exp_date){
@@ -309,7 +309,7 @@ function superpwa_register_settings() {
     	// Disabling "Add to home screen"
 		add_settings_field(
 			'superpwa_disable_add_to_home',								// ID
-			__('<label for="superpwa_settings[disable_add_to_home]">Disable "Add to home screen"</label>', 'super-progressive-web-apps'),				// Title
+			'<label for="superpwa_settings[disable_add_to_home]">'.__('Disable "Add to home screen"', 'super-progressive-web-apps').'</label>',				// Title
 			'superpwa_disable_add_to_home_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -327,7 +327,7 @@ function superpwa_register_settings() {
 		// Yandex Support
 		add_settings_field(
 			'superpwa_yandex_support_shortcut',								// ID
-			__('<label for="superpwa_settings[yandex_support]">Yandex support</label>', 'super-progressive-web-apps'),				// Title
+			'<label for="superpwa_settings[yandex_support]">'.__('Yandex support', 'super-progressive-web-apps').'</label>',				// Title
 			'superpwa_yandex_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -335,7 +335,7 @@ function superpwa_register_settings() {
 		// Analytics support
 		add_settings_field(
 			'superpwa_analytics_support_shortcut',								// ID
-			__('<label for="superpwa_settings[analytics_support]">Offline analytics </label>', 'super-progressive-web-apps'),				// Title
+			'<label for="superpwa_settings[analytics_support]">'.__('Offline analytics', 'super-progressive-web-apps').'</label>',				// Title
 			'superpwa_analytics_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -343,7 +343,7 @@ function superpwa_register_settings() {
 		// Cache External Origin URLs
 		add_settings_field(
 			'superpwa_cache_external_urls_shortcut',								// ID
-			__('<label for="superpwa_settings[cache_external_urls]">Cache External Origin URLs</label>', 'super-progressive-web-apps'),				// Title
+			'<label for="superpwa_settings[cache_external_urls]">'.__('Cache External Origin URLs', 'super-progressive-web-apps').'</label>',				// Title
 			'superpwa_cache_external_urls_support_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
@@ -634,7 +634,7 @@ function superpwa_footer_version( $default ) {
 	
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
-	if ( strpos( $screen->id, 'superpwa' ) === false ) {
+	if ( isset($screen->id) && strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
 	

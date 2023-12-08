@@ -229,10 +229,9 @@ function superpwa_onesignal_admin_notices() {
 		
 		echo '<div class="notice notice-warning"><p>' . 
 		sprintf( 
-			__( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ), 
+			'<strong>'.esc_html__('SuperPWA','super-progressive-web-apps'). '</strong>'.esc_html__('is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.','super-progressive-web-apps'). ' <br> '.esc_html__('Please refer to the','super-progressive-web-apps').' <a href="%s" target="_blank">'.esc_html__('OneSignal integration documentation','super-progressive-web-apps').'</a> '.esc_html__('for more info. ','super-progressive-web-apps'), 
 			'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice#multisites'
-		) . '</p></div>';
-		
+		) .'</p></div>';
 		// Filter PWA status since PWA is not ready yet. 
 		add_filter( 'superpwa_is_pwa_ready', '__return_false' );
 	}

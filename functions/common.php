@@ -321,11 +321,11 @@ function superpwa_reset_all_settings(){
         
         if($result){    
             
-            echo json_encode(array('status'=>'t'));            
+            echo wp_json_encode(array('status'=>'t'));            
         
         }else{
             
-            echo json_encode(array('status'=>'f'));            
+            echo wp_json_encode(array('status'=>'f'));            
         
         }        
         wp_die();           
@@ -360,17 +360,15 @@ function superpwa_setting_tabs_html(){
  	}
 ?>
 			<div class="spwa-tab">
-				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url_raw($general_settings); ?>" data-href="yes"><?php _e('Settings', 'super-progressive-web-apps') ?></a>
-				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url_raw($addon_page); ?>" data-href="yes"><?php _e('Features (Addons)', 'super-progressive-web-apps') ?></a>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($advance_settings); ?>" data-href="yes"><?php _e('Advanced', 'super-progressive-web-apps') ?></a>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($support_settings); ?>" data-href="yes"><?php _e('Help & Support', 'super-progressive-web-apps') ?></a>
-				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { 
-                     $expiry_warning = superpwa_license_expire_warning();
-				  	?>
-				  <a class="spwa-tablinks" href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes">License <?php echo $expiry_warning; ?></a>
+				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url($general_settings); ?>" data-href="yes"><?php esc_html_e('Settings', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url($addon_page); ?>" data-href="yes"><?php esc_html_e('Features (Addons)', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url($advance_settings); ?>" data-href="yes"><?php esc_html_e('Advanced', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url($support_settings); ?>" data-href="yes"><?php esc_html_e('Help & Support', 'super-progressive-web-apps') ?></a>
+				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
+				  <a class="spwa-tablinks" href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
 				  <?php } ?>
 				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url_raw($license_settings); ?>" data-href="yes"><?php _e('License', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php esc_html_e('License', 'super-progressive-web-apps') ?></a>
 				<?php } ?>
 				  
 				</div>
@@ -382,7 +380,7 @@ function superpwa_setting_tabs_html(){
  */
 function superpwa_license_expire_warning(){
 
-	$license_alert ='';
+	$license_alert = false;
 		if( defined('SUPERPWA_PRO_VERSION') ){
 
 			$license_info = get_option("superpwa_pro_upgrade_license");
@@ -393,7 +391,7 @@ function superpwa_license_expire_warning(){
 			$today = date('Y-m-d');
 			$exp_date = $license_exp;
 
-	        $license_alert = $today > $exp_date ? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>": "" ;
+	        $license_alert = $today > $exp_date ? true:false;
 	        }
 	    }
     return $license_alert;
@@ -426,23 +424,23 @@ function superpwa_newsletter_form(){
 					     <span class="dashicons dashicons-dismiss superpwa_newsletter_hide" style="float: right;cursor: pointer;"></span>
 					    <span style="clear:both;"></span>
 						<div class="name column-name" style="margin: 0px 10px;">
-							<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
+							<h3><?php esc_html_e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
 						</div>
 						<div class="desc column-description" style="margin: 0px 10px;">
-							<p><?php _e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+							<p><?php esc_html_e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
 						</div>
 						
 						<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
 						
 							<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
 								<fieldset>
-									<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
+									<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_html_e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">		
 									<input name="source" value="superpwa-plugin" type="hidden">
-									<input type="submit" class="button" value="<?php _e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+									<input type="submit" class="button" value="<?php esc_html_e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
 									<span class="superpwa_newsletter_hide" style="box-shadow: unset;cursor: pointer;margin-left: 10px;">
-									<?php _e( 'No thanks', 'super-progressive-web-apps' ); ?>
+									<?php esc_html_e( 'No thanks', 'super-progressive-web-apps' ); ?>
 									</span>
-									<small style="display:block; margin-top:8px;"><?php _e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
+									<small style="display:block; margin-top:8px;"><?php esc_html_e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
 									
 								</fieldset>
 							</form>

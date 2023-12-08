@@ -53,12 +53,12 @@ class SPWAP_PUSH_NOTIFICATION
     
 public function enable_modules(){
     if(!wp_verify_nonce( $_REQUEST['verify_nonce'], 'verify_request' ) ) {
-        echo json_encode(array("status"=>300,"message"=>'Request not valid'));
+        echo wp_json_encode(array("status"=>300,"message"=>esc_html__('Request not valid','super-progressive-web-apps')));
         exit();
     }
     // Exit if the user does not have proper permissions
     if(! current_user_can( 'install_plugins' ) ) {
-        echo json_encode(array("status"=>300,"message"=>'User Request not valid'));
+        echo wp_json_encode(array("status"=>300,"message"=>esc_html__('User Request not valid','super-progressive-web-apps')));
         exit();
     }
 
@@ -88,9 +88,9 @@ public function enable_modules(){
     }
 
     if(count($plugins)>0){
-       echo json_encode( array( "status"=>200, "message"=>"Module successfully Added",'redirect_url'=>esc_url($redirectSettingsUrl) , "slug"=>$plugins[0]['name'], 'path'=> $plugins[0]['path'] ) );
+       echo wp_json_encode( array( "status"=>200, "message"=>esc_html__('Module successfully Added','super-progressive-web-apps'),'redirect_url'=>esc_url($redirectSettingsUrl) , "slug"=>esc_html($plugins[0]['name']), 'path'=> esc_html($plugins[0]['path'] )) );
     }else{
-        echo json_encode(array("status"=>300, "message"=>"Modules not Found"));
+        echo wp_json_encode(array("status"=>300, "message"=>esc_html__('Modules not Found','super-progressive-web-apps')));
     }
     wp_die();
 

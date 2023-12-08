@@ -370,16 +370,15 @@ function superpwa_settings_link( $links ) {
 				// True means, add-on is installed and active
 				return array_merge(
 					array(
-						'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
-						// 'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
+						'settings' => '<a href="' . esc_url(admin_url( 'admin.php?page=superpwa' )) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
 					),
 					$links
 				);
 			}else{
 				return array_merge(
 					array(
-						'settings' => '<a href="' . admin_url( 'admin.php?page=superpwa' ) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
-						'upgrade' => '<a href="' . admin_url( 'admin.php?page=superpwa-upgrade' ) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
+						'settings' => '<a href="' .  esc_url(admin_url( 'admin.php?page=superpwa' )) . '">' . __( 'Settings', 'super-progressive-web-apps' ) . '</a>',
+						'upgrade' => '<a href="' .  esc_url(admin_url( 'admin.php?page=superpwa-upgrade' )) . '">' . __( 'Upgrade to Pro', 'super-progressive-web-apps' ) . '</a>'
 					),
 					$links
 				);
@@ -454,7 +453,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
 		// Generate manifest from Settings and send the response w/ header.
 		header( 'Content-Type: application/json' );
-		echo json_encode( superpwa_manifest_template() );
+		echo wp_json_encode( superpwa_manifest_template() );
 		exit();
 	}
     // Needed new query_vars of pagename for Wp Fastest Cache 
