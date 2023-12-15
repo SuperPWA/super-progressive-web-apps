@@ -14,22 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) die;
 
 /**
- * Delete database settings
- *
- * @since 1.0
- * @since 1.7 Added clean-up for superpwa_active_addons and superpwa_utm_tracking_settings
- */ 
-delete_option( 'superpwa_settings' );
-delete_option( 'superpwa_active_addons' );
-delete_option( 'superpwa_utm_tracking_settings' );
-delete_option( 'superpwa_version' );
-delete_option( 'superpwa_hide_newsletter' );
-delete_option( 'superpwa_pull_to_refresh_settings' );
-delete_option( 'superpwa_apple_icons_settings' );
-delete_option( 'superpwa_apple_icons_uploaded' );
-delete_option( 'superpwa_caching_strategies_settings' );
-
-/**
  * Clean up for Multisites
  *
  * @since 1.6
@@ -47,6 +31,26 @@ if ( is_multisite() ) {
 		switch_to_blog( $blog_id );
 		
 		// Delete database settings for each site.
+		superpwa_delete_all_options();
+
+		// Return to main site
+		restore_current_blog();
+	}
+	
+	// Delete the list of websites where SuperPWA was activated.
+	delete_site_option( 'superpwa_active_sites' );
+} else {
+	superpwa_delete_all_options();
+}
+
+/**
+ * Delete database settings
+ *
+ * @since 1.0
+ * @since 1.7 Added clean-up for superpwa_active_addons and superpwa_utm_tracking_settings
+ * @since 1.35 Added clean-up for superpwa_pull_to_refresh_settings , superpwa_apple_icons_settings , superpwa_apple_icons_uploaded , superpwa_caching_strategies_settings
+ */
+function superpwa_delete_all_options(){
 		delete_option( 'superpwa_settings' );
 		delete_option( 'superpwa_active_addons' );
 		delete_option( 'superpwa_utm_tracking_settings' );
@@ -56,11 +60,4 @@ if ( is_multisite() ) {
 		delete_option( 'superpwa_apple_icons_settings' );
 		delete_option( 'superpwa_apple_icons_uploaded' );
 		delete_option( 'superpwa_caching_strategies_settings' );
-
-		// Return to main site
-		restore_current_blog();
-	}
-	
-	// Delete the list of websites where SuperPWA was activated.
-	delete_site_option( 'superpwa_active_sites' );
 }
