@@ -77,6 +77,9 @@ Here are the current features of Super Progressive Web Apps:
 * Call To Action (CTA) [More Info](https://superpwa.com/doc/call-to-action-cta-add-on-for-superpwa/)
 * Android APK APP Generator [More Info](https://superpwa.com/doc/android-apk-app-generator-add-on-for-superpwa/)
 * Data Analytics [More Info](https://superpwa.com/doc/data-analytics-add-on-for-superpwa/)
+* Pre-Loader [More Info](https://superpwa.com/docs/article/preloader-add-on-for-superpwa/)
+* App Shortcuts [More Info](https://superpwa.com/docs/article/app-shortcuts-add-on-for-superpwa/)
+* QR Code Generator [More Info](https://superpwa.com/docs/article/qr-code-generator-add-on-for-superpwa/)
 
 ### Progressive Web App Minimum Requirements
 
