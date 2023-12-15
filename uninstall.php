@@ -23,6 +23,11 @@ delete_option( 'superpwa_settings' );
 delete_option( 'superpwa_active_addons' );
 delete_option( 'superpwa_utm_tracking_settings' );
 delete_option( 'superpwa_version' );
+delete_option( 'superpwa_hide_newsletter' );
+delete_option( 'superpwa_pull_to_refresh_settings' );
+delete_option( 'superpwa_apple_icons_settings' );
+delete_option( 'superpwa_apple_icons_uploaded' );
+delete_option( 'superpwa_caching_strategies_settings' );
 
 /**
  * Clean up for Multisites
@@ -46,7 +51,12 @@ if ( is_multisite() ) {
 		delete_option( 'superpwa_active_addons' );
 		delete_option( 'superpwa_utm_tracking_settings' );
 		delete_option( 'superpwa_version' );
-		
+		delete_option( 'superpwa_hide_newsletter' );
+		delete_option( 'superpwa_pull_to_refresh_settings' );
+		delete_option( 'superpwa_apple_icons_settings' );
+		delete_option( 'superpwa_apple_icons_uploaded' );
+		delete_option( 'superpwa_caching_strategies_settings' );
+
 		// Return to main site
 		restore_current_blog();
 	}
