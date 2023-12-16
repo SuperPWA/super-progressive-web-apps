@@ -48,7 +48,7 @@ if ( is_multisite() ) {
  *
  * @since 1.0
  * @since 1.7 Added clean-up for superpwa_active_addons and superpwa_utm_tracking_settings
- * @since 1.35 Added clean-up for superpwa_pull_to_refresh_settings , superpwa_apple_icons_settings , superpwa_apple_icons_uploaded , superpwa_caching_strategies_settings
+ * @since 2.2.23 Added clean-up for superpwa_pull_to_refresh_settings , superpwa_apple_icons_settings , superpwa_apple_icons_uploaded , superpwa_caching_strategies_settings
  */
 function superpwa_delete_all_options(){
 		delete_option( 'superpwa_settings' );

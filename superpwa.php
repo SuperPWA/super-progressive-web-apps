@@ -6,7 +6,7 @@
  * Author: SuperPWA
  * Author URI: https://profiles.wordpress.org/superpwa/
  * Contributors: SuperPWA
- * Version: 2.2.22
+ * Version: 2.2.23
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html

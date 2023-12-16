@@ -116,6 +116,8 @@ function superpwa_manifest_template() {
 	$superpwa_settings = superpwa_get_settings();
 
 	$manifest               = array();
+	$id_url = parse_url(site_url());
+	$manifest['id']         = isset($id_url['host'])?$id_url['host']:mt_rand(0,9999999);
 	$manifest['name']       = $superpwa_settings['app_name'];
 	$manifest['short_name'] = $superpwa_settings['app_short_name'];
 
@@ -192,8 +194,12 @@ function superpwa_manifest_template() {
 			$current_language = superpwa_get_language_shortcode();
 			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
-			$manifest['scope'] = "";
+			$manifest['scope'] = "/";
 		}
+		$launch_handler = ['client_mode'=>'auto'];
+		$manifest['launch_handler']  = $launch_handler;
+		$manifest['handle_links']  = 'preferred';
+		
 
 	// }
 
