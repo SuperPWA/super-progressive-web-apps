@@ -78,5 +78,18 @@ jQuery(document).ready(function ($) {
 		}
 	}
 }
+var superpwa_complete_extn_list = jQuery('.addon-install #the-list').html();
+jQuery('.superpwa-sub-tab-headings span').click(function(){
+    var tabId = jQuery(this).attr('data-tab-id');
+    if(tabId && superpwa_complete_extn_list){
+        jQuery('.addon-install #the-list').hide();
+        jQuery('.addon-install #the-list').html(superpwa_complete_extn_list);
+        jQuery('.superpwa-sub-tab-headings span').removeClass('selected');
+        jQuery(this).addClass('selected');
+        jQuery('#the-list .plugin-card:not(.'+tabId+')').remove();
+        jQuery('.addon-install #the-list').show();
+
+    }
+});
 
 }); // document ready

@@ -55,6 +55,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.0',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'push_notification_for_superpwa' => array(
 							'name'					=> __( 'Push Notification', 'super-progressive-web-apps' ),
@@ -67,6 +68,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.19',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'apple_touch_icons' => array(
 							'name'					=> __( 'Apple Touch Icons & Splash Screen', 'super-progressive-web-apps' ),
@@ -77,7 +79,8 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-apple-icons' ),
 							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '2.1.7',//1.8
+							'superpwa_min_version'	=> '2.1.7',//1.8,
+							'category'				=> 'subtab-all subtab-popular subtab-usability',
 						),
 		'caching_strategies' => array(
 							'name'					=> __( 'Caching Strategies', 'super-progressive-web-apps' ),
@@ -89,6 +92,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'call_to_action' => array(
 							'name'					=> __( 'Call To Action', 'super-progressive-web-apps' ),
@@ -101,6 +105,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.2',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'android_apk_app_generator' => array(
 							'name'					=> __( 'Android APK APP Generator', 'super-progressive-web-apps' ),
@@ -113,6 +118,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.2',
+							'category'				=> 'subtab-all subtab-app',
 						),
 		'app_shortcut' => array(
 							'name'					=> __( 'APP Shortcuts', 'super-progressive-web-apps' ),
@@ -125,6 +131,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
+							'category'				=> 'subtab-all subtab-app',
 						),
 		'data_analytics' => array(
 							'name'					=> __( 'Data Analytics', 'super-progressive-web-apps' ),
@@ -137,6 +144,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.8',
+							'category'				=> 'subtab-all subtab-analytics',
 						),
 		'pre_loader' => array(
 							'name'					=> __( 'PreLoader', 'super-progressive-web-apps' ),
@@ -148,6 +156,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.18',//1.8
+							'category'				=> 'subtab-all subtab-analytics subtab-usability',
 						),
 		'qr_code_generator' => array(
 							'name'					=> __( 'QR Code Generator', 'super-progressive-web-apps' ),
@@ -160,6 +169,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.3',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'wpml_for_superpwa' => array(
 							'name'					=> __( 'WPML', 'super-progressive-web-apps' ),
@@ -172,6 +182,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'navigation_bar_for_superpwa' => array(
 							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
@@ -184,6 +195,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.20',
+							'category'				=> 'subtab-all subtab-navigation',
 						),
 						'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
@@ -195,11 +207,13 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.7',
+							'category'				=> 'subtab-all subtab-analytics',
 						),
 	
 	);
 	
 	if ( $slug === false ) {
+		ksort($addons);
 		return $addons;
 	}
 	
@@ -265,7 +279,16 @@ function superpwa_addons_interface_render() {
 	<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
        <?php superpwa_setting_tabs_html(); ?>
 		<p><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
-		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
+		<div class="superpwa-sub-tab-headings">
+			<span data-tab-id="subtab-all" class="selected"><?php esc_html_e( 'All', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-popular"><?php esc_html_e( 'Popular', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-analytics"><?php esc_html_e( 'Analytics', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-app"><?php esc_html_e( 'App generation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-navigation"><?php esc_html_e( 'Navigation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-usability"><?php esc_html_e( 'Usability', 'super-progressive-web-apps' ); ?></span>
+		</div>
+		<br/>
+		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}.addon-install  .bundled{background: #22b9e5;padding: 5px 3%;border-radius: 10px;color: #ffffff;line-height: 2;font-size: 14px;}.addon-install  .addon_pro{background: #ee4721;padding: 5px 3%;border-radius: 10px;color: #ffffff;line-height: 2;font-size: 14px;}.superpwa-sub-tab-headings span{cursor: pointer;}.superpwa-sub-tab-headings span.selected{color:blue;}</style>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
 			
@@ -288,7 +311,7 @@ function superpwa_addons_interface_render() {
 					
 					?>
 			
-					<div class="plugin-card plugin-card-<?php echo $slug; ?>">
+					<div class="plugin-card plugin-card-<?php echo $slug; ?> <?php echo esc_attr($addon['category']);?>">
 					
 						<div class="plugin-card-top">
 						
@@ -298,6 +321,7 @@ function superpwa_addons_interface_render() {
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
+									<span class="<?php echo esc_attr($addon['type'])?>"><?php if($addon['type']=='addon_pro'){ esc_html_e( 'Pro', 'super-progressive-web-apps');}else{ esc_html_e( 'Free', 'super-progressive-web-apps'); }?></span>
 								</h3>
 							</div>
 							
