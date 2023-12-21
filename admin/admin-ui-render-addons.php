@@ -156,7 +156,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.18',//1.8
-							'category'				=> 'subtab-all subtab-analytics subtab-usability',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'qr_code_generator' => array(
 							'name'					=> __( 'QR Code Generator', 'super-progressive-web-apps' ),
@@ -276,9 +276,9 @@ function superpwa_addons_interface_render() {
 	?>
 	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<div class="wrap">
-	<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+	<h1>Super Progressive Web Apps <sup class="superpwa_version"><?php echo SUPERPWA_VERSION; ?></sup></h1>
        <?php superpwa_setting_tabs_html(); ?>
-		<p><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
+		<p class="superpwa-addons-headp"><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		<div class="superpwa-sub-tab-headings">
 			<span data-tab-id="subtab-all" class="selected"><?php esc_html_e( 'All', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-popular"><?php esc_html_e( 'Popular', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
@@ -288,7 +288,7 @@ function superpwa_addons_interface_render() {
 			<span data-tab-id="subtab-usability"><?php esc_html_e( 'Usability', 'super-progressive-web-apps' ); ?></span>
 		</div>
 		<br/>
-		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}.addon-install  .bundled{background: #22b9e5;padding: 5px 3%;border-radius: 10px;color: #ffffff;line-height: 2;font-size: 14px;}.addon-install  .addon_pro{background: #ee4721;padding: 5px 3%;border-radius: 10px;color: #ffffff;line-height: 2;font-size: 14px;}.superpwa-sub-tab-headings span{cursor: pointer;}.superpwa-sub-tab-headings span.selected{color:blue;}</style>
+		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
 			

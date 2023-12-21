@@ -40,3 +40,60 @@
         padding-bottom:50px;
     }
 }
+
+.superpwa_version{
+    font-size: 13px;
+    background: #fff;
+    padding: 3px 10px;
+    border: 1px solid #b3b3b3;
+    border-radius: 20px;
+    position: relative;
+    top: 4px;
+    margin-left: 8px;
+}
+
+.addon-install .bundled {
+    background: #4CAF50;
+    padding: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 11px;
+    position: absolute;
+    top: -6px;
+    text-transform: uppercase;
+    left: -10px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.addon-install .addon_pro{
+    background: #ee4721;
+    padding: 0;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 11px;
+    position: absolute;
+    top: -6px;
+    text-transform: uppercase;
+    left: -10px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.superpwa-sub-tab-headings span{
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+}
+.superpwa-sub-tab-headings span.selected{color:blue;}
+
+.superpwa-addons-headp{
+    font-weight: 600;
+    font-size: 16px;
+    color: #868686;
+}
