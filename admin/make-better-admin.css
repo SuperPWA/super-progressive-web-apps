@@ -97,3 +97,8 @@
     font-size: 16px;
     color: #868686;
 }
+#the-list .plugin-action-buttons .upgrade{
+    background: #fdfc35;
+    color: #000;
+    border-color: #666;
+}

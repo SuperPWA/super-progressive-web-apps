@@ -297,7 +297,7 @@ function superpwa_addons_interface_render() {
 				<?php 
 				// Newsletter marker. Set this to false once newsletter subscription is displayed.
 				$superpwa_newsletter = true;
-				
+				$superpwa_upgrade_class_addons ='';
 				// Looping over each add-on
 				foreach( $addons as $slug => $addon ) { 
 				
@@ -352,7 +352,7 @@ function superpwa_addons_interface_render() {
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
 										</a>
 										<?php } } else{ ?>
-											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label ="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary '.esc_attr (superpwa_addons_status($slug));  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label ="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo superpwa_addons_button_text( $slug ); ?>
 											</a>
 										<?php } ?>
