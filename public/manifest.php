@@ -405,11 +405,18 @@ function superpwa_get_pwa_screenshots() {
 	if ( @$superpwa_settings['screenshots'] != '' ) {
 		
 		$tmp_arr=explode(',',$superpwa_settings['screenshots']);
+		
 		if(!empty($tmp_arr)){
 			foreach($tmp_arr as $item){
+				$width=1280;
+				$height=720;
+				if(function_exists('getimagesize')){
+					list($width, $height) = getimagesize($item);
+				}
 				$screenshot_array[] = array(
 					'src' 	=> $item,
 					'type'	=> 'image/png', // must be image/png
+					'sizes' => $width.'x'.$height
 					
 				);
 			}
