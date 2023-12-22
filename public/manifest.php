@@ -172,7 +172,6 @@ function superpwa_manifest_template() {
 			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$superpwa_settings['icon'], 'sizes'=>'192x192'));
 		}
 		if( isset( $superpwa_settings['prefer_related_applications'] ) && $superpwa_settings['prefer_related_applications'] == true){
-			$manifest['prefer_related_applications']       = true;
 			$related_applications = array();
 			if (isset($superpwa_settings['related_applications']) && $superpwa_settings['related_applications']) {
 				$related_applications[] = array('id' =>$superpwa_settings['related_applications'],
@@ -186,6 +185,7 @@ function superpwa_manifest_template() {
 			}
 
 			if (count($related_applications) > 0) {
+				$manifest['prefer_related_applications']       = true;
 				$manifest['related_applications']       = $related_applications;
 			}
 		}
