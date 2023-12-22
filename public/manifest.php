@@ -116,6 +116,8 @@ function superpwa_manifest_template() {
 	$superpwa_settings = superpwa_get_settings();
 
 	$manifest               = array();
+	$id_url = parse_url(site_url());
+	$manifest['id']         = isset($id_url['host'])?$id_url['host']:mt_rand(0,9999999);
 	$manifest['name']       = $superpwa_settings['app_name'];
 	$manifest['short_name'] = $superpwa_settings['app_short_name'];
 
@@ -169,31 +171,36 @@ function superpwa_manifest_template() {
 		if ( isset( $superpwa_settings['icon'] ) && ! empty( $superpwa_settings['icon'] ) ) {
 			$manifest['shortcuts'][0]['icons'] = array(array('src'=>$superpwa_settings['icon'], 'sizes'=>'192x192'));
 		}
+		if( isset( $superpwa_settings['prefer_related_applications'] ) && $superpwa_settings['prefer_related_applications'] == true){
+			$related_applications = array();
+			if (isset($superpwa_settings['related_applications']) && $superpwa_settings['related_applications']) {
+				$related_applications[] = array('id' =>$superpwa_settings['related_applications'],
+							'platform' => 'play',
+							'url' => 'https://play.google.com/store/apps/details?id='.$superpwa_settings['related_applications'] );
+			}
+			if (isset($superpwa_settings['related_applications_ios']) && $superpwa_settings['related_applications_ios']) {
+				$related_applications[] = array('id' =>$superpwa_settings['related_applications_ios'],
+							'platform' => 'itunes',
+							'url' => 'https://apps.apple.com/app/'.$superpwa_settings['related_applications_ios'] );
+			}
 
-		$related_applications = array();
-		if (isset($superpwa_settings['related_applications']) && $superpwa_settings['related_applications']) {
-			$related_applications[] = array('id' =>$superpwa_settings['related_applications'],
-						'platform' => 'play',
-						'url' => 'https://play.google.com/store/apps/details?id='.$superpwa_settings['related_applications'] );
+			if (count($related_applications) > 0) {
+				$manifest['prefer_related_applications']       = true;
+				$manifest['related_applications']       = $related_applications;
+			}
 		}
-		if (isset($superpwa_settings['related_applications_ios']) && $superpwa_settings['related_applications_ios']) {
-			$related_applications[] = array('id' =>$superpwa_settings['related_applications_ios'],
-						'platform' => 'itunes',
-						'url' => 'https://apps.apple.com/app/'.$superpwa_settings['related_applications_ios'] );
-		}
-
-		if (count($related_applications) > 0) {
-			$manifest['related_applications']       = $related_applications;
-		}
-
 		$wpml_settings = get_option( 'superpwa_wpml_settings');
 
 		if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
 			$current_language = superpwa_get_language_shortcode();
 			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
-			$manifest['scope'] = "";
+			$manifest['scope'] = "/";
 		}
+		$launch_handler = ['client_mode'=>'auto'];
+		$manifest['launch_handler']  = $launch_handler;
+		$manifest['handle_links']  = 'preferred';
+		
 
 	// }
 
@@ -249,7 +256,7 @@ function superpwa_generate_manifest() {
 	}
 	
 	// Write the manfiest to disk.
-	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), json_encode( superpwa_manifest_template() ) ) ) {
+	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
 		$superpwa_settings['is_static_manifest'] = 1;
@@ -273,14 +280,14 @@ function superpwa_generate_manifest() {
 function superpwa_add_manifest_to_wp_head() {
 	
 	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-	$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
-	$tags .= '<link rel="prefetch" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
+	$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+	$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
 	// theme-color meta tag 
-	if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
+	if ( apply_filters( 'superpwa_add_theme_color', true ) && isset($superpwa_settings['theme_color'])) {
 		
-		$tags .= '<meta name="theme-color" content="'. $superpwa_settings['theme_color'] .'">' . PHP_EOL;
+		$tags .= '<meta name="theme-color" content="'. esc_attr($superpwa_settings['theme_color']) .'">' . PHP_EOL;
 	}
 	
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
@@ -336,13 +343,13 @@ function superpwa_get_pwa_icons() {
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> $superpwa_settings['icon'],
+							'src' 	=> esc_url($superpwa_settings['icon']),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'any', // any maskable to support adaptive icons
 						);
 	$icons_array[] = array(
-							'src' 	=> $superpwa_settings['icon'],
+							'src' 	=> esc_url($superpwa_settings['icon']),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'maskable', // any maskable to support adaptive icons
@@ -352,13 +359,13 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['splash_icon'],
+							'src' 	=> esc_url($superpwa_settings['splash_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'any',
 						);
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['splash_icon'],
+							'src' 	=> esc_url($superpwa_settings['splash_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'maskable',
@@ -368,7 +375,7 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> $superpwa_settings['monochrome_icon'],
+							'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'monochrome',
@@ -398,14 +405,27 @@ function superpwa_get_pwa_screenshots() {
 	if ( @$superpwa_settings['screenshots'] != '' ) {
 		
 		$tmp_arr=explode(',',$superpwa_settings['screenshots']);
-
-		foreach($tmp_arr as $item){
-			$screenshot_array[] = array(
-				'src' 	=> $item,
-			//	'sizes'	=> '472x1024', // must be 472x1024.
-				'type'	=> 'image/png', // must be image/png
-				
-			);
+		
+		if(!empty($tmp_arr)){
+			foreach($tmp_arr as $item){
+				if(function_exists('getimagesize')){
+					list($width, $height) = @getimagesize($item);
+					if($width && $height){
+						$screenshot_array[] = array(
+							'src' 	=> $item,
+							'type'	=> 'image/png', // must be image/png
+							'sizes' => $width.'x'.$height
+							
+						);
+						$screenshot_array[] = array(
+							'src' 	=> $item,
+							'type'	=> 'image/png', // must be image/png
+							'sizes' => $width.'x'.$height,
+							'form_factor' => 'wide',
+						);
+					}
+				}
+			}
 		}
 	}
 	

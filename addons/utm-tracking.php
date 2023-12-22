@@ -251,7 +251,7 @@ function superpwa_utm_tracking_source_cb() {
 	</fieldset>
 	
 	<p class="description">
-		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
+		<?php echo esc_html__( 'Campaign Source is mandatory and defaults to', 'super-progressive-web-apps').'<code>'.esc_html__('superpwa', 'super-progressive-web-apps' ).'</code>'; ?>
 	</p>
 
 	<?php
@@ -274,7 +274,7 @@ function superpwa_utm_tracking_medium_cb() {
 	</fieldset>
 	
 	<p class="description">
-		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
+		<?php echo esc_html__( 'Campaign medium is mandatory and defaults to', 'super-progressive-web-apps').'<code>'.esc_html__('superpwa', 'super-progressive-web-apps' ).'</code>'; ?>
 	</p>
 
 	<?php
@@ -297,7 +297,7 @@ function superpwa_utm_tracking_name_cb() {
 	</fieldset>
 	
 	<p class="description">
-		<?php _e( 'Campaign Source is mandatory and defaults to <code>superpwa</code>.', 'super-progressive-web-apps' ); ?>
+	<?php echo esc_html__( 'UTM Campaign is mandatory and defaults to', 'super-progressive-web-apps').'<code>'.esc_html__('superpwa', 'super-progressive-web-apps' ).'</code>'; ?>
 	</p>
 
 	<?php
@@ -370,7 +370,7 @@ function superpwa_utm_tracking_interface_render() {
 	?>
 	
 	<div class="wrap">	
-		<h1><?php _e( 'UTM Tracking', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
+		<h1><?php esc_html_e( 'UTM Tracking', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 
 		<?php superpwa_setting_tabs_html(); ?>
 

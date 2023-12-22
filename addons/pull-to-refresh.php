@@ -65,24 +65,6 @@ function superpwa_pull_to_refresh_get_settings()
 	add_action('superpwa_addon_activated_pull_to_refresh', 'superpwa_pull_to_refresh_save_settings_todo');
 
 /**
- * Deactivation Todo
- * 
- * Unhook the filter and regenerate manifest
- * 
- * @since 1.7
- */
-/* function superpwa_pull_to_refresh_deactivate_todo()
-{
-
-	// Unhook the Pull To Refresh params filter
-	remove_filter('superpwa_manifest_start_url', 'superpwa_pull_to_refresh_for_start_url');
-
-	// Regenerate manifest
-	superpwa_generate_manifest();
-}
- */ // add_action('superpwa_addon_deactivated_pull_to_refresh', 'superpwa_pull_to_refresh_deactivate_todo');
-
-/**
  * Register Pull To Refresh settings
  *
  * @since 	1.7
@@ -190,19 +172,6 @@ function superpwa_pull_to_refresh_get_settings()
 
 		return $settings;
 	}
-
-// /**
-//  * Callback function for Pull To Refresh section
-//  *
-//  * @since 1.7
-//  */
-// function superpwa_pull_to_refresh_section_cb() {
-
-// 	// Get add-on info
-// 	$addon_pull_to_refresh = superpwa_get_addons( 'pull_to_refresh' );
-
-// 	// printf( '<p>' . __( 'This add-on automatically adds UTM campaign parameters to the <code>Start Page</code> URL in your <a href="%s" target="_blank">manifest</a>. This will help you identify visitors coming specifically from your app. <a href="%s" target="_blank">Read more</a> about Pull To Refresh.', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ), $addon_pull_to_refresh['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings' );
-// }
 
 
 /**
@@ -323,7 +292,7 @@ function superpwa_pull_to_refresh_interface_render()
 ?>
 
 	<div class="wrap">
-		<h1><?php _e('Pull To Refresh', 'super-progressive-web-apps'); ?>
+		<h1><?php esc_html_e('Pull To Refresh', 'super-progressive-web-apps'); ?>
 			<!-- <small>(<a href="<?php //echo esc_url($addon_pull_to_refresh['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'
 									?>"><?php //echo esc_html__( 'Docs', 'super-progressive-web-apps' ); 
 										?></a>)</small> -->
@@ -349,26 +318,13 @@ function superpwa_pull_to_refresh_interface_render()
 <?php
 }
 
-
-/* add_action("admin_enqueue_scripts", 'superpwa_pull_to_refresh_script_enqueue');
-
-function superpwa_pull_to_refresh_script_enqueue($hook){
-	if($hook== 'toplevel_page_pwaforwp'){ 
-		//wp_enqueue_script('pwaforwp-ptr-switches',PWAFORWP_PTRFP_PLUGIN_URL . '/assets/admin-pull-to-refresh.js',array( 'jquery', 'pwaforwp-main-js' ),PWAFORWP_PTRFP_VERSION,true);
-		// wp_enqueue_script( 'superpwa-make-better-js', SUPERPWA_PATH_SRC . 'admin/make-better-admin.js', array( 'jquery' ), SUPERPWA_VERSION);
-
-	}
-}
-
- */
-
 if(!function_exists('superpwa_pull_to_refresh_ptrfp_scripts_load')){
 	function superpwa_pull_to_refresh_ptrfp_scripts_load(){
 		if(function_exists('superpwa_pull_to_refresh_get_settings')){
 				$settings = superpwa_pull_to_refresh_get_settings();
 			}else{ $settings = array(); }
 		if( isset($settings['superpwa_pull_to_refresh_switch'])  && $settings['superpwa_pull_to_refresh_switch'] ==1 ){
-			wp_enqueue_script( "superpwa_ptrfp_lib_script", SUPERPWA_PATH_SRC."admin/js/superpwa-ptr-lib.min.js", array('jquery'), SUPERPWA_VERSION, true );
+			wp_register_script( "superpwa_ptrfp_lib_script", SUPERPWA_PATH_SRC."admin/js/superpwa-ptr-lib.min.js", array('jquery'), SUPERPWA_VERSION, true );
 			$ptrArray = array(
 						'instrPullToRefresh'=> ( isset( $settings['superpwa_ptr_text'] )? $settings['superpwa_ptr_text'] : esc_html__("Pull down to refresh", 'pull-to-refresh-for-pwa') ),
 						'instrReleaseToRefresh'=> (isset( $settings['superpwa_ptr_release_text'] )? $settings['superpwa_ptr_release_text'] : esc_html__("Release to refresh", 'pull-to-refresh-for-pwa') ),
@@ -377,10 +333,7 @@ if(!function_exists('superpwa_pull_to_refresh_ptrfp_scripts_load')){
 						'instrptr_font_color'=>( isset( $settings['superpwa_ptr_font_color'] ) && !empty($settings['superpwa_ptr_font_color'])? $settings['superpwa_ptr_font_color'] : "rgba(0, 0, 0, 0.3)" ),
 							);
 			wp_localize_script("superpwa_ptrfp_lib_script", 'superpwa_ptr_obj', $ptrArray);
-			/*wp_add_inline_script( "pwaforwp_ptrfp_lib_script", '
-      PullToRefresh.init({
-        onRefresh: function() { location.reload(true);  },
-      });', 'after' );*/
+			wp_enqueue_script( "superpwa_ptrfp_lib_script");
 
 		}
 	}

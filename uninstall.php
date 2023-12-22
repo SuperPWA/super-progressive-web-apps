@@ -14,17 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) die;
 
 /**
- * Delete database settings
- *
- * @since 1.0
- * @since 1.7 Added clean-up for superpwa_active_addons and superpwa_utm_tracking_settings
- */ 
-delete_option( 'superpwa_settings' );
-delete_option( 'superpwa_active_addons' );
-delete_option( 'superpwa_utm_tracking_settings' );
-delete_option( 'superpwa_version' );
-
-/**
  * Clean up for Multisites
  *
  * @since 1.6
@@ -42,15 +31,55 @@ if ( is_multisite() ) {
 		switch_to_blog( $blog_id );
 		
 		// Delete database settings for each site.
-		delete_option( 'superpwa_settings' );
-		delete_option( 'superpwa_active_addons' );
-		delete_option( 'superpwa_utm_tracking_settings' );
-		delete_option( 'superpwa_version' );
-		
+		superpwa_delete_all_options();
+
 		// Return to main site
 		restore_current_blog();
 	}
 	
 	// Delete the list of websites where SuperPWA was activated.
 	delete_site_option( 'superpwa_active_sites' );
+} else {
+	superpwa_delete_all_options();
+}
+
+/**
+ * Delete database settings
+ *
+ * @since 1.0
+ * @since 1.7 Added clean-up for superpwa_active_addons and superpwa_utm_tracking_settings
+ * @since 2.2.23 Added clean-up for superpwa_pull_to_refresh_settings , superpwa_apple_icons_settings , superpwa_apple_icons_uploaded , superpwa_caching_strategies_settings
+ */
+function superpwa_delete_all_options(){
+
+		//deleting options
+		delete_option( 'superpwa_settings' );
+		delete_option( 'superpwa_active_addons' );
+		delete_option( 'superpwa_utm_tracking_settings' );
+		delete_option( 'superpwa_version' );
+		delete_option( 'superpwa_hide_newsletter' );
+		delete_option( 'superpwa_pull_to_refresh_settings' );
+		delete_option( 'superpwa_apple_icons_settings' );
+		delete_option( 'superpwa_apple_icons_uploaded' );
+		delete_option( 'superpwa_caching_strategies_settings' );
+
+		global $wp_filesystem;
+
+		if(isset($wp_filesystem)){
+		$upload_dir = wp_upload_dir();
+		
+		// deleting splashscreen folder
+		$folder_to_delete= $upload_dir['basedir'].'/superpwa-splashIcons';
+		if($wp_filesystem->is_dir($folder_to_delete)){
+			$wp_filesystem->delete($folder_to_delete, true);
+		}
+		// deleting manifest file
+		if($wp_filesystem->is_file(ABSPATH.'superpwa-manifest.json')){
+			$wp_filesystem->delete(ABSPATH.'superpwa-manifest.json');
+		}
+		// deleting service worker file
+		if($wp_filesystem->is_file(ABSPATH.'superpwa-sw.js')){
+			$wp_filesystem->delete(ABSPATH.'superpwa-sw.js');
+		}
+	}
 }

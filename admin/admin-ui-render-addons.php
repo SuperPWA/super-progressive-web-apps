@@ -55,6 +55,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.0',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'push_notification_for_superpwa' => array(
 							'name'					=> __( 'Push Notification', 'super-progressive-web-apps' ),
@@ -67,6 +68,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.19',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'apple_touch_icons' => array(
 							'name'					=> __( 'Apple Touch Icons & Splash Screen', 'super-progressive-web-apps' ),
@@ -77,7 +79,8 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link'			=> admin_url( 'admin.php?page=superpwa-apple-icons' ),
 							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '2.1.7',//1.8
+							'superpwa_min_version'	=> '2.1.7',//1.8,
+							'category'				=> 'subtab-all subtab-popular subtab-usability',
 						),
 		'caching_strategies' => array(
 							'name'					=> __( 'Caching Strategies', 'super-progressive-web-apps' ),
@@ -89,6 +92,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'More Details &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'call_to_action' => array(
 							'name'					=> __( 'Call To Action', 'super-progressive-web-apps' ),
@@ -101,6 +105,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.2',
+							'category'				=> 'subtab-all subtab-popular',
 						),
 		'android_apk_app_generator' => array(
 							'name'					=> __( 'Android APK APP Generator', 'super-progressive-web-apps' ),
@@ -113,6 +118,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.2',
+							'category'				=> 'subtab-all subtab-app',
 						),
 		'app_shortcut' => array(
 							'name'					=> __( 'APP Shortcuts', 'super-progressive-web-apps' ),
@@ -125,6 +131,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.6',
+							'category'				=> 'subtab-all subtab-app',
 						),
 		'data_analytics' => array(
 							'name'					=> __( 'Data Analytics', 'super-progressive-web-apps' ),
@@ -137,6 +144,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.8',
+							'category'				=> 'subtab-all subtab-analytics',
 						),
 		'pre_loader' => array(
 							'name'					=> __( 'PreLoader', 'super-progressive-web-apps' ),
@@ -148,6 +156,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'More Details & Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.1.18',//1.8
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'qr_code_generator' => array(
 							'name'					=> __( 'QR Code Generator', 'super-progressive-web-apps' ),
@@ -160,6 +169,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.3',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'wpml_for_superpwa' => array(
 							'name'					=> __( 'WPML', 'super-progressive-web-apps' ),
@@ -172,6 +182,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 		'navigation_bar_for_superpwa' => array(
 							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
@@ -184,6 +195,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.20',
+							'category'				=> 'subtab-all subtab-navigation',
 						),
 						'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
@@ -195,11 +207,13 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.7',
+							'category'				=> 'subtab-all subtab-analytics',
 						),
 	
 	);
 	
 	if ( $slug === false ) {
+		ksort($addons);
 		return $addons;
 	}
 	
@@ -226,10 +240,10 @@ function superpwa_addons_interface_render() {
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
 		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
-		do_action( 'superpwa_addon_activated_' . $_GET['addon'] );
+		do_action( 'superpwa_addon_activated_' . sanitize_title($_GET['addon'] ));
 		
 		// Get add-on info
-		$addon = superpwa_get_addons( $_GET['addon'] );
+		$addon = superpwa_get_addons( sanitize_title($_GET['addon']) );
 		
 		// Add UTM Tracking to admin_link_text if its not an admin page.
 		if ( $addon['admin_link_target'] === 'external' ) {
@@ -262,9 +276,18 @@ function superpwa_addons_interface_render() {
 	?>
 	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<div class="wrap">
-	<h1>Super Progressive Web Apps <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+	<h1>Super Progressive Web Apps <sup class="superpwa_version"><?php echo SUPERPWA_VERSION; ?></sup></h1>
        <?php superpwa_setting_tabs_html(); ?>
-		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
+		<p class="superpwa-addons-headp"><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
+		<div class="superpwa-sub-tab-headings">
+			<span data-tab-id="subtab-all" class="selected"><?php esc_html_e( 'All', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-popular"><?php esc_html_e( 'Popular', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-analytics"><?php esc_html_e( 'Analytics', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-app"><?php esc_html_e( 'App generation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-navigation"><?php esc_html_e( 'Navigation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-usability"><?php esc_html_e( 'Usability', 'super-progressive-web-apps' ); ?></span>
+		</div>
+		<br/>
 		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
@@ -274,7 +297,7 @@ function superpwa_addons_interface_render() {
 				<?php 
 				// Newsletter marker. Set this to false once newsletter subscription is displayed.
 				$superpwa_newsletter = true;
-				
+				$superpwa_upgrade_class_addons ='';
 				// Looping over each add-on
 				foreach( $addons as $slug => $addon ) { 
 				
@@ -288,7 +311,7 @@ function superpwa_addons_interface_render() {
 					
 					?>
 			
-					<div class="plugin-card plugin-card-<?php echo $slug; ?>">
+					<div class="plugin-card plugin-card-<?php echo $slug; ?> <?php echo esc_attr($addon['category']);?>">
 					
 						<div class="plugin-card-top">
 						
@@ -298,6 +321,7 @@ function superpwa_addons_interface_render() {
 										<?php echo $addon['name']; ?>
 										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
 									</a>
+									<span class="<?php echo esc_attr($addon['type'])?>"><?php if($addon['type']=='addon_pro'){ esc_html_e( 'Pro', 'super-progressive-web-apps');}else{ esc_html_e( 'Free', 'super-progressive-web-apps'); }?></span>
 								</h3>
 							</div>
 							
@@ -328,7 +352,7 @@ function superpwa_addons_interface_render() {
 											<?php echo __('Activate','super-progressive-web-apps'); ?>
 										</a>
 										<?php } } else{ ?>
-											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary';  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
+											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary '.esc_attr (superpwa_addons_status($slug));  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label ="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
 											<?php echo superpwa_addons_button_text( $slug ); ?>
 											</a>
 										<?php } ?>
@@ -352,7 +376,7 @@ function superpwa_addons_interface_render() {
                                         }
                                         ?>
 										<?php if($slug!='push_notification_for_superpwa'){  ?>
-										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php _e('More Details', 'super-progressive-web-apps'); ?></a>
+										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
 										<?php } ?>
 									</li>
 						
@@ -364,22 +388,6 @@ function superpwa_addons_interface_render() {
 							</div>
 							
 						</div>
-						
-						<?php /*<div class="plugin-card-bottom">
-							<div class="column-compatibility">
-								<?php 
-								if ( superpwa_addons_status( $slug ) == 'active' ) {
-									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s"%s>%s</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, $addon['admin_link_text'] ); 
-								} 
-								else if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) {
-									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>', 'super-progressive-web-apps' ); 
-								} 
-								else { 
-									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>', 'super-progressive-web-apps' );
-								}  ?>
-							</div>
-						</div>*/ ?> 
-						
 					</div>
 				<?php } ?>
 			</div>
@@ -584,7 +592,7 @@ function superpwa_addons_button_link( $slug ) {
 function superpwa_addons_handle_activation() {
 	
 	// Get the add-on status
-	$addon_status = superpwa_addons_status( $_GET['addon'] );
+	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
 	
 	// Authentication	
 	if ( 
@@ -604,13 +612,13 @@ function superpwa_addons_handle_activation() {
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
 	// Add the add-on to the list of active add-ons
-	$active_addons[] = $_GET['addon'];
+	$active_addons[] = sanitize_text_field($_GET['addon']);
 	
 	// Write settings back to database
 	update_option( 'superpwa_active_addons', $active_addons );
 		
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . $_GET['addon'] ) );
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . sanitize_title($_GET['addon'] )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activation' );
@@ -626,7 +634,7 @@ add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activa
 function superpwa_addons_handle_deactivation() {
 	
 	// Get the add-on status
-	$addon_status = superpwa_addons_status( $_GET['addon'] );
+	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
 	// Authentication
 	if ( 
 		! current_user_can( superpwa_current_user_can() ) ||
@@ -646,17 +654,17 @@ function superpwa_addons_handle_deactivation() {
 	
 	// Delete the add-on from the active_addons array in SuperPWA settings.
 	$active_addons = array_flip( $active_addons );
-	unset( $active_addons[ $_GET['addon'] ] );
+	unset( $active_addons[ sanitize_title($_GET['addon']) ] );
 	$active_addons = array_flip( $active_addons );
 		
 	// Write settings back to database
 	update_option( 'superpwa_active_addons', $active_addons );
 		
 	// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
-	do_action( 'superpwa_addon_deactivated_' . $_GET['addon'] );
+	do_action( 'superpwa_addon_deactivated_' . sanitize_title($_GET['addon']) );
 	
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . $_GET['addon'] ) );
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . sanitize_title($_GET['addon'] )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );
@@ -673,21 +681,21 @@ function superpwa_newsletter_submit(){
 	global $current_user;
 	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
     $api_params = array(
-        'name' => esc_attr($current_user->display_name),
-        'email'=> sanitize_text_field($_POST['email']),
-        'website'=> sanitize_text_field( get_site_url() ),
+        'name' => sanitize_text_field($current_user->display_name),
+        'email'=> sanitize_email($_POST['email']),
+        'website'=> sanitize_url( get_site_url() ),
         'type'=> 'superpwa'
     );
     $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 	if ( !is_wp_error( $response ) ) {
 		$response = wp_remote_retrieve_body( $response );
-		echo json_encode(array('status'=>200, 'message'=>'Submitted ', 'response'=> $response));
+		echo wp_json_encode(array('status'=>200, 'message'=>esc_html__('Submitted ','super-progressive-web-apps'), 'response'=> $response));
 	}else{
-		echo json_encode(array('status'=>500, 'message'=>'No response from API'));	
+		echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('No response from API','super-progressive-web-apps')));	
 	}
 }
 else{
-	echo json_encode(array('status'=>403, 'message'=>'Unauthorized Request'));
+	echo wp_json_encode(array('status'=>403, 'message'=>esc_html__('Unauthorized Request','super-progressive-web-apps')));
 }
     die;
 }
@@ -697,12 +705,12 @@ function superpwa_newsletter_hide_form(){
 	  if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
 			$hide_newsletter  = get_option('superpwa_hide_newsletter');
 			if($hide_newsletter == false){
-				add_option( 'superpwa_hide_newsletter', 'no' );
+				add_option( 'superpwa_hide_newsletter', 'no' , false);
 			}
-			update_option( 'superpwa_hide_newsletter', 'yes' );
-			echo json_encode(array('status'=>200, 'message'=>'Submitted '));
+			update_option( 'superpwa_hide_newsletter', 'yes' , false);
+			echo wp_json_encode(array('status'=>200, 'message'=>esc_html__('Submitted ','super-progressive-web-apps')));
     }else{
-		echo json_encode(array('status'=>403, 'message'=>'Unauthorized Request'));
+		echo wp_json_encode(array('status'=>403, 'message'=>esc_html__('Unauthorized Request','super-progressive-web-apps')));
 	}
     die;
 }

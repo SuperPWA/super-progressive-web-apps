@@ -229,8 +229,6 @@ function superpwaGetZip() {
     zip.generateAsync({
         type: 'blob'
     }).then(function(content) {
-        //saveAs(content, 'splashscreens.zip');
-
 		var fileName = 'splashscreens.zip';
 		var fileObj = new File([content], fileName, {
 			type : 'application/zip'

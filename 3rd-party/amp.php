@@ -18,9 +18,6 @@ class SUPERPWA_AMP_SW{
             /* Check & initialize AMP is Activated or not*/
             $this->superpwa_is_amp_activated();
 
-            // Change service worker filename to match OneSignal's service worker
-			//add_filter( 'superpwa_sw_filename', array($this, 'superpwa_amp_sw_filename') );
-
             add_action('pre_amp_render_post', array($this, 'superpwa_amp_entry_point'));
             //Automattic AMP will be done here
             add_action('wp', array($this, 'superpwa_automattic_amp_entry_point'));
@@ -69,14 +66,17 @@ class SUPERPWA_AMP_SW{
 
 
 				$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-				$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
+				$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 
 				// theme-color meta tag 
 				if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
 
 				// Get Settings
 					$settings = superpwa_get_settings();
-					$tags .= '<meta name="theme-color" content="'. $settings['theme_color'] .'">' . PHP_EOL;
+					if(isset($settings['theme_color'])){
+						$tags .= '<meta name="theme-color" content="'. esc_attr($settings['theme_color']) .'">' . PHP_EOL;
+					}
+					
 				}
 
 				$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
