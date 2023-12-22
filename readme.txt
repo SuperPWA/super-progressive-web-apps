@@ -190,6 +190,16 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.23 =
+* Date: [22.December.2023](https://superpwa.com/superpwa-2-2-23-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Proper sorting of features #314
+* Enhancement: Compatibility with loco translate #426
+* Enhancement: Updated manifest as per the pwabuilder recommendation. #440
+* Enhancement: Code Improvement checklist #486
+* Enhancement: Update readme.txt and add all pro feature list #488
+* BugFixed: Warning appearing in manifest #487
+* BugFixed: On Uninstall few data still remain inside db. #485
+
 = 2.2.22 =
 * Date: [28.November.2023](https://superpwa.com/superpwa-2-2-22-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Role Based Access is not working #472

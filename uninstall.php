@@ -51,6 +51,8 @@ if ( is_multisite() ) {
  * @since 2.2.23 Added clean-up for superpwa_pull_to_refresh_settings , superpwa_apple_icons_settings , superpwa_apple_icons_uploaded , superpwa_caching_strategies_settings
  */
 function superpwa_delete_all_options(){
+
+		//deleting options
 		delete_option( 'superpwa_settings' );
 		delete_option( 'superpwa_active_addons' );
 		delete_option( 'superpwa_utm_tracking_settings' );
@@ -60,4 +62,25 @@ function superpwa_delete_all_options(){
 		delete_option( 'superpwa_apple_icons_settings' );
 		delete_option( 'superpwa_apple_icons_uploaded' );
 		delete_option( 'superpwa_caching_strategies_settings' );
+
+		// setting up required files
+		require_once ( ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php' );
+		require_once ( ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php' );
+		$fileSystemDirect = new WP_Filesystem_Direct(false);
+		$upload_dir = wp_upload_dir();
+
+		// deleting splashscreen folder
+		$folder_to_delete= $upload_dir['baseurl'].'/superpwa-splashIcons';
+		if($fileSystemDirect->is_dir($folder_to_delete)){
+			$fileSystemDirect->rmdir($dir, true);
+		}
+		// deleting manifest file
+		if($fileSystemDirect->is_file(ABSPATH.'superpwa-manifest.json')){
+			$fileSystemDirect->delete(ABSPATH.'superpwa-manifest.json');
+		}
+		// deleting service worker file
+		if($fileSystemDirect->is_file(ABSPATH.'superpwa-sw.js')){
+			$fileSystemDirect->delete(ABSPATH.'superpwa-sw.js');
+		}
+		
 }
