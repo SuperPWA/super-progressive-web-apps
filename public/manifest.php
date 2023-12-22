@@ -410,19 +410,20 @@ function superpwa_get_pwa_screenshots() {
 			foreach($tmp_arr as $item){
 				if(function_exists('getimagesize')){
 					list($width, $height) = @getimagesize($item);
-					$screenshot_array[] = array(
-						'src' 	=> $item,
-						'type'	=> 'image/png', // must be image/png
-						'sizes' => $width.'x'.$height
-						
-					);
-					$screenshot_array[] = array(
-						'src' 	=> $item,
-						'type'	=> 'image/png', // must be image/png
-						'sizes' => $width.'x'.$height,
-						'form_factor' => 'wide',
-						
-					);
+					if($width && $height){
+						$screenshot_array[] = array(
+							'src' 	=> $item,
+							'type'	=> 'image/png', // must be image/png
+							'sizes' => $width.'x'.$height
+							
+						);
+						$screenshot_array[] = array(
+							'src' 	=> $item,
+							'type'	=> 'image/png', // must be image/png
+							'sizes' => $width.'x'.$height,
+							'form_factor' => 'wide',
+						);
+					}
 				}
 			}
 		}
