@@ -4,10 +4,10 @@ jQuery(document).ready(function($){
 		if(e.target.checked == true){
 		     // Code in the case checkbox is checked.
 		     console.log('checked');
-		     $('#pre-automatic-suboption').removeClass('hide').addClass('show');
+		     $('#superpwa-automatic-suboption').removeClass('hide').addClass('show');
 		} else {
 		     // Code in the case checkbox is NOT checked.
-		     $('#pre-automatic-suboption').removeClass('show').addClass('hide');
+		     $('#superpwa-automatic-suboption').removeClass('show').addClass('hide');
 		}
 	});
 
@@ -15,10 +15,10 @@ jQuery(document).ready(function($){
 
 		if(e.target.checked == true){
 		     // Code in the case checkbox is checked.
-		     $('#pre-manual-suboption').removeClass('hide').addClass('show');
+		     $('#superpwa-pre-manual-suboption').removeClass('hide').addClass('show');
 		} else {
 		     // Code in the case checkbox is NOT checked.
-		     $('#pre-manual-suboption').removeClass('show').addClass('hide');
+		     $('#superpwa-pre-manual-suboption').removeClass('show').addClass('hide');
 		}
 	});
 

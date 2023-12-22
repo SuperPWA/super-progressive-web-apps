@@ -255,11 +255,20 @@ function superpwa_register_settings() {
 		);
 
 		add_settings_field(
+			'superpwa_prefer_related_applications',									// ID
+			esc_html__('Prefer Related Application', 'super-progressive-web-apps'),	// Title
+			'superpwa_prefer_related_applications_cb',								// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+
+		add_settings_field(
 			'superpwa_related_applications',									// ID
 			esc_html__('Related Application', 'super-progressive-web-apps'),	// Title
 			'superpwa_related_applications_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
-			'superpwa_basic_settings_section'						// Settings Section ID
+			'superpwa_basic_settings_section',						// Settings Section ID
+			array('class'=>'superpwa_related_applications'),
 		);
 
 	// PWA Status

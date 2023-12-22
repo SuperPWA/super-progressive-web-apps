@@ -66,9 +66,10 @@ function superpwa_delete_all_options(){
 		// setting up required files
 		require_once ( ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php' );
 		require_once ( ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php' );
+		if(class_exists('WP_Filesystem_Direct')){
 		$fileSystemDirect = new WP_Filesystem_Direct(false);
 		$upload_dir = wp_upload_dir();
-
+		
 		// deleting splashscreen folder
 		$folder_to_delete= $upload_dir['baseurl'].'/superpwa-splashIcons';
 		if($fileSystemDirect->is_dir($folder_to_delete)){
@@ -82,5 +83,5 @@ function superpwa_delete_all_options(){
 		if($fileSystemDirect->is_file(ABSPATH.'superpwa-sw.js')){
 			$fileSystemDirect->delete(ABSPATH.'superpwa-sw.js');
 		}
-		
+	}
 }

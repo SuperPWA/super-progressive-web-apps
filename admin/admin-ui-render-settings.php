@@ -499,13 +499,24 @@ function superpwa_text_direction_cb() {
 
 	<?php
 }
+
+function superpwa_prefer_related_applications_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	<fieldset>
+		<input type="checkbox" name="superpwa_settings[prefer_related_applications]" class="superpwa_related_app regular-text" value="1" <?php if ( isset( $settings['prefer_related_applications'] ) && ( $settings['prefer_related_applications'] == true ) ) echo 'checked';?>/>
+	</fieldset>
+	<?php
+}
+
 function superpwa_related_applications_cb() {
 
 	// Get Settings
 	$settings = superpwa_get_settings(); ?>
 	<fieldset>
 		<label for="superpwa_settings[related_applications]"><?php esc_html_e( 'PlayStore App ID', 'super-progressive-web-apps' ); ?></label>&nbsp;
-		<input type="text" name="superpwa_settings[related_applications]" class="regular-text" placeholder="com.example.app" value="<?php if ( isset( $settings['related_applications'] ) && ( ! empty($settings['related_applications']) ) ) echo esc_attr($settings['related_applications']); ?>"/>
+		<input type="text" name="superpwa_settings[related_applications]" class="superpwa_related_applications regular-text" placeholder="com.example.app" value="<?php if ( isset( $settings['related_applications'] ) && ( ! empty($settings['related_applications']) ) ) echo esc_attr($settings['related_applications']); ?>"/>
 	</fieldset>
 	<fieldset>
 		<label for="superpwa_settings[related_applications_ios]"><?php esc_html_e( 'AppStore App ID', 'super-progressive-web-apps' ); ?></label>&nbsp;
@@ -818,7 +829,7 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
 			  <?php } ?>
 			  <?php if(!defined('SUPERPWA_PRO_VERSION')){ ?>
-				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;margin-right: 5px; float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>
+				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>
 			  <?php } ?>
 			</div>
 			<span id="alert-warning" style=" margin-top: 10px; display: none; padding: 10px;background-color: #ff9800;color: white;"> <?php esc_html_e( 'Please Save the settings before moving to other tabs', 'super-progressive-web-apps' ); ?> </span>

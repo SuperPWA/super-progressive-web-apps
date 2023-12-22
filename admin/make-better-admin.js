@@ -92,4 +92,31 @@ jQuery('.superpwa-sub-tab-headings span').click(function(){
     }
 });
 
+
+
+jQuery('.superpwa_related_app').click(function(){
+    
+        if(jQuery('.superpwa_related_applications')){
+            if(jQuery(this).prop("checked")){
+                jQuery('.superpwa_related_applications').show();
+            }else{
+                jQuery('.superpwa_related_applications').hide();
+            }
+        }
+});
+
+if(jQuery('.superpwa_related_applications').length){
+    var superpwa_app_chk = jQuery('.superpwa_related_app');
+    var superpwa_app_related = jQuery('.superpwa_related_applications');
+    if(superpwa_app_chk ){
+        if(superpwa_app_chk.prop("checked")){
+            superpwa_app_related.show();
+        }else{
+            superpwa_app_related.hide();  
+        }
+    }
+}
+
 }); // document ready
+
+

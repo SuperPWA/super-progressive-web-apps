@@ -320,20 +320,20 @@ function superpwa_caching_strategies_pre_caching_cb() {
 	$settings = superpwa_caching_strategies_get_settings();
 	?>
 
-	<style type="text/css">.pre-manual-suboption span {display: table-cell;margin-bottom: 9px;padding: 15px 10px;line-height: 1.3;vertical-align: middle;}.show{display: block;}.hide{display: none}
+	<style type="text/css">.superpwa-pre-manual-suboption span {display: table-cell;margin-bottom: 9px;padding: 15px 10px;line-height: 1.3;vertical-align: middle;}.show{display: block;}.hide{display: none}
 	</style>
 			
 		<div class="pre-cache-main">
-            <div class="pre-cache-automatic">
-               <div class="pre-automatic-checkbox" style="margin-bottom: 10px;"> 
+            <div class="superpwa-pre-cache-automatic">
+               <div class="superpwa-pre-automatic-checkbox" style="margin-bottom: 10px;"> 
                   <input type="checkbox" name="superpwa_caching_strategies_settings[precaching_automatic]" id="precaching_automatic" class="" <?php echo (isset( $settings['precaching_automatic'] ) &&  $settings['precaching_automatic'] == 1 ? 'checked="checked"' : ''); ?> data-uncheck-val="0" value="1">
 
                   <strong><?php echo esc_html__('Automatic', 'super-progressive-web-apps'); ?></strong>
 				  
-                    <span class="pwafw-help-subtitle"><a href="https://superpwa.com/docs/article/how-to-setup-precaching-in-superpwa/" target="_blank"><?php echo '<span class="pwafw-tooltip"><i class="dashicons dashicons-editor-help"></i>'.esc_html__('Learn more', 'super-progressive-web-apps'); ?></a></span>
+                    <span class="superpwa-help-subtitle"><a href="https://superpwa.com/docs/article/how-to-setup-precaching-in-superpwa/" target="_blank"><?php echo '<span class="pwafw-tooltip"><i class="dashicons dashicons-editor-help"></i>'.esc_html__('Learn more', 'super-progressive-web-apps'); ?></a></span>
                  </div>
-                 <div id="pre-automatic-suboption" class="pre-automatic-suboption <?php echo (isset( $settings['precaching_automatic'] ) &&  $settings['precaching_automatic'] == 1 ? ' show' : ' hide'); ?>" style="margin-bottom: 30px;margin-left: 40px;">  
-                <table class="pre-automatic-cache-table" style="margin-bottom: 12px;">
+                 <div id="superpwa-automatic-suboption" class="superpwa-automatic-suboption <?php echo (isset( $settings['precaching_automatic'] ) &&  $settings['precaching_automatic'] == 1 ? ' show' : ' hide'); ?>" style="margin-bottom: 30px;margin-left: 40px;">  
+                <table class="superpwa-automatic-cache-table" style="margin-bottom: 12px;">
                      <tr>
                          <td>
                           <?php echo esc_html__('Post', 'super-progressive-web-apps') ?>                             
@@ -366,15 +366,15 @@ function superpwa_caching_strategies_pre_caching_cb() {
 
 
 
-            <div class="pre-cache-manual" style="margin-top: 20px;">
-                <div class="pre-manual-checkbox" style="margin-bottom: 10px;">  
+            <div class="superpwa-pre-cache-manual" style="margin-top: 20px;">
+                <div class="superpwa-pre-manual-checkbox" style="margin-bottom: 10px;">  
 	              <input type="checkbox" name="superpwa_caching_strategies_settings[precaching_manual]" id="precaching_manual" class="" <?php echo (isset( $settings['precaching_manual'] ) &&  $settings['precaching_manual'] == 1 ? 'checked="checked"' : ''); ?> data-uncheck-val="0" value="1">
 
 	              <strong><?php echo esc_html__('Manual', 'super-progressive-web-apps'); ?></strong>   
                </div> 
-	             <div id="pre-manual-suboption" class="pre-manual-suboption <?php echo (isset( $settings['precaching_manual'] ) &&  $settings['precaching_manual'] == 1 ? ' show' : ' hide'); ?>" style="margin-left: 45px;">    
-                    <span class="pre-manual-label"> <strong> <?php echo esc_html__('Enter Urls To Be Cached', 'super-progressive-web-apps'); ?> </strong></span>
-                   <span class="pre-manual-textarea">
+	             <div id="superpwa-pre-manual-suboption" class="superpwa-pre-manual-suboption <?php echo (isset( $settings['precaching_manual'] ) &&  $settings['precaching_manual'] == 1 ? ' show' : ' hide'); ?>" style="margin-left: 45px;">    
+                    <span class="superpwa-pre-manual-label"> <strong> <?php echo esc_html__('Enter Urls To Be Cached', 'super-progressive-web-apps'); ?> </strong></span>
+                   <span class="superpwa-pre-manual-textarea">
                        <label><textarea placeholder="https://example.com/2019/06/06/hello-world/, https://example.com/2019/06/06/hello-world-2/ "  rows="4" cols="50" id="superpwa_settings_precaching_urls" name="superpwa_caching_strategies_settings[precaching_urls]"><?php if(isset($settings['precaching_urls'])){ echo esc_attr($settings['precaching_urls']);} ?></textarea></label>
                        <p><?php echo esc_html__('Note: Seperate the URLs using Comma(,)', 'super-progressive-web-apps'); ?></p>
                        <p><?php echo esc_html__('Place the list of URLs which you want to pre cache by service worker', 'super-progressive-web-apps'); ?></p>
