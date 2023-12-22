@@ -343,13 +343,13 @@ function superpwa_get_pwa_icons() {
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
+							'src' 	=> esc_url(superpwa_httpsify($superpwa_settings['icon'])),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'any', // any maskable to support adaptive icons
 						);
 	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
+							'src' 	=> esc_url(superpwa_httpsify($superpwa_settings['icon'])),
 							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
 							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
 							'purpose'=> 'maskable', // any maskable to support adaptive icons
@@ -359,13 +359,13 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['splash_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
+							'src' 	=> esc_url(superpwa_httpsify($superpwa_settings['splash_icon'])),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'any',
 						);
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
+							'src' 	=> esc_url(superpwa_httpsify($superpwa_settings['splash_icon'])),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'maskable',
@@ -375,7 +375,7 @@ function superpwa_get_pwa_icons() {
 	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
 		
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
+							'src' 	=> esc_url(superpwa_httpsify($superpwa_settings['monochrome_icon'])),
 							'sizes'	=> '512x512', // must be 512x512.
 							'type'	=> 'image/png', // must be image/png
 							'purpose'=> 'monochrome',
@@ -408,17 +408,15 @@ function superpwa_get_pwa_screenshots() {
 		
 		if(!empty($tmp_arr)){
 			foreach($tmp_arr as $item){
-				$width=1280;
-				$height=720;
 				if(function_exists('getimagesize')){
 					list($width, $height) = getimagesize($item);
+					$screenshot_array[] = array(
+						'src' 	=> superpwa_httpsify($item),
+						'type'	=> 'image/png', // must be image/png
+						'sizes' => $width.'x'.$height
+						
+					);
 				}
-				$screenshot_array[] = array(
-					'src' 	=> $item,
-					'type'	=> 'image/png', // must be image/png
-					'sizes' => $width.'x'.$height
-					
-				);
 			}
 		}
 	}
