@@ -127,9 +127,9 @@ function superpwa_get_start_url( $rel = false ) {
  */
 function superpwa_httpsify( $url ) {
 	if(strpos($url, 'localhost') === false){            
-		return str_replace( 'http://', 'https://', $url );            
+		return str_replace( 'http://', 'https://', $url );        
 	 }else{
-		return str_replace( 'https://', 'http://', $url ); 
+		return $url; 
 	 }
 }
 
