@@ -268,7 +268,7 @@ function superpwa_register_settings() {
 			'superpwa_related_applications_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section',						// Settings Section ID
-			array('class'=>'superpwa_related_applications'),
+			array('class'=>'superpwa_related_applications')
 		);
 
 	// PWA Status
