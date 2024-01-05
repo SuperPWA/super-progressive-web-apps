@@ -349,6 +349,14 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
+		// Offline message
+		add_settings_field(
+			'superpwa_offline_message_setting',								// ID
+			'<label for="superpwa_settings[offline_message_setting]">'.__('Offline Message', 'super-progressive-web-apps').'</label>',				// Title
+			'superpwa_offline_message_setting_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
 		// Cache External Origin URLs
 		add_settings_field(
 			'superpwa_cache_external_urls_shortcut',								// ID
@@ -544,6 +552,7 @@ function superpwa_get_default_settings() {
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
 				'bypass_sw_url_cache'=> '',
+				'offline_message_setting'=>1,
 			);
 
 	return $defaults;

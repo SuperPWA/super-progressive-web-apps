@@ -665,6 +665,23 @@ function superpwa_analytics_support_cb() {
 }
 
 /**
+ * Enable or disable the offline message
+ *
+ * @since 2.1.5
+ */ 
+function superpwa_offline_message_setting_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings();
+	$offline_message_checked = '';
+	if(!isset( $settings['offline_message_setting'] ) || $settings['offline_message_setting'] == 1){
+		$offline_message_checked = 'checked="checked';
+	}
+	?><input type="checkbox" name="superpwa_settings[offline_message_setting]" id="superpwa_settings[offline_message_setting]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	<p><?php echo esc_html__('To check whether user is offline and display message you are offline', 'super-progressive-web-apps'); ?></p>
+	<?php
+}
+
+/**
  * Enable or disable cache external urls support
  *
  * @since 2.1.6
