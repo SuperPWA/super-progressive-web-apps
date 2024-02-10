@@ -682,6 +682,23 @@ function superpwa_offline_message_setting_cb() {
 }
 
 /**
+ * Enable or disable the Prefetch
+ *
+ * @since 2.2.24
+ */ 
+function superpwa_prefetch_manifest_setting_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings();
+	$offline_message_checked = '';
+	if(isset( $settings['prefetch_manifest_setting'] ) && $settings['prefetch_manifest_setting'] == 1){
+		$offline_message_checked = 'checked="checked';
+	}
+	?><input type="checkbox" name="superpwa_settings[prefetch_manifest_setting]" id="superpwa_settings[prefetch_manifest_setting]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	<p><?php echo esc_html__('Prefetch manifest URLs provides some control over the request priority', 'super-progressive-web-apps'); ?></p>
+	<?php
+}
+
+/**
  * Enable or disable cache external urls support
  *
  * @since 2.1.6
