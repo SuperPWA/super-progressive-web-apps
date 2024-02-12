@@ -430,5 +430,40 @@ function superpwaGetZip() {
 			}
 		);
 	}
+
+	jQuery("#screenshots_add_more").click(function(e) {  // Add more screenshots
+		e.preventDefault();
+		clone_tr = jQuery(this).parents('.js_clone_div:first').clone();
+		clone_tr.find('input').val("")
+		clone_tr.find('input').prop('name','superpwa_settings[screenshots_multiple][]')
+		clone_tr.find("#screenshots_add_more").remove()
+		clone_tr.find(".js_remove_screenshot").show()
+		clone_tr.find('.js_choose_button').addClass('superpwa-screenshots-multiple-upload')
+		clone_tr.find('.js_choose_button').removeClass('superpwa-screenshots-upload')
+		clone_tr.insertAfter('.js_clone_div:last')
+	});
+	jQuery("body").on('click','.js_remove_screenshot',function(e) {  // Add more screenshots
+		e.preventDefault();
+		jQuery(this).parents('.js_clone_div').remove()
+	});
+
+	// after added add more functionality form multiple screenshots
+	jQuery("body").on('click','.superpwa-screenshots-multiple-upload',function(e) {  // Application screenshots upload
+		e.preventDefault();
+		this_ = jQuery(this).parents('.js_clone_div');
+		var superpwawpMediaUploader = wp.media({
+			title: 'Screenshots',
+			button: {
+				text: 'Select Icon'
+			},
+			multiple: false,  // Set this to true to allow multiple files to be selected
+			library:{type : 'image'}
+		})
+		.on("select", function() {
+			var attachment = superpwawpMediaUploader.state().get("selection").first().toJSON();
+			this_.find(".superpwa-screenshots").val(attachment.url);
+		})
+		.open();
+	});
 	
 	

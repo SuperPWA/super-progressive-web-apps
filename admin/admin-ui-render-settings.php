@@ -151,10 +151,30 @@ function superpwa_app_screenshots_cb() {
 	$settings = superpwa_get_settings(); ?>
 	
 	<!-- Application Icon -->
-	<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
-	<button type="button" class="button superpwa-screenshots-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
-	</button>
+	<div class="js_clone_div" style="margin-top: 10px;">
+		<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
+		<button type="button" class="button button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
+			<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
+		</button>
+		<button type="button" class="button button-primary" id="screenshots_add_more"> <?php echo esc_html__('Add More', 'super-progressive-web-apps'); ?> </button>
+		<button type="button" style="background-color: red; border-color: red; color: #fff; display:none;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
+		</button>
+	</div>
+	<?php
+	if (isset($settings['screenshots_multiple']) && is_array($settings['screenshots_multiple']) && !empty($settings['screenshots_multiple'])) {
+		foreach ($settings['screenshots_multiple'] as $key => $screenshot) {
+	?>	
+		<div class="js_clone_div" style="margin-top: 10px;">
+			<input type="text" name="superpwa_settings[screenshots_multiple][]"  class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $screenshot ) ? esc_attr( pwaforwp_https($screenshot)) : ''; ?>">
+			<button type="button" class="button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
+				<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php echo esc_html__('Choose Screenshots', 'super-progressive-web-apps'); ?> 
+			</button>
+			<button type="button" style="background-color: red; border-color: red; color: #fff;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
+			</button>
+		</div>
+	<?php }
+	}
+	?>
 	
 	<p class="description">
 		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
