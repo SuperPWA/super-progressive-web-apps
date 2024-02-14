@@ -410,15 +410,17 @@ function superpwa_get_pwa_screenshots() {
 		if(!empty($tmp_arr)){
 			foreach($tmp_arr as $item){
 				if(function_exists('getimagesize')){
-					$image_details =  @getimagesize($item);
-					list($width, $height) = $image_details;
-					$file_type = $image_details['mime'];
+					list($width, $height) =  @getimagesize($item);
+					$file_type = 'image/png';
+					if(function_exists('wp_get_image_mime')){
+						$file_type = @wp_get_image_mime($item);
+					}
 					if($width && $height){
-						$screenshot_array[] = array(
-							'src' 	=> $item,
-							'type'	=> $file_type, // must be image/png
-							'sizes' => $width.'x'.$height,
-						);
+						// $screenshot_array[] = array(
+						// 	'src' 	=> $item,
+						// 	'type'	=> $file_type, // must be image/png
+						// 	'sizes' => $width.'x'.$height,
+						// );
 						$screenshot_array[] = array(
 							'src' 	=> $item,
 							'type'	=> $file_type, // must be image/png
@@ -432,8 +434,11 @@ function superpwa_get_pwa_screenshots() {
 		if (isset($superpwa_settings['screenshots_multiple']) && !empty($superpwa_settings['screenshots_multiple'])) {
 			foreach ($superpwa_settings['screenshots_multiple'] as $key => $screenshots_multiple) {
 				if (!empty($screenshots_multiple)) {
-					$image_details =  @getimagesize($item);
-					$file_type = $image_details['mime'];
+					list($width, $height) =  @getimagesize($item);
+					$file_type = 'image/png';
+					if(function_exists('wp_get_image_mime')){
+						$file_type = @wp_get_image_mime($item);
+					}
 					$screenshot_array[] = array(
 						'src' 	=> esc_url($screenshots_multiple),
 						'sizes'	=> '512x512', 

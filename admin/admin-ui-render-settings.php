@@ -165,7 +165,7 @@ function superpwa_app_screenshots_cb() {
 		foreach ($settings['screenshots_multiple'] as $key => $screenshot) {
 	?>	
 		<div class="js_clone_div" style="margin-top: 10px;">
-			<input type="text" name="superpwa_settings[screenshots_multiple][]"  class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $screenshot ) ? esc_attr( pwaforwp_https($screenshot)) : ''; ?>">
+			<input type="text" name="superpwa_settings[screenshots_multiple][]"  class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $screenshot ) ? esc_attr( superpwa_httpsify($screenshot)) : ''; ?>">
 			<button type="button" class="button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
 				<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php echo esc_html__('Choose Screenshots', 'super-progressive-web-apps'); ?> 
 			</button>
