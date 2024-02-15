@@ -177,7 +177,7 @@ function superpwa_app_screenshots_cb() {
 	?>
 	
 	<p class="description">
-		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG/WEBP', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -693,10 +693,10 @@ function superpwa_offline_message_setting_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	$offline_message_checked = '';
-	if(!isset( $settings['offline_message_setting'] ) || $settings['offline_message_setting'] == 1){
+	if(isset( $settings['offline_message'] ) && $settings['offline_message'] == 1){
 		$offline_message_checked = 'checked="checked';
 	}
-	?><input type="checkbox" name="superpwa_settings[offline_message_setting]" id="superpwa_settings[offline_message_setting]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	?><input type="checkbox" name="superpwa_settings[offline_message]" id="superpwa_settings[offline_message]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
 	<p><?php echo esc_html__('To check whether user is offline and display message you are offline', 'super-progressive-web-apps'); ?></p>
 	<?php
 }
@@ -709,11 +709,11 @@ function superpwa_offline_message_setting_cb() {
 function superpwa_prefetch_manifest_setting_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings();
-	$offline_message_checked = '';
-	if(isset( $settings['prefetch_manifest_setting'] ) && $settings['prefetch_manifest_setting'] == 1){
-		$offline_message_checked = 'checked="checked';
+	$prefetch_manifest_checked = '';
+	if(isset( $settings['prefetch_manifest'] ) && $settings['prefetch_manifest'] == 1){
+		$prefetch_manifest_checked = 'checked="checked';
 	}
-	?><input type="checkbox" name="superpwa_settings[prefetch_manifest_setting]" id="superpwa_settings[prefetch_manifest_setting]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	?><input type="checkbox" name="superpwa_settings[prefetch_manifest]" id="superpwa_settings[prefetch_manifest]" value="1" <?php echo $prefetch_manifest_checked; ?> data-uncheck-val="0">
 	<p><?php echo esc_html__('Prefetch manifest URLs provides some control over the request priority', 'super-progressive-web-apps'); ?></p>
 	<?php
 }

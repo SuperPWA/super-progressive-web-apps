@@ -160,7 +160,7 @@ if ('serviceWorker' in navigator) {
 			}
 			isOffline = false;
 		} else {
-			if (superpwa_sw.offline_message_setting == 1) {
+			if (superpwa_sw.offline_message == 1) {
 				showSnackbar(goOfflineMsg);
 				isOffline = true;
 			}
