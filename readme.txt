@@ -191,7 +191,7 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.2.24 =
-* Date: [17.February.2023](https://superpwa.com/superpwa-2-2-24-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [17.February.2024](https://superpwa.com/superpwa-2-2-24-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: CTA on the frontpage is not showing.  #499
 * Feature: Make the offline message “You are offline” as an option #482
 * Feature: Make the feature Prefetch manifest URL link as an option #496
