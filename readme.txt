@@ -195,7 +195,7 @@ Feel free to get in touch if you have any questions.
 * BugFixed: CTA on the frontpage is not showing.  #499
 * Feature: Make the offline message “You are offline” as an option #482
 * Feature: Make the feature Prefetch manifest URL link as an option #496
-* Enhancement: Improvements to the app screenshoot option. #495
+* Enhancement: Improvements to the app screenshot option. #495
 
 
 = 2.2.23.1 =
