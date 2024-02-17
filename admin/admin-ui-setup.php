@@ -268,7 +268,7 @@ function superpwa_register_settings() {
 			'superpwa_related_applications_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section',						// Settings Section ID
-			array('class'=>'superpwa_related_applications'),
+			array('class'=>'superpwa_related_applications')
 		);
 
 	// PWA Status
@@ -346,6 +346,22 @@ function superpwa_register_settings() {
 			'superpwa_analytics_support_shortcut',								// ID
 			'<label for="superpwa_settings[analytics_support]">'.__('Offline analytics', 'super-progressive-web-apps').'</label>',				// Title
 			'superpwa_analytics_support_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Offline message
+		add_settings_field(
+			'superpwa_offline_message_setting',								// ID
+			'<label for="superpwa_settings[offline_message]">'.__('Offline Message', 'super-progressive-web-apps').'</label>',				// Title
+			'superpwa_offline_message_setting_cb',								// CB
+			'superpwa_pwa_advance_section',							// Page slug
+			'superpwa_pwa_advance_section'							// Settings Section ID
+		);
+		// Prefetch manifest URL link
+		add_settings_field(
+			'superpwa_prefetch_manifest_setting',								// ID
+			'<label for="superpwa_settings[prefetch_manifest]">'.__('Prefetch manifest URL link', 'super-progressive-web-apps').'</label>',				// Title
+			'superpwa_prefetch_manifest_setting_cb',								// CB
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
@@ -507,6 +523,8 @@ function superpwa_get_settings() {
 				'exclude_homescreen'=> '',
 				'bypass_sw_url_cache'=> '',
 				'monochrome_icon'=>'',
+				'prefetch_manifest'=>1,
+				'offline_message'=>1,
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );

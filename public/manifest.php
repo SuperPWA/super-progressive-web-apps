@@ -278,12 +278,18 @@ function superpwa_generate_manifest() {
  * @since 1.9 Introduced filter superpwa_add_theme_color
  */
 function superpwa_add_manifest_to_wp_head() {
-	
-	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-	$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
-	$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
+	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
+	$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+	if(isset( $superpwa_settings['prefetch_manifest'] )){
+		if($superpwa_settings['prefetch_manifest'] == 1){  
+			$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+		}
+	}else{
+		$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+	}
+	
 	// theme-color meta tag 
 	if ( apply_filters( 'superpwa_add_theme_color', true ) && isset($superpwa_settings['theme_color'])) {
 		
@@ -295,6 +301,25 @@ function superpwa_add_manifest_to_wp_head() {
 	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL; 
 	
 	echo $tags;
+}
+
+function superpwa_image_extension($image_url = '')
+{
+    $image_extension = 'image/png';
+    if(!empty($image_url)){
+        $valid_extensions = array('png', 'webp');
+        $explode_url = explode('.', $image_url);
+        if(!empty($explode_url) && is_array($explode_url)){
+            $explode_count = count($explode_url);
+            $img_extension = strtolower(sanitize_text_field($explode_url[$explode_count - 1]));
+            if(!empty($img_extension)){
+                if(in_array($img_extension, $valid_extensions)){
+                    $image_extension = 'image/'.$img_extension;
+                }
+            }
+        }
+    }
+    return $image_extension;
 }
 
 $show_manifest_icon = 0;
@@ -409,21 +434,31 @@ function superpwa_get_pwa_screenshots() {
 		if(!empty($tmp_arr)){
 			foreach($tmp_arr as $item){
 				if(function_exists('getimagesize')){
-					list($width, $height) = @getimagesize($item);
+					list($width, $height) =  @getimagesize($item);
+					$file_type = superpwa_image_extension($item);
 					if($width && $height){
 						$screenshot_array[] = array(
 							'src' 	=> $item,
-							'type'	=> 'image/png', // must be image/png
-							'sizes' => $width.'x'.$height
-							
-						);
-						$screenshot_array[] = array(
-							'src' 	=> $item,
-							'type'	=> 'image/png', // must be image/png
+							'type'	=> $file_type, // must be image/png
 							'sizes' => $width.'x'.$height,
 							'form_factor' => 'wide',
 						);
 					}
+				}
+			}
+		}
+		if (isset($superpwa_settings['screenshots_multiple']) && !empty($superpwa_settings['screenshots_multiple'])) {
+			foreach ($superpwa_settings['screenshots_multiple'] as $key => $screenshots_multiple) {
+				if (!empty($screenshots_multiple)) {
+					list($width, $height) =  @getimagesize($screenshots_multiple);
+					$file_type = superpwa_image_extension($screenshots_multiple);
+					$screenshot_array[] = array(
+						'src' 	=> esc_url($screenshots_multiple),
+						'sizes' => $width.'x'.$height, 
+						'type'	=> $file_type, 
+						"form_factor"=> "wide",
+						"label"=> "Homescreen of Superpwa App"
+					);
 				}
 			}
 		}

@@ -190,6 +190,18 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.24 =
+* Date: [17.February.2024](https://superpwa.com/superpwa-2-2-24-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: CTA on the frontpage is not showing.  #499
+* Feature: Make the offline message “You are offline” as an option #482
+* Feature: Make the feature Prefetch manifest URL link as an option #496
+* Enhancement: Improvements to the app screenshot option. #495
+
+
+= 2.2.23.1 =
+* Date: [24.December.2023](https://superpwa.com/superpwa-2-2-23-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Parse error: syntax error, unexpected ")" in PHP 7.2 and below 
+
 = 2.2.23 =
 * Date: [22.December.2023](https://superpwa.com/superpwa-2-2-23-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Proper sorting of features #314

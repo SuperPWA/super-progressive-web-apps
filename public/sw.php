@@ -371,6 +371,7 @@ function superpwa_register_sw() {
 				'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ).'?'.$superpwa_sw_version,
 				'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 				'enableOnDesktop'=> false,
+				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
 			);
 		$localize = apply_filters('superpwa_sw_localize_data', $localize);
 		wp_localize_script( 'superpwa-register-sw', 'superpwa_sw',  $localize);

@@ -151,13 +151,33 @@ function superpwa_app_screenshots_cb() {
 	$settings = superpwa_get_settings(); ?>
 	
 	<!-- Application Icon -->
-	<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
-	<button type="button" class="button superpwa-screenshots-upload" data-editor="content">
-		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
-	</button>
+	<div class="js_clone_div" style="margin-top: 10px;">
+		<input type="text" name="superpwa_settings[screenshots]" id="superpwa_settings[screenshots]" class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $settings['screenshots'] ) ? esc_attr( $settings['screenshots']) : ''; ?>">
+		<button type="button" class="button button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
+			<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
+		</button>
+		<button type="button" class="button button-primary" id="screenshots_add_more"> <?php echo esc_html__('Add More', 'super-progressive-web-apps'); ?> </button>
+		<button type="button" style="background-color: red; border-color: red; color: #fff; display:none;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
+		</button>
+	</div>
+	<?php
+	if (isset($settings['screenshots_multiple']) && is_array($settings['screenshots_multiple']) && !empty($settings['screenshots_multiple'])) {
+		foreach ($settings['screenshots_multiple'] as $key => $screenshot) {
+	?>	
+		<div class="js_clone_div" style="margin-top: 10px;">
+			<input type="text" name="superpwa_settings[screenshots_multiple][]"  class="superpwa-screenshots regular-text" size="50" value="<?php echo isset( $screenshot ) ? esc_attr( superpwa_httpsify($screenshot)) : ''; ?>">
+			<button type="button" class="button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
+				<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php echo esc_html__('Choose Screenshots', 'super-progressive-web-apps'); ?> 
+			</button>
+			<button type="button" style="background-color: red; border-color: red; color: #fff;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
+			</button>
+		</div>
+	<?php }
+	}
+	?>
 	
 	<p class="description">
-		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
+		<?php echo esc_html__('This will be the screenshots of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG/WEBP', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('472x1024', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
 	</p>
 
 	<?php
@@ -661,6 +681,40 @@ function superpwa_analytics_support_cb() {
 	?><input type="checkbox" name="superpwa_settings[analytics_support]" id="superpwa_settings[analytics_support]" value="1" 
 	<?php if ( isset( $settings['analytics_support'] ) ) { checked( '1', $settings['analytics_support'] ); } ?>>
 	<br>
+	<?php
+}
+
+/**
+ * Enable or disable the offline message
+ *
+ * @since 2.1.5
+ */ 
+function superpwa_offline_message_setting_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings();
+	$offline_message_checked = '';
+	if(isset( $settings['offline_message'] ) && $settings['offline_message'] == 1){
+		$offline_message_checked = 'checked="checked';
+	}
+	?><input type="checkbox" name="superpwa_settings[offline_message]" id="superpwa_settings[offline_message]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	<p><?php echo esc_html__('To check whether user is offline and display message you are offline', 'super-progressive-web-apps'); ?></p>
+	<?php
+}
+
+/**
+ * Enable or disable the Prefetch
+ *
+ * @since 2.2.24
+ */ 
+function superpwa_prefetch_manifest_setting_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings();
+	$prefetch_manifest_checked = '';
+	if(isset( $settings['prefetch_manifest'] ) && $settings['prefetch_manifest'] == 1){
+		$prefetch_manifest_checked = 'checked="checked';
+	}
+	?><input type="checkbox" name="superpwa_settings[prefetch_manifest]" id="superpwa_settings[prefetch_manifest]" value="1" <?php echo $prefetch_manifest_checked; ?> data-uncheck-val="0">
+	<p><?php echo esc_html__('Prefetch manifest URLs provides some control over the request priority', 'super-progressive-web-apps'); ?></p>
 	<?php
 }
 
