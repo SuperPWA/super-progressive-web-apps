@@ -190,6 +190,10 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.24.1 =
+* Date: [05.March.2024](https://superpwa.com/superpwa-2-2-24.1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Activating Pro version throwing Fatal error #501
+
 = 2.2.24 =
 * Date: [17.February.2024](https://superpwa.com/superpwa-2-2-24-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: CTA on the frontpage is not showing.  #499
