@@ -369,7 +369,7 @@ function superpwa_setting_tabs_html(){
 				  <a class="spwa-tablinks" href="<?php echo esc_url($advance_settings); ?>" data-href="yes"><?php esc_html_e('Advanced', 'super-progressive-web-apps') ?></a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url($support_settings); ?>" data-href="yes"><?php esc_html_e('Help & Support', 'super-progressive-web-apps') ?></a>
 				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks" href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
+				  <a class="spwa-tablinks" href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 				  <?php } ?>
 				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
 				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php esc_html_e('License', 'super-progressive-web-apps') ?></a>

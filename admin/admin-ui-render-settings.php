@@ -880,7 +880,7 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo __('Advanced', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo __('Help & Support', 'super-progressive-web-apps'); ?></a>
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){  ?>
-			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
+			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 			  <?php } ?>
 			  <?php if(!defined('SUPERPWA_PRO_VERSION')){ ?>
 				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>
