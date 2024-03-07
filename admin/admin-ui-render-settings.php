@@ -262,6 +262,7 @@ function superpwa_start_url_cb() {
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
 				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
 				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
+				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?>><?php esc_html_e(' &mdash; Active URL &mdash;', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
@@ -314,12 +315,17 @@ function superpwa_start_url_cb() {
 				post_select.removeAttribute('disabled');
 				post_select.parentNode.style.display="inline-block";
 			}
-			else{
+			else if (status=="page"){
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
 				page_select.removeAttribute('disabled');
 				page_select.parentNode.style.display="inline-block";
-			} 
+			}else{
+				post_select.setAttribute('disabled',true);
+				post_select.parentNode.style.display="none";
+				page_select.setAttribute('disabled',true);
+				page_select.parentNode.style.display="none";
+			}
 		}
 	    </script>
 		<?php if ( superpwa_is_amp() ) { ?>
