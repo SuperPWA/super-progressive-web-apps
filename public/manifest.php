@@ -264,9 +264,9 @@ function superpwa_generate_manifest() {
 		
 		return true;
 	}
-	
+	$dynamic_check = (isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] =='active_url')?false:true;
 	// Write the manfiest to disk.
-	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
+	if ( $dynamic_check  && superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
 		$superpwa_settings['is_static_manifest'] = 1;
