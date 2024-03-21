@@ -140,7 +140,9 @@ function superpwa_generate_sw() {
 		return true;
 	}
 	
-	if ( superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+	$dynamic_check = (isset($settings['startpage_type']) && $settings['startpage_type'] =='active_url')?false:true;
+	
+	if ( $dynamic_check && superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
 		
 		// set file status as satic file in database.
 		$settings['is_static_sw'] = 1;
