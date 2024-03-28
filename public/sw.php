@@ -140,7 +140,7 @@ function superpwa_generate_sw() {
 		return true;
 	}
 	
-	$dynamic_check = (isset($settings['startpage_type']) && $settings['startpage_type'] =='active_url')?false:true;
+	$dynamic_check = (isset($settings['startpage_type']) && $settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
 	
 	if ( $dynamic_check && superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
 		

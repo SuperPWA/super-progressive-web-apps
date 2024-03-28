@@ -254,7 +254,9 @@ function superpwa_theme_color_cb() {
 function superpwa_start_url_cb() {
 
 	// Get Settings
-	$settings = superpwa_get_settings(); ?>
+	$settings = superpwa_get_settings(); 
+	$pro_active = function_exists('is_plugin_active')?is_plugin_active( 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php' ):false;
+	?>
 	
 	<fieldset>
 			<!-- WordPress Pages Dropdown -->
@@ -262,7 +264,7 @@ function superpwa_start_url_cb() {
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
 				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
 				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
-				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?>><?php esc_html_e(' &mdash; Active URL &mdash;', 'super-progressive-web-apps') ?></option>
+				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?> ><?php esc_html_e(' &mdash; Active URL &mdash;', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
@@ -288,7 +290,10 @@ function superpwa_start_url_cb() {
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>
-
+		<?php if(!$pro_active){ ?>
+			<label style="display:none;" id="superpwa_startpage_pro_btn"> <?php esc_html_e('To use this option please buy our Pro plugin.', 'super-progressive-web-apps') ?> <a class="spwa-tablinks"  style="display:inline;border-radius:5px;background: #ff4c4c;color: #ffffff;font-weight: 700; padding: 4px 10px;text-decoration:none;" href="http://localhost/wordpress/wp-admin/admin.php?page=superpwa-upgrade"><?php esc_html_e('Upgrade to PRO', 'super-progressive-web-apps') ?></a>
+		</lable>
+			<?php } ?>
 		
 		<p class="description">
 			<?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?>
@@ -309,22 +314,32 @@ function superpwa_start_url_cb() {
 		function superpwa_stype_toggle(status ='page') {
 			const page_select = document.getElementById('superpwa_start_pages');
 			const post_select = document.getElementById('superpwa_start_posts');
+			const pro_btn = document.getElementById('superpwa_startpage_pro_btn');
 			if(status=="post"){
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
 				post_select.removeAttribute('disabled');
-				post_select.parentNode.style.display="inline-block";
+				post_select.parentNode.style.display="inline";
+				if(pro_btn){
+					pro_btn.style.display="none";
+				}
 			}
 			else if (status=="page"){
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
 				page_select.removeAttribute('disabled');
-				page_select.parentNode.style.display="inline-block";
+				page_select.parentNode.style.display="inline";
+				if(pro_btn){
+					pro_btn.style.display="none";
+				}
 			}else{
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
+				if(pro_btn){
+					pro_btn.style.display="inline";
+				}
 			}
 		}
 	    </script>

@@ -138,8 +138,7 @@ function superpwa_manifest_template( $pageid = null ) {
 	$manifest['dir']          	  = superpwa_get_text_dir();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = strlen( superpwa_get_start_url( true ) )>2?user_trailingslashit(superpwa_get_start_url( true )) : superpwa_get_start_url( true );
-
-	if(isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] == 'active_url')
+	if(isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init'))
 	{
 		if ($pageid) {
 			$permalink = get_permalink($pageid);
@@ -264,7 +263,7 @@ function superpwa_generate_manifest() {
 		
 		return true;
 	}
-	$dynamic_check = (isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] =='active_url')?false:true;
+	$dynamic_check = (isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
 	// Write the manfiest to disk.
 	if ( $dynamic_check  && superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
 		
@@ -590,7 +589,7 @@ function superpwa_get_text_dir() {
 
 function superpwa_add_manifest_variables($url) {
 	$settings = superpwa_get_settings();
-    if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'active_url' ) {
+    if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init')) {
 		$parsedUrl = parse_url( $url );
 		global $post;
 		$cache_version = SUPERPWA_VERSION;
