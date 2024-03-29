@@ -452,8 +452,9 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 
 	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
 		// Generate manifest from Settings and send the response w/ header.
+		$pagemid =  isset($query->query_vars['superpwa_mid'])? $query->query_vars['superpwa_mid'] : null;
 		header( 'Content-Type: application/json' );
-		echo wp_json_encode( superpwa_manifest_template() );
+		echo wp_json_encode( superpwa_manifest_template($pagemid) );
 		exit();
 	}
     // Needed new query_vars of pagename for Wp Fastest Cache 
@@ -557,3 +558,10 @@ function superpwa_enqueue_superpwa_select2_js( $hook ) {
 	
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_superpwa_select2_js',9999 );
+
+add_filter('query_vars', 'superpwa_manifest_query_vars');
+
+function superpwa_manifest_query_vars($vars) {
+    $vars[] = 'superpwa_mid';
+    return $vars;
+}

@@ -110,7 +110,7 @@ function superpwa_manifest( $arg = 'src' ) {
  * @since 2.0 Replaces superpwa_generate_manifest()
  * @since 2.0 Added display
  */
-function superpwa_manifest_template() {
+function superpwa_manifest_template( $pageid = null ) {
 	
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
@@ -138,6 +138,15 @@ function superpwa_manifest_template() {
 	$manifest['dir']          	  = superpwa_get_text_dir();
 	$manifest['orientation']      = superpwa_get_orientation();
 	$manifest['start_url']        = strlen( superpwa_get_start_url( true ) )>2?user_trailingslashit(superpwa_get_start_url( true )) : superpwa_get_start_url( true );
+	if(isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init'))
+	{
+		if ($pageid) {
+			$permalink = get_permalink($pageid);
+			if($permalink){
+				$manifest['start_url']       = $permalink;
+			}
+		} 
+	}
 	if(isset($superpwa_settings['app_category']) && !empty($superpwa_settings['app_category']))
 	{
 		$manifest['categories']       = [$superpwa_settings['app_category']];
@@ -254,9 +263,9 @@ function superpwa_generate_manifest() {
 		
 		return true;
 	}
-	
+	$dynamic_check = (isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
 	// Write the manfiest to disk.
-	if ( superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
+	if ( $dynamic_check  && superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
 		
 		// set file status as satic file in database.
 		$superpwa_settings['is_static_manifest'] = 1;
@@ -281,15 +290,13 @@ function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
 	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-	$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+	$manifest_url = superpwa_add_manifest_variables(superpwa_manifest( 'src' ));
+	$tags .= '<link rel="manifest" href="'. esc_url($manifest_url) . '">' . PHP_EOL;
 	if(isset( $superpwa_settings['prefetch_manifest'] )){
 		if($superpwa_settings['prefetch_manifest'] == 1){  
 			$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 		}
-	}else{
-		$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 	}
-	
 	// theme-color meta tag 
 	if ( apply_filters( 'superpwa_add_theme_color', true ) && isset($superpwa_settings['theme_color'])) {
 		
@@ -578,4 +585,42 @@ function superpwa_get_text_dir() {
 		default: 
 			return 'ltr';
 	}
+}
+
+function superpwa_add_manifest_variables($url) {
+	$settings = superpwa_get_settings();
+    if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init')) {
+		$parsedUrl = parse_url( $url );
+		global $post;
+		$cache_version = SUPERPWA_VERSION;
+		if(isset($settings['force_update_sw_setting']) && $settings['force_update_sw_setting'] !=''){
+		  $cache_version =   $settings['force_update_sw_setting'];
+		  if(!version_compare($cache_version,SUPERPWA_VERSION, '>=') ){
+			$cache_version = SUPERPWA_VERSION;
+		  }
+		}
+		// Extract the query string parameters
+		$queryParams = [];
+		if (isset($parsedUrl['query'])) {
+			parse_str($parsedUrl['query'], $queryParams);
+		}
+	
+		if (!isset($queryParams['superpwa_mid'])) {
+			$queryParams['superpwa_mid'] = $post->ID;
+		}
+		if (!isset($queryParams['v'])) {
+			$queryParams['v'] = $cache_version;
+		}
+	
+		// Rebuild the query string
+		$newQueryString = http_build_query($queryParams);
+	
+		if (isset($parsedUrl['path'])) {
+			$newUrl = $parsedUrl['path'] . '?' . $newQueryString;
+		} else {
+			$newUrl = '?' . $newQueryString;
+		}	
+		return $newUrl;
+	}
+	return parse_url( $url, PHP_URL_PATH ) ;
 }

@@ -254,7 +254,9 @@ function superpwa_theme_color_cb() {
 function superpwa_start_url_cb() {
 
 	// Get Settings
-	$settings = superpwa_get_settings(); ?>
+	$settings = superpwa_get_settings(); 
+	$pro_active = function_exists('is_plugin_active')?is_plugin_active( 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php' ):false;
+	?>
 	
 	<fieldset>
 			<!-- WordPress Pages Dropdown -->
@@ -262,6 +264,7 @@ function superpwa_start_url_cb() {
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
 				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
 				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
+				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?> ><?php esc_html_e(' &mdash; Dynamic URL &mdash;', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
@@ -287,7 +290,10 @@ function superpwa_start_url_cb() {
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>
-
+		<?php if(!$pro_active){ ?>
+			<label style="display:none;" id="superpwa_startpage_pro_btn"> <?php esc_html_e('To use this option.', 'super-progressive-web-apps') ?> <a class="spwa-tablinks"  style="display:inline;border-radius:5px;background: #ff4c4c;color: #ffffff;font-weight: 700; padding: 4px 10px;text-decoration:none;" href="http://localhost/wordpress/wp-admin/admin.php?page=superpwa-upgrade"><?php esc_html_e('Upgrade to PRO', 'super-progressive-web-apps') ?></a>
+		</lable>
+			<?php } ?>
 		
 		<p class="description">
 			<?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?>
@@ -308,18 +314,33 @@ function superpwa_start_url_cb() {
 		function superpwa_stype_toggle(status ='page') {
 			const page_select = document.getElementById('superpwa_start_pages');
 			const post_select = document.getElementById('superpwa_start_posts');
+			const pro_btn = document.getElementById('superpwa_startpage_pro_btn');
 			if(status=="post"){
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
 				post_select.removeAttribute('disabled');
-				post_select.parentNode.style.display="inline-block";
+				post_select.parentNode.style.display="inline";
+				if(pro_btn){
+					pro_btn.style.display="none";
+				}
 			}
-			else{
+			else if (status=="page"){
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
 				page_select.removeAttribute('disabled');
-				page_select.parentNode.style.display="inline-block";
-			} 
+				page_select.parentNode.style.display="inline";
+				if(pro_btn){
+					pro_btn.style.display="none";
+				}
+			}else{
+				post_select.setAttribute('disabled',true);
+				post_select.parentNode.style.display="none";
+				page_select.setAttribute('disabled',true);
+				page_select.parentNode.style.display="none";
+				if(pro_btn){
+					pro_btn.style.display="inline";
+				}
+			}
 		}
 	    </script>
 		<?php if ( superpwa_is_amp() ) { ?>
@@ -693,11 +714,27 @@ function superpwa_offline_message_setting_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	$offline_message_checked = '';
+	$offline_message_txt = 'style="display:none;"';
 	if(isset( $settings['offline_message'] ) && $settings['offline_message'] == 1){
 		$offline_message_checked = 'checked="checked';
+		$offline_message_txt = '';
 	}
 	?><input type="checkbox" name="superpwa_settings[offline_message]" id="superpwa_settings[offline_message]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	<input size="50" type="text" name="superpwa_settings[offline_message_txt]" id="superpwa_settings[offline_message_txt]" value="<?php echo !empty($settings['offline_message_txt'])?esc_html($settings['offline_message_txt']):'You are currently offline.';?>" <?php echo $offline_message_txt;?> >
 	<p><?php echo esc_html__('To check whether user is offline and display message you are offline', 'super-progressive-web-apps'); ?></p>
+	<script>
+		let offline_message = document.getElementById('superpwa_settings[offline_message]');
+		if(offline_message){
+			offline_message.addEventListener('change', function(e){
+                if(e.target.checked){
+                    document.getElementById('superpwa_settings[offline_message_txt]').style.display = 'inline-block';
+                }else{
+                    document.getElementById('superpwa_settings[offline_message_txt]').style.display = 'none';
+                }
+            });
+		}
+    </script>
+	</script>
 	<?php
 }
 
@@ -880,7 +917,7 @@ function superpwa_admin_interface_render() {
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo __('Advanced', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo __('Help & Support', 'super-progressive-web-apps'); ?></a>
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){  ?>
-			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? wp_kses("<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>"):""); ?></a>
+			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 			  <?php } ?>
 			  <?php if(!defined('SUPERPWA_PRO_VERSION')){ ?>
 				<a class="spwa-tablinks" id="spwa-upgrade2pro" style="background: #ff4c4c;color: #ffffff;float: right; font-weight: 700; padding: 16px 25px" href="<?php echo admin_url('admin.php?page=superpwa-upgrade'); ?>" onclick="openCity(event, 'superpwa-upgrade')" data-href="no"><?php echo __( 'Upgrade to PRO', 'super-progressive-web-apps' ); ?></a>

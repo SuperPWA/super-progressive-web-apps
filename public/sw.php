@@ -140,7 +140,9 @@ function superpwa_generate_sw() {
 		return true;
 	}
 	
-	if ( superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+	$dynamic_check = (isset($settings['startpage_type']) && $settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
+	
+	if ( $dynamic_check && superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
 		
 		// set file status as satic file in database.
 		$settings['is_static_sw'] = 1;
@@ -372,6 +374,7 @@ function superpwa_register_sw() {
 				'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 				'enableOnDesktop'=> false,
 				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
+				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
 			);
 		$localize = apply_filters('superpwa_sw_localize_data', $localize);
 		wp_localize_script( 'superpwa-register-sw', 'superpwa_sw',  $localize);

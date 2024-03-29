@@ -21,7 +21,7 @@ if ('serviceWorker' in navigator) {
 	const snackbarTimeToHide = 5000; // 5s
 	let isOffline = false,
 		snackbarTimeoutHide = null,
-		goOfflineMsg = 'You\'re currently offline',
+		goOfflineMsg = superpwa_sw.offline_message_txt,
 		backOnlineMsg = 'You\'re back online <a href="javascript:location.reload()">refresh</a>';
 
 	/**

@@ -461,7 +461,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
 
 	// Sanitize startpage type
-	$settings['startpage_type'] = sanitize_text_field( $settings['startpage_type'] );
+	$settings['startpage_type'] = sanitize_text_field( isset($settings['startpage_type'])?$settings['startpage_type']:'page' );
 	/**
 	 * Get current settings already saved in the database.
 	 * 
