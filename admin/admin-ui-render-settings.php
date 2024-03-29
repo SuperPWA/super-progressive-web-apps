@@ -264,7 +264,7 @@ function superpwa_start_url_cb() {
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
 				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
 				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
-				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?> ><?php esc_html_e(' &mdash; Active URL &mdash;', 'super-progressive-web-apps') ?></option>
+				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?> ><?php esc_html_e(' &mdash; Dynamic URL &mdash;', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
 		<!-- WordPress Pages Dropdown -->
@@ -291,7 +291,7 @@ function superpwa_start_url_cb() {
 			)); ?>
 		</label>
 		<?php if(!$pro_active){ ?>
-			<label style="display:none;" id="superpwa_startpage_pro_btn"> <?php esc_html_e('To use this option please buy our Pro plugin.', 'super-progressive-web-apps') ?> <a class="spwa-tablinks"  style="display:inline;border-radius:5px;background: #ff4c4c;color: #ffffff;font-weight: 700; padding: 4px 10px;text-decoration:none;" href="http://localhost/wordpress/wp-admin/admin.php?page=superpwa-upgrade"><?php esc_html_e('Upgrade to PRO', 'super-progressive-web-apps') ?></a>
+			<label style="display:none;" id="superpwa_startpage_pro_btn"> <?php esc_html_e('To use this option.', 'super-progressive-web-apps') ?> <a class="spwa-tablinks"  style="display:inline;border-radius:5px;background: #ff4c4c;color: #ffffff;font-weight: 700; padding: 4px 10px;text-decoration:none;" href="http://localhost/wordpress/wp-admin/admin.php?page=superpwa-upgrade"><?php esc_html_e('Upgrade to PRO', 'super-progressive-web-apps') ?></a>
 		</lable>
 			<?php } ?>
 		
