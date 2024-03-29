@@ -1,6 +1,6 @@
 === Super Progressive Web Apps ===
 Contributors: SuperPWA
-Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
+Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.5
 Requires PHP: 5.3
