@@ -714,11 +714,27 @@ function superpwa_offline_message_setting_cb() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 	$offline_message_checked = '';
+	$offline_message_txt = 'style="display:none;"';
 	if(isset( $settings['offline_message'] ) && $settings['offline_message'] == 1){
 		$offline_message_checked = 'checked="checked';
+		$offline_message_txt = '';
 	}
 	?><input type="checkbox" name="superpwa_settings[offline_message]" id="superpwa_settings[offline_message]" value="1" <?php echo $offline_message_checked; ?> data-uncheck-val="0">
+	<input size="50" type="text" name="superpwa_settings[offline_message_txt]" id="superpwa_settings[offline_message_txt]" value="<?php echo !empty($settings['offline_message_txt'])?esc_html($settings['offline_message_txt']):'You are currently offline.';?>" <?php echo $offline_message_txt;?> >
 	<p><?php echo esc_html__('To check whether user is offline and display message you are offline', 'super-progressive-web-apps'); ?></p>
+	<script>
+		let offline_message = document.getElementById('superpwa_settings[offline_message]');
+		if(offline_message){
+			offline_message.addEventListener('change', function(e){
+                if(e.target.checked){
+                    document.getElementById('superpwa_settings[offline_message_txt]').style.display = 'inline-block';
+                }else{
+                    document.getElementById('superpwa_settings[offline_message_txt]').style.display = 'none';
+                }
+            });
+		}
+    </script>
+	</script>
 	<?php
 }
 

@@ -190,6 +190,18 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.25 =
+* Date: [29.March.2024](https://superpwa.com/superpwa-2-2-25-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Option to change this Text "You're currently offline." #493
+* Compatibility: Tested with WordPress 6.5  #510
+* Feature: Option to hide the navigation bar on certain pages (PRO) #511
+* Feature: Dynamic Start URL (PRO) #502
+* Feature: Option to generate PWA install QR code for any website link (PRO) #502
+* Improvement: Load CTA in body if footer is not present (PRO) #506
+* Enhancement: Improve the error message while creating an APK.(PRO) #494
+* BugFixed: APK logo and the splash screen icon logo are not showing properly.(PRO) #508
+
+
 = 2.2.24.1 =
 * Date: [05.March.2024](https://superpwa.com/superpwa-2-2-24.1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Activating Pro version throwing Fatal error #501
