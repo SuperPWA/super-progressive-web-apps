@@ -288,10 +288,17 @@ function superpwa_generate_manifest() {
  */
 function superpwa_add_manifest_to_wp_head() {
 	// Get Settings
+	
 	$superpwa_settings = superpwa_get_settings();
-	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-	$manifest_url = superpwa_add_manifest_variables(superpwa_manifest( 'src' ));
-	$tags .= '<link rel="manifest" href="'. esc_url($manifest_url) . '">' . PHP_EOL;
+	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL;
+	$is_display_manifest = 1;
+	if (function_exists('superpwa_display_status')) {
+		$is_display_manifest = superpwa_display_status();
+	}
+	if ($is_display_manifest) {
+		$manifest_url = superpwa_add_manifest_variables(superpwa_manifest( 'src' ));
+		$tags .= '<link rel="manifest" href="'. esc_url($manifest_url) . '">' . PHP_EOL;
+	}
 	if(isset( $superpwa_settings['prefetch_manifest'] )){
 		if($superpwa_settings['prefetch_manifest'] == 1){  
 			$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
@@ -341,6 +348,8 @@ if(isset($superpwa_settings['excluded_urls']) && !empty($superpwa_settings['excl
 		}
 	}
 }
+
+
 if($show_manifest_icon == 0){
 	add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 }
@@ -624,3 +633,4 @@ function superpwa_add_manifest_variables($url) {
 	}
 	return parse_url( $url, PHP_URL_PATH ) ;
 }
+
