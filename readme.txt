@@ -190,6 +190,14 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.26 =
+* Date: [25.April.2024](https://superpwa.com/superpwa-2-2-26-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added an option where users can exclude a particular page from the PWA. #429
+* Feature: Added all missing translation in SuperPwa pro extension #518
+* BugFixed: Pre-caching offline URLs is not working when we add the URLs one by one in next line. #505
+* Improvement: Change upgrade plan details page #513
+* BugFixed: CTA is not working on the iOS devices.  #517
+
 = 2.2.25 =
 * Date: [29.March.2024](https://superpwa.com/superpwa-2-2-25-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Option to change this Text "You're currently offline." #493
@@ -268,13 +276,5 @@ Feel free to get in touch if you have any questions.
 * New : Add related_applications to manifest #387
 * Enhancement : Label should be clickable for all checkbox labels #411 
 
-
-= 2.2.15 =
-* Date: [12.April.2023](https://superpwa.com/superpwa-2-2-15-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* New : Added Monochrome icon to manifest  #328
-* Enhancement : Set post as Start Page #328 
-* Enhancement : Increased character limit of app name to 20  #328  
-* BugFixed : Conflict with WP Fastescache plugin. #401
-* BugFixed : Assets not loading with Cache First then Network strategy. #408
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)

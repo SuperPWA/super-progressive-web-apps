@@ -108,11 +108,12 @@ add_filter( 'superpwa_sw_template', 'superpwa_caching_strategies_sw_template', 1
 function superpwa_pre_caching_urls_sw( $files_to_cache ) {
 	
 	$settings = superpwa_caching_strategies_get_settings();
-       $pre_cache_urls = $manual_urls = '';
-	  if(isset($settings['precaching_manual']) && $settings['precaching_manual'] == '1' && !empty($settings['precaching_urls'])){
-	  	  $manual_urls = str_replace(',', '\',\'', $settings['precaching_urls']);
-	  	  $files_to_cache = '\''.$manual_urls.'\','.$files_to_cache;
-	  }
+	$pre_cache_urls = $manual_urls = '';
+	if(isset($settings['precaching_manual']) && $settings['precaching_manual'] == '1' && !empty($settings['precaching_urls'])){
+		$removing_nl_br = preg_replace( "/\r|\n/", "", $settings['precaching_urls']);
+		$manual_urls = str_replace(',', '\',\'', $removing_nl_br);
+		$files_to_cache = '\''.$manual_urls.'\','.$files_to_cache;
+	}
 
 
 	     $store_post_id = array();

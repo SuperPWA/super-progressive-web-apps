@@ -217,7 +217,6 @@ function superpwa_upgread_pro_interface_render(){
 										<span class="d-amt"><sup><?php esc_html_e( '$', 'super-progressive-web-apps' ); ?></sup><?php esc_html_e( '999', 'super-progressive-web-apps' ); ?></span>
 				                        <span class="amt"><sup><?php esc_html_e( '$', 'super-progressive-web-apps' ); ?></sup><?php esc_html_e( '999', 'super-progressive-web-apps' ); ?></span>
 				                        <span class="s-amt"><?php esc_html_e( '(Save $199)', 'super-progressive-web-apps' ); ?></span>
-				                        <span class="bil"><?php esc_html_e( 'Billed Annually', 'super-progressive-web-apps' ); ?></span>
 				                        <span class="s"><?php esc_html_e( 'Unlimited Site', 'super-progressive-web-apps' ); ?></span>
 				                        <span class="e"><?php esc_html_e( 'Tech Support', 'super-progressive-web-apps' ); ?></span>
 				                        <span class="f"><?php esc_html_e( 'Pro Features', 'super-progressive-web-apps' ); ?></span>
@@ -228,7 +227,7 @@ function superpwa_upgread_pro_interface_render(){
 				            </div><!-- /.pri-lst -->
 				            <div class="tru-us">
 				                <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/rating.png'); ?>">
-				                <h2><?php esc_html_e( 'Used by more than 40000+ Users!', 'super-progressive-web-apps' ); ?></h2>
+				                <h2><?php esc_html_e( 'Used by more than 50,000+ Users!', 'super-progressive-web-apps' ); ?></h2>
 				                <p><?php esc_html_e( 'More than 40k Websites, Blogs &amp; E-Commerce shops are powered by our SuperPWA making it the #1 Independent PWA plugin in WordPress.', 'super-progressive-web-apps' ); ?></p>
 				                <a href="https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?filter=5" target="_blank"><?php esc_html_e( 'Read The Reviews', 'super-progressive-web-apps' ); ?></a>
 				            </div>
