@@ -431,7 +431,7 @@ function superpwa_newsletter_form(){
 							<h3><?php esc_html_e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
 						</div>
 						<div class="desc column-description" style="margin: 0px 10px;">
-							<p><?php esc_html_e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+							<p style="margin-left:0px;"><?php esc_html_e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
 						</div>
 						
 						<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
