@@ -206,6 +206,14 @@ function superpwa_manifest_template( $pageid = null ) {
 			$manifest['start_url'] = $start_url;
 			$manifest['scope'] = "/";
 		}
+
+		$wpmultialng_settings = get_option( 'superpwa_wpmultilang_settings');
+		if (isset($wpmultialng_settings['enable_wpmultilang']) && $wpmultialng_settings['enable_wpmultilang'] == 1) {
+			$current_language = superpwa_get_language_shortcode();
+			$start_url = superpwa_home_url().$current_language;
+			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "/";
+		}
 		$launch_handler = ['client_mode'=>'auto'];
 		$manifest['launch_handler']  = $launch_handler;
 		$manifest['handle_links']  = 'preferred';
