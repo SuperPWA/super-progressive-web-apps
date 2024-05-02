@@ -303,7 +303,7 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
     // Sanitize and validate campaign source. Campaign source cannot be empty.
 	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
 
-    $settings['screen_centre_icon'] = sanitize_text_field( $settings['screen_centre_icon'] ) == '' ? '' : sanitize_text_field( $settings['screen_centre_icon'] );
+    $settings['screen_centre_icon'] = (isset($settings['screen_centre_icon'])) ? sanitize_text_field( $settings['screen_centre_icon'] ) : '';
 
     $settings['status_bar_style'] = sanitize_text_field( $settings['status_bar_style'] ) == '' ? 'default' : sanitize_text_field( $settings['status_bar_style'] );
 
