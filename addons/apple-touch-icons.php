@@ -370,6 +370,11 @@ function superpwa_splashscreen_uploader(){
     if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
         echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
     }
+
+    if($_SERVER['CONTENT_LENGTH']/1000000 > ini_get('upload_max_filesize') || $_SERVER['CONTENT_LENGTH']/1000000 > ini_get('post_max_size')){
+        echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('zip file size is very large','super-progressive-web-apps')));die;
+    }
+    
     if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
         echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file type not matched','super-progressive-web-apps')));die;
     }
