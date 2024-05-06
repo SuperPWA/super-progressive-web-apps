@@ -207,8 +207,16 @@ function superpwa_manifest_template( $pageid = null ) {
 			$manifest['scope'] = "/";
 		}
 
-		$wpmultialng_settings = get_option( 'superpwa_wpmultilang_settings');
-		if (isset($wpmultialng_settings['enable_wpmultilang']) && $wpmultialng_settings['enable_wpmultilang'] == 1) {
+		$wpmultilang_settings = get_option( 'superpwa_wpmultilang_settings');
+		if (isset($wpmultilang_settings['enable_wpmultilang']) && $wpmultilang_settings['enable_wpmultilang'] == 1) {
+			$current_language = superpwa_get_language_shortcode();
+			$start_url = superpwa_home_url().$current_language;
+			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "/";
+		}
+
+		$polylang_settings = get_option( 'superpwa_polylang_settings');
+		if (isset($polylang_settings['enable_polylang']) && $polylang_settings['enable_polylang'] == 1) {
 			$current_language = superpwa_get_language_shortcode();
 			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
