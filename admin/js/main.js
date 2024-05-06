@@ -186,6 +186,8 @@ function superpwaOnFileUploadChange(e) {
     setTimeout(function(){ superpwaGetZip(); }, 300);
 }
 
+
+
 function superpwaGetZip() {
 	 jQuery('#aft_img_gen').text("Generating Images Please Wait...");
 	if(image==''){
@@ -226,38 +228,48 @@ function superpwaGetZip() {
             var img2=canvas.toDataURL();
             folder.file(phone.file,img2.split(';base64,')[1],{base64:true});
     });
-    zip.generateAsync({
+
+	
+	zip.generateAsync({
+		compression: 'DEFLATE',
         type: 'blob'
-    }).then(function(content) {
+    })
+	.then(function(content) {
 		var fileName = 'splashscreens.zip';
 		var fileObj = new File([content], fileName, {
 			type : 'application/zip'
 		});
-		console.log('File object created:', fileObj);
+
 		var fd = new FormData();
    		fd.append('fileName', fileName);
 		fd.append('file', fileObj);
 		fd.append('action', 'superpwa_splashscreen_uploader');
 		fd.append('security_nonce', superpwaIosScreen.nonce);
+		fd.append('mimeType', 'application/zip');
 		
-
 		// POST Ajax call
 		jQuery.ajax({
 			type: 'POST',
 			url: ajaxurl,
 			data: fd,
 			dataType: 'json',
-			success: function (data) {
-				console.log(data)
-		   jQuery('#thumbnail').css("display", "block");
-		   jQuery('#aft_img_gen').text("Splash Screen Images Generated Successfully");
-		   jQuery('#aft_img_gen').css({"color":"green","margin-bottom":"20px"});
-		   jQuery('#submit_splash_screen').trigger('click');	
-				//window.location.reload();
-			},
 			cache: false,
 			contentType: false,
-			processData: false
+			processData: false,
+			success: function (data) {
+				if (data.status == 200) {
+					jQuery('#thumbnail').css("display", "block");
+					jQuery('#aft_img_gen').text("Splash Screen Images Generated Successfully");
+					jQuery('#aft_img_gen').css({"color":"green","margin-bottom":"20px"});
+					jQuery('#submit_splash_screen').trigger('click');
+				}else{
+					jQuery('#thumbnail').css("display", "block");
+					jQuery('#aft_img_gen').text(data.message);
+					jQuery('#aft_img_gen').css({"color":"red","margin-bottom":"20px"});
+				}
+				//window.location.reload();
+			},
+			
 		})
     });
 }
