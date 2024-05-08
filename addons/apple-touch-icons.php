@@ -191,6 +191,7 @@ function superpwa_apple_icons_splash_screen_cb() {
 
     <script id="iosScreen-data" type="application/json"><?php echo wp_json_encode($splashIconsScreens); ?></script>
     <br/>
+    <input type="hidden" id="max_upload_size" value="<?php echo ini_get('upload_max_filesize'); ?>">
     <?php
 }
 
