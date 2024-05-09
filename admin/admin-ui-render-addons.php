@@ -182,7 +182,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
-							'category'				=> 'subtab-all subtab-usability',
+							'category'				=> 'subtab-all subtab-multilingual',
 						),
 		'wp_multilang_for_superpwa' => array(
 							'name'					=> __( 'WP Multilang', 'super-progressive-web-apps' ),
@@ -195,7 +195,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.27',
-							'category'				=> 'subtab-all subtab-usability',
+							'category'				=> 'subtab-all subtab-multilingual',
 						),
 		'polylang_for_superpwa' => array(
 							'name'					=> __( 'Polylang', 'super-progressive-web-apps' ),
@@ -208,7 +208,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.27',
-							'category'				=> 'subtab-all subtab-usability',
+							'category'				=> 'subtab-all subtab-multilingual',
 						),
 		'navigation_bar_for_superpwa' => array(
 							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
@@ -324,6 +324,7 @@ function superpwa_addons_interface_render() {
 			<span data-tab-id="subtab-analytics"><?php esc_html_e( 'Analytics', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-app"><?php esc_html_e( 'App generation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-navigation"><?php esc_html_e( 'Navigation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-multilingual"><?php esc_html_e( 'Multilingual', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-usability"><?php esc_html_e( 'Usability', 'super-progressive-web-apps' ); ?></span>
 		</div>
 		<br/>

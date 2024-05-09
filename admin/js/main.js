@@ -246,13 +246,11 @@ function superpwaGetZip() {
 		fd.append('action', 'superpwa_splashscreen_uploader');
 		fd.append('security_nonce', superpwaIosScreen.nonce);
 		fd.append('mimeType', 'application/zip');
-
-		var max_upload_size = jQuery("#max_upload_size").val();
+		var max_upload_size = superpwaIosScreen.max_file_size;
 		var allowed_size = parseFloat(max_upload_size.replace('M',''));
 		
 		// POST Ajax call
-		if (zip_size < allowed_size) {
-		
+		if (zip_size < allowed_size) {		
 			jQuery.ajax({
 				type: 'POST',
 				url: ajaxurl,
@@ -278,7 +276,7 @@ function superpwaGetZip() {
 			})
 		}else{
 			jQuery('#thumbnail').css("display", "block");
-			jQuery('#aft_img_gen').text('Generated zip file size('+zip_size+'MB) excceding to server upload_max_filesize');
+			jQuery('#aft_img_gen').text('Generated zip file size('+zip_size+'MB) excceding to server max file size '+max_upload_size);
 			jQuery('#aft_img_gen').css({"color":"red","margin-bottom":"20px"});
 		}
     });

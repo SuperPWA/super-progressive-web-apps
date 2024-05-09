@@ -191,7 +191,6 @@ function superpwa_apple_icons_splash_screen_cb() {
 
     <script id="iosScreen-data" type="application/json"><?php echo wp_json_encode($splashIconsScreens); ?></script>
     <br/>
-    <input type="hidden" id="max_upload_size" value="<?php echo ini_get('upload_max_filesize'); ?>">
     <?php
 }
 
@@ -286,7 +285,10 @@ function superpwa_load_admin_scripts($hooks){
     wp_register_script('superpwa-admin-apple-script',SUPERPWA_PATH_SRC .'/admin/js/jszip.min.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
     wp_enqueue_script('superpwa-admin-apple-script'); 
     wp_localize_script( 'superpwa-admin-apple-script', 'superpwaIosScreen', 
-                        array('nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' )) );
+                        array(
+                            'nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' ),
+                            'max_file_size'=> ini_get('upload_max_filesize')
+                        ) );
 
 
 }
@@ -370,10 +372,6 @@ function superpwa_splashscreen_uploader(){
 
     if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
         echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
-    }
-
-    if($_SERVER['CONTENT_LENGTH']/1000000 > ini_get('upload_max_filesize') || $_SERVER['CONTENT_LENGTH']/1000000 > ini_get('post_max_size')){
-        echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('zip file size is very large','super-progressive-web-apps')));die;
     }
     
     if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
