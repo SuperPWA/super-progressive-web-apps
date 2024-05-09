@@ -190,6 +190,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.27 =
+* Date: [09.May.2024](https://superpwa.com/superpwa-2-2-27-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added compatibility with wp-multilang #514
+* Feature: Added compatibility with Polylang #437
+* Improvement: Apple touch Icons are not getting updated #521
+* BugFixed: The CTA cancel button is not working on both Desktop and Android devices.  #523
+
 = 2.2.26 =
 * Date: [25.April.2024](https://superpwa.com/superpwa-2-2-26-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added an option where users can exclude a particular page from the PWA. #429
@@ -270,11 +277,6 @@ Feel free to get in touch if you have any questions.
 * Enhancement :Need to create an option where the user can disable/enable the Add to Home Screens banner on desktop or tablet. #417
 * Enhancement :Need to make Start page dropdown with ajax search #412 
 * BugFixed :Warning appears in all pages when we install pro version #421
-
-= 2.2.16 =
-* Date: [27.April.2023](https://superpwa.com/superpwa-2-2-16-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* New : Add related_applications to manifest #387
-* Enhancement : Label should be clickable for all checkbox labels #411 
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)
