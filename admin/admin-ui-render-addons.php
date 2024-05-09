@@ -191,10 +191,10 @@ function superpwa_get_addons( $slug = false ) {
 							'icon'					=> 'wp-multilang.png',
 							'link'					=> 'https://superpwa.com/docs/article/how-to-enable-superpwa-on-wpml-multilingual-site/',
 							'more_link'					=> 'https://superpwa.com/docs/article/how-to-enable-superpwa-on-wpml-multilingual-site/',
-							'admin_link'			=>  admin_url('admin.php?page=superpwa-wpmultilang'),
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-wp_multilang'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '2.2.18',
+							'superpwa_min_version'	=> '2.2.27',
 							'category'				=> 'subtab-all subtab-usability',
 						),
 		'polylang_for_superpwa' => array(
@@ -207,7 +207,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link'			=>  admin_url('admin.php?page=superpwa-polylang'),
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
-							'superpwa_min_version'	=> '2.2.18',
+							'superpwa_min_version'	=> '2.2.27',
 							'category'				=> 'subtab-all subtab-usability',
 						),
 		'navigation_bar_for_superpwa' => array(

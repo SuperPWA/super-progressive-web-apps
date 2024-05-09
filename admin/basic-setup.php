@@ -449,13 +449,17 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	$manifest_filename    = superpwa_get_manifest_filename();
 	$sw_filename          = superpwa_get_sw_filename();
 	$amphtml_filename    = 'superpwa-amp-sw.html';
-
+	
 	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
 		// Generate manifest from Settings and send the response w/ header.
 		$pagemid =  isset($query->query_vars['superpwa_mid'])? $query->query_vars['superpwa_mid'] : null;
 		header( 'Content-Type: application/json' );
 		echo wp_json_encode( superpwa_manifest_template($pagemid) );
 		exit();
+	}
+	$superpwa_settings = superpwa_get_settings();
+	if(isset($superpwa_settings['is_any_multilang_enable']) && $superpwa_settings['is_any_multilang_enable'] == 1){
+		superpwa_generate_manifest();
 	}
     // Needed new query_vars of pagename for Wp Fastest Cache 
 	if(class_exists('WpFastestCache')){
