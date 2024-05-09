@@ -182,7 +182,33 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.18',
-							'category'				=> 'subtab-all subtab-usability',
+							'category'				=> 'subtab-all subtab-multilingual',
+						),
+		'wp_multilang_for_superpwa' => array(
+							'name'					=> __( 'WP Multilang', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Provides you to install pwa on WP-Multilang site based on selected language.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'wp-multilang.png',
+							'link'					=> 'https://superpwa.com/docs/',
+							'more_link'					=> 'https://superpwa.com/docs/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-wp_multilang'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.27',
+							'category'				=> 'subtab-all subtab-multilingual',
+						),
+		'polylang_for_superpwa' => array(
+							'name'					=> __( 'Polylang', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Provides you to install pwa on Polylang site based on selected language.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'polylang.png',
+							'link'					=> 'https://superpwa.com/docs/',
+							'more_link'					=> 'https://superpwa.com/docs/',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-polylang'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.27',
+							'category'				=> 'subtab-all subtab-multilingual',
 						),
 		'navigation_bar_for_superpwa' => array(
 							'name'					=> __( 'Navigation Bar', 'super-progressive-web-apps' ),
@@ -298,6 +324,7 @@ function superpwa_addons_interface_render() {
 			<span data-tab-id="subtab-analytics"><?php esc_html_e( 'Analytics', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-app"><?php esc_html_e( 'App generation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-navigation"><?php esc_html_e( 'Navigation', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
+			<span data-tab-id="subtab-multilingual"><?php esc_html_e( 'Multilingual', 'super-progressive-web-apps' ); ?></span>&nbsp;|&nbsp;
 			<span data-tab-id="subtab-usability"><?php esc_html_e( 'Usability', 'super-progressive-web-apps' ); ?></span>
 		</div>
 		<br/>

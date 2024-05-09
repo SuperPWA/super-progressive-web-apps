@@ -68,12 +68,14 @@ function superpwa_manifest( $arg = 'src' ) {
 		* pointing to the root folder of WordPress is still useful. 
 		*/
 		case 'abs':
-			$filepath = trailingslashit( ABSPATH ) . $manifest_filename;
-			if(!file_exists($filepath)){
-				$filepath = trailingslashit( get_home_path() ). $manifest_filename;
+			if (function_exists('get_home_path')) {
+				$filepath = trailingslashit( ABSPATH ) . $manifest_filename;
+				if(!file_exists($filepath)){
+					$filepath = trailingslashit( get_home_path() ). $manifest_filename;
+				}
+				return $filepath;
+				break;
 			}
-			return $filepath;
-			break;
 
 		// Link to manifest
 		case 'src':
@@ -198,6 +200,8 @@ function superpwa_manifest_template( $pageid = null ) {
 				$manifest['related_applications']       = $related_applications;
 			}
 		}
+
+		$is_any_multilang_enable = false;
 		$wpml_settings = get_option( 'superpwa_wpml_settings');
 
 		if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
@@ -205,6 +209,29 @@ function superpwa_manifest_template( $pageid = null ) {
 			$start_url = superpwa_home_url().$current_language;
 			$manifest['start_url'] = $start_url;
 			$manifest['scope'] = "/";
+			$is_any_multilang_enable = true;
+		}
+
+		$wpmultilang_settings = get_option( 'superpwa_wp_multilang_settings');
+		if (isset($wpmultilang_settings['enable_wp_multilang']) && $wpmultilang_settings['enable_wp_multilang'] == 1 && function_exists("wpm_get_languages")) {
+			$current_language = wpm_get_language();
+			$start_url = superpwa_home_url().$current_language;
+			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "/";
+			$is_any_multilang_enable = true;
+		}
+
+		$polylang_settings = get_option( 'superpwa_polylang_settings');
+		if (isset($polylang_settings['enable_polylang']) && $polylang_settings['enable_polylang'] == 1 && function_exists("pll_default_language")) {
+			$current_language = pll_current_language();
+			$start_url = superpwa_home_url().$current_language;
+			$manifest['start_url'] = $start_url;
+			$manifest['scope'] = "/";
+			$is_any_multilang_enable = true;
+		}
+		if ($is_any_multilang_enable) {
+			$superpwa_settings['is_any_multilang_enable'] = 1;
+			update_option( 'superpwa_settings', $superpwa_settings );
 		}
 		$launch_handler = ['client_mode'=>'auto'];
 		$manifest['launch_handler']  = $launch_handler;

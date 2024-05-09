@@ -285,7 +285,10 @@ function superpwa_load_admin_scripts($hooks){
     wp_register_script('superpwa-admin-apple-script',SUPERPWA_PATH_SRC .'/admin/js/jszip.min.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
     wp_enqueue_script('superpwa-admin-apple-script'); 
     wp_localize_script( 'superpwa-admin-apple-script', 'superpwaIosScreen', 
-                        array('nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' )) );
+                        array(
+                            'nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' ),
+                            'max_file_size'=> ini_get('upload_max_filesize')
+                        ) );
 
 
 }
@@ -301,11 +304,11 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
 	$settings['screen_icon'] = (isset($settings['screen_icon'])) ? sanitize_text_field( $settings['screen_icon'] ) : '';
 
     // Sanitize and validate campaign source. Campaign source cannot be empty.
-	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
+	$settings['background_color'] = (isset($settings['background_color'])) ? sanitize_text_field( $settings['background_color'] ) : '';
 
-    $settings['screen_centre_icon'] = sanitize_text_field( $settings['screen_centre_icon'] ) == '' ? '' : sanitize_text_field( $settings['screen_centre_icon'] );
+    $settings['screen_centre_icon'] = (isset($settings['screen_centre_icon'])) ? sanitize_text_field( $settings['screen_centre_icon'] ) : '';
 
-    $settings['status_bar_style'] = sanitize_text_field( $settings['status_bar_style'] ) == '' ? 'default' : sanitize_text_field( $settings['status_bar_style'] );
+    $settings['status_bar_style'] = (isset($settings['status_bar_style'])) ? sanitize_text_field( $settings['status_bar_style'] ) : '';
 
     return $settings;
 }
@@ -370,6 +373,7 @@ function superpwa_splashscreen_uploader(){
     if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
         echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
     }
+    
     if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
         echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file type not matched','super-progressive-web-apps')));die;
     }
