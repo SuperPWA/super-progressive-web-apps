@@ -480,11 +480,17 @@ function superpwa_get_pwa_screenshots() {
 					list($width, $height) =  @getimagesize($item);
 					$file_type = superpwa_image_extension($item);
 					if($width && $height){
+
+						$form_factor = 'wide';
+						if (isset($superpwa_settings['form_factor']) && !empty($superpwa_settings['form_factor'])) {
+							$form_factor = $superpwa_settings['form_factor'];
+						}
+						
 						$screenshot_array[] = array(
 							'src' 	=> $item,
 							'type'	=> $file_type, // must be image/png
 							'sizes' => $width.'x'.$height,
-							'form_factor' => 'wide',
+							'form_factor' => $form_factor,
 						);
 					}
 				}
@@ -495,11 +501,17 @@ function superpwa_get_pwa_screenshots() {
 				if (!empty($screenshots_multiple)) {
 					list($width, $height) =  @getimagesize($screenshots_multiple);
 					$file_type = superpwa_image_extension($screenshots_multiple);
+
+					$form_factor_multiple = 'wide';
+					if (isset($superpwa_settings['form_factor_multiple'][$key]) && !empty($superpwa_settings['form_factor_multiple'][$key])) {
+							$form_factor_multiple = $superpwa_settings['form_factor_multiple'][$key];
+					}
+
 					$screenshot_array[] = array(
 						'src' 	=> esc_url($screenshots_multiple),
 						'sizes' => $width.'x'.$height, 
 						'type'	=> $file_type, 
-						"form_factor"=> "wide",
+						"form_factor"=> $form_factor_multiple,
 						"label"=> "Homescreen of Superpwa App"
 					);
 				}

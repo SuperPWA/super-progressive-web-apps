@@ -156,12 +156,23 @@ function superpwa_app_screenshots_cb() {
 		<button type="button" class="button button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
 			<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Screenshots', 'super-progressive-web-apps' ); ?>
 		</button>
+		<select name="superpwa_settings[form_factor]" class="superpwa_settings_form_factor">
+			<option value="" ><?php esc_html_e( 'Select Form Factor', 'super-progressive-web-apps' ); ?>
+				</option>
+			<option value="narrow" <?php if ( isset( $settings['form_factor'] ) ) { selected( $settings['form_factor'], 'narrow' ); } ?>>
+				<?php esc_html_e( 'Narrow', 'super-progressive-web-apps' ); ?>
+			</option>
+			<option value="wide" <?php if ( isset( $settings['form_factor'] ) ) { selected( $settings['form_factor'], 'wide' ); } ?>>
+				<?php esc_html_e( 'Wide', 'super-progressive-web-apps' ); ?>
+			</option>
+		</select>
 		<button type="button" class="button button-primary" id="screenshots_add_more"> <?php echo esc_html__('Add More', 'super-progressive-web-apps'); ?> </button>
 		<button type="button" style="background-color: red; border-color: red; color: #fff; display:none;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
 		</button>
 	</div>
 	<?php
 	if (isset($settings['screenshots_multiple']) && is_array($settings['screenshots_multiple']) && !empty($settings['screenshots_multiple'])) {
+		// print_r($settings['form_factor_multiple']);die;
 		foreach ($settings['screenshots_multiple'] as $key => $screenshot) {
 	?>	
 		<div class="js_clone_div" style="margin-top: 10px;">
@@ -169,6 +180,16 @@ function superpwa_app_screenshots_cb() {
 			<button type="button" class="button js_choose_button superpwa-screenshots-multiple-upload" data-editor="content">
 				<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php echo esc_html__('Choose Screenshots', 'super-progressive-web-apps'); ?> 
 			</button>
+			<select name="superpwa_settings[form_factor_multiple][]" class="superpwa_settings_form_factor_multiple">
+				<option value="" ><?php esc_html_e( 'Select Form Factor', 'super-progressive-web-apps' ); ?>
+				</option>
+				<option value="narrow" <?php if ( isset( $settings['form_factor_multiple'][$key] ) ) { selected( $settings['form_factor_multiple'][$key], 'narrow' ); } ?>>
+					<?php esc_html_e( 'Narrow', 'super-progressive-web-apps' ); ?>
+				</option>
+				<option value="wide" <?php if ( isset( $settings['form_factor_multiple'][$key] ) ) { selected( $settings['form_factor_multiple'][$key], 'wide' ); } ?>>
+					<?php esc_html_e( 'Wide', 'super-progressive-web-apps' ); ?>
+				</option>
+			</select>
 			<button type="button" style="background-color: red; border-color: red; color: #fff;" class="button js_remove_screenshot" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?> 
 			</button>
 		</div>
