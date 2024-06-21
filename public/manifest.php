@@ -144,10 +144,17 @@ function superpwa_manifest_template( $pageid = null ) {
 	{
 		if ($pageid) {
 			$permalink = get_permalink($pageid);
+			$title  = get_the_title($pageid);
 			if($permalink){
 				$manifest['start_url']       = $permalink;
 			}
-		} 
+			if($title){
+				$stripped_title = strip_tags($title);
+				$trimmed_title = mb_substr($stripped_title, 0, 75);
+				$manifest['name']       = $trimmed_title;
+				$manifest['short_name'] = $trimmed_title;
+			}
+		}  
 	}
 	if(isset($superpwa_settings['app_category']) && !empty($superpwa_settings['app_category']))
 	{
