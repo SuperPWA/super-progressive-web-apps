@@ -190,6 +190,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.28 =
+* Date: [09.May.2024](https://superpwa.com/superpwa-2-2-28-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Need to make feature with form_factor in SuperPWA #526
+* Feature: Need to create an option to edit the text in the iOS QR code. #529
+* Improvement: Preloader issue after recent recent updates #530
+* BugFixed: While clicking on the install button on CTA, the Google search appears for the word Install (Android only) #527
+
 = 2.2.27 =
 * Date: [09.May.2024](https://superpwa.com/superpwa-2-2-27-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added compatibility with wp-multilang #514
@@ -271,12 +278,6 @@ Feel free to get in touch if you have any questions.
 * Date: [15.July.2023](https://superpwa.com/superpwa-2-2-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added compatibility with WPML #438
 * Enhancement :fix php 8 error #332
-
-= 2.2.17 =
-* Date: [30.May.2023](https://superpwa.com/superpwa-2-2-17-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Enhancement :Need to create an option where the user can disable/enable the Add to Home Screens banner on desktop or tablet. #417
-* Enhancement :Need to make Start page dropdown with ajax search #412 
-* BugFixed :Warning appears in all pages when we install pro version #421
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)
