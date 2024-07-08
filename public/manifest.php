@@ -236,6 +236,16 @@ function superpwa_manifest_template( $pageid = null ) {
 			$manifest['scope'] = "/";
 			$is_any_multilang_enable = true;
 		}
+		$translatepress_settings = get_option( 'superpwa_translatepress_settings');
+		if (isset($translatepress_settings['enable_translatepress']) && $translatepress_settings['enable_translatepress'] == 1 && class_exists('TRP_Translate_Press')) {
+			$homeUrl = superpwa_home_url();
+			global $TRP_LANGUAGE;
+			$trp = TRP_Translate_Press::get_trp_instance();
+			$start_url = $trp->get_component('url_converter')->get_url_for_language($TRP_LANGUAGE, $homeUrl);
+			$manifest['start_url'] = $homeUrl;
+			$manifest['scope'] = "/";
+			$is_any_multilang_enable = true;
+		}
 		if ($is_any_multilang_enable) {
 			$superpwa_settings['is_any_multilang_enable'] = 1;
 			update_option( 'superpwa_settings', $superpwa_settings );
