@@ -192,7 +192,9 @@ Feel free to get in touch if you have any questions.
 
 = 2.2.29 =
 * Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Need to add compatibility with Translatepress #535
+* Feature: Added compatibility with Translatepress #535
+* Compatibility: Tested with WordPress 6.6 #543
+
 
 = 2.2.28 =
 * Date: [09.May.2024](https://superpwa.com/superpwa-2-2-28-release-note/?utm_source=wordpress.org&utm_medium=changelog)
