@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.3
 Stable tag: trunk
 License: GPLv2 or later
@@ -190,6 +190,12 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.29 =
+* Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added compatibility with Translatepress #535
+* Compatibility: Tested with WordPress 6.6 #543
+
+
 = 2.2.28 =
 * Date: [09.May.2024](https://superpwa.com/superpwa-2-2-28-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Need to make feature with form_factor in SuperPWA #526
@@ -273,11 +279,6 @@ Feel free to get in touch if you have any questions.
 = 2.2.19 =
 * Date: [11.August.2023](https://superpwa.com/superpwa-2-2-19-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added Push Notifications support #452
-
-= 2.2.18 =
-* Date: [15.July.2023](https://superpwa.com/superpwa-2-2-18-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added compatibility with WPML #438
-* Enhancement :fix php 8 error #332
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)

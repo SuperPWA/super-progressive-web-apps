@@ -1,3 +1,8 @@
+= 2.2.29 =
+* Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added compatibility with Translatepress #535
+* Compatibility: Tested with WordPress 6.6 #543
+
 = 2.2.28 =
 * Date: [21.June.2024](https://superpwa.com/superpwa-2-2-28-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Need to make feature with form_factor in SuperPWA #526
