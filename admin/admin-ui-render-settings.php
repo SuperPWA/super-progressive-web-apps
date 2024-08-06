@@ -317,7 +317,8 @@ function superpwa_start_url_cb() {
 			<?php } ?>
 		
 		<p class="description">
-			<?php printf( __( 'Specify the page to load when the application is launched from a device. Current start page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_start_url() ); ?>
+		<?php echo esc_html__( 'Specify the page to load when the application is launched from a device. Current start page is', 'super-progressive-web-apps' ) ?>
+		&nbsp;<code><?php echo superpwa_get_start_url(); ?></code>
 		</p>
 		<script>
 		
@@ -388,7 +389,8 @@ function superpwa_start_url_cb() {
 				// Show notice if option to enable AMP for pages is disabled.
 				if ( empty( $td_amp_page_post_type ) ) { ?>
 					<p class="description">
-						<?php printf( __( 'Please enable AMP support for Page in <a href="%s">Theme Settings > Theme Panel</a> > AMP > Post Type Support.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=td_theme_panel' ) ); ?>
+					<?php echo esc_html__( 'Please enable AMP support for Page in', 'super-progressive-web-apps' ) ?>
+					&nbsp;<a href="<?php echo esc_url(admin_url( 'admin.php?page=td_theme_panel' )) ?>"><?php echo esc_html__( 'Theme Settings > Theme Panel', 'super-progressive-web-apps' ) ?></a> > <?php echo esc_html__( 'AMP > Post Type Support', 'super-progressive-web-apps' ) ?>.
 					</p>
 				<?php }
 			} ?>
@@ -422,7 +424,10 @@ function superpwa_app_category_cb() {
 			<option value=""><?php esc_html_e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
 				<?php foreach($manifest_categories as $category){ ?>
 				<option value="<?php echo $category?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $category); } ?>>
-					<?php esc_html_e($category, 'super-progressive-web-apps' ); ?>
+					
+					<?php 
+					// phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText 
+					esc_html_e($category, 'super-progressive-web-apps' ); ?>
 				</option>
 				<?php } ?>
 			</select>
@@ -455,7 +460,8 @@ function superpwa_offline_page_cb() {
 	</label>
 	
 	<p class="description">
-		<?php printf( __( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is <code>%s</code>', 'super-progressive-web-apps' ), superpwa_get_offline_page() ); ?>
+		<?php echo esc_html__( 'Offline page is displayed when the device is offline and the requested page is not already cached. Current offline page is', 'super-progressive-web-apps' ) ?>
+		&nbsp;<code><?php echo superpwa_get_offline_page(); ?></code>
 	</p>
 
 	<?php
@@ -525,7 +531,10 @@ function superpwa_display_cb() {
 	</label>
 	
 	<p class="description">
-		<?php printf( __( 'Display mode decides what browser UI is shown when your app is launched. <code>Standalone</code> is default. <a href="%s" target="_blank">What\'s the difference? &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=superpwa-plugin&utm_medium=settings-display' ); ?>
+		<?php echo esc_html__( 'Display mode decides what browser UI is shown when your app is launched', 'super-progressive-web-apps' ) ?>.
+		&nbsp;<code><?php echo esc_html__( 'Standalone','super-progressive-web-apps') ?></code>&nbsp;<?php echo esc_html__( 'is default','super-progressive-web-apps') ?>.&nbsp;
+		<a href="<?php echo esc_attr('https://superpwa.com/doc/web-app-manifest-display-modes/?utm_source=superpwa-plugin&utm_medium=settings-display') ?>" target="_blank"><?php echo esc_html__( "What's the difference?",'super-progressive-web-apps') ?> &rarr;</a>
+		
 	</p>
 
 	<?php
@@ -604,11 +613,16 @@ function superpwa_manifest_status_cb() {
 	 * Check to see if the file exists, If not attempts to generate a new one.
 	 */
 	if ( superpwa_file_exists( superpwa_manifest( 'src' ) ) || superpwa_generate_manifest() ) {
-		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Manifest generated successfully. You can <a href="%s" target="_blank">See it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_manifest( 'src' ) );
+		?>
+		<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span><?php echo esc_html__( 'Manifest generated successfully. You can', 'super-progressive-web-apps' ) ?>
+		<a href="<?php echo esc_url(superpwa_manifest( 'src' )); ?>" target="_blank"><?php echo esc_html__( 'See it here', 'super-progressive-web-apps' ) ?> &rarr;</a></p>
+		<?php
 	} else {
+		?>
+		<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span><?php echo esc_html__( 'Manifest generation failed', 'super-progressive-web-apps' ) ?>.&nbsp;
+		<a href="<?php echo esc_url('https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-manifest'); ?>" target="_blank"><?php echo esc_html__( 'Fix it', 'super-progressive-web-apps' ) ?> &rarr;</a></p>
+		<?php
 		
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Manifest generation failed. <a href="%s" target="_blank">Fix it &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-manifest' );
 	}
 }
 
@@ -628,11 +642,15 @@ function superpwa_sw_status_cb() {
 	 * Check to see if the file exists, If not attempts to generate a new one.
 	 */
 	if ( superpwa_file_exists( superpwa_sw( 'src' ) ) || superpwa_generate_sw() ) {
-		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Service worker generated successfully. <a href="%s" target="_blank">See it here &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', superpwa_sw( 'src' ) );
+		?>
+		<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span><?php echo esc_html__( 'Service worker generated successfully', 'super-progressive-web-apps' ) ?>.&nbsp;
+		<a href="<?php echo esc_url(superpwa_sw( 'src' )); ?>" target="_blank"><?php echo esc_html__( 'See it here', 'super-progressive-web-apps' ) ?> &rarr;</a></p>
+		<?php
 	} else {
-		
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker generation failed. <a href="%s" target="_blank">Fix it &rarr;</a>', 'super-progressive-web-apps' ) . '</p>', 'https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw' );
+		?>
+		<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span><?php echo esc_html__( 'Service worker generation failed', 'super-progressive-web-apps' ) ?>.&nbsp;
+		<a href="<?php echo esc_url('https://superpwa.com/doc/fixing-manifest-service-worker-generation-failed-error/?utm_source=superpwa-plugin&utm_medium=settings-status-no-sw'); ?>" target="_blank"><?php echo esc_html__( 'Fix it', 'super-progressive-web-apps' ) ?> &rarr;</a></p>
+		<?php
 	}
 }
 
@@ -644,11 +662,13 @@ function superpwa_sw_status_cb() {
 function superpwa_https_status_cb() {
 
 	if ( is_ssl() ) {
-		
-		printf( '<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span> ' . __( 'Your website is served over HTTPS.', 'super-progressive-web-apps' ) . '</p>' );
+		?>
+		<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span><?php echo esc_html__( 'Your website is served over HTTPS', 'super-progressive-web-apps' ) ?>.</p>
+		<?php
 	} else {
-		
-		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Progressive Web Apps require that your website is served over HTTPS. Please contact your host to add a SSL certificate to your domain.', 'super-progressive-web-apps' ) . '</p>' );
+		?>
+		<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span><?php echo esc_html__( 'Progressive Web Apps require that your website is served over HTTPS. Please contact your host to add a SSL certificate to your domain', 'super-progressive-web-apps' ) ?>.</p>
+		<?php
 	}
 }
  

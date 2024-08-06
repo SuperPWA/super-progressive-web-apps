@@ -642,13 +642,8 @@ function superpwa_footer_text( $default ) {
 	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
-	
-    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
-	'https://millionclues.com/donate/',
-	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
-	);
-	
-	return $superpwa_footer_text;
+	return esc_html__( 'If you like SuperPWA, please','super-progressive-web-apps').'&nbsp;<a href="'.esc_url('https://millionclues.com/donate/').'" target="_blank">'.esc_html__("make a donation", 'super-progressive-web-apps' ).'</a>&nbsp;'.esc_html__("or leave a", 'super-progressive-web-apps' ).'&nbsp;<a href="'.esc_url('https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post').'" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>&nbsp;'.esc_html__("rating to support continued development. Thanks a bunch!", 'super-progressive-web-apps' );
+    
 }
 add_filter( 'admin_footer_text', 'superpwa_footer_text' );
 

@@ -308,7 +308,7 @@ function superpwa_addons_interface_render() {
 		if ( $addon !== false ) {
 			
 			// Add-on activation notice
-			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s"%s>%s</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'], $link_target, $addon['admin_link_text'] ) . '</p></div>';	
+			echo '<div class="updated notice is-dismissible"><p><strong>'.esc_html__("Add-On activated:", "super-progressive-web-apps").$addon['name'].'</strong> <a href="'.$addon['admin_link'].'"'.$link_target.'>'.$addon['admin_link_text'].'</a></p></div>';	
 		}
 	}
 	
@@ -413,14 +413,14 @@ function superpwa_addons_interface_render() {
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
 											if(superpwa_push_notification_status()=='active'){
-												printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
+												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url(admin_url('/admin.php?page=push-notification')).'"'.$link_target.' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
 										 }else{
 											if(superpwa_addons_status( $slug ) == 'active'){
-											printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') );
+												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url($addon['admin_link']).'"'.$link_target.' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
-										 }
-									  ?>
+										}
+									?>
 									<li>
 										<?php
                                             $link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
@@ -429,7 +429,7 @@ function superpwa_addons_interface_render() {
                                         }
                                         ?>
 										<?php if($slug!='push_notification_for_superpwa'){  ?>
-										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
+										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php echo esc_html__('More information about', 'super-progressive-web-apps'); echo ' '.$addon['name']; ?>" data-title="<?php echo $addon['name']; ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
 										<?php } ?>
 									</li>
 						
