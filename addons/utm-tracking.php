@@ -222,7 +222,7 @@ function superpwa_utm_tracking_section_cb() {
 	$addon_utm_tracking = superpwa_get_addons( 'utm_tracking' );
 	$src = superpwa_manifest( 'src' );
 	$utm_link = $addon_utm_tracking['link'] . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings';
-	echo'<p>' . esc_html__( "This add-on automatically adds UTM campaign parameters to the", "super-progressive-web-apps" ).'<code>'.esc_html__("Start Page", "super-progressive-web-apps" ).'</code>'.esc_html__("URL in your", "super-progressive-web-apps").'&nbsp;<a href="'.$src.'" target="_blank">' . esc_html__( "manifest", "super-progressive-web-apps").'</a>'.esc_html__( " This will help you identify visitors coming specifically from your app", "super-progressive-web-apps").'&nbsp;<a href="'.$utm_link.'" target="_blank">'.esc_html__("Read more", "super-progressive-web-apps").'</a> '.esc_html__("about UTM Tracking.", "super-progressive-web-apps").'</p>';
+	echo'<p>' . esc_html__( "This add-on automatically adds UTM campaign parameters to the", "super-progressive-web-apps" ).'<code>'.esc_html__("Start Page", "super-progressive-web-apps" ).'</code>'.esc_html__("URL in your", "super-progressive-web-apps").'&nbsp;<a href="'.esc_url($src).'" target="_blank">' . esc_html__( "manifest", "super-progressive-web-apps").'</a>'.esc_html__( " This will help you identify visitors coming specifically from your app", "super-progressive-web-apps").'&nbsp;<a href="'.esc_url($utm_link).'" target="_blank">'.esc_html__("Read more", "super-progressive-web-apps").'</a> '.esc_html__("about UTM Tracking.", "super-progressive-web-apps").'</p>';
 }
 
 /**
@@ -232,7 +232,7 @@ function superpwa_utm_tracking_section_cb() {
  */
 function superpwa_utm_tracking_start_url_cb() {
 	
-	echo '<code style="word-break: break-all;">' . superpwa_get_start_url( true ) . '</code>';
+	echo '<code style="word-break: break-all;">' . esc_url(superpwa_get_start_url( true )) . '</code>';
 }
 
 /**

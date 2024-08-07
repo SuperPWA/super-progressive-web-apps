@@ -289,8 +289,7 @@ function superpwa_caching_strategies_validater_sanitizer( $settings ) {
  * @since 1.7
  */
 function superpwa_caching_strategies_section_cb() {
-
-	printf( '<p>' . __( 'Caching strategies will help your users to get connected and display content, perform function, in bad network conditions and even when the user is completely offline.', 'super-progressive-web-apps' ) . '</p>');
+	echo '<p>' . esc_html__( 'Caching strategies will help your users to get connected and display content, perform function, in bad network conditions and even when the user is completely offline.', 'super-progressive-web-apps' ) . '</p>';
 }
 
 /**

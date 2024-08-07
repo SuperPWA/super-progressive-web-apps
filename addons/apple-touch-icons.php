@@ -208,7 +208,7 @@ function superpwa_apple_icons_splash_with_centre_screen_cb() {
 function superpwa_apple_icons_splash_color_screen_cb() {
     $splashIcons = superpwa_apple_icons_get_settings();
     ?>
-    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? $splashIcons['screen_icon']: $splashIcons['background_color'] ?>">
+    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? esc_attr($splashIcons['screen_icon']): esc_attr($splashIcons['background_color']) ?>">
     <?php
 }
 
