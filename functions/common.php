@@ -103,11 +103,11 @@ function superpwa_get_start_url( $rel = false ) {
 		$addons=get_option('superpwa_active_addons',array());
 		if(in_array('utm_tracking',$addons))
 		{
-			$start_url = ( parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '' : parse_url( $start_url, PHP_URL_PATH );
+			$start_url = ( wp_parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '' : wp_parse_url( $start_url, PHP_URL_PATH );
 		}
 		else
 		{
-			$start_url = ( parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '.' : parse_url( $start_url, PHP_URL_PATH );
+			$start_url = ( wp_parse_url( $start_url, PHP_URL_PATH ) == '' ) ? '.' : wp_parse_url( $start_url, PHP_URL_PATH );
 		}
 		
 		return apply_filters( 'superpwa_manifest_start_url', $start_url );
@@ -347,8 +347,10 @@ function superpwa_setting_tabs_html(){
  $support_settings = admin_url( 'admin.php?page=superpwa#support-settings');
  $license_settings = admin_url( 'admin.php?page=superpwa#license-settings');
  $addon_page = admin_url( 'admin.php?page=superpwa-addons');
+ // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
  if( $_GET['page'] == 'superpwa-upgrade' ) {
  	$license_settings_class = $addon_page_class =  '' ;
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
  	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {
  		$license_settings_class = 'active';
  	}else{
@@ -357,6 +359,7 @@ function superpwa_setting_tabs_html(){
  }
  
  	$license_settings_class = $addon_page_class =  '' ;
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
  	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {
  		$license_settings_class = 'active';
  	}else{
@@ -365,14 +368,18 @@ function superpwa_setting_tabs_html(){
 ?>
 			<div class="spwa-tab">
 				  <a id="spwa-default" class="spwa-tablinks" href="<?php echo esc_url($general_settings); ?>" data-href="yes"><?php esc_html_e('Settings', 'super-progressive-web-apps') ?></a>
-				  <a class="spwa-tablinks <?php echo $addon_page_class; ?>" href="<?php echo esc_url($addon_page); ?>" data-href="yes"><?php esc_html_e('Features (Addons)', 'super-progressive-web-apps') ?></a>
+				  <a class="spwa-tablinks <?php echo esc_attr($addon_page_class); ?>" href="<?php echo esc_url($addon_page); ?>" data-href="yes"><?php esc_html_e('Features (Addons)', 'super-progressive-web-apps') ?></a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url($advance_settings); ?>" data-href="yes"><?php esc_html_e('Advanced', 'super-progressive-web-apps') ?></a>
 				  <a class="spwa-tablinks" href="<?php echo esc_url($support_settings); ?>" data-href="yes"><?php esc_html_e('Help & Support', 'super-progressive-web-apps') ?></a>
-				  <?php if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks" href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php echo __('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
+				  <?php
+				  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
+				  if( defined('SUPERPWA_PRO_VERSION') &&  $_GET['page'] !== 'superpwa-upgrade' ) { ?>
+				  <a class="spwa-tablinks" href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php echo esc_html__('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 				  <?php } ?>
-				  <?php if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
-				  <a class="spwa-tablinks <?php echo $license_settings_class; ?>  " href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php esc_html_e('License', 'super-progressive-web-apps') ?></a>
+				  <?php
+				  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information. 
+				  if( $_GET['page'] == 'superpwa-upgrade' ) { ?>
+				  <a class="spwa-tablinks <?php echo esc_attr($license_settings_class); ?>  " href="<?php echo esc_url($license_settings); ?>" data-href="yes"><?php esc_html_e('License', 'super-progressive-web-apps') ?></a>
 				<?php } ?>
 				  
 				</div>
@@ -390,9 +397,9 @@ function superpwa_license_expire_warning(){
 			$license_info = get_option("superpwa_pro_upgrade_license");
 			if ($license_info && isset($license_info['pro']['license_key_expires'])) {
 
-			$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
+			$license_exp = gmdate('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
 			$license_info_lifetime = $license_info['pro']['license_key_expires'];
-			$today = date('Y-m-d');
+			$today = gmdate('Y-m-d');
 			$exp_date = $license_exp;
 
 	        $license_alert = $today > $exp_date ? true:false;
@@ -422,7 +429,7 @@ function superpwa_newsletter_form(){
 
 	if ( $superpwa_newsletter === true && $hide_form !== 'yes') { ?>
 	  <div class="superpwa-newsletter-wrapper">
-		<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
+		<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo esc_html(SUPERPWA_PATH_SRC) . 'admin/img/email.png'; ?>') no-repeat right top;">
 						
 					<div class="plugin-card-top" style="min-height: 135px;">
 					     <span class="dashicons dashicons-dismiss superpwa_newsletter_hide" style="float: right;cursor: pointer;"></span>

@@ -279,6 +279,7 @@ function superpwa_pull_to_refresh_interface_render()
 	}
 
 	// Handing save settings
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if (isset($_GET['settings-updated'])) {
 		// Add settings saved message with the class of "updated"
 		add_settings_error('superpwa_settings_group', 'superpwa_pull_to_refresh_settings_saved_message', __('Settings saved.', 'super-progressive-web-apps'), 'updated');

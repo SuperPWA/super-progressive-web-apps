@@ -136,6 +136,7 @@ if( ! function_exists( 'wp_dropdown_posts' ) ) {
 		$html = apply_filters( 'wp_dropdown_posts', $output, $r, $posts );
 
 		if( $r['echo'] ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 

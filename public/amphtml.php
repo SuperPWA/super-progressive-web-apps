@@ -10,9 +10,9 @@ function amp_service_worker_template(){
 		    <head>
 		        <title>Installing service worker</title>
 		        <script type="text/javascript">
-		            var swsource = "<?php echo $swjs_path_amp; ?>";
+		            var swsource = "<?php echo esc_url($swjs_path_amp); ?>";
 		            if("serviceWorker" in navigator) {			               
-		                navigator.serviceWorker.register(swsource, {scope: '<?php echo $home_url; ?>'}).then(function(reg){
+		                navigator.serviceWorker.register(swsource, {scope: '<?php echo esc_url($home_url); ?>'}).then(function(reg){
 		                    console.log('Congratulations!!Service Worker Registered ServiceWorker scope: ', reg.scope);
 		                }).catch(function(err) {
 		                    console.log('ServiceWorker registration failed: ', err);

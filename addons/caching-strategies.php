@@ -421,6 +421,7 @@ function superpwa_caching_strategies_interface_render() {
     }
 	
 	// Handing save settings
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['settings-updated'] ) ) {
 		
 		// Add settings saved message with the class of "updated"

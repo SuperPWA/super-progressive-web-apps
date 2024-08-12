@@ -118,8 +118,8 @@ function superpwa_manifest_template( $pageid = null ) {
 	$superpwa_settings = superpwa_get_settings();
 
 	$manifest               = array();
-	$id_url = parse_url(site_url());
-	$manifest['id']         = isset($id_url['host'])?$id_url['host']:mt_rand(0,9999999);
+	$id_url = wp_parse_url(site_url());
+	$manifest['id']         = isset($id_url['host'])?$id_url['host']:wp_rand(0,9999999);
 	$manifest['name']       = $superpwa_settings['app_name'];
 	$manifest['short_name'] = $superpwa_settings['app_short_name'];
 
@@ -149,7 +149,7 @@ function superpwa_manifest_template( $pageid = null ) {
 				$manifest['start_url']       = $permalink;
 			}
 			if($title){
-				$stripped_title = strip_tags($title);
+				$stripped_title = wp_strip_all_tags($title);
 				$trimmed_title = mb_substr($stripped_title, 0, 75);
 				$manifest['name']       = $trimmed_title;
 				$manifest['short_name'] = $trimmed_title;
@@ -177,7 +177,7 @@ function superpwa_manifest_template( $pageid = null ) {
 		$manifest['shortcuts'] = array(
 									array(
 										'name'=>$superpwa_settings['app_short_name'],
-										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
+										'url'=>user_trailingslashit( wp_parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
 									)
 								);
 		
@@ -345,7 +345,7 @@ function superpwa_add_manifest_to_wp_head() {
 	}
 	if(isset( $superpwa_settings['prefetch_manifest'] )){
 		if($superpwa_settings['prefetch_manifest'] == 1){  
-			$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+			$tags .= '<link rel="prefetch" href="'. esc_url(wp_parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 		}
 	}
 	// theme-color meta tag 
@@ -357,7 +357,7 @@ function superpwa_add_manifest_to_wp_head() {
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 	
 	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL; 
-	
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $tags;
 }
 
@@ -549,7 +549,7 @@ function superpwa_get_pwa_screenshots() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	return parse_url( trailingslashit( superpwa_get_bloginfo( 'sw' ) ), PHP_URL_PATH );
+	return wp_parse_url( trailingslashit( superpwa_get_bloginfo( 'sw' ) ), PHP_URL_PATH );
 }
 
 /**
@@ -658,7 +658,7 @@ function superpwa_get_text_dir() {
 function superpwa_add_manifest_variables($url) {
 	$settings = superpwa_get_settings();
     if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init')) {
-		$parsedUrl = parse_url( $url );
+		$parsedUrl = wp_parse_url( $url );
 		global $post;
 		$cache_version = SUPERPWA_VERSION;
 		if(isset($settings['force_update_sw_setting']) && $settings['force_update_sw_setting'] !=''){
@@ -690,6 +690,6 @@ function superpwa_add_manifest_variables($url) {
 		}	
 		return $newUrl;
 	}
-	return parse_url( $url, PHP_URL_PATH ) ;
+	return wp_parse_url( $url, PHP_URL_PATH ) ;
 }
 

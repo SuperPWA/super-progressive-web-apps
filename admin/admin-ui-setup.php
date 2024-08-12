@@ -64,9 +64,9 @@ function superpwa_add_menu_links() {
 		$license_info = get_option("superpwa_pro_upgrade_license");
 		if ($license_info && isset($license_info['pro']['license_key_expires'])) {
 
-		$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
+		$license_exp = gmdate('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
 		$license_info_lifetime = $license_info['pro']['license_key_expires'];
-		$today = date('Y-m-d');
+		$today = gmdate('Y-m-d');
 		$exp_date = $license_exp;
 		$date1 = date_create($today);
 		$date2 = date_create($exp_date);

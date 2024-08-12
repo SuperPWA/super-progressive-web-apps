@@ -68,7 +68,7 @@ class SUPERPWA_AMP_SW{
 
 
 				$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-				$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+				$tags .= '<link rel="manifest" href="'. esc_url(wp_parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 
 				// theme-color meta tag 
 				if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
