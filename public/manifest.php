@@ -247,6 +247,7 @@ function superpwa_manifest_template( $pageid = null ) {
 			$is_any_multilang_enable = true;
 		}
 		if ($is_any_multilang_enable) {
+			superpwa_delete_manifest();
 			$superpwa_settings['is_any_multilang_enable'] = 1;
 			update_option( 'superpwa_settings', $superpwa_settings );
 		}
