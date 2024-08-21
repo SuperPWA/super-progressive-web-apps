@@ -429,43 +429,46 @@ function superpwa_get_pwa_icons() {
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
-							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
-							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
-							'purpose'=> 'any', // any maskable to support adaptive icons
-						);
-	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
-							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
-							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
-							'purpose'=> 'maskable', // any maskable to support adaptive icons
-						);
+		'src' 	=> esc_url($superpwa_settings['icon']),
+		'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
+		'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
+		'purpose'=> 'any', // any maskable to support adaptive icons
+	);
+	if ( isset($superpwa_settings['app_maskable_icon'] ) && ! empty( $superpwa_settings['app_maskable_icon'] ) ) {
+		$icons_array[] = array(
+			'src' 	=> esc_url($superpwa_settings['icon']),
+			'sizes'	=> '192x192', 
+			'type'	=> 'image/png',
+			'purpose'=> 'maskable',
+		);
+	}
 	
 	// Splash screen icon - Added since 1.3
-	if ( @$superpwa_settings['splash_icon'] != '' ) {
-		
+	if ( isset($superpwa_settings['splash_icon']) && ! empty( $superpwa_settings['splash_icon'] ) ) {
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'any',
-						);
-		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'maskable',
-						);
+			'src' 	=> esc_url($superpwa_settings['splash_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'any',
+		);
 	}
 
-	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
-		
+	if ( isset($superpwa_settings['splash_maskable_icon']) && ! empty( $superpwa_settings['splash_maskable_icon'] ) ) {
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'monochrome',
-						);
+			'src' 	=> esc_url($superpwa_settings['splash_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'maskable',
+		);
+	}
+
+	if ( isset($superpwa_settings['monochrome_icon']) && ! empty( $superpwa_settings['monochrome_icon'] ) ) {
+		$icons_array[] = array(
+			'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'monochrome',
+		);
 	}
 	
 	return $icons_array;

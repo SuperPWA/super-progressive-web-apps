@@ -116,6 +116,25 @@ function superpwa_app_icon_cb() {
 
 	<?php
 }
+/**
+ * Application Maskable Icon
+ *
+ * @since 2.2.30
+ */
+function superpwa_app_maskable_icon_cb() {
+	$settings = superpwa_get_settings(); ?>
+	<input type="text" name="superpwa_settings[app_maskable_icon]" id="superpwa_settings[app_maskable_icon]" class="superpwa-maskable-icon superpwa-maskable-input regular-text" size="50" value="<?php echo isset( $settings['app_maskable_icon'] ) ? esc_attr( $settings['app_maskable_icon']) : ''; ?>">
+	<button type="button" class="button superpwa-maskable-icon-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
+	</button>
+	<button type="button" style="background-color: red; border-color: red; color: #fff; display:none;" class="button superpwa_js_remove_maskable" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?></button>
+	
+	<p class="description">
+		<?php echo esc_html__('This will be the maskable icon of your app when installed on the phone. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('192x192', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
 
 /**
  * Splash Screen Icon
@@ -145,6 +164,28 @@ function superpwa_splash_icon_cb() {
  *
  * @since 1.0
  */
+
+/**
+ * Application Maskable Icon
+ *
+ * @since 2.2.30
+ */
+function superpwa_splash_maskable_icon_cb() {
+	$settings = superpwa_get_settings(); ?>
+	<input type="text" name="superpwa_settings[splash_maskable_icon]" id="superpwa_settings[splash_maskable_icon]" class="superpwa-maskable-icon superpwa-maskable-input regular-text" size="50" value="<?php echo isset( $settings['splash_maskable_icon'] ) ? esc_attr( $settings['splash_maskable_icon']) : ''; ?>">
+	<button type="button" class="button superpwa-maskable-icon-upload" data-editor="content">
+		<span class="dashicons dashicons-format-image" style="margin-top: 4px;"></span> <?php esc_html_e( 'Choose Icon', 'super-progressive-web-apps' ); ?>
+	</button>
+	<button type="button" style="background-color: red; border-color: red; color: #fff; display:none;" class="button superpwa_js_remove_maskable" > <?php echo esc_html__('Remove', 'super-progressive-web-apps'); ?></button>
+	
+	<p class="description">
+		<?php echo esc_html__('This icon will be displayed on the splash screen of your app on supported devices. Must be a ', 'super-progressive-web-apps').'<code>'. esc_html__('PNG', 'super-progressive-web-apps').'</code>'. esc_html__('image exactly ', 'super-progressive-web-apps').' <code>'. esc_html__('512x512', 'super-progressive-web-apps').'</code>'. esc_html__('in size.', 'super-progressive-web-apps'); ?>
+	</p>
+
+	<?php
+}
+
+
 function superpwa_app_screenshots_cb() {
 
 	// Get Settings

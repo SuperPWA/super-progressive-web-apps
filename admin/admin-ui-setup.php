@@ -156,6 +156,14 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
+		// Application Maskable Icon
+		add_settings_field(
+			'superpwa_maskable_icons',										// ID
+			__('Application Maskable Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_app_maskable_icon_cb',									// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		// Monodchome Icon
 		add_settings_field(
 			'superpwa_app_monochrome',								// ID
@@ -169,6 +177,14 @@ function superpwa_register_settings() {
 			'superpwa_splash_icon',									// ID
 			__('Splash Screen Icon', 'super-progressive-web-apps'),	// Title
 			'superpwa_splash_icon_cb',								// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		// Splash Maskable Screen Icon
+		add_settings_field(
+			'superpwa_splash_maskable_icon',									// ID
+			__('Splash Screen Maskable Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_splash_maskable_icon_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -455,10 +471,19 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
 
+	
+	if ( isset( $settings['app_maskable_icon'] )  && ! empty( $settings['app_maskable_icon'] ) ) {
+		$settings['app_maskable_icon'] = sanitize_text_field( superpwa_httpsify( $settings['app_maskable_icon'] ) );
+	}
+
 	$settings['screenshots'] = sanitize_text_field( $settings['screenshots'] );
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
+
+	if ( isset( $settings['splash_maskable_icon'] )  && ! empty( $settings['splash_maskable_icon'] ) ) {
+		$settings['splash_maskable_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_maskable_icon'] ) );
+	}
 
 	// Sanitize startpage type
 	$settings['startpage_type'] = sanitize_text_field( isset($settings['startpage_type'])?$settings['startpage_type']:'page' );
