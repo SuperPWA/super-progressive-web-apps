@@ -289,12 +289,15 @@ function superpwa_addons_interface_render() {
     }
 
 	// Add-on activation todo
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
 		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 		do_action( 'superpwa_addon_activated_' . sanitize_title($_GET['addon'] ));
 		
 		// Get add-on info
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 		$addon = superpwa_get_addons( sanitize_title($_GET['addon']) );
 		
 		// Add UTM Tracking to admin_link_text if its not an admin page.
@@ -302,17 +305,16 @@ function superpwa_addons_interface_render() {
 			$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-activation-notice';
 		}
 		
-		// Set link target attribute so that external links open in a new tab.
-		$link_target = ( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : '';
 		
 		if ( $addon !== false ) {
-			
 			// Add-on activation notice
-			echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>Add-On activated: %s.</strong> <a href="%s"%s>%s</a>', 'super-progressive-web-apps' ), $addon['name'], $addon['admin_link'], $link_target, $addon['admin_link_text'] ) . '</p></div>';	
+			// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+			echo '<div class="updated notice is-dismissible"><p><strong>'.esc_html__("Add-On activated:", "super-progressive-web-apps").$addon['name'].'</strong> <a href="'.esc_url($addon['admin_link']).'"'.( $addon['admin_link_target'] === 'external' ) ? 'target="_blank"' : "".'>'.esc_html__($addon['admin_link_text'],"super-progressive-web-apps"	).'</a></p></div>';	
 		}
 	}
 	
 	// Add-on de-activation notice
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['deactivated'] ) ) {
 			
 		// Add settings saved message with the class of "updated"
@@ -328,7 +330,7 @@ function superpwa_addons_interface_render() {
 	?>
 	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<div class="wrap">
-	<h1>Super Progressive Web Apps <sup class="superpwa_version"><?php echo SUPERPWA_VERSION; ?></sup></h1>
+	<h1><?php esc_html_e('Super Progressive Web Apps', 'super-progressive-web-apps' ); ?> <sup class="superpwa_version"><?php echo esc_html(SUPERPWA_VERSION); ?></sup></h1>
        <?php superpwa_setting_tabs_html(); ?>
 		<p class="superpwa-addons-headp"><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
 		<div class="superpwa-sub-tab-headings">
@@ -364,15 +366,17 @@ function superpwa_addons_interface_render() {
 					
 					?>
 			
-					<div class="plugin-card plugin-card-<?php echo $slug; ?> <?php echo esc_attr($addon['category']);?>">
+					<div class="plugin-card plugin-card-<?php echo esc_attr($slug); ?> <?php echo esc_attr($addon['category']);?>">
 					
 						<div class="plugin-card-top">
 						
 							<div class="name column-name">
 								<h3>
-									<a href="<?php echo $addon['link'] . (($addon['admin_link_target'] === 'external')? '?utm_source=superpwa-plugin&utm_medium=addon-card': '') ; ?>" target="_blank">
-										<?php echo $addon['name']; ?>
-										<img src="<?php echo SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']; ?>" class="plugin-icon" alt="">
+									<a href="<?php echo esc_url($addon['link']) . (($addon['admin_link_target'] === 'external')? '?utm_source=superpwa-plugin&utm_medium=addon-card': '') ; ?>" target="_blank">
+										<?php
+										// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+										echo esc_html__($addon['name'], 'super-progressive-web-apps'); ?>
+										<img src="<?php echo esc_attr(SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']); ?>" class="plugin-icon" alt="">
 									</a>
 									<span class="<?php echo esc_attr($addon['type'])?>"><?php if($addon['type']=='addon_pro'){ esc_html_e( 'Pro', 'super-progressive-web-apps');}else{ esc_html_e( 'Free', 'super-progressive-web-apps'); }?></span>
 								</h3>
@@ -396,31 +400,31 @@ function superpwa_addons_interface_render() {
 												$url = sprintf( admin_url( 'plugins.php?action=' . $action . '&plugin=%s&plugin_status=all&paged=1&s' ), $plugin );
 												$activate_url = wp_nonce_url( $url, $action . '-plugin_' . $plugin );
 												?>
-										<a class="button button-primary"  href="<?php echo esc_url($activate_url)?>" aria-label="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
-											<?php echo __('Activate','super-progressive-web-apps'); ?>
+										<a class="button button-primary"  href="<?php echo esc_url($activate_url)?>" aria-label="<?php echo esc_attr(superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'); ?>" data-name="<?php echo esc_attr($addon['name']); ?>">
+											<?php echo esc_html__('Activate','super-progressive-web-apps'); ?>
 										</a>
 											 <?php } else if(superpwa_push_notification_status()=='not_installed'){?>
 												
-										<a class="button button-primary superpwa-install-require-plugin not-exist" data-secure="<?php echo wp_create_nonce('verify_request')?>" id="pushnotification"  aria-label<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
-											<?php echo __('Activate','super-progressive-web-apps'); ?>
+										<a class="button button-primary superpwa-install-require-plugin not-exist" data-secure="<?php echo esc_attr(wp_create_nonce('verify_request'))?>" id="pushnotification"  aria-label<?php echo esc_attr(superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'); ?>" data-name="<?php echo esc_attr($addon['name']); ?>">
+											<?php echo esc_html__('Activate','super-progressive-web-apps'); ?>
 										</a>
 										<?php } } else{ ?>
-											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary '.esc_attr (superpwa_addons_status($slug));  ?>" data-slug="<?php echo $slug; ?>" href="<?php echo superpwa_addons_button_link( $slug ); ?>" aria-label ="<?php echo superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'; ?>" data-name="<?php echo $addon['name']; ?>">
-											<?php echo superpwa_addons_button_text( $slug ); ?>
+											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary '.esc_attr (superpwa_addons_status($slug));  ?>" data-slug="<?php echo esc_attr($slug); ?>" href="<?php echo esc_url(superpwa_addons_button_link( $slug )); ?>" aria-label ="<?php echo esc_attr(superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'); ?>" data-name="<?php echo esc_attr($addon['name']); ?>">
+											<?php echo esc_html(superpwa_addons_button_text( $slug ) ); ?>
 											</a>
 										<?php } ?>
 									</li>
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
 											if(superpwa_push_notification_status()=='active'){
-												printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), admin_url('/admin.php?page=push-notification'), $link_target, __('Settings','super-progressive-web-apps') ); 
+												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url(admin_url('/admin.php?page=push-notification')).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
 										 }else{
 											if(superpwa_addons_status( $slug ) == 'active'){
-											printf( __( '<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="%s"%s style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> %s</a></li>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, __('Settings','super-progressive-web-apps') );
+												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url($addon['admin_link']).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
-										 }
-									  ?>
+										}
+									?>
 									<li>
 										<?php
                                             $link = $addon['link'] . (($addon['admin_link_target'] === 'external')?'?utm_source=superpwa-plugin&utm_medium=addon-card': '');
@@ -429,7 +433,7 @@ function superpwa_addons_interface_render() {
                                         }
                                         ?>
 										<?php if($slug!='push_notification_for_superpwa'){  ?>
-										<a href="<?php echo $link; ?>" target="_blank" aria-label="<?php printf(__('More information about %s', 'super-progressive-web-apps'), $addon['name']); ?>" data-title="<?php echo $addon['name']; ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
+										<a href="<?php echo esc_url($link); ?>" target="_blank" aria-label="<?php echo esc_html__('More information about', 'super-progressive-web-apps'); echo ' '. esc_html($addon['name']); ?>" data-title="<?php echo esc_attr($addon['name']); ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
 										<?php } ?>
 									</li>
 						
@@ -437,7 +441,10 @@ function superpwa_addons_interface_render() {
 							</div>
 							
 							<div class="desc column-description">
-								<p><?php echo $addon['description']; ?></p>
+								<p><?php
+									// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
+									echo esc_html__($addon['description'], 'super-progressive-web-apps'); ?>
+								</p>
 							</div>
 							
 						</div>
@@ -645,6 +652,7 @@ function superpwa_addons_button_link( $slug ) {
 function superpwa_addons_handle_activation() {
 	
 	// Get the add-on status
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
 	
 	// Authentication	
@@ -687,6 +695,7 @@ add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activa
 function superpwa_addons_handle_deactivation() {
 	
 	// Get the add-on status
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
 	// Authentication
 	if ( 
@@ -758,7 +767,7 @@ function superpwa_newsletter_hide_form(){
 	  if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
 			$hide_newsletter  = get_option('superpwa_hide_newsletter');
 			if($hide_newsletter == false){
-				add_option( 'superpwa_hide_newsletter', 'no' , false);
+				add_option( 'superpwa_hide_newsletter', 'no');
 			}
 			update_option( 'superpwa_hide_newsletter', 'yes' , false);
 			echo wp_json_encode(array('status'=>200, 'message'=>esc_html__('Submitted ','super-progressive-web-apps')));

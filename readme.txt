@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: trunk
+Stable tag: 2.2.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -190,6 +190,13 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.30 =
+* Date: [23.August.2024](https://superpwa.com/superpwa-2-2-30-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added an option to change the colour of the navigation bar icon. #536
+* BugFixed: The App Icon is getting replaced by Splash screen Icon on some Android devices #540
+* Improvement: Improved in the Navigation bar code.  #541
+* Improvement: Few Improvements require #542
+
 = 2.2.29 =
 * Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added compatibility with Translatepress #535
@@ -275,10 +282,6 @@ Feel free to get in touch if you have any questions.
 * Feature: Added navigation Bar feature #443
 * BugFixed: DevTools Console Warning for Source Map 404 Error in Plugin #466
 * BugFixed: The push notification add-on keeps on installing. #465
-
-= 2.2.19 =
-* Date: [11.August.2023](https://superpwa.com/superpwa-2-2-19-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added Push Notifications support #452
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)

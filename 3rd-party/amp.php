@@ -53,7 +53,9 @@ class SUPERPWA_AMP_SW{
 	                $swhtml            = $url.'superpwa-amp-sw'.superpwa_multisite_filename_postfix().'.html';
 	                $swjs_path_amp     = $url.'superpwa-sw'.superpwa_multisite_filename_postfix().'.js';
 	                ?>
-	            <amp-install-serviceworker data-scope="<?php echo trailingslashit($home_url); ?>" 
+	            <amp-install-serviceworker data-scope="<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo trailingslashit($home_url); ?>" 
 	                        src="<?php echo esc_url_raw($swjs_path_amp); ?>" 
 	                        data-iframe-src="<?php echo esc_url_raw($swhtml); ?>"  
 	                        layout="nodisplay">
@@ -66,7 +68,7 @@ class SUPERPWA_AMP_SW{
 
 
 				$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL; 
-				$tags .= '<link rel="manifest" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+				$tags .= '<link rel="manifest" href="'. esc_url(wp_parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 
 				// theme-color meta tag 
 				if ( apply_filters( 'superpwa_add_theme_color', true ) ) {
@@ -82,7 +84,7 @@ class SUPERPWA_AMP_SW{
 				$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 
 				$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL; 
-
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $tags;
 
 	    }

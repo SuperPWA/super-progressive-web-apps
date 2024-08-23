@@ -118,8 +118,8 @@ function superpwa_manifest_template( $pageid = null ) {
 	$superpwa_settings = superpwa_get_settings();
 
 	$manifest               = array();
-	$id_url = parse_url(site_url());
-	$manifest['id']         = isset($id_url['host'])?$id_url['host']:mt_rand(0,9999999);
+	$id_url = wp_parse_url(site_url());
+	$manifest['id']         = isset($id_url['host'])?$id_url['host']:wp_rand(0,9999999);
 	$manifest['name']       = $superpwa_settings['app_name'];
 	$manifest['short_name'] = $superpwa_settings['app_short_name'];
 
@@ -149,7 +149,7 @@ function superpwa_manifest_template( $pageid = null ) {
 				$manifest['start_url']       = $permalink;
 			}
 			if($title){
-				$stripped_title = strip_tags($title);
+				$stripped_title = wp_strip_all_tags($title);
 				$trimmed_title = mb_substr($stripped_title, 0, 75);
 				$manifest['name']       = $trimmed_title;
 				$manifest['short_name'] = $trimmed_title;
@@ -177,7 +177,7 @@ function superpwa_manifest_template( $pageid = null ) {
 		$manifest['shortcuts'] = array(
 									array(
 										'name'=>$superpwa_settings['app_short_name'],
-										'url'=>user_trailingslashit( parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
+										'url'=>user_trailingslashit( wp_parse_url( trailingslashit( $shortcut_url ), PHP_URL_PATH ) ),
 									)
 								);
 		
@@ -247,6 +247,7 @@ function superpwa_manifest_template( $pageid = null ) {
 			$is_any_multilang_enable = true;
 		}
 		if ($is_any_multilang_enable) {
+			superpwa_delete_manifest();
 			$superpwa_settings['is_any_multilang_enable'] = 1;
 			update_option( 'superpwa_settings', $superpwa_settings );
 		}
@@ -345,7 +346,7 @@ function superpwa_add_manifest_to_wp_head() {
 	}
 	if(isset( $superpwa_settings['prefetch_manifest'] )){
 		if($superpwa_settings['prefetch_manifest'] == 1){  
-			$tags .= '<link rel="prefetch" href="'. esc_url(parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
+			$tags .= '<link rel="prefetch" href="'. esc_url(wp_parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH )) . '">' . PHP_EOL;
 		}
 	}
 	// theme-color meta tag 
@@ -357,7 +358,7 @@ function superpwa_add_manifest_to_wp_head() {
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 	
 	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL; 
-	
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $tags;
 }
 
@@ -428,43 +429,46 @@ function superpwa_get_pwa_icons() {
 	
 	// Application icon
 	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
-							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
-							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
-							'purpose'=> 'any', // any maskable to support adaptive icons
-						);
-	$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['icon']),
-							'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
-							'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
-							'purpose'=> 'maskable', // any maskable to support adaptive icons
-						);
+		'src' 	=> esc_url($superpwa_settings['icon']),
+		'sizes'	=> '192x192', // must be 192x192. Todo: use getimagesize($settings['icon'])[0].'x'.getimagesize($settings['icon'])[1] in the future
+		'type'	=> 'image/png', // must be image/png. Todo: use getimagesize($settings['icon'])['mime']
+		'purpose'=> 'any', // any maskable to support adaptive icons
+	);
+	if ( isset($superpwa_settings['app_maskable_icon'] ) && ! empty( $superpwa_settings['app_maskable_icon'] ) ) {
+		$icons_array[] = array(
+			'src' 	=> esc_url($superpwa_settings['app_maskable_icon']),
+			'sizes'	=> '192x192', 
+			'type'	=> 'image/png',
+			'purpose'=> 'maskable',
+		);
+	}
 	
 	// Splash screen icon - Added since 1.3
-	if ( @$superpwa_settings['splash_icon'] != '' ) {
-		
+	if ( isset($superpwa_settings['splash_icon']) && ! empty( $superpwa_settings['splash_icon'] ) ) {
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'any',
-						);
-		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['splash_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'maskable',
-						);
+			'src' 	=> esc_url($superpwa_settings['splash_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'any',
+		);
 	}
 
-	if ( @$superpwa_settings['monochrome_icon'] != '' ) {
-		
+	if ( isset($superpwa_settings['splash_maskable_icon']) && ! empty( $superpwa_settings['splash_maskable_icon'] ) ) {
 		$icons_array[] = array(
-							'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
-							'sizes'	=> '512x512', // must be 512x512.
-							'type'	=> 'image/png', // must be image/png
-							'purpose'=> 'monochrome',
-						);
+			'src' 	=> esc_url($superpwa_settings['splash_maskable_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'maskable',
+		);
+	}
+
+	if ( isset($superpwa_settings['monochrome_icon']) && ! empty( $superpwa_settings['monochrome_icon'] ) ) {
+		$icons_array[] = array(
+			'src' 	=> esc_url($superpwa_settings['monochrome_icon']),
+			'sizes'	=> '512x512', // must be 512x512.
+			'type'	=> 'image/png', // must be image/png
+			'purpose'=> 'monochrome',
+		);
 	}
 	
 	return $icons_array;
@@ -549,7 +553,7 @@ function superpwa_get_pwa_screenshots() {
  * @since	1.4
  */
 function superpwa_get_scope() {
-	return parse_url( trailingslashit( superpwa_get_bloginfo( 'sw' ) ), PHP_URL_PATH );
+	return wp_parse_url( trailingslashit( superpwa_get_bloginfo( 'sw' ) ), PHP_URL_PATH );
 }
 
 /**
@@ -658,7 +662,7 @@ function superpwa_get_text_dir() {
 function superpwa_add_manifest_variables($url) {
 	$settings = superpwa_get_settings();
     if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'active_url' && function_exists('superpwa_pro_init')) {
-		$parsedUrl = parse_url( $url );
+		$parsedUrl = wp_parse_url( $url );
 		global $post;
 		$cache_version = SUPERPWA_VERSION;
 		if(isset($settings['force_update_sw_setting']) && $settings['force_update_sw_setting'] !=''){
@@ -690,6 +694,6 @@ function superpwa_add_manifest_variables($url) {
 		}	
 		return $newUrl;
 	}
-	return parse_url( $url, PHP_URL_PATH ) ;
+	return wp_parse_url( $url, PHP_URL_PATH ) ;
 }
 

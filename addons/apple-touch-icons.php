@@ -208,7 +208,7 @@ function superpwa_apple_icons_splash_with_centre_screen_cb() {
 function superpwa_apple_icons_splash_color_screen_cb() {
     $splashIcons = superpwa_apple_icons_get_settings();
     ?>
-    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? $splashIcons['screen_icon']: $splashIcons['background_color'] ?>">
+    <input type="text" name="superpwa_apple_icons_settings[background_color]"  class="superpwa-colorpicker" id="ios-splash-color" value="<?php echo (isset($splashIcons['screen_icon']) && !empty($splashIcons['screen_icon']))? esc_attr($splashIcons['screen_icon']): esc_attr($splashIcons['background_color']) ?>">
     <?php
 }
 
@@ -325,6 +325,7 @@ function superpwa_apple_icons_interface_render() {
     }
 	
 	// Handing save settings
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['settings-updated'] ) ) {
 		
 		// Add settings saved message with the class of "updated"
@@ -385,14 +386,28 @@ function superpwa_splashscreen_uploader(){
     $path =  $upload['basedir']."/superpwa-splashIcons/";
     $subpath = $upload['basedir']."/superpwa-splashIcons/super_splash_screens/";
     wp_mkdir_p($path);
-    file_put_contents($path.'/index.html','');
-    file_put_contents($subpath.'/index.html','');
-    WP_Filesystem();
+
+    if ( ! function_exists( 'wp_filesystem' ) ) {
+        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+    }
+    
+    // Initialize the WP_Filesystem global variable
+    global $wp_filesystem;
+    
+    if ( ! WP_Filesystem() ) {
+        WP_Filesystem();
+    }
+    
+    $wp_filesystem->put_contents( $path . '/index.html', '', FS_CHMOD_FILE ); // FS_CHMOD_FILE is the default file permission
+    $wp_filesystem->put_contents( $subpath . '/index.html', '', FS_CHMOD_FILE );
+    
     $zipFileName = $path."/splashScreen.zip";
+    // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
     $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
+
     if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
         $result = unzip_file($zipFileName, $path);
-        unlink($zipFileName);    
+        wp_delete_file($zipFileName);    
     }else{
         echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Files are not uploading','super-progressive-web-apps')));die;
     }

@@ -64,9 +64,9 @@ function superpwa_add_menu_links() {
 		$license_info = get_option("superpwa_pro_upgrade_license");
 		if ($license_info && isset($license_info['pro']['license_key_expires'])) {
 
-		$license_exp = date('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
+		$license_exp = gmdate('Y-m-d', strtotime($license_info['pro']['license_key_expires']));
 		$license_info_lifetime = $license_info['pro']['license_key_expires'];
-		$today = date('Y-m-d');
+		$today = gmdate('Y-m-d');
 		$exp_date = $license_exp;
 		$date1 = date_create($today);
 		$date2 = date_create($exp_date);
@@ -156,6 +156,14 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
+		// Application Maskable Icon
+		add_settings_field(
+			'superpwa_maskable_icons',										// ID
+			__('Application Maskable Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_app_maskable_icon_cb',									// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
 		// Monodchome Icon
 		add_settings_field(
 			'superpwa_app_monochrome',								// ID
@@ -169,6 +177,14 @@ function superpwa_register_settings() {
 			'superpwa_splash_icon',									// ID
 			__('Splash Screen Icon', 'super-progressive-web-apps'),	// Title
 			'superpwa_splash_icon_cb',								// Callback function
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+		// Splash Maskable Screen Icon
+		add_settings_field(
+			'superpwa_splash_maskable_icon',									// ID
+			__('Splash Screen Maskable Icon', 'super-progressive-web-apps'),	// Title
+			'superpwa_splash_maskable_icon_cb',								// Callback function
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
@@ -455,10 +471,19 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
 
+	
+	if ( isset( $settings['app_maskable_icon'] )  && ! empty( $settings['app_maskable_icon'] ) ) {
+		$settings['app_maskable_icon'] = sanitize_text_field( superpwa_httpsify( $settings['app_maskable_icon'] ) );
+	}
+
 	$settings['screenshots'] = sanitize_text_field( $settings['screenshots'] );
 	
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
+
+	if ( isset( $settings['splash_maskable_icon'] )  && ! empty( $settings['splash_maskable_icon'] ) ) {
+		$settings['splash_maskable_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_maskable_icon'] ) );
+	}
 
 	// Sanitize startpage type
 	$settings['startpage_type'] = sanitize_text_field( isset($settings['startpage_type'])?$settings['startpage_type']:'page' );
@@ -609,7 +634,8 @@ function superpwa_enqueue_css_js( $hook ) {
 	wp_enqueue_media();
 	
 	// Main JS
-    wp_register_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker','plugin-install', 'wp-util','updates' ), SUPERPWA_VERSION, true );
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+    wp_register_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main'. $suffix .'.js', array( 'wp-color-picker','plugin-install', 'wp-util','updates' ), SUPERPWA_VERSION, true );
 
     $object_name = array(
             'ajax_url'                  => admin_url( 'admin-ajax.php' ),
@@ -642,13 +668,8 @@ function superpwa_footer_text( $default ) {
 	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
-	
-    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
-	'https://millionclues.com/donate/',
-	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
-	);
-	
-	return $superpwa_footer_text;
+	return esc_html__( 'If you like SuperPWA, please','super-progressive-web-apps').'&nbsp;<a href="'.esc_url('https://millionclues.com/donate/').'" target="_blank">'.esc_html__("make a donation", 'super-progressive-web-apps' ).'</a>&nbsp;'.esc_html__("or leave a", 'super-progressive-web-apps' ).'&nbsp;<a href="'.esc_url('https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post').'" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a>&nbsp;'.esc_html__("rating to support continued development. Thanks a bunch!", 'super-progressive-web-apps' );
+    
 }
 add_filter( 'admin_footer_text', 'superpwa_footer_text' );
 

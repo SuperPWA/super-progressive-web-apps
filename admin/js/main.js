@@ -18,6 +18,25 @@ jQuery(document).ready(function($){
 		})
 		.open();
 	});
+
+	$('.superpwa-maskable-icon-upload').click(function(e) {	// Application Icon upload
+		e.preventDefault();
+		var t = $(this);
+		var superpwa_meda_uploader = wp.media({
+			title: 'Maskable Icon',
+			button: {
+				text: 'Select Icon'
+			},
+			multiple: false  // Set this to true to allow multiple files to be selected
+		})
+		.on('select', function() {
+			var attachment = superpwa_meda_uploader.state().get('selection').first().toJSON();
+			t.parents('td').find('.superpwa-maskable-input').val(attachment.url);
+			superpwa_check_maskable_input();
+		})
+		.open();
+	});
+	
 	$('.superpwa-splash-icon-upload').click(function(e) {	// Splash Screen Icon upload
 		e.preventDefault();
 		var superpwa_meda_uploader = wp.media({
@@ -487,5 +506,30 @@ function superpwaGetZip() {
 		})
 		.open();
 	});
-	
-	
+
+	jQuery('.superpwa_js_remove_maskable').click(function(e) {
+		e.preventDefault();
+		jQuery(this).parents('td').find('.superpwa-maskable-input').val("");
+		jQuery(this).hide();
+	});
+
+	jQuery('.superpwa-maskable-input').keyup(function() {
+		if ( jQuery(this).val() == null || jQuery(this).val() == "") {
+			jQuery(this).parents('td').find('.superpwa_js_remove_maskable').hide();
+		}else{
+			jQuery(this).parents('td').find('.superpwa_js_remove_maskable').show();
+		}
+	})
+
+
+	function superpwa_check_maskable_input() {
+		jQuery('.superpwa-maskable-input').each(function() {
+			console.log(jQuery(this).val())
+			if ( jQuery(this).val() == null || jQuery(this).val() == "") {
+				jQuery(this).parents('td').find('.superpwa_js_remove_maskable').hide();
+			}else{
+				jQuery(this).parents('td').find('.superpwa_js_remove_maskable').show();
+			}
+		});
+	}
+	superpwa_check_maskable_input();

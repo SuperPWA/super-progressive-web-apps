@@ -95,7 +95,8 @@ function superpwa_activation_redirect( $plugin, $network_wide ) {
 	}
 
 	// Redirect to SuperPWA settings page. 
-	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	exit( wp_safe_redirect( esc_url(admin_url( 'admin.php?page=superpwa' )) ) );
 }
 add_action( 'activated_plugin', 'superpwa_activation_redirect', PHP_INT_MAX, 2 );
 
@@ -114,13 +115,12 @@ function superpwa_admin_notices() {
     // Admin notice on plugin activation
 	if ( get_transient( 'superpwa_admin_notice_activation' ) ) {
 	
-		$superpwa_is_ready = superpwa_is_pwa_ready() ? __( 'Your app is ready with the default settings. ', 'super-progressive-web-apps' ) : '';
+		$superpwa_is_ready = superpwa_is_pwa_ready() ? esc_html__( 'Your app is ready with the default settings. ', 'super-progressive-web-apps' ) : '';
 		
 		// Do not display link to settings UI if we are already in the UI.
 		$screen = get_current_screen();
-		$superpwa_ui_link_text = ( strpos( $screen->id, 'superpwa' ) === false ) ? sprintf( __( '<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) : '';
 		
-		echo '<div class="updated notice is-dismissible"><p>' . __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> ', 'super-progressive-web-apps' ) . $superpwa_is_ready . $superpwa_ui_link_text . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p>' . esc_html__( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> ', 'super-progressive-web-apps' ) . esc_html($superpwa_is_ready) .( strpos( $screen->id, 'superpwa' ) === false ) ? '<a href="'.esc_url(admin_url( 'admin.php?page=superpwa' )).'">'.esc_html__( 'Customize your app', 'super-progressive-web-apps' ).' &rarr;</a>' : '' . '</p></div>';
 		
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_activation' );
@@ -128,8 +128,7 @@ function superpwa_admin_notices() {
 	
 	// Admin notice on plugin upgrade
 	if ( get_transient( 'superpwa_admin_notice_upgrade_complete' ) ) {
-		
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice' ) . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p><strong>'.esc_html__('SuperPWA', 'super-progressive-web-apps').':</strong>' .esc_html__('Successfully updated to version', 'super-progressive-web-apps' ).'&nbsp;'.esc_html(SUPERPWA_VERSION) .'&nbsp;'.esc_html__('Thank you!', 'super-progressive-web-apps' ).'<a href="'.esc_url('https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice').'" target="_blank">'.esc_html__('Discover new features and read the story', 'super-progressive-web-apps').'&rarr;</a></p></div>';
 		
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_upgrade_complete' );
@@ -152,9 +151,9 @@ function superpwa_network_admin_notices() {
     // Network admin notice on multisite network activation
 	if ( get_transient( 'superpwa_network_admin_notice_activation' ) ) {
 	
-		$superpwa_is_ready = superpwa_is_pwa_ready() ? 'Your app is ready on the main website with the default settings. ' : '';
-		
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
+		$superpwa_is_ready = superpwa_is_pwa_ready() ? esc_html__('Your app is ready on the main website with the default settings. ', 'super-progressive-web-apps') : '';
+		 
+		echo '<div class="updated notice is-dismissible"><p>'.esc_html__( 'Thank you for installing', 'super-progressive-web-apps').'&nbsp;<strong>'.esc_html__( 'Super Progressive Web Apps!', 'super-progressive-web-apps').'</strong> '.esc_html( $superpwa_is_ready).'<a href="'.esc_url(admin_url( 'admin.php?page=superpwa' )).'">'.esc_html__( 'Customize your app', 'super-progressive-web-apps').' &rarr;</a><br/>'.esc_html__( 'Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps'). '</p></div>';
 		
 		// Delete transient
 		delete_transient( 'superpwa_network_admin_notice_activation' );
@@ -162,8 +161,8 @@ function superpwa_network_admin_notices() {
 	
 	// Network admin notice on plugin upgrade
 	if ( get_transient( 'superpwa_admin_notice_upgrade_complete' ) ) {
-		
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice-multisite' ) . '</p></div>';
+
+		echo '<div class="updated notice is-dismissible"><p><strong>'.esc_html__('SuperPWA', 'super-progressive-web-apps').':</strong>' .esc_html__('Successfully updated to version', 'super-progressive-web-apps' ).'&nbsp;'.esc_html(SUPERPWA_VERSION) .'&nbsp;'.esc_html__('Thank you!', 'super-progressive-web-apps' ).'<a href="'.esc_url('https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice-multisite').'" target="_blank">'.esc_html__('Discover new features and read the story', 'super-progressive-web-apps').'&rarr;</a></p></div>';
 		
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_upgrade_complete' );
@@ -471,11 +470,13 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 
 	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
 		header( 'Content-Type: text/javascript' );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo superpwa_sw_template();
 		exit();
 	}
 	if ( strpos( $query_vars_as_string, $amphtml_filename ) !== false ) {
 		header( 'Content-Type: text/html' );
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo amp_service_worker_template();
 		exit();
 	}

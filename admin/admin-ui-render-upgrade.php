@@ -15,9 +15,10 @@ function superpwa_upgread_pro_interface_render(){
 	if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	wp_enqueue_style( 'superpwa-upgrade-ui-css', SUPERPWA_PATH_SRC . 'admin/css/upgrade-ui'.$suffix.'.css?ver='.SUPERPWA_VERSION, array(), SUPERPWA_VERSION );
 	
 	?>
-		<link rel='stylesheet' href='<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/css/upgrade-ui.css?ver='.SUPERPWA_VERSION); ?>' media='all' />
 
 	<div class="wrap">
 		<!-- Add-Ons UI -->

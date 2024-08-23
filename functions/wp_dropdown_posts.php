@@ -114,8 +114,7 @@ if( ! function_exists( 'wp_dropdown_posts' ) ) {
 
 				$value   = ! isset($r['value_field']) || ! isset($post->{$r['value_field']}) ? $post->ID : $post->{$r['value_field']};
 				$_selected = selected( $value, $r['selected'], FALSE );
-
-				$display = ! empty($post->$show) ? $post->$show : sprintf( __( '#%d (no title)' ), $post->ID );
+				$display = ! empty($post->$show) ? $post->$show : $post->ID.  ' ('.esc_html__('no title','super-progressive-web-apps').')';
 
 				if( $r['show_callback'] ) $display = call_user_func( $r['show_callback'], $display, $post->ID );
 
@@ -137,6 +136,7 @@ if( ! function_exists( 'wp_dropdown_posts' ) ) {
 		$html = apply_filters( 'wp_dropdown_posts', $output, $r, $posts );
 
 		if( $r['echo'] ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $html;
 		}
 

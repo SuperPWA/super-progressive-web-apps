@@ -188,11 +188,11 @@ function superpwa_sw_template() {
  * To learn more and add one to your website, visit - https://superpwa.com
  */
  
-const cacheName = '<?php echo parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' . $cache_version; ?>';
-const startPage = '<?php echo superpwa_get_start_url(); ?>';
-const offlinePage = '<?php echo superpwa_get_offline_page(); ?>';
-const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
-const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
+const cacheName = '<?php echo esc_url(wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' .esc_html($cache_version)); ?>';
+const startPage = '<?php echo esc_url(superpwa_get_start_url()); ?>';
+const offlinePage = '<?php echo esc_url(superpwa_get_offline_page()); ?>';
+const filesToCache = [<?php echo esc_html(apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' )); ?>];
+const neverCacheUrls = [<?php echo esc_html(apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' )); ?>];
 
 // Install
 self.addEventListener('install', function(e) {
@@ -367,10 +367,10 @@ function superpwa_register_sw() {
 	}
 
 	if($include_script){
-		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
+		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), SUPERPWA_VERSION, true );
 		$superpwa_sw_version = isset($settings['force_update_sw_setting'])? $settings['force_update_sw_setting'] : time();
 		$localize = array(
-				'url' => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ).'?'.$superpwa_sw_version,
+				'url' => wp_parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ).'?'.$superpwa_sw_version,
 				'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 				'enableOnDesktop'=> false,
 				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
@@ -444,23 +444,23 @@ function superpwa_exclude_urls_cache_sw($never_cacheurls){
 
 	// Get Settings
 	$settings = superpwa_get_settings();
-	 if(isset($settings['excluded_urls']) && !empty($settings['excluded_urls'])){
+	if(isset($settings['excluded_urls']) && !empty($settings['excluded_urls'])){
 
-                  $exclude_from_cache     = $settings['excluded_urls']; 
+		$exclude_from_cache     = $settings['excluded_urls']; 
 
-                  $exclude_from_cache     = str_replace('/', '\/', $exclude_from_cache);     
-                  $exclude_from_cache     = '/'.str_replace(',', '/,/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('/', '\/', $exclude_from_cache);     
+		$exclude_from_cache     = '/'.str_replace(',', '/,/', $exclude_from_cache);
 
-                  $exclude_from_cache     = str_replace('\//', '/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('\//', '/', $exclude_from_cache);
 
-                  $exclude_from_cache  = $exclude_from_cache.'endslash';
+		$exclude_from_cache  = $exclude_from_cache.'endslash';
 
-                  $exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
 
-                  $exclude_from_cache     = str_replace('endslash', '/', $exclude_from_cache);
-                  
-				 $never_cacheurls  .= ','.$exclude_from_cache;
-      }
+		$exclude_from_cache     = str_replace('endslash', '/', $exclude_from_cache);
+		
+		$never_cacheurls  .= ','.$exclude_from_cache;
+    }
 
 	return $never_cacheurls;
 }

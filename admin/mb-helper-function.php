@@ -55,17 +55,17 @@ function superpwa_add_deactivation_feedback_modal() {
  * @since 1.4.0
  */
 function superpwa_send_feedback() {
-
+    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: its in form variable.
     if( isset( $_POST['data'] ) ) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: its in form variable.
         parse_str( $_POST['data'], $form );
     }
 
     if ( ! wp_verify_nonce( $form['superpwa_deactivate_nonce'], 'superpwa-deactivate-nonce' ) ) {
-        // nonce is not valid.
-        die( __( 'Security check', 'superpwa-for-wp' ) ); 
+        die( esc_html__( 'Security check', 'superpwa-for-wp' ) ); 
     }
     if ( ! current_user_can( superpwa_current_user_can() ) ) {
-        die( __( 'Unauthorised Access', 'superpwa-for-wp' ) ); 
+        die( esc_html__( 'Unauthorised Access', 'superpwa-for-wp' ) ); 
     }
     $text = '';
     if( isset( $form['superpwa_disable_text'] ) ) {
@@ -113,7 +113,7 @@ function superpwa_enqueue_makebetter_email_js(){
         return;
     }
 
-    wp_enqueue_script( 'superpwa-make-better-js', SUPERPWA_PATH_SRC . 'admin/make-better-admin.js', array( 'jquery' ), SUPERPWA_VERSION);
+    wp_enqueue_script( 'superpwa-make-better-js', SUPERPWA_PATH_SRC . 'admin/make-better-admin.js', array( 'jquery' ), SUPERPWA_VERSION,true);
 
     wp_enqueue_style( 'superpwa-make-better-css', SUPERPWA_PATH_SRC . 'admin/make-better-admin.css', false , SUPERPWA_VERSION);
 }

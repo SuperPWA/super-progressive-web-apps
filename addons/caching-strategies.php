@@ -289,8 +289,7 @@ function superpwa_caching_strategies_validater_sanitizer( $settings ) {
  * @since 1.7
  */
 function superpwa_caching_strategies_section_cb() {
-
-	printf( '<p>' . __( 'Caching strategies will help your users to get connected and display content, perform function, in bad network conditions and even when the user is completely offline.', 'super-progressive-web-apps' ) . '</p>');
+	echo '<p>' . esc_html__( 'Caching strategies will help your users to get connected and display content, perform function, in bad network conditions and even when the user is completely offline.', 'super-progressive-web-apps' ) . '</p>';
 }
 
 /**
@@ -401,8 +400,9 @@ function superpwa_precache_load_admin_scripts($hooks){
     if( !in_array($hooks, array('superpwa_page_superpwa-caching-strategies', 'super-pwa_page_superpwa-caching-strategies')) && strpos($hooks, 'superpwa-caching-strategies') == false ) {
         return false;
     }
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-    wp_register_script('superpwa-admin-precache-script',SUPERPWA_PATH_SRC .'/admin/js/pre-cache.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
+    wp_register_script('superpwa-admin-precache-script',SUPERPWA_PATH_SRC .'/admin/js/pre-cache'. $suffix .'.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
     
     wp_enqueue_script('superpwa-admin-precache-script'); 
 
@@ -422,6 +422,7 @@ function superpwa_caching_strategies_interface_render() {
     }
 	
 	// Handing save settings
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['settings-updated'] ) ) {
 		
 		// Add settings saved message with the class of "updated"
