@@ -410,7 +410,7 @@ function superpwa_addons_interface_render() {
 										</a>
 										<?php } } else{ ?>
 											<a class="button activate-now button-<?php echo superpwa_addons_button_text( $slug ) == __( 'Deactivate', 'super-progressive-web-apps' ) ? 'secondary' : 'primary '.esc_attr (superpwa_addons_status($slug));  ?>" data-slug="<?php echo esc_attr($slug); ?>" href="<?php echo esc_url(superpwa_addons_button_link( $slug )); ?>" aria-label ="<?php echo esc_attr(superpwa_addons_button_text( $slug ) . ' ' . $addon['name'] . ' now'); ?>" data-name="<?php echo esc_attr($addon['name']); ?>">
-											<?php echo esc_html(superpwa_addons_button_text( $slug ), 'super-progressive-web-apps'); ?>
+											<?php echo esc_html(superpwa_addons_button_text( $slug ) ); ?>
 											</a>
 										<?php } ?>
 									</li>
@@ -433,7 +433,7 @@ function superpwa_addons_interface_render() {
                                         }
                                         ?>
 										<?php if($slug!='push_notification_for_superpwa'){  ?>
-										<a href="<?php echo esc_url($link); ?>" target="_blank" aria-label="<?php echo esc_html__('More information about', 'super-progressive-web-apps'); echo ' '.esc_html($addon['name'], 'super-progressive-web-apps'); ?>" data-title="<?php echo esc_attr($addon['name']); ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
+										<a href="<?php echo esc_url($link); ?>" target="_blank" aria-label="<?php echo esc_html__('More information about', 'super-progressive-web-apps'); echo ' '. esc_html($addon['name']); ?>" data-title="<?php echo esc_attr($addon['name']); ?>"><?php esc_html_e('More Details', 'super-progressive-web-apps'); ?></a>
 										<?php } ?>
 									</li>
 						
