@@ -436,7 +436,7 @@ function superpwa_get_pwa_icons() {
 	);
 	if ( isset($superpwa_settings['app_maskable_icon'] ) && ! empty( $superpwa_settings['app_maskable_icon'] ) ) {
 		$icons_array[] = array(
-			'src' 	=> esc_url($superpwa_settings['icon']),
+			'src' 	=> esc_url($superpwa_settings['app_maskable_icon']),
 			'sizes'	=> '192x192', 
 			'type'	=> 'image/png',
 			'purpose'=> 'maskable',
@@ -455,7 +455,7 @@ function superpwa_get_pwa_icons() {
 
 	if ( isset($superpwa_settings['splash_maskable_icon']) && ! empty( $superpwa_settings['splash_maskable_icon'] ) ) {
 		$icons_array[] = array(
-			'src' 	=> esc_url($superpwa_settings['splash_icon']),
+			'src' 	=> esc_url($superpwa_settings['splash_maskable_icon']),
 			'sizes'	=> '512x512', // must be 512x512.
 			'type'	=> 'image/png', // must be image/png
 			'purpose'=> 'maskable',
