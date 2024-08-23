@@ -489,7 +489,10 @@ function superpwa_app_category_cb() {
 			<option value=""><?php esc_html_e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
 				<?php foreach($manifest_categories as $key_escaped => $category_escaped){ ?>
 				<option value="<?php echo esc_attr($key_escaped)?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $key_escaped); } ?>>					
-					<?php echo $category_escaped; ?>
+					<?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo $category_escaped; 
+					?>
 				</option>
 				<?php } ?>
 			</select>

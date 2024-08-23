@@ -9,7 +9,7 @@
  * Version: 2.2.30
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
- * License: GPL2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * License: GPL2
  */
 
 /**
