@@ -460,16 +460,36 @@ function superpwa_app_category_cb() {
 		<label for="superpwa_settings[app_category]">
 		<?php 
 		// Allowed manifest categories
-		$manifest_categories=["business","education","entertainment","finance","fitness","food","games","government","health","kids","lifestyle","magazines","medical","music","navigation","security","shopping","social","sports","travel","utilities","weather"];
+		$manifest_categories = [
+			"business" => esc_html__( 'Business', 'super-progressive-web-apps' ),
+			"education"=> esc_html__( 'Education', 'super-progressive-web-apps' ),
+			"entertainment" => esc_html__( 'Entertainment', 'super-progressive-web-apps' ),
+			"finance" => esc_html__( 'Finance', 'super-progressive-web-apps' ),
+			"fitness" => esc_html__( 'Fitness', 'super-progressive-web-apps' ),
+			"food" => esc_html__( 'Food', 'super-progressive-web-apps' ),
+			"games" => esc_html__( 'Games', 'super-progressive-web-apps' ),
+			"government" => esc_html__( 'Government', 'super-progressive-web-apps' ),
+			"health" => esc_html__( 'Health', 'super-progressive-web-apps' ),
+			"kids" => esc_html__( 'Kids', 'super-progressive-web-apps' ),
+			"lifestyle" => esc_html__( 'Lifestyle', 'super-progressive-web-apps' ),
+			"magazines" => esc_html__( 'Magazines', 'super-progressive-web-apps' ),
+			"medical" => esc_html__( 'Medical', 'super-progressive-web-apps' ),
+			"music" => esc_html__( 'Music', 'super-progressive-web-apps' ),
+			"navigation" => esc_html__( 'Navigation', 'super-progressive-web-apps' ),
+			"security" => esc_html__( 'Security', 'super-progressive-web-apps' ),
+			"shopping" => esc_html__( 'Shopping', 'super-progressive-web-apps' ),
+			"social" => esc_html__( 'Social', 'super-progressive-web-apps' ),
+			"sports" => esc_html__( 'Sports', 'super-progressive-web-apps' ),
+			"travel" => esc_html__( 'Travel', 'super-progressive-web-apps' ),
+			"utilities" => esc_html__( 'Utilities', 'super-progressive-web-apps' ),
+			"weather" => esc_html__( 'Weather', 'super-progressive-web-apps' )
+		];
 		?>
 			<select name="superpwa_settings[app_category]" id="superpwa_settings[app_category]">
 			<option value=""><?php esc_html_e('— Select Category —', 'super-progressive-web-apps' ); ?></option>
-				<?php foreach($manifest_categories as $category){ ?>
-				<option value="<?php echo esc_attr($category)?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $category); } ?>>
-					
-					<?php 
-					// phpcs:ignore WordPress.WP.I18n.LowLevelTranslationFunction,WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.Security.EscapeOutput.OutputNotEscaped
-					esc_html_e($category, 'super-progressive-web-apps' ); ?>
+				<?php foreach($manifest_categories as $key_escaped => $category_escaped){ ?>
+				<option value="<?php echo esc_attr($key_escaped)?>" <?php if ( isset( $settings['app_category'] ) ) { selected( $settings['app_category'], $key_escaped); } ?>>					
+					<?php echo $category_escaped; ?>
 				</option>
 				<?php } ?>
 			</select>
