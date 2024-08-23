@@ -444,23 +444,23 @@ function superpwa_exclude_urls_cache_sw($never_cacheurls){
 
 	// Get Settings
 	$settings = superpwa_get_settings();
-	 if(isset($settings['excluded_urls']) && !empty($settings['excluded_urls'])){
+	if(isset($settings['excluded_urls']) && !empty($settings['excluded_urls'])){
 
-                  $exclude_from_cache     = $settings['excluded_urls']; 
+		$exclude_from_cache     = $settings['excluded_urls']; 
 
-                  $exclude_from_cache     = str_replace('/', '\/', $exclude_from_cache);     
-                  $exclude_from_cache     = '/'.str_replace(',', '/,/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('/', '\/', $exclude_from_cache);     
+		$exclude_from_cache     = '/'.str_replace(',', '/,/', $exclude_from_cache);
 
-                  $exclude_from_cache     = str_replace('\//', '/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('\//', '/', $exclude_from_cache);
 
-                  $exclude_from_cache  = $exclude_from_cache.'endslash';
+		$exclude_from_cache  = $exclude_from_cache.'endslash';
 
-                  $exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
+		$exclude_from_cache     = str_replace('\/endslash', '/', $exclude_from_cache);
 
-                  $exclude_from_cache     = str_replace('endslash', '/', $exclude_from_cache);
-                  
-				 $never_cacheurls  .= ','.$exclude_from_cache;
-      }
+		$exclude_from_cache     = str_replace('endslash', '/', $exclude_from_cache);
+		
+		$never_cacheurls  .= ','.$exclude_from_cache;
+    }
 
 	return $never_cacheurls;
 }

@@ -634,7 +634,8 @@ function superpwa_enqueue_css_js( $hook ) {
 	wp_enqueue_media();
 	
 	// Main JS
-    wp_register_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker','plugin-install', 'wp-util','updates' ), SUPERPWA_VERSION, true );
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+    wp_register_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main'. $suffix .'.js', array( 'wp-color-picker','plugin-install', 'wp-util','updates' ), SUPERPWA_VERSION, true );
 
     $object_name = array(
             'ajax_url'                  => admin_url( 'admin-ajax.php' ),

@@ -400,8 +400,9 @@ function superpwa_precache_load_admin_scripts($hooks){
     if( !in_array($hooks, array('superpwa_page_superpwa-caching-strategies', 'super-pwa_page_superpwa-caching-strategies')) && strpos($hooks, 'superpwa-caching-strategies') == false ) {
         return false;
     }
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-    wp_register_script('superpwa-admin-precache-script',SUPERPWA_PATH_SRC .'/admin/js/pre-cache.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
+    wp_register_script('superpwa-admin-precache-script',SUPERPWA_PATH_SRC .'/admin/js/pre-cache'. $suffix .'.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
     
     wp_enqueue_script('superpwa-admin-precache-script'); 
 
