@@ -191,7 +191,10 @@ function superpwa_sw_template() {
 const cacheName = '<?php echo esc_url(wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST ) . '-superpwa-' .esc_html($cache_version)); ?>';
 const startPage = '<?php echo esc_url(superpwa_get_start_url()); ?>';
 const offlinePage = '<?php echo esc_url(superpwa_get_offline_page()); ?>';
-const filesToCache = [<?php echo esc_html(apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' )); ?>];
+
+const filesToCache = [<?php 
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo esc_html(apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' )); ?>];
 
 // Install
