@@ -125,7 +125,7 @@ function superpwa_apple_icons_register_settings() {
         // Splash screen URL
 		add_settings_field(
 			'superpwa_apple_icons_splash_screen',						// ID
-			esc_html__('Splash Screen Image', 'super-progressive-web-apps'),	// Title
+			esc_html__('Touch Icons', 'super-progressive-web-apps'),	// Title
 			'superpwa_apple_icons_splash_screen_cb',					// CB
 			'superpwa_apple_icons_section',						// Page slug
 			'superpwa_apple_icons_section'							// Settings Section ID
