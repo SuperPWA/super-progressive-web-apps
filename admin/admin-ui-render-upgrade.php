@@ -105,6 +105,13 @@ function superpwa_upgread_pro_interface_render(){
 				                                </div>
 				                                <p><?php esc_html_e( 'Easily generate Android APP (APK package) of your current PWA website.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
+				                            <div class="fe-2">
+				                                <div class="fe-t">
+				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
+				                                    <h4><?php esc_html_e( 'Apple IPA APP Generator', 'super-progressive-web-apps' ); ?></h4>
+				                                </div>
+				                                <p><?php esc_html_e( 'Easily generate Apple IPA (IPA package) of your current PWA website.', 'super-progressive-web-apps' ); ?></p>
+				                            </div>
 
 				                            <div class="fe-2">
 				                                <div class="fe-t">
