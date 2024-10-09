@@ -191,7 +191,7 @@ Feel free to get in touch if you have any questions.
 == Changelog ==
 
 = 2.2.31 =
-* Date: [09.August.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [09.October.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added feature to add APKs to the iOS App Store. #516
 * BugFixed: Conflict issue with Show On Scroll feature in CTA #545
 * BugFixed: When the Pre-cache Automatic option is enabled, then there is an issue in the console. working fine in 2.0.28 #555
