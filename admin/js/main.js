@@ -281,7 +281,7 @@ function superpwaGetZip() {
 				success: function (data) {
 					if (data.status == 200) {
 						jQuery('#thumbnail').css("display", "block");
-						jQuery('#aft_img_gen').text("Splash Screen Images Generated Successfully");
+						jQuery('#aft_img_gen').text("Touch Icons Generated Successfully");
 						jQuery('#aft_img_gen').css({"color":"green","margin-bottom":"20px"});
 						jQuery('#submit_splash_screen').trigger('click');
 					}else{

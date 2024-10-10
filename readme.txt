@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: 2.2.30
+Stable tag: 2.2.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -190,6 +190,15 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.31 =
+* Date: [09.October.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added feature to add APKs to the iOS App Store. #516
+* BugFixed: Conflict issue with Show On Scroll feature in CTA #545
+* BugFixed: When the Pre-cache Automatic option is enabled, then there is an issue in the console. working fine in 2.0.28 #555
+* Improvement: compatibility with nginx server #549
+* Improvement: Changes title from 'Splash Screen Image' to 'Touch Icons' #550
+* Improvement: superpwa-frontend-cta.js file is running on Mac book even if the option "Desktop" is not selected #551
+
 = 2.2.30 =
 * Date: [23.August.2024](https://superpwa.com/superpwa-2-2-30-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added an option to change the colour of the navigation bar icon. #536
@@ -275,13 +284,6 @@ Feel free to get in touch if you have any questions.
 * BugFixed: Role Based Access is not working #472
 * BugFixed: If add-on is not activated than do not show the settings button #470
 * BugFixed: The button network deactivate is not working #475
-
-= 2.2.20 =
-* Date: [26.September.2023](https://superpwa.com/superpwa-2-2-20-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added feature for Role managers #450
-* Feature: Added navigation Bar feature #443
-* BugFixed: DevTools Console Warning for Source Map 404 Error in Plugin #466
-* BugFixed: The push notification add-on keeps on installing. #465
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)

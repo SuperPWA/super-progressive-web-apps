@@ -570,3 +570,10 @@ function superpwa_manifest_query_vars($vars) {
     $vars[] = 'superpwa_mid';
     return $vars;
 }
+
+function superpwa_nginx_server_fix() {
+    if (isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) {
+        return '/';
+    }
+    return '';
+}
