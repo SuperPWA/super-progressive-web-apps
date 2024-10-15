@@ -342,7 +342,8 @@ function checkNeverCacheList(url) {
                 }';    
 }
 ?>
-<?php return apply_filters( 'superpwa_sw_template', ob_get_clean() );
+<?php 	echo apply_filters( 'superpwa_sw_template', ob_get_clean() );
+		echo apply_filters( 'superpwa_offline_form_sw_template', ob_get_clean() );
 }
 
 /**
