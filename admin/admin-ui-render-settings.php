@@ -708,7 +708,7 @@ function superpwa_sw_status_cb() {
 	/** 
 	 * Check to see if the file exists, If not attempts to generate a new one.
 	 */
-	if ( superpwa_file_exists( superpwa_sw( 'src' ) . superpwa_nginx_server_fix() ) || superpwa_generate_sw() ){
+	if ( superpwa_file_exists( superpwa_sw( 'src' ) . superpwa_nginx_server_fix( superpwa_sw( 'src' ) ) ) || superpwa_generate_sw() ){
 		?>
 		<p><span class="dashicons dashicons-yes" style="color: #46b450;"></span><?php echo esc_html__( 'Service worker generated successfully', 'super-progressive-web-apps' ) ?>.&nbsp;
 		<a href="<?php echo esc_url(superpwa_sw( 'src' )); ?>" target="_blank"><?php echo esc_html__( 'See it here', 'super-progressive-web-apps' ) ?> &rarr;</a></p>
@@ -1015,7 +1015,7 @@ function superpwa_admin_interface_render() {
 } ?>
 		<h1><?php echo esc_html__('Super Progressive Web Apps', 'super-progressive-web-apps'); ?> <sup><?php echo esc_html(SUPERPWA_VERSION); ?></sup></h1>
 		
-		<form action="options.php" method="post" enctype="multipart/form-data">		
+		<form action="<?php echo esc_url(admin_url("options.php")); ?>" method="post" enctype="multipart/form-data">		
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_settings_group' );
