@@ -85,7 +85,7 @@ function superpwa_sw( $arg = 'src' ) {
 			}
 			
 			// For dynamic files, return the home_url
-			return home_url( '/' ) . $sw_filename;
+			return superpwa_home_url() . $sw_filename;
 			
 			break;
 	}
