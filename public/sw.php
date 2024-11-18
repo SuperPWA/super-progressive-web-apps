@@ -115,6 +115,13 @@ function superpwa_generate_sw() {
 	
 	// Delete service worker if it exists
 	superpwa_delete_sw();
+
+	// check if sw is already generated. To avoid generation loop on settings page when superpwa_file_exists returns false.
+	global $superpwa_sw_generated;
+
+	if($superpwa_sw_generated){
+		return true;
+	}
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
@@ -149,6 +156,9 @@ function superpwa_generate_sw() {
 		
 		// Write settings back to database.
 		update_option( 'superpwa_settings', $settings );
+
+		// set sw generated to true.
+		$superpwa_sw_generated = true;
 		
 		return true;
 	}
