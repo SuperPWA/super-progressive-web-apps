@@ -188,6 +188,10 @@ function superpwa_sw_template() {
         $cache_version = SUPERPWA_VERSION;
       }
     }
+
+	if (function_exists('superpwa_home_url')) {
+		$superpwa_home_url = superpwa_home_url();
+	}
    
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
@@ -288,13 +292,69 @@ self.addEventListener('fetch', function(e) {
     <?php }	?>
 
 			// For POST requests, do not use the cache. Serve offline page if offline.
+			if ( ! e.request.url.match(/^(http|https):\/\//i) )
+
+					return;
+
+			if ( e.request.referrer.match(/^(wp-admin):\/\//i) )
+					return;
+
 			if ( e.request.method !== 'GET' ) {
+
 				e.respondWith(
-					fetch(e.request).catch( function() {
-						        return caches.match(offlinePage);
-					})
+
+					fetch(e.request)
+
+						.catch(error => {
+
+							if(e.request.method == 'POST' ){
+								console.log('inside my fetch post')
+								console.log('form_data')
+								console.log(e.data)
+								console.log(form_data)
+								console.log(e.request.url)
+
+								saveOfflineFormPostRequests(e.request.url,form_data);
+
+								return new Response(`
+									<meta name="viewport" content="width=device-width, initial-scale=1.0">
+									<p align="center">
+										<br><br><br>
+										<h2 align="center">Your form submission is saved. It will be submitted when you are back online</h2>
+									</p>
+									<p align="center">
+										<button 
+											type="button" 
+											style="background: #2271b1; padding: 10px 20px; color: #fff; text-align: center; border-radius: 60px; font-size: 16px; margin: 0 auto 15px; text-decoration: none; display: inline-block; cursor: pointer;" 
+											onclick="window.location=superpwa_home_url;">
+											Go to Home
+										</button>
+									</p>
+									<script>
+										var superpwa_home_url = '${esc_url($superpwa_home_url)}';
+									</script>
+								`, {
+									status: 200,
+									statusText: 'Form saved in offline mode',
+									headers: new Headers({
+										'Content-Type': 'text/html'
+									})
+								});
+
+
+
+							}else{
+
+								console.log('inside else')
+								return caches.match(offlinePage);
+
+							}
+						})
+
 				);
+
 				return;
+
 			}
 			
 			// For Range Headers
@@ -352,7 +412,14 @@ function checkNeverCacheList(url) {
                 }';    
 }
 ?>
-<?php return apply_filters( 'superpwa_sw_template', ob_get_clean() );
+<?php
+	$active_addons = get_option( 'superpwa_active_addons', array() );
+	if ( in_array('offline_form_for_superpwa', $active_addons) ){
+		$swJsContent = apply_filters( 'superpwa_sw_template', ob_get_clean() );
+		return apply_filters( 'superpwa_offline_form_sw_template', $swJsContent );
+	}
+	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
+	
 }
 
 /**
@@ -380,12 +447,20 @@ function superpwa_register_sw() {
 	}
 
 	if($include_script){
+		$active_addons = get_option( 'superpwa_active_addons', array() );
+		$offline_form_addon_active = false;
+		$ajax_url = admin_url( 'admin-ajax.php' );
+		if ( in_array('offline_form_for_superpwa', $active_addons) ){
+			$offline_form_addon_active = true;
+		}
 		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), SUPERPWA_VERSION, true );
 		$superpwa_sw_version = isset($settings['force_update_sw_setting'])? $settings['force_update_sw_setting'] : time();
 		$localize = array(
 				'url' => wp_parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ). superpwa_nginx_server_fix( superpwa_sw( 'src' ) ). '?'.$superpwa_sw_version,
 				'disable_addtohome' => isset($settings['disable_add_to_home'])? $settings['disable_add_to_home'] : 0,
 				'enableOnDesktop'=> false,
+				'offline_form_addon_active' =>$offline_form_addon_active,
+				'ajax_url' =>$ajax_url,
 				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
 				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
 			);
