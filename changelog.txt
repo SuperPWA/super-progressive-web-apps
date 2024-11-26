@@ -1,3 +1,13 @@
+= 2.2.32 =
+* Date: [26.November.2024](https://superpwa.com/superpwa-2-2-32-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added feature of Offline form. #297
+* BugFixed: Exclude Add to home screen banner option is not working. #556
+* BugFixed: SuperPWA Non-AMP install page's instruction 1st step is showing a <b> tag and 2nd is not translating #559
+* BugFixed: CTA banner not working properly. #562
+* Improvement: correct contact link #558
+* Improvement: Manifest generation cause 503 on settings page save when superpwa_file_exists returns false #564
+* Test: Test with WordPress version 6.7 #561
+
 = 2.2.31 =
 * Date: [09.October.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added feature to add APKs to the iOS App Store. #516
