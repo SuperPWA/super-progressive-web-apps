@@ -2,7 +2,7 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.3
 Stable tag: 2.2.31
 License: GPLv2 or later
