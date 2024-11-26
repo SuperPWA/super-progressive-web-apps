@@ -284,7 +284,7 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '2.2.32',
-							'category'				=> 'subtab-all subtab-multilingual',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 	
 	);

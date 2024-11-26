@@ -293,12 +293,10 @@ window.mobileCheck = function() {
 		}).then(function () {
 			console.log('sync event registered');
 		}).catch(function () {
-			/* system was unable to register for a sync,\n\t\t this could be an OS-level restriction */
 			console.log('sync registration failed')
 		});
 		
-		
-		
+	
 		function superpwa_formSubmitOptions(event) {
 			console.log('vikas here')
 			var finalData = {};
@@ -369,44 +367,6 @@ window.mobileCheck = function() {
 				alert('Error occured during form submission, please try again');
 				return;
 			}
-		}
-		
-		function saveContact(event) {
-			var elements = document.getElementsByClassName('wpcf7-form')[0].elements;
-			var obj = {};
-			for (var i = 0; i < elements.length; i++) {
-				var item = elements.item(i);
-				obj[item.name] = item.value;
-			}
-			var allData = {
-				'form_data': obj,
-				'action': 'form_submit_data'
-			};
-			/*send data in serviceWorker*/
-			var indexedDBOpenRequest = indexedDB.open('superpwa-form', 2);
-			indexedDBOpenRequest.onerror = (event) => {
-				console.error('a post form request has been not added to IndexedDB');
-			};
-			indexedDBOpenRequest.onsuccess = (event) => {
-				const db = event.target.result;
-				if (!db.objectStoreNames.contains('post_requests')) {
-					db.createObjectStore('post_requests', { autoIncrement: true, keyPath: 'id' });
-				}
-				var request = db.transaction('post_requests', 'readwrite').objectStore('post_requests').add({
-					url: swsource,
-					payload: obj,
-					method: 'POST'
-				})
-		
-				request.onsuccess = function (event) {
-					console.log('a post form request has been added to indexedb')
-				}
-		
-				request.onerror = function (error) {
-					console.error(error)
-				}
-			};
-			return false;
 		}
 		
 		function handleGravityMultistep(btn_type, event) {

@@ -291,13 +291,10 @@ self.addEventListener('fetch', function(e) {
 		return;
     <?php }	?>
 
-			// For POST requests, do not use the cache. Serve offline page if offline.
-			if ( ! e.request.url.match(/^(http|https):\/\//i) )
-
-					return;
-
-			if ( e.request.referrer.match(/^(wp-admin):\/\//i) )
-					return;
+	<?php $active_addons = get_option( 'superpwa_active_addons', array() );
+		if ( in_array('offline_form_for_superpwa', $active_addons) ){
+	     ?>
+			if ( e.request.referrer.match(/^(wp-admin):\/\//i) ) return;
 
 			if ( e.request.method !== 'GET' ) {
 
@@ -308,12 +305,7 @@ self.addEventListener('fetch', function(e) {
 						.catch(error => {
 
 							if(e.request.method == 'POST' ){
-								console.log('inside my fetch post')
-								console.log('form_data')
-								console.log(e.data)
 								console.log(form_data)
-								console.log(e.request.url)
-
 								saveOfflineFormPostRequests(e.request.url,form_data);
 
 								return new Response(`
@@ -331,7 +323,7 @@ self.addEventListener('fetch', function(e) {
 										</button>
 									</p>
 									<script>
-										var superpwa_home_url = '${esc_url($superpwa_home_url)}';
+										var superpwa_home_url = "<?php echo esc_url($superpwa_home_url)?>";
 									</script>
 								`, {
 									status: 200,
@@ -356,6 +348,7 @@ self.addEventListener('fetch', function(e) {
 				return;
 
 			}
+	<?php } ?>
 			
 			// For Range Headers
 			if (e.request.headers.has('range')) {
@@ -415,8 +408,7 @@ function checkNeverCacheList(url) {
 <?php
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	if ( in_array('offline_form_for_superpwa', $active_addons) ){
-		$swJsContent = apply_filters( 'superpwa_sw_template', ob_get_clean() );
-		return apply_filters( 'superpwa_offline_form_sw_template', $swJsContent );
+		echo  apply_filters( 'superpwa_offline_form_sw_template', '' );
 	}
 	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
 	
