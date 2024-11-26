@@ -2,9 +2,9 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.3
-Stable tag: 2.2.31
+Stable tag: 2.2.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -189,6 +189,15 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.2.32 =
+* Date: [26.November.2024](https://superpwa.com/superpwa-2-2-32-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Feature: Added feature of Offline form. #297
+* BugFixed: Exclude Add to home screen banner option is not working. #556
+* BugFixed: SuperPWA Non-AMP install page's instruction 1st step is showing a <b> tag and 2nd is not translating #559
+* BugFixed: CTA banner not working properly. #562
+* Improvement: correct contact link #558
+* Improvement: Manifest generation cause 503 on settings page save when superpwa_file_exists returns false #564
+* Test: Test with WordPress version 6.7 #561
 
 = 2.2.31 =
 * Date: [09.October.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)

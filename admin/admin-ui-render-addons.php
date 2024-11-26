@@ -42,7 +42,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @since 1.8 Returns false of $slug isn't found.
  */
 function superpwa_get_addons( $slug = false ) {
-	
 	// Add-Ons array
 	$addons = array(
 		'pull_to_refresh' => array(
@@ -262,7 +261,7 @@ function superpwa_get_addons( $slug = false ) {
 							'superpwa_min_version'	=> '2.2.26',
 							'category'				=> 'subtab-all subtab-usability',
 						),
-						'utm_tracking' => array(
+		'utm_tracking' => array(
 							'name'					=> __( 'UTM Tracking', 'super-progressive-web-apps' ),
 							'description'			=> __( 'Track visits from your app by adding UTM tracking parameters to the Start Page URL.', 'super-progressive-web-apps' ),
 							'type'					=> 'bundled',
@@ -273,6 +272,19 @@ function superpwa_get_addons( $slug = false ) {
 							'admin_link_target'		=> 'admin',
 							'superpwa_min_version'	=> '1.7',
 							'category'				=> 'subtab-all subtab-analytics',
+						),
+		'offline_form_for_superpwa' => array(
+							'name'					=> __( 'Offline Form', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Store your forms data when you are offline and sync data when you are online with one click.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'offline.png',
+							'link'					=> 'https://superpwa.com/docs',
+							'more_link'					=> 'https://superpwa.com/docs',
+							'admin_link'			=>  admin_url('admin.php?page=superpwa-offline-form'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.32',
+							'category'				=> 'subtab-all subtab-usability',
 						),
 	
 	);

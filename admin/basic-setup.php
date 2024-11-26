@@ -571,9 +571,17 @@ function superpwa_manifest_query_vars($vars) {
     return $vars;
 }
 
-function superpwa_nginx_server_fix() {
+/*
+* Fix for nginx server when sw.js does not return 200 status code
+*/
+function superpwa_nginx_server_fix( $sw_url ) {
     if (isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) {
-        return '/';
+		$response = wp_remote_head( $sw_url );
+		if ( is_wp_error( $response ) ) {
+			return '';
+		}
+		$response_code = wp_remote_retrieve_response_code( $response );
+        return ( 200 !== $response_code ) ? '/':'';
     }
     return '';
 }

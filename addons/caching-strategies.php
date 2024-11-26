@@ -442,7 +442,7 @@ function superpwa_caching_strategies_interface_render() {
 		
 		<?php superpwa_setting_tabs_html(); ?>
 
-		<form action="options.php" method="post" class="form-table" enctype="multipart/form-data">		
+		<form action="<?php echo esc_url(admin_url("options.php")); ?>" method="post" class="form-table" enctype="multipart/form-data">		
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields( 'superpwa_caching_strategies_settings_group' );

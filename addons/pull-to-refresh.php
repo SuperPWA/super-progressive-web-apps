@@ -301,7 +301,7 @@ function superpwa_pull_to_refresh_interface_render()
 
 		<?php superpwa_setting_tabs_html(); ?>
 
-		<form action="options.php" method="post" enctype="multipart/form-data">
+		<form action="<?php echo esc_url(admin_url("options.php")); ?>" method="post" enctype="multipart/form-data">
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
 			settings_fields('superpwa_pull_to_refresh_settings_group');

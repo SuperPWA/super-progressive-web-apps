@@ -258,31 +258,494 @@ window.mobileCheck = function() {
 	  return check;
 	};
 
- window.addEventListener('load', function() {
-     var manifestLink = document.querySelectorAll("link[rel='manifest']");
-	    if(manifestLink.length > 1){
-	        for (var i = 0; i < manifestLink.length; i++) {
-	        	var href = manifestLink[i].getAttribute("href");
-	        	if(href.indexOf("superpwa-manifest.json") == -1){
-                     manifestLink[i].remove();
-	        	}
-	        }
-	    }
-		// fix for href="#" in Ios safari standalone
-		var ua = window.navigator.userAgent;
-		var iOS = ua.match(/iPad/i) || ua.match(/iPhone/i);
-		var webkit = ua.match(/WebKit/i);
-		var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-
-		if(iOSSafari && (window.matchMedia('(display-mode: standalone)').matches)){
-		setTimeout(function(){
-			const anchor_fix = document.querySelectorAll("a[href='#']");
-			if(anchor_fix.length > 1){
-				for (var i = 0; i < anchor_fix.length; i++) {
-				 anchor_fix[i].setAttribute("href","javascript:void(0);");
+	window.addEventListener('load', function() {
+		var manifestLink = document.querySelectorAll("link[rel='manifest']");
+			if(manifestLink.length > 1){
+				for (var i = 0; i < manifestLink.length; i++) {
+					var href = manifestLink[i].getAttribute("href");
+					if(href.indexOf("superpwa-manifest.json") == -1){
+						manifestLink[i].remove();
+					}
 				}
 			}
-		},600);
-	}
+			// fix for href="#" in Ios safari standalone
+			var ua = window.navigator.userAgent;
+			var iOS = ua.match(/iPad/i) || ua.match(/iPhone/i);
+			var webkit = ua.match(/WebKit/i);
+			var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
- });
+			if(iOSSafari && (window.matchMedia('(display-mode: standalone)').matches)){
+			setTimeout(function(){
+				const anchor_fix = document.querySelectorAll("a[href='#']");
+				if(anchor_fix.length > 1){
+					for (var i = 0; i < anchor_fix.length; i++) {
+						anchor_fix[i].setAttribute("href","javascript:void(0);");
+					}
+				}
+			},600);
+		}
+
+	});
+
+	if (superpwa_sw.offline_form_addon_active) {
+		navigator.serviceWorker.ready.then(function (registration) {
+			return registration.sync.register('superpwa_form_sendFormData')
+		}).then(function () {
+			console.log('sync event registered');
+		}).catch(function () {
+			console.log('sync registration failed')
+		});
+		
+	
+		function superpwa_formSubmitOptions(event) {
+			console.log('vikas here')
+			var finalData = {};
+			var inputElements = document.querySelectorAll('input, textarea, select');/*closest('form')*/
+			for (let elem of inputElements) {
+				if (elem.getAttribute('type') == 'radio') {
+		
+					let chk_name_radio = elem.getAttribute('name');
+		
+					var parent_div = elem.closest('.frm_opt_container')
+		
+					if (parent_div.getAttribute('aria-required') == 'true') {
+		
+						let chk_value = parent_div.querySelectorAll('input[name=\"' + chk_name_radio + '\"]:checked');
+		
+						if (chk_value.length == 0) {
+		
+							event.preventDefault();
+		
+							event.stopPropagation();
+		
+							alert('Please fill all mandatory fields');
+		
+							return;
+						}
+					}
+				}
+		
+		
+				if (!elem.value && ((elem.getAttribute('aria-required') == 'true' || elem.getAttribute('required')) && elem.offsetParent !== null)) {
+					event.preventDefault();
+					event.stopPropagation();
+					alert('Please fill all mandatory fields');
+					return;
+				}
+				var name = elem.getAttribute('name');
+				if (name) {
+					//name=name.replace(/[\[']/g, '_').replace(/[\]']/g, '');
+					if (elem.getAttribute('type') == 'checkbox') {
+						if (elem.checked) {
+							finalData[name] = elem.value;
+						}
+					} else if (elem.getAttribute('type') == 'radio') {
+						if (elem.checked) {
+							finalData[name] = elem.value;
+						}
+					} else {
+						finalData[name] = elem.value;
+					}
+				}
+			}
+		
+			console.log(finalData);
+		
+			if (JSON.stringify(finalData) !== '{}') {
+				var allData = {
+					'form_data': finalData,
+					'action': 'form_submit_data'
+				};
+				/* send data in serviceWorker */
+				navigator.serviceWorker.ready.then((registration) => {
+					console.log(allData);
+					registration.active.postMessage(allData);
+				});
+			} else {
+				event.preventDefault();
+				event.stopPropagation();
+				alert('Error occured during form submission, please try again');
+				return;
+			}
+		}
+		
+		function handleGravityMultistep(btn_type, event) {
+			let target_parent = event.parentNode.parentNode;
+			let go_next = false;
+			if (btn_type == 'previous') {
+				target_parent.style.display = 'none';
+				let prev_id = target_parent.previousElementSibling.id;
+				let source_page = document.querySelector('input[name^=\"gform_source_page_number_\"]');
+				let target_page = document.querySelector('input[name^=\"gform_target_page_number_\"]');
+				source_page.value = parseInt(source_page.value) - 1;
+				target_page.value = parseInt(target_page.value) - 1;
+				if (prev_id) {
+					document.getElementById(prev_id).style.display = 'block';
+				}
+			} else {
+				let inputs = target_parent.querySelectorAll('input, textarea, select');
+				for (let elem of inputs) {
+					let req_flag = elem.getAttribute('aria-required');
+					if (req_flag == 'true' && (elem.getAttribute('type') == 'checkbox' || elem.getAttribute('type') == 'radio')) {
+						let chk_name = elem.getAttribute('name');
+						let chk_value = target_parent.querySelectorAll('input[name=\"' + chk_name + '\"]:checked');
+						if (!chk_value.length) {
+							go_next = false;
+							break;
+						} else {
+							go_next = true;
+						}
+					} else {
+						if (!elem.value) {
+							go_next = false;
+							break;
+						} else {
+							go_next = true;
+						}
+					}
+				}
+				if (go_next == true) {
+					target_parent.style.display = 'none';
+					let next_id = target_parent.nextElementSibling.id;
+					let source_page = document.querySelector('input[name^=\"gform_source_page_number_\"]');
+					let target_page = document.querySelector('input[name^=\"gform_target_page_number_\"]');
+					let gform_wrapper = document.querySelector('.gform_wrapper');
+					let total_page = gform_wrapper.getAttribute('id').split('_')[2];
+					source_page.value = parseInt(source_page.value) + 1;
+					if (target_page < total_page) { target_page.value = parseInt(target_page.value) + 1; }
+					else { target_page.value = 0; }
+					if (next_id) {
+						document.getElementById(next_id).style.display = 'block';
+					}
+				} else {
+					alert('Please fill correct values in all mandatory fields');
+				}
+			}
+		}
+		
+		window.addEventListener('online', (e) => { updateOnlineStatus(e) });
+		
+		function updateOnlineStatus(event) {
+			window.location.reload();
+		}
+		window.onload = function (event) {
+			console.log('Page Load');
+			if (!navigator.onLine) {
+				updateOfflineStatus(event);
+			}
+			window.addEventListener('offline', (e) => {
+				updateOfflineStatus(e);
+				reRenderPage();
+			});
+			fallbackForIosSync();
+			var our_db;
+			function fallbackForIosSync() {
+				var isSyncSupported = ('serviceWorker' in navigator && 'SyncManager' in window);
+				if (!isSyncSupported && navigator.onLine) {
+					var indexedDBOpenRequest = indexedDB.open('superpwa-form', 2);
+					indexedDBOpenRequest.onerror = function (error) {
+						console.error('IndexedDB error:', error)
+					}
+					indexedDBOpenRequest.onupgradeneeded = function () {
+						if (!this.result.objectStoreNames.contains('post_requests')) {
+							this.result.createObjectStore('post_requests', { autoIncrement: true, keyPath: 'id' })
+						}
+					}
+					indexedDBOpenRequest.onsuccess = function () {
+						our_db = this.result;
+						sendPostToServerAjax();
+					}
+				}
+			}
+		
+			function reRenderPage() {
+				var condition = navigator.onLine ? 'online' : 'offline';
+				if (condition == 'offline') {
+					var formElement = document.querySelector('form[method=\"post\"]');
+					if (formElement && (formElement.classList.contains('frm-fluent-form') || formElement.querySelector('.frm_dropzone'))) {
+						// window.location.reload();
+					}
+				}
+			}
+		
+			function updateOfflineStatus(event) {
+				var condition = navigator.onLine ? 'online' : 'offline';
+				if (condition == 'offline') {
+					setTimeout(() => {
+						var formElement = document.querySelectorAll('form[method=\"post\"]');
+						if (formElement && formElement.length > 0) {
+							for (var i = 0; i < formElement.length; i++) {
+								// Fluent Form Compatibility
+		
+								if (formElement[i].hasAttribute('data-form_instance') && formElement[i].classList.contains('frm-fluent-form')) {
+									var class_to_remove = formElement[i].getAttribute('data-form_instance');
+									formElement[i].classList.remove(class_to_remove)
+								}
+		
+								// Fix for Formidable form not adding data due to anti-spam javascript
+		
+								if (formElement[i].hasAttribute('data-token')) {
+									const antispamInput = document.createElement('input');
+									antispamInput.type = 'hidden';
+									antispamInput.value = formElement[i].getAttribute('data-token');
+									antispamInput.name = 'antispam_token';
+									formElement[i].appendChild(antispamInput);
+								}
+		
+								if (formElement[i].querySelector('button[type=\"submit\"]')) { let ourEle = formElement[i].querySelector('button[type=\"submit\"]'); ourEle.removeAttribute('onclick'); ourEle.removeAttribute('onkeypress'); ourEle.replaceWith(ourEle.cloneNode(true)); }
+		
+								if (formElement[i].querySelector('button[type=\"button\"]')) { let ourEle = formElement[i].querySelector('button[type=\"button\"]'); ourEle.removeAttribute('onclick'); ourEle.removeAttribute('onkeypress'); ourEle.replaceWith(ourEle.cloneNode(true)); }
+		
+								if (formElement[i].querySelector('input[type=\"submit\"]')) { let ourEle = formElement[i].querySelector('input[type=\"submit\"]'); ourEle.removeAttribute('onclick'); ourEle.removeAttribute('onkeypress'); ourEle.replaceWith(ourEle.cloneNode(true)); }
+		
+								formElement[i].addEventListener('submit', superpwa_formSubmitOptions, true);
+							}
+						}
+		
+						//For Formidable Form ajax upload field
+						var inputs = document.getElementsByTagName('input');
+						if (inputs && inputs.length) {
+							for (var i = 0; i < inputs.length; i++) {
+								if (inputs[i].type.toLowerCase() == 'file') {
+									if (document.querySelector('.dz-error-message')) {
+										document.querySelector('.dz-error-message').remove();
+										setTimeout(
+											function () {
+												document.querySelector('.dz-error-message').innerHTML = '';
+											},
+											500);
+									}
+								}
+							}
+						}
+		
+						// Fix for Formidable Ajax uploads
+		
+						var frm_dropzone_attrs = document.querySelectorAll('.frm_dropzone');
+						if (frm_dropzone_attrs && frm_dropzone_attrs.length > 0) {
+							frm_dropzone_attrs.forEach(ele => {
+								var container_id = ele.id;
+								container_id = container_id.match(/\d+/);
+								const upload_input_parent = ele.closest('.frm_form_field');
+								var upload_input = upload_input_parent.querySelector('.dz-hidden-input');
+								if (upload_input) {
+									upload_input.setAttribute("data-containerid", container_id);
+								}
+							});
+						}
+		
+						var frm_dropzone_ele = document.querySelectorAll('.dz-hidden-input');
+						if (frm_dropzone_ele && frm_dropzone_ele.length > 0) {
+							frm_dropzone_ele.forEach(ele => {
+								ele.addEventListener('change', (function (e) {
+									if (e.target.files[0] || e.target) {
+										var formElement = document.querySelector('form[method="post"]');
+										var field_id = e.target.getAttribute("data-containerid");
+										var field_id_label = 'file' + field_id;
+										var object1 = {};
+										object1['action'] = 'frm_submit_dropzone';
+										object1['field_id'] = field_id;
+										object1['form_id'] = document.querySelector('[name="form_id"]').value;
+										object1['nonce'] = frm_js.nonce;
+										object1['antispam_token'] = formElement.getAttribute('data-token');
+										object1[field_id_label] = e.target.files[0];
+										saveAddlAjaxSubmits(frm_js.ajax_url, object1);
+									}
+								}));
+							});
+						}
+		
+		
+		
+						// For Gravity Form multistep form
+						let gform_next_buttons = document.querySelectorAll('.gform_next_button');
+						let gform_previous_button = document.querySelectorAll('.gform_previous_button');
+						if (gform_next_buttons.length > 0) {
+							gform_next_buttons.forEach(button => {
+								button.setAttribute('onclick', 'handleGravityMultistep("next",this)');
+								button.setAttribute('onkeypress', 'handleGravityMultistep("next",this)');
+								button.setAttribute('type', 'button');
+							});
+						}
+						if (gform_previous_button.length > 0) {
+							gform_previous_button.forEach(button => {
+								button.setAttribute('onclick', 'handleGravityMultistep(\"previous\",this)');
+								button.setAttribute('onkeypress', 'handleGravityMultistep(\"previous\",this)');
+								button.setAttribute('type', 'button');
+							});
+						}
+					}, 500);
+				}
+			}
+		
+			function sendPostToServerAjax() {
+				var savedRequests = [];
+				var objStore = getObjectStore('ajax_requests');
+				if (!!objStore) {
+					var req = getObjectStore('ajax_requests').openCursor() // FOLDERNAME is 'ajax_requests'
+					req.onsuccess = async function (event) {
+						var cursor = event.target.result
+						if (cursor) {
+							// Keep moving the cursor forward and collecting saved requests.
+							savedRequests.push(cursor.value)
+							cursor.continue()
+						} else {
+							if (savedRequests && savedRequests.length) {
+								for (let savedRequest of savedRequests) {
+									var formData = new FormData();
+									for (const [key, value] of Object.entries(savedRequest.payload)) {
+										formData.append(key, value);
+									}
+									var requestUrl = savedRequest.url
+									var payload = JSON.stringify(savedRequest.payload)
+									var method = savedRequest.method
+									/*request to forms*/
+									var headers = {
+										'Accept': 'application/json, text/javascript, */*; q=0.01',
+									} // if you have any other headers put them here
+									fetch(superpwa_sw.ajax_url+'?action=superpwa_form_store_send', {
+										headers: headers,
+										method: method,
+										body: formData
+									}).then(function (response) {
+										if (response.status < 400) {
+											// If sending the POST request was successful, then remove it from the IndexedDB.
+											getObjectStore('ajax_requests', 'readwrite').delete(savedRequest.id);
+											return response.json();
+										}
+										return false;
+									}).then(function (response) {
+										if (response) {
+											sendPostToServer([response[0], savedRequest.payload.field_id]);
+											console.log('Form Submitted with ajax fields : success');
+										} else {
+											sendPostToServer();
+											console.log('Form Submitted without ajax fields : ajax fields present but their saving failed to db');
+										}
+									});
+								}
+							} else {
+								sendPostToServer();
+								console.log('Form Submitted without ajax fields : no values present in ajax_requests object');
+							}
+						}
+					}
+					req.onerror = function (error) {
+						sendPostToServer();
+					}
+				} else {
+					sendPostToServer();
+				}
+			}
+		
+			function sendPostToServer(ajax_params = null) {
+				var savedRequests = [];
+				var objStore = getObjectStore('post_requests');
+				console.log(objStore)
+				if (!!objStore) {
+					var req = getObjectStore('post_requests').openCursor();
+					req.onsuccess = async function (event) {
+						var cursor = event.target.result;
+						if (cursor) {
+							// Keep moving the cursor forward and collecting saved requests.
+							savedRequests.push(cursor.value);
+							cursor.continue();
+						} else {
+							// Process each saved request.
+							console.log(savedRequests)
+							for (let savedRequest of savedRequests) {
+								var formData = new FormData();
+								for (const [key, value] of Object.entries(savedRequest.payload)) {
+									formData.append(key, value);
+								}
+								if (ajax_params && ajax_params.length && ajax_params[0]) {
+									formData.set('item_meta[' + ajax_params[1] + ']', ajax_params[0]);
+								}
+								var requestUrl = savedRequest.url;
+								var method = savedRequest.method;
+								/* Request to admin-ajax.php */
+								var headers = {
+									'Accept': 'application/json, text/javascript, */*; q=0.01',
+									// Add any other headers here if needed
+								};
+								try {
+									console.log('requestUrl')
+									console.log(requestUrl)
+									const response = await fetch(requestUrl, {
+										headers: headers,
+										method: method,
+										body: formData
+									});
+									console.log('server response', response);
+									if (response.status < 400) {
+										// If sending the POST request was successful, then remove it from the IndexedDB.
+										try {
+											var forDataSave = {};
+											formData.forEach(function (value, key) {
+												forDataSave[key] = value;
+											});
+											var forDataSaveJson = JSON.stringify(forDataSave);
+											const response = await fetch(superpwa_sw.ajax_url+'?action=superpwa_form_store_send', {
+												headers: headers,
+												method: method,
+												body: forDataSaveJson,
+											});
+											console.log('saved request', savedRequest);
+											if (response.status < 400) {
+												// If successful, remove the request from IndexedDB.
+												await getObjectStore('post_requests', 'readwrite').delete(savedRequest.id);
+											}
+										} catch (error) {
+											console.error('Send to Server failed:', error);
+											throw error;
+										}
+									} else {
+										console.error('Server responded with an error:', response.status);
+										// Handle the error as needed
+									}
+								} catch (error) {
+									console.error('Send to Server failed:', error);
+									// Handle the error as needed
+									throw error; // Rethrow the error if necessary
+								}
+							}
+						}
+					};
+				}
+			}
+		
+			function getObjectStore(storeName, mode) {
+				if (!our_db) { return null; }
+				// retrieve our object store
+				return our_db.transaction(storeName, mode).objectStore(storeName)
+			}
+		
+			function saveAddlAjaxSubmits(submit_url, obj) {
+				/*send data in serviceWorker*/
+				var indexedDBOpenRequest = indexedDB.open('superpwa-form', 2);
+				indexedDBOpenRequest.onerror = (event) => {
+					console.error('a post form request has been not added to IndexedDB');
+				};
+				indexedDBOpenRequest.onupgradeneeded = (event) => {
+					const db = event.target.result;
+					if (!db.objectStoreNames.contains('ajax_requests')) {
+						db.createObjectStore('ajax_requests', { autoIncrement: true, keyPath: 'id' });
+					}
+				}
+				indexedDBOpenRequest.onsuccess = (event) => {
+					const db = event.target.result;
+					var request = db.transaction('ajax_requests', 'readwrite').objectStore('ajax_requests').add({
+						url: submit_url,
+						payload: obj,
+						method: 'POST'
+					})
+					request.onsuccess = function (event) {
+						console.log('a post form request has been added to indexedb')
+					}
+					request.onerror = function (error) {
+						console.error(error)
+					}
+				}
+			}
+		}
+	}

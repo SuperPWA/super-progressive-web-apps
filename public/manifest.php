@@ -293,6 +293,13 @@ function superpwa_generate_manifest() {
 	
 	// Delete manifest if it exists.
 	superpwa_delete_manifest();
+
+	// check if manifest is already generated. To avoid generation loop on settings page when superpwa_file_exists returns false.
+	global $superpwa_manifest_generated;
+
+	if($superpwa_manifest_generated){
+		return true;
+	}
 	
 	// Get Settings
 	$superpwa_settings = superpwa_get_settings();
@@ -317,6 +324,9 @@ function superpwa_generate_manifest() {
 		
 		// Write settings back to database.
 		update_option( 'superpwa_settings', $superpwa_settings );
+
+		// set manifest generated to true.
+		$superpwa_manifest_generated = true;
 		
 		return true;
 	}
