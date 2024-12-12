@@ -209,42 +209,48 @@ function superpwa_manifest_template( $pageid = null ) {
 		}
 
 		$is_any_multilang_enable = false;
-		$wpml_settings = get_option( 'superpwa_wpml_settings');
-
-		if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
-			$current_language = superpwa_get_language_shortcode();
-			$start_url = superpwa_home_url().$current_language;
-			$manifest['start_url'] = $start_url;
-			$manifest['scope'] = "/";
-			$is_any_multilang_enable = true;
+		$active_addons = get_option( 'superpwa_active_addons', array() );
+		if (in_array('wpml_for_superpwa',$active_addons)) {
+			$wpml_settings = get_option( 'superpwa_wpml_settings');
+			if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
+				$current_language = superpwa_get_language_shortcode();
+				$start_url = superpwa_home_url().$current_language;
+				$manifest['start_url'] = $start_url;
+				$manifest['scope'] = "/";
+				$is_any_multilang_enable = true;
+			}
 		}
-
-		$wpmultilang_settings = get_option( 'superpwa_wp_multilang_settings');
-		if (isset($wpmultilang_settings['enable_wp_multilang']) && $wpmultilang_settings['enable_wp_multilang'] == 1 && function_exists("wpm_get_languages")) {
-			$current_language = wpm_get_language();
-			$start_url = superpwa_home_url().$current_language;
-			$manifest['start_url'] = $start_url;
-			$manifest['scope'] = "/";
-			$is_any_multilang_enable = true;
+		if (in_array('wp_multilang_for_superpwa',$active_addons)) {
+			$wpmultilang_settings = get_option( 'superpwa_wp_multilang_settings');
+			if (isset($wpmultilang_settings['enable_wp_multilang']) && $wpmultilang_settings['enable_wp_multilang'] == 1 && function_exists("wpm_get_languages")) {
+				$current_language = wpm_get_language();
+				$start_url = superpwa_home_url().$current_language;
+				$manifest['start_url'] = $start_url;
+				$manifest['scope'] = "/";
+				$is_any_multilang_enable = true;
+			}
 		}
-
-		$polylang_settings = get_option( 'superpwa_polylang_settings');
-		if (isset($polylang_settings['enable_polylang']) && $polylang_settings['enable_polylang'] == 1 && function_exists("pll_default_language")) {
-			$current_language = pll_current_language();
-			$start_url = superpwa_home_url().$current_language;
-			$manifest['start_url'] = $start_url;
-			$manifest['scope'] = "/";
-			$is_any_multilang_enable = true;
+		if (in_array('polylang_for_superpwa',$active_addons)) {
+			$polylang_settings = get_option( 'superpwa_polylang_settings');
+			if (isset($polylang_settings['enable_polylang']) && $polylang_settings['enable_polylang'] == 1 && function_exists("pll_default_language")) {
+				$current_language = pll_current_language();
+				$start_url = superpwa_home_url().$current_language;
+				$manifest['start_url'] = $start_url;
+				$manifest['scope'] = "/";
+				$is_any_multilang_enable = true;
+			}
 		}
-		$translatepress_settings = get_option( 'superpwa_translatepress_settings');
-		if (isset($translatepress_settings['enable_translatepress']) && $translatepress_settings['enable_translatepress'] == 1 && class_exists('TRP_Translate_Press')) {
-			$homeUrl = superpwa_home_url();
-			global $TRP_LANGUAGE;
-			$trp = TRP_Translate_Press::get_trp_instance();
-			$start_url = $trp->get_component('url_converter')->get_url_for_language($TRP_LANGUAGE, $homeUrl);
-			$manifest['start_url'] = $homeUrl;
-			$manifest['scope'] = "/";
-			$is_any_multilang_enable = true;
+		if (in_array('translatepress_for_superpwa',$active_addons)) {
+			$translatepress_settings = get_option( 'superpwa_translatepress_settings');
+			if (isset($translatepress_settings['enable_translatepress']) && $translatepress_settings['enable_translatepress'] == 1 && class_exists('TRP_Translate_Press')) {
+				$homeUrl = superpwa_home_url();
+				global $TRP_LANGUAGE;
+				$trp = TRP_Translate_Press::get_trp_instance();
+				$start_url = $trp->get_component('url_converter')->get_url_for_language($TRP_LANGUAGE, $homeUrl);
+				$manifest['start_url'] = $homeUrl;
+				$manifest['scope'] = "/";
+				$is_any_multilang_enable = true;
+			}
 		}
 		if ($is_any_multilang_enable) {
 			superpwa_delete_manifest();
