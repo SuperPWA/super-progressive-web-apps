@@ -54,12 +54,15 @@ function superpwa_pull_to_refresh_get_settings()
  *
  * @since	1.7
  */
-	function superpwa_pull_to_refresh_save_settings_todo()
-	{
-
-		// Regenerate manifest
-		superpwa_generate_manifest();
+	function superpwa_pull_to_refresh_save_settings_todo(){
+	
+		if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ) {
+			// Regenerate manifest
+			superpwa_generate_manifest();
+		}
+		
 	}
+
 	add_action('add_option_superpwa_pull_to_refresh_settings', 'superpwa_pull_to_refresh_save_settings_todo');
 	add_action('update_option_superpwa_pull_to_refresh_settings', 'superpwa_pull_to_refresh_save_settings_todo');
 	add_action('superpwa_addon_activated_pull_to_refresh', 'superpwa_pull_to_refresh_save_settings_todo');
@@ -69,79 +72,84 @@ function superpwa_pull_to_refresh_get_settings()
  *
  * @since 	1.7
  */
-	function superpwa_pull_to_refresh_register_settings()
-	{
+	function superpwa_pull_to_refresh_register_settings() {
+	
+		if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ) {
 
-		// Register Setting
-		register_setting(
-			'superpwa_pull_to_refresh_settings_group',		 // Group name
-			'superpwa_pull_to_refresh_settings', 			// Setting name = html form <input> name on settings form
-			'superpwa_pull_to_refresh_validater_sanitizer'	// Input validator and sanitizer
-		);
+			// Register Setting
+			register_setting(
+				'superpwa_pull_to_refresh_settings_group',		 // Group name
+				'superpwa_pull_to_refresh_settings', 			// Setting name = html form <input> name on settings form
+				'superpwa_pull_to_refresh_validater_sanitizer'	// Input validator and sanitizer
+			);
 
-		// Pull To Refresh
-		add_settings_section(
-			'superpwa_pull_to_refresh_section',				// ID
-			__return_false(),								// Title
-			'',				// Callback Function
-			'superpwa_pull_to_refresh_section'					// Page slug
-		);
+			// Pull To Refresh
+			add_settings_section(
+				'superpwa_pull_to_refresh_section',				// ID
+				__return_false(),								// Title
+				'',				// Callback Function
+				'superpwa_pull_to_refresh_section'					// Page slug
+			);
 
 
-		// Pull To Refresh	
-		add_settings_field(
-			'superpwa_pull_to_refresh_source',							// ID
-			__('Pull To Refresh	', 'super-progressive-web-apps'),	// Title
-			'superpwa_pull_to_refresh_enable_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Pull To Refresh	
+			add_settings_field(
+				'superpwa_pull_to_refresh_source',							// ID
+				__('Pull To Refresh	', 'super-progressive-web-apps'),	// Title
+				'superpwa_pull_to_refresh_enable_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
 
-		// Pull message
-		add_settings_field(
-			'superpwa_pull_to_refresh_pull_message',							// ID
-			__('Pull message', 'super-progressive-web-apps'),	// Title
-			'superpwa_pull_to_refresh_pull_message_text_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Pull message
+			add_settings_field(
+				'superpwa_pull_to_refresh_pull_message',							// ID
+				__('Pull message', 'super-progressive-web-apps'),	// Title
+				'superpwa_pull_to_refresh_pull_message_text_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
 
-		// Release message
-		add_settings_field(
-			'superpwa_pull_to_refresh_release_message',							// ID
-			__('Release message', 'super-progressive-web-apps'),		// Title
-			'superpwa_pull_to_refresh_pull_release_text_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Release message
+			add_settings_field(
+				'superpwa_pull_to_refresh_release_message',							// ID
+				__('Release message', 'super-progressive-web-apps'),		// Title
+				'superpwa_pull_to_refresh_pull_release_text_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
 
-		// Refreshing message
-		add_settings_field(
-			'superpwa_pull_to_refresh_refreshing',							// ID
-			__('Refreshing message', 'super-progressive-web-apps'),		// Title
-			'superpwa_pull_to_refresh_refreshing_text_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Refreshing message
+			add_settings_field(
+				'superpwa_pull_to_refresh_refreshing',							// ID
+				__('Refreshing message', 'super-progressive-web-apps'),		// Title
+				'superpwa_pull_to_refresh_refreshing_text_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
 
-		// Font size
-		add_settings_field(
-			'superpwa_pull_to_refresh_font_size',						// ID
-			__('Font size', 'super-progressive-web-apps'),	// Title
-			'superpwa_pull_to_refresh_font_size_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Font size
+			add_settings_field(
+				'superpwa_pull_to_refresh_font_size',						// ID
+				__('Font size', 'super-progressive-web-apps'),	// Title
+				'superpwa_pull_to_refresh_font_size_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
 
-		// Font Color
-		add_settings_field(
-			'superpwa_pull_to_refresh_font_color',						// ID
-			__('Font Color', 'super-progressive-web-apps'),	// Title
-			'superpwa_pull_to_refresh_font_color_cb',						// CB
-			'superpwa_pull_to_refresh_section',						// Page slug
-			'superpwa_pull_to_refresh_section'							// Settings Section ID
-		);
+			// Font Color
+			add_settings_field(
+				'superpwa_pull_to_refresh_font_color',						// ID
+				__('Font Color', 'super-progressive-web-apps'),	// Title
+				'superpwa_pull_to_refresh_font_color_cb',						// CB
+				'superpwa_pull_to_refresh_section',						// Page slug
+				'superpwa_pull_to_refresh_section'							// Settings Section ID
+			);
+
+		}
+		
 	}
+
 	add_action('admin_init', 'superpwa_pull_to_refresh_register_settings');
 
 /**
@@ -273,7 +281,10 @@ function superpwa_pull_to_refresh_font_color_cb()
  */
 function superpwa_pull_to_refresh_interface_render()
 {
-	// Authentication
+
+	if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ) {
+
+		// Authentication
 	if (!current_user_can('manage_options')) {
 		return;
 	}
@@ -293,10 +304,7 @@ function superpwa_pull_to_refresh_interface_render()
 ?>
 
 	<div class="wrap">
-		<h1><?php esc_html_e('Pull To Refresh', 'super-progressive-web-apps'); ?>
-			<!-- <small>(<a href="<?php //echo esc_url($addon_pull_to_refresh['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'
-									?>"><?php //echo esc_html__( 'Docs', 'super-progressive-web-apps' ); 
-										?></a>)</small> -->
+		<h1><?php esc_html_e('Pull To Refresh', 'super-progressive-web-apps'); ?>			
 		</h1>
 
 		<?php superpwa_setting_tabs_html(); ?>
@@ -314,17 +322,29 @@ function superpwa_pull_to_refresh_interface_render()
 			?>
 		</form>
 	</div>
-	<?php //superpwa_newsletter_form(); 
-	?>
-<?php
+	<?php	
+
+	}	
 }
 
-if(!function_exists('superpwa_pull_to_refresh_ptrfp_scripts_load')){
-	function superpwa_pull_to_refresh_ptrfp_scripts_load(){
+
+
+function superpwa_pull_to_refresh_ptrfp_scripts_load() {
+
+	if ( superpwa_addons_status( 'pull_to_refresh' ) 	== 'active' ) {
+
 		if(function_exists('superpwa_pull_to_refresh_get_settings')){
-				$settings = superpwa_pull_to_refresh_get_settings();
-			}else{ $settings = array(); }
+
+			$settings = superpwa_pull_to_refresh_get_settings();
+
+		}else{ 
+
+			$settings = array(); 
+
+		}
+
 		if( isset($settings['superpwa_pull_to_refresh_switch'])  && $settings['superpwa_pull_to_refresh_switch'] ==1 ){
+
 			wp_register_script( "superpwa_ptrfp_lib_script", SUPERPWA_PATH_SRC."admin/js/superpwa-ptr-lib.min.js", array('jquery'), SUPERPWA_VERSION, true );
 			$ptrArray = array(
 						'instrPullToRefresh'=> ( isset( $settings['superpwa_ptr_text'] )? $settings['superpwa_ptr_text'] : esc_html__("Pull down to refresh", 'pull-to-refresh-for-pwa') ),
@@ -337,6 +357,9 @@ if(!function_exists('superpwa_pull_to_refresh_ptrfp_scripts_load')){
 			wp_enqueue_script( "superpwa_ptrfp_lib_script");
 
 		}
+
 	}
-	add_action("wp_enqueue_scripts", 'superpwa_pull_to_refresh_ptrfp_scripts_load');
+	
 }
+
+add_action("wp_enqueue_scripts", 'superpwa_pull_to_refresh_ptrfp_scripts_load');
