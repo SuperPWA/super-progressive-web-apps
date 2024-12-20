@@ -187,6 +187,8 @@ Feel free to get in touch if you have any questions.
 == Screenshots ==
 
 1. Settings page in WordPress Admin > SuperPWA > Settings
+2. Addons in WordPress Admin > SuperPWA > Features(Addons)
+3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
 = 2.2.32 =
