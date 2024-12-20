@@ -287,6 +287,13 @@ window.mobileCheck = function() {
 
 	});
 
+	document.addEventListener('DOMContentLoaded', function () {
+		const reffer = document.referrer; 
+		if (reffer && reffer.includes('android-app://')) {
+			sessionStorage.setItem('superpwa_mode','apk');
+		} 
+	});
+
 	if (superpwa_sw.offline_form_addon_active) {
 		navigator.serviceWorker.ready.then(function (registration) {
 			return registration.sync.register('superpwa_form_sendFormData')
