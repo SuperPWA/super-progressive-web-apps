@@ -23,45 +23,48 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @since 1.8
  */
 function superpwa_ati_add_apple_touch_icons( $tags ) {
-	
-    // Get the icons added via SuperPWA > Settings
-    //$icons = superpwa_get_pwa_icons();
-        // Get settings
-    $settings = superpwa_get_settings();
 
-    $splashIcons = superpwa_apple_icons_get_settings();
+    if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) {
 
-    if(isset($splashIcons['status_bar_style']) && !empty($splashIcons['status_bar_style'])){
-         $status_bar_style = $splashIcons['status_bar_style'];
-     }else{
-        $status_bar_style = 'default';
-     }
-    $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
-    $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
-    $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="'.esc_attr($status_bar_style).'">' . PHP_EOL;
+        // Get the icons added via SuperPWA > Settings            
+        $settings = superpwa_get_settings();
 
-    if(isset($settings['icon']) && !empty($settings['icon']))
-    {
-        $tags .= '<link rel="apple-touch-icon"  href="' .esc_url($settings['icon']) . '">' . PHP_EOL; 
-        $tags .= '<link rel="apple-touch-icon" sizes="192x192" href="' .esc_url($settings['icon']) . '">' . PHP_EOL; 
+        $splashIcons = superpwa_apple_icons_get_settings();
+
+        if(isset($splashIcons['status_bar_style']) && !empty($splashIcons['status_bar_style'])){
+            $status_bar_style = $splashIcons['status_bar_style'];
+        }else{
+            $status_bar_style = 'default';
+        }
+        $tags .= '<meta name="mobile-web-app-capable" content="yes">' . PHP_EOL;
+        $tags .= '<meta name="apple-touch-fullscreen" content="yes">' . PHP_EOL;
+        $tags .= '<meta name="apple-mobile-web-app-title" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+        $tags .= '<meta name="application-name" content="'.esc_attr($settings['app_name']).'">' . PHP_EOL;
+        $tags .= '<meta name="apple-mobile-web-app-capable" content="yes">' . PHP_EOL;
+        $tags .= '<meta name="apple-mobile-web-app-status-bar-style" content="'.esc_attr($status_bar_style).'">' . PHP_EOL;
+
+        if(isset($settings['icon']) && !empty($settings['icon']))
+        {
+            $tags .= '<link rel="apple-touch-icon"  href="' .esc_url($settings['icon']) . '">' . PHP_EOL; 
+            $tags .= '<link rel="apple-touch-icon" sizes="192x192" href="' .esc_url($settings['icon']) . '">' . PHP_EOL; 
+        }
+        //Ios splash screen
+        $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' );
+        if( $iosScreenSetting && isset($iosScreenSetting['ios_splash_icon']) && !empty($iosScreenSetting['ios_splash_icon']) ) {
+            $iconsInfo = superpwa_apple_splashscreen_files_data();
+            foreach ( $iosScreenSetting['ios_splash_icon'] as $key => $value ) {
+                if( !empty($value) && !empty($key) && isset($iconsInfo[$key]) ) {
+                    $screenData = $iconsInfo[$key];
+                    $tags .= '<link rel="apple-touch-startup-image" media="screen and (device-width: '.esc_attr($screenData['device-width']).') and (device-height: '.esc_attr($screenData['device-height']).') and (-webkit-device-pixel-ratio: '.esc_attr($screenData['ratio']).') and (orientation: '.esc_attr($screenData['orientation']).')" href="'.esc_url($value).'"/>'."\n";
+                }//if closed
+            }//foreach closed
+        }
+
     }
-    //Ios splash screen
-    $iosScreenSetting = get_option( 'superpwa_apple_icons_uploaded' );
-    if( $iosScreenSetting && isset($iosScreenSetting['ios_splash_icon']) && !empty($iosScreenSetting['ios_splash_icon']) ) {
-        $iconsInfo = superpwa_apple_splashscreen_files_data();
-        foreach ( $iosScreenSetting['ios_splash_icon'] as $key => $value ) {
-            if( !empty($value) && !empty($key) && isset($iconsInfo[$key]) ) {
-                $screenData = $iconsInfo[$key];
-                $tags .= '<link rel="apple-touch-startup-image" media="screen and (device-width: '.esc_attr($screenData['device-width']).') and (device-height: '.esc_attr($screenData['device-height']).') and (-webkit-device-pixel-ratio: '.esc_attr($screenData['ratio']).') and (orientation: '.esc_attr($screenData['orientation']).')" href="'.esc_url($value).'"/>'."\n";
-            }//if closed
-        }//foreach closed
-    }
-
+	    
     return $tags;
 }
+
 add_filter( 'superpwa_wp_head_tags', 'superpwa_ati_add_apple_touch_icons' );
 
 /**
@@ -73,17 +76,28 @@ add_filter( 'superpwa_wp_head_tags', 'superpwa_ati_add_apple_touch_icons' );
  * 
  * @return (string) Remove the Apple Touch Icons from the existing tag string
  */
-function superpwa_remove_site_apple_touch_icon($meta_tags) {
-	if(is_customize_preview() && is_admin()){
+function superpwa_remove_site_apple_touch_icon( $meta_tags ) {
+
+    if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) {
+
+        if ( is_customize_preview() && is_admin() ) {
             return $meta_tags;
         }
-        foreach ($meta_tags as $key => $value) {
-            if(strpos($value, 'apple-touch-icon') !== false){
-                unset($meta_tags[$key]);
+
+        foreach ( $meta_tags as $key => $value ) {
+
+            if ( strpos( $value, 'apple-touch-icon' ) !== false ) {
+
+                unset( $meta_tags[$key] );
+
             }
         }
-        return $meta_tags;
+
+    }
+	
+    return $meta_tags;
 }
+
 add_filter( 'site_icon_meta_tags', 'superpwa_remove_site_apple_touch_icon', 0 );
 
 
@@ -108,7 +122,10 @@ function superpwa_apple_icons_get_settings() {
  * @since 	2.1.7
  */
 function superpwa_apple_icons_register_settings() {
-    // Register Setting
+
+    if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) {
+
+        // Register Setting
 	register_setting( 
 		'superpwa_apple_icons_settings_group',		 // Group name
 		'superpwa_apple_icons_settings', 			// Setting name = html form <input> name on settings form
@@ -155,6 +172,9 @@ function superpwa_apple_icons_register_settings() {
             'superpwa_apple_icons_section',                      // Page slug
             'superpwa_apple_icons_section'                       // Settings Section ID
         );
+
+    }
+    
 }
 add_action( 'admin_init', 'superpwa_apple_icons_register_settings' );
 
@@ -277,21 +297,26 @@ function superpwa_apple_splashscreen_files_data(){
     return $iosSplashData;
 }
 
-function superpwa_load_admin_scripts($hooks){
-    if( !in_array($hooks, array('superpwa_page_superpwa-apple-icons', 'super-pwa_page_superpwa-apple-icons')) && strpos($hooks, 'superpwa-apple-icons') == false ) {
-        return false;
+function superpwa_load_admin_scripts( $hooks ){
+
+    if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) {
+
+        if( !in_array($hooks, array('superpwa_page_superpwa-apple-icons', 'super-pwa_page_superpwa-apple-icons')) && strpos($hooks, 'superpwa-apple-icons') == false ) {
+            return false;
+        }
+        wp_enqueue_media();
+        wp_register_script('superpwa-admin-apple-script',SUPERPWA_PATH_SRC .'/admin/js/jszip.min.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
+        wp_enqueue_script('superpwa-admin-apple-script'); 
+        wp_localize_script( 'superpwa-admin-apple-script', 'superpwaIosScreen', 
+                            array(
+                                'nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' ),
+                                'max_file_size'=> ini_get('upload_max_filesize')
+                            ) );
+
     }
-    wp_enqueue_media();
-    wp_register_script('superpwa-admin-apple-script',SUPERPWA_PATH_SRC .'/admin/js/jszip.min.js', array('superpwa-main-js'), SUPERPWA_VERSION, true);
-    wp_enqueue_script('superpwa-admin-apple-script'); 
-    wp_localize_script( 'superpwa-admin-apple-script', 'superpwaIosScreen', 
-                        array(
-                            'nonce'=> wp_create_nonce( 'superpwaIosScreenSecurity' ),
-                            'max_file_size'=> ini_get('upload_max_filesize')
-                        ) );
-
-
+    
 }
+
 add_action( 'admin_enqueue_scripts', 'superpwa_load_admin_scripts' );
 
 /**
@@ -318,8 +343,10 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
  * @since 1.7
  */ 
 function superpwa_apple_icons_interface_render() {
-	
-	// Authentication
+
+	if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ){
+
+        // Authentication
     if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
     }
@@ -362,66 +389,73 @@ function superpwa_apple_icons_interface_render() {
 	</div>
     <?php superpwa_newsletter_form(); ?>
 	<?php
+
+    }
+	
 }
 
 function superpwa_splashscreen_uploader(){
 
-    // Authentication
-    if ( ! current_user_can( 'manage_options' ) ) {
-       return;
-    }
+    if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) {
 
-    if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
-        echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
+        // Authentication
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+    
+        if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
+            echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
+        }
+        
+        if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
+            echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file type not matched','super-progressive-web-apps')));die;
+        }
+        if(isset($_FILES['file']['error']) && $_FILES['file']['error']!='0'){
+            echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file contains error','super-progressive-web-apps')));die;
+        }
+    
+        $upload = wp_upload_dir();
+        $path =  $upload['basedir']."/superpwa-splashIcons/";
+        $subpath = $upload['basedir']."/superpwa-splashIcons/super_splash_screens/";
+        wp_mkdir_p($path);
+    
+        if ( ! function_exists( 'wp_filesystem' ) ) {
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        }
+        
+        // Initialize the WP_Filesystem global variable
+        global $wp_filesystem;
+        
+        if ( ! WP_Filesystem() ) {
+            WP_Filesystem();
+        }
+        
+        $wp_filesystem->put_contents( $path . '/index.html', '', FS_CHMOD_FILE ); // FS_CHMOD_FILE is the default file permission
+        $wp_filesystem->put_contents( $subpath . '/index.html', '', FS_CHMOD_FILE );
+        
+        $zipFileName = $path."/splashScreen.zip";
+        // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
+        $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
+    
+        if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
+            $result = unzip_file($zipFileName, $path);
+            wp_delete_file($zipFileName);    
+        }else{
+            echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Files are not uploading','super-progressive-web-apps')));die;
+        }
+    
+        $pathURL = $upload['baseurl']."/superpwa-splashIcons/super_splash_screens/";
+        $iosScreenData = superpwa_apple_splashscreen_files_data(); 
+        $iosScreenSetting = (array)get_option( 'superpwa_apple_icons_uploaded' ) ;
+        foreach ($iosScreenData as $key => $value) {
+            $iosScreenSetting['ios_splash_icon'][$key] = sanitize_url($pathURL.$value['file']);
+        }
+        update_option( 'superpwa_apple_icons_uploaded', $iosScreenSetting ) ;
+        
+        echo wp_json_encode(array("status"=>200, "message"=> esc_html__('Splash screen uploaded successfully','super-progressive-web-apps')));
+        die;
     }
     
-    if(isset($_FILES['file']['type']) && $_FILES['file']['type']!='application/zip'){
-        echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file type not matched','super-progressive-web-apps')));die;
-    }
-    if(isset($_FILES['file']['error']) && $_FILES['file']['error']!='0'){
-        echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('file contains error','super-progressive-web-apps')));die;
-    }
-
-    $upload = wp_upload_dir();
-    $path =  $upload['basedir']."/superpwa-splashIcons/";
-    $subpath = $upload['basedir']."/superpwa-splashIcons/super_splash_screens/";
-    wp_mkdir_p($path);
-
-    if ( ! function_exists( 'wp_filesystem' ) ) {
-        require_once( ABSPATH . 'wp-admin/includes/file.php' );
-    }
-    
-    // Initialize the WP_Filesystem global variable
-    global $wp_filesystem;
-    
-    if ( ! WP_Filesystem() ) {
-        WP_Filesystem();
-    }
-    
-    $wp_filesystem->put_contents( $path . '/index.html', '', FS_CHMOD_FILE ); // FS_CHMOD_FILE is the default file permission
-    $wp_filesystem->put_contents( $subpath . '/index.html', '', FS_CHMOD_FILE );
-    
-    $zipFileName = $path."/splashScreen.zip";
-    // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
-    $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
-
-    if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
-        $result = unzip_file($zipFileName, $path);
-        wp_delete_file($zipFileName);    
-    }else{
-        echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Files are not uploading','super-progressive-web-apps')));die;
-    }
-
-    $pathURL = $upload['baseurl']."/superpwa-splashIcons/super_splash_screens/";
-    $iosScreenData = superpwa_apple_splashscreen_files_data(); 
-    $iosScreenSetting = (array)get_option( 'superpwa_apple_icons_uploaded' ) ;
-    foreach ($iosScreenData as $key => $value) {
-         $iosScreenSetting['ios_splash_icon'][$key] = sanitize_url($pathURL.$value['file']);
-    }
-    update_option( 'superpwa_apple_icons_uploaded', $iosScreenSetting ) ;
-	
-	echo wp_json_encode(array("status"=>200, "message"=> esc_html__('Splash screen uploaded successfully','super-progressive-web-apps')));
-	 	  die;
 }
 function superpwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
     $zip = new ZipArchive;

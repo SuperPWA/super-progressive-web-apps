@@ -561,9 +561,7 @@ function superpwa_addons_status( $slug ) {
 
 			// If we are here, add-on is not installed and not active
 			return 'upgrade';
-			
-			
-			
+									
 			break;
 			
 		default:

@@ -125,16 +125,6 @@ function superpwa_generate_sw() {
 	
 	// Get Settings
 	$settings = superpwa_get_settings();
-
-	$wpml_settings = get_option( 'superpwa_wpml_settings');
-
-	if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
-		$current_language = superpwa_get_language_shortcode();
-		$start_url = superpwa_home_url().$current_language;
-		$manifest['start_url'] = $start_url;
-		$manifest['scope'] = "/";
-	}
-	
 	// Return true if dynamic file returns a 200 response.
 	if ( superpwa_file_exists( home_url( '/' ) . superpwa_get_sw_filename() ) && defined( 'WP_CACHE' ) && ! WP_CACHE ) {
 		

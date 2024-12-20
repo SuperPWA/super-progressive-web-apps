@@ -54,24 +54,34 @@ function superpwa_utm_tracking_get_settings() {
  * @since 1.7
  */
 function superpwa_utm_tracking_for_start_url( $start_url ) {
-	
-	// Get UTM Tracking settings
-	$utm_params = superpwa_utm_tracking_get_settings();
-	
-	// Add the initial '/?'
-	$start_url = trailingslashit( $start_url ) . '?';
-	
-	// Build the URL
-	foreach ( $utm_params as $param => $value ) {
+
+	if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ) {
+
+		// Get UTM Tracking settings
+		$utm_params = superpwa_utm_tracking_get_settings();
 		
-		if ( ! empty( $value ) ) {
-			$start_url = $start_url . $param . '=' . rawurlencode( $value ) . '&';
+		// Add the initial '/?'
+		$start_url = trailingslashit( $start_url ) . '?';
+		
+		// Build the URL
+		foreach ( $utm_params as $param => $value ) {
+			
+			if ( ! empty( $value ) ) {
+				$start_url = $start_url . $param . '=' . rawurlencode( $value ) . '&';
+			}
 		}
+		
+		// Remove trailing '&'
+		return rtrim( $start_url, '&' );
+
+	}else{
+
+		return $start_url;
+
 	}
-	
-	// Remove trailing '&'
-	return rtrim( $start_url, '&' );
+		
 }
+
 add_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
 
 /**
@@ -83,10 +93,14 @@ add_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url'
  * @since	1.7
  */
 function superpwa_utm_tracking_save_settings_todo() {
+
+	if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ) {
+		// Regenerate manifest
+		superpwa_generate_manifest();
+	}
 	
-	// Regenerate manifest
-	superpwa_generate_manifest();
 }
+
 add_action( 'add_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
 add_action( 'update_option_superpwa_utm_tracking_settings', 'superpwa_utm_tracking_save_settings_todo' );
 add_action( 'superpwa_addon_activated_utm_tracking', 'superpwa_utm_tracking_save_settings_todo' );
@@ -100,11 +114,14 @@ add_action( 'superpwa_addon_activated_utm_tracking', 'superpwa_utm_tracking_save
  */
 function superpwa_utm_tracking_deactivate_todo() {
 	
-	// Unhook the UTM tracking params filter
-	remove_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
+	if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ) {
+		// Unhook the UTM tracking params filter
+		remove_filter( 'superpwa_manifest_start_url', 'superpwa_utm_tracking_for_start_url' );
 	
-	// Regenerate manifest
-	superpwa_generate_manifest();
+		// Regenerate manifest
+		superpwa_generate_manifest();
+	}
+	
 }
 add_action( 'superpwa_addon_deactivated_utm_tracking', 'superpwa_utm_tracking_deactivate_todo' );
 
@@ -115,7 +132,9 @@ add_action( 'superpwa_addon_deactivated_utm_tracking', 'superpwa_utm_tracking_de
  */
 function superpwa_utm_tracking_register_settings() {
 
-	// Register Setting
+	if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ){
+
+		// Register Setting
 	register_setting( 
 		'superpwa_utm_tracking_settings_group',		 // Group name
 		'superpwa_utm_tracking_settings', 			// Setting name = html form <input> name on settings form
@@ -183,6 +202,9 @@ function superpwa_utm_tracking_register_settings() {
 			'superpwa_utm_tracking_section',						// Page slug
 			'superpwa_utm_tracking_section'							// Settings Section ID
 		);	
+
+	}
+	
 }
 add_action( 'admin_init', 'superpwa_utm_tracking_register_settings' );
 
@@ -348,8 +370,10 @@ function superpwa_utm_tracking_content_cb() {
  * @since 1.7
  */ 
 function superpwa_utm_tracking_interface_render() {
-	
-	// Authentication
+
+	if ( superpwa_addons_status( 'utm_tracking' ) == 'active' ) {
+
+		// Authentication
 
 	if ( ! current_user_can( superpwa_current_user_can() ) ) {
         return;
@@ -391,4 +415,7 @@ function superpwa_utm_tracking_interface_render() {
 	</div>
 	<?php superpwa_newsletter_form(); ?>
 	<?php
+
+	}
+		
 }

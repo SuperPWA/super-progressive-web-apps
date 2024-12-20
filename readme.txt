@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.7
 Requires PHP: 5.3
-Stable tag: 2.2.32
+Stable tag: 2.2.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -187,8 +187,20 @@ Feel free to get in touch if you have any questions.
 == Screenshots ==
 
 1. Settings page in WordPress Admin > SuperPWA > Settings
+2. Addons in WordPress Admin > SuperPWA > Features(Addons)
+3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.33 =
+* Date: [20.December.2024](https://superpwa.com/superpwa-2-2-33-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: WP 6.7.0: Translations loaded too early #572
+* BugFixed: Start_url not getting updated in manifest and when multilingual option enabled and directly deactivated addon #570
+* BugFixed: Function _load_textdomain_just_in_time was called incorrectly. #571
+* BugFixed: If the option to display the CTA banner on IOS is unchecked, the CTA install button added using shortcode also stops working on IOS devices. #569
+* BugFixed: Conflict issue with Visibility extension #566
+* Improvement: Change screenshots on plugin details page #546
+* Feature: Need to added the feature in Nav Bar extension. #567
+
 = 2.2.32 =
 * Date: [26.November.2024](https://superpwa.com/superpwa-2-2-32-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added feature of Offline form. #297
@@ -285,14 +297,6 @@ Feel free to get in touch if you have any questions.
 * Date: [28.November.2023](https://superpwa.com/superpwa-2-2-22-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Role Based Access is not working #472
 * BugFixed: Fixed Broken Access Control vulnerability [Learn More](https://patchstack.com/database/vulnerability/super-progressive-web-apps/wordpress-super-progressive-web-apps-plugin-2-2-21-broken-access-control-vulnerability)
-
-= 2.2.21 =
-* Date: [18.October.2023](https://superpwa.com/superpwa-2-2-21-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* BugFixed: Push notification is not working on IOS. #468
-* Feature: Added Notification badge on the PWA icon #212
-* BugFixed: Role Based Access is not working #472
-* BugFixed: If add-on is not activated than do not show the settings button #470
-* BugFixed: The button network deactivate is not working #475
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)
