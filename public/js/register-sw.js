@@ -288,11 +288,14 @@ window.mobileCheck = function() {
 	});
 
 	document.addEventListener('DOMContentLoaded', function () {
-		const reffer = document.referrer; 
-		if (reffer && reffer.includes('android-app://')) {
-			sessionStorage.setItem('superpwa_mode','apk');
-		} 
+		if (typeof pnScriptSetting !== 'undefined' && pnScriptSetting.superpwa_apk_only !== undefined && pnScriptSetting.superpwa_apk_only == 1) {
+			const reffer = document.referrer; 
+			if (reffer && reffer.includes('android-app://')) {
+				sessionStorage.setItem('superpwa_mode', 'apk');
+			}
+		}
 	});
+	
 
 	if (superpwa_sw.offline_form_addon_active) {
 		navigator.serviceWorker.ready.then(function (registration) {
