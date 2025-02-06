@@ -312,7 +312,7 @@ function superpwa_reset_all_settings(){
         if ( ! isset( $_POST['superpwa_security_nonce'] ) ){
            return; 
         }
-        if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
+        if ( !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) ){
            return;  
         }
 		if ( ! current_user_can( superpwa_current_user_can() ) ) {
@@ -348,7 +348,7 @@ function superpwa_setting_tabs_html(){
  $license_settings = admin_url( 'admin.php?page=superpwa#license-settings');
  $addon_page = admin_url( 'admin.php?page=superpwa-addons');
  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
- if( $_GET['page'] == 'superpwa-upgrade' ) {
+ if( isset($_GET['page']) && $_GET['page'] == 'superpwa-upgrade' ) {
  	$license_settings_class = $addon_page_class =  '' ;
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
  	if(  isset( $_GET['page'] ) && $_GET['page'] == 'superpwa-upgrade' ) {

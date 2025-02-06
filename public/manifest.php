@@ -398,6 +398,7 @@ function superpwa_image_extension($image_url = '')
 }
 
 $show_manifest_icon = 0;
+// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 $current_page_url = home_url( $_SERVER['REQUEST_URI'] );
 if(isset($superpwa_settings['excluded_urls']) && !empty($superpwa_settings['excluded_urls'])){
 	$excluded_urls = explode(",", $superpwa_settings['excluded_urls']);

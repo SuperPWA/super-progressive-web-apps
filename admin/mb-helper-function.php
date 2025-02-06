@@ -57,7 +57,7 @@ function superpwa_add_deactivation_feedback_modal() {
 function superpwa_send_feedback() {
     // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: its in form variable.
     if( isset( $_POST['data'] ) ) {
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Reason: its in form variable.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: its in form variable.
         parse_str( $_POST['data'], $form );
     }
 

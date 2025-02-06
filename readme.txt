@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.7
 Requires PHP: 5.3
-Stable tag: 2.2.33
+Stable tag: 2.2.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,14 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.34 =
+* Date: [06.February.2025](https://superpwa.com/superpwa-2-2-34-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: While using the navigation bar in Superpwa, the hamburger menu should not show. #509
+* BugFixed: Issue persist in IOS new package version. #580
+* Feature: Added an Option to Delete Generated APK Files #577
+* Feature: Added compatibility with the plugin litespeed cache #573
+* Feature: Added the Nav bar support in IOS package. #578
+
 = 2.2.33 =
 * Date: [20.December.2024](https://superpwa.com/superpwa-2-2-33-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: WP 6.7.0: Translations loaded too early #572
@@ -292,11 +300,6 @@ Feel free to get in touch if you have any questions.
 * Enhancement: Update readme.txt and add all pro feature list #488
 * BugFixed: Warning appearing in manifest #487
 * BugFixed: On Uninstall few data still remain inside db. #485
-
-= 2.2.22 =
-* Date: [28.November.2023](https://superpwa.com/superpwa-2-2-22-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* BugFixed: Role Based Access is not working #472
-* BugFixed: Fixed Broken Access Control vulnerability [Learn More](https://patchstack.com/database/vulnerability/super-progressive-web-apps/wordpress-super-progressive-web-apps-plugin-2-2-21-broken-access-control-vulnerability)
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)
