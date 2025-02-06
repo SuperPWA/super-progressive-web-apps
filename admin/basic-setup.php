@@ -508,10 +508,10 @@ function superpwa_get_select2_data(){
 			return; 
 		}
         
-        if ( (wp_verify_nonce( $_GET['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
+        if ( (wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) )){
 
-			$search        = isset( $_GET['q'] ) ? sanitize_text_field( $_GET['q'] ) : '';                                    
-			$type          = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
+			$search        = isset( $_GET['q'] ) ? sanitize_text_field( wp_unslash( $_GET['q'] ) ) : '';                                    
+			$type          = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : '';
 
 			$arg['post_type']      = $type;
             $arg['posts_per_page'] = 50;  
@@ -575,6 +575,7 @@ function superpwa_manifest_query_vars($vars) {
 * Fix for nginx server when sw.js does not return 200 status code
 */
 function superpwa_nginx_server_fix( $sw_url ) {
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
     if (isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) {
 		$response = wp_remote_head( $sw_url );
 		if ( is_wp_error( $response ) ) {

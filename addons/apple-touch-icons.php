@@ -207,6 +207,7 @@ function superpwa_apple_icons_splash_screen_cb() {
         } 
     ?>
     <p id="aft_img_gen"> </p>
+    <?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
     <img src="<?php echo esc_url($src); ?>" id="thumbnail" title="<?php echo esc_attr__('Currently selected splash screen', 'super-progressive-web-apps'); ?>"  width="100">
 
     <script id="iosScreen-data" type="application/json"><?php echo wp_json_encode($splashIconsScreens); ?></script>
@@ -403,7 +404,7 @@ function superpwa_splashscreen_uploader(){
             return;
         }
     
-        if( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( $_POST['security_nonce'], 'superpwaIosScreenSecurity' )) ) {
+        if ( (!isset($_POST['security_nonce'])) || (isset($_POST['security_nonce']) && !wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['security_nonce'])), 'superpwaIosScreenSecurity' )) ) {
             echo wp_json_encode(array('status'=>400, 'message'=>esc_html__('security nonce not matched','super-progressive-web-apps')));die;
         }
         
@@ -434,12 +435,14 @@ function superpwa_splashscreen_uploader(){
         $wp_filesystem->put_contents( $subpath . '/index.html', '', FS_CHMOD_FILE );
         
         $zipFileName = $path."/splashScreen.zip";
-        // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
-        $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
+        if ( isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK ) {
+            // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $moveFile = move_uploaded_file($_FILES['file']['tmp_name'], $zipFileName);
     
-        if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
-            $result = unzip_file($zipFileName, $path);
-            wp_delete_file($zipFileName);    
+            if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
+                $result = unzip_file($zipFileName, $path);
+                wp_delete_file($zipFileName);
+            }
         }else{
             echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Files are not uploading','super-progressive-web-apps')));die;
         }

@@ -1007,7 +1007,7 @@ function superpwa_admin_interface_render() {
 			if( file_exists($superpwa_pro_manager) ){
 				require_once $superpwa_pro_manager;
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
-				if( $_GET['page'] == 'superpwa' ) {
+				if( isset($_GET['page'] ) && $_GET['page'] == 'superpwa' ) {
 					wp_enqueue_style( 'superpwa-license-panel-css', SUPERPWA_PRO_PATH_SRC . '/assets/inc/css/superpwa-pro-license-data.css', array() , SUPERPWA_PRO_VERSION );
 				}
 			}

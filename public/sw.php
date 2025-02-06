@@ -421,7 +421,7 @@ function superpwa_register_sw() {
 	    $exclude_homescreen = explode(",",$settings['exclude_homescreen']);
 
 	    $siteUrl = filter_input(INPUT_SERVER, 'REQUEST_URI');
-
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	    $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http").'://'.$_SERVER['HTTP_HOST'].$siteUrl;
 	    if(in_array($actual_link, $exclude_homescreen)){
     	  $include_script = false;

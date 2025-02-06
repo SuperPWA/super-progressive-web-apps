@@ -317,13 +317,14 @@ function superpwa_addons_interface_render() {
 	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
 	if ( isset( $_GET['activated'] ) && isset( $_GET['addon'] ) ) {
 		
-		// Add-on activation action. Functions defined in the add-on file are loaded by now. 
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
-		do_action( 'superpwa_addon_activated_' . sanitize_title($_GET['addon'] ));
+		// Add-on activation action. Functions defined in the add-on file are loaded by now.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form information.
+		$addon_name = isset($_GET['addon']) ? wp_unslash($_GET['addon']) : '';
+		do_action( 'superpwa_addon_activated_' . sanitize_title($addon_name) );
 		
 		// Get add-on info
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
-		$addon = superpwa_get_addons( sanitize_title($_GET['addon']) );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form information.
+		$addon = superpwa_get_addons( sanitize_title($addon_name) );
 		
 		// Add UTM Tracking to admin_link_text if its not an admin page.
 		if ( $addon['admin_link_target'] === 'external' ) {
@@ -401,6 +402,7 @@ function superpwa_addons_interface_render() {
 										<?php
 										// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
 										echo esc_html__($addon['name'], 'super-progressive-web-apps'); ?>
+										<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 										<img src="<?php echo esc_attr(SUPERPWA_PATH_SRC . 'admin/img/' . $addon['icon']); ?>" class="plugin-icon" alt="">
 									</a>
 									<span class="<?php echo esc_attr($addon['type'])?>"><?php if($addon['type']=='addon_pro'){ esc_html_e( 'Pro', 'super-progressive-web-apps');}else{ esc_html_e( 'Free', 'super-progressive-web-apps'); }?></span>
@@ -675,15 +677,16 @@ function superpwa_addons_button_link( $slug ) {
 function superpwa_addons_handle_activation() {
 	
 	// Get the add-on status
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
-	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form information.
+	$addon_name = isset($_GET['addon']) ? wp_unslash($_GET['addon']) : '';
+	$addon_status = superpwa_addons_status( sanitize_title($addon_name) );
 	
 	// Authentication	
 	if ( 
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_activate_nonce'], 'activate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( sanitize_text_field(  wp_unslash( $_GET['superpwa_addon_activate_nonce'] ) ), 'activate' ) ) || 
 		! ( $addon_status == 'inactive' ) 
 	) {
 		
@@ -696,13 +699,13 @@ function superpwa_addons_handle_activation() {
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 	
 	// Add the add-on to the list of active add-ons
-	$active_addons[] = sanitize_text_field($_GET['addon']);
+	$active_addons[] = sanitize_text_field($addon_name);
 	
 	// Write settings back to database
 	update_option( 'superpwa_active_addons', $active_addons );
 		
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . sanitize_title($_GET['addon'] )) );
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . sanitize_title($addon_name )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activation' );
@@ -718,14 +721,15 @@ add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activa
 function superpwa_addons_handle_deactivation() {
 	
 	// Get the add-on status
-	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reason: We are not processing form information.
-	$addon_status = superpwa_addons_status( sanitize_title($_GET['addon']) );
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Reason: We are not processing form information.
+	$addon_name = isset($_GET['addon']) ? wp_unslash($_GET['addon']) : '';
+	$addon_status = superpwa_addons_status( sanitize_title($addon_name) );
 	// Authentication
 	if ( 
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( $_GET['superpwa_addon_deactivate_nonce'], 'deactivate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_addon_deactivate_nonce'] ) ), 'deactivate' ) ) || 
 		! ( $addon_status == 'active' ) 
 	) {
 		
@@ -739,17 +743,17 @@ function superpwa_addons_handle_deactivation() {
 	
 	// Delete the add-on from the active_addons array in SuperPWA settings.
 	$active_addons = array_flip( $active_addons );
-	unset( $active_addons[ sanitize_title($_GET['addon']) ] );
+	unset( $active_addons[ sanitize_title($addon_name) ] );
 	$active_addons = array_flip( $active_addons );
 		
 	// Write settings back to database
 	update_option( 'superpwa_active_addons', $active_addons );
 		
 	// Add-on deactivation action. Functions defined in the add-on file are still availalbe at this point. 
-	do_action( 'superpwa_addon_deactivated_' . sanitize_title($_GET['addon']) );
+	do_action( 'superpwa_addon_deactivated_' . sanitize_title($addon_name) );
 	
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . sanitize_title($_GET['addon'] )) );
+	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . sanitize_title($addon_name )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );
@@ -762,12 +766,16 @@ add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deac
  */
 function superpwa_newsletter_submit(){
 	
-	if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
+	if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) )){
 	global $current_user;
 	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
+	$email = "";
+	if ( isset($_POST['email']) ) {
+		$email = sanitize_email( wp_unslash( $_POST['email'] ) );
+	}
     $api_params = array(
         'name' => sanitize_text_field($current_user->display_name),
-        'email'=> sanitize_email($_POST['email']),
+        'email'=> $email,
         'website'=> sanitize_url( get_site_url() ),
         'type'=> 'superpwa'
     );
@@ -787,7 +795,7 @@ else{
 add_action( 'wp_ajax_superpwa_newsletter_submit', 'superpwa_newsletter_submit' );
 
 function superpwa_newsletter_hide_form(){   
-	  if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( $_REQUEST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) )){
+	  if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( sanitize_text_field( wp_unslash($_REQUEST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) )){
 			$hide_newsletter  = get_option('superpwa_hide_newsletter');
 			if($hide_newsletter == false){
 				add_option( 'superpwa_hide_newsletter', 'no');

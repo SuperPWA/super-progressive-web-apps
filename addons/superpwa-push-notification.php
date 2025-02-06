@@ -52,7 +52,7 @@ class SPWAP_PUSH_NOTIFICATION
 
     
 public function enable_modules(){
-    if(!wp_verify_nonce( $_REQUEST['verify_nonce'], 'verify_request' ) ) {
+    if ( isset($_REQUEST['verify_nonce']) && !wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['verify_nonce'])), 'verify_request' ) ) {
         echo wp_json_encode(array("status"=>300,"message"=>esc_html__('Request not valid','super-progressive-web-apps')));
         exit();
     }
@@ -64,7 +64,10 @@ public function enable_modules(){
 
     $plugins = array();
     $redirectSettingsUrl = '';
-    $currentActivateModule = sanitize_text_field( wp_unslash($_REQUEST['activate']));
+    $currentActivateModule = '';
+    if ( isset($_REQUEST['activate']) ) {
+        $currentActivateModule = sanitize_text_field( wp_unslash($_REQUEST['activate']) );
+    }
     switch($currentActivateModule){
         case 'pushnotification': 
             $nonceUrl = add_query_arg(

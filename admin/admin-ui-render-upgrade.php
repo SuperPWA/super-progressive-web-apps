@@ -85,6 +85,7 @@ function superpwa_upgread_pro_interface_render(){
 				                        <div class="fet">
 				                            <div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Call to Action feature', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -92,6 +93,7 @@ function superpwa_upgread_pro_interface_render(){
 				                            </div>
 				                            <div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Advanced Tech Support', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -100,6 +102,7 @@ function superpwa_upgread_pro_interface_render(){
 
 				                            <div class="fe-2">
 				                                <div class="fe-t">
+													<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Android APK APP Generator', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -107,6 +110,7 @@ function superpwa_upgread_pro_interface_render(){
 				                            </div>
 				                            <div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Apple App Package Generator', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -115,6 +119,7 @@ function superpwa_upgread_pro_interface_render(){
 
 				                            <div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Continuous Updates', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -122,13 +127,15 @@ function superpwa_upgread_pro_interface_render(){
 				                            </div>
 																		<div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Innovation', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
 				                                <p><?php esc_html_e( 'Be the first one to get the innovative features that we build in the future.', 'super-progressive-web-apps' ); ?></p>
 				                            </div>
-																		<div class="fe-2">
+											<div class="fe-2">
 				                                <div class="fe-t">
+												<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                                    <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/tick.png'); ?>">
 				                                    <h4><?php esc_html_e( 'Documentation', 'super-progressive-web-apps' ); ?></h4>
 				                                </div>
@@ -234,6 +241,7 @@ function superpwa_upgread_pro_interface_render(){
 				                </div>
 				            </div><!-- /.pri-lst -->
 				            <div class="tru-us">
+							<?php // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 				                <img src="<?php echo esc_url(SUPERPWA_PATH_SRC . 'admin/img/rating.png'); ?>">
 				                <h2><?php esc_html_e( 'Used by more than 50,000+ Users!', 'super-progressive-web-apps' ); ?></h2>
 				                <p><?php esc_html_e( 'More than 40k Websites, Blogs &amp; E-Commerce shops are powered by our SuperPWA making it the #1 Independent PWA plugin in WordPress.', 'super-progressive-web-apps' ); ?></p>
