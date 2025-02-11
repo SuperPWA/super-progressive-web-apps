@@ -179,9 +179,6 @@ function superpwa_sw_template() {
       }
     }
 
-	if (function_exists('superpwa_home_url')) {
-		$superpwa_home_url = superpwa_home_url();
-	}
    
 	// Start output buffer. Everything from here till ob_get_clean() is returned
 	ob_start();  ?>
@@ -281,65 +278,8 @@ self.addEventListener('fetch', function(e) {
 		return;
     <?php }	?>
 
-	<?php $active_addons = get_option( 'superpwa_active_addons', array() );
-		if ( in_array('offline_form_for_superpwa', $active_addons) ){
-	     ?>
-			if ( e.request.referrer.match(/^(wp-admin):\/\//i) ) return;
+	<?php do_action('superpwa_offline_form_fetch'); ?>
 
-			if ( e.request.method !== 'GET' ) {
-
-				e.respondWith(
-
-					fetch(e.request)
-
-						.catch(error => {
-
-							if(e.request.method == 'POST' ){
-								console.log(form_data)
-								saveOfflineFormPostRequests(e.request.url,form_data);
-
-								return new Response(`
-									<meta name="viewport" content="width=device-width, initial-scale=1.0">
-									<p align="center">
-										<br><br><br>
-										<h2 align="center">Your form submission is saved. It will be submitted when you are back online</h2>
-									</p>
-									<p align="center">
-										<button 
-											type="button" 
-											style="background: #2271b1; padding: 10px 20px; color: #fff; text-align: center; border-radius: 60px; font-size: 16px; margin: 0 auto 15px; text-decoration: none; display: inline-block; cursor: pointer;" 
-											onclick="window.location=superpwa_home_url;">
-											Go to Home
-										</button>
-									</p>
-									<script>
-										var superpwa_home_url = "<?php echo esc_url($superpwa_home_url)?>";
-									</script>
-								`, {
-									status: 200,
-									statusText: 'Form saved in offline mode',
-									headers: new Headers({
-										'Content-Type': 'text/html'
-									})
-								});
-
-
-
-							}else{
-
-								console.log('inside else')
-								return caches.match(offlinePage);
-
-							}
-						})
-
-				);
-
-				return;
-
-			}
-	<?php } ?>
-			
 			// For Range Headers
 			if (e.request.headers.has('range')) {
 				return;
