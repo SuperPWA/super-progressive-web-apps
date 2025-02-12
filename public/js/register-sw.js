@@ -436,7 +436,7 @@ if ('serviceWorker' in navigator) {
 		  window.addEventListener('online', (e) => { updateOnlineStatus(e) });
 		  
 		  function updateOnlineStatus(event) {
-			  window.location.reload();
+			  setTimeout(window.location.reload(),3000);
 		  }
 		  window.onload = function (event) {
 			  console.log('Page Load');
@@ -807,12 +807,17 @@ if ('serviceWorker' in navigator) {
 							  const qty_input = minus_parent.querySelector('.quantity-wrapper .qty');
 							  const product_id = button.getAttribute('data-product_id');
 							  
-							  qty_input.value = qty_input.value < 2 ? 0 : parseInt(qty_input.value) - 1;
+							  //qty_input.value = qty_input.value < 2 ? 0 : parseInt(qty_input.value) - 1;
 							  
 							  if(qty_input.value == 0){
 								  qty_wrapper.classList.remove('is-added');
 							  }
-							  
+							    setTimeout(
+								function () {
+									qty_wrapper.querySelectorAll('.blockUI').forEach(el => el.remove());
+								},
+								5000);
+
 							  const addToCartUrl = '/wp-admin/admin-ajax.php';
 							  var object_payload = {};
 							  object_payload['action'] =  'etheme_update_cart_item_quantity_by_id';
@@ -840,8 +845,13 @@ if ('serviceWorker' in navigator) {
 							  const qty_input = plus_parent.querySelector('.quantity-wrapper .qty');
 							  const product_id = button.getAttribute('data-product_id');
 							  
-							  qty_input.value = parseInt(qty_input.value) + 1;
-  
+							  //qty_input.value = parseInt(qty_input.value) + 1;
+							 
+							  setTimeout(
+								function () {
+									qty_wrapper.querySelectorAll('.blockUI').forEach(el => el.remove());
+								},
+								5000);
 							  qty_wrapper.classList.add('is-added');
 							  
 							  const addToCartUrl = '/wp-admin/admin-ajax.php';
