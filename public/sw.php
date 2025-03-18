@@ -285,18 +285,24 @@ self.addEventListener('fetch', function(e) {
 				return;
 			}
 			// Revving strategy
-			if ( (e.request.mode === 'navigate' || e.request.mode === 'cors') && navigator.onLine ) {
-				e.respondWith(
+			if ((e.request.mode === 'navigate' || e.request.mode === 'cors') && navigator.onLine) {
+				// Only cache GET requests
+				if (e.request.method === 'GET') {
+					e.respondWith(
 					fetch(e.request).then(function(response) {
 						return caches.open(cacheName).then(function(cache) {
-							cache.put(e.request, response.clone());
-							return response;
-						});  
+						cache.put(e.request, response.clone());
+						return response;
+						});
 					}).catch(function(){
-						// If the network is unavailable, get
+						// If the network is unavailable, get the request from cache
 						return cache.match(e.request.url);
 					})
-				);
+					);
+				} else {
+					// For non-GET requests, simply fetch from the network
+					e.respondWith(fetch(e.request));
+				}
 				return;
 			}
 
