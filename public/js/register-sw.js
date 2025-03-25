@@ -370,6 +370,7 @@ if ('serviceWorker' in navigator) {
 				  navigator.serviceWorker.ready.then((registration) => {
 					  console.log(allData);
 					  registration.active.postMessage(allData);
+					  event.stopPropagation();
 				  });
 			  } else {
 				  event.preventDefault();
@@ -512,6 +513,7 @@ if ('serviceWorker' in navigator) {
 		  
 								  formElement[i].addEventListener('submit', superpwa_formSubmitOptions, true);
 							  }
+
 						  }
 		  
 						  //For Formidable Form ajax upload field

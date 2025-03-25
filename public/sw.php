@@ -340,14 +340,7 @@ function checkNeverCacheList(url) {
                   } catch (e){ console.log(e.message); }
                 }';    
 }
-?>
-<?php
-	$active_addons = get_option( 'superpwa_active_addons', array() );
-	if ( in_array('offline_form_for_superpwa', $active_addons) ){
-		echo  apply_filters( 'superpwa_offline_form_sw_template', '' );
-	}
 	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
-	
 }
 
 /**
