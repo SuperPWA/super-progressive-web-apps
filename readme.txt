@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.7
 Requires PHP: 5.3
-Stable tag: 2.2.34
+Stable tag: 2.2.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.35 =
+* Date: [25.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Error in browser console  #568
+* BugFixed: CTA visibility is not working correctly when any cache plugin is used #586
+* Feature: Products are added to the cart while being offline and get synced once back online #579
+* Compatibility: Bricks builder offline form compatibility #587
+
 = 2.2.34 =
 * Date: [06.February.2025](https://superpwa.com/superpwa-2-2-34-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: While using the navigation bar in Superpwa, the hamburger menu should not show. #509
@@ -291,15 +298,6 @@ Feel free to get in touch if you have any questions.
 * Date: [24.December.2023](https://superpwa.com/superpwa-2-2-23-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Parse error: syntax error, unexpected ")" in PHP 7.2 and below 
 
-= 2.2.23 =
-* Date: [22.December.2023](https://superpwa.com/superpwa-2-2-23-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Proper sorting of features #314
-* Enhancement: Compatibility with loco translate #426
-* Enhancement: Updated manifest as per the pwabuilder recommendation. #440
-* Enhancement: Code Improvement checklist #486
-* Enhancement: Update readme.txt and add all pro feature list #488
-* BugFixed: Warning appearing in manifest #487
-* BugFixed: On Uninstall few data still remain inside db. #485
 
 
 Full changelog available [ at changelog.txt](https://plugins.svn.wordpress.org/super-progressive-web-apps/trunk/changelog.txt)
