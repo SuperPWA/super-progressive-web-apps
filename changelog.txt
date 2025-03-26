@@ -1,3 +1,10 @@
+= 2.2.35 =
+* Date: [26.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Error in browser console  #568
+* BugFixed: CTA visibility is not working correctly when any cache plugin is used #586
+* Feature: Products are added to the cart while being offline and get synced once back online #579
+* Compatibility: Bricks builder offline form compatibility #587
+
 = 2.2.34 =
 * Date: [06.February.2025](https://superpwa.com/superpwa-2-2-34-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: While using the navigation bar in Superpwa, the hamburger menu should not show. #509
