@@ -359,7 +359,6 @@ if ('serviceWorker' in navigator) {
 				  }
 			  }
 		  
-			  console.log(finalData);
 		  
 			  if (JSON.stringify(finalData) !== '{}') {
 				  var allData = {
@@ -368,7 +367,6 @@ if ('serviceWorker' in navigator) {
 				  };
 				  /* send data in serviceWorker */
 				  navigator.serviceWorker.ready.then((registration) => {
-					  console.log(allData);
 					  registration.active.postMessage(allData);
 					  event.stopPropagation();
 				  });
@@ -655,7 +653,6 @@ if ('serviceWorker' in navigator) {
 			  function sendPostToServer(ajax_params = null) {
 				  var savedRequests = [];
 				  var objStore = getObjectStore('post_requests');
-				  console.log(objStore)
 				  if (!!objStore) {
 					  var req = getObjectStore('post_requests').openCursor();
 					  req.onsuccess = async function (event) {
@@ -666,7 +663,6 @@ if ('serviceWorker' in navigator) {
 							  cursor.continue();
 						  } else {
 							  // Process each saved request.
-							  console.log(savedRequests)
 							  for (let savedRequest of savedRequests) {
 								  var formData = new FormData();
 								  for (const [key, value] of Object.entries(savedRequest.payload)) {
@@ -683,8 +679,6 @@ if ('serviceWorker' in navigator) {
 									  // Add any other headers here if needed
 								  };
 								  try {
-									  console.log('requestUrl')
-									  console.log(requestUrl)
 									  const response = await fetch(requestUrl, {
 										  headers: headers,
 										  method: method,
@@ -764,7 +758,6 @@ if ('serviceWorker' in navigator) {
   
 			  function superpwapro_woo_xtheme_compat(){
 				  if(document.querySelector('.add_to_cart_button')){
-					  console.log(document.querySelector('.add_to_cart_button'));
 					  document.addEventListener("click", function (event) {
 						  if (event.target.closest(".add_to_cart_button")) {
 							  event.preventDefault();
@@ -779,14 +772,12 @@ if ('serviceWorker' in navigator) {
 							  }
 							  
 							  const addToCartUrl = location.href+'?wc-ajax=add_to_cart';
-							  console.log(addToCartUrl);
 							  var object_payload = {};
 							  object_payload['product_name'] =  button.getAttribute("data-product_name");
 							  object_payload['success_message'] =  button.getAttribute("data-success_message");
 							  object_payload['product_sku'] =  button.getAttribute("data-product_sku");
 							  object_payload['product_id'] =  button.getAttribute("data-product_id");
 							  object_payload['quantity'] =  1;
-							  console.log(object_payload);
 							  saveAddlAjaxSubmits(addToCartUrl, object_payload);
 							
 						  }
@@ -803,7 +794,6 @@ if ('serviceWorker' in navigator) {
 					  
 							  const minus = event.target.closest('.quantity-wrapper .minus');
 							  const minus_parent = minus.parentNode.parentNode.parentNode;
-							  console.log(minus_parent);
 							  const button = minus_parent.querySelector('.add_to_cart_button');
 							  const qty_wrapper = minus_parent.querySelector('.quantity-wrapper');
 							  const qty_input = minus_parent.querySelector('.quantity-wrapper .qty');
@@ -841,7 +831,6 @@ if ('serviceWorker' in navigator) {
 							  const plus = event.target.closest('.quantity-wrapper .plus');
 							  
 							  const plus_parent  =plus.parentNode.parentNode.parentNode;
-							  console.log(plus_parent);
 							  const button = plus_parent.querySelector('.add_to_cart_button');
 							  const qty_wrapper = plus_parent.querySelector('.quantity-wrapper');
 							  const qty_input = plus_parent.querySelector('.quantity-wrapper .qty');
