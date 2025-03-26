@@ -1,5 +1,5 @@
 = 2.2.35 =
-* Date: [25.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [26.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Error in browser console  #568
 * BugFixed: CTA visibility is not working correctly when any cache plugin is used #586
 * Feature: Products are added to the cart while being offline and get synced once back online #579
