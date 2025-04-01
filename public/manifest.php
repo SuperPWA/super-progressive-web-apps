@@ -214,7 +214,7 @@ function superpwa_manifest_template( $pageid = null ) {
 			$wpml_settings = get_option( 'superpwa_wpml_settings');
 			if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
 				$current_language = superpwa_get_language_shortcode();
-				$start_url = superpwa_home_url().$current_language;
+				$start_url = superpwa_home_url();
 				$manifest['start_url'] = $start_url;
 				$manifest['scope'] = "/";
 				$is_any_multilang_enable = true;
