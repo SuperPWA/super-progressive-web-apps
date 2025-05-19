@@ -505,3 +505,65 @@ function superpwa_sanitize_exclude_urls_cache_sw($urls)
 
 
 add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cache_sw' ,9999);
+
+
+/* 
+ * Exclude register-sw.js from Seraph Accel Cache
+ * 
+ * @since 2.1.2
+ */
+
+add_filter('seraph_accel_jscss_addtype', function($exclude, $script) {
+  
+    if ( strpos( $script->getAttribute( 'src' ), 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
+        return true; 
+    }
+    return false;
+}, 10, 2);
+
+/**
+ * Register service worker in Fluent Community
+ *
+ */
+
+add_action('fluent_community/portal_footer', function() {
+
+	$settings = superpwa_get_settings(); 
+	$include_script = true;
+
+	if( isset( $settings[ 'exclude_homescreen' ] ) && !empty( $settings['exclude_homescreen'] ) ){
+		$exclude_homescrn_setting = $settings['exclude_homescreen'];
+	    $exclude_homescreen = explode( ",",$settings['exclude_homescreen'] );
+
+	    $siteUrl = filter_input(INPUT_SERVER, 'REQUEST_URI');
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	    $actual_link = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ? "https" : "http").'://'.$_SERVER['HTTP_HOST'].$siteUrl;
+	    if(  in_array( $actual_link, $exclude_homescreen ) ){
+    	  $include_script = false;
+	    }
+	}
+
+		if ($include_script) {
+		$superpwa_sw_version = isset( $settings['force_update_sw_setting'] ) ? $settings['force_update_sw_setting'] : time();
+
+		$localize = array(
+			'url' => wp_parse_url( superpwa_sw('src'), PHP_URL_PATH ) . superpwa_nginx_server_fix(superpwa_sw('src')) . '?' . $superpwa_sw_version,
+			'disable_addtohome' => isset( $settings['disable_add_to_home'] ) ? $settings['disable_add_to_home'] : 0,
+			'enableOnDesktop' => false,
+			'offline_form_addon_active' => false,
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'offline_message' => !isset( $settings['offline_message'] ) ? 1 : $settings['offline_message'],
+			'offline_message_txt' => !isset( $settings['offline_message_txt'] ) ? esc_html__('You are currently offline.', 'super-progressive-web-apps') : $settings['offline_message_txt'],
+		);
+
+		$localize = apply_filters( 'superpwa_sw_localize_data' , $localize);
+
+		// Directly output as JS
+		echo '<script>';
+		echo 'var superpwa_sw = ' . json_encode( $localize, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';';
+		echo '</script>';
+
+		// Optionally include the script tag as well if you're not using wp_enqueue_script
+		echo '<script src="' . esc_url( SUPERPWA_PATH_SRC . 'public/js/register-sw.js' ) . '"></script>';
+	}
+});

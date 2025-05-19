@@ -714,3 +714,15 @@ function superpwa_add_manifest_variables($url) {
 	return wp_parse_url( $url, PHP_URL_PATH ) ;
 }
 
+/**
+ * Add manifest to Fluent Community header
+ *
+ */
+
+add_action('fluent_community/portal_head', function() {
+	//add  manifest to head
+	$manifest_url = superpwa_add_manifest_variables(superpwa_manifest( 'src' ));
+	if ( isset( $manifest_url ) && !empty( $manifest_url )) {
+		echo '<link rel="manifest" href="' . esc_url( $manifest_url ) . '">';
+	}
+});
