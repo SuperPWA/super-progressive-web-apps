@@ -2,9 +2,9 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.3
-Stable tag: 2.2.35
+Stable tag: 2.2.36
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,12 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.36 =
+* Date: [19.May.2025](https://superpwa.com/superpwa-2-2-36-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Start URL redirecting due to WPML #591
+* Compatibility: compatibility with Fluent Community plugin. #575
+* Test: Tested with WP 6.8 #593
+
 = 2.2.35 =
 * Date: [25.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Error in browser console  #568

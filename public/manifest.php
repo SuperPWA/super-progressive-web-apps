@@ -214,7 +214,7 @@ function superpwa_manifest_template( $pageid = null ) {
 			$wpml_settings = get_option( 'superpwa_wpml_settings');
 			if (isset($wpml_settings['enable_wpml']) && $wpml_settings['enable_wpml'] == 1) {
 				$current_language = superpwa_get_language_shortcode();
-				$start_url = superpwa_home_url().$current_language;
+				$start_url = superpwa_home_url();
 				$manifest['start_url'] = $start_url;
 				$manifest['scope'] = "/";
 				$is_any_multilang_enable = true;
@@ -714,3 +714,15 @@ function superpwa_add_manifest_variables($url) {
 	return wp_parse_url( $url, PHP_URL_PATH ) ;
 }
 
+/**
+ * Add manifest to Fluent Community header
+ *
+ */
+
+add_action('fluent_community/portal_head', function() {
+	//add  manifest to head
+	$manifest_url = superpwa_add_manifest_variables(superpwa_manifest( 'src' ));
+	if ( isset( $manifest_url ) && !empty( $manifest_url )) {
+		echo '<link rel="manifest" href="' . esc_url( $manifest_url ) . '">';
+	}
+});

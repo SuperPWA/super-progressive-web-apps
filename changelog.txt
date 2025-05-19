@@ -1,3 +1,9 @@
+= 2.2.36 =
+* Date: [19.May.2025](https://superpwa.com/superpwa-2-2-36-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Start URL redirecting due to WPML #591
+* Compatibility: compatibility with Fluent Community plugin. #575
+* Test: Tested with WP 6.8 #593
+
 = 2.2.35 =
 * Date: [26.March.2025](https://superpwa.com/superpwa-2-2-35-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Error in browser console  #568
