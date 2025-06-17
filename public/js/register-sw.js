@@ -259,11 +259,12 @@ if ('serviceWorker' in navigator) {
 	  };
   
 	  window.addEventListener('load', function() {
+		   let manifest_name = superpwa_sw.manifest_name ?? 'superpwa-manifest.json';
 		  var manifestLink = document.querySelectorAll("link[rel='manifest']");
 			  if(manifestLink.length > 1){
 				  for (var i = 0; i < manifestLink.length; i++) {
 					  var href = manifestLink[i].getAttribute("href");
-					  if(href.indexOf("superpwa-manifest.json") == -1){
+					  if(href.indexOf(manifest_name) == -1){
 						  manifestLink[i].remove();
 					  }
 				  }

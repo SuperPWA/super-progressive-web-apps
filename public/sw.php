@@ -384,6 +384,7 @@ function superpwa_register_sw() {
 				'ajax_url' =>$ajax_url,
 				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
 				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
+				'manifest_name' => superpwa_get_manifest_filename(),
 			);
 		$localize = apply_filters('superpwa_sw_localize_data', $localize);
 		wp_localize_script( 'superpwa-register-sw', 'superpwa_sw',  $localize);
