@@ -37,6 +37,8 @@ if ('serviceWorker' in navigator) {
 	   * Inject html of snackbar
 	   */
 	  function injectSnackbarHtml() {
+		if (document.querySelector('.snackbar')) return;
+		
 		  const container = document.createElement('div');
 		  container.className = 'snackbar';
   
