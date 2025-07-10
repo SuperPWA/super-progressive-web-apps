@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.8
 Requires PHP: 5.3
-Stable tag: 2.2.36
+Stable tag: 2.2.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.37 =
+* Date: [10.July.2025](https://superpwa.com/superpwa-2-2-37-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: CTA is not working properly on the multilingual website. #598
+* Compatibility: Need to make a compatibility with PushEngage plugin. #600
+* Compatibility: Issue with nginx server #595
+* Feature: Make online / offline texts translateable #365
+
 = 2.2.36 =
 * Date: [19.May.2025](https://superpwa.com/superpwa-2-2-36-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Start URL redirecting due to WPML #591
@@ -298,11 +305,6 @@ Feel free to get in touch if you have any questions.
 * Feature: Make the offline message “You are offline” as an option #482
 * Feature: Make the feature Prefetch manifest URL link as an option #496
 * Enhancement: Improvements to the app screenshot option. #495
-
-
-= 2.2.23.1 =
-* Date: [24.December.2023](https://superpwa.com/superpwa-2-2-23-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* BugFixed: Parse error: syntax error, unexpected ")" in PHP 7.2 and below 
 
 
 

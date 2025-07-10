@@ -22,7 +22,7 @@ if ('serviceWorker' in navigator) {
 	  let isOffline = false,
 		  snackbarTimeoutHide = null,
 		  goOfflineMsg = superpwa_sw.offline_message_txt,
-		  backOnlineMsg = 'You\'re back online <a href="javascript:location.reload()">refresh</a>';
+		  backOnlineMsg = superpwa_sw.online_message_txt;
   
 	  /**
 	  * Subscribe to online offline indicator
@@ -37,6 +37,8 @@ if ('serviceWorker' in navigator) {
 	   * Inject html of snackbar
 	   */
 	  function injectSnackbarHtml() {
+		if (document.querySelector('.snackbar')) return;
+		
 		  const container = document.createElement('div');
 		  container.className = 'snackbar';
   
@@ -259,11 +261,12 @@ if ('serviceWorker' in navigator) {
 	  };
   
 	  window.addEventListener('load', function() {
+		   let manifest_name = superpwa_sw.manifest_name ?? 'superpwa-manifest.json';
 		  var manifestLink = document.querySelectorAll("link[rel='manifest']");
 			  if(manifestLink.length > 1){
 				  for (var i = 0; i < manifestLink.length; i++) {
 					  var href = manifestLink[i].getAttribute("href");
-					  if(href.indexOf("superpwa-manifest.json") == -1){
+					  if(href.indexOf(manifest_name) == -1){
 						  manifestLink[i].remove();
 					  }
 				  }

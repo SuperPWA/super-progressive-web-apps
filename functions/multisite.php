@@ -23,6 +23,9 @@ function superpwa_multisite_filename_postfix() {
 	
 	// Return empty string if not a multisite
 	if ( ! is_multisite() ) {
+		if (isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) {
+			return '-nginx';
+		}
 		return '';
 	}
 	
