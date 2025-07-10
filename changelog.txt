@@ -1,3 +1,10 @@
+= 2.2.37 =
+* Date: [10.July.2025](https://superpwa.com/superpwa-2-2-37-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: CTA is not working properly on the multilingual website. #598
+* Compatibility: Need to make a compatibility with PushEngage plugin. #600
+* Compatibility: Issue with nginx server #595
+* Feature: Make online / offline texts translateable #365
+
 = 2.2.36 =
 * Date: [19.May.2025](https://superpwa.com/superpwa-2-2-36-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Start URL redirecting due to WPML #591
