@@ -22,7 +22,7 @@ if ('serviceWorker' in navigator) {
 	  let isOffline = false,
 		  snackbarTimeoutHide = null,
 		  goOfflineMsg = superpwa_sw.offline_message_txt,
-		  backOnlineMsg = 'You\'re back online <a href="javascript:location.reload()">refresh</a>';
+		  backOnlineMsg = superpwa_sw.online_message_txt;
   
 	  /**
 	  * Subscribe to online offline indicator
