@@ -138,8 +138,14 @@ function superpwa_generate_sw() {
 	}
 	
 	$dynamic_check = (isset($settings['startpage_type']) && $settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
+	/*
+	 * we are  using superpwa_get_file to get the contents of the service worker file instead of superpwa_sw_template.
+	 * All filters tied to superpwa_sw_template  are not applied when superpwa_sw_template is called because some filters
+	 * are added after the service worker is generated due to plugin load order.
+	 */
+	$swjs_content = superpwa_get_file( home_url( '/' ) .'?superpwa-sw-alt' );
 	
-	if ( $dynamic_check && superpwa_put_contents( superpwa_sw( 'abs' ), superpwa_sw_template() ) ) {
+	if ( $dynamic_check && superpwa_put_contents( superpwa_sw( 'abs' ), $swjs_content ) ) {
 		
 		// set file status as satic file in database.
 		$settings['is_static_sw'] = 1;

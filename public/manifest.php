@@ -322,9 +322,15 @@ function superpwa_generate_manifest() {
 		return true;
 	}
 	$dynamic_check = (isset($superpwa_settings['startpage_type']) && $superpwa_settings['startpage_type'] =='active_url' && function_exists('superpwa_pro_init'))?false:true;
-	// Write the manfiest to disk.
-	if ( $dynamic_check  && superpwa_put_contents( superpwa_manifest( 'abs' ), wp_json_encode( superpwa_manifest_template() ) ) ) {
-		
+	/*
+	 * we are  using superpwa_get_file to get the contents of the manifest file instead of superpwa_manifest_template.
+	 * All filters tied to superpwa_manifest_template  are not applied when superpwa_manifest_template is called because some filters
+	 * are added after the service worker is generated due to plugin load order.
+	 */
+	$manifest_content = superpwa_get_file( home_url( '/' ) .'?superpwa-manifest-alt' );
+	// Write the manifest to disk.
+	if ( $dynamic_check  && superpwa_put_contents( superpwa_manifest( 'abs' ), $manifest_content ) ) {
+
 		// set file status as satic file in database.
 		$superpwa_settings['is_static_manifest'] = 1;
 		

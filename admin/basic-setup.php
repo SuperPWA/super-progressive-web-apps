@@ -448,8 +448,10 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	$manifest_filename    = superpwa_get_manifest_filename();
 	$sw_filename          = superpwa_get_sw_filename();
 	$amphtml_filename    = 'superpwa-amp-sw.html';
-	
-	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false ) {
+	$swjs = isset( $_GET['superpwa-sw-alt'] ) ? true : false;
+	$manifestjson = isset( $_GET['superpwa-manifest-alt'] ) ? true : false;
+
+	if ( strpos( $query_vars_as_string, $manifest_filename ) !== false || $manifestjson ) {
 		// Generate manifest from Settings and send the response w/ header.
 		$pagemid =  isset($query->query_vars['superpwa_mid'])? $query->query_vars['superpwa_mid'] : null;
 		header( 'Content-Type: application/json' );
@@ -468,7 +470,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	    }
     }
 
-	if ( strpos( $query_vars_as_string, $sw_filename ) !== false ) {
+	if ( strpos( $query_vars_as_string, $sw_filename ) !== false  || $swjs ) {
 		header( 'Content-Type: text/javascript' );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo superpwa_sw_template();

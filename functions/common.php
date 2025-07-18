@@ -572,3 +572,25 @@ function superpwa_pre_update_settings($value, $old_value,  $option){
 }
 
 add_filter('pre_update_option_superpwa_settings', 'superpwa_pre_update_settings',10,3);
+
+/**
+ * @param $file (string) URL to get content from
+ * 
+ * @return (string|false) File content if successful, false otherwise.
+ * 
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ * 
+ * @since 2.0.1
+ */
+function superpwa_get_file( $file ) {
+	
+	$response 		= wp_remote_get( $file, array( 'sslverify' => false ) );
+	$response_code 	= wp_remote_retrieve_response_code( $response );
+	
+	if ( 200 === $response_code ) {
+		return wp_remote_retrieve_body( $response );
+	}
+	
+	return false;
+}
