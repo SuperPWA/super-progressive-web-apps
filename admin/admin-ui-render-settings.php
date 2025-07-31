@@ -648,6 +648,19 @@ function superpwa_prefer_related_applications_cb() {
 	<?php
 }
 
+function superpwa_featured_image_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	<fieldset>
+		<input type="checkbox" name="superpwa_settings[superpwa_featured_image]" class="superpwa_related_app regular-text" value="1" <?php if ( isset( $settings['superpwa_featured_image'] ) && ( $settings['superpwa_featured_image'] == true ) ) echo 'checked';?>/>
+	</fieldset>
+	<p class="description">
+		<?php echo esc_html__( 'Used as the installable app icon in the PWA manifest, this image is automatically collected from the featured image of the current page or post.', 'super-progressive-web-apps' ); ?>
+	</p>
+	<?php
+}
+
 function superpwa_related_applications_cb() {
 
 	// Get Settings
