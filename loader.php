@@ -21,6 +21,7 @@ require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/yandex.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/amp.php' );
 require_once( SUPERPWA_PATH_ABS . '3rd-party/wonderpush.php' );
+require_once( SUPERPWA_PATH_ABS . '3rd-party/pushengage.php' );
 
 // Load functions
 require_once( SUPERPWA_PATH_ABS . 'functions/common.php' );
