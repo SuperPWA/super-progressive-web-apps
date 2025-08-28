@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.38 =
+* Date: [28.August.2025](https://superpwa.com/superpwa-2-2-38-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Push notification SW code not being added to SuperPWA SW template due to plugin load order #602
+* Compatibility: Compatibility with PushEngage plugin. #600
+* Feature: CTA should be invisible when scroll up #599
+* Feature: Featured image as home screen icon when adding individual pages to home screen. #596
+
 = 2.2.37 =
 * Date: [10.July.2025](https://superpwa.com/superpwa-2-2-37-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: CTA is not working properly on the multilingual website. #598
@@ -298,13 +305,6 @@ Feel free to get in touch if you have any questions.
 = 2.2.24.1 =
 * Date: [05.March.2024](https://superpwa.com/superpwa-2-2-24.1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Activating Pro version throwing Fatal error #501
-
-= 2.2.24 =
-* Date: [17.February.2024](https://superpwa.com/superpwa-2-2-24-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* BugFixed: CTA on the frontpage is not showing.  #499
-* Feature: Make the offline message “You are offline” as an option #482
-* Feature: Make the feature Prefetch manifest URL link as an option #496
-* Enhancement: Improvements to the app screenshot option. #495
 
 
 
