@@ -379,6 +379,7 @@ function superpwa_start_url_cb() {
 			const page_select = document.getElementById('superpwa_start_pages');
 			const post_select = document.getElementById('superpwa_start_posts');
 			const pro_btn = document.getElementById('superpwa_startpage_pro_btn');
+			const featured_image = document.querySelector('.superpwa_featured_image');
 			if(status=="post"){
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
@@ -387,6 +388,10 @@ function superpwa_start_url_cb() {
 				if(pro_btn){
 					pro_btn.style.display="none";
 				}
+				if(featured_image){
+					featured_image.parentNode.parentNode.parentNode.style.display="none";
+				}
+				
 			}
 			else if (status=="page"){
 				post_select.setAttribute('disabled',true);
@@ -396,6 +401,9 @@ function superpwa_start_url_cb() {
 				if(pro_btn){
 					pro_btn.style.display="none";
 				}
+				if(featured_image){
+					featured_image.parentNode.parentNode.parentNode.style.display="none";
+				}
 			}else{
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
@@ -403,6 +411,9 @@ function superpwa_start_url_cb() {
 				page_select.parentNode.style.display="none";
 				if(pro_btn){
 					pro_btn.style.display="inline";
+				}
+				if(featured_image){
+					featured_image.parentNode.parentNode.parentNode.style.display="contents";
 				}
 			}
 		}
@@ -645,6 +656,19 @@ function superpwa_prefer_related_applications_cb() {
 	<fieldset>
 		<input type="checkbox" name="superpwa_settings[prefer_related_applications]" class="superpwa_related_app regular-text" value="1" <?php if ( isset( $settings['prefer_related_applications'] ) && ( $settings['prefer_related_applications'] == true ) ) echo 'checked';?>/>
 	</fieldset>
+	<?php
+}
+
+function superpwa_featured_image_cb() {
+
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+	<fieldset>
+		<input type="checkbox" name="superpwa_settings[superpwa_featured_image]" class="superpwa_featured_image	 regular-text" value="1" <?php if ( isset( $settings['superpwa_featured_image'] ) && ( $settings['superpwa_featured_image'] == true ) ) echo 'checked';?>/>
+	</fieldset>
+	<p class="description">
+		<?php echo esc_html__( 'Used as the installable app icon in the PWA manifest, this image is automatically collected from the featured image of the current page or post.', 'super-progressive-web-apps' ); ?>
+	</p>
 	<?php
 }
 

@@ -147,6 +147,22 @@ function superpwa_manifest_template( $pageid = null ) {
 			$title  = get_the_title($pageid);
 			if($permalink){
 				$manifest['start_url']       = $permalink;
+				if( isset($superpwa_settings['superpwa_featured_image']) && $superpwa_settings['superpwa_featured_image'] ) {
+					if ( has_post_thumbnail($pageid)) {
+						$thumbnail_id = get_post_thumbnail_id($pageid);
+						$featured_image = wp_get_attachment_image_src($thumbnail_id, 'full');
+						if (!empty($featured_image)) {
+							$file_type = wp_check_filetype($featured_image[0]);
+							$icons_array = array(
+								'src' 	=> esc_url($featured_image[0]),
+								'sizes' => $featured_image[1].'x'.$featured_image[2], 
+								'type'	=> $file_type['type'], 
+								'purpose'=> 'any'
+							);					
+							$manifest['icons'] = [$icons_array];
+						}
+					}
+				}
 			}
 			if($title){
 				$stripped_title = wp_strip_all_tags($title);

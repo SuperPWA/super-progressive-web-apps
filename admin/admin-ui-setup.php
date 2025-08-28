@@ -225,6 +225,18 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 
+		// Featured Image
+		$pro_active = function_exists('is_plugin_active')?is_plugin_active( 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php' ):false;
+		if ($pro_active) {
+			add_settings_field(
+				'superpwa_featured_image',									// ID
+				__('Featured Image as Icon', 'super-progressive-web-apps'),			// Title
+				'superpwa_featured_image_cb',								// CB
+				'superpwa_basic_settings_section',						// Page slug
+				'superpwa_basic_settings_section'						// Settings Section ID
+			);
+		}
+
 		// App Category
 		add_settings_field(
 			'superpwa_app_category',									// ID
