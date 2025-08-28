@@ -230,7 +230,7 @@ function superpwa_register_settings() {
 		if ($pro_active) {
 			add_settings_field(
 				'superpwa_featured_image',									// ID
-				__('Featured Image', 'super-progressive-web-apps'),			// Title
+				__('Featured Image as Icon', 'super-progressive-web-apps'),			// Title
 				'superpwa_featured_image_cb',								// CB
 				'superpwa_basic_settings_section',						// Page slug
 				'superpwa_basic_settings_section'						// Settings Section ID
