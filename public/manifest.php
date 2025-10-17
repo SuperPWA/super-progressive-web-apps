@@ -430,6 +430,7 @@ if(isset($superpwa_settings['excluded_urls']) && !empty($superpwa_settings['excl
 
 if($show_manifest_icon == 0){
 	add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
+	add_action( 'login_head', 'superpwa_add_manifest_to_wp_head', 0 );
 }
 
 /**
