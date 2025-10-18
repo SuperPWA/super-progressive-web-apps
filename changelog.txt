@@ -2,9 +2,7 @@
 * Date: [18.October.2025](https://superpwa.com/superpwa-2-2-39-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Navigation bar is not working properly. #606
 * BugFixed: jQuery is not defined #604
-* BugFixed: Conflict issue with Oxygen builder. #597
 * BugFixed: Exclude option is not working in SuperPWA. #610
-* BugFixed: Delete button is not visible in the Android APK App Generator. #605
 
 
 = 2.2.38 =
