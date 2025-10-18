@@ -1,3 +1,10 @@
+= 2.2.39 =
+* Date: [18.October.2025](https://superpwa.com/superpwa-2-2-39-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Navigation bar is not working properly. #606
+* BugFixed: jQuery is not defined #604
+* BugFixed: Exclude option is not working in SuperPWA. #610
+
+
 = 2.2.38 =
 * Date: [28.August.2025](https://superpwa.com/superpwa-2-2-38-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Push notification SW code not being added to SuperPWA SW template due to plugin load order #602
