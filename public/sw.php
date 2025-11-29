@@ -382,7 +382,7 @@ function superpwa_register_sw() {
 				'enableOnDesktop'=> false,
 				'offline_form_addon_active' =>$offline_form_addon_active,
 				'ajax_url' =>$ajax_url,
-				'offline_message'=> !isset($settings['offline_message']) ? 1 : $settings['offline_message'],
+				'offline_message'=> !isset($settings['offline_message']) ? 0 : $settings['offline_message'],
 				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
 				'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
 				'manifest_name' => superpwa_get_manifest_filename(),
@@ -554,7 +554,7 @@ add_action('fluent_community/portal_footer', function() {
 			'enableOnDesktop' => false,
 			'offline_form_addon_active' => false,
 			'ajax_url' => admin_url('admin-ajax.php'),
-			'offline_message' => !isset( $settings['offline_message'] ) ? 1 : $settings['offline_message'],
+			'offline_message' => !isset( $settings['offline_message'] ) ? 0 : $settings['offline_message'],
 			'offline_message_txt' => !isset( $settings['offline_message_txt'] ) ? esc_html__('You are currently offline.', 'super-progressive-web-apps') : $settings['offline_message_txt'],
 			'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
 		);
