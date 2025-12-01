@@ -119,3 +119,49 @@ function superpwa_enqueue_makebetter_email_js(){
 }
 
 add_filter('admin_footer', 'superpwa_add_deactivation_feedback_modal');
+
+/* * BFCM Banner Integration
+ * Loads assets from assets/css and assets/js
+ */
+add_action('admin_enqueue_scripts', 'superpwa_enqueue_bfcm_assets');
+
+function superpwa_enqueue_bfcm_assets($hook) { 
+ 
+    
+    if ( $hook !== 'toplevel_page_superpwa'
+    && $hook !== 'superpwa_page_superpwa-addons' ) {
+        return;
+    }
+
+    // 2. define settings
+    $expiry_date_str = '2025-12-25 23:59:59'; 
+    $offer_link      = 'https://superpwa.com/bfcm-25/';
+
+    // 3. Expiry Check (Server Side)
+    if ( current_time('timestamp') > strtotime($expiry_date_str) ) {
+        return; 
+    }
+
+    // 4. Register & Enqueue CSS    
+    wp_enqueue_style(
+        'superpwa-bfcm-style', 
+        SUPERPWA_PATH_SRC. 'admin/css/bfcm-style.css', 
+        array(), 
+        SUPERPWA_VERSION
+    );
+
+    // 5. Register & Enqueue JS
+    wp_enqueue_script(
+        'superpwa-bfcm-script', 
+        SUPERPWA_PATH_SRC. 'admin/js/bfcm-script.js', 
+        array('jquery'), // jQuery dependency
+        SUPERPWA_VERSION, 
+        true 
+    );
+
+    // 6. Data Pass (PHP to JS)
+    wp_localize_script('superpwa-bfcm-script', 'bfcmData', array(
+        'targetDate' => $expiry_date_str,
+        'offerLink'  => $offer_link
+    ));
+}
