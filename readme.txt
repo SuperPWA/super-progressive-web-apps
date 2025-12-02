@@ -2,9 +2,9 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.3
-Stable tag: 2.2.39
+Stable tag: 2.2.40
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,14 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.40 =
+* Date: [01.December.2025](https://superpwa.com/superpwa-2-2-40-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Tested: WordPress version upto 6.9
+* Added: Promotion Banner BFCM. #624
+* BugFixed: Offline message appears even though the option is unchecked in the settings. #613
+* BugFixed: site breaks on stale while revalidate caching. #597
+* BugFixed: Warning in error log. #618
+
 = 2.2.39 =
 * Date: [18.October.2025](https://superpwa.com/superpwa-2-2-39-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Navigation bar is not working properly. #606

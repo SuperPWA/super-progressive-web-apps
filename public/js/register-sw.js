@@ -157,7 +157,7 @@ if ('serviceWorker' in navigator) {
 	   */
 	  function runOnlineOfflineIndicator() {
 		  if (navigator.onLine) {
-			  if (isOffline === true) {
+			  if (superpwa_sw.offline_message == 1 && isOffline === true) {
 				  showSnackbar(backOnlineMsg);
 			  }
 			  isOffline = false;

@@ -516,6 +516,13 @@ function superpwa_validater_and_sanitizer( $settings ) {
 		$settings['is_static_manifest'] = $current_settings['is_static_manifest'];
 	}
 	
+	// Handle offline_message checkbox - if not set (unchecked), set to 0
+	if ( ! isset( $settings['offline_message'] ) ) {
+		$settings['offline_message'] = 0;
+	} else {
+		$settings['offline_message'] = intval( $settings['offline_message'] );
+	}
+	
 	return $settings;
 }
 			

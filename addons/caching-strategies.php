@@ -72,26 +72,28 @@ function superpwa_caching_strategies_sw_template( $file_string ) {
 			case 'steal_while_revalidate':
 
 				$script = 'e.respondWith(
-				caches.open(cacheName)
-					.then(function(cache) {
-						cache.match(e.request)
-							.then( function(cacheResponse) {
-								fetch(e.request)
-									.then(function(networkResponse) {
-										cache.put(e.request, networkResponse)
-									})
-								return cacheResponse || networkResponse
-							})
-					})
+				caches.open(cacheName).then(function(cache) {
+					return cache.match(e.request).then(function(cacheResponse) {
+						var fetchPromise = fetch(e.request).then(function(networkResponse) {
+							cache.put(e.request, networkResponse.clone());
+							return networkResponse;
+						});
+						return cacheResponse || fetchPromise;
+					});
+				}).catch(function() {
+					return caches.match(offlinePage);
+				})
 			);';
 				break;
 			case 'cache_only':
 
 				$script = 	'e.respondWith(
 				caches.open(cacheName).then(function(cache) {
-					cache.match(e.request).then(function(cacheResponse) {
+					return cache.match(e.request).then(function(cacheResponse) {
 						return cacheResponse;
-					})
+					});
+				}).catch(function() {
+					return caches.match(offlinePage);
 				})
 			);';
 				break;
