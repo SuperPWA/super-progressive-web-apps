@@ -476,6 +476,10 @@ function superpwa_get_pwa_icons() {
 		);
 	}
 	
+	$superpwa_same_icon_splash = apply_filters('superpwa_same_icon_splash',false);
+	if($superpwa_same_icon_splash){
+		return $icons_array;
+	}
 	// Splash screen icon - Added since 1.3
 	if ( isset($superpwa_settings['splash_icon']) && ! empty( $superpwa_settings['splash_icon'] ) ) {
 		$icons_array[] = array(
