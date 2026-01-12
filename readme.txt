@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.9
 Requires PHP: 5.3
-Stable tag: 2.2.40
+Stable tag: 2.2.41
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.41 = 
+* Date: [12.January.2026](https://superpwa.com/superpwa-2-2-41-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Added: Add to home support added in Chrome iOS #633
+* BugFixed: Function _load_textdomain_just_in_time warning. #631
+* Enhancement: Changes need to be made to the service worker version field in the UI. #622
+* Removed: Removed BCFM banner
+
 = 2.2.40 =
 * Date: [01.December.2025](https://superpwa.com/superpwa-2-2-40-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested: WordPress version upto 6.9
