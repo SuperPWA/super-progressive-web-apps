@@ -499,6 +499,68 @@ function superpwa_validater_and_sanitizer( $settings ) {
 
 	// Sanitize startpage type
 	$settings['startpage_type'] = sanitize_text_field( isset($settings['startpage_type'])?$settings['startpage_type']:'page' );
+	
+	// Validate and sanitize custom start URL if set
+	if ( isset( $settings['startpage_type'] ) && $settings['startpage_type'] == 'custom_url' ) {
+		if ( isset( $settings['custom_start_url'] ) && ! empty( trim( $settings['custom_start_url'] ) ) ) {
+			$custom_url = esc_url_raw( trim( $settings['custom_start_url'] ) );
+			
+			// Validate same origin
+			$site_url = superpwa_home_url();
+			$parsed_site = wp_parse_url( $site_url );
+			$parsed_custom = wp_parse_url( $custom_url );
+			
+			// Check if URL is valid and from same origin
+			if ( ! empty( $custom_url ) && ! empty( $parsed_custom ) && isset( $parsed_custom['host'] ) ) {
+				$site_origin = ( isset( $parsed_site['scheme'] ) ? $parsed_site['scheme'] : 'https' ) . '://' . ( isset( $parsed_site['host'] ) ? $parsed_site['host'] : '' );
+				$custom_origin = ( isset( $parsed_custom['scheme'] ) ? $parsed_custom['scheme'] : 'https' ) . '://' . ( isset( $parsed_custom['host'] ) ? $parsed_custom['host'] : '' );
+				
+				// Also check port if present
+				if ( isset( $parsed_site['port'] ) ) {
+					$site_origin .= ':' . $parsed_site['port'];
+				}
+				if ( isset( $parsed_custom['port'] ) ) {
+					$custom_origin .= ':' . $parsed_custom['port'];
+				}
+				
+				if ( $site_origin !== $custom_origin ) {
+					// Invalid origin, reset to empty
+					$settings['custom_start_url'] = '';
+					add_settings_error(
+						'superpwa_settings',
+						'custom_url_invalid_origin',
+						esc_html__( 'Custom start URL must be from the same origin as your site. URL has been cleared.', 'super-progressive-web-apps' ),
+						'error'
+					);
+				} else {
+					$settings['custom_start_url'] = $custom_url;
+				}
+			} else {
+				// Invalid URL format
+				$settings['custom_start_url'] = '';
+				add_settings_error(
+					'superpwa_settings',
+					'custom_url_invalid_format',
+					esc_html__( 'Please enter a valid URL for the custom start URL.', 'super-progressive-web-apps' ),
+					'error'
+				);
+			}
+		} else {
+			// Empty URL when custom_url is selected - fall back to page type
+			$settings['custom_start_url'] = '';
+			$settings['startpage_type'] = 'page';
+			add_settings_error(
+				'superpwa_settings',
+				'custom_url_empty',
+				esc_html__( 'Custom URL was empty. Start page type has been reset to "Select Page".', 'super-progressive-web-apps' ),
+				'warning'
+			);
+		}
+	} else {
+		// Clear custom URL if not using custom_url type
+		$settings['custom_start_url'] = '';
+	}
+	
 	/**
 	 * Get current settings already saved in the database.
 	 * 
@@ -551,6 +613,7 @@ function superpwa_get_settings() {
 				'theme_color' 		=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
+				'custom_start_url'	=> '',
 				'app_category' 		=> 0,
 				'offline_page' 		=> 0,
 				'orientation'		=> 1,
@@ -591,6 +654,7 @@ function superpwa_get_default_settings() {
 				'theme_color' 		=> '#D5E0EB',
 				'start_url' 		=> 0,
 				'start_url_amp'		=> 0,
+				'custom_start_url'	=> '',
 				'offline_page' 		=> 0,
 				'app_category'		=> 0,
 				'orientation'		=> 1,

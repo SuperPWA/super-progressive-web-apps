@@ -320,12 +320,13 @@ function superpwa_start_url_cb() {
 	$pro_active = function_exists('is_plugin_active')?is_plugin_active( 'super-progressive-web-apps-pro/super-progressive-web-apps-pro.php' ):false;
 	?>
 	
-	<fieldset>
+		<fieldset>
 			<!-- WordPress Pages Dropdown -->
 			<label for="superpwa_settings[startpage_type]">
 			<select name="superpwa_settings[startpage_type]" id="superpwa_settings_startpage_type">
 				<option value="page" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "page" ); } ?>><?php esc_html_e(' Select Page ', 'super-progressive-web-apps') ?></option>
 				<option value="post" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "post" ); } ?>><?php esc_html_e(' Select Post ', 'super-progressive-web-apps') ?></option>
+				<option value="custom_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "custom_url" ); } ?>><?php esc_html_e(' Custom URL ', 'super-progressive-web-apps') ?></option>
 				<option value="active_url" <?php if ( isset( $settings['startpage_type'] ) ) { selected( $settings['startpage_type'], "active_url" ); } ?> ><?php esc_html_e(' &mdash; Dynamic URL &mdash;', 'super-progressive-web-apps') ?></option>
 			</select>
 		</label>
@@ -354,6 +355,12 @@ function superpwa_start_url_cb() {
 				'selected' =>  isset($settings['start_url']) ? $settings['start_url'] : '',
 			)); ?>
 		</label>
+		<!-- Custom URL Input -->
+		<label for="superpwa_settings[custom_start_url]" id="superpwa_custom_url_label" style="display:none;">
+			<input type="url" name="superpwa_settings[custom_start_url]" id="superpwa_custom_start_url" class="regular-text" value="<?php echo isset($settings['custom_start_url']) ? esc_attr($settings['custom_start_url']) : ''; ?>" placeholder="<?php esc_attr_e('https://example.com/custom-page', 'super-progressive-web-apps'); ?>">
+			<p class="description" id="superpwa_custom_url_error" style="color: #dc3232; display:none;"></p>
+			<p class="description"><?php esc_html_e('Enter a custom URL. Must be from the same origin as your site.', 'super-progressive-web-apps'); ?></p>
+		</label>
 		<?php if(!$pro_active){ ?>
 			<label style="display:none;" id="superpwa_startpage_pro_btn"> <?php esc_html_e('To use this option.', 'super-progressive-web-apps') ?> <a class="spwa-tablinks"  style="display:inline;border-radius:5px;background: #ff4c4c;color: #ffffff;font-weight: 700; padding: 4px 10px;text-decoration:none;" href="<?php echo esc_url(admin_url( 'admin.php?page=superpwa-upgrade' ))  ?>"><?php esc_html_e('Upgrade to PRO', 'super-progressive-web-apps') ?></a>
 		</lable>
@@ -378,13 +385,23 @@ function superpwa_start_url_cb() {
 		function superpwa_stype_toggle(status ='page') {
 			const page_select = document.getElementById('superpwa_start_pages');
 			const post_select = document.getElementById('superpwa_start_posts');
+			const custom_url_label = document.getElementById('superpwa_custom_url_label');
+			const custom_url_input = document.getElementById('superpwa_custom_start_url');
+			const custom_url_error = document.getElementById('superpwa_custom_url_error');
 			const pro_btn = document.getElementById('superpwa_startpage_pro_btn');
 			const featured_image = document.querySelector('.superpwa_featured_image');
+			
 			if(status=="post"){
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
 				post_select.removeAttribute('disabled');
 				post_select.parentNode.style.display="inline";
+				if(custom_url_label){
+					custom_url_label.style.display="none";
+					if(custom_url_input){
+						custom_url_input.removeAttribute('required');
+					}
+				}
 				if(pro_btn){
 					pro_btn.style.display="none";
 				}
@@ -398,17 +415,48 @@ function superpwa_start_url_cb() {
 				post_select.parentNode.style.display="none";
 				page_select.removeAttribute('disabled');
 				page_select.parentNode.style.display="inline";
+				if(custom_url_label){
+					custom_url_label.style.display="none";
+					if(custom_url_input){
+						custom_url_input.removeAttribute('required');
+					}
+				}
 				if(pro_btn){
 					pro_btn.style.display="none";
 				}
 				if(featured_image){
 					featured_image.parentNode.parentNode.parentNode.style.display="none";
 				}
-			}else{
+			}
+			else if (status=="custom_url"){
 				post_select.setAttribute('disabled',true);
 				post_select.parentNode.style.display="none";
 				page_select.setAttribute('disabled',true);
 				page_select.parentNode.style.display="none";
+				if(custom_url_label){
+					custom_url_label.style.display="inline";
+					if(custom_url_input){
+						custom_url_input.setAttribute('required', 'required');
+					}
+				}
+				if(pro_btn){
+					pro_btn.style.display="none";
+				}
+				if(featured_image){
+					featured_image.parentNode.parentNode.parentNode.style.display="none";
+				}
+			}
+			else{
+				post_select.setAttribute('disabled',true);
+				post_select.parentNode.style.display="none";
+				page_select.setAttribute('disabled',true);
+				page_select.parentNode.style.display="none";
+				if(custom_url_label){
+					custom_url_label.style.display="none";
+					if(custom_url_input){
+						custom_url_input.removeAttribute('required');
+					}
+				}
 				if(pro_btn){
 					pro_btn.style.display="inline";
 				}
@@ -416,6 +464,49 @@ function superpwa_start_url_cb() {
 					featured_image.parentNode.parentNode.parentNode.style.display="contents";
 				}
 			}
+		}
+		
+		// Validate custom URL on input
+		const custom_url_input = document.getElementById('superpwa_custom_start_url');
+		if(custom_url_input){
+			custom_url_input.addEventListener('blur', function() {
+				const url = this.value.trim();
+				const error_element = document.getElementById('superpwa_custom_url_error');
+				
+				if(url === ''){
+					if(error_element){
+						error_element.style.display = 'none';
+					}
+					return;
+				}
+				
+				// Get current site origin
+				const current_origin = window.location.origin;
+				
+				try {
+					const url_obj = new URL(url);
+					const url_origin = url_obj.origin;
+					
+					if(url_origin !== current_origin){
+						if(error_element){
+							error_element.textContent = '<?php esc_html_e('Error: URL must be from the same origin as your site.', 'super-progressive-web-apps'); ?>';
+							error_element.style.display = 'block';
+						}
+						this.setCustomValidity('<?php esc_html_e('URL must be from the same origin', 'super-progressive-web-apps'); ?>');
+					} else {
+						if(error_element){
+							error_element.style.display = 'none';
+						}
+						this.setCustomValidity('');
+					}
+				} catch(e) {
+					if(error_element){
+						error_element.textContent = '<?php esc_html_e('Error: Please enter a valid URL.', 'super-progressive-web-apps'); ?>';
+						error_element.style.display = 'block';
+					}
+					this.setCustomValidity('<?php esc_html_e('Please enter a valid URL', 'super-progressive-web-apps'); ?>');
+				}
+			});
 		}
 	    </script>
 		<?php if ( superpwa_is_amp() ) { ?>
