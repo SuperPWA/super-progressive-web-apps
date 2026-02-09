@@ -659,6 +659,7 @@ function superpwa_enqueue_css_js( $hook ) {
     $object_name = array(
             'ajax_url'                  => admin_url( 'admin-ajax.php' ),
             'superpwa_security_nonce'   => wp_create_nonce('superpwa_ajax_check_nonce'),
+            'script_debug'              => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
         );
     $object_name = apply_filters('superpwa_localize_filter',$object_name,'superpwa_obj');
         

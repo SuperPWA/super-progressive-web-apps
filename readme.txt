@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 6.9
 Requires PHP: 5.3
-Stable tag: 2.2.41
+Stable tag: 2.2.42
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,15 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.42 = 
+* Date: [09.February.2026](https://superpwa.com/superpwa-2-2-42-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Added: Custom URL option for start url #636
+* Enhancement: Remove notification from browser console #629
+* BugFixed: Addon settings not accessible after recent update #635
+* BugFixed: Navigation bar is shown on Chrome browser on Mac #637
+* BugFixed: Splash screen not generated when ZipArchive is not available #639
+* BugFixed: Cannot use bool as array in manifest.php on line 538 #640
+
 = 2.2.41 = 
 * Date: [12.January.2026](https://superpwa.com/superpwa-2-2-41-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Add to home support added in Chrome iOS #633

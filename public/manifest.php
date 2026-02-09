@@ -535,7 +535,7 @@ function superpwa_get_pwa_screenshots() {
 		if(!empty($tmp_arr)){
 			foreach($tmp_arr as $item){
 				if(function_exists('getimagesize')){
-					list($width, $height) =  @getimagesize($item);
+					list($width, $height) =  superpwa_getimagesize($item);
 					$file_type = superpwa_image_extension($item);
 					if($width && $height){
 
@@ -560,7 +560,10 @@ function superpwa_get_pwa_screenshots() {
 		if (isset($superpwa_settings['screenshots_multiple']) && !empty($superpwa_settings['screenshots_multiple'])) {
 			foreach ($superpwa_settings['screenshots_multiple'] as $key => $screenshots_multiple) {
 				if (!empty($screenshots_multiple)) {
-					list($width, $height) =  @getimagesize($screenshots_multiple);
+					list($width, $height) =  superpwa_getimagesize($screenshots_multiple);
+					if(!$width || !$height){
+						continue;
+					}
 					$file_type = superpwa_image_extension($screenshots_multiple);
 
 					$form_factor_multiple = 'wide';
@@ -746,3 +749,29 @@ add_action('fluent_community/portal_head', function() {
 		echo '<link rel="manifest" href="' . esc_url( $manifest_url ) . '">';
 	}
 });
+
+function superpwa_getimagesize( $file ) {
+    if ( empty( $file ) ) {
+        return [false, false];
+    }
+
+    // Convert upload URL to local path if needed
+    if ( filter_var( $file, FILTER_VALIDATE_URL ) ) {
+        $upload_dir = wp_upload_dir();
+
+        if ( strpos( $file, $upload_dir['baseurl'] ) === 0 ) {
+            $file = str_replace(
+                $upload_dir['baseurl'],
+                $upload_dir['basedir'],
+                $file
+            );
+        }
+    }
+
+    // Ensure local readable file
+    if ( ! file_exists( $file ) || ! is_readable( $file ) ) {
+        return [false, false];
+    }
+
+    return @getimagesize( $file );
+}

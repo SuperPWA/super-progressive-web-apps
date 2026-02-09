@@ -1,7 +1,7 @@
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function() {
 	  navigator.serviceWorker.register(superpwa_sw.url)
-	  .then(function(registration) { console.log('SuperPWA service worker ready'); 
+	  .then(function(registration) { if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('SuperPWA service worker ready'); } 
 		  if(registration.active)
 		  {
 			  registration.update(); 
@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
 		  }
 		  subOnlineOfflineIndicator();
 	  })
-	  .catch(function(error) { console.log('Registration failed with ' + error); });
+	  .catch(function(error) { if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('Registration failed with ' + error); } });
   
 	  /****************** Start : Online/Offline Indicator ******************/
   
@@ -60,7 +60,7 @@ if ('serviceWorker' in navigator) {
 		  window.addEventListener('online', runOnlineOfflineIndicator);
 		  window.addEventListener('offline', runOnlineOfflineIndicator);
   
-		  window.addEventListener('fetch',() => console.log("fetch"));
+		  window.addEventListener('fetch',() => { if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log("fetch"); } });
   
 		  // Clean snackbarTimeToHide varibale when user hover on the snackbar to prevent hide it
 		  container.addEventListener('mouseover', function () {
@@ -243,9 +243,9 @@ if ('serviceWorker' in navigator) {
 						  a2hsBanner[i].style.display="none";
 					  }
 				  }//a2hsBanner if
-				  console.log("User accepted the prompt");
+				  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log("User accepted the prompt"); }
 			  }else{
-				  console.log("User dismissed the prompt");
+				  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log("User dismissed the prompt"); }
 			  }
 			  deferredPrompt = null;
 		  });
@@ -304,9 +304,9 @@ if ('serviceWorker' in navigator) {
 		  navigator.serviceWorker.ready.then(function (registration) {
 			  return registration.sync.register('superpwa_form_sendFormData')
 		  }).then(function () {
-			  console.log('sync event registered');
+			  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('sync event registered'); }
 		  }).catch(function () {
-			  console.log('sync registration failed')
+			  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('sync registration failed'); }
 		  });
 		  
 		  
@@ -441,7 +441,7 @@ if ('serviceWorker' in navigator) {
 			  setTimeout(window.location.reload(),3000);
 		  }
 		  window.onload = function (event) {
-			  console.log('Page Load');
+			  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('Page Load'); }
 			  if (!navigator.onLine) {
 				  updateOfflineStatus(event);
 				  superpwapro_woo_xtheme_compat();
@@ -632,16 +632,16 @@ if ('serviceWorker' in navigator) {
 									  }).then(function (response) {
 										  if (response) {
 											  sendPostToServer([response[0], savedRequest.payload.field_id]);
-											  console.log('Form Submitted with ajax fields : success');
+											  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('Form Submitted with ajax fields : success'); }
 										  } else {
 											  sendPostToServer();
-											  console.log('Form Submitted without ajax fields : ajax fields present but their saving failed to db');
+											  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('Form Submitted without ajax fields : ajax fields present but their saving failed to db'); }
 										  }
 									  });
 								  }
 							  } else {
 								  sendPostToServer();
-								  console.log('Form Submitted without ajax fields : no values present in ajax_requests object');
+								  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('Form Submitted without ajax fields : no values present in ajax_requests object'); }
 							  }
 						  }
 					  }
@@ -687,7 +687,7 @@ if ('serviceWorker' in navigator) {
 										  method: method,
 										  body: formData
 									  });
-									  console.log('server response', response);
+									  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('server response', response); }
 									  if (response.status < 400) {
 										  // If sending the POST request was successful, then remove it from the IndexedDB.
 										  try {
@@ -701,7 +701,7 @@ if ('serviceWorker' in navigator) {
 												  method: method,
 												  body: forDataSaveJson,
 											  });
-											  console.log('saved request', savedRequest);
+											  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('saved request', savedRequest); }
 											  if (response.status < 400) {
 												  // If successful, remove the request from IndexedDB.
 												  await getObjectStore('post_requests', 'readwrite').delete(savedRequest.id);
@@ -751,7 +751,7 @@ if ('serviceWorker' in navigator) {
 						  method: 'POST'
 					  })
 					  request.onsuccess = function (event) {
-						  console.log('a post form request has been added to indexedb')
+						  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('a post form request has been added to indexedb'); }
 					  }
 					  request.onerror = function (error) {
 						  console.error(error)
@@ -786,7 +786,7 @@ if ('serviceWorker' in navigator) {
 						  }
 					  });
 				  }else{
-					  console.log('add_to_cart_button not found');
+					  if (typeof superpwa_sw !== 'undefined' && superpwa_sw.script_debug) { console.log('add_to_cart_button not found'); }
 				  }
 		  
 				  if(document.querySelector('.quantity-wrapper .minus')){

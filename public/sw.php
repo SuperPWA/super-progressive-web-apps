@@ -200,13 +200,13 @@ const neverCacheUrls = [<?php echo esc_html(apply_filters( 'superpwa_sw_never_ca
 
 // Install
 self.addEventListener('install', function(e) {
-	console.log('SuperPWA service worker installation');
+	<?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('SuperPWA service worker installation');<?php endif; ?>
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
-			console.log('SuperPWA service worker caching dependencies');
+			<?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('SuperPWA service worker caching dependencies');<?php endif; ?>
 			filesToCache.map(function(url) {
 				return cache.add(url).catch(function (reason) {
-					return console.log('SuperPWA: ' + String(reason) + ' ' + url);
+					<?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>return console.log('SuperPWA: ' + String(reason) + ' ' + url);<?php else : ?>return;<?php endif; ?>
 				});
 			});
 		})
@@ -215,12 +215,12 @@ self.addEventListener('install', function(e) {
 
 // Activate
 self.addEventListener('activate', function(e) {
-	console.log('SuperPWA service worker activation');
+	<?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('SuperPWA service worker activation');<?php endif; ?>
 	e.waitUntil(
 		caches.keys().then(function(keyList) {
 			return Promise.all(keyList.map(function(key) {
 				if ( key !== cacheName ) {
-					console.log('SuperPWA old cache removed', key);
+					<?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('SuperPWA old cache removed', key);<?php endif; ?>
 					return caches.delete(key);
 				}
 			}));
@@ -232,7 +232,7 @@ self.addEventListener('activate', function(e) {
 // Range Data Code
 var fetchRangeData = function(event){
     var pos = Number(/^bytes\=(\d+)\-$/g.exec(event.request.headers.get('range'))[1]);
-            console.log('Range request for', event.request.url, ', starting position:', pos);
+            <?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('Range request for', event.request.url, ', starting position:', pos);<?php endif; ?>
             event.respondWith(
               caches.open(cacheName)
               .then(function(cache) {
@@ -264,7 +264,7 @@ self.addEventListener('fetch', function(e) {
 	
 	// Return if the current request url is in the never cache list
 	if ( ! neverCacheUrls.every(checkNeverCacheList, e.request.url) ) {
-	  console.log( 'SuperPWA: Current request is excluded from cache.' );
+	  <?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log( 'SuperPWA: Current request is excluded from cache.' );<?php endif; ?>
 	  return;
 	}
 	
@@ -337,7 +337,7 @@ function checkNeverCacheList(url) {
 	            if(workbox.googleAnalytics){
                   try{
                     workbox.googleAnalytics.initialize();
-                  } catch (e){ console.log(e.message); }
+                  } catch (e){ console.log(e.message);}
                 }';    
 }
 	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
@@ -386,6 +386,7 @@ function superpwa_register_sw() {
 				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
 				'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
 				'manifest_name' => superpwa_get_manifest_filename(),
+				'script_debug' => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
 			);
 		$localize = apply_filters('superpwa_sw_localize_data', $localize);
 		wp_localize_script( 'superpwa-register-sw', 'superpwa_sw',  $localize);
@@ -557,6 +558,7 @@ add_action('fluent_community/portal_footer', function() {
 			'offline_message' => !isset( $settings['offline_message'] ) ? 0 : $settings['offline_message'],
 			'offline_message_txt' => !isset( $settings['offline_message_txt'] ) ? esc_html__('You are currently offline.', 'super-progressive-web-apps') : $settings['offline_message_txt'],
 			'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
+			'script_debug' => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
 		);
 
 		$localize = apply_filters( 'superpwa_sw_localize_data' , $localize);
