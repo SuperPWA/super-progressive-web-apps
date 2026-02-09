@@ -441,7 +441,14 @@ function superpwa_splashscreen_uploader(){
     
             if($moveFile && superpwa_zip_allowed_extensions($zipFileName,['png'])){
                 $result = unzip_file($zipFileName, $path);
+                if ( is_wp_error( $result ) ) {
+                    wp_delete_file($zipFileName);
+                    echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Failed to extract zip file: ','super-progressive-web-apps') . $result->get_error_message()));die;
+                }
                 wp_delete_file($zipFileName);
+            } elseif($moveFile) {
+                wp_delete_file($zipFileName);
+                echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Zip file validation failed. Only PNG files are allowed.','super-progressive-web-apps')));die;
             }
         }else{
             echo wp_json_encode(array('status'=>500, 'message'=>esc_html__('Files are not uploading','super-progressive-web-apps')));die;
@@ -461,20 +468,80 @@ function superpwa_splashscreen_uploader(){
     
 }
 function superpwa_zip_allowed_extensions($zip_path, array $allowed_extensions) {
-    $zip = new ZipArchive;
-    $zip->open($zip_path);
-
-    for ($i = 0; $i < $zip->numFiles; $i++) {
-        $stat = $zip->statIndex( $i );
-        $ext = pathinfo($stat['name'], PATHINFO_EXTENSION);
-    
-        // Skip folders name (but their content will be checked)
-        if ($ext === '' && substr($stat['name'], -1) === '/')
-            continue;
+    // Try ZipArchive first (faster)
+    if ( class_exists( 'ZipArchive' ) ) {
+        $zip = new ZipArchive;
+        $result = $zip->open($zip_path);
         
-        if (!in_array(strtolower($ext), $allowed_extensions))
+        // Check if zip file was opened successfully
+        if ( $result !== true ) {
             return false;
+        }
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $stat = $zip->statIndex( $i );
+            
+            // Skip if statIndex fails
+            if ( $stat === false ) {
+                continue;
+            }
+            
+            $ext = pathinfo($stat['name'], PATHINFO_EXTENSION);
+        
+            // Skip folders name (but their content will be checked)
+            if ($ext === '' && substr($stat['name'], -1) === '/')
+                continue;
+            
+            if (!in_array(strtolower($ext), $allowed_extensions)) {
+                $zip->close();
+                return false;
+            }
+        }
+        
+        $zip->close();
+        return true;
     }
+    
+    // Fallback to PclZip (WordPress includes this)
+    if ( ! class_exists( 'PclZip' ) ) {
+        require_once( ABSPATH . 'wp-admin/includes/class-pclzip.php' );
+    }
+    
+    if ( ! class_exists( 'PclZip' ) ) {
+        return false;
+    }
+    
+    $zip = new PclZip( $zip_path );
+    $list = $zip->listContent();
+    
+    if ( $list === 0 ) {
+        return false;
+    }
+    
+    foreach ( $list as $file ) {
+        // Skip directories
+        if ( isset( $file['folder'] ) && $file['folder'] ) {
+            continue;
+        }
+        
+        $filename = isset( $file['filename'] ) ? $file['filename'] : ( isset( $file['name'] ) ? $file['name'] : '' );
+        
+        if ( empty( $filename ) ) {
+            continue;
+        }
+        
+        $ext = pathinfo( $filename, PATHINFO_EXTENSION );
+        
+        // Skip if no extension (likely a directory)
+        if ( empty( $ext ) ) {
+            continue;
+        }
+        
+        if ( ! in_array( strtolower( $ext ), $allowed_extensions ) ) {
+            return false;
+        }
+    }
+    
     return true;
 }
 add_action('wp_ajax_superpwa_splashscreen_uploader', 'superpwa_splashscreen_uploader');
