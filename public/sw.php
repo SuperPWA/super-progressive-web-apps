@@ -337,7 +337,7 @@ function checkNeverCacheList(url) {
 	            if(workbox.googleAnalytics){
                   try{
                     workbox.googleAnalytics.initialize();
-                  } catch (e){ <?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log(e.message);<?php endif; ?> }
+                  } catch (e){ console.log(e.message);}
                 }';    
 }
 	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
