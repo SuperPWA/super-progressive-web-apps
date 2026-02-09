@@ -561,6 +561,9 @@ function superpwa_get_pwa_screenshots() {
 			foreach ($superpwa_settings['screenshots_multiple'] as $key => $screenshots_multiple) {
 				if (!empty($screenshots_multiple)) {
 					list($width, $height) =  superpwa_getimagesize($screenshots_multiple);
+					if(!$width || !$height){
+						continue;
+					}
 					$file_type = superpwa_image_extension($screenshots_multiple);
 
 					$form_factor_multiple = 'wide';
@@ -749,7 +752,7 @@ add_action('fluent_community/portal_head', function() {
 
 function superpwa_getimagesize( $file ) {
     if ( empty( $file ) ) {
-        return false;
+        return [false, false];
     }
 
     // Convert upload URL to local path if needed
@@ -767,7 +770,7 @@ function superpwa_getimagesize( $file ) {
 
     // Ensure local readable file
     if ( ! file_exists( $file ) || ! is_readable( $file ) ) {
-        return false;
+        return [false, false];
     }
 
     return @getimagesize( $file );

@@ -198,6 +198,7 @@ Feel free to get in touch if you have any questions.
 * BugFixed: Addon settings not accessible after recent update #635
 * BugFixed: Navigation bar is shown on Chrome browser on Mac #637
 * BugFixed: Splash screen not generated when ZipArchive is not available #639
+* BugFixed: Cannot use bool as array in manifest.php on line 538 #640
 
 = 2.2.41 = 
 * Date: [12.January.2026](https://superpwa.com/superpwa-2-2-41-release-note/?utm_source=wordpress.org&utm_medium=changelog)
