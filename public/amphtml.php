@@ -13,9 +13,9 @@ function amp_service_worker_template(){
 		            var swsource = "<?php echo esc_url($swjs_path_amp); ?>";
 		            if("serviceWorker" in navigator) {			               
 		                navigator.serviceWorker.register(swsource, {scope: '<?php echo esc_url($home_url); ?>'}).then(function(reg){
-		                    console.log('Congratulations!!Service Worker Registered ServiceWorker scope: ', reg.scope);
+		                    <?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('Congratulations!!Service Worker Registered ServiceWorker scope: ', reg.scope);<?php endif; ?>
 		                }).catch(function(err) {
-		                    console.log('ServiceWorker registration failed: ', err);
+		                    <?php if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) : ?>console.log('ServiceWorker registration failed: ', err);<?php endif; ?>
 		                });			                			                                                                                                                                    
 		            };
 

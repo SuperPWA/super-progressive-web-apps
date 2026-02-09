@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
 
 		if(e.target.checked == true){
 		     // Code in the case checkbox is checked.
-		     console.log('checked');
+		     if (superpwa_obj.script_debug) { console.log('checked'); }
 		     $('#superpwa-automatic-suboption').removeClass('hide').addClass('show');
 		} else {
 		     // Code in the case checkbox is NOT checked.

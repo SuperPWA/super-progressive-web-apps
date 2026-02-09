@@ -364,7 +364,7 @@ function superpwaGetZip() {
 	                        setTimeout(function(){ location.reload(); }, 1000);
 	                    },
 	                    error: function(response){                    
-	                    console.log(response);
+	                    if (superpwa_obj.script_debug) { console.log(response); }
 	                    }
 	                    }); 
         
@@ -388,7 +388,7 @@ function superpwaGetZip() {
 				activate = '&activate=pushnotification';
 			}
 	
-		console.log(wp.updates);
+		if (superpwa_obj.script_debug) { console.log(wp.updates); }
 	
 	
 		jQuery.ajax({
@@ -405,7 +405,7 @@ function superpwaGetZip() {
 							{
 								slug: response.slug,
 								success: function (pluginresponse) {
-									console.log(pluginresponse.activateUrl);
+									if (superpwa_obj.script_debug) { console.log(pluginresponse.activateUrl); }
 									superpwa_Activate_Modules_Upgrade(pluginresponse.activateUrl, self, response, nonce)
 								}
 							}
@@ -427,7 +427,7 @@ function superpwaGetZip() {
 		if (typeof url === 'undefined' || !url) {
 			return;
 		}
-		 console.log( 'Activating...' );
+		 if (superpwa_obj.script_debug) { console.log( 'Activating...' ); }
 		 self.html('Activating...');
 		 jQuery.ajax(
 			{
@@ -439,7 +439,7 @@ function superpwaGetZip() {
 					var msgplug = '';
 					if(self.attr('id')=='pushnotification'){
 						msgplug = 'push notification';
-						console.log("push notification Activated");
+						if (superpwa_obj.script_debug) { console.log("push notification Activated"); }
 						self.removeClass('updating-message')
 						self.removeClass("button")
 						self.removeClass('superpwa-install-require-plugin')
@@ -464,7 +464,7 @@ function superpwaGetZip() {
 					} else {
 						msg = 'Uncaught Error.\n' + jqXHR.responseText;
 					}
-					console.log(msg);
+					if (superpwa_obj.script_debug) { console.log(msg); }
 				},
 			}
 		);
@@ -524,7 +524,7 @@ function superpwaGetZip() {
 
 	function superpwa_check_maskable_input() {
 		jQuery('.superpwa-maskable-input').each(function() {
-			console.log(jQuery(this).val())
+			if (superpwa_obj.script_debug) { console.log(jQuery(this).val()); }
 			if ( jQuery(this).val() == null || jQuery(this).val() == "") {
 				jQuery(this).parents('td').find('.superpwa_js_remove_maskable').hide();
 			}else{
