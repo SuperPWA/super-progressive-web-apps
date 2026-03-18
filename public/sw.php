@@ -516,12 +516,20 @@ add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cach
  * @since 2.1.2
  */
 
-add_filter('seraph_accel_jscss_addtype', function($exclude, $script) {
+add_filter('seraph_accel_jscss_addtype', function($exclude, $script = null) {
   
-    if ( strpos( $script->getAttribute( 'src' ), 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
-        return true; 
-    }
-    return false;
+	$src = '';
+	if ( is_object( $script ) && method_exists( $script, 'getAttribute' ) ) {
+		$src = (string) $script->getAttribute( 'src' );
+	} elseif ( is_string( $script ) ) {
+		$src = $script;
+	}
+
+	if ( $src !== '' && strpos( $src, 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
+		return true;
+	}
+
+	return $exclude;
 }, 10, 2);
 
 /**
