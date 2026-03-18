@@ -425,6 +425,15 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
+
+		// Hide elements (CSS selectors) in PWA
+		add_settings_field(
+			'superpwa_hide_elements_selectors',									// ID
+			__( 'Hide elements in PWA (CSS selectors)', 'super-progressive-web-apps' ),	// Title
+			'superpwa_hide_elements_selectors_cb',								// CB
+			'superpwa_pwa_advance_section',									// Page slug
+			'superpwa_pwa_advance_section'										// Settings Section ID
+		);
 		// Role Based Access
 		if( function_exists('is_super_admin') &&  is_super_admin() ){
 			add_settings_field(
@@ -522,6 +531,15 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	} else {
 		$settings['offline_message'] = intval( $settings['offline_message'] );
 	}
+
+	// Sanitize hide elements selectors
+	if ( isset( $settings['hide_elements_selectors'] ) ) {
+		$raw = (string) $settings['hide_elements_selectors'];
+		$raw = wp_strip_all_tags( $raw );
+		$raw = str_replace( array( "\r\n", "\r" ), "\n", $raw );
+		$raw = preg_replace( "/[\\t\\f\\v]+/", " ", $raw );
+		$settings['hide_elements_selectors'] = sanitize_textarea_field( $raw );
+	}
 	
 	return $settings;
 }
@@ -569,6 +587,7 @@ function superpwa_get_settings() {
 				'monochrome_icon'=>'',
 				'prefetch_manifest'=>1,
 				'offline_message'=>1,
+				'hide_elements_selectors' => '',
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
@@ -606,6 +625,7 @@ function superpwa_get_default_settings() {
 				'excluded_urls'=> '',
 				'exclude_homescreen'=> '',
 				'bypass_sw_url_cache'=> '',
+				'hide_elements_selectors' => '',
 			);
 
 	return $defaults;

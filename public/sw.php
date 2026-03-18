@@ -396,6 +396,62 @@ function superpwa_register_sw() {
 add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
 
 /**
+ * Output CSS to hide configured selectors in PWA display-mode.
+ *
+ * Only selectors starting with "." or "#" are applied.
+ *
+ * @since 2.2.43
+ */
+function superpwa_output_hide_elements_css() {
+	$settings = superpwa_get_settings();
+	if ( empty( $settings['hide_elements_selectors'] ) ) {
+		return;
+	}
+
+	$raw = (string) $settings['hide_elements_selectors'];
+	$raw = str_replace( array( "\r\n", "\r" ), "\n", $raw );
+	$raw = preg_replace( "/\\s*,\\s*/", ",", $raw );
+	$raw = str_replace( "\n", ",", $raw );
+
+	$parts = array_filter( array_map( 'trim', explode( ',', $raw ) ) );
+	if ( empty( $parts ) ) {
+		return;
+	}
+
+	$selectors = array();
+	foreach ( $parts as $sel ) {
+		// Safety: allow only #id or .class selectors (with optional descendant parts).
+		if ( $sel === '' ) {
+			continue;
+		}
+
+		if ( $sel[0] !== '#' && $sel[0] !== '.' ) {
+			continue;
+		}
+
+		// Prevent breaking out of CSS context.
+		if ( strpbrk( $sel, "{};<>" ) !== false ) {
+			continue;
+		}
+
+		$selectors[] = $sel;
+	}
+
+	if ( empty( $selectors ) ) {
+		return;
+	}
+
+	$css_selectors = implode( ",\n", array_map( 'esc_html', $selectors ) );
+
+	echo "<style id='superpwa-hide-elements'>\n";
+	echo "@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {\n";
+	echo $css_selectors . " { display: none !important; visibility: hidden !important; }\n";
+	echo "}\n";
+	echo "</style>\n";
+}
+add_action( 'wp_head', 'superpwa_output_hide_elements_css', 99 );
+
+/**
  * Delete Service Worker
  *
  * @return true on success, false on failure

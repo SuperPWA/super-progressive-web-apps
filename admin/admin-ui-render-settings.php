@@ -935,6 +935,29 @@ function superpwa_exclude_add_to_homescreen_cb(){
 	<?php
 }
 
+/**
+ * Hide elements in PWA (CSS selectors)
+ *
+ * @since 2.2.43
+ */
+function superpwa_hide_elements_selectors_cb() {
+	$settings = superpwa_get_settings();
+	$value    = isset( $settings['hide_elements_selectors'] ) ? $settings['hide_elements_selectors'] : '';
+	?>
+	<label>
+		<textarea
+			placeholder="#header, .site-footer, .promo-banner"
+			rows="4"
+			cols="70"
+			id="superpwa_settings[hide_elements_selectors]"
+			name="superpwa_settings[hide_elements_selectors]"
+		><?php echo esc_textarea( $value ); ?></textarea>
+	</label>
+	<p><?php echo esc_html__( 'Add CSS selectors (IDs/classes) to hide in the installed PWA. Separate using commas or new lines.', 'super-progressive-web-apps' ); ?></p>
+	<p><?php echo esc_html__( 'Tip: Only selectors starting with # or . are applied (for safety).', 'super-progressive-web-apps' ); ?></p>
+	<?php
+}
+
 function superpwa_role_based_access_cb(){
 	if( function_exists('is_super_admin') &&  is_super_admin() ){
 		$settings = superpwa_get_settings(); 
