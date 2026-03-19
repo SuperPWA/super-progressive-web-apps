@@ -26,7 +26,7 @@
     background-color: #fff;
     overflow-y: auto;
 }
-.mb-box{display: none;width:100%;}
+.superpwa-mb-box{display: none;width:100%;}
 .superpwa-for-wp-feedback-not-deactivate { display: block; text-align: right; }
 
 #superpwa-reloaded-feedback-content h3{

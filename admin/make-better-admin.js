@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
         // show text field if there is one
         var inputValue = $(this).attr("value");
         var targetBox = $("." + inputValue);
-        $(".mb-box").not(targetBox).hide();
+        $(".superpwa-mb-box").not(targetBox).hide();
         $(targetBox).show();
     });
     // send form or close it
