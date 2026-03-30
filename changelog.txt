@@ -1,3 +1,12 @@
+= 2.2.43 = 
+* Date: [30.March.2026](https://superpwa.com/superpwa-2-2-43-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Added: Sharing Media in Progressive Web Apps #612
+* Added: Option to Hide Specific HTML Sections in PWA Only #645
+* Added: Option for Navigation bar visibile to only logged in users and also icon customization option. #649
+* BugFixed: ArgumentCountError in public/sw.php:519 with latest version v2.2.42 #647
+* BugFixed: Conflict with Meta Box Lite plugin – blank screen on Post Type/Taxonomy creation #650
+* Tested: WordPress version upto 7.0
+
 = 2.2.42 = 
 * Date: [09.February.2026](https://superpwa.com/superpwa-2-2-42-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Custom URL option for start url #636

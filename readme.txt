@@ -2,9 +2,9 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 2.2.42
+Stable tag: 2.2.43
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,15 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.43 = 
+* Date: [30.March.2026](https://superpwa.com/superpwa-2-2-43-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Added: Sharing Media in Progressive Web Apps #612
+* Added: Option to Hide Specific HTML Sections in PWA Only #645
+* Added: Option for Navigation bar visibile to only logged in users and also icon customization option. #649
+* BugFixed: ArgumentCountError in public/sw.php:519 with latest version v2.2.42 #647
+* BugFixed: Conflict with Meta Box Lite plugin – blank screen on Post Type/Taxonomy creation #650
+* Tested: WordPress version upto 7.0
+
 = 2.2.42 = 
 * Date: [09.February.2026](https://superpwa.com/superpwa-2-2-42-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Custom URL option for start url #636
@@ -321,17 +330,6 @@ Feel free to get in touch if you have any questions.
 * BugFixed: Pre-caching offline URLs is not working when we add the URLs one by one in next line. #505
 * Improvement: Change upgrade plan details page #513
 * BugFixed: CTA is not working on the iOS devices.  #517
-
-= 2.2.25 =
-* Date: [29.March.2024](https://superpwa.com/superpwa-2-2-25-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Option to change this Text "You're currently offline." #493
-* Compatibility: Tested with WordPress 6.5  #510
-* Feature: Option to hide the navigation bar on certain pages (PRO) #511
-* Feature: Dynamic Start URL (PRO) #502
-* Feature: Option to generate PWA install QR code for any website link (PRO) #502
-* Improvement: Load CTA in body if footer is not present (PRO) #506
-* Enhancement: Improve the error message while creating an APK.(PRO) #494
-* BugFixed: APK logo and the splash screen icon logo are not showing properly.(PRO) #508
 
 
 
