@@ -279,6 +279,7 @@ self.addEventListener('fetch', function(e) {
     <?php }	?>
 
 	<?php do_action('superpwa_offline_form_fetch'); ?>
+	<?php do_action('superpwa_share_target_action'); ?>
 
 			// For Range Headers
 			if (e.request.headers.has('range')) {
@@ -296,7 +297,7 @@ self.addEventListener('fetch', function(e) {
 						});
 					}).catch(function(){
 						// If the network is unavailable, get the request from cache
-						return cache.match(e.request.url);
+						return caches.match(e.request.url);
 					})
 					);
 				} else {
@@ -305,7 +306,6 @@ self.addEventListener('fetch', function(e) {
 				}
 				return;
 			}
-
 			//strategy_replace_start
 			e.respondWith(
 				caches.match(e.request).then(function(response) {
@@ -394,6 +394,62 @@ function superpwa_register_sw() {
 
 }
 add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
+
+/**
+ * Output CSS to hide configured selectors in PWA display-mode.
+ *
+ * Only selectors starting with "." or "#" are applied.
+ *
+ * @since 2.2.43
+ */
+function superpwa_output_hide_elements_css() {
+	$settings = superpwa_get_settings();
+	if ( empty( $settings['hide_elements_selectors'] ) ) {
+		return;
+	}
+
+	$raw = (string) $settings['hide_elements_selectors'];
+	$raw = str_replace( array( "\r\n", "\r" ), "\n", $raw );
+	$raw = preg_replace( "/\\s*,\\s*/", ",", $raw );
+	$raw = str_replace( "\n", ",", $raw );
+
+	$parts = array_filter( array_map( 'trim', explode( ',', $raw ) ) );
+	if ( empty( $parts ) ) {
+		return;
+	}
+
+	$selectors = array();
+	foreach ( $parts as $sel ) {
+		// Safety: allow only #id or .class selectors (with optional descendant parts).
+		if ( $sel === '' ) {
+			continue;
+		}
+
+		if ( $sel[0] !== '#' && $sel[0] !== '.' ) {
+			continue;
+		}
+
+		// Prevent breaking out of CSS context.
+		if ( strpbrk( $sel, "{};<>" ) !== false ) {
+			continue;
+		}
+
+		$selectors[] = $sel;
+	}
+
+	if ( empty( $selectors ) ) {
+		return;
+	}
+
+	$css_selectors = implode( ",\n", array_map( 'esc_html', $selectors ) );
+
+	echo "<style id='superpwa-hide-elements'>\n";
+	echo "@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {\n";
+	echo $css_selectors . " { display: none !important; visibility: hidden !important; }\n";
+	echo "}\n";
+	echo "</style>\n";
+}
+add_action( 'wp_head', 'superpwa_output_hide_elements_css', 99 );
 
 /**
  * Delete Service Worker
@@ -516,12 +572,20 @@ add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cach
  * @since 2.1.2
  */
 
-add_filter('seraph_accel_jscss_addtype', function($exclude, $script) {
+add_filter('seraph_accel_jscss_addtype', function($exclude, $script = null) {
   
-    if ( strpos( $script->getAttribute( 'src' ), 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
-        return true; 
-    }
-    return false;
+	$src = '';
+	if ( is_object( $script ) && method_exists( $script, 'getAttribute' ) ) {
+		$src = (string) $script->getAttribute( 'src' );
+	} elseif ( is_string( $script ) ) {
+		$src = $script;
+	}
+
+	if ( $src !== '' && strpos( $src, 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
+		return true;
+	}
+
+	return $exclude;
 }, 10, 2);
 
 /**

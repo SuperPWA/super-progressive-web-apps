@@ -286,6 +286,19 @@ function superpwa_get_addons( $slug = false ) {
 							'superpwa_min_version'	=> '2.2.32',
 							'category'				=> 'subtab-all subtab-usability',
 						),
+		'share_target_for_superpwa' => array(
+							'name'					=> __( 'Share Target', 'super-progressive-web-apps' ),
+							'description'			=> __( 'Receive shared content in your PWA and map title, text and URL params to custom selectors.', 'super-progressive-web-apps' ),
+							'type'					=> 'addon_pro',
+							'icon'					=> 'share-target.png',
+							'link'					=> 'https://superpwa.com/docs/',
+							'more_link'				=> 'https://superpwa.com/docs/',
+							'admin_link'			=> admin_url('admin.php?page=superpwa-share-target'),
+							'admin_link_text'		=> __( 'Customize Settings &rarr;', 'super-progressive-web-apps' ),
+							'admin_link_target'		=> 'admin',
+							'superpwa_min_version'	=> '2.2.32',
+							'category'				=> 'subtab-all subtab-usability',
+						),
 	
 	);
 	
