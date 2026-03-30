@@ -279,6 +279,7 @@ self.addEventListener('fetch', function(e) {
     <?php }	?>
 
 	<?php do_action('superpwa_offline_form_fetch'); ?>
+	<?php do_action('superpwa_share_target_action'); ?>
 
 			// For Range Headers
 			if (e.request.headers.has('range')) {
@@ -296,7 +297,7 @@ self.addEventListener('fetch', function(e) {
 						});
 					}).catch(function(){
 						// If the network is unavailable, get the request from cache
-						return cache.match(e.request.url);
+						return caches.match(e.request.url);
 					})
 					);
 				} else {
@@ -305,7 +306,6 @@ self.addEventListener('fetch', function(e) {
 				}
 				return;
 			}
-
 			//strategy_replace_start
 			e.respondWith(
 				caches.match(e.request).then(function(response) {
