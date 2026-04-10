@@ -1073,8 +1073,7 @@ function superpwa_admin_interface_render() {
 			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')"><?php echo esc_html__('Settings', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo esc_url($addon_page);  ?>" data-href="yes"><?php echo esc_html__('Features (Addons)', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo esc_html__('Advanced', 'super-progressive-web-apps'); ?></a>
-			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo esc_html__('Support', 'super-progressive-web-apps'); ?></a>
-			  <a class="spwa-tablinks" id="spwa-help" href="#help-settings" onclick="openCity(event, 'help')" data-href="no"><?php echo esc_html__('Help', 'super-progressive-web-apps'); ?></a>
+			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo esc_html__('Help & Support', 'super-progressive-web-apps'); ?></a>			  
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){  ?>
 			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo esc_html__('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 			  <?php } ?>
@@ -1112,26 +1111,7 @@ function superpwa_admin_interface_render() {
 			</div>
 			<div id="support" class="spwa-tabcontent">
 
-			 <?php
-              //1)Docs 2)Find new or whats new in superpwa(Blog Post Link)
-			 //3)Technical issue (supportLink) 4)Report a Bug(Support Link)
-
-			  ?>
-			 <h1><?php esc_html_e(' 1) Documentation', 'super-progressive-web-apps'); ?></h1>
-			 <p class="support-cont"><?php esc_html_e('All the documents regarding SuperPWA Setup, it\'s settings detail and also about add-ons setup all you can go through this ', 'super-progressive-web-apps'); ?><b><a href="https://superpwa.com/docs/" target="_blank"><?php esc_html_e('Docs link', 'super-progressive-web-apps'); ?></a></b></p>
-
-			 <h1><?php esc_html_e(' 2) What\'s New', 'super-progressive-web-apps'); ?></h1>
-			 <p class="support-cont"><?php esc_html_e('We will be continuously working on new features whereas also fixing the bugs and at the sametime releasing new feature add-ons, So to catch all those things just check this link ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/blog/" target="_blank"><?php esc_html_e('What\'s new in SuperPWA', 'super-progressive-web-apps'); ?></a></b></p>
-
-			 <h1><?php esc_html_e(' 3) Technical Issue', 'super-progressive-web-apps'); ?></h1>
-			 <p class="support-cont"><?php esc_html_e('If you are facing any issues or unable to Setup, you can directly connect us using this link', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Contact us', 'super-progressive-web-apps'); ?></a></b></p>
-
-			 <h1><?php esc_html_e(' 4) Report a Bug', 'super-progressive-web-apps'); ?></h1>
-			 <p class="support-cont"><?php esc_html_e('If you found any bug or having issues with any third party plugins you can contact us ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Bug Report', 'super-progressive-web-apps'); ?></a></b></p>
-			</div>
-
-			<div id="help" class="spwa-tabcontent">
-				<?php echo '<div>
+			 <?php echo '<div>
                    	<h3>'.esc_html__('Ask for Technical Support', 'super-progressive-web-apps') .'</h3>
                    	<p>'.esc_html__('We are always available to help you with anything', 'super-progressive-web-apps').'</p>
 		            <table class="form-table" role="presentation"><tbody>
@@ -1162,6 +1142,17 @@ function superpwa_admin_interface_render() {
 		                <button class="button spwa_help-send-query spwa-submit-button">'.esc_html__('Send Message', 'super-progressive-web-apps').'</button>
 		        </div>';
 				 ?>
+			 <h1><?php esc_html_e(' 1) Documentation', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('All the documents regarding SuperPWA Setup, it\'s settings detail and also about add-ons setup all you can go through this ', 'super-progressive-web-apps'); ?><b><a href="https://superpwa.com/docs/" target="_blank"><?php esc_html_e('Docs link', 'super-progressive-web-apps'); ?></a></b></p>
+
+			 <h1><?php esc_html_e(' 2) What\'s New', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('We will be continuously working on new features whereas also fixing the bugs and at the sametime releasing new feature add-ons, So to catch all those things just check this link ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/blog/" target="_blank"><?php esc_html_e('What\'s new in SuperPWA', 'super-progressive-web-apps'); ?></a></b></p>
+
+			 <h1><?php esc_html_e(' 3) Technical Issue', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('If you are facing any issues or unable to Setup, you can directly connect us using this link', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Contact us', 'super-progressive-web-apps'); ?></a></b></p>
+
+			 <h1><?php esc_html_e(' 4) Report a Bug', 'super-progressive-web-apps'); ?></h1>
+			 <p class="support-cont"><?php esc_html_e('If you found any bug or having issues with any third party plugins you can contact us ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Bug Report', 'super-progressive-web-apps'); ?></a></b></p>
 			</div>
 			<div id="superpwa_pro_license" class="spwa-tabcontent">
 
