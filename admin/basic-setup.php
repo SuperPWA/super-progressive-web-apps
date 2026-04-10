@@ -498,6 +498,53 @@ function superpwa_setup_hooks() {
 }
 add_action( 'plugins_loaded', 'superpwa_setup_hooks' );
 
+function superpwa_send_query_message(){   
+
+		if ( ! current_user_can( superpwa_current_user_can() ) ) {
+			return;
+		}
+        if ( ! isset( $_POST['superpwa_security_nonce'] ) ){
+            return; 
+        }
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+        if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
+           return;  
+        }
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+        $message    = sanitize_textarea_field($_POST['message']);
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated    
+        $customer_type    	= sanitize_text_field($_POST['customer_type']);        
+        $customer_type 		= !empty($customer_type)? $customer_type : 'No';
+        $message .= "<table>
+        				<tr><td>".esc_html__('Are you existing Premium Customer?','super-progressive-web-apps')."</td><td>".$customer_type."</td></tr>
+        				<tr><td>Plugin</td><td>".esc_html__('Superpwa for wp','super-progressive-web-apps')." </td></tr>
+        				<tr><td>Version</td><td>".SUPERPWA_VERSION."</td></tr>
+        			</table>";
+        $user       = wp_get_current_user();
+        
+        if($user){            
+            $user_data  = $user->data;        
+            $user_email = $user_data->user_email;       
+            //php mailer variables
+            $to = 'team@magazine3.in';
+            $subject = "Superpwa Customer Query";
+            $headers = 'From: '. esc_attr($user_email) . "\r\n" .
+            'Reply-To: ' . esc_attr($user_email) . "\r\n";
+            // Load WP components, no themes.                      
+            $sent = wp_mail($to, $subject, wp_strip_all_tags($message), $headers);        
+            
+            if($sent){
+            	echo wp_json_encode(array('status'=>'t'));            
+            }else{
+            	echo wp_json_encode(array('status'=>'f'));            
+            }
+            
+        }                        
+        wp_die();           
+}
+
+add_action('wp_ajax_superpwa_send_query_message', 'superpwa_send_query_message');
+
  
 
 function superpwa_get_select2_data(){

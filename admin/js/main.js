@@ -183,6 +183,48 @@ jQuery(document).ready(function($){
 	}
 
 	superpwa_select2();
+
+	jQuery(".spwa_help-send-query").on("click", function(e){
+        e.preventDefault();   
+        var email = jQuery("#spwa_query_email").val();           
+        var message = jQuery("#spwa_help_query_message").val();           
+        var customer = jQuery("#spwa_help_query_customer").val();    
+        if(jQuery.trim(message) !='' && customer && email){       
+			jQuery.ajax({
+				type: "POST",    
+				url: ajaxurl,                    
+				dataType: "json",
+				data:{action:"superpwa_send_query_message", customer_type: customer, message:message, superpwa_security_nonce:superpwa_obj.superpwa_security_nonce},
+				success:function(response){                       
+					if(response['status'] =='t'){
+					jQuery(".spwa_help-query-succes").show();
+					jQuery(".spwa_help-query-error").hide();
+					}else{
+					jQuery(".spwa_help-query-succes").hide();  
+					jQuery(".spwa_help-query-error").show();
+					}
+				},
+				error: function(response){                    
+					console.log(response);
+				}
+			});
+        }else{
+            if(jQuery.trim(message) =='' && customer ==''){
+                alert('Please enter the message and select customer type');
+            }else{
+            
+            if(customer ==''){
+                alert('Select Customer type');
+            }
+            if(jQuery.trim(message) == ''){
+                alert('Please enter the message');
+            }
+                
+            }
+            
+        }                   
+        
+    });
 });
 var image = '';
 document.addEventListener('DOMContentLoaded', function() {
