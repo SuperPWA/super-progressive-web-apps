@@ -183,6 +183,89 @@ jQuery(document).ready(function($){
 	}
 
 	superpwa_select2();
+
+	jQuery(".spwa_help-send-query").on("click", function(e){
+		e.preventDefault();
+		var $btn = jQuery(this);
+		var email = jQuery.trim(jQuery("#spwa_query_email").val());
+		var message = jQuery("#spwa_help_query_message").val();
+		var customer = jQuery("#spwa_help_query_customer").val();
+
+		var $success = jQuery(".spwa_help-query-success");
+		var $error = jQuery(".spwa_help-query-error");
+		var $validation = jQuery(".spwa_help-query-validation");
+		var $successText = $success.find(".spwa_help-query-success-text");
+		var $errorText = $error.find(".spwa_help-query-error-text");
+
+		function hideAll() {
+			$success.hide();
+			$error.hide();
+			$validation.hide();
+		}
+
+		hideAll();
+
+		if (typeof superpwa_obj === "undefined" || !superpwa_obj.superpwa_security_nonce) {
+			$errorText.text("Unable to verify request. Please reload the page and try again.");
+			$error.show();
+			return;
+		}
+
+		var validationMsg = "";
+		if (!email) {
+			validationMsg = "Please enter your email address.";
+		} else if (!customer) {
+			validationMsg = "Please select whether you are an existing Premium customer.";
+		} else if (!jQuery.trim(message)) {
+			validationMsg = "Please enter your message.";
+		}
+		if (validationMsg) {
+			$validation.find("p").text(validationMsg);
+			$validation.show();
+			return;
+		}
+
+		var originalLabel = $btn.text();
+		$btn.prop("disabled", true).text("Sending...");
+
+		jQuery.ajax({
+			type: "POST",
+			url: ajaxurl,
+			dataType: "json",
+			data: {
+				action: "superpwa_send_query_message",
+				customer_type: customer,
+				message: message,
+				query_email: email,
+				superpwa_security_nonce: superpwa_obj.superpwa_security_nonce
+			}
+		})
+			.done(function (response) {
+				if (response && response.success) {
+					var okMsg = (response.data && response.data.message) ? response.data.message : null;
+					if (okMsg) {
+						$successText.text(okMsg);
+					}
+					$success.show();
+					jQuery("#spwa_help_query_message").val("");
+				} else {
+					var errMsg = (response && response.data && response.data.message) ? response.data.message : "Message not sent. Please try again.";
+					$errorText.text(errMsg);
+					$error.show();
+				}
+			})
+			.fail(function (xhr) {
+				var errMsg = "Message not sent. Please check your network connection and try again.";
+				if (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) {
+					errMsg = xhr.responseJSON.data.message;
+				}
+				$errorText.text(errMsg);
+				$error.show();
+			})
+			.always(function () {
+				$btn.prop("disabled", false).text(originalLabel);
+			});
+	});
 });
 var image = '';
 document.addEventListener('DOMContentLoaded', function() {

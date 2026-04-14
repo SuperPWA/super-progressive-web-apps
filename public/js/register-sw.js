@@ -174,7 +174,7 @@ if ('serviceWorker' in navigator) {
 	   * @param {String} msg 
 	   */
 	  function showSnackbar(msg) {
-		  document.getElementById('snackbar-msg').innerHTML = msg;
+		  document.getElementById('snackbar-msg').textContent = msg;
 		  document.body.classList.add('snackbar--show');
   
 		  clearTimeout(snackbarTimeoutHide);

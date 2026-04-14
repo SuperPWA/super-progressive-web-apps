@@ -383,7 +383,7 @@ function superpwa_register_sw() {
 				'offline_form_addon_active' =>$offline_form_addon_active,
 				'ajax_url' =>$ajax_url,
 				'offline_message'=> !isset($settings['offline_message']) ? 0 : $settings['offline_message'],
-				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : $settings['offline_message_txt'],
+				'offline_message_txt'=> !isset($settings['offline_message_txt']) ? esc_html__('You are currently offline.','super-progressive-web-apps') : esc_html($settings['offline_message_txt']),
 				'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
 				'manifest_name' => superpwa_get_manifest_filename(),
 				'script_debug' => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
@@ -572,21 +572,30 @@ add_filter( 'superpwa_sw_never_cache_urls', 'superpwa_sanitize_exclude_urls_cach
  * @since 2.1.2
  */
 
-add_filter('seraph_accel_jscss_addtype', function($exclude, $script = null) {
-  
-	$src = '';
-	if ( is_object( $script ) && method_exists( $script, 'getAttribute' ) ) {
-		$src = (string) $script->getAttribute( 'src' );
-	} elseif ( is_string( $script ) ) {
-		$src = $script;
-	}
+add_filter('seraph_accel_jscss_addtype', function($exclude) {
 
-	if ( $src !== '' && strpos( $src, 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
-		return true;
-	}
+    $script = null; // fallback
 
-	return $exclude;
-}, 10, 2);
+    // Optional: safely try to get second arg
+    $args = func_get_args();
+    if (isset($args[1])) {
+        $script = $args[1];
+    }
+
+    $src = '';
+    if ( is_object( $script ) && method_exists( $script, 'getAttribute' ) ) {
+        $src = (string) $script->getAttribute( 'src' );
+    } elseif ( is_string( $script ) ) {
+        $src = $script;
+    }
+
+    if ( $src !== '' && strpos( $src, 'super-progressive-web-apps/public/js/register-sw.js' ) !== false ) {
+        return true;
+    }
+
+    return $exclude;
+
+}, 10, 1);
 
 /**
  * Register service worker in Fluent Community
@@ -620,7 +629,7 @@ add_action('fluent_community/portal_footer', function() {
 			'offline_form_addon_active' => false,
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'offline_message' => !isset( $settings['offline_message'] ) ? 0 : $settings['offline_message'],
-			'offline_message_txt' => !isset( $settings['offline_message_txt'] ) ? esc_html__('You are currently offline.', 'super-progressive-web-apps') : $settings['offline_message_txt'],
+			'offline_message_txt' => !isset( $settings['offline_message_txt'] ) ? esc_html__('You are currently offline.', 'super-progressive-web-apps') : esc_html($settings['offline_message_txt']),
 			'online_message_txt'=>  esc_html__('You\'re back online .','super-progressive-web-apps') . ' <a href="javascript:location.reload()">'.esc_html__('refresh','super-progressive-web-apps').'</a>',
 			'script_debug' => defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG,
 		);

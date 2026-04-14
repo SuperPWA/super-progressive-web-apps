@@ -1073,7 +1073,7 @@ function superpwa_admin_interface_render() {
 			  <a id="spwa-default" class="spwa-tablinks" data-href="no" href="#general-settings" onclick="openCity(event, 'settings')"><?php echo esc_html__('Settings', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-feature" href="<?php echo esc_url($addon_page);  ?>" data-href="yes"><?php echo esc_html__('Features (Addons)', 'super-progressive-web-apps'); ?></a>
 			  <a class="spwa-tablinks" id="spwa-advance" href="#advance-settings" onclick="openCity(event, 'advance')" data-href="no"><?php echo esc_html__('Advanced', 'super-progressive-web-apps'); ?></a>
-			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo esc_html__('Help & Support', 'super-progressive-web-apps'); ?></a>
+			  <a class="spwa-tablinks" id="spwa-support" href="#support-settings" onclick="openCity(event, 'support')" data-href="no"><?php echo esc_html__('Help & Support', 'super-progressive-web-apps'); ?></a>			  
 			  <?php if( defined('SUPERPWA_PRO_VERSION') ){  ?>
 			  <a class="spwa-tablinks" id="spwa-license" href="#license-settings" onclick="openCity(event, 'superpwa_pro_license')" data-href="no"><?php echo esc_html__('License', 'super-progressive-web-apps'); ?> <?php echo (superpwa_license_expire_warning()? "<span class='superpwa_pro_icon dashicons dashicons-warning superpwa_pro_alert' style='color: #ffb229;left: 3px;position: relative;'></span>":""); ?></a>
 			  <?php } ?>
@@ -1111,11 +1111,43 @@ function superpwa_admin_interface_render() {
 			</div>
 			<div id="support" class="spwa-tabcontent">
 
-			 <?php
-              //1)Docs 2)Find new or whats new in superpwa(Blog Post Link)
-			 //3)Technical issue (supportLink) 4)Report a Bug(Support Link)
-
-			  ?>
+			 <?php echo '<div>
+                   	<h3>'.esc_html__('Ask for Technical Support', 'super-progressive-web-apps') .'</h3>
+                   	<p>'.esc_html__('We are always available to help you with anything', 'super-progressive-web-apps').'</p>
+		            <table class="form-table" role="presentation"><tbody>
+						<tr><th scope="row">
+							<label for="spwa_query_email">'.esc_html__('Email', 'super-progressive-web-apps').'</label></th><td>
+							<input type="text" id="spwa_query_email" class="regular-text" name="spwa_query_email" placeholder="youremail@example.com" >
+							</td>
+						</tr>
+						<tr><th scope="row">
+							<label for="spwa_help_query_customer">'.esc_html__('Are you existing Premium Customer?', 'super-progressive-web-apps').'</label></th><td>
+								<select class="regular-text" id="spwa_help_query_customer" name="spwa_help_query_customer">
+									<option value="">Select</option>
+									<option value="Yes">'.esc_html__('Yes', 'super-progressive-web-apps').'</option>
+									<option value="No">'.esc_html__('No', 'super-progressive-web-apps').'</option>
+								</select></td>
+						</tr>
+						<tr><th scope="row">
+								<label for="spwa_help_query_message">'.esc_html__('Message', 'super-progressive-web-apps').'</label>
+							</th><td>
+								<textarea rows="5" id="spwa_help_query_message" name="spwa_help_query_message" class="regular-text"></textarea>
+								<br>
+								<div class="spwa_help-query-validation notice notice-warning inline" style="display:none;" role="alert"><p></p></div>
+								<div class="spwa_help-query-success notice notice-success inline" style="display:none;" role="status"><p class="spwa_help-query-success-text">'.esc_html__( 'Message sent successfully. We will get back to you shortly.', 'super-progressive-web-apps' ).'</p></div>
+								<div class="spwa_help-query-error notice notice-error inline" style="display:none;" role="alert"><p class="spwa_help-query-error-text">'.esc_html__( 'Message not sent. Please check your network connection and try again.', 'super-progressive-web-apps' ).'</p></div>
+							</td>
+						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						<td> <button type="button" class="button spwa_help-send-query spwa-submit-button">'.esc_html__('Send Message', 'super-progressive-web-apps').'</button></td>
+						<tr>
+						</tbody>
+					</table>
+		               
+		        </div><br>
+		        <hr class="spwa-support-form-separator" />';
+				 ?>
 			 <h1><?php esc_html_e(' 1) Documentation', 'super-progressive-web-apps'); ?></h1>
 			 <p class="support-cont"><?php esc_html_e('All the documents regarding SuperPWA Setup, it\'s settings detail and also about add-ons setup all you can go through this ', 'super-progressive-web-apps'); ?><b><a href="https://superpwa.com/docs/" target="_blank"><?php esc_html_e('Docs link', 'super-progressive-web-apps'); ?></a></b></p>
 
@@ -1128,7 +1160,6 @@ function superpwa_admin_interface_render() {
 			 <h1><?php esc_html_e(' 4) Report a Bug', 'super-progressive-web-apps'); ?></h1>
 			 <p class="support-cont"><?php esc_html_e('If you found any bug or having issues with any third party plugins you can contact us ', 'super-progressive-web-apps'); ?> <b><a href="https://superpwa.com/contact/" target="_blank"><?php esc_html_e('Bug Report', 'super-progressive-web-apps'); ?></a></b></p>
 			</div>
-
 			<div id="superpwa_pro_license" class="spwa-tabcontent">
 
 			 <?php
@@ -1148,6 +1179,8 @@ function superpwa_admin_interface_render() {
             document.getElementById("spwa-advance").click();
 	    }else if(url.indexOf('#support-settings') > -1){
             document.getElementById("spwa-support").click();
+	    }else if(url.indexOf('#help-settings') > -1){
+            document.getElementById("spwa-help").click();
 	    }else if(url.indexOf('#license-settings') > -1){
             document.getElementById("spwa-license").click();
 	    }else{	

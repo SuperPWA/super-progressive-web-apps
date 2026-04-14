@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 2.2.43
+Stable tag: 2.2.44
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.44 = 
+* Date: [14.April.2026](https://superpwa.com/superpwa-2-2-44-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Added: Option for hover color in navigation menu #646
+* Added: Contact form on Plugin dashboard #638
+* BugFixed: E_ERROR in super-progressive-web-apps (sw.php:519) – ArgumentCountError due to missing parameter in closure #652
+* BugFixed: Fix for Stored Cross-Site Scripting via Offline Message Setting disclosed by Wordfence (lucsob)
+
 = 2.2.43 = 
 * Date: [30.March.2026](https://superpwa.com/superpwa-2-2-43-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Sharing Media in Progressive Web Apps #612
@@ -322,14 +329,6 @@ Feel free to get in touch if you have any questions.
 * Feature: Added compatibility with Polylang #437
 * Improvement: Apple touch Icons are not getting updated #521
 * BugFixed: The CTA cancel button is not working on both Desktop and Android devices.  #523
-
-= 2.2.26 =
-* Date: [25.April.2024](https://superpwa.com/superpwa-2-2-26-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added an option where users can exclude a particular page from the PWA. #429
-* Feature: Added all missing translation in SuperPwa pro extension #518
-* BugFixed: Pre-caching offline URLs is not working when we add the URLs one by one in next line. #505
-* Improvement: Change upgrade plan details page #513
-* BugFixed: CTA is not working on the iOS devices.  #517
 
 
 
