@@ -498,49 +498,74 @@ function superpwa_setup_hooks() {
 }
 add_action( 'plugins_loaded', 'superpwa_setup_hooks' );
 
-function superpwa_send_query_message(){   
+function superpwa_send_query_message() {
 
-		if ( ! current_user_can( superpwa_current_user_can() ) ) {
-			return;
-		}
-        if ( ! isset( $_POST['superpwa_security_nonce'] ) ){
-            return; 
-        }
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-        if ( !wp_verify_nonce( $_POST['superpwa_security_nonce'], 'superpwa_ajax_check_nonce' ) ){
-           return;  
-        }
-        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-        $message    = sanitize_textarea_field($_POST['message']);
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotValidated    
-        $customer_type    	= sanitize_text_field($_POST['customer_type']);        
-        $customer_type 		= !empty($customer_type)? $customer_type : 'No';
-        $message .= "<table>
-        				<tr><td>".esc_html__('Are you existing Premium Customer?','super-progressive-web-apps')."</td><td>".$customer_type."</td></tr>
-        				<tr><td>Plugin</td><td>".esc_html__('Superpwa for wp','super-progressive-web-apps')." </td></tr>
-        				<tr><td>Version</td><td>".SUPERPWA_VERSION."</td></tr>
-        			</table>";
-        $user       = wp_get_current_user();
-        
-        if($user){            
-            $user_data  = $user->data;        
-            $user_email = $user_data->user_email;       
-            //php mailer variables
-            $to = 'team@magazine3.in';
-            $subject = "Superpwa Customer Query";
-            $headers = 'From: '. esc_attr($user_email) . "\r\n" .
-            'Reply-To: ' . esc_attr($user_email) . "\r\n";
-            // Load WP components, no themes.                      
-            $sent = wp_mail($to, $subject, wp_strip_all_tags($message), $headers);        
-            
-            if($sent){
-            	echo wp_json_encode(array('status'=>'t'));            
-            }else{
-            	echo wp_json_encode(array('status'=>'f'));            
-            }
-            
-        }                        
-        wp_die();           
+	if ( ! current_user_can( superpwa_current_user_can() ) ) {
+		wp_send_json_error(
+			array(
+				'message' => esc_html__( 'You do not have permission to send this message.', 'super-progressive-web-apps' ),
+			)
+		);
+	}
+
+	if ( ! isset( $_POST['superpwa_security_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) ) {
+		wp_send_json_error(
+			array(
+				'message' => esc_html__( 'Security check failed. Please reload the page and try again.', 'super-progressive-web-apps' ),
+			)
+		);
+	}
+
+	$message       = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+	$customer_type = isset( $_POST['customer_type'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_type'] ) ) : '';
+	$query_email   = isset( $_POST['query_email'] ) ? sanitize_email( wp_unslash( $_POST['query_email'] ) ) : '';
+
+	if ( '' === trim( $message ) || '' === $customer_type ) {
+		wp_send_json_error(
+			array(
+				'message' => esc_html__( 'Please fill in all required fields.', 'super-progressive-web-apps' ),
+			)
+		);
+	}
+
+	if ( ! is_email( $query_email ) ) {
+		wp_send_json_error(
+			array(
+				'message' => esc_html__( 'Please enter a valid email address.', 'super-progressive-web-apps' ),
+			)
+		);
+	}
+
+	$user       = wp_get_current_user();
+	$user_email = ( $user && $user->ID ) ? $user->user_email : $query_email;
+
+	$message .= '<table>
+					<tr><td>' . esc_html__( 'Contact email : ', 'super-progressive-web-apps' ) . '</td><td>' . esc_html( $query_email ) . '</td></tr>
+					<tr><td>' . esc_html__( 'Are you existing Premium Customer?', 'super-progressive-web-apps' ) . '</td><td>' . esc_html( $customer_type ) . '</td></tr>
+					<tr><td>Plugin</td><td>' . esc_html__( 'Superpwa for wp', 'super-progressive-web-apps' ) . ' </td></tr>
+					<tr><td>Version</td><td>' . esc_html( SUPERPWA_VERSION ) . '</td></tr>
+				</table>';
+
+	$to      = 'team@magazine3.in';
+	$subject = 'Superpwa Customer Query';
+	$headers = 'From: ' . esc_attr( $user_email ) . "\r\n" .
+		'Reply-To: ' . esc_attr( $query_email ) . "\r\n";
+
+	$sent = wp_mail( $to, $subject, wp_strip_all_tags( $message ), $headers );
+
+	if ( $sent ) {
+		wp_send_json_success(
+			array(
+				'message' => esc_html__( 'Message sent successfully. We will get back to you shortly.', 'super-progressive-web-apps' ),
+			)
+		);
+	}
+
+	wp_send_json_error(
+		array(
+			'message' => esc_html__( 'Message could not be sent. Please try again later or check your site email configuration.', 'super-progressive-web-apps' ),
+		)
+	);
 }
 
 add_action('wp_ajax_superpwa_send_query_message', 'superpwa_send_query_message');

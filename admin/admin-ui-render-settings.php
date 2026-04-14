@@ -1133,14 +1133,20 @@ function superpwa_admin_interface_render() {
 							</th><td>
 								<textarea rows="5" id="spwa_help_query_message" name="spwa_help_query_message" class="regular-text"></textarea>
 								<br>
-								<p class="spwa_help-query-success" style="display:none; color: green;">'.esc_html__('Message sent successfully, Please wait we will get back to you shortly', 'super-progressive-web-apps').'</p>
-								<p class="spwa_help-query-error" style="display:none; color: red;">'.esc_html__('Message not sent. please check your network connection', 'super-progressive-web-apps').'</p>
+								<div class="spwa_help-query-validation notice notice-warning inline" style="display:none;" role="alert"><p></p></div>
+								<div class="spwa_help-query-success notice notice-success inline" style="display:none;" role="status"><p class="spwa_help-query-success-text">'.esc_html__( 'Message sent successfully. We will get back to you shortly.', 'super-progressive-web-apps' ).'</p></div>
+								<div class="spwa_help-query-error notice notice-error inline" style="display:none;" role="alert"><p class="spwa_help-query-error-text">'.esc_html__( 'Message not sent. Please check your network connection and try again.', 'super-progressive-web-apps' ).'</p></div>
 							</td>
 						</tr>
+						<tr>
+						<td>&nbsp;</td>
+						<td> <button type="button" class="button spwa_help-send-query spwa-submit-button">'.esc_html__('Send Message', 'super-progressive-web-apps').'</button></td>
+						<tr>
 						</tbody>
 					</table>
-		                <button class="button spwa_help-send-query spwa-submit-button">'.esc_html__('Send Message', 'super-progressive-web-apps').'</button>
-		        </div>';
+		               
+		        </div><br>
+		        <hr class="spwa-support-form-separator" />';
 				 ?>
 			 <h1><?php esc_html_e(' 1) Documentation', 'super-progressive-web-apps'); ?></h1>
 			 <p class="support-cont"><?php esc_html_e('All the documents regarding SuperPWA Setup, it\'s settings detail and also about add-ons setup all you can go through this ', 'super-progressive-web-apps'); ?><b><a href="https://superpwa.com/docs/" target="_blank"><?php esc_html_e('Docs link', 'super-progressive-web-apps'); ?></a></b></p>
