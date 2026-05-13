@@ -1,3 +1,9 @@
+= 2.2.45 = 
+* Date: [13.May.2026](https://superpwa.com/superpwa-2-2-45-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement: Minify the output of /super-pwa.js for better performance #608
+* BugFixed: Preloader issue on form submit and backstep in IOS #654
+* BugFixed: App banner showing after installing on iPad #644
+
 = 2.2.44 = 
 * Date: [14.April.2026](https://superpwa.com/superpwa-2-2-44-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Option for hover color in navigation menu #646
