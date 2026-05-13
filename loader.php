@@ -33,6 +33,9 @@ require_once( SUPERPWA_PATH_ABS . 'public/manifest.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/amphtml.php' );
 
+// Load Service Worker Minifier
+require_once( SUPERPWA_PATH_ABS . 'includes/sw-minifier.php' );
+
 // Load bundled add-ons
 require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );
 require_once( SUPERPWA_PATH_ABS . 'addons/apple-touch-icons.php' );
