@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 2.2.44
+Stable tag: 2.2.45
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,12 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.45 = 
+* Date: [13.May.2026](https://superpwa.com/superpwa-2-2-45-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement: Minify the output of /super-pwa.js for better performance #608
+* BugFixed: Preloader issue on form submit and backstep in IOS #654
+* BugFixed: App banner showing after installing on iPad #644
+
 = 2.2.44 = 
 * Date: [14.April.2026](https://superpwa.com/superpwa-2-2-44-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Added: Option for hover color in navigation menu #646
@@ -322,13 +328,6 @@ Feel free to get in touch if you have any questions.
 * Feature: Need to create an option to edit the text in the iOS QR code. #529
 * Improvement: Preloader issue after recent recent updates #530
 * BugFixed: While clicking on the install button on CTA, the Google search appears for the word Install (Android only) #527
-
-= 2.2.27 =
-* Date: [09.May.2024](https://superpwa.com/superpwa-2-2-27-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added compatibility with wp-multilang #514
-* Feature: Added compatibility with Polylang #437
-* Improvement: Apple touch Icons are not getting updated #521
-* BugFixed: The CTA cancel button is not working on both Desktop and Android devices.  #523
 
 
 
