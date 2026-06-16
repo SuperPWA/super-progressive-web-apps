@@ -10,8 +10,10 @@
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
-// Load JShrink Minifier
-require_once( SUPERPWA_PATH_ABS . 'includes/minifier.php' );
+// Load bundled JShrink only when another plugin has not already registered it.
+if ( ! class_exists( '\JShrink\Minifier' ) ) {
+	require_once SUPERPWA_PATH_ABS . 'includes/minifier.php';
+}
 
 /**
  * Minify Service Worker Template

@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 3.6.0
 Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 2.2.45
+Stable tag: 2.2.46
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,13 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.46 = 
+* Date: [15.June.2026](https://superpwa.com/superpwa-2-2-46-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: PHP Fatal error: Cannot redeclare class JShrink\Minifier #656
+* BugFixed: wp_enqueue_style issue on WordPress version 6.9.1 #657
+* BugFixed: Loading icon selector does not work #659
+* Enhancement:  Added Transparent Color option in PreLoader #658
+
 = 2.2.45 = 
 * Date: [13.May.2026](https://superpwa.com/superpwa-2-2-45-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement: Minify the output of /super-pwa.js for better performance #608
