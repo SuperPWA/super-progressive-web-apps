@@ -10,10 +10,8 @@
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
-// Load bundled JShrink only when another plugin has not already registered it.
-if ( ! class_exists( '\JShrink\Minifier' ) ) {
-	require_once SUPERPWA_PATH_ABS . 'includes/minifier.php';
-}
+
+require_once SUPERPWA_PATH_ABS . 'includes/minifier.php';
 
 /**
  * Minify Service Worker Template
@@ -36,8 +34,8 @@ function superpwa_minify_sw_template( $sw_template ) {
 	
 	// SCRIPT_DEBUG is false or undefined, proceed with minification
 	try {
-		// Use JShrink to minify the JavaScript
-		$minified = \JShrink\Minifier::minify( $sw_template, array( 'flaggedComments' => true ) );
+		// Use SuperPWA JShrink to minify the JavaScript
+		$minified = \SuperPWA\JShrink\Minifier::minify( $sw_template, array( 'flaggedComments' => true ) );
 		
 		// Return minified content if successful
 		if ( ! empty( $minified ) ) {
@@ -47,7 +45,7 @@ function superpwa_minify_sw_template( $sw_template ) {
 	} catch ( \Exception $e ) {
 		// If minification fails, log error (optional) and return original
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-			error_log( 'SuperPWA: JShrink minification failed - ' . $e->getMessage() );
+			error_log( 'SuperPWA: Minification failed - ' . $e->getMessage() );
 		}
 	}
 	
