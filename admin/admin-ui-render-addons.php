@@ -383,6 +383,7 @@ function superpwa_addons_interface_render() {
 		</div>
 		<br/>
 		<style>.compatibility-compatible i:before{font-size: 16px; POSITION: RELATIVE;top: 3px;width: 15px;}</style>
+		<div id="superpwa-addon-notice-container"></div>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
 			
@@ -457,11 +458,11 @@ function superpwa_addons_interface_render() {
 									<?php
 										 if($slug=='push_notification_for_superpwa'){ 
 											if(superpwa_push_notification_status()=='active'){
-												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url(admin_url('/admin.php?page=push-notification')).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
+												echo'<li class="compatibility-compatible"><a class="button button-secondary" href="'.esc_url(admin_url('/admin.php?page=push-notification')).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
 										 }else{
 											if(superpwa_addons_status( $slug ) == 'active'){
-												echo'<li class="compatibility-compatible"><a class="button activate-now button-secondary" href="'.esc_url($addon['admin_link']).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
+												echo'<li class="compatibility-compatible"><a class="button button-secondary" href="'.esc_url($addon['admin_link']).'"'.esc_attr($link_target).' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> '.esc_html__("Settings","super-progressive-web-apps").'</a></li>';
 											}
 										}
 									?>
@@ -843,3 +844,69 @@ function superpwa_push_notification_status(){
 	}
 	return $status;
 }
+
+/**
+ * AJAX Handler for Add-on Activation & Deactivation
+ *
+ * @since 2.2.48
+ */
+function superpwa_ajax_toggle_addon() {
+	if ( ! isset( $_POST['superpwa_security_nonce'] ) || ! current_user_can( superpwa_current_user_can() ) ) {
+		wp_send_json_error( array( 'message' => __( 'Unauthorized request', 'super-progressive-web-apps' ) ) );
+	}
+
+	if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) ) {
+		wp_send_json_error( array( 'message' => __( 'Security check failed', 'super-progressive-web-apps' ) ) );
+	}
+
+	$addon_name = isset( $_POST['addon'] ) ? sanitize_title( wp_unslash( $_POST['addon'] ) ) : '';
+	$addon      = superpwa_get_addons( $addon_name );
+
+	if ( false === $addon ) {
+		wp_send_json_error( array( 'message' => __( 'Invalid Add-on', 'super-progressive-web-apps' ) ) );
+	}
+
+	$status        = superpwa_addons_status( $addon_name );
+	$active_addons = get_option( 'superpwa_active_addons', array() );
+
+	if ( 'inactive' === $status ) {
+		if ( ! in_array( $addon_name, $active_addons, true ) ) {
+			$active_addons[] = $addon_name;
+			update_option( 'superpwa_active_addons', $active_addons );
+		}
+		do_action( 'superpwa_addon_activated_' . $addon_name );
+
+		if ( 'external' === $addon['admin_link_target'] ) {
+			$addon['admin_link'] .= '?utm_source=superpwa-plugin&utm_medium=addon-activation-notice';
+		}
+
+		wp_send_json_success( array(
+			'addon'             => $addon_name,
+			'new_status'        => 'active',
+			'button_text'       => __( 'Deactivate', 'super-progressive-web-apps' ),
+			'button_link'       => superpwa_addons_button_link( $addon_name ),
+			'admin_link'        => esc_url( $addon['admin_link'] ),
+			'admin_link_text'   => esc_html( $addon['admin_link_text'] ),
+			'admin_link_target' => ( 'external' === $addon['admin_link_target'] ) ? 'target="_blank"' : '',
+			'notice'            => '<div class="updated notice is-dismissible"><p><strong>' . esc_html__( 'Add-On activated:', 'super-progressive-web-apps' ) . ' ' . esc_html( $addon['name'] ) . '</strong> <a href="' . esc_url( $addon['admin_link'] ) . '" ' . ( ( 'external' === $addon['admin_link_target'] ) ? 'target="_blank"' : '' ) . '>' . esc_html( $addon['admin_link_text'] ) . '</a></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'super-progressive-web-apps' ) . '</span></button></div>',
+		) );
+	} elseif ( 'active' === $status ) {
+		$active_addons = array_flip( $active_addons );
+		unset( $active_addons[ $addon_name ] );
+		$active_addons = array_flip( $active_addons );
+		update_option( 'superpwa_active_addons', array_values( $active_addons ) );
+
+		do_action( 'superpwa_addon_deactivated_' . $addon_name );
+
+		wp_send_json_success( array(
+			'addon'       => $addon_name,
+			'new_status'  => 'inactive',
+			'button_text' => __( 'Activate', 'super-progressive-web-apps' ),
+			'button_link' => superpwa_addons_button_link( $addon_name ),
+			'notice'      => '<div class="updated notice is-dismissible"><p><strong>' . esc_html__( 'Add-On deactivated', 'super-progressive-web-apps' ) . '</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'super-progressive-web-apps' ) . '</span></button></div>',
+		) );
+	} else {
+		wp_send_json_error( array( 'message' => __( 'Cannot toggle status for this add-on.', 'super-progressive-web-apps' ) ) );
+	}
+}
+add_action( 'wp_ajax_superpwa_ajax_toggle_addon', 'superpwa_ajax_toggle_addon' );
