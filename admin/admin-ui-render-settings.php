@@ -531,7 +531,7 @@ function superpwa_offline_page_cb() {
 		echo wp_dropdown_pages( array( 
 			'name' => 'superpwa_settings[offline_page]', 
 			'echo' => 0, 
-			'show_option_none' => __( '&mdash; Default &mdash;' ), 
+			'show_option_none' => __( '&mdash; Default &mdash;', 'super-progressive-web-apps' ), 
 			'option_none_value' => '0', 
 			'selected' =>  isset($settings['offline_page']) ? $settings['offline_page'] : '',
 		)); ?>
@@ -798,7 +798,7 @@ function superpwa_app_shortcut_link_cb() {
 			echo wp_dropdown_pages( array( 
 				'name' => 'superpwa_settings[shortcut_url]', 
 				'echo' => 0, 
-				'show_option_none' => __( 'Select Page' ), 
+				'show_option_none' => __( 'Select Page', 'super-progressive-web-apps' ), 
 				'option_none_value' => '0', 
 				'selected' =>  isset($settings['shortcut_url']) ? $settings['shortcut_url'] : '',
 			)); ?>

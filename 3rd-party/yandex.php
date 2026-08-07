@@ -9,6 +9,8 @@
  * @function	superpwa_yandex_manifest_support()			Add array of yandex to SuperPWA manifest as per https://yandex.ru/dev/turboapps/doc/dev/manifest.html
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
  add_filter( 'superpwa_manifest', 'superpwa_yandex_manifest_support' );
  function superpwa_yandex_manifest_support( $manifest ){
 

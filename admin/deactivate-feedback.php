@@ -1,4 +1,6 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $reasons = array(
     		1 => '<li><label><input type="radio" name="superpwa_disable_reason" value="temporary"/>' . esc_html__('It is only temporary', 'super-progressive-web-apps') . '</label></li>',
 		2 => '<li><label><input type="radio" name="superpwa_disable_reason" value="stopped"/>' . esc_html__('I stopped using superPWA on my site', 'super-progressive-web-apps') . '</label></li>',

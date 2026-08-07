@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 function amp_service_worker_template(){
 	$url = superpwa_site_url();

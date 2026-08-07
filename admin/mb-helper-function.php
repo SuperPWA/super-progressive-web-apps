@@ -62,10 +62,10 @@ function superpwa_send_feedback() {
     }
 
     if ( ! wp_verify_nonce( $form['superpwa_deactivate_nonce'], 'superpwa-deactivate-nonce' ) ) {
-        die( esc_html__( 'Security check', 'superpwa-for-wp' ) ); 
+        die( esc_html__( 'Security check', 'super-progressive-web-apps' ) ); 
     }
     if ( ! current_user_can( superpwa_current_user_can() ) ) {
-        die( esc_html__( 'Unauthorised Access', 'superpwa-for-wp' ) ); 
+        die( esc_html__( 'Unauthorised Access', 'super-progressive-web-apps' ) ); 
     }
     $text = '';
     if( isset( $form['superpwa_disable_text'] ) ) {

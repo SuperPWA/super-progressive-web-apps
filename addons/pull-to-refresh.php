@@ -347,9 +347,9 @@ function superpwa_pull_to_refresh_ptrfp_scripts_load() {
 
 			wp_register_script( "superpwa_ptrfp_lib_script", SUPERPWA_PATH_SRC."admin/js/superpwa-ptr-lib.min.js", array('jquery'), SUPERPWA_VERSION, true );
 			$ptrArray = array(
-						'instrPullToRefresh'=> ( isset( $settings['superpwa_ptr_text'] )? $settings['superpwa_ptr_text'] : esc_html__("Pull down to refresh", 'pull-to-refresh-for-pwa') ),
-						'instrReleaseToRefresh'=> (isset( $settings['superpwa_ptr_release_text'] )? $settings['superpwa_ptr_release_text'] : esc_html__("Release to refresh", 'pull-to-refresh-for-pwa') ),
-						'instrRefreshing'=>( isset( $settings['superpwa_ptr_refreshing_text'] )? $settings['superpwa_ptr_refreshing_text'] : esc_html__("Refreshing", 'pull-to-refresh-for-pwa') ),
+						'instrPullToRefresh'=> ( isset( $settings['superpwa_ptr_text'] )? $settings['superpwa_ptr_text'] : esc_html__("Pull down to refresh", 'super-progressive-web-apps') ),
+						'instrReleaseToRefresh'=> (isset( $settings['superpwa_ptr_release_text'] )? $settings['superpwa_ptr_release_text'] : esc_html__("Release to refresh", 'super-progressive-web-apps') ),
+						'instrRefreshing'=>( isset( $settings['superpwa_ptr_refreshing_text'] )? $settings['superpwa_ptr_refreshing_text'] : esc_html__("Refreshing", 'super-progressive-web-apps') ),
 						'instrptr_font_size'=>( isset( $settings['superpwa_ptr_font_size'] ) && !empty($settings['superpwa_ptr_font_size'])? $settings['superpwa_ptr_font_size'] : "0.85em" ),
 						'instrptr_font_color'=>( isset( $settings['superpwa_ptr_font_color'] ) && !empty($settings['superpwa_ptr_font_color'])? $settings['superpwa_ptr_font_color'] : "rgba(0, 0, 0, 0.3)" ),
 							);

@@ -705,7 +705,7 @@ function superpwa_addons_handle_activation() {
 	) {
 		
 		// Return to referer if authentication fails.
-		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
 		exit;
 	}
 		
@@ -719,7 +719,7 @@ function superpwa_addons_handle_activation() {
 	update_option( 'superpwa_active_addons', $active_addons );
 		
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . sanitize_title($addon_name )) );
+	wp_safe_redirect( admin_url( 'admin.php?page=superpwa-addons&activated=1&addon=' . sanitize_title($addon_name )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_activate_addon', 'superpwa_addons_handle_activation' );
@@ -748,7 +748,7 @@ function superpwa_addons_handle_deactivation() {
 	) {
 		
 		// Return to referer if authentication fails.
-		wp_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=superpwa-addons' ) );
 		exit;
 	}
 	
@@ -767,7 +767,7 @@ function superpwa_addons_handle_deactivation() {
 	do_action( 'superpwa_addon_deactivated_' . sanitize_title($addon_name) );
 	
 	// Redirect back to add-ons sub-menu
-	wp_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . sanitize_title($addon_name )) );
+	wp_safe_redirect( admin_url( 'admin.php?page=superpwa-addons&deactivated=1&addon=' . sanitize_title($addon_name )) );
 	exit;
 }
 add_action( 'admin_post_superpwa_deactivate_addon', 'superpwa_addons_handle_deactivation' );
