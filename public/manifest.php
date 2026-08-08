@@ -413,22 +413,22 @@ function superpwa_image_extension($image_url = '')
     return $image_extension;
 }
 
-$show_manifest_icon = 0;
+$superpwa_show_manifest_icon = 0;
 // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-$current_page_url = home_url( $_SERVER['REQUEST_URI'] );
+$superpwa_current_page_url = home_url( $_SERVER['REQUEST_URI'] );
 if(isset($superpwa_settings['excluded_urls']) && !empty($superpwa_settings['excluded_urls'])){
-	$excluded_urls = explode(",", $superpwa_settings['excluded_urls']);
-	if(!empty($excluded_urls)){
-		foreach($excluded_urls as $excluded_page_url) {
-			if(trim($excluded_page_url) == trim($current_page_url)){
-				$show_manifest_icon = 1;
+	$superpwa_excluded_urls = explode(",", $superpwa_settings['excluded_urls']);
+	if(!empty($superpwa_excluded_urls)){
+		foreach($superpwa_excluded_urls as $superpwa_excluded_page_url) {
+			if(trim($superpwa_excluded_page_url) == trim($superpwa_current_page_url)){
+				$superpwa_show_manifest_icon = 1;
 			}
 		}
 	}
 }
 
 
-if($show_manifest_icon == 0){
+if($superpwa_show_manifest_icon == 0){
 	add_action( 'wp_head', 'superpwa_add_manifest_to_wp_head', 0 );
 }
 

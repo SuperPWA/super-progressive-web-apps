@@ -45,6 +45,7 @@ function superpwa_minify_sw_template( $sw_template ) {
 	} catch ( \Exception $e ) {
 		// If minification fails, log error (optional) and return original
 		if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			error_log( 'SuperPWA: Minification failed - ' . $e->getMessage() );
 		}
 	}

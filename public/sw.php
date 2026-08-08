@@ -108,6 +108,7 @@ function superpwa_sw( $arg = 'src' ) {
  *
  */
 function superpwa_get_language_shortcode() {
+    // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
     return apply_filters( 'wpml_current_language', null );
 }
 
@@ -445,6 +446,7 @@ function superpwa_output_hide_elements_css() {
 
 	echo "<style id='superpwa-hide-elements'>\n";
 	echo "@media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {\n";
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $css_selectors . " { display: none !important; visibility: hidden !important; }\n";
 	echo "}\n";
 	echo "</style>\n";
@@ -641,7 +643,7 @@ add_action('fluent_community/portal_footer', function() {
 		echo 'var superpwa_sw = ' . json_encode( $localize, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';';
 		echo '</script>';
 
-		// Optionally include the script tag as well if you're not using wp_enqueue_script
+		// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
 		echo '<script src="' . esc_url( SUPERPWA_PATH_SRC . 'public/js/register-sw.js' ) . '"></script>';
 	}
 });
