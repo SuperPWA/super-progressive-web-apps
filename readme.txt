@@ -2,9 +2,9 @@
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 5.3
-Stable tag: 2.2.47
+Stable tag: 2.2.48
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,10 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.48 = 
+* Date: [03.September2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Tested: WordPress version upto 7.1
+
 = 2.2.47 = 
 * Date: [08.August.2026](https://superpwa.com/superpwa-2-2-47-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Bug: Malformed refresh link in "Back Online" toast notification #663
@@ -328,11 +332,6 @@ Feel free to get in touch if you have any questions.
 * BugFixed: The App Icon is getting replaced by Splash screen Icon on some Android devices #540
 * Improvement: Improved in the Navigation bar code.  #541
 * Improvement: Few Improvements require #542
-
-= 2.2.29 =
-* Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added compatibility with Translatepress #535
-* Compatibility: Tested with WordPress 6.6 #543
 
 
 

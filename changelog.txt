@@ -1,3 +1,7 @@
+= 2.2.48 = 
+* Date: [03.September2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Tested: WordPress version upto 7.1
+
 = 2.2.47 = 
 * Date: [08.August.2026](https://superpwa.com/superpwa-2-2-47-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: Bug: Malformed refresh link in "Back Online" toast notification #663
