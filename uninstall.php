@@ -25,10 +25,10 @@ if ( is_multisite() ) {
 	$superpwa_sites = get_site_option( 'superpwa_active_sites' );
 	
 	// Loop through each active site.
-	foreach( $superpwa_sites as $blog_id => $actviation_status ) {
+	foreach( $superpwa_sites as $superpwa_blog_id => $superpwa_activation_status ) {
 		
 		// Switch to each blog
-		switch_to_blog( $blog_id );
+		switch_to_blog( $superpwa_blog_id );
 		
 		// Delete database settings for each site.
 		superpwa_delete_all_options();

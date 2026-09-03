@@ -352,6 +352,7 @@ register_deactivation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_deacti
  * @since 1.0
  */
 function superpwa_load_plugin_textdomain() {
+	// phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound
 	load_plugin_textdomain( 'super-progressive-web-apps', false, '/super-progressive-web-apps/languages/' );
 }
 add_action( 'plugins_loaded', 'superpwa_load_plugin_textdomain' );
@@ -477,7 +478,7 @@ function superpwa_generate_sw_and_manifest_on_fly( $query ) {
 	if ( strpos( $query_vars_as_string, $amphtml_filename ) !== false ) {
 		header( 'Content-Type: text/html' );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo amp_service_worker_template();
+		echo superpwa_amp_service_worker_template();
 		exit();
 	}
 }

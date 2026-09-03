@@ -58,6 +58,7 @@ if( ! function_exists( 'wp_dropdown_posts' ) ) {
 	 * }
 	 * @return string String of HTML content.
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 	function wp_dropdown_posts( $args = '' ) {
 
 		$defaults = array(
@@ -133,6 +134,7 @@ if( ! function_exists( 'wp_dropdown_posts' ) ) {
 		 * @param array  $r      The parsed arguments array.
 		 * @param array  $posts  List of WP_Post objects returned by `get_posts()`
 		 */
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		$html = apply_filters( 'wp_dropdown_posts', $output, $r, $posts );
 
 		if( $r['echo'] ) {

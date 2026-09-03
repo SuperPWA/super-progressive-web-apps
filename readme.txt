@@ -1,10 +1,10 @@
 === Super Progressive Web Apps ===
 Contributors: SuperPWA
 Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
-Requires at least: 3.6.0
+Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 5.3
-Stable tag: 2.2.46
+Stable tag: 2.2.47
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,12 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.47 = 
+* Date: [08.August.2026](https://superpwa.com/superpwa-2-2-47-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Bug: Malformed refresh link in "Back Online" toast notification #663
+* Enhancement: Improve UX by Converting SuperPWA Add-on Activation/Deactivation to AJAX #662
+* Enhancement: Code Improvement #665
+
 = 2.2.46 = 
 * Date: [15.June.2026](https://superpwa.com/superpwa-2-2-46-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: PHP Fatal error: Cannot redeclare class JShrink\Minifier #656
@@ -327,14 +333,6 @@ Feel free to get in touch if you have any questions.
 * Date: [02.August.2024](https://superpwa.com/superpwa-2-2-29-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Feature: Added compatibility with Translatepress #535
 * Compatibility: Tested with WordPress 6.6 #543
-
-
-= 2.2.28 =
-* Date: [09.May.2024](https://superpwa.com/superpwa-2-2-28-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Need to make feature with form_factor in SuperPWA #526
-* Feature: Need to create an option to edit the text in the iOS QR code. #529
-* Improvement: Preloader issue after recent recent updates #530
-* BugFixed: While clicking on the install button on CTA, the Google search appears for the word Install (Android only) #527
 
 
 

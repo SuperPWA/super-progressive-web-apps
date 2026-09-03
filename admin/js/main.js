@@ -616,3 +616,88 @@ function superpwaGetZip() {
 		});
 	}
 	superpwa_check_maskable_input();
+
+	// Add-on activation / deactivation via AJAX
+	jQuery(document).on('click', '.plugin-card .activate-now[data-slug]', function(e) {
+		var $btn = jQuery(this);
+		var slug = $btn.attr('data-slug');
+		var name = $btn.attr('data-name') || '';
+
+		if ($btn.hasClass('upgrade') || $btn.hasClass('uninstalled') || !slug) {
+			return;
+		}
+
+		e.preventDefault();
+
+		if ($btn.hasClass('updating-message') || $btn.prop('disabled')) {
+			return;
+		}
+
+		var isDeactivating = $btn.text().trim() === 'Deactivate' || $btn.hasClass('button-secondary');
+		var loadingText = isDeactivating ? 'Deactivating...' : 'Activating...';
+		var originalText = $btn.text();
+
+		$btn.addClass('updating-message').text(loadingText);
+
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxurl,
+			dataType: 'json',
+			data: {
+				action: 'superpwa_ajax_toggle_addon',
+				addon: slug,
+				superpwa_security_nonce: superpwa_obj.superpwa_security_nonce
+			},
+			success: function(response) {
+				$btn.removeClass('updating-message');
+				if (response && response.success) {
+					var data = response.data;
+					var $actionList = $btn.closest('.plugin-action-buttons');
+
+					if (data.new_status === 'active') {
+						$btn.removeClass('button-primary inactive')
+							.addClass('button-secondary active')
+							.text(data.button_text)
+							.attr('href', data.button_link)
+							.attr('aria-label', data.button_text + ' ' + name + ' now');
+
+						if ($actionList.find('.compatibility-compatible').length === 0) {
+							var settingsHtml = '<li class="compatibility-compatible"><a class="button button-secondary" href="' + data.admin_link + '" ' + (data.admin_link_target || '') + ' style="padding-left: 7px;"><i class="dashicons-before dashicons-admin-generic" style="vertical-align: sub;font-size: 8px;"></i> Settings</a></li>';
+							$btn.closest('li').after(settingsHtml);
+						}
+					} else {
+						$btn.removeClass('button-secondary active')
+							.addClass('button-primary inactive')
+							.text(data.button_text)
+							.attr('href', data.button_link)
+							.attr('aria-label', data.button_text + ' ' + name + ' now');
+
+						$actionList.find('.compatibility-compatible').remove();
+					}
+
+					if (data.notice) {
+						var $noticeContainer = jQuery('#superpwa-addon-notice-container');
+						if ($noticeContainer.length === 0) {
+							jQuery('.superpwa-sub-tab-headings').after('<div id="superpwa-addon-notice-container" style="margin-top: 15px;"></div>');
+							$noticeContainer = jQuery('#superpwa-addon-notice-container');
+						}
+						$noticeContainer.html(data.notice);
+					}
+				} else {
+					$btn.text(originalText);
+					var errorMsg = (response && response.data && response.data.message) ? response.data.message : 'Action failed. Please try again.';
+					alert(errorMsg);
+				}
+			},
+			error: function() {
+				$btn.removeClass('updating-message').text(originalText);
+				alert('Request failed. Please check your internet connection.');
+			}
+		});
+	});
+
+	jQuery(document).on('click', '#superpwa-addon-notice-container .notice-dismiss', function() {
+		jQuery(this).closest('.notice').fadeOut(200, function() {
+			jQuery(this).remove();
+		});
+	});

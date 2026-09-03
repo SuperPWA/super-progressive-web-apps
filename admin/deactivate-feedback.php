@@ -1,5 +1,7 @@
 <?php 
-$reasons = array(
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+$superpwa_reasons = array(
     		1 => '<li><label><input type="radio" name="superpwa_disable_reason" value="temporary"/>' . esc_html__('It is only temporary', 'super-progressive-web-apps') . '</label></li>',
 		2 => '<li><label><input type="radio" name="superpwa_disable_reason" value="stopped"/>' . esc_html__('I stopped using superPWA on my site', 'super-progressive-web-apps') . '</label></li>',
 		3 => '<li><label><input type="radio" name="superpwa_disable_reason" value="missing"/>' . esc_html__('I miss a feature', 'super-progressive-web-apps') . '</label></li>
@@ -11,7 +13,7 @@ $reasons = array(
 		6 => '<li><label><input type="radio" name="superpwa_disable_reason" value="other"/>' . esc_html__('Other reason', 'super-progressive-web-apps') . '</label></li>
 		<li><textarea class="superpwa-mb-box other" name="superpwa_disable_text[]" placeholder="' . esc_html__('Please specify, if possible', 'super-progressive-web-apps') . '"></textarea></li>',
     );
-shuffle($reasons);
+shuffle($superpwa_reasons);
 ?>
 
 
@@ -21,9 +23,9 @@ shuffle($reasons);
 	    <h3><strong><?php esc_html_e('If you have a moment, please let us know why you are deactivating:', 'super-progressive-web-apps'); ?></strong></h3>
 	    <ul>
                 <?php 
-                foreach ($reasons as $reason){
+                foreach ($superpwa_reasons as $superpwa_reason){
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    echo $reason;
+                    echo $superpwa_reason;
                 }
                 ?>
 	    </ul>

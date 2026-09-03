@@ -30,6 +30,7 @@ function superpwa_upgread_pro_interface_render(){
 					if(version_compare(SUPERPWA_VERSION, '2.2.23') >= 0){
 						do_action("superpwa_admin_upgrade_license_page");
 					}else{
+						// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 						do_action("admin_upgrade_license_page");
 					}
 				}else{ ?>

@@ -509,7 +509,8 @@ class Minifier
         }
 
         if ($char === false) {
-            throw new \RuntimeException('Unclosed multiline comment at position: ' . ($this->index - 2));
+            // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+            throw new \RuntimeException(esc_html('Unclosed multiline comment at position: ' . ($this->index - 2)));
         }
 
         // if we're here c is part of the comment and therefore tossed
@@ -585,7 +586,8 @@ class Minifier
                     if ($stringType === '`') {
                         $this->echo($this->a);
                     } else {
-                        throw new \RuntimeException('Unclosed string at position: ' . $startpos);
+                        // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+                        throw new \RuntimeException(esc_html('Unclosed string at position: ' . $startpos));
                     }
                     break;
 
@@ -655,9 +657,11 @@ class Minifier
 
             if ($this->a === "\n") {
                 if ($character_class) {
-                    throw new \RuntimeException('Unclosed character class at position: ' . $character_class_index);
+                    // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+                    throw new \RuntimeException(esc_html('Unclosed character class at position: ' . $character_class_index));
                 }
-                throw new \RuntimeException('Unclosed regex pattern at position: ' . $this->index);
+                // phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
+                throw new \RuntimeException(esc_html('Unclosed regex pattern at position: ' . $this->index));
             }
 
             $this->echo($this->a);
