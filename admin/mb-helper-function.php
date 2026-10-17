@@ -74,7 +74,7 @@ function superpwa_send_feedback() {
 
     $headers = array();
 
-    $from = isset( $form['superpwa_disable_from'] ) ? $form['superpwa_disable_from'] : '';
+    $from = ! empty( $form['superpwa_disable_from'] ) ? sanitize_email( $form['superpwa_disable_from'] ) : '';
     if( $from ) {
         $headers[] = "From: $from";
         $headers[] = "Reply-To: $from";

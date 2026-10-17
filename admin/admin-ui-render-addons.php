@@ -652,7 +652,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Activation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'superpwa_addon_activate_' . $slug, 'superpwa_addon_activate_nonce' );
 			
 			break;
 			
@@ -665,7 +665,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Deactivation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'superpwa_addon_deactivate_' . $slug, 'superpwa_addon_deactivate_nonce' );
 			
 			break;
 		
@@ -700,7 +700,7 @@ function superpwa_addons_handle_activation() {
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( sanitize_text_field(  wp_unslash( $_GET['superpwa_addon_activate_nonce'] ) ), 'activate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( sanitize_text_field(  wp_unslash( $_GET['superpwa_addon_activate_nonce'] ) ), 'superpwa_addon_activate_' . sanitize_title( $addon_name ) ) ) || 
 		! ( $addon_status == 'inactive' ) 
 	) {
 		
@@ -743,7 +743,7 @@ function superpwa_addons_handle_deactivation() {
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_addon_deactivate_nonce'] ) ), 'deactivate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_addon_deactivate_nonce'] ) ), 'superpwa_addon_deactivate_' . sanitize_title( $addon_name ) ) ) || 
 		! ( $addon_status == 'active' ) 
 	) {
 		
@@ -782,7 +782,7 @@ function superpwa_newsletter_submit(){
 	
 	if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) )){
 	global $current_user;
-	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
+	$api_url = 'https://magazine3.company/wp-json/api/central/email/subscribe';
 	$email = "";
 	if ( isset($_POST['email']) ) {
 		$email = sanitize_email( wp_unslash( $_POST['email'] ) );
@@ -793,7 +793,7 @@ function superpwa_newsletter_submit(){
         'website'=> sanitize_url( get_site_url() ),
         'type'=> 'superpwa'
     );
-    $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+    $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => true, 'body' => $api_params ) );
 	if ( !is_wp_error( $response ) ) {
 		$response = wp_remote_retrieve_body( $response );
 		echo wp_json_encode(array('status'=>200, 'message'=>esc_html__('Submitted ','super-progressive-web-apps'), 'response'=> $response));

@@ -52,10 +52,7 @@ class SPWAP_PUSH_NOTIFICATION
 
     
 public function enable_modules(){
-    if ( isset($_REQUEST['verify_nonce']) && !wp_verify_nonce( sanitize_text_field(wp_unslash($_REQUEST['verify_nonce'])), 'verify_request' ) ) {
-        echo wp_json_encode(array("status"=>300,"message"=>esc_html__('Request not valid','super-progressive-web-apps')));
-        exit();
-    }
+    check_ajax_referer( 'verify_request', 'verify_nonce' );
     // Exit if the user does not have proper permissions
     if(! current_user_can( 'install_plugins' ) ) {
         echo wp_json_encode(array("status"=>300,"message"=>esc_html__('User Request not valid','super-progressive-web-apps')));

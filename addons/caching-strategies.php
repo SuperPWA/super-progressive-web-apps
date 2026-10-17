@@ -134,20 +134,33 @@ function superpwa_pre_caching_urls_sw( $files_to_cache ) {
 		$pre_cache_urls = $manual_urls = '';
 		
 		if(isset($settings['precaching_manual']) && $settings['precaching_manual'] == '1' && !empty($settings['precaching_urls'])){
-			$removing_nl_br = preg_replace( "/\r|\n/", "", $settings['precaching_urls']);
-			$manual_urls = str_replace(',', '\',\'', $removing_nl_br);
-			$files_to_cache = '\''.$manual_urls.'\','.$files_to_cache;
+			$raw_urls = preg_replace( "/\r|\n/", "", $settings['precaching_urls'] );
+			$url_parts = array_filter( array_map( 'trim', explode( ',', $raw_urls ) ) );
+			$safe_urls = array();
+			foreach ( $url_parts as $url_part ) {
+				$sanitized_url = esc_url_raw( $url_part );
+				if ( ! empty( $sanitized_url ) ) {
+					$safe_urls[] = wp_json_encode( $sanitized_url );
+				}
+			}
+			if ( ! empty( $safe_urls ) ) {
+				$files_to_cache = implode( ',', $safe_urls ) . ',' . $files_to_cache;
+			}
 		}
 
 	     $store_post_id = array();
          $store_post_id = json_decode(get_transient('superpwa_pre_cache_post_ids'));
                 
 		if(!empty($store_post_id) && isset($settings['precaching_automatic']) && $settings['precaching_automatic']==1){
-				$files_to_cache .= ',';
-				foreach ($store_post_id as $post_id){
-					
-					$files_to_cache .= "'".trim(get_permalink($post_id))."',\n"; 
-																																		
+				$auto_urls = array();
+				foreach ( $store_post_id as $post_id ) {
+					$permalink = esc_url_raw( trim( get_permalink( $post_id ) ) );
+					if ( ! empty( $permalink ) ) {
+						$auto_urls[] = wp_json_encode( $permalink );
+					}
+				}
+				if ( ! empty( $auto_urls ) ) {
+					$files_to_cache .= ',' . implode( ',', $auto_urls );
 				}
 		}
 
@@ -326,6 +339,31 @@ function superpwa_caching_strategies_validater_sanitizer( $settings ) {
     
     // Sanitize and validate campaign source. Campaign source cannot be empty.
 	$settings['caching_type'] = sanitize_text_field( $settings['caching_type'] ) == '' ? 'network_first' : sanitize_text_field( $settings['caching_type'] );
+
+	$allowed_caching_types = array( 'network_first', 'cache_first', 'steal_while_revalidate', 'cache_only', 'network_only' );
+	if ( ! in_array( $settings['caching_type'], $allowed_caching_types, true ) ) {
+		$settings['caching_type'] = 'network_first';
+	}
+
+	$settings['precaching_automatic']       = isset( $settings['precaching_automatic'] ) ? absint( $settings['precaching_automatic'] ) : 0;
+	$settings['precaching_manual']          = isset( $settings['precaching_manual'] ) ? absint( $settings['precaching_manual'] ) : 0;
+	$settings['precaching_automatic_post']  = isset( $settings['precaching_automatic_post'] ) ? absint( $settings['precaching_automatic_post'] ) : 0;
+	$settings['precaching_automatic_page']  = isset( $settings['precaching_automatic_page'] ) ? absint( $settings['precaching_automatic_page'] ) : 0;
+	$settings['precaching_post_count']      = isset( $settings['precaching_post_count'] ) ? absint( $settings['precaching_post_count'] ) : 5;
+
+	if ( isset( $settings['precaching_urls'] ) && '' !== $settings['precaching_urls'] ) {
+		$url_parts = array_filter( array_map( 'trim', explode( ',', $settings['precaching_urls'] ) ) );
+		$safe_urls = array();
+		foreach ( $url_parts as $url_part ) {
+			$sanitized_url = esc_url_raw( $url_part );
+			if ( ! empty( $sanitized_url ) ) {
+				$safe_urls[] = $sanitized_url;
+			}
+		}
+		$settings['precaching_urls'] = implode( ', ', $safe_urls );
+	} else {
+		$settings['precaching_urls'] = '';
+	}
 
     return  $settings;
 }

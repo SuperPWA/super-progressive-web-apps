@@ -532,6 +532,48 @@ function superpwa_validater_and_sanitizer( $settings ) {
 		$settings['offline_message'] = intval( $settings['offline_message'] );
 	}
 
+	// Sanitize offline toast message text
+	if ( isset( $settings['offline_message_txt'] ) ) {
+		$settings['offline_message_txt'] = sanitize_text_field( $settings['offline_message_txt'] );
+	}
+
+	// Cast page / URL ID fields to integers
+	if ( isset( $settings['start_url'] ) ) {
+		$settings['start_url'] = absint( $settings['start_url'] );
+	}
+	if ( isset( $settings['start_url_amp'] ) ) {
+		$settings['start_url_amp'] = absint( $settings['start_url_amp'] );
+	}
+	if ( isset( $settings['offline_page'] ) ) {
+		$settings['offline_page'] = absint( $settings['offline_page'] );
+	}
+
+	// Whitelist orientation (0=any, 1=portrait, 2=landscape)
+	if ( isset( $settings['orientation'] ) ) {
+		$allowed_orientation = array( 0, 1, 2 );
+		$orientation = absint( $settings['orientation'] );
+		$settings['orientation'] = in_array( $orientation, $allowed_orientation, true ) ? $orientation : 1;
+	}
+
+	// Whitelist display (0=fullscreen, 1=standalone, 2=minimal-ui, 3=browser)
+	if ( isset( $settings['display'] ) ) {
+		$allowed_display = array( 0, 1, 2, 3 );
+		$display = absint( $settings['display'] );
+		$settings['display'] = in_array( $display, $allowed_display, true ) ? $display : 1;
+	}
+
+	// Whitelist text direction (0=ltr, 1=rtl)
+	if ( isset( $settings['text_dir'] ) ) {
+		$allowed_dir = array( 0, 1 );
+		$text_dir = absint( $settings['text_dir'] );
+		$settings['text_dir'] = in_array( $text_dir, $allowed_dir, true ) ? $text_dir : 0;
+	}
+
+	// Sanitize monochrome icon URL
+	if ( isset( $settings['monochrome_icon'] ) && '' !== $settings['monochrome_icon'] ) {
+		$settings['monochrome_icon'] = esc_url_raw( superpwa_httpsify( $settings['monochrome_icon'] ) );
+	}
+
 	// Sanitize hide elements selectors
 	if ( isset( $settings['hide_elements_selectors'] ) ) {
 		$raw = (string) $settings['hide_elements_selectors'];

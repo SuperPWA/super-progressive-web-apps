@@ -30,7 +30,7 @@ shuffle($superpwa_reasons);
                 ?>
 	    </ul>
 	    <?php if ($email) : ?>
-    	    <input type="hidden" name="superpwa_disable_from" value="<?php esc_attr( $email ); ?>"/>
+    	    <input type="hidden" name="superpwa_disable_from" value="<?php echo esc_attr( $email ); ?>"/>
 	    <?php endif; ?>
 	    <input id="superpwa-reloaded-feedback-submit" class="button button-primary" type="submit" name="superpwa_disable_submit" value="<?php esc_html_e('Submit & Deactivate', 'super-progressive-web-apps'); ?>"/>
 		<input type="hidden" name="superpwa_deactivate_nonce" value="<?php echo esc_attr(wp_create_nonce( 'superpwa-deactivate-nonce' ))?>">
