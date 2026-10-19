@@ -105,3 +105,39 @@
 .superpwa_related_applications{
     display: none;
 }
+
+/* WP 6.9+/7.x moved plugin-card flex layout under .plugin-install-php only.
+   Restore a 2-column card grid on SuperPWA Add-ons (and newsletter) pages. */
+.addon-install #the-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.addon-install #the-list .plugin-card,
+.addon-install #the-list .superpwa-newsletter-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: calc(50% - 8px);
+    margin: 0;
+}
+.addon-install #the-list .superpwa-newsletter-wrapper .plugin-card {
+    width: 100%;
+    margin: 0;
+}
+.superpwa-newsletter-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+.superpwa-newsletter-wrapper > .plugin-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 782px) {
+    .addon-install #the-list .plugin-card,
+    .addon-install #the-list .superpwa-newsletter-wrapper {
+        width: 100%;
+    }
+}

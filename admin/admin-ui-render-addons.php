@@ -490,6 +490,42 @@ function superpwa_addons_interface_render() {
 							
 						</div>
 					</div>
+					<?php
+					// Show newsletter card once, after the first add-on (All tab only).
+					if ( true === $superpwa_newsletter ) {
+						$hide_form = get_option( 'superpwa_hide_newsletter' );
+						if ( 'yes' !== $hide_form ) {
+							?>
+							<div class="plugin-card plugin-card-superpwa-newsletter subtab-all" style="background: #fdfc35 url('<?php echo esc_url( SUPERPWA_PATH_SRC . 'admin/img/email.png' ); ?>') no-repeat right top;">
+								<div class="plugin-card-top" style="min-height: 135px;">
+									<span class="dashicons dashicons-dismiss superpwa_newsletter_hide" style="float: right;cursor: pointer;"></span>
+									<span style="clear:both;"></span>
+									<div class="name column-name" style="margin: 0px 10px;">
+										<h3><?php esc_html_e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
+									</div>
+									<div class="desc column-description" style="margin: 0px 10px;">
+										<p style="margin-left:0px;"><?php esc_html_e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+									</div>
+									<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
+										<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
+											<fieldset>
+												<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_attr_e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">
+												<input name="source" value="superpwa-plugin" type="hidden">
+												<input type="submit" class="button" value="<?php esc_attr_e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+												<span class="superpwa_newsletter_hide" style="box-shadow: unset;cursor: pointer;margin-left: 10px;">
+													<?php esc_html_e( 'No thanks', 'super-progressive-web-apps' ); ?>
+												</span>
+												<small style="display:block; margin-top:8px;"><?php echo wp_kses_post( __( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ) ); ?></small>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+							<?php
+						}
+						$superpwa_newsletter = false;
+					}
+					?>
 				<?php } ?>
 			</div>
 		</div>

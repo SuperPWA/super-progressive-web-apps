@@ -204,6 +204,12 @@ Date: [18.September.2026](https://superpwa.com/superpwa-2-2-48-1-release-note/?u
 * Date: [03.September.2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested: WordPress version upto 7.1
 
+= 2.2.47 = 
+* Date: [08.August.2026](https://superpwa.com/superpwa-2-2-47-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* BugFixed: Bug: Malformed refresh link in “Back Online” toast notification #663
+* Enhancement: Improve UX by Converting SuperPWA Add-on Activation/Deactivation to AJAX #662
+* Enhancement: Code Improvement #665
+
 = 2.2.46 = 
 * Date: [15.June.2026](https://superpwa.com/superpwa-2-2-46-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * BugFixed: PHP Fatal error: Cannot redeclare class JShrink\Minifier #656
