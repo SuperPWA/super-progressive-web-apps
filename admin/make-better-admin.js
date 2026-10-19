@@ -36,25 +36,36 @@ jQuery(document).ready(function ($) {
         var exdate = new Date();
         exdate.setSeconds(exdate.getSeconds() + 2592000);
         document.cookie = "superpwa_hide_deactivate_feedback=1; expires=" + exdate.toUTCString() + "; path=/";
+        var feedbackText = $('#superpwa-reloaded-feedback-content .superpwa-mb-box:visible').val() || '';
 
         $('#superpwa-reloaded-feedback-overlay').hide();
         if ('superpwa-reloaded-feedback-submit' === this.id) {
-            // Send form data
-            $.ajax({
-                type: 'POST',
-                url: ajaxurl,
-                dataType: 'json',
-                data: {
-                    action: 'superpwa_send_feedback',
-                    data: $('#superpwa-reloaded-feedback-content form').serialize()
-                },
-                complete: function (MLHttpRequest, textStatus, errorThrown) {
-                    // deactivate the plugin and close the popup
-                    $('#superpwa-reloaded-feedback-overlay').remove();
-                    window.location.href = superpwa_deactivate_link_url;
+            var reason = $('#superpwa-reloaded-feedback-content input[name="superpwa_disable_reason"]:checked').val();
+            var allowedReasons = ['missing', 'technical', 'other'];
+            var wordCount = feedbackText.trim() === '' ? 0 : feedbackText.trim().split(/\s+/).length;
+            var shouldSendEmail = allowedReasons.indexOf(reason) !== -1 && wordCount >= 3;
 
-                }
-            });
+            if (shouldSendEmail) {
+                // Send form data
+                $.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    dataType: 'json',
+                    data: {
+                        action: 'superpwa_send_feedback',
+                        data: $('#superpwa-reloaded-feedback-content form').serialize()
+                    },
+                    complete: function (MLHttpRequest, textStatus, errorThrown) {
+                        // deactivate the plugin and close the popup
+                        $('#superpwa-reloaded-feedback-overlay').remove();
+                        window.location.href = superpwa_deactivate_link_url;
+
+                    }
+                });
+            } else {
+                $('#superpwa-reloaded-feedback-overlay').remove();
+                window.location.href = superpwa_deactivate_link_url;
+            }
         } else {
             $('#superpwa-reloaded-feedback-overlay').remove();
             window.location.href = superpwa_deactivate_link_url;
