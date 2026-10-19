@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 5.3
-Stable tag: 2.2.48
+Stable tag: 2.2.49
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,11 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
+= 2.2.49 = 
+* Date: [19.October.2026](https://superpwa.com/superpwa-2-2-49-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : Missing Sanitization & Type Validation on Multiple Settings #669
+* Enhancement : Harden settings and addon request handling
+
 = 2.2.48 = 
 * Date: [03.September2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested: WordPress version upto 7.1
