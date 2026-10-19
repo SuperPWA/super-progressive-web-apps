@@ -196,11 +196,6 @@ Feel free to get in touch if you have any questions.
 * Enhancement : Missing Sanitization & Type Validation on Multiple Settings #669
 * Enhancement : Harden settings and addon request handling
 
-= 2.2.49 = 
-* Date: [19.October.2026](https://superpwa.com/superpwa-2-2-49-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Enhancement : Missing Sanitization & Type Validation on Multiple Settings #669
-* Enhancement : Harden settings and addon request handling
-
 = 2.2.48.1 =
 Date: [18.September.2026](https://superpwa.com/superpwa-2-2-48-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement: Improving feedback form
