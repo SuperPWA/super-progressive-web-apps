@@ -4,7 +4,7 @@ Tags: pwa, progressive web apps, android app, chrome app, add to homescreen
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 5.3
-Stable tag: 2.2.48.1
+Stable tag: 2.2.49
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,17 +191,22 @@ Feel free to get in touch if you have any questions.
 3. Advanced settings in WordPress Admin > SuperPWA > Advanced
 
 == Changelog ==
-= 2.2.48.1 = 
-* Date: [18.September.2026](https://superpwa.com/superpwa-2-2-48-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+= 2.2.49 = 
+* Date: [19.October.2026](https://superpwa.com/superpwa-2-2-49-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Enhancement : Missing Sanitization & Type Validation on Multiple Settings #669
+* Enhancement : Harden settings and addon request handling
+
+= 2.2.48.1 =
+Date: [18.September.2026](https://superpwa.com/superpwa-2-2-48-1-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Enhancement: Improving feedback form
 
 = 2.2.48 = 
-* Date: [03.September2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
+* Date: [03.September.2026](https://superpwa.com/superpwa-2-2-48-release-note/?utm_source=wordpress.org&utm_medium=changelog)
 * Tested: WordPress version upto 7.1
 
 = 2.2.47 = 
 * Date: [08.August.2026](https://superpwa.com/superpwa-2-2-47-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* BugFixed: Bug: Malformed refresh link in "Back Online" toast notification #663
+* BugFixed: Bug: Malformed refresh link in “Back Online” toast notification #663
 * Enhancement: Improve UX by Converting SuperPWA Add-on Activation/Deactivation to AJAX #662
 * Enhancement: Code Improvement #665
 
@@ -320,22 +325,6 @@ Feel free to get in touch if you have any questions.
 * Improvement: correct contact link #558
 * Improvement: Manifest generation cause 503 on settings page save when superpwa_file_exists returns false #564
 * Test: Test with WordPress version 6.7 #561
-
-= 2.2.31 =
-* Date: [09.October.2024](https://superpwa.com/superpwa-2-2-31-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added feature to add APKs to the iOS App Store. #516
-* BugFixed: Conflict issue with Show On Scroll feature in CTA #545
-* BugFixed: When the Pre-cache Automatic option is enabled, then there is an issue in the console. working fine in 2.0.28 #555
-* Improvement: compatibility with nginx server #549
-* Improvement: Changes title from 'Splash Screen Image' to 'Touch Icons' #550
-* Improvement: superpwa-frontend-cta.js file is running on Mac book even if the option "Desktop" is not selected #551
-
-= 2.2.30 =
-* Date: [23.August.2024](https://superpwa.com/superpwa-2-2-30-release-note/?utm_source=wordpress.org&utm_medium=changelog)
-* Feature: Added an option to change the colour of the navigation bar icon. #536
-* BugFixed: The App Icon is getting replaced by Splash screen Icon on some Android devices #540
-* Improvement: Improved in the Navigation bar code.  #541
-* Improvement: Few Improvements require #542
 
 
 

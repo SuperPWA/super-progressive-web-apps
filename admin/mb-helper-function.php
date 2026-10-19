@@ -84,7 +84,7 @@ function superpwa_send_feedback() {
 
     $headers = array();
 
-    $from = isset( $form['superpwa_disable_from'] ) ? $form['superpwa_disable_from'] : '';
+    $from = ! empty( $form['superpwa_disable_from'] ) ? sanitize_email( $form['superpwa_disable_from'] ) : '';
     if( $from ) {
         $headers[] = "From: $from";
         $headers[] = "Reply-To: $from";
@@ -112,7 +112,7 @@ function superpwa_enqueue_makebetter_email_js(){
 
     wp_enqueue_script( 'superpwa-make-better-js', SUPERPWA_PATH_SRC . 'admin/make-better-admin.js', array( 'jquery' ), SUPERPWA_VERSION.'2',true);
 
-    wp_enqueue_style( 'superpwa-make-better-css', SUPERPWA_PATH_SRC . 'admin/make-better-admin.css', false , SUPERPWA_VERSION);
+    wp_enqueue_style( 'superpwa-make-better-css', SUPERPWA_PATH_SRC . 'admin/make-better-admin.css', array( 'list-tables' ), SUPERPWA_VERSION);
 }
 
 add_filter('admin_footer', 'superpwa_add_deactivation_feedback_modal');

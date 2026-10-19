@@ -490,6 +490,42 @@ function superpwa_addons_interface_render() {
 							
 						</div>
 					</div>
+					<?php
+					// Show newsletter card once, after the first add-on (All tab only).
+					if ( true === $superpwa_newsletter ) {
+						$hide_form = get_option( 'superpwa_hide_newsletter' );
+						if ( 'yes' !== $hide_form ) {
+							?>
+							<div class="plugin-card plugin-card-superpwa-newsletter subtab-all" style="background: #fdfc35 url('<?php echo esc_url( SUPERPWA_PATH_SRC . 'admin/img/email.png' ); ?>') no-repeat right top;">
+								<div class="plugin-card-top" style="min-height: 135px;">
+									<span class="dashicons dashicons-dismiss superpwa_newsletter_hide" style="float: right;cursor: pointer;"></span>
+									<span style="clear:both;"></span>
+									<div class="name column-name" style="margin: 0px 10px;">
+										<h3><?php esc_html_e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
+									</div>
+									<div class="desc column-description" style="margin: 0px 10px;">
+										<p style="margin-left:0px;"><?php esc_html_e( 'Learn more about Progressive Web Apps and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+									</div>
+									<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
+										<form method="post" action="https://superpwa.com/newsletter/" target="_blank" id="superpwa_newsletter">
+											<fieldset>
+												<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php esc_attr_e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">
+												<input name="source" value="superpwa-plugin" type="hidden">
+												<input type="submit" class="button" value="<?php esc_attr_e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
+												<span class="superpwa_newsletter_hide" style="box-shadow: unset;cursor: pointer;margin-left: 10px;">
+													<?php esc_html_e( 'No thanks', 'super-progressive-web-apps' ); ?>
+												</span>
+												<small style="display:block; margin-top:8px;"><?php echo wp_kses_post( __( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ) ); ?></small>
+											</fieldset>
+										</form>
+									</div>
+								</div>
+							</div>
+							<?php
+						}
+						$superpwa_newsletter = false;
+					}
+					?>
 				<?php } ?>
 			</div>
 		</div>
@@ -652,7 +688,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Activation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'activate', 'superpwa_addon_activate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_activate_addon&addon=' . $slug ), 'superpwa_addon_activate_' . $slug, 'superpwa_addon_activate_nonce' );
 			
 			break;
 			
@@ -665,7 +701,7 @@ function superpwa_addons_button_link( $slug ) {
 			}
 			
 			// Deactivation link for bundled add-ons.
-			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'deactivate', 'superpwa_addon_deactivate_nonce' );
+			return wp_nonce_url( admin_url( 'admin-post.php?action=superpwa_deactivate_addon&addon=' . $slug ), 'superpwa_addon_deactivate_' . $slug, 'superpwa_addon_deactivate_nonce' );
 			
 			break;
 		
@@ -700,7 +736,7 @@ function superpwa_addons_handle_activation() {
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( sanitize_text_field(  wp_unslash( $_GET['superpwa_addon_activate_nonce'] ) ), 'activate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_activate_nonce'] ) && wp_verify_nonce( sanitize_text_field(  wp_unslash( $_GET['superpwa_addon_activate_nonce'] ) ), 'superpwa_addon_activate_' . sanitize_title( $addon_name ) ) ) || 
 		! ( $addon_status == 'inactive' ) 
 	) {
 		
@@ -743,7 +779,7 @@ function superpwa_addons_handle_deactivation() {
 		! current_user_can( superpwa_current_user_can() ) ||
 		// ! current_user_can( 'manage_options' ) || 
 		! isset( $_GET['addon'] ) || 
-		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_addon_deactivate_nonce'] ) ), 'deactivate' ) ) || 
+		! ( isset( $_GET['superpwa_addon_deactivate_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['superpwa_addon_deactivate_nonce'] ) ), 'superpwa_addon_deactivate_' . sanitize_title( $addon_name ) ) ) || 
 		! ( $addon_status == 'active' ) 
 	) {
 		
@@ -782,7 +818,7 @@ function superpwa_newsletter_submit(){
 	
 	if (isset( $_REQUEST['superpwa_security_nonce'] ) && current_user_can( superpwa_current_user_can()) && (wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['superpwa_security_nonce'] ) ), 'superpwa_ajax_check_nonce' ) )){
 	global $current_user;
-	$api_url = 'http://magazine3.company/wp-json/api/central/email/subscribe';
+	$api_url = 'https://magazine3.company/wp-json/api/central/email/subscribe';
 	$email = "";
 	if ( isset($_POST['email']) ) {
 		$email = sanitize_email( wp_unslash( $_POST['email'] ) );
@@ -793,7 +829,7 @@ function superpwa_newsletter_submit(){
         'website'=> sanitize_url( get_site_url() ),
         'type'=> 'superpwa'
     );
-    $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+    $response = wp_remote_post( $api_url, array( 'timeout' => 15, 'sslverify' => true, 'body' => $api_params ) );
 	if ( !is_wp_error( $response ) ) {
 		$response = wp_remote_retrieve_body( $response );
 		echo wp_json_encode(array('status'=>200, 'message'=>esc_html__('Submitted ','super-progressive-web-apps'), 'response'=> $response));
