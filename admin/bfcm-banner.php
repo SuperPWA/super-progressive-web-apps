@@ -322,7 +322,7 @@ function superpwa_bfcm_banner() {
 			outline: 2px solid #fff;
 			outline-offset: 2px;
 		}
-		@container (max-width: 1120px) {
+		@container (max-width: 1024px) {
 			.superpwa-bfcm-lead {
 				flex-basis: 100%;
 			}
