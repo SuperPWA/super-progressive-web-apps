@@ -368,6 +368,7 @@ function superpwa_apple_icons_interface_render() {
 	superpwa_setting_tabs_styles();
 	?>
 	<div class="wrap">
+	<?php superpwa_bfcm_banner(); ?>
     <!--Duplicate h1 To show saved settings message above h1 tag -->
         <h1 style="display: none" ><?php esc_html_e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>	
 		<h1><?php esc_html_e( 'Apple touch icons & Splash Screen', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>

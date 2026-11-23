@@ -304,6 +304,7 @@ function superpwa_pull_to_refresh_interface_render()
 ?>
 
 	<div class="wrap">
+		<?php superpwa_bfcm_banner(); ?>
 		<h1><?php esc_html_e('Pull To Refresh', 'super-progressive-web-apps'); ?>			
 		</h1>
 

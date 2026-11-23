@@ -21,6 +21,7 @@ function superpwa_upgread_pro_interface_render(){
 	?>
 
 	<div class="wrap">
+		<?php superpwa_bfcm_banner(); ?>
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
 

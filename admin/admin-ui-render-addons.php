@@ -369,6 +369,7 @@ function superpwa_addons_interface_render() {
 	?>
 	<style type="text/css">.spwa-tab {overflow: hidden;border: 1px solid #ccc;background-color: #fff;margin-top: 15px;}.spwa-tab a {background-color: inherit;text-decoration: none;float: left;border: none;outline: none;cursor: pointer;padding: 14px 16px;transition: 0s;font-size: 15px;color: #2271b1;}.spwa-tab a:hover {color: #0a4b78;}.spwa-tab a.active {box-shadow: none;border-bottom: 4px solid #646970;color: #1d2327;}.spwa-tab a:focus {box-shadow: none;outline: none;}.spwa-tabcontent {display: none;padding: 6px 12px;border-top: none; animation: fadeEffect 1s; } @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }</style>
 	<div class="wrap">
+	<?php superpwa_bfcm_banner(); ?>
 	<h1><?php esc_html_e('Super Progressive Web Apps', 'super-progressive-web-apps' ); ?> <sup class="superpwa_version"><?php echo esc_html(SUPERPWA_VERSION); ?></sup></h1>
        <?php superpwa_setting_tabs_html(); ?>
 		<p class="superpwa-addons-headp"><?php esc_html_e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>

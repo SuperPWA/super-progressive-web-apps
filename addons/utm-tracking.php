@@ -396,6 +396,7 @@ function superpwa_utm_tracking_interface_render() {
 	?>
 	
 	<div class="wrap">	
+		<?php superpwa_bfcm_banner(); ?>
 		<h1><?php esc_html_e( 'UTM Tracking', 'super-progressive-web-apps' ); ?> <small>(<a href="<?php echo esc_url($addon_utm_tracking['link']) . '?utm_source=superpwa-plugin&utm_medium=utm-tracking-settings'?>"><?php echo esc_html__( 'Docs', 'super-progressive-web-apps' ); ?></a>)</small></h1>
 
 		<?php superpwa_setting_tabs_html(); ?>

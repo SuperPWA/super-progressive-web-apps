@@ -15,6 +15,7 @@ require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-settings.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-addons.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/admin-ui-render-upgrade.php' );
 require_once( SUPERPWA_PATH_ABS . 'admin/mb-helper-function.php' );
+require_once( SUPERPWA_PATH_ABS . 'admin/bfcm-banner.php' );
 
 // 3rd party compatibility
 require_once( SUPERPWA_PATH_ABS . '3rd-party/onesignal.php' );
