@@ -90,7 +90,7 @@ function superpwa_send_feedback() {
         $headers[] = "Reply-To: $from";
     }
 
-    $subject = $reason.' - Super Progressive Web Apps';
+    $subject = $reason.' - Super Progressive Web Apps V'.SUPERPWA_VERSION;
 
     if( $reason === 'technical' ){
         $text = 'technical issue description: '.$text;
